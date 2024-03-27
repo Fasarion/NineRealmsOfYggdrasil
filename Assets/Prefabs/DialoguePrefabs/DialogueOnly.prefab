@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3423377551861924548
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3423377551861924550}
+  - component: {fileID: 3423377551861924551}
+  m_Layer: 0
+  m_Name: DialogueOnly
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3423377551861924550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423377551861924548}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 131.37195, y: -13.22596, z: 12.334281}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3423377551861924551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3423377551861924548}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe0efaa124af5e40977ff1168562886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  containerType: 0
+  branches:
+  - name: Choice 1
+    container: {fileID: 0}
+  - name: Choice 2
+    container: {fileID: 0}
+  dialogue:
+    sentences:
+    - name: Start
+      text: 'This container can only contain text
+
+'
+      voiceLine: {fileID: 0}
+    - name: Next
+      text: This is the second sentence in the dialogue
+      voiceLine: {fileID: 0}
+  useBranches: 1
+  objectToActivate: {fileID: 0}

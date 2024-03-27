@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25b76c97e4500cd4d9dc58652f4ae43d, type: 3}
+  m_Name: ConditionNodeName
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: ConditionNodeName
+  <QuestNodeType>k__BackingField: 3
+  <IsStartingNode>k__BackingField: 0
+  <Branches>k__BackingField:
+  - <Text>k__BackingField: NextNode
+    <NextQuestNode>k__BackingField: {fileID: 11400000, guid: d7ed7729d0241b44ca44b8d803359052, type: 2}

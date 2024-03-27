@@ -1,0 +1,852 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &8012431838067978198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012431838067978196}
+  - component: {fileID: 8012431838067978197}
+  m_Layer: 0
+  m_Name: QuestAcceptedChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8012431838067978196
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431838067978198}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 341.79172, y: 1021.0077, z: -23.358007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012431838792283712}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012431838067978197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431838067978198}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 781e45e78fb3ff04e8cf971d3a7e8243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questTrigger: {fileID: 8012431839627037582}
+--- !u!1 &8012431838792283713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012431838792283712}
+  - component: {fileID: 8012431838792283719}
+  m_Layer: 0
+  m_Name: FetchQuest1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8012431838792283712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431838792283713}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 8012431839627037581}
+  - {fileID: 8012431838067978196}
+  - {fileID: 8012431839136980821}
+  - {fileID: 8012431838985070997}
+  - {fileID: 8012431839327745815}
+  - {fileID: 8540345124430946496}
+  - {fileID: 8540345124007993850}
+  - {fileID: 8540345123580867956}
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012431838792283719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431838792283713}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09bc20ef71cf0494f8f6219a9d3cbbac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 0}
+  trigger: {fileID: 8012431839627037582}
+--- !u!1 &8012431838985070999
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012431838985070997}
+  - component: {fileID: 8012431838985070998}
+  m_Layer: 0
+  m_Name: QuestTaskCompletedChecker(Must be added to scene were kills occur)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8012431838985070997
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431838985070999}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 341.79172, y: 1021.0077, z: -23.358007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012431838792283712}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012431838985070998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431838985070999}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e75ad291e64843489dd2c61c6b7b43b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trigger: {fileID: 0}
+  stateToSwapTo: 2
+--- !u!1 &8012431839136980823
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012431839136980821}
+  - component: {fileID: 8012431839136980820}
+  m_Layer: 0
+  m_Name: ConfirmItemFetched
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8012431839136980821
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431839136980823}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 129.53195, y: -13.22596, z: 0.23428059}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012431838792283712}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012431839136980820
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431839136980823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50b3a3dec7a8732439e3aba2072c2701, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questHandler: {fileID: 0}
+--- !u!1 &8012431839327745809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012431839327745815}
+  - component: {fileID: 8012431839327745808}
+  m_Layer: 0
+  m_Name: QuestCompleteChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8012431839327745815
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431839327745809}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 341.79172, y: 1021.0077, z: -23.358007}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012431838792283712}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012431839327745808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431839327745809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9da083999570873448b0c7e10e930832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questTrigger: {fileID: 8012431839627037582}
+  questRewardObjectNotImplemented: {fileID: 0}
+  newQuestsToActivate: []
+--- !u!1 &8012431839627037583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8012431839627037581}
+  - component: {fileID: 8012431839627037582}
+  m_Layer: 0
+  m_Name: FetchQuestStateActivator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8012431839627037581
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431839627037583}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 129.53195, y: -13.22596, z: 0.23428059}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8012431838792283712}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8012431839627037582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8012431839627037583}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b05bbefb24d7c5c4a99bb9d6eeabd0e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 0}
+  questUIUpdate: {fileID: 0}
+  questStatesList:
+  - objectsToActivate:
+    - {fileID: 5574290389264405635}
+  - objectsToActivate:
+    - {fileID: 5574290389712819641}
+    - {fileID: 8012431838067978198}
+  - objectsToActivate:
+    - {fileID: 8012431839136980823}
+    - {fileID: 5574290389286666551}
+  - objectsToActivate:
+    - {fileID: 8012431839327745809}
+    - {fileID: 0}
+  questObjects: []
+--- !u!1001 &8012431837931427391
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8012431838792283712}
+    m_Modifications:
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogueStateSwapper
+      value: 
+      objectReference: {fileID: 1946999712279211002}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0].name
+      value: TestCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0].text
+      value: I need you to collect an item from another character, thanks
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1].name
+      value: TestCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1].text
+      value: I need you to collect a certain number of items, thanks
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2].text
+      value: 'Use those divine weapons of yours, kill ''em and bring their guts back
+        here. I''ll even be nice and throw in a reward for your trouble.
+
+
+        Press
+        [F] to Continue'
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[3].text
+      value: 'Use those divine weapons of yours, kill ''em and bring their guts back
+        here. I''ll even be nice and throw in a reward for your trouble.
+
+
+        Press
+        [F] to Continue'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8067101
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009165287
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.022117
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_Name
+      value: FetchQuestTestDialogueNPC1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118769267306835285, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: interactUIText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117124, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: questTrigger
+      value: 
+      objectReference: {fileID: 8012431839627037582}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: stateToSwapTo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectToActivate
+      value: 
+      objectReference: {fileID: 8012431839627037583}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 8012431839627037583}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+--- !u!114 &1946999712279211002 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431837931427391}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe0efaa124af5e40977ff1168562886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5574290389264405635 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431837931427391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8540345124430946496 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431837931427391}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8012431839453026053
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8012431838792283712}
+    m_Modifications:
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogueStateSwapper
+      value: 
+      objectReference: {fileID: 1946999712804432576}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0].name
+      value: TestCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0].text
+      value: This is the item I need you to collect, good luck
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1].name
+      value: TestCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1].text
+      value: This is the item I need you to collect, good luck
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2].text
+      value: 'Use those divine weapons of yours, kill ''em and bring their guts back
+        here. I''ll even be nice and throw in a reward for your trouble.
+
+
+        Press
+        [F] to Continue'
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[3].text
+      value: 'Use those divine weapons of yours, kill ''em and bring their guts back
+        here. I''ll even be nice and throw in a reward for your trouble.
+
+
+        Press
+        [F] to Continue'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -5.8067102
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009165287
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.022117
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_Name
+      value: FetchQuestTestDialogueNPC2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118769267306835285, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: interactUIText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: questTrigger
+      value: 
+      objectReference: {fileID: 8012431839627037582}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: stateToSwapTo
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectToActivate
+      value: 
+      objectReference: {fileID: 8012431839136980823}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToDeactivate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 5574290389286666551}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.data[1]
+      value: 
+      objectReference: {fileID: 8012431839136980823}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToDeactivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 5574290389712819641}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+--- !u!114 &1946999712804432576 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431839453026053}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fe0efaa124af5e40977ff1168562886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &5574290389712819641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431839453026053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8540345124007993850 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431839453026053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &8012431839565841291
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8012431838792283712}
+    m_Modifications:
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0].name
+      value: TestCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[0].text
+      value: Thank you for retrieving this item for me! Speak to NPC2 for another
+        fetch quest
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1].name
+      value: TestCharacter
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[1].text
+      value: Thank you for retrieving this item for me!
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[2].text
+      value: 'Use those divine weapons of yours, kill ''em and bring their guts back
+        here. I''ll even be nice and throw in a reward for your trouble.
+
+
+        Press
+        [F] to Continue'
+      objectReference: {fileID: 0}
+    - target: {fileID: 563974802451376164, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: dialogue.sentences.Array.data[3].text
+      value: 'Use those divine weapons of yours, kill ''em and bring their guts back
+        here. I''ll even be nice and throw in a reward for your trouble.
+
+
+        Press
+        [F] to Continue'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8067101
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.009165287
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -12.022117
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_Name
+      value: FetchQuestTestDialogueNPC1Complete
+      objectReference: {fileID: 0}
+    - target: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7302412541866277429, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8118769267306835285, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: interactUIText
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117122, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117124, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: questTrigger
+      value: 
+      objectReference: {fileID: 8012431839627037582}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: stateToSwapTo
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectToActivate
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToDeactivate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToActivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373530509705117125, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+      propertyPath: objectsToDeactivate.Array.data[0]
+      value: 
+      objectReference: {fileID: 5574290389286666551}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+--- !u!1 &5574290389286666551 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2479860366001324732, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431839565841291}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &8540345123580867956 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852253687781324543, guid: 4b292aa5905154f4bb49264fd5fa62ab, type: 3}
+  m_PrefabInstance: {fileID: 8012431839565841291}
+  m_PrefabAsset: {fileID: 0}

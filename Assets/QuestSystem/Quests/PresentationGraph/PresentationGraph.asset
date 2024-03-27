@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64c63bd223f6cd48a3d7d970be663f9, type: 3}
+  m_Name: PresentationGraph
+  m_EditorClassIdentifier: 
+  <FileName>k__BackingField: PresentationGraph
+  <questDialogueGraphSOs>k__BackingField:
+  - {fileID: 11400000, guid: b701848511cc2fa4795f1f58e59b1e90, type: 2}
+  - {fileID: 11400000, guid: e1e6eca8f56a63f45abc3544ab9a2ef0, type: 2}
+  <activatorSOs>k__BackingField:
+  - {fileID: 11400000, guid: 4379aeb20ce33794c8195b4a5866aabf, type: 2}
+  - {fileID: 11400000, guid: edd32a5be0017c44283618d29e46d76f, type: 2}
+  - {fileID: 11400000, guid: 060b07954d2d9a9498357f5d66b13a81, type: 2}
+  <questHandlerSOs>k__BackingField:
+  - {fileID: 11400000, guid: 881a0ecce80e3e745bca9fba8bc3288b, type: 2}
+  <startingNode>k__BackingField: {fileID: 11400000, guid: 060b07954d2d9a9498357f5d66b13a81, type: 2}

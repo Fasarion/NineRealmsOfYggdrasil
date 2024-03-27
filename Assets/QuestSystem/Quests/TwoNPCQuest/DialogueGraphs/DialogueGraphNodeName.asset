@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d67663a0bf5028418d9437f5e71fe1b, type: 3}
+  m_Name: DialogueGraphNodeName
+  m_EditorClassIdentifier: 
+  <NodeName>k__BackingField: DialogueGraphNodeName
+  <QuestNodeType>k__BackingField: 1
+  <IsStartingNode>k__BackingField: 0
+  <Branches>k__BackingField:
+  - <Text>k__BackingField: Loop
+    <NextQuestNode>k__BackingField: {fileID: 0}
+  - <Text>k__BackingField: Branch3D1
+    <NextQuestNode>k__BackingField: {fileID: 11400000, guid: 0b08ca6b2601f924e931784d0c666092, type: 2}
+  - <Text>k__BackingField: Branch4D1
+    <NextQuestNode>k__BackingField: {fileID: 11400000, guid: b39e514444e82f04a8b8181ac216812d, type: 2}
+  <DialogueContainerSO>k__BackingField: {fileID: 11400000, guid: feafb887392c33140983d6923c9637be, type: 2}

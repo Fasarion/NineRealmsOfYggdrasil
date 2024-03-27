@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Object References")]
     public Camera cam;
     private Rigidbody rBody;
-    [SerializeField] private Animator playerAnimator;
+    //[SerializeField] private Animator playerAnimator;
     
     [Header("Move Parameters")]
     public float moveSpeed;
@@ -53,13 +53,13 @@ public class PlayerMovement : MonoBehaviour
 
         canDash = false;
         isDashing = true;
-        dashVfx.SetActive(true);
+        //dashVfx.SetActive(true);
         speed = dashSpeed;
         //FMODUnity.RuntimeManager.PlayOneShot(playerAudio.dash);
 
         //yield return Timing.WaitForSeconds(dashTime);
 
-        dashVfx.SetActive(false);
+        //dashVfx.SetActive(false);
         speed = moveSpeed;
         isDashing = false;
         
@@ -76,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //animationEventHandler = FindObjectOfType<PlayerMovementAnimationEventHandler>();
         //animationEventHandler.onFootstep += OnFootstep;
-        dashVfx.SetActive(false);
+        //dashVfx.SetActive(false);
         speed = moveSpeed;
         canDash= true;
     }
@@ -120,7 +120,7 @@ private void FixedUpdate()
     // Update is called once per frame
     void Update()
     {
-        playerAnimator.SetFloat("speed", movementDirection.magnitude);
+        //playerAnimator.SetFloat("speed", movementDirection.magnitude);
         
         PointPlayerTowardsMouse();
 
@@ -153,8 +153,8 @@ private void FixedUpdate()
         }
  
         // update the animator parameters
-        playerAnimator.SetFloat ("yDirection", forwardBackwardsMagnitude);
-        playerAnimator.SetFloat ("xDirection", rightLeftMagnitude);
+        //playerAnimator.SetFloat ("yDirection", forwardBackwardsMagnitude);
+        //playerAnimator.SetFloat ("xDirection", rightLeftMagnitude);
         
         
        

@@ -19,6 +19,8 @@ public partial struct XPObjectSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        state.Enabled = false;
+        
         var config = SystemAPI.GetSingleton<PlayerLevelingConfig>();
         var level = SystemAPI.GetSingletonRW<PlayerLevel>();
         var xp = SystemAPI.GetSingletonRW<PlayerXP>();

@@ -12,7 +12,7 @@ using UnityEngine;
 
 [UpdateInGroup(typeof(PhysicsSystemGroup))]
 [UpdateAfter(typeof(PhysicsSimulationGroup))]
-    public partial struct ChangeHpOnHitSystem : ISystem
+    public partial struct DetectHpTriggerSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
@@ -41,8 +41,6 @@ using UnityEngine;
         
         public void Execute(TriggerEvent triggerEvent)
         {
-            //Debug.Log("Trigger Event");
-            
             Entity triggerEntity;
             Entity hitEntity;
             
@@ -64,28 +62,28 @@ using UnityEngine;
                 return;
             }
             
-            // // Determine if the hit entity is already added to the trigger entity's hit buffer 
-            // var hitBuffer = HitBufferLookup[triggerEntity];
-            // foreach (var hit in hitBuffer)
-            // {
-            //     if (hit.HitEntity == hitEntity) return;
-            // }
-            //
-            // // Need to estimate position and normal as TriggerEvent does not have these details unlike CollisionEvent
-            // var triggerEntityPosition = TransformLookup[triggerEntity].Position;
-            // var hitEntityPosition = TransformLookup[hitEntity].Position;
-            //
-            // var hitPosition = math.lerp(triggerEntityPosition, hitEntityPosition, 0.5f);
-            // var hitNormal = math.normalizesafe(hitEntityPosition - triggerEntityPosition);
-            //
-            // var newHitElement = new HitBufferElement
-            // {
-            //     IsHandled = false,
-            //     HitEntity = hitEntity,
-            //     Position = hitPosition,
-            //     Normal = hitNormal
-            // };
-            //
-            // HitBufferLookup[triggerEntity].Add(newHitElement);
+            // Determine if the hit entity is already added to the trigger entity's hit buffer 
+            var hitBuffer = HitBufferLookup[triggerEntity];
+            foreach (var hit in hitBuffer)
+            {
+                if (hit.HitEntity == hitEntity) return;
+            }
+            
+            // Need to estimate position and normal as TriggerEvent does not have these details unlike CollisionEvent
+            var triggerEntityPosition = TransformLookup[triggerEntity].Position;
+            var hitEntityPosition = TransformLookup[hitEntity].Position;
+            
+            var hitPosition = math.lerp(triggerEntityPosition, hitEntityPosition, 0.5f);
+            var hitNormal = math.normalizesafe(hitEntityPosition - triggerEntityPosition);
+            
+            var newHitElement = new HitBufferElement
+            {
+                IsHandled = false,
+                HitEntity = hitEntity,
+                Position = hitPosition,
+                Normal = hitNormal
+            };
+            
+            HitBufferLookup[triggerEntity].Add(newHitElement);
         }
     }

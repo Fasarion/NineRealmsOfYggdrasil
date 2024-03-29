@@ -98,7 +98,7 @@ namespace QS.Elements
                     target.value = newValue;
                     NodeName = newValue;
                     
-                    /*if (string.IsNullOrEmpty(target.value))
+                    /*if (string.IsNullOrEmpty(target.Value))
                     {
                         if (!string.IsNullOrEmpty(NodeName))
                         {
@@ -180,7 +180,7 @@ namespace QS.Elements
                     SerializedObject questHandlerSerialized = new SerializedObject(questHandler);
                     //Debug.Log("Called on draw!");
                     
-                    //var questHandler = (QuestHandler)testValueObjectField.value;
+                    //var questHandler = (QuestHandler)testValueObjectField.Value;
                     var properties = questHandler.GetType().GetFields();
                     List<string> propertyNames = new List<string>();
                     foreach (var property in properties)
@@ -243,7 +243,7 @@ namespace QS.Elements
             
             
                 SerializedObject questHandlerSerialized = new SerializedObject(questHandler);
-                //var questHandler = (QuestHandler)testValueObjectField.value;
+                //var questHandler = (QuestHandler)testValueObjectField.Value;
                 var properties = questHandler.GetType().GetFields();
                 List<string> propertyNames = new List<string>();
                 foreach (var property in properties)

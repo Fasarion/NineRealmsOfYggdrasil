@@ -20,7 +20,6 @@ namespace Player
             
             AimSettingsData data = SystemAPI.GetSingleton<AimSettingsData>();
 
-
             if (data.autoAim)
             {
                 HandleAutoAim();

@@ -96,7 +96,7 @@ namespace QS.Utilities
                 objectField.RegisterValueChangedCallback(onValueChanged);
             }
             return objectField;
-            //field.value = AssetUtility.LoadAssetBundle(name, path);
+            //field.Value = AssetUtility.LoadAssetBundle(name, path);
         }
 
         /*public static ObjectField CreateQSActivatorNodeField()
@@ -118,7 +118,7 @@ namespace QS.Utilities
                 objectField.RegisterValueChangedCallback(onValueChanged);
             }
             return objectField;
-            //field.value = AssetUtility.LoadAssetBundle(name, path);
+            //field.Value = AssetUtility.LoadAssetBundle(name, path);
         }
         
         public static ObjectField CreateDialogueGraphField(EventCallback<ChangeEvent<Object>> onValueChanged = null)
@@ -135,7 +135,7 @@ namespace QS.Utilities
                 objectField.RegisterValueChangedCallback(onValueChanged);
             }
             return objectField;
-            //field.value = AssetUtility.LoadAssetBundle(name, path);
+            //field.Value = AssetUtility.LoadAssetBundle(name, path);
         }
         
         
@@ -148,7 +148,7 @@ namespace QS.Utilities
                 propertyField.RegisterValueChangeCallback(onValueChanged);
             }
             return propertyField;
-            //field.value = AssetUtility.LoadAssetBundle(name, path);
+            //field.Value = AssetUtility.LoadAssetBundle(name, path);
         }
     }
 

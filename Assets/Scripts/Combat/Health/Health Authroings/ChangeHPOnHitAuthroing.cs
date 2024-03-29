@@ -7,7 +7,7 @@ namespace Health
 {
     public class ChangeHPOnHitAuthroing : MonoBehaviour
     {
-        [Tooltip("How much will the HP of this object change when hit? (a negative value means HP is lost)")]
+        [Tooltip("How much will the HP of this object change when hit? (a negative Value means HP is lost)")]
         [SerializeField] private float hpChangeValue = -1f;
     
         class Baker : Baker<ChangeHPOnHitAuthroing>

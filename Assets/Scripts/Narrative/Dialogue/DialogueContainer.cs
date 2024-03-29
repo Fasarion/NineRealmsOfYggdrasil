@@ -142,7 +142,7 @@ public class DialogueContainer : MonoBehaviour//, ISerializationCallbackReceiver
     {
         foreach (var branch in branchingOptions)
         {
-            GUILayout.Label("Key: " + branch.Key + " value: " + branch.Value);
+            GUILayout.Label("Key: " + branch.Key + " Value: " + branch.Value);
         }
     }*/
 }

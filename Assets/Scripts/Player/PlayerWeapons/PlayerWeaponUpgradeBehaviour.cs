@@ -161,7 +161,7 @@ public class PlayerWeaponUpgradeBehaviour : MonoBehaviour
                 if (weapon is IMakeDamage makeDamage) makeDamage.UpdateDamage((int)upgradeAmount);
                 break;
             
-            // NOTE: updates with positive value
+            // NOTE: updates with positive Value
             case AllUpgradeTypes.Cooldown:
                 if (weapon is IHasCooldown iCooldown) iCooldown.UpdateCooldown(upgradeAmount);
                 break;

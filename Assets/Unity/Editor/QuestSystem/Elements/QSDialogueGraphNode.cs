@@ -180,7 +180,7 @@ namespace QS.Elements
                 propertyFields.Clear();
 
                 //ObjectField target = (ObjectField)callback.target;
-                //dialogueContainerSO = (DSDialogueContainerSO)target.value;
+                //dialogueContainerSO = (DSDialogueContainerSO)target.Value;
                 SerializedObject dialogueContainerSerialized = new SerializedObject(dialogueContainerSO);
                 
                 

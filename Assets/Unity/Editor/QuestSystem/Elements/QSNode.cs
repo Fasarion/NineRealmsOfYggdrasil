@@ -92,7 +92,7 @@ namespace QS.Elements
                     target.value = newValue;
                     NodeName = newValue;
                     
-                    /*if (string.IsNullOrEmpty(target.value))
+                    /*if (string.IsNullOrEmpty(target.Value))
                     {
                         if (!string.IsNullOrEmpty(NodeName))
                         {

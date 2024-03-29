@@ -36,7 +36,7 @@ namespace MEC
         public float TimeBetweenSlowUpdateCalls = 1f / 7f;
         /// <summary>
         /// The amount that each coroutine should be seperated inside the Unity profiler. NOTE: When the profiler window
-        /// is not open this value is ignored and all coroutines behave as if "None" is selected.
+        /// is not open this Value is ignored and all coroutines behave as if "None" is selected.
         /// </summary>
         [Tooltip("How much data should be sent to the profiler window when it's open.")]
         public DebugInfoType ProfilerDebugAmount;
@@ -2303,7 +2303,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action at the given rate for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each period.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each period.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="period">The amount of time between calls.</param>
         /// <param name="action">The action to call every frame.</param>
@@ -2319,7 +2319,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action at the given rate for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each period.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each period.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="period">The amount of time between calls.</param>
         /// <param name="action">The action to call every frame.</param>
@@ -2335,7 +2335,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action at the given rate for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each period.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each period.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="period">The amount of time between calls.</param>
         /// <param name="action">The action to call every frame.</param>
@@ -2352,7 +2352,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action at the given rate for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each period.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each period.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="period">The amount of time between calls.</param>
         /// <param name="action">The action to call every frame.</param>
@@ -2369,7 +2369,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action every frame for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each frame.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each frame.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="action">The action to call every frame.</param>
         /// <param name="onDone">An optional action to call when this function finishes.</param>
@@ -2383,7 +2383,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action every frame for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each frame.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each frame.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="action">The action to call every frame.</param>
         /// <param name="onDone">An optional action to call when this function finishes.</param>
@@ -2397,7 +2397,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action every frame for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each frame.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each frame.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="action">The action to call every frame.</param>
         /// <param name="timing">The timing segment to run in.</param>
@@ -2413,7 +2413,7 @@ namespace MEC
         /// <summary>
         /// Calls the supplied action every frame for a given number of seconds.
         /// </summary>
-        /// <param name="reference">A value that will be passed in to the supplied action each frame.</param>
+        /// <param name="reference">A Value that will be passed in to the supplied action each frame.</param>
         /// <param name="timeframe">The number of seconds that this function should run.</param>
         /// <param name="action">The action to call every frame.</param>
         /// <param name="timing">The timing segment to run in.</param>

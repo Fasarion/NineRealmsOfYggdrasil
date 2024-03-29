@@ -23,6 +23,8 @@ namespace Player
             if (ver == 0 && hor == 0)
                 return;
 
+            var playerPosSingleton = SystemAPI.GetSingletonRW<PlayerPositionSingleton>();
+
             var dir = math.normalizesafe(new float3(hor, 0, ver));
             var moveVector = dir * SystemAPI.Time.DeltaTime;
 
@@ -37,8 +39,11 @@ namespace Player
                 {
                     speed *= sprintMod.ValueRO.SprintModifier;
                 }
+
+                var newPos = playerTransform.ValueRO.Position + moveVector * speed;
                 
-                playerTransform.ValueRW.Position = playerTransform.ValueRO.Position + moveVector * speed;
+                playerTransform.ValueRW.Position = newPos;
+                playerPosSingleton.ValueRW.Value = newPos;
             }
         }
     }

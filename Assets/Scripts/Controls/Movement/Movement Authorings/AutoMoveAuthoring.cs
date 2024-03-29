@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -19,29 +18,9 @@ namespace Movement
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
             
                 AddComponent(entity, new DirectionComponent());
-                AddComponent(entity, new AutoMove {MoveForward = authoring.alwaysMoveForward});
+                AddComponent(entity, new AutoMoveComponent {MoveForward = authoring.alwaysMoveForward});
             }
         }
-    }
-
-    public struct AutoMove : IComponentData
-    {
-        public bool MoveForward;
-    }
-
-    public struct MoveSpeedComponent : IComponentData
-    {
-        public float Value;
-    }
-
-    public struct DirectionComponent : IComponentData
-    {
-        public DirectionComponent(float3 value)
-        {
-            Value = value;
-        }
-    
-        public float3 Value;
     }
 }
 

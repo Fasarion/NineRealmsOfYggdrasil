@@ -15,7 +15,7 @@ namespace Movement
             float deltaTime = SystemAPI.Time.DeltaTime;
 
             foreach (var (autoMove, speed, directionComp, transform) 
-                in SystemAPI.Query<RefRO<AutoMove>, RefRO<MoveSpeedComponent>, RefRO<DirectionComponent>, RefRW<LocalTransform> >())
+                in SystemAPI.Query<RefRO<AutoMoveComponent>, RefRO<MoveSpeedComponent>, RefRO<DirectionComponent>, RefRW<LocalTransform> >())
             {
                 var direction = autoMove.ValueRO.MoveForward ? transform.ValueRO.Forward() : directionComp.ValueRO.Value;
                 transform.ValueRW.Position += direction * speed.ValueRO.Value * deltaTime;

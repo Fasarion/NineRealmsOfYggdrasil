@@ -10,13 +10,17 @@ using Unity.Physics.Systems;
 using Unity.Transforms;
 using UnityEngine;
 
-[UpdateInGroup(typeof(PhysicsSystemGroup))]
-[UpdateAfter(typeof(PhysicsSimulationGroup))]
+
+namespace Damage
+{
+    [UpdateInGroup(typeof(PhysicsSystemGroup))]
+    [UpdateAfter(typeof(PhysicsSimulationGroup))]
     public partial struct DetectHpTriggerSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<SimulationSingleton>();
+            state.RequireForUpdate<HpTriggerConfig>();
         }
 
         public void OnUpdate(ref SystemState state)
@@ -87,3 +91,4 @@ using UnityEngine;
             HitBufferLookup[triggerEntity].Add(newHitElement);
         }
     }
+}

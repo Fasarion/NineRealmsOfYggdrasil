@@ -25,7 +25,7 @@ namespace Damage
 
         public void OnUpdate(ref SystemState state)
         {
-            var detectCapabilityTriggerJob = new DetectCapabilityTriggerJob
+            var detectCapabilityTriggerJob = new DetectHitTriggerJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
                 HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
@@ -37,7 +37,7 @@ namespace Damage
         }
     }
     
-    public struct DetectCapabilityTriggerJob : ITriggerEventsJob
+    public struct DetectHitTriggerJob : ITriggerEventsJob
     {
         public BufferLookup<HitBufferElement> HitBufferLookup;
         [ReadOnly] public ComponentLookup<CurrentHpComponent> HitPointsLookup;

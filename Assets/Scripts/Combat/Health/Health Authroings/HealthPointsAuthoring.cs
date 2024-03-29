@@ -20,7 +20,7 @@ namespace Health
                     Value = authoring.maxHP,
                 });
                 
-                AddComponent(entity, new CurrentHpComponent()
+                AddComponent(entity, new CurrentHpComponent
                 {
                     Value = authoring.maxHP,
                 });

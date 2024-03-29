@@ -11,6 +11,8 @@ public class XPObjectAuthoring : MonoBehaviour
 
     [Tooltip("The base distance the player must be from the object for it to be picked up.")]
     public float baseDistance = 1;
+    
+    [Tooltip("How fast the object should move towards ")]
 
     public class XpObjectAuthoringBaker : Baker<XPObjectAuthoring>
     {

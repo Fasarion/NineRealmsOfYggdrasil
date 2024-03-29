@@ -25,5 +25,6 @@ public partial struct XPObjectSystem : ISystem
         var level = SystemAPI.GetSingletonRW<PlayerLevel>();
         var xp = SystemAPI.GetSingletonRW<PlayerXP>();
         
+        
     }
 }

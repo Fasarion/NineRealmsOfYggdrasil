@@ -3,7 +3,7 @@ using Unity.Mathematics;
 
 namespace Movement
 {
-    public struct DirectionComponent : IComponentData
+    public struct DirectionComponent : IComponentData, IEnableableComponent
     {
         public DirectionComponent(float3 value)
         {

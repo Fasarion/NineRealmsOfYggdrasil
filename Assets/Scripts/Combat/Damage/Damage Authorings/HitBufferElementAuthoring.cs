@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-public class HitBufferElementAuthoring : MonoBehaviour
+namespace Damage
 {
-    public class CapabilityBaker : Baker<HitBufferElementAuthoring>
+    public class HitBufferElementAuthoring : MonoBehaviour
     {
-        public override void Bake(HitBufferElementAuthoring authoring)
+        public class CapabilityBaker : Baker<HitBufferElementAuthoring>
         {
-            var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddBuffer<HitBufferElement>(entity);
+            public override void Bake(HitBufferElementAuthoring authoring)
+            {
+                var entity = GetEntity(TransformUsageFlags.Dynamic);
+                AddBuffer<HitBufferElement>(entity);
+            }
         }
     }
 }

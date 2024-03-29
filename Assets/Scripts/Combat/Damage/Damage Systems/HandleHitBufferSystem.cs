@@ -5,7 +5,7 @@ namespace Damage
 {
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     [UpdateAfter(typeof(DetectHpTriggerSystem))]
-    public partial struct HandleHpHitBufferSystem : ISystem
+    public partial struct HandleHitBufferSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
         {

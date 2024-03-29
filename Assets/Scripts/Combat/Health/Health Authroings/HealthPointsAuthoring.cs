@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Damage;
 using Unity.Entities;
 using UnityEngine;
 
@@ -25,6 +24,8 @@ namespace Health
                 {
                     Value = authoring.maxHP,
                 });
+                
+                AddBuffer<DamageBufferElement>(entity);
             }
         }
     }

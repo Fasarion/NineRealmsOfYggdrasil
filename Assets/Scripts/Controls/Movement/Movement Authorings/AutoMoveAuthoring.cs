@@ -8,7 +8,7 @@ namespace Movement
 {
     public class AutoMoveAuthoring : MonoBehaviour
     {
-        [Tooltip("This will force the object to always move in its forward direction (z-axis)")]
+        [Tooltip("This will force the object to always move in its forward direction (its' z-axis)")]
         [SerializeField] private bool alwaysMoveForward;
 
         class Baker : Baker<AutoMoveAuthoring>

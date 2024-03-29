@@ -154,7 +154,7 @@ namespace QS.Elements
             
                 label = 
                     new Label(
-                        "Current quest type is: " + questHandler.questType +  "."
+                        "Value quest type is: " + questHandler.questType +  "."
                     ); 
                 customDataContainer.Add(label);
             }

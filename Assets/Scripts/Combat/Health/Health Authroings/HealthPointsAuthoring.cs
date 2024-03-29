@@ -16,20 +16,27 @@ namespace Health
             {
                 var entity = GetEntity(TransformUsageFlags.None);
             
-                AddComponent(entity, new HealthPointsComponent
+                AddComponent(entity, new MaxHpComponent
                 {
-                    Max = authoring.maxHP,
-                    Current = authoring.maxHP
+                    Value = authoring.maxHP,
+                });
+                
+                AddComponent(entity, new CurrentHpComponent()
+                {
+                    Value = authoring.maxHP,
                 });
             }
         }
     }
 
-    struct HealthPointsComponent : IComponentData
+    public struct MaxHpComponent : IComponentData
     {
-        public float Max;
-        public float Current;
+        public float Value;
     }
-
+    
+    public struct CurrentHpComponent : IComponentData
+    {
+        public float Value;
+    }
 }
 

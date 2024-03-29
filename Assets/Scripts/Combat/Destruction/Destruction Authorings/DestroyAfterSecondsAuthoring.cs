@@ -30,5 +30,7 @@ namespace Destruction
         public float CurrentLifeTime;
     }
 
+    struct ShouldBeDestroyed : IComponentData { }
+
 }
 

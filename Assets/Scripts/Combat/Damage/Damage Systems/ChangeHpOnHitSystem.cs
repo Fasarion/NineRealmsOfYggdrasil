@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Health;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -22,8 +23,8 @@ using UnityEngine;
         {
             var detectCapabilityTriggerJob = new DetectCapabilityTriggerJob
             {
-                //HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
-                //HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHitPoints>(),
+                HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
+                HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
                 TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
             };
 
@@ -34,35 +35,35 @@ using UnityEngine;
     
     public struct DetectCapabilityTriggerJob : ITriggerEventsJob
     {
-       // public BufferLookup<HitBufferElement> HitBufferLookup;
-        //[ReadOnly] public ComponentLookup<CurrentHitPoints> HitPointsLookup;
+        public BufferLookup<HitBufferElement> HitBufferLookup;
+        [ReadOnly] public ComponentLookup<CurrentHpComponent> HitPointsLookup;
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         
         public void Execute(TriggerEvent triggerEvent)
         {
-            Debug.Log("Trigger Event");
+            //Debug.Log("Trigger Event");
             
-            // Entity triggerEntity;
-            // Entity hitEntity;
-            //
-            // // Figure out which entity is the trigger and which entity is the hit entity
-            // // If there are not exactly 1 of each, this is not a valid trigger event for this case, return from job
-            // if (HitBufferLookup.HasBuffer(triggerEvent.EntityA) && HitPointsLookup.HasComponent(triggerEvent.EntityB))
-            // {
-            //     triggerEntity = triggerEvent.EntityA;
-            //     hitEntity = triggerEvent.EntityB;
-            // }
-            // else if (HitBufferLookup.HasBuffer(triggerEvent.EntityB) &&
-            //          HitPointsLookup.HasComponent(triggerEvent.EntityA))
-            // {
-            //     triggerEntity = triggerEvent.EntityB;
-            //     hitEntity = triggerEvent.EntityA;
-            // }
-            // else
-            // {
-            //     return;
-            // }
-            //
+            Entity triggerEntity;
+            Entity hitEntity;
+            
+            // Figure out which entity is the trigger and which entity is the hit entity
+            // If there are not exactly 1 of each, this is not a valid trigger event for this case, return from job
+            if (HitBufferLookup.HasBuffer(triggerEvent.EntityA) && HitPointsLookup.HasComponent(triggerEvent.EntityB))
+            {
+                triggerEntity = triggerEvent.EntityA;
+                hitEntity = triggerEvent.EntityB;
+            }
+            else if (HitBufferLookup.HasBuffer(triggerEvent.EntityB) &&
+                     HitPointsLookup.HasComponent(triggerEvent.EntityA))
+            {
+                triggerEntity = triggerEvent.EntityB;
+                hitEntity = triggerEvent.EntityA;
+            }
+            else
+            {
+                return;
+            }
+            
             // // Determine if the hit entity is already added to the trigger entity's hit buffer 
             // var hitBuffer = HitBufferLookup[triggerEntity];
             // foreach (var hit in hitBuffer)

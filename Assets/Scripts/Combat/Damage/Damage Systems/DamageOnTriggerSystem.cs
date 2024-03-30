@@ -2,11 +2,11 @@ using Health;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Physics.Systems;
+using UnityEngine;
 
 namespace Damage
 {
-    [UpdateInGroup(typeof(PhysicsSystemGroup))]
-    [UpdateBefore(typeof(HandleHitBufferSystem))]
+    [UpdateInGroup(typeof(DamageSystemGroup))]
     public partial struct DamageOnTriggerSystem : ISystem
     {
         [BurstCompile]
@@ -25,6 +25,8 @@ namespace Damage
                         HitPoints = damageOnTrigger.DamageValue,
                         DamageType = damageOnTrigger.DamageType,
                     });
+                    
+                    Debug.Log("Add Damage to Buffer");
                 }
             }
         }

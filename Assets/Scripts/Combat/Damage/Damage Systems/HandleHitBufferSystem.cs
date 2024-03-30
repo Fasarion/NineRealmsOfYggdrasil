@@ -3,8 +3,7 @@ using Unity.Physics.Systems;
 
 namespace Damage
 {
-    [UpdateInGroup(typeof(PhysicsSystemGroup))]
-    [UpdateAfter(typeof(DetectHpTriggerSystem))]
+    [UpdateInGroup(typeof(DamageSystemGroup), OrderLast = true)]
     public partial struct HandleHitBufferSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)

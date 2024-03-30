@@ -10,7 +10,7 @@ namespace Damage
     [UpdateInGroup(typeof(SimulationSystemGroup))]
     [UpdateAfter(typeof(FixedStepSimulationSystemGroup))]
     [UpdateAfter(typeof(TransformSystemGroup))]
-    public partial class DamageSystemGroup : ComponentSystemGroup
+    public partial class CombatSystemGroup : ComponentSystemGroup
     {
         
     }

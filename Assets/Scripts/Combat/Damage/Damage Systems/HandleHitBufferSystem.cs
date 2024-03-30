@@ -7,7 +7,7 @@ namespace Damage
     /// System for handling hit buffers. Marks the flag "IsHandled" in Hit Buffer Elements as True, which informs other
     /// systems to not handle the element further, i.e. registering multiple hits from the same entity.
     /// </summary>
-    [UpdateInGroup(typeof(DamageSystemGroup), OrderLast = true)]
+    [UpdateInGroup(typeof(CombatSystemGroup), OrderLast = true)]
     public partial struct HandleHitBufferSystem : ISystem
     {
         public void OnUpdate(ref SystemState state)

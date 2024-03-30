@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Damage
 {
-    [UpdateInGroup(typeof(DamageSystemGroup))]
+    [UpdateInGroup(typeof(CombatSystemGroup))]
     public partial struct ApplyDamageSystem : ISystem
     {
         [BurstCompile]
@@ -16,8 +16,7 @@ namespace Damage
 
             foreach (var (currentHP, damageBuffer, damageReceivingEntity) in SystemAPI
                 .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>>()
-                .WithEntityAccess()
-                .WithOptions(EntityQueryOptions.FilterWriteGroup))
+                .WithEntityAccess())
             {
                 float totalDamageToDeal = 0;
 
@@ -30,6 +29,17 @@ namespace Damage
                 
                 // Clear damage buffer to avoid dealing damage multiple times an different frames
                 damageBuffer.Clear();
+
+                // Skip entity if no damage should be dealt
+                if (totalDamageToDeal == 0)
+                    continue;
+                
+                // Tells other system to update health bar this frame
+                // TODO: Make "UpdateHealth" component instead to make it more general?
+                if (SystemAPI.ManagedAPI.HasComponent<HealthBarUI>(damageReceivingEntity))
+                {
+                    SystemAPI.SetComponentEnabled<UpdateHealthBarUI>(damageReceivingEntity, true);
+                }
 
                 // Deal damage
                 currentHP.ValueRW.Value -= totalDamageToDeal;

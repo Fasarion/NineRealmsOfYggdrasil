@@ -1,3 +1,4 @@
+using Damage;
 using Unity.Collections;
 using UnityEngine;
 using Unity.Entities;
@@ -8,6 +9,7 @@ using UnityEngine.UI;
 
 namespace Health
 {
+    [UpdateInGroup(typeof(CombatSystemGroup))]
     public partial struct HealthBarUISystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
@@ -18,11 +20,10 @@ namespace Health
             foreach (var (maxHP, transform, healthBarOffset, healthBarPrefab, entity) in SystemAPI.Query<MaxHpComponent, 
                          LocalTransform, HealthBarOffset, HealthBarUIPrefabComponent>().WithNone<HealthBarUI>().WithEntityAccess())
             {
-                Debug.Log("Spawn Health bar");
-                
                 var spawnPosition = transform.Position + healthBarOffset.Value;
                 var newHealthBar = Object.Instantiate(healthBarPrefab.Value, spawnPosition, quaternion.identity);
 
+                // Initialize slider values
                 var healthBarSlider = newHealthBar.GetComponentInChildren<Slider>();
                 healthBarSlider.minValue = 0;
                 healthBarSlider.maxValue = maxHP.Value;
@@ -32,8 +33,9 @@ namespace Health
             }
 
             // Cleanup health bars for destroyed entities
-            foreach (var (healthBarUI, entity) in SystemAPI.Query<HealthBarUI>().WithNone<HealthBarOffset>()
-                         .WithEntityAccess())
+            foreach (var (healthBarUI, entity) in SystemAPI.Query<HealthBarUI>()
+                .WithNone<HealthBarOffset>()
+                .WithEntityAccess())
             {
                 Object.Destroy(healthBarUI.Value);
                 ecb.RemoveComponent<HealthBarUI>(entity);
@@ -42,16 +44,18 @@ namespace Health
             ecb.Playback(state.EntityManager);
             
             // Update the transform position of all health bars to be above each entity
-            foreach (var (healthBarUI, transform, healthBarOffset) in SystemAPI.Query<HealthBarUI, LocalTransform, 
-                         HealthBarOffset>())
+            foreach (var (healthBarUI, transform, healthBarOffset) in 
+                SystemAPI.Query<HealthBarUI, LocalTransform, HealthBarOffset>())
             {
                 healthBarUI.Value.transform.position = transform.Position + healthBarOffset.Value;
                 healthBarUI.Value.transform.LookAt(Camera.main.transform);
             }
             
             // Update the values of the health bar for entities that need it updated
-            foreach (var (healthBarUI, maxHitPoints, currentHitPoints, entity) in SystemAPI.Query<HealthBarUI, MaxHpComponent, 
-                         CurrentHpComponent>().WithAll<UpdateHealthBarUI>().WithEntityAccess())
+            foreach (var (healthBarUI, maxHitPoints, currentHitPoints, entity) 
+                in SystemAPI.Query<HealthBarUI, MaxHpComponent, CurrentHpComponent>()
+                    .WithAll<UpdateHealthBarUI>()
+                    .WithEntityAccess())
             {
                 var healthBarSlider = healthBarUI.Value.GetComponentInChildren<Slider>();
                 healthBarSlider.minValue = 0;

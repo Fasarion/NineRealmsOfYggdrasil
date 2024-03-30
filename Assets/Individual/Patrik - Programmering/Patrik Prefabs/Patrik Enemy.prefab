@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 9051152070818199392}
   - component: {fileID: 3040318899576448565}
   - component: {fileID: 5845518096462122248}
+  - component: {fileID: 1570689716404177242}
+  - component: {fileID: 7387909956392563431}
   m_Layer: 0
   m_Name: Patrik Enemy
   m_TagString: Untagged
@@ -306,3 +308,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1570689716404177242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50d92a0f33fd05c4bbe2707605dbf9c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7387909956392563431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f42118303ddc8441892911443139265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBarPrefab: {fileID: 9151816930588452720, guid: b6185acc990ac9c4988e85bfed3b917b,
+    type: 3}
+  healthBarOffset: {x: 0, y: 1, z: 0}

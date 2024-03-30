@@ -7,7 +7,7 @@ namespace Destruction
 {
     public class DestroyAfterSecondsAuthoring : MonoBehaviour
     {
-        [Tooltip("After how many seconds will this object be destroyed?")]
+        [Tooltip("After how many seconds will this object be destroyed after being spawned?")]
         [SerializeField] private float lifeTime = 2f;
     
         class Baker : Baker<DestroyAfterSecondsAuthoring>
@@ -20,6 +20,10 @@ namespace Destruction
                 {
                     TimeToDestroy = authoring.lifeTime
                 });
+
+
+                AddComponent(entity, new ShouldBeDestroyed());
+                SetComponentEnabled<ShouldBeDestroyed>(false);
             }
         }
     }
@@ -31,6 +35,5 @@ namespace Destruction
     }
 
     struct ShouldBeDestroyed : IComponentData, IEnableableComponent { }
-
 }
 

@@ -7,6 +7,9 @@ using Movement;
 
 namespace Player
 {
+    /// <summary>
+    /// System for moving a player based on its move speed and sprint modifier.
+    /// </summary>
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     public partial struct PlayerMovementSystem : ISystem
     {

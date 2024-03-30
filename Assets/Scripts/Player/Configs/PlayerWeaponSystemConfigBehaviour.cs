@@ -26,14 +26,14 @@ namespace Player
                 {
                     AddComponent(entity, new PlayerWeaponConfig{});
                 }
-                
             }
         }
     }
     
     public struct PlayerRotationConfig : IComponentData
     {
-        // non used work around variable to make the component existable as a singleton
+        // non used "work around variable" to make the component existable as a singleton. Used as a RequireForUpdate-component
+        // in player aim system.
         bool workAround;
     }
 

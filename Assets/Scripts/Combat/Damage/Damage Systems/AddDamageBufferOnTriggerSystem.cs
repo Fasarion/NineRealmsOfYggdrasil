@@ -6,8 +6,12 @@ using UnityEngine;
 
 namespace Damage
 {
+    /// <summary>
+    /// System for adding Damage Buffer Elements to Damage Buffers. These Damage Buffers will be handled
+    /// in later systems for applying damage to entities.
+    /// </summary>
     [UpdateInGroup(typeof(DamageSystemGroup))]
-    public partial struct DamageOnTriggerSystem : ISystem
+    public partial struct AddDamageBufferOnTriggerSystem : ISystem
     {
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
@@ -25,8 +29,6 @@ namespace Damage
                         HitPoints = damageOnTrigger.DamageValue,
                         DamageType = damageOnTrigger.DamageType,
                     });
-                    
-                    Debug.Log("Add Damage to Buffer");
                 }
             }
         }

@@ -8,7 +8,6 @@ namespace Health
 {
     public class HpTriggerSystemConfigBehaviour : MonoBehaviour
     {
-    
         [Tooltip("Determines if the HP trigger system should run.")]
         [SerializeField] private bool enableHpTriggerSystem = true;
 

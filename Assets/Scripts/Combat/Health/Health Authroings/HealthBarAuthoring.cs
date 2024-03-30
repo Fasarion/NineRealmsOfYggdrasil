@@ -32,8 +32,8 @@ namespace Health
                 AddComponent<UpdateHealthBarUI>(entity);
                 SetComponentEnabled<UpdateHealthBarUI>(entity, false);
                 
-                // Color
-                AddComponent(entity, new URPMaterialPropertyBaseColor { Value = new float4(1, 1, 1, 1) });
+                // // Color
+                // AddComponent(entity, new URPMaterialPropertyBaseColor { Value = new float4(1, 1, 1, 1) });
             }
         }
     }

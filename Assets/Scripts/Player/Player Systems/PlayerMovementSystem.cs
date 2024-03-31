@@ -16,24 +16,14 @@ namespace Player
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<PlayerMovementConfig>();
+            state.RequireForUpdate<PlayerTag>();
         }
     
         public void OnUpdate(ref SystemState state)
         {
-            float hor = Input.GetAxis("Horizontal");
-            float ver = Input.GetAxis("Vertical");
-    
-            float3 input = new float3(hor, 0, ver);
-            
-            float magnitude = math.length(input);
-            if (magnitude > 1)
-                input = math.normalize(input);
-            
-            // TODO: control system
             bool applySprint = Input.GetKey(KeyCode.LeftShift);
-            var moveVector = input * SystemAPI.Time.DeltaTime;
-            
             var playerPosSingleton = SystemAPI.GetSingletonRW<PlayerPositionSingleton>();
+            var moveInput = SystemAPI.GetSingleton<PlayerMoveInput>();
 
             foreach (var (playerTransform, speedComp, sprintMod) 
                 in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, RefRO<SprintComponent>>().WithAll<PlayerTag>())
@@ -44,9 +34,9 @@ namespace Player
                     speed *= sprintMod.ValueRO.SprintModifier;
                 }
         
-                var newPos = playerTransform.ValueRO.Position +  moveVector * speed;
-                playerTransform.ValueRW.Position = newPos;
-                playerPosSingleton.ValueRW.Value = newPos;
+                var newPos = playerTransform.ValueRO.Position.xz +  moveInput.Value * speed * SystemAPI.Time.DeltaTime;
+                playerTransform.ValueRW.Position.xz = newPos;
+                playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
             }
         }
     }

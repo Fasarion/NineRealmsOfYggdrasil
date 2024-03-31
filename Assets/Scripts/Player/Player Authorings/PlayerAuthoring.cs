@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 namespace Player
@@ -15,14 +14,11 @@ namespace Player
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<PlayerTag>();
                 AddComponent<PlayerPositionSingleton>();
+                
+                //Inputs TODO: move to seperate class
+                AddComponent<PlayerMoveInput>();
             }
         }
     }
-
-    public struct PlayerPositionSingleton : IComponentData
-    {
-        public float3 Value;
-    }
-
 }
 

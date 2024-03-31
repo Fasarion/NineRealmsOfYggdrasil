@@ -14,9 +14,6 @@ namespace Player
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<PlayerTag>();
                 AddComponent<PlayerPositionSingleton>();
-                
-                //Inputs TODO: move to seperate class
-                AddComponent<PlayerMoveInput>();
             }
         }
     }

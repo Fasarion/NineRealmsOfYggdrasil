@@ -3,18 +3,23 @@ using System.Collections.Generic;
 using Destruction;
 using Movement;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
+
 
 public partial struct XPObjectSpawnSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<XpObjectConfig>();
+        state.RequireForUpdate<XPObjectConfig>();
     }
 
     public void OnUpdate(ref SystemState state)
     {
-        var config = SystemAPI.GetSingleton<XpObjectConfig>();
+        state.Enabled = false;
+        
+        var config = SystemAPI.GetSingleton<XPObjectConfig>();
 
         for (int i = 0; i < 10; i++)
         {
@@ -25,6 +30,12 @@ public partial struct XPObjectSpawnSystem : ISystem
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(xpObject);
                 state.EntityManager.SetComponentEnabled<DirectionComponent>(xpObject, false);
                 state.EntityManager.SetComponentEnabled<ShouldBeDestroyed>(xpObject, false);
+                state.EntityManager.SetComponentData(xpObject, new LocalTransform
+                {
+                    Position = new float3(i, .5f, j),
+                    Rotation = Quaternion.identity,
+                    Scale = 1
+                });
             }
         }
     }

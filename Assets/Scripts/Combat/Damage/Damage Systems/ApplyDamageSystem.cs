@@ -40,7 +40,7 @@ namespace Damage
                 if (SystemAPI.HasComponent<HasChangedHP>(damageReceivingEntity))
                 {
                     SystemAPI.SetComponentEnabled<HasChangedHP>(damageReceivingEntity, true);
-                    SystemAPI.SetComponent(damageReceivingEntity, new HasChangedHP(totalDamageToDeal));
+                    SystemAPI.SetComponent(damageReceivingEntity, new HasChangedHP(-totalDamageToDeal));
                 }
 
                 // Deal damage

@@ -27,10 +27,7 @@ namespace Player
             
             float minMagnitudeForValidMove = 0.25f;
             float magnitude = math.length(input);
-    
-            if (magnitude < minMagnitudeForValidMove)
-                return;
-            
+
             if (magnitude > 1)
                 input = math.normalize(input);
             
@@ -38,6 +35,9 @@ namespace Player
             bool applySprint = Input.GetKey(KeyCode.LeftShift);
             var moveVector = input * SystemAPI.Time.DeltaTime;
             var playerPosSingleton = SystemAPI.GetSingletonRW<PlayerPositionSingleton>();
+            
+            if (magnitude < minMagnitudeForValidMove)
+                return;
             
             foreach (var (playerTransform, speedComp, sprintMod) 
                 in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, RefRO<SprintComponent>>().WithAll<PlayerTag>())
@@ -53,6 +53,5 @@ namespace Player
                 playerPosSingleton.ValueRW.Value = newPos;
             }
         }
-    
     }
 }

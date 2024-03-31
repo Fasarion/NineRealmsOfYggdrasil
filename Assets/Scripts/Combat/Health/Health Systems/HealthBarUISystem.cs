@@ -10,6 +10,8 @@ using UnityEngine.UI;
 namespace Health
 {
     [UpdateInGroup(typeof(CombatSystemGroup))]
+    [UpdateBefore(typeof(DisableHasChangedHealthTagsSystem))]
+    [UpdateAfter(typeof(ApplyDamageSystem))]
     public partial struct HealthBarUISystem : ISystem
     {
         public void OnUpdate(ref SystemState state)
@@ -54,15 +56,13 @@ namespace Health
             // Update the values of the health bar for entities that need it updated
             foreach (var (healthBarUI, maxHitPoints, currentHitPoints, entity) 
                 in SystemAPI.Query<HealthBarUI, MaxHpComponent, CurrentHpComponent>()
-                    .WithAll<UpdateHealthBarUI>()
+                    .WithAll<HasChangedHP>()
                     .WithEntityAccess())
             {
                 var healthBarSlider = healthBarUI.Value.GetComponentInChildren<Slider>();
                 healthBarSlider.minValue = 0;
                 healthBarSlider.maxValue = maxHitPoints.Value;
                 healthBarSlider.value = currentHitPoints.Value;
-            
-                state.EntityManager.SetComponentEnabled<UpdateHealthBarUI>(entity, false);
             }
         }
     }

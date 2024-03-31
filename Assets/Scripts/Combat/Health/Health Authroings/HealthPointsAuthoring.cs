@@ -15,17 +15,15 @@ namespace Health
             {
                 var entity = GetEntity(TransformUsageFlags.None);
             
-                AddComponent(entity, new MaxHpComponent
-                {
-                    Value = authoring.maxHP,
-                });
+                AddComponent(entity, new MaxHpComponent {Value = authoring.maxHP,});
+                AddComponent(entity, new CurrentHpComponent {Value = authoring.maxHP,});
                 
-                AddComponent(entity, new CurrentHpComponent
-                {
-                    Value = authoring.maxHP,
-                });
-                
+                // Damage Buffer in order to be able to take damage
                 AddBuffer<DamageBufferElement>(entity);
+                
+                // Tag to mark whenever an entity has changed HP in a given frame
+                AddComponent<HasChangedHP>(entity);
+                SetComponentEnabled<HasChangedHP>(entity, false);
             }
         }
     }

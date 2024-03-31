@@ -22,15 +22,12 @@ namespace Health
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 
-                // Set prefab
+                // Set health bar prefab
                 AddComponentObject(entity, new HealthBarUIPrefabComponent{ Value = authoring.healthBarPrefab});
 
                 // Set offset
                 AddComponent(entity, new HealthBarOffset { Value = authoring.healthBarOffset });
                 
-                // Set update tag to false to begin with
-                AddComponent<UpdateHealthBarUI>(entity);
-                SetComponentEnabled<UpdateHealthBarUI>(entity, false);
                 
                 // // Color
                 // AddComponent(entity, new URPMaterialPropertyBaseColor { Value = new float4(1, 1, 1, 1) });

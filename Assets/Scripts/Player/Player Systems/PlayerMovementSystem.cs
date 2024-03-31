@@ -49,7 +49,6 @@ namespace Player
                 }
         
                 var newPos = playerTransform.ValueRO.Position +  moveVector * speed;
-        
                 playerTransform.ValueRW.Position = newPos;
                 playerPosSingleton.ValueRW.Value = newPos;
             }

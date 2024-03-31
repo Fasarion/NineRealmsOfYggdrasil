@@ -20,8 +20,6 @@ namespace Damage
                 .Query<HasChangedHP>()
                 .WithEntityAccess())
             {
-                Debug.Log("Enable flash!");
-
                 // only applies for negative amounts
                 //TODO: optimize with a new tag "HasTakenDamage"
                 if (hasChangedHP.Amount >= 0)

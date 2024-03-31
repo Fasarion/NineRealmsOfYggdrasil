@@ -25,20 +25,16 @@ namespace Player
     
             float3 input = new float3(hor, 0, ver);
             
-            float minMagnitudeForValidMove = 0.25f;
             float magnitude = math.length(input);
-
             if (magnitude > 1)
                 input = math.normalize(input);
             
             // TODO: control system
             bool applySprint = Input.GetKey(KeyCode.LeftShift);
             var moveVector = input * SystemAPI.Time.DeltaTime;
+            
             var playerPosSingleton = SystemAPI.GetSingletonRW<PlayerPositionSingleton>();
-            
-            if (magnitude < minMagnitudeForValidMove)
-                return;
-            
+
             foreach (var (playerTransform, speedComp, sprintMod) 
                 in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, RefRO<SprintComponent>>().WithAll<PlayerTag>())
             {

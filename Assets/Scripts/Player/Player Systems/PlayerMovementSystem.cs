@@ -22,12 +22,12 @@ namespace Player
         {
             float hor = Input.GetAxis("Horizontal");
             float ver = Input.GetAxis("Vertical");
-
+    
             float3 input = new float3(hor, 0, ver);
             
             float minMagnitudeForValidMove = 0.25f;
             float magnitude = math.length(input);
-
+    
             if (magnitude < minMagnitudeForValidMove)
                 return;
             

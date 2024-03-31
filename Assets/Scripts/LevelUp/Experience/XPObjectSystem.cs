@@ -98,8 +98,6 @@ public partial struct XPObjectSystem : ISystem
 
             totalXpToAdd += xp.ValueRO.Value;
             xp.ValueRW.Value = totalXpToAdd;
-        
-            Debug.Log($"{xp.ValueRO.Value}");
         }
         
         

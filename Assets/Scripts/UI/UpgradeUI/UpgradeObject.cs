@@ -42,6 +42,8 @@ public class UpgradeObject : ScriptableObject
     
     public float upgradeAmount;
 
+    public bool startUnlocked;
+
     [HideInInspector] public int upgradeIndex;
     [HideInInspector] public bool isUnlocked;
 

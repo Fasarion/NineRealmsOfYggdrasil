@@ -39,7 +39,6 @@ public partial struct PlayerWantsToFireSystem : ISystem
     private void HandleManualFire(ref SystemState state)
     {
         bool fireButtonPressed = SystemAPI.GetSingleton<PlayerFireInput>().FireKeyPressed;
-        //bool fireButtonPressed = Input.GetButtonDown("Fire1");
         if (!fireButtonPressed) return;
 
         FireWithWeapons(ref state);
@@ -47,7 +46,7 @@ public partial struct PlayerWantsToFireSystem : ISystem
 
     private void FireWithWeapons(ref SystemState state)
     {
-        foreach (var weapon in SystemAPI.Query<RefRW<WeaponComponent>>().WithAll<PlayerTag>())
+        foreach (var weapon in SystemAPI.Query<RefRW<WeaponComponent>>().WithAll<BelongsToPlayerTag>())
         {
             if (weapon.ValueRO.HasCooledDown)
             {

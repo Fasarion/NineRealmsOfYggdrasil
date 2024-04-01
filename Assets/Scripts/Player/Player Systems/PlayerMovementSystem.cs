@@ -11,12 +11,12 @@ namespace Player
     /// <summary>
     /// System for moving a player based on its move speed and sprint modifier.
     /// </summary>
-    public partial struct PlayerMovementSystem : ISystem
+    public partial struct PlayerMovementSystem : ISystem 
     {
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<PlayerMovementConfig>();
-            state.RequireForUpdate<PlayerTag>();
+            state.RequireForUpdate<PlayerTag>(); 
         }
     
         public void OnUpdate(ref SystemState state)

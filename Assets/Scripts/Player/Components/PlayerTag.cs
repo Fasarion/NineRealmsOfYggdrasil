@@ -6,7 +6,5 @@ using UnityEngine;
 namespace Player
 {
 
-    public struct PlayerTag : IComponentData
-    {
-    }
+    public struct PlayerTag : IComponentData { }
 }

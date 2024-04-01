@@ -4,6 +4,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using Movement;
 using Player;
+using UnityEngine;
 
 namespace Weapon
 {
@@ -24,34 +25,32 @@ namespace Weapon
         public void OnUpdate(ref SystemState state)
         {
             var entityManager = state.EntityManager;
-        
-            foreach (var (weapon, transform, ltw) in 
-                SystemAPI.Query<RefRO<WeaponComponent>, RefRO<LocalTransform>, RefRO<LocalToWorld>>())
+            
+            foreach (var (weapon, ltw) in 
+                SystemAPI.Query<RefRO<WeaponComponent>, RefRO<LocalToWorld>>())
             {
+                // TODO: Add WantsToFireComponent-tag to optimize query
                 if (!weapon.ValueRO.WantsToFire)
                     return;
-
-                SpawnProjectile(ref state, entityManager, weapon, transform, ltw);
+                
+                SpawnProjectile(ref state, entityManager, weapon, ltw);
             }
         
         }
 
         [BurstCompile]
         private void SpawnProjectile(ref SystemState state, EntityManager entityManager, 
-            RefRO<WeaponComponent> weapon, RefRO<LocalTransform> transform, RefRO<LocalToWorld> ltw)
+            RefRO<WeaponComponent> weapon, RefRO<LocalToWorld> ltw)
         {
             Entity projectileEntity = entityManager.Instantiate(weapon.ValueRO.Projectile);
             var entityTransform = entityManager.GetComponentData<LocalTransform>(projectileEntity);
-        
-            // projectile position
-            entityTransform.Position = transform.ValueRO.Position;
-        
-            // projectile rotation
+            
+            entityTransform.Position = ltw.ValueRO.Position;
             entityTransform.Rotation = math.mul(ltw.ValueRO.Rotation, entityTransform.Rotation);
         
             // set new transform values and direction
             entityManager.SetComponentData(projectileEntity, entityTransform);
-            entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(transform.ValueRO.Forward())));
+            entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(ltw.ValueRO.Forward)));
         }
     }
 }

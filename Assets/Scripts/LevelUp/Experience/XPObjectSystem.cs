@@ -23,9 +23,8 @@ public partial struct XPObjectSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
+        //state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         state.RequireForUpdate<PlayerXP>();
-        state.RequireForUpdate<PlayerLevel>();
         state.RequireForUpdate<XPObjectConfig>();
         state.RequireForUpdate<PlayerPositionSingleton>();
     }
@@ -36,7 +35,6 @@ public partial struct XPObjectSystem : ISystem
         state.Dependency.Complete();
         
         var config = SystemAPI.GetSingleton<XPObjectConfig>();
-        var level = SystemAPI.GetSingletonRW<PlayerLevel>();
 
         var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);

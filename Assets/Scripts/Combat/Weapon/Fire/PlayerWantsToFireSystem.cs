@@ -14,6 +14,7 @@ public partial struct PlayerWantsToFireSystem : ISystem
     {
         state.RequireForUpdate<FireSettingsData>();
         state.RequireForUpdate<PlayerWeaponConfig>();
+        state.RequireForUpdate<PlayerFireInput>();
     }
     
     public void OnUpdate(ref SystemState state)
@@ -37,7 +38,8 @@ public partial struct PlayerWantsToFireSystem : ISystem
 
     private void HandleManualFire(ref SystemState state)
     {
-        bool fireButtonPressed = Input.GetButtonDown("Fire1");
+        bool fireButtonPressed = SystemAPI.GetSingleton<PlayerFireInput>().FireKeyPressed;
+        //bool fireButtonPressed = Input.GetButtonDown("Fire1");
         if (!fireButtonPressed) return;
 
         FireWithWeapons(ref state);

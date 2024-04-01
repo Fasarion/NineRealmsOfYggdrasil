@@ -5,3 +5,8 @@ public struct PlayerMoveInput : IComponentData
 {
     public float2 Value;
 }
+
+public struct PlayerFireInput : IComponentData
+{
+    public bool FireKeyPressed;
+}

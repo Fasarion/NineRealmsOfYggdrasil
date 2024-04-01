@@ -13,6 +13,7 @@ public class InputAuthoring : MonoBehaviour
                 
             //Inputs TODO: move to seperate class
             AddComponent<PlayerMoveInput>();
+            AddComponent<PlayerFireInput>();
         }
     }
 }

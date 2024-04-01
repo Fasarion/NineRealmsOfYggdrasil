@@ -13,6 +13,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "PlayerFire",
+                    "type": "Button",
+                    "id": "8fe5cd11-2ac5-4faa-bd9f-0a59d034529c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -125,6 +134,17 @@
                     "action": "PlayerMovement",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "26f96f28-b13a-4766-81be-70cebc2d20cc",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerFire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

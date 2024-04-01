@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 7139840582480737796}
   - component: {fileID: 3470256506313007981}
   - component: {fileID: 5721736140305412554}
-  - component: {fileID: 3146360395728833807}
   - component: {fileID: 7518404381628642642}
   - component: {fileID: 1699717597459645934}
   - component: {fileID: 4031803512305907226}
@@ -314,19 +313,6 @@ MonoBehaviour:
   projectilePrefab: {fileID: 7824363987953266496, guid: 00a46bfd6213f1d438cbe2fe38f1fe45,
     type: 3}
   coolDownTime: 0.1
---- !u!114 &3146360395728833807
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6353328540331355661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6963a4f72f52409dbde3a1562a87b7d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sprintModifier: 1.5
 --- !u!114 &7518404381628642642
 MonoBehaviour:
   m_ObjectHideFlags: 0

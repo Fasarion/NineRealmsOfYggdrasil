@@ -24,8 +24,8 @@ public class UpgradePoolManager : MonoBehaviour
                 
                 if (_instance == null)
                 {
-                    GameObject instanceObject = new GameObject("UpgradePoolManager");
-                    _instance = instanceObject.AddComponent<UpgradePoolManager>();
+                    //GameObject instanceObject = new GameObject("UpgradePoolManager");
+                    //_instance = instanceObject.AddComponent<UpgradePoolManager>();
                 }
             }
 
@@ -38,7 +38,7 @@ public class UpgradePoolManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {

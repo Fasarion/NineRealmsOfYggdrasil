@@ -26,6 +26,8 @@ public enum UpgradeBaseType
     
 }
 
+[CreateAssetMenu(fileName = "UpgradeObject", menuName = "Upgrades/UpgradeObject" +
+                                                         "")]
 public class UpgradeObject : ScriptableObject
 {
     //TODO: add support for multiple upgrade values in one struct
@@ -34,7 +36,7 @@ public class UpgradeObject : ScriptableObject
     [TextArea(3, 10)]
     public string upgradeDescription;
 
-    public Image upgradeImage;
+    public Sprite upgradeSprite;
 
     public UpgradeBaseType thingToUpgrade;
 

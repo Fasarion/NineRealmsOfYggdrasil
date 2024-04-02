@@ -5,13 +5,22 @@ using UnityEngine;
 
 public class PlayerLevelingAuthoring : MonoBehaviour
 {
+    [Header("--Tweakable Values--")] [Tooltip("Required xp for the initial level up, from level 0 -> 1")]
+    public int baseXPNeeded = 5;
+
+    [Tooltip(
+        "The added amount of xp needed per level. Example if baseXPNeeded is = 5: level 1 requires 25 xp, level 2 requires 65 xp, level 3 105 xp, and so on...")]
+    public int addedXPNeededPerLevel = 20;
+    
+    
+    
     [Header("--Debug Values--")]
     [Tooltip("Starting XP for the player in a scene. Only change for testing purposes!")]
     public int playerStartingXP = 0;
     [Tooltip("Starting level for the player in a scene. Only change for testing purposes!")]
     public int playerStartingLevel = 0;
-    
-    //TODO: level scaling, etc
+    [Tooltip("Starting amount of available skillpoints. Only change for testing purposes!")]
+    public int playerStartingSkillpoints = 0;
 
     public class PlayerLevelingAuthoringBaker : Baker<PlayerLevelingAuthoring>
     {
@@ -22,7 +31,10 @@ public class PlayerLevelingAuthoring : MonoBehaviour
                 new PlayerLevelingConfig
                     {
                         PlayerStartingXp = authoring.playerStartingXP,
-                        PlayerStartingLevel = authoring.playerStartingLevel
+                        PlayerStartingLevel = authoring.playerStartingLevel,
+                        BaseXPNeeded = authoring.baseXPNeeded,
+                        AddedXPNeededPerLevel = authoring.addedXPNeededPerLevel,
+                        PlayerStartingSkillpoints = authoring.playerStartingSkillpoints
                     });
             AddComponent(entity, new PlayerXP
             {
@@ -32,7 +44,11 @@ public class PlayerLevelingAuthoring : MonoBehaviour
             {
                 Value = authoring.playerStartingLevel
             });
-            
+            AddComponent(entity, new PlayerSkillpoints
+            {
+                Value = authoring.playerStartingSkillpoints
+            });
+
         }
     }
 }
@@ -41,6 +57,9 @@ public struct PlayerLevelingConfig : IComponentData
 {
     public int PlayerStartingXp;
     public int PlayerStartingLevel;
+    public int BaseXPNeeded;
+    public int AddedXPNeededPerLevel;
+    public int PlayerStartingSkillpoints;
 }
 
 public struct PlayerXP : IComponentData
@@ -49,6 +68,11 @@ public struct PlayerXP : IComponentData
 }
 
 public struct PlayerLevel : IComponentData
+{
+    public int Value;
+}
+
+public struct PlayerSkillpoints : IComponentData
 {
     public int Value;
 }

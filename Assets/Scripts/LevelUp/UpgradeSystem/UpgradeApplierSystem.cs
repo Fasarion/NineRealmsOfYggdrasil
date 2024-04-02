@@ -11,19 +11,39 @@ public partial class UpgradeApplierSystem : SystemBase
     protected override void OnUpdate()
     {
         var choice = SystemAPI.GetSingletonRW<UpgradeChoice>();
+
+        if (choice.ValueRO.IsHandled) return;
         
-        if (!choice.ValueRO.IsHandled)
-        {
             if (_pool == null)
             {
                 _pool = UpgradePoolManager.Instance;
             }
 
             UpgradeObject upgradeObject = _pool.GetUpgradeObjectReferenceByKey(choice.ValueRO.ChoiceIndex);
-
             choice.ValueRW.IsHandled = true;
+            
+            HandleLocks(upgradeObject);
         
             Debug.Log($"Upgrade chosen: {upgradeObject.upgradeTitle}");
+    }
+
+    private void HandleLocks(UpgradeObject upgradeObject)
+    {
+        upgradeObject.isUnlocked = false;
+        _pool.RegisterUpgradeAsPicked(upgradeObject.upgradeIndex);
+
+        UpgradeObject[] objectsToUnlock = upgradeObject.upgradesToUnlock.ToArray();
+
+        foreach (var obj in objectsToUnlock)
+        {
+            obj.isUnlocked = true;
+        }
+        
+        UpgradeObject[] objectsToLock = upgradeObject.upgradesToLock.ToArray();
+
+        foreach (var obj in objectsToLock)
+        {
+            obj.isUnlocked = false;
         }
     }
 }

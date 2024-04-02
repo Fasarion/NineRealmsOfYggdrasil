@@ -11,6 +11,7 @@ public class UpgradePoolManager : MonoBehaviour
     public string folderPath = "Assets/Upgrades/UpgradePool";
     public Dictionary<int, UpgradeObject> upgradePool;
     public HashSet<int> unlockedUpgradeSet;
+    public HashSet<int> pickedUpgradeSet;
     
     private static UpgradePoolManager _instance;
     
@@ -46,6 +47,7 @@ public class UpgradePoolManager : MonoBehaviour
         }
         
         GenerateUpgradePool();
+        pickedUpgradeSet = new HashSet<int>();
     }
 
     public void GenerateUpgradePool()
@@ -76,8 +78,10 @@ public class UpgradePoolManager : MonoBehaviour
         unlockedUpgradeSet = new HashSet<int>();
         foreach (var upgrade in upgradeObjects)
         {
+            if(pickedUpgradeSet.Contains(upgrade.upgradeIndex)) continue;
+            
             if (upgrade.isUnlocked)
-            { 
+            {
                 unlockedUpgradeSet.Add(upgrade.upgradeIndex);
             }
         }
@@ -110,7 +114,7 @@ public class UpgradePoolManager : MonoBehaviour
         {
             int rollResult = GetRandomRoll(upgradeIndecis.Count);
 
-            UpgradeObject resultObject = GetUpgradeObjectReferenceByKey(rollResult);
+            UpgradeObject resultObject = GetUpgradeObjectReferenceByKey(upgradeIndecis[rollResult]);
             upgradeIndecis.RemoveAt(rollResult);
             upgradeObjects[i] = resultObject;
         }
@@ -129,6 +133,11 @@ public class UpgradePoolManager : MonoBehaviour
     {
         UpgradeObject upgradeObject = upgradePool[key];
         return upgradeObject;
+    }
+
+    public void RegisterUpgradeAsPicked(int index)
+    {
+        pickedUpgradeSet.Add(index);
     }
     
 }

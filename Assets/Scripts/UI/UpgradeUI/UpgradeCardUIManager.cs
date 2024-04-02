@@ -78,6 +78,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         }
 
         _isUIDisplayed = true;
+        Time.timeScale = 0f;
     }
 
     private void HideUI()
@@ -88,6 +89,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         }
 
         _isUIDisplayed = false;
+        Time.timeScale = 1f;
     }
 
     public RectTransform[] GetUpgradeCardDimensions(UpgradeObject[] upgradeObjects)

@@ -258,7 +258,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
 
     // MovementMap
     private readonly InputActionMap m_MovementMap;
-    private List<MovementActions.IMovementMapActions> m_MovementMapActionsCallbackInterfaces = new List<IMovementMapActions>();
+    private List<IMovementMapActions> m_MovementMapActionsCallbackInterfaces = new List<IMovementMapActions>();
     private readonly InputAction m_MovementMap_PlayerMovement;
     private readonly InputAction m_MovementMap_PlayerFire;
     private readonly InputAction m_MovementMap_UpgradeUIButton;

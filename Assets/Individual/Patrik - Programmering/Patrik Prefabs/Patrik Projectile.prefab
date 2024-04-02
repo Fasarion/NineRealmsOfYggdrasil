@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 2200917143035241133}
   - component: {fileID: 7135853917643872561}
   - component: {fileID: 7899796359273220732}
+  - component: {fileID: 4045521414853887161}
   m_Layer: 0
   m_Name: Patrik Projectile
   m_TagString: Untagged
@@ -323,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 2
+  maxHP: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,7 +337,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0fc3a8116264439a1093e275390a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 2
+  lifeTime: 5
 --- !u!114 &7135853917643872561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,3 +364,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4045521414853887161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d624dce546514415a7316aacbd262703, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpChange: -1

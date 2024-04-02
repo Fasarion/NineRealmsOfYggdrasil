@@ -22,8 +22,8 @@ namespace Destruction
                 });
 
 
-                AddComponent(entity, new ShouldBeDestroyed());
-                SetComponentEnabled<ShouldBeDestroyed>(false);
+                // AddComponent(entity, new ShouldBeDestroyed());
+                // SetComponentEnabled<ShouldBeDestroyed>(false);
             }
         }
     }

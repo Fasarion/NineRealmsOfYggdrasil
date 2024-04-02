@@ -16,6 +16,7 @@ namespace Health
             {
                 var entity = GetEntity(TransformUsageFlags.None);
             
+                // TODO: Create an aspect to group components and make functions
                 AddComponent(entity, new MaxHpComponent {Value = authoring.maxHP,});
                 AddComponent(entity, new CurrentHpComponent {Value = authoring.maxHP,});
                 

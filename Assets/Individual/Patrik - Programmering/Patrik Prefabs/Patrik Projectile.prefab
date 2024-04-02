@@ -20,6 +20,8 @@ GameObject:
   - component: {fileID: 7135853917643872561}
   - component: {fileID: 7899796359273220732}
   - component: {fileID: 4045521414853887161}
+  - component: {fileID: 9141337140125238061}
+  - component: {fileID: 8116207207063421910}
   m_Layer: 0
   m_Name: Patrik Projectile
   m_TagString: Untagged
@@ -377,3 +379,28 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpChange: -1
+--- !u!114 &9141337140125238061
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 2
+--- !u!114 &8116207207063421910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

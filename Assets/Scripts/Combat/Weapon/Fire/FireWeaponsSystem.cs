@@ -27,7 +27,7 @@ namespace Weapon
             var entityManager = state.EntityManager;
             
             foreach (var (weapon, ltw) in 
-                SystemAPI.Query<RefRO<WeaponComponent>, RefRO<LocalToWorld>>())
+                SystemAPI.Query<RefRO<GunComponent>, RefRO<LocalToWorld>>())
             {
                 // TODO: Add WantsToFireComponent-tag to optimize query
                 if (!weapon.ValueRO.WantsToFire)
@@ -40,7 +40,7 @@ namespace Weapon
 
         [BurstCompile]
         private void SpawnProjectile(ref SystemState state, EntityManager entityManager, 
-            RefRO<WeaponComponent> weapon, RefRO<LocalToWorld> ltw)
+            RefRO<GunComponent> weapon, RefRO<LocalToWorld> ltw)
         {
             Entity projectileEntity = entityManager.Instantiate(weapon.ValueRO.Projectile);
             var entityTransform = entityManager.GetComponentData<LocalTransform>(projectileEntity);

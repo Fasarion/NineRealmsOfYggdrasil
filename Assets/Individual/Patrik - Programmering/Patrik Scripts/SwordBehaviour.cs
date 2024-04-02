@@ -12,7 +12,7 @@ namespace Patrik
         [SerializeField] private Transform tip;
         [SerializeField] private Animator swordAnimator;
         
-        private string swordAttackName = "Swing";
+        private string swordAttackName = "SwordSwing";
 
         public UnityAction OnAttackPerformed;
     
@@ -23,7 +23,8 @@ namespace Patrik
 
         public void PerformAttack()
         {
-            swordAnimator.SetTrigger(swordAttackName);
+            swordAnimator.Play(swordAttackName);
+            Debug.Log("Set Trigger");
         }
     }
 }

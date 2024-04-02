@@ -6,7 +6,7 @@ namespace Weapon
     {
         public void OnUpdate(ref SystemState state)
         {
-            foreach (var weapon in SystemAPI.Query<RefRW<WeaponComponent>>())
+            foreach (var weapon in SystemAPI.Query<RefRW<GunComponent>>())
             {
                 weapon.ValueRW.CurrentCoolDownTime += SystemAPI.Time.DeltaTime;
                 weapon.ValueRW.WantsToFire = false;

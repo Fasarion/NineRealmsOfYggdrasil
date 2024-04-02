@@ -46,7 +46,7 @@ public partial struct PlayerWantsToFireSystem : ISystem
 
     private void FireWithWeapons(ref SystemState state)
     {
-        foreach (var weapon in SystemAPI.Query<RefRW<WeaponComponent>>().WithAll<BelongsToPlayerTag>())
+        foreach (var weapon in SystemAPI.Query<RefRW<GunComponent>>().WithAll<BelongsToPlayerTag>())
         {
             if (weapon.ValueRO.HasCooledDown)
             {
@@ -55,13 +55,13 @@ public partial struct PlayerWantsToFireSystem : ISystem
         }
     }
     
-    private void Fire(RefRW<WeaponComponent> weapon)
+    private void Fire(RefRW<GunComponent> weapon)
     {
         weapon.ValueRW.WantsToFire = true;
         ResetCoolDown(weapon);
     }
 
-    private void ResetCoolDown(RefRW<WeaponComponent> weapon)
+    private void ResetCoolDown(RefRW<GunComponent> weapon)
     {
         weapon.ValueRW.CurrentCoolDownTime = 0;
     }

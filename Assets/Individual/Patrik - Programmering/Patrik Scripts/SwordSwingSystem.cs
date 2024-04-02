@@ -6,7 +6,7 @@ namespace Patrik
     public partial class SwordSwingSystem : SystemBase
     {
         private PlayerWeaponHandlerBehaviour weaponHandler;
-        
+
         protected override void OnUpdate()
         {
             PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
@@ -26,6 +26,11 @@ namespace Patrik
             }
             
             weaponHandler.TryPerformCurrentAttack();
+        }
+
+        protected override void OnStopRunning()
+        {
+            weaponHandler.OnPerformAttack -= OnAttackPerformed;
         }
 
         void OnAttackPerformed()

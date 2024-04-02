@@ -22,9 +22,6 @@ public partial struct ResetInputSystem : ISystem
         var fireInput = SystemAPI.GetSingletonRW<PlayerFireInput>();
         fireInput.ValueRW.FireKeyPressed = false;
 
-        var upgradeUIButtonInput = SystemAPI.GetSingletonRW<UpgradeUIButtonPress>();
-        upgradeUIButtonInput.ValueRW.isPressed = false;
-        
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

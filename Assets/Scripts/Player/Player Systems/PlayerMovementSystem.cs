@@ -4,6 +4,7 @@ using Unity.Physics.Systems;
 using Unity.Transforms;
 using UnityEngine;
 using Movement;
+using Patrik;
 using Unity.Physics;
 
 namespace Player
@@ -31,6 +32,12 @@ namespace Player
                 var newPos = playerTransform.ValueRO.Position.xz +  moveInput.Value * speed * SystemAPI.Time.DeltaTime;
                 playerTransform.ValueRW.Position.xz = newPos;
                 playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
+
+                if (PlayerParentBehaviour.Instance != null)
+                {
+                    PlayerParentBehaviour.Instance.transform.position = playerTransform.ValueRO.Position; 
+                    PlayerParentBehaviour.Instance.transform.rotation = playerTransform.ValueRO.Rotation; 
+                }
             }
         }
     }

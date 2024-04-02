@@ -19,7 +19,7 @@ namespace Damage
                 .Query<DynamicBuffer<KnockBackBufferElement>, RefRW<PhysicsVelocity>>()
                 .WithEntityAccess())
             {
-                float3 totalKnockBackForce = float3.zero;
+                float2 totalKnockBackForce = float2.zero;
 
                 // Sum all knockbacks in buffer
                 bool hasKnockback = false;
@@ -37,7 +37,7 @@ namespace Damage
                     continue;
 
                 // Knock back
-                physicsVelocity.ValueRW.Linear += totalKnockBackForce;
+                physicsVelocity.ValueRW.Linear += new float3(totalKnockBackForce.x, 0, totalKnockBackForce.y);
             }
             
             // Play back all operations in entity command buffer

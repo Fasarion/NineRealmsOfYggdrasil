@@ -23,6 +23,7 @@ namespace Damage
             state.RequireForUpdate<HpTriggerConfig>();
         }
 
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var detectCapabilityTriggerJob = new DetectHitTriggerJob

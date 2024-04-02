@@ -8,6 +8,8 @@ public class UpgradeCardUIManager : MonoBehaviour
     [SerializeField] private List<UpgradeCardUIBehaviour> upgradeCards;
     
     private static UpgradeCardUIManager _instance;
+
+    private bool _isUIDisplayed;
     
     public static UpgradeCardUIManager Instance
     {
@@ -47,6 +49,16 @@ public class UpgradeCardUIManager : MonoBehaviour
     }
 
     private void OnDisable()
+    {
+        
+    }
+
+    private void ShowUI()
+    {
+        
+    }
+
+    private void HideUI()
     {
         
     }

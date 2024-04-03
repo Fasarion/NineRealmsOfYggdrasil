@@ -1,4 +1,6 @@
-﻿using Unity.Entities;
+﻿using Unity.Collections;
+using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace Patrik
@@ -7,26 +9,37 @@ namespace Patrik
     {
         private PlayerWeaponHandlerBehaviour weaponHandler;
 
+        private bool hasSetUp;
+
         protected override void OnUpdate()
         {
-            PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
-            if (!fireInput.FireKeyPressed) return;
-
-            if (weaponHandler == null)
+            if (!hasSetUp)
             {
-                weaponHandler = PlayerWeaponHandlerBehaviour.Instance;
+                if (weaponHandler == null)
+                {
+                    weaponHandler = PlayerWeaponHandlerBehaviour.Instance;
 
-                weaponHandler.OnPerformAttack += OnAttackPerformed;
+                    weaponHandler.OnPerformAttack += OnAttackPerformed;
+                    weaponHandler.OnStopAttack += OnAttackStop;
+                }
+            
+                if (weaponHandler == null)
+                {
+                    Debug.LogError("Missing Player Weapon Handler.");
+                    return;
+                }
+
+                hasSetUp = true;
             }
             
-            if (weaponHandler == null)
-            {
-                Debug.LogError("Missing Player Weapon Handler.");
-                return;
-            }
+            
+            PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
+            if (!fireInput.FireKeyPressed) return;
             
             weaponHandler.TryPerformCurrentAttack();
         }
+
+        
 
         protected override void OnStopRunning()
         {
@@ -35,8 +48,49 @@ namespace Patrik
 
         void OnAttackPerformed()
         {
-            Debug.Log("Attack event recieved in DOTS!");
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            
+            foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
+                .WithAll<Disabled>()
+                .WithEntityAccess())
+            {
+               ecb.RemoveComponent(entity, typeof(Disabled));
+                
+               // EntityManager.RemoveComponent(entity, typeof(Disabled));
+                Debug.Log("Remove disabled");
+            }
+            
+            ecb.Playback(EntityManager);
+        }
+        
+        private void OnAttackStop()
+        {
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>().WithEntityAccess())
+            {
+                ecb.AddComponent(entity, typeof(Disabled));
+
+                // EntityManager.AddComponent(entity, typeof(Disabled));
+                // Debug.Log("Add disabled");
+            } 
+            
+            ecb.Playback(EntityManager);
         }
     }
     
+    public partial class SwordEntityFollowAnimationSystem : SystemBase
+    {
+        protected override void OnUpdate()
+        {
+            foreach (var (transform, sword) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>())
+            {
+                transform.ValueRW.Position = PlayerWeaponHandlerBehaviour.Instance.SwordTip.position;
+            }
+        }
+
+        
+        
+    }
 }

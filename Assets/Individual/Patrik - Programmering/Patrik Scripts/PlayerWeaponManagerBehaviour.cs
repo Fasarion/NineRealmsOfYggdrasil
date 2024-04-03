@@ -11,8 +11,11 @@ namespace Patrik
 
         [SerializeField] private List<WeaponBehaviour> weapons;
 
-        // temp way of accessing current weapon
-        private WeaponBehaviour currentWeapon => weapons[0];
+
+        private static int PASSIVE_WEAPON_COUNT = 2;
+
+        private WeaponBehaviour[] passiveWeapons = new WeaponBehaviour[PASSIVE_WEAPON_COUNT];
+        private WeaponBehaviour activeWeapon;
 
         public UnityAction OnActiveWeaponAttack;
         public UnityAction OnActiveWeaponStopAttack;
@@ -29,6 +32,8 @@ namespace Patrik
                 weapon.OnAttackPerformed += OnAttackPerformed;
                 weapon.OnAttackStop += OnAttackStop;
             }
+
+            activeWeapon = weapons[0];
         }
         
         private void OnDisable()
@@ -52,7 +57,7 @@ namespace Patrik
 
         public void TryPerformCurrentAttack()
         {
-            currentWeapon.PerformAttack();
+            activeWeapon.PerformNormalAttack();
         }
     }
 }

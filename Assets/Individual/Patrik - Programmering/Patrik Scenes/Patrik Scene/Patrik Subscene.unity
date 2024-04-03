@@ -289,8 +289,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c65fe7bbff4ec478859d92c7b26610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   tip: {fileID: 0}
-  swordAnimator: {fileID: 0}
 --- !u!95 &633456627
 Animator:
   serializedVersion: 5
@@ -606,10 +606,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1048000313}
   - component: {fileID: 1048000314}
+  - component: {fileID: 1048000320}
   - component: {fileID: 1048000317}
   - component: {fileID: 1048000316}
   - component: {fileID: 1048000315}
-  - component: {fileID: 1048000320}
   - component: {fileID: 1048000321}
   m_Layer: 0
   m_Name: Sword Entity
@@ -2148,6 +2148,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Entity
+      objectReference: {fileID: 0}
+    - target: {fileID: 6353328540331355661, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6604889744194150476, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}

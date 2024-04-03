@@ -8,7 +8,7 @@ namespace Patrik
 {
     public partial class SwordSwingSystem : SystemBase
     {
-        private PlayerWeaponHandlerBehaviour weaponHandler;
+        private PlayerWeaponManagerBehaviour _weaponManager;
 
         private bool hasSetUp;
 
@@ -16,15 +16,15 @@ namespace Patrik
         {
             if (!hasSetUp)
             {
-                if (weaponHandler == null)
+                if (_weaponManager == null)
                 {
-                    weaponHandler = PlayerWeaponHandlerBehaviour.Instance;
+                    _weaponManager = PlayerWeaponManagerBehaviour.Instance;
 
-                    weaponHandler.OnPerformAttack += OnAttackPerformed;
-                    weaponHandler.OnStopAttack += OnAttackStop;
+                    _weaponManager.OnPerformAttack += OnAttackPerformed;
+                    _weaponManager.OnStopAttack += OnAttackStop;
                 }
             
-                if (weaponHandler == null)
+                if (_weaponManager == null)
                 {
                     Debug.LogError("Missing Player Weapon Handler.");
                     return;
@@ -37,14 +37,14 @@ namespace Patrik
             PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
             if (!fireInput.FireKeyPressed) return;
             
-            weaponHandler.TryPerformCurrentAttack();
+            _weaponManager.TryPerformCurrentAttack();
         }
 
         
 
         protected override void OnStopRunning()
         {
-            weaponHandler.OnPerformAttack -= OnAttackPerformed;
+            _weaponManager.OnPerformAttack -= OnAttackPerformed;
         }
 
         void OnAttackPerformed()
@@ -91,7 +91,7 @@ namespace Patrik
             foreach (var (transform, sword) in 
                 SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>())
             {
-                transform.ValueRW.Position = PlayerWeaponHandlerBehaviour.Instance.SwordTip.position;
+                transform.ValueRW.Position = SwordBehaviour.Instance.Tip.position;
             }
         }
 

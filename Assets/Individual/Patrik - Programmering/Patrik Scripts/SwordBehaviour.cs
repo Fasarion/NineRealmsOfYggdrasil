@@ -7,18 +7,30 @@ using UnityEngine.Events;
 
 namespace Patrik
 {
-    public class SwordBehaviour : MonoBehaviour
+    public class SwordBehaviour : WeaponBehaviour
     {
         [SerializeField] private Transform tip;
-        [SerializeField] private Animator swordAnimator;
 
+        public static SwordBehaviour Instance;
+        
         public Transform Tip => tip;
         
-        private string swordAttackName = "SwordSwing";
+        private void Awake()
+        {
+            Instance = this;
+        }
+
+    }
+
+    public abstract class WeaponBehaviour : MonoBehaviour
+    {
+        [SerializeField] private Animator animator;
+
+        private string attackAnimationName = "Attack";
 
         public UnityAction OnAttackPerformed;
         public UnityAction OnAttackStop;
-    
+
         public void OnStartAttackEvent()
         {
             OnAttackPerformed?.Invoke();
@@ -31,8 +43,7 @@ namespace Patrik
 
         public void PerformAttack()
         {
-            swordAnimator.Play(swordAttackName);
-            Debug.Log("Set Trigger");
+            animator.Play(attackAnimationName);
         }
     }
 }

@@ -1,15 +1,16 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace Patrik
 {
-    public class PlayerWeaponHandlerBehaviour : MonoBehaviour
+    public class PlayerWeaponManagerBehaviour : MonoBehaviour
     {
-        public static PlayerWeaponHandlerBehaviour Instance { get; private set; }
+        public static PlayerWeaponManagerBehaviour Instance { get; private set; }
 
+        [SerializeField] private List<WeaponBehaviour> weapons;
         [SerializeField] private SwordBehaviour swordBehaviour;
-        public Transform SwordTip => swordBehaviour.Tip;
 
         public UnityAction OnPerformAttack;
         public UnityAction OnStopAttack;

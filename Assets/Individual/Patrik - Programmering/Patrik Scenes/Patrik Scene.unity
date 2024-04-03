@@ -970,6 +970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9220caf6ebdc4a64bf6384986b46535a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weapons: []
   swordBehaviour: {fileID: 1207726947}
 --- !u!1 &832575517
 GameObject:
@@ -1088,8 +1089,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c65fe7bbff4ec478859d92c7b26610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 1207726946}
   tip: {fileID: 1673130592}
-  swordAnimator: {fileID: 1207726946}
 --- !u!1 &1673130591
 GameObject:
   m_ObjectHideFlags: 0

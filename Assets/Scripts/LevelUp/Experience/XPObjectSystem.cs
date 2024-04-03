@@ -91,6 +91,8 @@ public partial struct XPObjectSystem : ISystem
 
             totalXpToAdd += xp.ValueRO.Value;
             xp.ValueRW.Value = totalXpToAdd;
+            
+            AudioManager.Instance.PlayWeaponSound();
         
             //Debug.Log($"{xp.ValueRO.Value}");
         }

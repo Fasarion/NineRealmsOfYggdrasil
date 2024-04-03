@@ -10,6 +10,8 @@ public class WeaponAudio : ScriptableObject
     [Header("Weapons")] 
     public EventReference swordSwing;
 
+    public EventReference testTwo;
+
     public void SwordSwingAudio(GameObject gameObject)
     {
         RuntimeManager.PlayOneShotAttached(swordSwing.Guid, gameObject);

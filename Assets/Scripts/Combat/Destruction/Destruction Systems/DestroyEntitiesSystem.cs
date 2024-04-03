@@ -18,8 +18,6 @@ namespace Destruction
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            //var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-            
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var beginSimECB = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged);
@@ -30,7 +28,7 @@ namespace Destruction
             foreach (var (_, entity) in SystemAPI.Query<RefRW<ShouldBeDestroyed>>().WithEntityAccess())
             {
                 
-                
+                // Hanlde
                 if (spawnEntityOnDestroyLookup.TryGetComponent(entity, out var spawnEntityOnDestroy))
                 {
                     var spawnedEntity = beginSimECB.Instantiate(spawnEntityOnDestroy.Value);

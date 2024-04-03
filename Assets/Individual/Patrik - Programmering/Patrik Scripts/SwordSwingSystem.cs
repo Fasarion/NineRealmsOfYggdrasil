@@ -22,6 +22,8 @@ namespace Patrik
 
                     _weaponManager.OnActiveWeaponAttack += OnAttackPerformed;
                     _weaponManager.OnActiveWeaponStopAttack += OnAttackStop;
+                    
+                    OnAttackStop(); 
                 }
             
                 if (_weaponManager == null)
@@ -51,7 +53,6 @@ namespace Patrik
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
-            
             foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
                 .WithAll<Disabled>()
                 .WithEntityAccess())
@@ -69,8 +70,9 @@ namespace Patrik
             foreach (var (transform, sword, damageBuffer, entity) in 
                 SystemAPI.Query<RefRW<LocalTransform>, SwordComponent, DynamicBuffer<HitBufferElement>>().WithEntityAccess())
             {
-                ecb.AddComponent(entity, typeof(Disabled));
                 
+                ecb.AddComponent(entity, typeof(Disabled));
+
                 damageBuffer.Clear();
             } 
             

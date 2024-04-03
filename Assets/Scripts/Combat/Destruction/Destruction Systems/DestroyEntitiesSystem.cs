@@ -28,7 +28,7 @@ namespace Destruction
             foreach (var (_, entity) in SystemAPI.Query<RefRW<ShouldBeDestroyed>>().WithEntityAccess())
             {
                 
-                // Hanlde
+                // Spawn Objects on destroy
                 if (spawnEntityOnDestroyLookup.TryGetComponent(entity, out var spawnEntityOnDestroy))
                 {
                     var spawnedEntity = beginSimECB.Instantiate(spawnEntityOnDestroy.Value);

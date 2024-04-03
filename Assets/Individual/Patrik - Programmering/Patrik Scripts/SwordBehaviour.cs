@@ -11,14 +11,22 @@ namespace Patrik
     {
         [SerializeField] private Transform tip;
         [SerializeField] private Animator swordAnimator;
+
+        public Transform Tip => tip;
         
         private string swordAttackName = "SwordSwing";
 
         public UnityAction OnAttackPerformed;
+        public UnityAction OnAttackStop;
     
-        public void OnAttackEvent()
+        public void OnStartAttackEvent()
         {
             OnAttackPerformed?.Invoke();
+        }
+
+        public void OnStopAttackEvent()
+        {
+            OnAttackStop?.Invoke();
         }
 
         public void PerformAttack()

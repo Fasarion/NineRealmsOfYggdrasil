@@ -20,8 +20,16 @@ public partial class GetPlayerInputSystem : SystemBase
     protected override void OnStartRunning()
     {
         playerMovementActions.Enable();
+        
+        // Attack
         playerMovementActions.MovementMap.PlayerFire.performed += OnPlayerShoot;
+        playerMovementActions.MovementMap.PlayerSpecialAttack.performed += OnSpecialAttack;
+        
+        
+        // General
         playerMovementActions.MovementMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
+        
+        
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
     }
 
@@ -34,15 +42,28 @@ public partial class GetPlayerInputSystem : SystemBase
     protected override void OnStopRunning()
     {
         playerMovementActions.Disable();
+        
         playerMovementActions.MovementMap.PlayerFire.performed -= OnPlayerShoot;
+        playerMovementActions.MovementMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
+
         playerMovementActions.MovementMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
     }
+
+    
 
     private void OnPlayerShoot(InputAction.CallbackContext obj)
     {
         if (!SystemAPI.Exists(playerEntity)) return;
 
         var fireInput = SystemAPI.GetSingletonRW<PlayerFireInput>();
+        fireInput.ValueRW.FireKeyPressed = true;
+    }
+    
+    private void OnSpecialAttack(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
         fireInput.ValueRW.FireKeyPressed = true;
     }
 

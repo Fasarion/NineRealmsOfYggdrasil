@@ -7,63 +7,63 @@ using UnityEngine;
 namespace Weapon
 {
     
-[UpdateAfter(typeof(UpdateWeaponCooldownSystem))]
-public partial struct PlayerWantsToFireSystem : ISystem
-{
-    public void OnCreate(ref SystemState state)
+    [UpdateAfter(typeof(UpdateWeaponCooldownSystem))]
+    public partial struct PlayerWantsToFireSystem : ISystem
     {
-        state.RequireForUpdate<FireSettingsData>();
-        state.RequireForUpdate<PlayerWeaponConfig>();
-        state.RequireForUpdate<PlayerFireInput>();
-    }
-    
-    public void OnUpdate(ref SystemState state)
-    {
-        var fireSettings = SystemAPI.GetSingletonRW<FireSettingsData>();
-
-        if (fireSettings.ValueRO.autoFire)
+        public void OnCreate(ref SystemState state)
         {
-            HandleAutoFire(ref state);
+            state.RequireForUpdate<FireSettingsData>();
+            state.RequireForUpdate<PlayerWeaponConfig>();
+            state.RequireForUpdate<PlayerFireInput>();
         }
-        else
+        
+        public void OnUpdate(ref SystemState state)
         {
-            HandleManualFire(ref state);
-        }
-    }
+            var fireSettings = SystemAPI.GetSingletonRW<FireSettingsData>();
 
-    private void HandleAutoFire(ref SystemState state)
-    {
-        FireWithWeapons(ref state);
-    }
-
-    private void HandleManualFire(ref SystemState state)
-    {
-        bool fireButtonPressed = SystemAPI.GetSingleton<PlayerFireInput>().FireKeyPressed;
-        if (!fireButtonPressed) return;
-
-        FireWithWeapons(ref state);
-    }
-
-    private void FireWithWeapons(ref SystemState state)
-    {
-        foreach (var weapon in SystemAPI.Query<RefRW<GunComponent>>().WithAll<BelongsToPlayerTag>())
-        {
-            if (weapon.ValueRO.HasCooledDown)
+            if (fireSettings.ValueRO.autoFire)
             {
-                Fire(weapon);
+                HandleAutoFire(ref state);
+            }
+            else
+            {
+                HandleManualFire(ref state);
             }
         }
-    }
-    
-    private void Fire(RefRW<GunComponent> weapon)
-    {
-        weapon.ValueRW.WantsToFire = true;
-        ResetCoolDown(weapon);
-    }
 
-    private void ResetCoolDown(RefRW<GunComponent> weapon)
-    {
-        weapon.ValueRW.CurrentCoolDownTime = 0;
+        private void HandleAutoFire(ref SystemState state)
+        {
+            FireWithWeapons(ref state);
+        }
+
+        private void HandleManualFire(ref SystemState state)
+        {
+            bool fireButtonPressed = SystemAPI.GetSingleton<PlayerFireInput>().FireKeyPressed;
+            if (!fireButtonPressed) return;
+
+            FireWithWeapons(ref state);
+        }
+
+        private void FireWithWeapons(ref SystemState state)
+        {
+            foreach (var weapon in SystemAPI.Query<RefRW<GunComponent>>().WithAll<BelongsToPlayerTag>())
+            {
+                if (weapon.ValueRO.HasCooledDown)
+                {
+                    Fire(weapon);
+                }
+            }
+        }
+        
+        private void Fire(RefRW<GunComponent> weapon)
+        {
+            weapon.ValueRW.WantsToFire = true;
+            ResetCoolDown(weapon);
+        }
+
+        private void ResetCoolDown(RefRW<GunComponent> weapon)
+        {
+            weapon.ValueRW.CurrentCoolDownTime = 0;
+        }
     }
-}
 }

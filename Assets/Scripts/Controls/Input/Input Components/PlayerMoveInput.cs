@@ -10,3 +10,8 @@ public struct PlayerFireInput : IComponentData
 {
     public bool FireKeyPressed;
 }
+
+public struct PlayerSpecialAttackInput : IComponentData
+{
+    public bool FireKeyPressed;
+}

@@ -21,6 +21,8 @@ public partial struct ResetInputSystem : ISystem
         // Reset fire input
         var fireInput = SystemAPI.GetSingletonRW<PlayerFireInput>();
         fireInput.ValueRW.FireKeyPressed = false;
+        var specialAttackInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
+        specialAttackInput.ValueRW.FireKeyPressed = false;
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

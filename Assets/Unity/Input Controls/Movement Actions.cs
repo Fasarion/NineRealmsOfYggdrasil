@@ -53,6 +53,15 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PlayerSpecialAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""e0359eff-9fa4-424b-b73e-31f2b091048e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -187,6 +196,17 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""action"": ""UpgradeUIButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2cb1c0c-c880-46e8-ba9b-0770f3912b52"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PlayerSpecialAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -198,6 +218,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         m_MovementMap_PlayerMovement = m_MovementMap.FindAction("PlayerMovement", throwIfNotFound: true);
         m_MovementMap_PlayerFire = m_MovementMap.FindAction("PlayerFire", throwIfNotFound: true);
         m_MovementMap_UpgradeUIButton = m_MovementMap.FindAction("UpgradeUIButton", throwIfNotFound: true);
+        m_MovementMap_PlayerSpecialAttack = m_MovementMap.FindAction("PlayerSpecialAttack", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -262,6 +283,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_MovementMap_PlayerMovement;
     private readonly InputAction m_MovementMap_PlayerFire;
     private readonly InputAction m_MovementMap_UpgradeUIButton;
+    private readonly InputAction m_MovementMap_PlayerSpecialAttack;
     public struct MovementMapActions
     {
         private @MovementActions m_Wrapper;
@@ -269,6 +291,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         public InputAction @PlayerMovement => m_Wrapper.m_MovementMap_PlayerMovement;
         public InputAction @PlayerFire => m_Wrapper.m_MovementMap_PlayerFire;
         public InputAction @UpgradeUIButton => m_Wrapper.m_MovementMap_UpgradeUIButton;
+        public InputAction @PlayerSpecialAttack => m_Wrapper.m_MovementMap_PlayerSpecialAttack;
         public InputActionMap Get() { return m_Wrapper.m_MovementMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -287,6 +310,9 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             @UpgradeUIButton.started += instance.OnUpgradeUIButton;
             @UpgradeUIButton.performed += instance.OnUpgradeUIButton;
             @UpgradeUIButton.canceled += instance.OnUpgradeUIButton;
+            @PlayerSpecialAttack.started += instance.OnPlayerSpecialAttack;
+            @PlayerSpecialAttack.performed += instance.OnPlayerSpecialAttack;
+            @PlayerSpecialAttack.canceled += instance.OnPlayerSpecialAttack;
         }
 
         private void UnregisterCallbacks(IMovementMapActions instance)
@@ -300,6 +326,9 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             @UpgradeUIButton.started -= instance.OnUpgradeUIButton;
             @UpgradeUIButton.performed -= instance.OnUpgradeUIButton;
             @UpgradeUIButton.canceled -= instance.OnUpgradeUIButton;
+            @PlayerSpecialAttack.started -= instance.OnPlayerSpecialAttack;
+            @PlayerSpecialAttack.performed -= instance.OnPlayerSpecialAttack;
+            @PlayerSpecialAttack.canceled -= instance.OnPlayerSpecialAttack;
         }
 
         public void RemoveCallbacks(IMovementMapActions instance)
@@ -322,5 +351,6 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         void OnPlayerMovement(InputAction.CallbackContext context);
         void OnPlayerFire(InputAction.CallbackContext context);
         void OnUpgradeUIButton(InputAction.CallbackContext context);
+        void OnPlayerSpecialAttack(InputAction.CallbackContext context);
     }
 }

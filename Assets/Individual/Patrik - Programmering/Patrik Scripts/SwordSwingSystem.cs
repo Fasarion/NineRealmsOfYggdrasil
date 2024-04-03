@@ -56,10 +56,7 @@ namespace Patrik
                 .WithAll<Disabled>()
                 .WithEntityAccess())
             {
-               ecb.RemoveComponent(entity, typeof(Disabled));
-                
-               // EntityManager.RemoveComponent(entity, typeof(Disabled));
-                Debug.Log("Remove disabled");
+                ecb.RemoveComponent(entity, typeof(Disabled));
             }
             
             ecb.Playback(EntityManager);
@@ -75,27 +72,9 @@ namespace Patrik
                 ecb.AddComponent(entity, typeof(Disabled));
                 
                 damageBuffer.Clear();
-            
-                // EntityManager.AddComponent(entity, typeof(Disabled));
-                // Debug.Log("Add disabled");
             } 
             
             ecb.Playback(EntityManager);
         }
-    }
-    
-    public partial class SwordEntityFollowAnimationSystem : SystemBase
-    {
-        protected override void OnUpdate()
-        {
-            foreach (var (transform, sword) in 
-                SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>())
-            {
-                transform.ValueRW.Position = SwordBehaviour.Instance.Tip.position;
-            }
-        }
-
-        
-        
     }
 }

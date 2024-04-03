@@ -11,9 +11,11 @@ public class InputAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.None);
                 
-            //Inputs TODO: move to seperate class
             AddComponent<PlayerMoveInput>();
+            
             AddComponent<PlayerFireInput>();
+            AddComponent<PlayerSpecialAttackInput>();
+
             AddComponent<UpgradeUIButtonPress>();
         }
     }

@@ -10,10 +10,12 @@ namespace Patrik
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
 
         [SerializeField] private List<WeaponBehaviour> weapons;
-        [SerializeField] private SwordBehaviour swordBehaviour;
 
-        public UnityAction OnPerformAttack;
-        public UnityAction OnStopAttack;
+        // temp way of accessing current weapon
+        private WeaponBehaviour currentWeapon => weapons[0];
+
+        public UnityAction OnActiveWeaponAttack;
+        public UnityAction OnActiveWeaponStopAttack;
 
         private void Awake()
         {
@@ -22,29 +24,35 @@ namespace Patrik
 
         private void OnEnable()
         {
-            swordBehaviour.OnAttackPerformed += OnAttackPerformed;
-            swordBehaviour.OnAttackStop += OnAttackStop;
+            foreach (var weapon in weapons)
+            {
+                weapon.OnAttackPerformed += OnAttackPerformed;
+                weapon.OnAttackStop += OnAttackStop;
+            }
         }
         
         private void OnDisable()
         {
-            swordBehaviour.OnAttackPerformed -= OnAttackPerformed;
-            swordBehaviour.OnAttackStop += OnAttackStop;
+            foreach (var weapon in weapons)
+            {
+                weapon.OnAttackPerformed -= OnAttackPerformed;
+                weapon.OnAttackStop -= OnAttackStop;
+            }
         }
 
         private void OnAttackPerformed()
         {
-            OnPerformAttack?.Invoke();
+            OnActiveWeaponAttack?.Invoke();
         }
         
         private void OnAttackStop()
         {
-            OnStopAttack?.Invoke();
+            OnActiveWeaponStopAttack?.Invoke();
         }
 
         public void TryPerformCurrentAttack()
         {
-            swordBehaviour.PerformAttack();
+            currentWeapon.PerformAttack();
         }
     }
 }

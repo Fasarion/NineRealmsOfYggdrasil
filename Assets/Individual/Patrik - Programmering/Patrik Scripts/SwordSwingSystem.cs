@@ -20,8 +20,8 @@ namespace Patrik
                 {
                     _weaponManager = PlayerWeaponManagerBehaviour.Instance;
 
-                    _weaponManager.OnPerformAttack += OnAttackPerformed;
-                    _weaponManager.OnStopAttack += OnAttackStop;
+                    _weaponManager.OnActiveWeaponAttack += OnAttackPerformed;
+                    _weaponManager.OnActiveWeaponStopAttack += OnAttackStop;
                 }
             
                 if (_weaponManager == null)
@@ -44,7 +44,7 @@ namespace Patrik
 
         protected override void OnStopRunning()
         {
-            _weaponManager.OnPerformAttack -= OnAttackPerformed;
+            _weaponManager.OnActiveWeaponAttack -= OnAttackPerformed;
         }
 
         void OnAttackPerformed()

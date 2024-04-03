@@ -936,7 +936,7 @@ GameObject:
   - component: {fileID: 809129036}
   - component: {fileID: 809129037}
   m_Layer: 0
-  m_Name: WeaponHandler
+  m_Name: Player Weapon Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -970,8 +970,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9220caf6ebdc4a64bf6384986b46535a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
-  swordBehaviour: {fileID: 1207726947}
+  weapons:
+  - {fileID: 1207726947}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

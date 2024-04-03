@@ -4,6 +4,7 @@ using Unity.Entities;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]
+[DisableAutoCreation]
 public partial class UpgradeApplierSystem : SystemBase
 {
     private UpgradePoolManager _pool;

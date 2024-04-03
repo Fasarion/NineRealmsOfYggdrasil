@@ -21,7 +21,7 @@ public partial class UpgradeUISystem : SystemBase
     protected override void OnUpdate()
     {
         var level = SystemAPI.GetSingleton<PlayerLevel>();
-
+        
         int currentLevel = level.Value;
         
         SubscribeToManager();

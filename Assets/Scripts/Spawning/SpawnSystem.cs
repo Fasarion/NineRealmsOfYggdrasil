@@ -42,6 +42,7 @@ public partial struct SpawnSystem : ISystem
         if (config.ValueRO.onlySpawnOnce) config.ValueRW.shouldBeSpawning = false;
         SpawnEnemies(config, state);
         
+        
 
         config.ValueRW.currentTimerInterval++;
         

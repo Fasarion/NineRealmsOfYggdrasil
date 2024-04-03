@@ -1,4 +1,5 @@
-﻿using Unity.Collections;
+﻿using Damage;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -49,7 +50,7 @@ namespace Patrik
         void OnAttackPerformed()
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-
+            
             
             foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
                 .WithAll<Disabled>()
@@ -67,11 +68,14 @@ namespace Patrik
         private void OnAttackStop()
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-
-            foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>().WithEntityAccess())
+            
+            foreach (var (transform, sword, damageBuffer, entity) in 
+                SystemAPI.Query<RefRW<LocalTransform>, SwordComponent, DynamicBuffer<HitBufferElement>>().WithEntityAccess())
             {
                 ecb.AddComponent(entity, typeof(Disabled));
-
+                
+                damageBuffer.Clear();
+            
                 // EntityManager.AddComponent(entity, typeof(Disabled));
                 // Debug.Log("Add disabled");
             } 
@@ -84,7 +88,8 @@ namespace Patrik
     {
         protected override void OnUpdate()
         {
-            foreach (var (transform, sword) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>())
+            foreach (var (transform, sword) in 
+                SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>())
             {
                 transform.ValueRW.Position = PlayerWeaponHandlerBehaviour.Instance.SwordTip.position;
             }

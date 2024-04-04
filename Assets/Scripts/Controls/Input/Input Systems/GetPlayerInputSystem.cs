@@ -24,7 +24,8 @@ public partial class GetPlayerInputSystem : SystemBase
         // Attack
         playerMovementActions.MovementMap.PlayerFire.performed += OnPlayerShoot;
         playerMovementActions.MovementMap.PlayerSpecialAttack.performed += OnSpecialAttack;
-        
+        playerMovementActions.MovementMap.PlayerUltimateAttack.performed += OnUltimateAttack;
+       
         
         // General
         playerMovementActions.MovementMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
@@ -32,6 +33,8 @@ public partial class GetPlayerInputSystem : SystemBase
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
     }
+
+    
 
     protected override void OnUpdate()
     {
@@ -45,6 +48,7 @@ public partial class GetPlayerInputSystem : SystemBase
         
         playerMovementActions.MovementMap.PlayerFire.performed -= OnPlayerShoot;
         playerMovementActions.MovementMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
+        playerMovementActions.MovementMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
 
         playerMovementActions.MovementMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
     }
@@ -55,8 +59,8 @@ public partial class GetPlayerInputSystem : SystemBase
     {
         if (!SystemAPI.Exists(playerEntity)) return;
 
-        var fireInput = SystemAPI.GetSingletonRW<PlayerFireInput>();
-        fireInput.ValueRW.FireKeyPressed = true;
+        var fireInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
+        fireInput.ValueRW.KeyPressed = true;
     }
     
     private void OnSpecialAttack(InputAction.CallbackContext obj)
@@ -64,7 +68,15 @@ public partial class GetPlayerInputSystem : SystemBase
         if (!SystemAPI.Exists(playerEntity)) return;
 
         var fireInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
-        fireInput.ValueRW.FireKeyPressed = true;
+        fireInput.ValueRW.KeyPressed = true;
+    }
+    
+    private void OnUltimateAttack(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
+        fireInput.ValueRW.KeyPressed = true;
     }
 
     private void OnUpgradeUIButtonPressed(InputAction.CallbackContext obj)

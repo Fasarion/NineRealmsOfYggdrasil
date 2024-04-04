@@ -14,7 +14,7 @@ namespace Weapon
         {
             state.RequireForUpdate<FireSettingsData>();
             state.RequireForUpdate<PlayerWeaponConfig>();
-            state.RequireForUpdate<PlayerFireInput>();
+            state.RequireForUpdate<PlayerNormalAttackInput>();
         }
         
         public void OnUpdate(ref SystemState state)
@@ -38,7 +38,7 @@ namespace Weapon
 
         private void HandleManualFire(ref SystemState state)
         {
-            bool fireButtonPressed = SystemAPI.GetSingleton<PlayerFireInput>().FireKeyPressed;
+            bool fireButtonPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyPressed;
             if (!fireButtonPressed) return;
 
             FireWithWeapons(ref state);

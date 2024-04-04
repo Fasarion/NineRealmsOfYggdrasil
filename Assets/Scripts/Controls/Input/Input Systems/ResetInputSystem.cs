@@ -19,10 +19,12 @@ public partial struct ResetInputSystem : ISystem
         moveInput.ValueRW.Value = float2.zero;
 
         // Reset fire input
-        var fireInput = SystemAPI.GetSingletonRW<PlayerFireInput>();
-        fireInput.ValueRW.FireKeyPressed = false;
+        var normalAttackInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
+        normalAttackInput.ValueRW.KeyPressed = false;
         var specialAttackInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
-        specialAttackInput.ValueRW.FireKeyPressed = false;
+        specialAttackInput.ValueRW.KeyPressed = false;
+        var ultimateAttackInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
+        ultimateAttackInput.ValueRW.KeyPressed = false;
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

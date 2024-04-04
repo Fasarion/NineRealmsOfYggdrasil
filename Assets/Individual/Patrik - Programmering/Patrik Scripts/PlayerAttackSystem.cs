@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Patrik
 {
-    public partial class SwordSwingSystem : SystemBase
+    public partial class PlayerAttackSystem : SystemBase
     {
         private PlayerWeaponManagerBehaviour _weaponManager;
 
@@ -22,39 +22,62 @@ namespace Patrik
                     
                     if (_weaponManager == null)
                     {
-                        Debug.LogError("Missing Player Weapon Handler.");
+                        Debug.LogWarning("Missing Player Weapon Handler, attacks not possible.");
                         return;
                     }
 
-                    _weaponManager.OnActiveWeaponStartAttackNormal += OnNormalAttackStart;
-                    _weaponManager.OnActiveWeaponStopAttackNormal += OnNormalAttackStop;
-                    
+                    SubscribeToAttackEvents();
+
                     // disable sword collider at start
                     OnNormalAttackStop(new AttackData()); 
                     hasSetUp = true;
                 }
             }
-            
+
+            HandleWeaponInput();
+        }
+
+        private void SubscribeToAttackEvents()
+        {
+            _weaponManager.OnActiveWeaponStartAttackNormal += OnNormalAttackStart;
+            _weaponManager.OnActiveWeaponStopAttackNormal += OnNormalAttackStop;
+        }
+
+        private void HandleWeaponInput()
+        {
             // Handle normal attack
-            PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
-            if (fireInput.FireKeyPressed)
+            var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
+            if (normalAttackInput.KeyPressed)
             {
                 _weaponManager.NormalAttack();
                 return;
             }
-            
-            
+
+            // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.FireKeyPressed)
+            if (specialAttack.KeyPressed)
             {
                 _weaponManager.SpecialAttack();
                 return;
             }
+            
+            // Handle special attack
+            var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
+            if (ultimateAttack.KeyPressed)
+            {
+                Debug.Log("Ultimate attack!");
+                //_weaponManager.UltimateAttack();
+                return;
+            }
         }
 
-        
 
         protected override void OnStopRunning()
+        {
+            UnsubscribeFromAttackEvents();
+        }
+
+        private void UnsubscribeFromAttackEvents()
         {
             _weaponManager.OnActiveWeaponStartAttackNormal -= OnNormalAttackStart;
             _weaponManager.OnActiveWeaponStopAttackNormal -= OnNormalAttackStop;

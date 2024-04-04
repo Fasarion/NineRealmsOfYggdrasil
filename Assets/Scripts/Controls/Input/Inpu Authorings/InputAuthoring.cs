@@ -13,8 +13,9 @@ public class InputAuthoring : MonoBehaviour
                 
             AddComponent<PlayerMoveInput>();
             
-            AddComponent<PlayerFireInput>();
+            AddComponent<PlayerNormalAttackInput>();
             AddComponent<PlayerSpecialAttackInput>();
+            AddComponent<PlayerUltimateAttackInput>();
 
             AddComponent<UpgradeUIButtonPress>();
         }

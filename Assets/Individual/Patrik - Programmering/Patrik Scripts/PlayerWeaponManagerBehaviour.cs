@@ -29,8 +29,8 @@ namespace Patrik
         {
             foreach (var weapon in weapons)
             {
-                weapon.OnAttackPerformed += OnAttackPerformed;
-                weapon.OnAttackStop += OnAttackStop;
+                weapon.OnAttackPerformed += OnNormalAttackStart;
+                weapon.OnAttackStop += OnNormalAttackStop;
             }
 
             activeWeapon = weapons[0];
@@ -40,17 +40,17 @@ namespace Patrik
         {
             foreach (var weapon in weapons)
             {
-                weapon.OnAttackPerformed -= OnAttackPerformed;
-                weapon.OnAttackStop -= OnAttackStop;
+                weapon.OnAttackPerformed -= OnNormalAttackStart;
+                weapon.OnAttackStop -= OnNormalAttackStop;
             }
         }
 
-        private void OnAttackPerformed(AttackData data)
+        private void OnNormalAttackStart(AttackData data)
         {
             OnActiveWeaponStartAttackNormal?.Invoke(data);
         }
         
-        private void OnAttackStop(AttackData data)
+        private void OnNormalAttackStop(AttackData data)
         {
             OnActiveWeaponStopAttackNormal?.Invoke(data);
         }

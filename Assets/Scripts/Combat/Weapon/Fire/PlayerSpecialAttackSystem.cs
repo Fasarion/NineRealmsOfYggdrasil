@@ -13,7 +13,7 @@ namespace Weapon
         
         public void OnUpdate(ref SystemState state)
         {
-            bool fireButtonPressed = SystemAPI.GetSingleton<PlayerSpecialAttackInput>().FireKeyPressed;
+            bool fireButtonPressed = SystemAPI.GetSingleton<PlayerSpecialAttackInput>().KeyPressed;
             if (!fireButtonPressed) return;
             
             Debug.Log("Special Attack Button Pressed!");

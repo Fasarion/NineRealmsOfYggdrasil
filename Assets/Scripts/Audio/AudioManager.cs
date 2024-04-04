@@ -7,15 +7,25 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [SerializeField] private WeaponAudio _weaponAudio;
+    [SerializeField] private WeaponAudio weaponAudio;
+    [SerializeField] private EnemyAudio enemyAudio;
+    [SerializeField] private PlayerAudio playerAudio;
 
     private void Awake()
     {
-        Instance = this;
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
     }
 
     public void PlayWeaponSound()
     {
-        _weaponAudio.SwordSwingAudio(gameObject);
+        weaponAudio.SwordSwingAudio(gameObject);
     }
 }

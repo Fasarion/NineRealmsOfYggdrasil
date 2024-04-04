@@ -7,8 +7,8 @@ namespace Patrik
     {
         [SerializeField] private Animator animator;
 
-        private string normalAttackAnimationName = "Attack";
-   //   private string normalAttackAnimationName = "Attack";
+        private string normalAttackAnimationName = "NormalAttack";
+        private string specialAttackAnimationName = "SpecialAttack";
 
         public UnityAction OnAttackPerformed;
         public UnityAction OnAttackStop;
@@ -26,6 +26,11 @@ namespace Patrik
         public void PerformNormalAttack()
         {
             animator.Play(normalAttackAnimationName);
+        }
+        
+        public void PerformSpecialAttack()
+        {
+            animator.Play(specialAttackAnimationName);
         }
     }
 }

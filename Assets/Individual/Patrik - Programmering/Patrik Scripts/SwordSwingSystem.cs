@@ -19,37 +19,48 @@ namespace Patrik
                 if (_weaponManager == null)
                 {
                     _weaponManager = PlayerWeaponManagerBehaviour.Instance;
-
-                    _weaponManager.OnActiveWeaponAttack += OnAttackPerformed;
-                    _weaponManager.OnActiveWeaponStopAttack += OnAttackStop;
                     
-                    OnAttackStop(); 
-                }
-            
-                if (_weaponManager == null)
-                {
-                    Debug.LogError("Missing Player Weapon Handler.");
-                    return;
-                }
+                    if (_weaponManager == null)
+                    {
+                        Debug.LogError("Missing Player Weapon Handler.");
+                        return;
+                    }
 
-                hasSetUp = true;
+                    _weaponManager.OnActiveWeaponStartAttackNormal += OnNormalAttackStart;
+                    _weaponManager.OnActiveWeaponStopAttackNormal += OnNormalAttackStop;
+                    
+                    // disable sword collider at start
+                    OnNormalAttackStop(); 
+                    hasSetUp = true;
+                }
+            }
+            
+            // Handle normal attack
+            PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
+            if (fireInput.FireKeyPressed)
+            {
+                _weaponManager.NormalAttack();
+                return;
             }
             
             
-            PlayerFireInput fireInput = SystemAPI.GetSingleton<PlayerFireInput>();
-            if (!fireInput.FireKeyPressed) return;
-            
-            _weaponManager.TryPerformCurrentAttack();
+            var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
+            if (specialAttack.FireKeyPressed)
+            {
+                _weaponManager.SpecialAttack();
+                return;
+            }
         }
 
         
 
         protected override void OnStopRunning()
         {
-            _weaponManager.OnActiveWeaponAttack -= OnAttackPerformed;
+            _weaponManager.OnActiveWeaponStartAttackNormal -= OnNormalAttackStart;
+            _weaponManager.OnActiveWeaponStopAttackNormal -= OnNormalAttackStop;
         }
 
-        void OnAttackPerformed()
+        void OnNormalAttackStart()
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
@@ -63,7 +74,7 @@ namespace Patrik
             ecb.Playback(EntityManager);
         }
         
-        private void OnAttackStop()
+        private void OnNormalAttackStop()
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             

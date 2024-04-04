@@ -17,8 +17,8 @@ namespace Patrik
         private WeaponBehaviour[] passiveWeapons = new WeaponBehaviour[PASSIVE_WEAPON_COUNT];
         private WeaponBehaviour activeWeapon;
 
-        public UnityAction OnActiveWeaponAttack;
-        public UnityAction OnActiveWeaponStopAttack;
+        public UnityAction OnActiveWeaponStartAttackNormal;
+        public UnityAction OnActiveWeaponStopAttackNormal;
 
         private void Awake()
         {
@@ -47,17 +47,22 @@ namespace Patrik
 
         private void OnAttackPerformed()
         {
-            OnActiveWeaponAttack?.Invoke();
+            OnActiveWeaponStartAttackNormal?.Invoke();
         }
         
         private void OnAttackStop()
         {
-            OnActiveWeaponStopAttack?.Invoke();
+            OnActiveWeaponStopAttackNormal?.Invoke();
         }
 
-        public void TryPerformCurrentAttack()
+        public void NormalAttack()
         {
             activeWeapon.PerformNormalAttack();
+        }
+        
+        public void SpecialAttack()
+        {
+            activeWeapon.PerformSpecialAttack();
         }
     }
 }

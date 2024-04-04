@@ -3,8 +3,18 @@ using UnityEngine.Events;
 
 namespace Patrik
 {
+    public enum WeaponType
+    {
+        None,
+        Sword,
+        Axe,
+        Mead,
+        Birds
+    }
+    
     public abstract class WeaponBehaviour : MonoBehaviour
     {
+        [SerializeField] private WeaponType _weaponType;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform attackPoint;
         public Transform AttackPoint => attackPoint;
@@ -22,8 +32,11 @@ namespace Patrik
 
         private AttackData GetAttackData()
         {
-            var attackData = new AttackData();
-            attackData.Position = attackPoint.position;
+            var attackData = new AttackData
+            {
+                WeaponType = _weaponType,
+                AttackPoint = attackPoint
+            };
 
             return attackData;
         }

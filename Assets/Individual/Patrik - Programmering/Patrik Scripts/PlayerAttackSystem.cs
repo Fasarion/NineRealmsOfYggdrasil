@@ -29,7 +29,10 @@ namespace Patrik
                     SubscribeToAttackEvents();
 
                     // disable sword collider at start
-                    OnNormalAttackStop(new AttackData()); 
+                    OnNormalAttackStop(new AttackData
+                    {
+                        WeaponType = WeaponType.Sword
+                    }); 
                     hasSetUp = true;
                 }
             }
@@ -66,6 +69,8 @@ namespace Patrik
             if (ultimateAttack.KeyPressed)
             {
                 Debug.Log("Ultimate attack!");
+                // TODO: ult attack event
+                // todo: energy meter
                 //_weaponManager.UltimateAttack();
                 return;
             }
@@ -86,29 +91,38 @@ namespace Patrik
         void OnNormalAttackStart(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
-                .WithAll<Disabled>()
-                .WithEntityAccess())
+
+            // handle sword attack start
+            if (data.WeaponType == WeaponType.Sword)
             {
-                ecb.RemoveComponent(entity, typeof(Disabled));
+                foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
+                    .WithAll<Disabled>()
+                    .WithEntityAccess())
+                {
+                    ecb.RemoveComponent(entity, typeof(Disabled));
+                }
             }
-            
+
             ecb.Playback(EntityManager);
         }
         
         private void OnNormalAttackStop(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            foreach (var (transform, sword, damageBuffer, entity) in 
-                SystemAPI.Query<RefRW<LocalTransform>, SwordComponent, DynamicBuffer<HitBufferElement>>().WithEntityAccess())
-            {
-                
-                ecb.AddComponent(entity, typeof(Disabled));
 
-                damageBuffer.Clear();
-            } 
+            // handle sword attack stop
+            if (data.WeaponType == WeaponType.Sword)
+            {
+                foreach (var (transform, sword, damageBuffer, entity) in 
+                    SystemAPI.Query<RefRW<LocalTransform>, SwordComponent, DynamicBuffer<HitBufferElement>>().WithEntityAccess())
+                {
+                
+                    ecb.AddComponent(entity, typeof(Disabled));
+
+                    damageBuffer.Clear();
+                } 
+            }
+           
             
             ecb.Playback(EntityManager);
         }

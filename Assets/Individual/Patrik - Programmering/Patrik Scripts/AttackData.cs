@@ -4,6 +4,7 @@ namespace Patrik
 {
     public struct AttackData
     {
-        public Vector3 Position;
+        public WeaponType WeaponType;
+        public Transform AttackPoint;
     }
 }

@@ -30,7 +30,7 @@ namespace Patrik
                     _weaponManager.OnActiveWeaponStopAttackNormal += OnNormalAttackStop;
                     
                     // disable sword collider at start
-                    OnNormalAttackStop(); 
+                    OnNormalAttackStop(new AttackData()); 
                     hasSetUp = true;
                 }
             }
@@ -60,7 +60,7 @@ namespace Patrik
             _weaponManager.OnActiveWeaponStopAttackNormal -= OnNormalAttackStop;
         }
 
-        void OnNormalAttackStart()
+        void OnNormalAttackStart(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
@@ -74,7 +74,7 @@ namespace Patrik
             ecb.Playback(EntityManager);
         }
         
-        private void OnNormalAttackStop()
+        private void OnNormalAttackStop(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             

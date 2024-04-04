@@ -10,7 +10,7 @@ namespace Patrik
             foreach (var (transform, sword) in 
                 SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>())
             {
-                transform.ValueRW.Position = SwordBehaviour.Instance.Tip.position;
+                transform.ValueRW.Position = SwordBehaviour.Instance.AttackPoint.position;
             }
         }
     }

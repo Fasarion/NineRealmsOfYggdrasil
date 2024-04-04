@@ -5,7 +5,7 @@ using UnityEngine;
 //using FMOD.Studio;
 
 
-[CreateAssetMenu(menuName = "SO/Audio/Player", fileName = "New Player Sheet")]
+[CreateAssetMenu(menuName = "ScriptableObjects/Audio/PlayerAudio")]
 public class PlayerAudio : ScriptableObject
 {
    

@@ -19,6 +19,9 @@ namespace Patrik
 
         public UnityAction<AttackData> OnActiveWeaponStartAttackNormal;
         public UnityAction<AttackData> OnActiveWeaponStopAttackNormal;
+        
+        public UnityAction<AttackData> OnActiveWeaponStartAttackSpecial;
+        public UnityAction<AttackData> OnActiveWeaponStopAttackSpecial;
 
         private void Awake()
         {
@@ -54,13 +57,23 @@ namespace Patrik
         {
             OnActiveWeaponStopAttackNormal?.Invoke(data);
         }
+        
+        private void OnSpecialAttackStart(AttackData data)
+        {
+            OnActiveWeaponStartAttackSpecial?.Invoke(data);
+        }
+        
+        private void OnSpecialAttackStop(AttackData data)
+        {
+            OnActiveWeaponStopAttackSpecial?.Invoke(data);
+        }
 
-        public void NormalAttack()
+        public void PerformActiveNormalAttack()
         {
             activeWeapon.PerformNormalAttack();
         }
         
-        public void SpecialAttack()
+        public void PerformActiveSpecialAttack()
         {
             activeWeapon.PerformSpecialAttack();
         }

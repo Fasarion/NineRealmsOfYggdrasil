@@ -29,7 +29,7 @@ namespace Patrik
                     SubscribeToAttackEvents();
 
                     // disable sword collider at start
-                    OnNormalAttackStop(new AttackData
+                    OnAttackStop(new AttackData
                     {
                         WeaponType = WeaponType.Sword
                     }); 
@@ -42,8 +42,8 @@ namespace Patrik
 
         private void SubscribeToAttackEvents()
         {
-            _weaponManager.OnActiveWeaponStartAttackNormal += OnNormalAttackStart;
-            _weaponManager.OnActiveWeaponStopAttackNormal += OnNormalAttackStop;
+            _weaponManager.OnActiveWeaponStartAttackNormal += OnAttackStart;
+            _weaponManager.OnActiveWeaponStopAttackNormal += OnAttackStop;
         }
 
         private void HandleWeaponInput()
@@ -52,7 +52,7 @@ namespace Patrik
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
             if (normalAttackInput.KeyPressed)
             {
-                _weaponManager.NormalAttack();
+                _weaponManager.PerformActiveNormalAttack();
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace Patrik
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             if (specialAttack.KeyPressed)
             {
-                _weaponManager.SpecialAttack();
+                _weaponManager.PerformActiveSpecialAttack();
                 return;
             }
             
@@ -68,8 +68,8 @@ namespace Patrik
             var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
             if (ultimateAttack.KeyPressed)
             {
-                Debug.Log("Ultimate attack!");
-                // TODO: ult attack event
+                Debug.Log("Trigger ultimate attack event!");
+                // TODO: ult attack event in weapon manager
                 // todo: energy meter
                 //_weaponManager.UltimateAttack();
                 return;
@@ -84,29 +84,29 @@ namespace Patrik
 
         private void UnsubscribeFromAttackEvents()
         {
-            _weaponManager.OnActiveWeaponStartAttackNormal -= OnNormalAttackStart;
-            _weaponManager.OnActiveWeaponStopAttackNormal -= OnNormalAttackStop;
+            _weaponManager.OnActiveWeaponStartAttackNormal -= OnAttackStart;
+            _weaponManager.OnActiveWeaponStopAttackNormal -= OnAttackStop;
         }
 
-        void OnNormalAttackStart(AttackData data)
+        void OnAttackStart(AttackData data)
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-
-            // handle sword attack start
-            if (data.WeaponType == WeaponType.Sword)
+            switch (data.AttackType)
             {
-                foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
-                    .WithAll<Disabled>()
-                    .WithEntityAccess())
-                {
-                    ecb.RemoveComponent(entity, typeof(Disabled));
-                }
+                case AttackType.Normal:
+                    StartNormalAttack(data);
+                    break;
+                
+                case AttackType.Special:
+                    StartSpecialAttack(data);
+                    break;
+                
+                case AttackType.Ultimate:
+                    StartUltimateAttack(data);
+                    break;
             }
-
-            ecb.Playback(EntityManager);
         }
         
-        private void OnNormalAttackStop(AttackData data)
+        private void OnAttackStop(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
@@ -122,9 +122,36 @@ namespace Patrik
                     damageBuffer.Clear();
                 } 
             }
-           
             
             ecb.Playback(EntityManager);
+        }
+
+        private void StartNormalAttack(AttackData data)
+        {
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            // sword attack start
+            if (data.WeaponType == WeaponType.Sword)
+            {
+                foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
+                    .WithAll<Disabled>()
+                    .WithEntityAccess())
+                {
+                    ecb.RemoveComponent(entity, typeof(Disabled));
+                }
+            }
+
+            ecb.Playback(EntityManager);
+        }
+        
+        private void StartSpecialAttack(AttackData data)
+        {
+            Debug.Log("Start special attack");
+        }
+        
+        private void StartUltimateAttack(AttackData data)
+        {
+            Debug.Log("Start ultimate attack");
         }
     }
 }

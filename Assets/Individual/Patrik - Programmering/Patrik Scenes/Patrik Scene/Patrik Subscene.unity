@@ -289,8 +289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c65fe7bbff4ec478859d92c7b26610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponType: 0
   animator: {fileID: 0}
-  tip: {fileID: 0}
+  attackPoint: {fileID: 0}
 --- !u!95 &633456627
 Animator:
   serializedVersion: 5
@@ -643,6 +644,8 @@ GameObject:
   - component: {fileID: 1048000316}
   - component: {fileID: 1048000315}
   - component: {fileID: 1048000321}
+  - component: {fileID: 1048000323}
+  - component: {fileID: 1048000322}
   m_Layer: 0
   m_Name: Sword Normal Attack
   m_TagString: Untagged
@@ -910,6 +913,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eaa1201dc7b44ce48a3b12db460e12c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1048000322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048000312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1048000323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048000312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 1
+  knockAwayFromPlayer: 1
 --- !u!1001 &1157425794
 PrefabInstance:
   m_ObjectHideFlags: 0

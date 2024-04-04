@@ -11,6 +11,13 @@ namespace Patrik
         Mead,
         Birds
     }
+
+    public enum AttackType
+    {
+        Normal, 
+        Special,
+        Ultimate
+    }
     
     public abstract class WeaponBehaviour : MonoBehaviour
     {
@@ -18,6 +25,7 @@ namespace Patrik
         [SerializeField] private Animator animator;
         [SerializeField] private Transform attackPoint;
         public Transform AttackPoint => attackPoint;
+        public AttackType CurrentAttackType { get; private set; }
 
         private string normalAttackAnimationName = "NormalAttack";
         private string specialAttackAnimationName = "SpecialAttack";
@@ -25,34 +33,33 @@ namespace Patrik
         public UnityAction<AttackData> OnAttackPerformed;
         public UnityAction<AttackData> OnAttackStop;
 
-        public void OnStartAttackEvent()
-        {
-            OnAttackPerformed?.Invoke(GetAttackData());
-        }
-
         private AttackData GetAttackData()
         {
             var attackData = new AttackData
             {
+                AttackType = CurrentAttackType,
                 WeaponType = _weaponType,
                 AttackPoint = attackPoint
             };
 
             return attackData;
         }
-
-        public void OnStopAttackEvent()
-        {
-            OnAttackStop?.Invoke(GetAttackData());
-        }
+        
+        // Animator Events
+        public void OnStartAttackEvent() => OnAttackPerformed?.Invoke(GetAttackData());
+        
+        public void OnStopAttackEvent() => OnAttackStop?.Invoke(GetAttackData());
+        
 
         public void PerformNormalAttack()
         {
+            CurrentAttackType = AttackType.Normal;
             animator.Play(normalAttackAnimationName);
         }
         
         public void PerformSpecialAttack()
         {
+            CurrentAttackType = AttackType.Special;
             animator.Play(specialAttackAnimationName);
         }
     }

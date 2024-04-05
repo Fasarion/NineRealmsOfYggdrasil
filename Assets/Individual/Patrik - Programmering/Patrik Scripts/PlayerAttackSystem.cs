@@ -129,6 +129,8 @@ namespace Patrik
         private void StartNormalAttack(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
+            
+            
 
             // sword attack start
             if (data.WeaponType == WeaponType.Sword)

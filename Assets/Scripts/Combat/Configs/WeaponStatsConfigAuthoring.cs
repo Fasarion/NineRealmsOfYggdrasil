@@ -12,7 +12,19 @@ public class WeaponStatsConfigAuthoring : MonoBehaviour
     {
         public override void Bake(WeaponStatsConfigAuthoring authoring)
         {
-            throw new System.NotImplementedException();
+            var entity = GetEntity(TransformUsageFlags.None);
+            
+            AddComponent(entity, new WeaponStatsComponent
+            {
+                
+                baseDamage = authoring.baseDamage,
+                
+                
+                
+                
+                
+                
+            });
         }
     }
 }

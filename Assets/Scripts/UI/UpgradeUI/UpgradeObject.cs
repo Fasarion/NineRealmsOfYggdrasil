@@ -3,6 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
+public struct UpgradeInformation
+{
+    [Tooltip("The base objects or groups of objects to modify. Each type added will be modified. You can add as many items to the list as you want!")]
+    public UpgradeBaseType thingToUpgrade;
+    [Tooltip("The specific type of values being added (or subtracted) to. Each type added will be modified. You can add as many types to the list as you want!")]
+    public UpgradeValueTypes valueToUpgrade;
+    [Tooltip("The actual numbers that will be added (or subtracted). If this list is the same length as ValuesToUpgrade each number " +
+             "item will modify the value item with the same index. If this list is shorter than the amount of ValuesToUpgrade the last " +
+             "element in the list will be used as a default. If this list is longer than ValuesToUpgrade the last items in this list will be ignored.")]
+    public float valueAmount;
+}
+
 public enum UpgradeValueTypes
 {
     Damage,
@@ -41,17 +54,10 @@ public class UpgradeObject : ScriptableObject
     [TextArea(3, 10)]
     public string upgradeDescription;
 
-    [Header("")]
-    [Header("--Upgrade Modifiers--")]
+    [Header("")] [Header("--Upgrade Modifiers--")]
 
-    [Tooltip("The base objects or groups of objects to modify. Each type added will be modified. You can add as many items to the list as you want!")]
-    public List<UpgradeBaseType> thingsToUpgrade;
-    [Tooltip("The specific type of values being added (or subtracted) to. Each type added will be modified. You can add as many types to the list as you want!")]
-    public List<UpgradeValueTypes> valuesToUpgrade;
-    [Tooltip("The actual numbers that will be added (or subtracted). If this list is the same length as ValuesToUpgrade each number " +
-             "item will modify the value item with the same index. If this list is shorter than the amount of ValuesToUpgrade the last " +
-             "element in the list will be used as a default. If this list is longer than ValuesToUpgrade the last items in this list will be ignored.")]
-    public List<float> upgradeAmounts;
+    public List<UpgradeInformation> upgrades;
+    
 
     [Header("")]
     [Header("--Upgrade Tree Logic--")]

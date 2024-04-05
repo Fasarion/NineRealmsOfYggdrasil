@@ -7,6 +7,7 @@ using FMOD.Studio;
 [CreateAssetMenu(menuName = "ScriptableObjects/Audio/WeaponAudio")]
 public class WeaponAudio : ScriptableObject
 {
+    private int value = 0;
     [Header("Weapons")] 
     public EventReference swordSwing;
 
@@ -18,12 +19,15 @@ public class WeaponAudio : ScriptableObject
     {
         RuntimeManager.PlayOneShotAttached(swordSwing.Guid, gameObject);
     }
-    public void Test(GameObject gameObject, float value)
+    public void Test()
     {
+        
+        if (value > 2) value = 0;
         test = RuntimeManager.CreateInstance(testRef);
-        RuntimeManager.AttachInstanceToGameObject(test, gameObject.transform);
+        //RuntimeManager.AttachInstanceToGameObject(test, gameObject.transform);
         test.setParameterByName("TestParam", value);
         test.start();
         test.release();
+        value++;
     }
 }

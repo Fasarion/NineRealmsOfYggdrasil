@@ -1087,6 +1087,24 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3015265541220515800, guid: b5b1309cf2495224d8d1b8cce31e481e,
+        type: 3}
+      propertyPath: enemyAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: c59f4081465ae45479d86f17ea1c9f29,
+        type: 2}
+    - target: {fileID: 3015265541220515800, guid: b5b1309cf2495224d8d1b8cce31e481e,
+        type: 3}
+      propertyPath: playerAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: 0aef294cd65965444975b0f6c7d69c5b,
+        type: 2}
+    - target: {fileID: 3015265541220515800, guid: b5b1309cf2495224d8d1b8cce31e481e,
+        type: 3}
+      propertyPath: weaponAudio
+      value: 
+      objectReference: {fileID: 11400000, guid: a9c1fe2458d2e734ca3a4ba012c3af8e,
+        type: 2}
     - target: {fileID: 4650116760049640205, guid: b5b1309cf2495224d8d1b8cce31e481e,
         type: 3}
       propertyPath: m_LocalPosition.x

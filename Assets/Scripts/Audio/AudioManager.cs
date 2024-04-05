@@ -7,9 +7,9 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-    [SerializeField] private WeaponAudio weaponAudio;
-    [SerializeField] private EnemyAudio enemyAudio;
-    [SerializeField] private PlayerAudio playerAudio;
+    public WeaponAudio weaponAudio;
+    public EnemyAudio enemyAudio;
+    public PlayerAudio playerAudio;
 
     private void Awake()
     {

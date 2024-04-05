@@ -552,7 +552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &461994464
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -681,20 +681,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b94a2408c03be34d9005adf6b4ba97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 250
-  height: 250
   tilePrefab: {fileID: 1555400123981958432, guid: f51208269be413b44ab0e8c16af59392,
     type: 3}
   targetObject: {fileID: 1374705427}
-  possibleObjects:
+  possibleOuterObjects:
+  - {fileID: 2905849595583168556, guid: 663f3e04476d63444b65e8afdc52443d, type: 3}
+  - {fileID: 2905849595583168556, guid: dce9c9ae1becc85479f6dde11188bcb2, type: 3}
   - {fileID: 2905849595583168556, guid: 5c3d78f64661ae1428a06e6fd07d217e, type: 3}
   - {fileID: 2905849595583168556, guid: c880a08ff22b7f24492048d5d529b4cb, type: 3}
   - {fileID: 2905849595583168556, guid: 35e69361b5734054d87e8a11cbff69af, type: 3}
   - {fileID: 2905849595583168556, guid: 48e9861a5d0628d488c30db8c4614875, type: 3}
+  - {fileID: 2905849595583168556, guid: 04bb35e8592ebc54a940571a578e2929, type: 3}
   - {fileID: 2905849595583168556, guid: 9de411f1dc47b054b81b6ff11f3be4ba, type: 3}
+  possibleInnerObjects:
+  - {fileID: 2905849595583168556, guid: 9f8be1d0892dcfb45a346c9876234e9f, type: 3}
   - {fileID: 2905849595583168556, guid: 4e1bdc2025a1ff040b12d0f9f5ff5d08, type: 3}
-  - {fileID: 2905849595583168556, guid: dce9c9ae1becc85479f6dde11188bcb2, type: 3}
-  - {fileID: 2905849595583168556, guid: 663f3e04476d63444b65e8afdc52443d, type: 3}
   randomSeed: 0
 --- !u!4 &793132217
 Transform:
@@ -998,7 +999,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -9.753848, y: 33.18476, z: -877}
-  m_LocalScale: {x: 250, y: 1, z: 250}
+  m_LocalScale: {x: 300, y: 1, z: 300}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

@@ -8,13 +8,15 @@ using Random = System.Random;
 public class GridManager : MonoBehaviour
 {
     
-    [SerializeField] private int width;
-    [SerializeField] private int height;
+    //[SerializeField] private int width;
+    //[SerializeField] private int height;
 
     [SerializeField] private Tile tilePrefab;
     [SerializeField] private GameObject targetObject;
 
-    [SerializeField] private List<GameObject> possibleObjects;
+    [SerializeField] private List<GameObject> possibleOuterObjects;
+
+    [SerializeField] private List<GameObject> possibleInnerObjects;
     // Start is called before the first frame update
     [SerializeField] private int randomSeed;
     private Random randomizer;
@@ -39,32 +41,41 @@ public class GridManager : MonoBehaviour
     }
     void GenerateGrid(float gridWidth, float gridHeight, Vector3 tileSize)
     {
-      
-   
-        
+
         int gridIntWidth = Mathf.CeilToInt(gridWidth / tileSize.x);
         int gridIntHeight = Mathf.CeilToInt(gridHeight / tileSize.z);
         
         //Checks which index in the grid that is roughly at the centre.
-        Vector2 tileCenter = GetTileCenter(gridIntWidth, gridIntHeight);
-        
+        Vector2 centerTile = GetCenterTile(gridIntWidth, gridIntHeight);
+        Vector2 mapCenter = new Vector2( centerTile.x,  centerTile.y);
         for (int x = 0; x < gridIntWidth; x++) 
         {
             for (int y = 0; y < gridIntHeight; y++)
             {
+
+                var distanceToTileCenter = Vector2.Distance(new Vector2(x, y), mapCenter);
                 
-                
-                
-                var chosenObjectIndex = randomizer.Next(0, possibleObjects.Count);
-                var spawnedTile = Instantiate(possibleObjects[chosenObjectIndex], new Vector3(x * tileSize.x, 0, y * tileSize.z), Quaternion.identity);
+                var chosenOuterObjectIndex = randomizer.Next(0, possibleOuterObjects.Count);
+                var chosenInnerObjectIndex = randomizer.Next(0, possibleInnerObjects.Count);
+
+                if (distanceToTileCenter < 5.0f)
+                {
+                    var spawnedTile = Instantiate(possibleInnerObjects[chosenInnerObjectIndex], new Vector3(x * tileSize.x, 0, y * tileSize.z), Quaternion.identity);
+
+                }
+                else
+                {
+                    var spawnedTile = Instantiate(possibleOuterObjects[chosenOuterObjectIndex], new Vector3(x * tileSize.x, 0, y * tileSize.z), Quaternion.identity);
+
+                }
                 string tileName = "Tile " + x +  "," + y;
             }
         }
     }
 
-    public Vector2Int GetTileCenter(int gridWidth, int gridHeight)
+    public Vector2Int GetCenterTile(int gridWidth, int gridHeight)
     {
-        return new Vector2Int(Mathf.CeilToInt(gridWidth / 2f), Mathf.CeilToInt(gridHeight / 2f)) ;
+        return new Vector2Int(Mathf.FloorToInt(gridWidth / 2f), Mathf.FloorToInt(gridHeight / 2f)) ;
     }
 
     // Update is called once per frame

@@ -38,6 +38,13 @@ namespace Player
                     PlayerParentBehaviour.Instance.transform.position = playerTransform.ValueRO.Position; 
                     PlayerParentBehaviour.Instance.transform.rotation = playerTransform.ValueRO.Rotation; 
                 }
+
+                if (PlayerWeaponManagerBehaviour.Instance != null)
+                {
+                    bool playerIsMoving = !moveInput.Value.Equals(float2.zero);
+                    PlayerWeaponManagerBehaviour.Instance.UpdateMovementParameter(playerIsMoving);
+                }
+                
             }
         }
     }

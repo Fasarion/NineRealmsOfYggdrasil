@@ -39,7 +39,9 @@ namespace Patrik
         // Animator parameter names
         private string attackAnimationName = "Attack";
         private string activeWeaponParameterName = "ActiveWeapon";
-        private string currentAttackAnimationName = "CurrentAttack";
+        private string currentAttackParameterName = "CurrentAttack";
+
+        private string movingParameterName = "Moving";
         
         // Events
         public UnityAction<AttackData> OnAttackStart;
@@ -108,15 +110,20 @@ namespace Patrik
         private void PerformAttack(AttackType type)
         {
             CurrentAttackType = type;
-            UpdateAnimator();
+            UpdateAnimatorAttackParameters();
         }
 
-        private void UpdateAnimator()
+        private void UpdateAnimatorAttackParameters()
         {
-            playerAnimator.SetInteger(currentAttackAnimationName, (int) CurrentAttackType);
+            playerAnimator.SetInteger(currentAttackParameterName, (int) CurrentAttackType);
             playerAnimator.SetInteger(activeWeaponParameterName, (int) activeWeapon.WeaponType);
 
             playerAnimator.Play(attackAnimationName);
+        }
+
+        public void UpdateMovementParameter(bool playerIsMoving)
+        {
+            playerAnimator.SetBool(movingParameterName, playerIsMoving);
         }
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -469,8 +469,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 11400000, guid: a9c1fe2458d2e734ca3a4ba012c3af8e, type: 2}
         m_TargetAssemblyTypeName: WeaponAudio, Assembly-CSharp
-        m_MethodName: SwordSwingAudio
-        m_Mode: 2
+        m_MethodName: 
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 588429561}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
@@ -881,6 +881,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1864850875}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1105094269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1105094271}
+  - component: {fileID: 1105094270}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1105094270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105094269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99d52857c14b2ac4db7d74a34a26f229, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponAudio: {fileID: 11400000, guid: a9c1fe2458d2e734ca3a4ba012c3af8e, type: 2}
+  enemyAudio: {fileID: 11400000, guid: c59f4081465ae45479d86f17ea1c9f29, type: 2}
+  playerAudio: {fileID: 11400000, guid: 0aef294cd65965444975b0f6c7d69c5b, type: 2}
+--- !u!4 &1105094271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105094269}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.575044, y: -2.2235842, z: -5.2302313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1229107162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,3 +1199,4 @@ SceneRoots:
   - {fileID: 1342410974}
   - {fileID: 1864850875}
   - {fileID: 588429563}
+  - {fileID: 1105094271}

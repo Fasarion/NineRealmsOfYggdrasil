@@ -27,10 +27,16 @@ namespace Patrik
     {
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
 
+        [Header("Weapon")]
+        [SerializeField] private WeaponType startWeaponType = WeaponType.Sword;
+
+        [Header("Animation")]
         [SerializeField] private Animator playerAnimator;
-        //[SerializeField] private List<WeaponBehaviour> weapons;
-        [SerializeField] private Transform weaponSlot;
-        [SerializeField] private WeaponType startWeaponType; 
+        
+        [Header("Weapon Slots")]
+        [SerializeField] private Transform activeSlot;
+        [SerializeField] private Transform passiveSlot1;
+        [SerializeField] private Transform passiveSlot2;
 
         // Weapons
         private static int PASSIVE_WEAPON_COUNT = 2;
@@ -40,7 +46,7 @@ namespace Patrik
         private WeaponBehaviour[] passiveWeapons = new WeaponBehaviour[PASSIVE_WEAPON_COUNT];
         private WeaponBehaviour activeWeapon;
         private AttackType CurrentAttackType { get;  set; }
-        public Transform WeaponSlot => weaponSlot;
+        public Transform ActiveSlot => activeSlot;
         
         // Animator parameter names
         private string attackAnimationName = "Attack";
@@ -90,13 +96,15 @@ namespace Patrik
         {
             weapons = FindObjectsOfType<WeaponBehaviour>().ToList();
 
+            int passiveSlotCounter = 0;
+            
             foreach (var weapon in weapons)
             {
                 if (weapon.WeaponType == startWeaponType)
                 {
                     activeWeapon = weapon;
                     weapon.MakeActive(this);
-                    break;
+                    return;
                 }
             }
         }

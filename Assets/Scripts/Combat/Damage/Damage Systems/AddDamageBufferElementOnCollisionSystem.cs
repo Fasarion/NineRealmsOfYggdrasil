@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Damage
 {
     [UpdateInGroup(typeof(CombatSystemGroup))]
+    [UpdateBefore(typeof(ApplyDamageSystem))]
     public partial struct AddDamageBufferElementOnCollisionSystem : ISystem
     {
         [BurstCompile]

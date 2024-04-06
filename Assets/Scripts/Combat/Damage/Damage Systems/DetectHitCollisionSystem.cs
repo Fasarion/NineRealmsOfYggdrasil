@@ -26,7 +26,7 @@ namespace Damage
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var detectCapabilityTriggerJob = new DetectHitCollisionJob
+            var hitCollisionJob = new DetectHitCollisionJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
                 HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
@@ -34,7 +34,7 @@ namespace Damage
             };
 
             var simSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
-            state.Dependency = detectCapabilityTriggerJob.Schedule(simSingleton, state.Dependency);
+            state.Dependency = hitCollisionJob.Schedule(simSingleton, state.Dependency);
         }
     }
     
@@ -61,8 +61,7 @@ namespace Damage
                 colliderEntity = entityA;
                 hitEntity = entityB;
             }
-            else if (HitBufferLookup.HasBuffer(entityB) &&
-                     HitPointsLookup.HasComponent(entityA))
+            else if (HitBufferLookup.HasBuffer(entityB) && HitPointsLookup.HasComponent(entityA))
             {
                 colliderEntity = entityB;
                 hitEntity = entityA;
@@ -95,8 +94,6 @@ namespace Damage
             };
             
             HitBufferLookup[colliderEntity].Add(newHitElement);
-            
-            Debug.Log("Collision Event");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using Unity.Burst;
+using Unity.Entities;
 using Unity.Physics.Systems;
 
 namespace Damage
@@ -10,6 +11,7 @@ namespace Damage
     [UpdateInGroup(typeof(CombatSystemGroup), OrderLast = true)]
     public partial struct HandleHitBufferSystem : ISystem
     {
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             state.Dependency.Complete();

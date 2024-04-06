@@ -26,7 +26,7 @@ namespace Damage
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var detectCapabilityTriggerJob = new DetectHitTriggerJob
+            var hitTriggerJob = new DetectHitTriggerJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
                 HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
@@ -34,7 +34,7 @@ namespace Damage
             };
 
             var simSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
-            state.Dependency = detectCapabilityTriggerJob.Schedule(simSingleton, state.Dependency);
+            state.Dependency = hitTriggerJob.Schedule(simSingleton, state.Dependency);
         }
     }
     

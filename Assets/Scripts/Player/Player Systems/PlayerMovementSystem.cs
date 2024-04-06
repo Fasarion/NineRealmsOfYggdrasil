@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using System;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics.Systems;
 using Unity.Transforms;
@@ -18,6 +19,7 @@ namespace Player
         {
             state.RequireForUpdate<PlayerMovementConfig>();
             state.RequireForUpdate<PlayerTag>(); 
+            state.RequireForUpdate<PlayerPositionSingleton>(); 
         }
     
         public void OnUpdate(ref SystemState state)

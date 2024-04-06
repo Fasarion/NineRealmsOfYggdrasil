@@ -20,7 +20,7 @@ public partial class XPEventCaller : SystemBase
         if (_cachedXP != xp.Value)
         {
             _cachedXP = xp.Value;
-            _audioManager.weaponAudio.Test();
+            _audioManager.playerAudio.xpAudio();
         }
     }
 }

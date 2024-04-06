@@ -9,13 +9,22 @@ public class AnimationAuthoring : MonoBehaviour
 {
     [Tooltip("Game Object Prefab. Must have Animator attached for correct usage.")]
     [SerializeField] private GameObject gameObjectPrefab;
+
+    [Tooltip("This will force the game object to match its position and rotation with this entity." +
+             "Otherwise, the entity will follow the game object. When an object's position is determined by " +
+             "logic on the game object side (like an animator), this should be marked as False.")]
+    [SerializeField] private bool followsEntity; 
     
     class Baker : Baker<AnimationAuthoring>
     {
         public override void Bake(AnimationAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponentObject(entity, new GameObjectAnimatorPrefab{Value = authoring.gameObjectPrefab});
+            AddComponentObject(entity, new GameObjectAnimatorPrefab
+            {
+                Value = authoring.gameObjectPrefab,
+                FollowEntity = authoring.followsEntity
+            });
         }
     }
 }
@@ -23,11 +32,12 @@ public class AnimationAuthoring : MonoBehaviour
 public class GameObjectAnimatorPrefab : IComponentData
 {
     public GameObject Value;
+    public bool FollowEntity;
 }
 
 public class AnimatorReference : ICleanupComponentData
 {
-    public Animator Value;
+    public Animator Animator;
 }
 
 public partial struct HandleAnimationSystem : ISystem
@@ -44,17 +54,27 @@ public partial struct HandleAnimationSystem : ISystem
             var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value);
             var animatorReference = new AnimatorReference()
             {
-                Value = gameObjectInstance.GetComponent<Animator>()
+                Animator = gameObjectInstance.GetComponent<Animator>()
             };
             ecb.AddComponent(entity, animatorReference);
         }
         
         // sync animator transform with corresponding entity transform
-        foreach (var (transform, animatorReference) in
-            SystemAPI.Query<LocalTransform, AnimatorReference>())
+        foreach (var (transform, animatorReference, animatorObject) in
+            SystemAPI.Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab>())
         {
-            animatorReference.Value.transform.position = transform.Position;
-            animatorReference.Value.transform.rotation = transform.Rotation;
+            var animatorTransform = animatorReference.Animator.transform;
+            
+            if (animatorObject.FollowEntity)
+            {
+                animatorTransform.position = transform.ValueRO.Position;
+                animatorTransform.rotation = transform.ValueRO.Rotation;
+            }
+            else
+            {
+                transform.ValueRW.Position = animatorTransform.position;
+                transform.ValueRW.Rotation = animatorTransform.rotation;
+            }
         }
         
         // remove game objects when animator reference has been destroyed
@@ -63,7 +83,7 @@ public partial struct HandleAnimationSystem : ISystem
                 .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
                 .WithEntityAccess())
         {
-            Object.Destroy(animatorReference.Value.gameObject);
+            Object.Destroy(animatorReference.Animator.gameObject);
             ecb.RemoveComponent<AnimatorReference>(entity);
         }
         

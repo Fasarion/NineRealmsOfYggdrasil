@@ -22,7 +22,10 @@ public class AnimationTestAuthoring : MonoBehaviour
         public override void Bake(AnimationTestAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponentObject(entity, new PlayerGameObjectPrefab{Value = authoring.PlayerGameObjectPrefab});
+            AddComponentObject(entity, new PlayerGameObjectPrefab
+            {
+                Value = authoring.PlayerGameObjectPrefab
+            });
         }
     }
 }

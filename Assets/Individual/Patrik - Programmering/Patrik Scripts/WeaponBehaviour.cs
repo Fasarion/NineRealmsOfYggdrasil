@@ -15,6 +15,13 @@ namespace Patrik
         
         public static WeaponBehaviour Instance;
 
+        public void MakeActive(PlayerWeaponManagerBehaviour weaponManagerBehaviour)
+        {
+            transform.parent = weaponManagerBehaviour.WeaponSlot;
+            transform.position = weaponManagerBehaviour.WeaponSlot.position;
+            transform.rotation = weaponManagerBehaviour.WeaponSlot.rotation;
+        }
+
         private void Awake()
         {
             Instance = this;

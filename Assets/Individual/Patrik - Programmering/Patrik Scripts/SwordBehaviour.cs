@@ -6,10 +6,10 @@ using UnityEngine;
 
 namespace Patrik
 {
-    public class SwordBehaviour : WeaponBehaviour
-    {
-        
-
-    }
+    // public class SwordBehaviour : WeaponBehaviour
+    // {
+    //     
+    //
+    // }
 }
 

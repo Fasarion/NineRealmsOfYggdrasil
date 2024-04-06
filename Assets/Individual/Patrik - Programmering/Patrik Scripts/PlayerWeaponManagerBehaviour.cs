@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -27,14 +28,19 @@ namespace Patrik
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
 
         [SerializeField] private Animator playerAnimator;
-        [SerializeField] private List<WeaponBehaviour> weapons;
+        //[SerializeField] private List<WeaponBehaviour> weapons;
+        [SerializeField] private Transform weaponSlot;
+        [SerializeField] private WeaponType startWeaponType; 
 
         // Weapons
         private static int PASSIVE_WEAPON_COUNT = 2;
 
+        
+        private List<WeaponBehaviour> weapons;
         private WeaponBehaviour[] passiveWeapons = new WeaponBehaviour[PASSIVE_WEAPON_COUNT];
         private WeaponBehaviour activeWeapon;
         private AttackType CurrentAttackType { get;  set; }
+        public Transform WeaponSlot => weaponSlot;
         
         // Animator parameter names
         private string attackAnimationName = "Attack";
@@ -77,7 +83,22 @@ namespace Patrik
 
         private void OnEnable()
         {
-            activeWeapon = weapons[0];
+            Invoke(nameof(SetupWeapons), 0.2f);
+        }
+
+        private void SetupWeapons()
+        {
+            weapons = FindObjectsOfType<WeaponBehaviour>().ToList();
+
+            foreach (var weapon in weapons)
+            {
+                if (weapon.WeaponType == startWeaponType)
+                {
+                    activeWeapon = weapon;
+                    weapon.MakeActive(this);
+                    break;
+                }
+            }
         }
 
         /// <summary>

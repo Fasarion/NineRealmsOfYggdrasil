@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Health;
 using Unity.Burst;
 using Unity.Collections;
@@ -8,8 +6,6 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Transforms;
-using UnityEngine;
-
 
 namespace Damage
 {
@@ -47,7 +43,6 @@ namespace Damage
         
         public void Execute(CollisionEvent collisionEvent)
         {
-            
             Entity entityA = collisionEvent.EntityA;
             Entity entityB = collisionEvent.EntityB;
             

@@ -42,8 +42,8 @@ namespace Patrik
 
         private void SubscribeToAttackEvents()
         {
-            _weaponManager.OnActiveWeaponStartAttackNormal += OnAttackStart;
-            _weaponManager.OnActiveWeaponStopAttackNormal += OnAttackStop;
+            _weaponManager.OnAttackStart += OnAttackStart;
+            _weaponManager.OnAttackStop += OnAttackStop;
         }
 
         private void HandleWeaponInput()
@@ -52,7 +52,7 @@ namespace Patrik
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
             if (normalAttackInput.KeyPressed)
             {
-                _weaponManager.PerformActiveNormalAttack();
+                _weaponManager.PerformNormalAttack();
                 return;
             }
 
@@ -60,7 +60,7 @@ namespace Patrik
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             if (specialAttack.KeyPressed)
             {
-                _weaponManager.PerformActiveSpecialAttack();
+                _weaponManager.PerformSpecialAttack();
                 return;
             }
             
@@ -84,8 +84,8 @@ namespace Patrik
 
         private void UnsubscribeFromAttackEvents()
         {
-            _weaponManager.OnActiveWeaponStartAttackNormal -= OnAttackStart;
-            _weaponManager.OnActiveWeaponStopAttackNormal -= OnAttackStop;
+            _weaponManager.OnAttackStart -= OnAttackStart;
+            _weaponManager.OnAttackStop -= OnAttackStop;
         }
 
         void OnAttackStart(AttackData data)

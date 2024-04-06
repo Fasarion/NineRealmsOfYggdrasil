@@ -37,19 +37,22 @@ namespace Damage
                 }
                 
             }
-            
+
             // Update Damage Timer
+            float4 red = new float4(1f, 0.0f, 0.0f, 1f);;
             var deltaTime = SystemAPI.Time.DeltaTime;
-            foreach (var (color, damageFlashTimer, entity) in 
-                SystemAPI.Query<RefRW<URPMaterialPropertyBaseColor>, RefRW<DamageFlashTimer>>()
+            foreach (var (currentColor, meshColor, damageFlashTimer, entity) in 
+                SystemAPI.Query<RefRW<URPMaterialPropertyBaseColor>, MeshColor, RefRW<DamageFlashTimer>>()
                     .WithEntityAccess())
             {
                 damageFlashTimer.ValueRW.CurrentTime -= deltaTime;
+
+                var baseColor = meshColor.Value;
                 
                 // Reset Timer
                 if (damageFlashTimer.ValueRO.CurrentTime <= 0f)
                 {
-                    color.ValueRW.Value = new float4(1, 1, 1, 1);
+                    currentColor.ValueRW.Value = baseColor;
                     SystemAPI.SetComponentEnabled<DamageFlashTimer>(entity, false);
                     continue;
                 }
@@ -57,7 +60,8 @@ namespace Damage
                 var percentage = damageFlashTimer.ValueRO.CurrentTime / damageFlashTimer.ValueRO.FlashTime;
                 var value = 1 - percentage;
 
-                color.ValueRW.Value = new float4(1, value, value, 1);
+
+                currentColor.ValueRW.Value = math.lerp(red, baseColor, value);
             }
         }
     }

@@ -52,7 +52,9 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
 
     public void RegisterMouseClick()
     {
+        Debug.Log("Register mouse click");
         OnMouseHoverExit();
         _manager.RegisterUpgradeCardClick(_upgradeObjectIndex);
+
     }
 }

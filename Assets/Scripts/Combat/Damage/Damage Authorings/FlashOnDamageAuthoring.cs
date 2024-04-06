@@ -1,5 +1,5 @@
+using System;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Rendering;
 using UnityEngine;
 
@@ -16,13 +16,12 @@ namespace Damage
             {
                 var entity = GetEntity(TransformUsageFlags.None);
             
+                // Flash Timer
                 AddComponent(entity, new DamageFlashTimer()
                 {
                    FlashTime = authoring.flashTime
                 });
                 SetComponentEnabled<DamageFlashTimer>(entity, false);
-                
-                AddComponent(entity, new URPMaterialPropertyBaseColor { Value = new float4(1, 1, 1, 1) });
             }
         }
     }

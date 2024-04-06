@@ -1,4 +1,5 @@
-﻿using Unity.Entities;
+﻿using System;
+using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics.Systems;
 using Unity.Transforms;
@@ -18,6 +19,7 @@ namespace Player
         {
             state.RequireForUpdate<PlayerMovementConfig>();
             state.RequireForUpdate<PlayerTag>(); 
+            state.RequireForUpdate<PlayerPositionSingleton>(); 
         }
     
         public void OnUpdate(ref SystemState state)
@@ -38,6 +40,13 @@ namespace Player
                     PlayerParentBehaviour.Instance.transform.position = playerTransform.ValueRO.Position; 
                     PlayerParentBehaviour.Instance.transform.rotation = playerTransform.ValueRO.Rotation; 
                 }
+
+                if (PlayerWeaponManagerBehaviour.Instance != null)
+                {
+                    bool playerIsMoving = !moveInput.Value.Equals(float2.zero);
+                    PlayerWeaponManagerBehaviour.Instance.UpdateMovementParameter(playerIsMoving);
+                }
+                
             }
         }
     }

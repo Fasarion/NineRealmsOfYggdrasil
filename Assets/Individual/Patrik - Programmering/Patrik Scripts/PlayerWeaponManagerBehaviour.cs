@@ -5,23 +5,70 @@ using UnityEngine.Events;
 
 namespace Patrik
 {
+    public enum WeaponType
+    {
+        None = 0,
+        Sword = 1,
+        Axe = 2,
+        Mead = 3,
+        Birds = 4
+    }
+
+    public enum AttackType
+    {
+        None = 0,
+        Normal = 1,
+        Special = 2,
+        Ultimate = 3
+    }
+    
     public class PlayerWeaponManagerBehaviour : MonoBehaviour
     {
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
 
+        [SerializeField] private Animator playerAnimator;
         [SerializeField] private List<WeaponBehaviour> weapons;
 
-
+        // Weapons
         private static int PASSIVE_WEAPON_COUNT = 2;
 
         private WeaponBehaviour[] passiveWeapons = new WeaponBehaviour[PASSIVE_WEAPON_COUNT];
         private WeaponBehaviour activeWeapon;
-
-        public UnityAction<AttackData> OnActiveWeaponStartAttackNormal;
-        public UnityAction<AttackData> OnActiveWeaponStopAttackNormal;
+        private AttackType CurrentAttackType { get;  set; }
         
-        public UnityAction<AttackData> OnActiveWeaponStartAttackSpecial;
-        public UnityAction<AttackData> OnActiveWeaponStopAttackSpecial;
+        // Animator parameter names
+        private string attackAnimationName = "Attack";
+        private string activeWeaponParameterName = "ActiveWeapon";
+        private string currentAttackParameterName = "CurrentAttack";
+
+        private string movingParameterName = "Moving";
+        
+        // Events
+        public UnityAction<AttackData> OnAttackStart;
+        public UnityAction<AttackData> OnAttackStop;
+
+        
+        // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
+        public void OnStartAttackEvent() => OnAttackStart?.Invoke(GetAttackData());
+        
+        public void OnStopAttackEvent() => OnAttackStop?.Invoke(GetAttackData());
+        
+        /// <summary>
+        /// Attack Data from current attack. Informs DOTS which weapon was attack, which attack type was used and
+        /// at which point the attack occured.
+        /// </summary>
+        /// <returns></returns>
+        private AttackData GetAttackData()
+        {
+            var attackData = new AttackData
+            {
+                AttackType = CurrentAttackType,
+                WeaponType = activeWeapon.WeaponType,
+                AttackPoint = activeWeapon.AttackPoint
+            };
+
+            return attackData;
+        }
 
         private void Awake()
         {
@@ -30,52 +77,53 @@ namespace Patrik
 
         private void OnEnable()
         {
-            foreach (var weapon in weapons)
-            {
-                weapon.OnAttackPerformed += OnNormalAttackStart;
-                weapon.OnAttackStop += OnNormalAttackStop;
-            }
-
             activeWeapon = weapons[0];
         }
-        
-        private void OnDisable()
+
+        /// <summary>
+        /// Function to be called when a normal attack is about to be performed. Called from DOTS after the correct input
+        /// is registered.
+        /// </summary>
+        public void PerformNormalAttack()
         {
-            foreach (var weapon in weapons)
-            {
-                weapon.OnAttackPerformed -= OnNormalAttackStart;
-                weapon.OnAttackStop -= OnNormalAttackStop;
-            }
+            PerformAttack(AttackType.Normal);
+        }
+        
+        /// <summary>
+        /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
+        /// is registered.
+        /// </summary>
+        public void PerformSpecialAttack()
+        {
+            PerformAttack(AttackType.Special);
+        }
+        
+        /// <summary>
+        /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
+        /// is registered.
+        /// </summary>
+        public void PerformUltimateAttack()
+        {
+            //TODO: Implement ultimate attack
         }
 
-        private void OnNormalAttackStart(AttackData data)
+        private void PerformAttack(AttackType type)
         {
-            OnActiveWeaponStartAttackNormal?.Invoke(data);
-        }
-        
-        private void OnNormalAttackStop(AttackData data)
-        {
-            OnActiveWeaponStopAttackNormal?.Invoke(data);
-        }
-        
-        private void OnSpecialAttackStart(AttackData data)
-        {
-            OnActiveWeaponStartAttackSpecial?.Invoke(data);
-        }
-        
-        private void OnSpecialAttackStop(AttackData data)
-        {
-            OnActiveWeaponStopAttackSpecial?.Invoke(data);
+            CurrentAttackType = type;
+            UpdateAnimatorAttackParameters();
         }
 
-        public void PerformActiveNormalAttack()
+        private void UpdateAnimatorAttackParameters()
         {
-            activeWeapon.PerformNormalAttack();
+            playerAnimator.SetInteger(currentAttackParameterName, (int) CurrentAttackType);
+            playerAnimator.SetInteger(activeWeaponParameterName, (int) activeWeapon.WeaponType);
+
+            playerAnimator.Play(attackAnimationName);
         }
-        
-        public void PerformActiveSpecialAttack()
+
+        public void UpdateMovementParameter(bool playerIsMoving)
         {
-            activeWeapon.PerformSpecialAttack();
+            playerAnimator.SetBool(movingParameterName, playerIsMoving);
         }
     }
 }

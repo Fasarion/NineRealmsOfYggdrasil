@@ -10,10 +10,4 @@ namespace Damage
         public float DamageValue;
         public DamageType DamageType;
     }
-
-    public struct KnockBackForce : IComponentData
-    {
-        public float Value;
-        public bool KnockAwayFromPlayer;
-    }
 }

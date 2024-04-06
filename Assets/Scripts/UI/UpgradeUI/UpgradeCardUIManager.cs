@@ -40,7 +40,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
         
         HideUI();

@@ -10,6 +10,7 @@ namespace Destruction
     [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
     public partial struct DestroyEntitiesSystem : ISystem
     {
+        [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
@@ -40,11 +41,29 @@ namespace Destruction
                         beginSimECB.SetComponent(spawnedEntity, localTransform);
                     }
                 }
+
+                // Destroy all children
+                DestroyChildrenRecursively(state, entity, ecb);
                 
                 ecb.DestroyEntity(entity);
             }
 
             ecb.Playback(state.EntityManager);
+        }
+
+        [BurstCompile]
+        private static void DestroyChildrenRecursively(SystemState state, Entity entity, EntityCommandBuffer ecb)
+        {
+            if (state.EntityManager.HasBuffer<Child>(entity))
+            {
+                DynamicBuffer<Child> childBuffer = state.EntityManager.GetBuffer<Child>(entity);
+
+                foreach (var child in childBuffer)
+                {
+                    DestroyChildrenRecursively(state, child.Value, ecb);
+                    ecb.DestroyEntity(child.Value);
+                }
+            }
         }
     }
 }

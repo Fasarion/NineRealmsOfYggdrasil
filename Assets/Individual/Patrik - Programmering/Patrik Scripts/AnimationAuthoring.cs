@@ -7,7 +7,8 @@ using UnityEngine;
 
 public class AnimationAuthoring : MonoBehaviour
 {
-    [Tooltip("Game Object Prefab. Must have Animator attached for correct usage.")]
+    [Tooltip("A Game Object with an animator component that will spawn at Start. This entity will match the game object's position and" +
+             " rotation as well as let that object play animations.")]
     [SerializeField] private GameObject gameObjectPrefab;
 
     [Tooltip("This will force the game object to match its position and rotation with this entity." +

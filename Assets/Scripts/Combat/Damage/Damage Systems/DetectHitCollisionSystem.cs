@@ -15,7 +15,7 @@ namespace Damage
 {
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     [UpdateAfter(typeof(PhysicsSimulationGroup))]
-    public partial struct DetectHpTriggerSystem : ISystem
+    public partial struct DetectHitCollisionSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
@@ -26,7 +26,7 @@ namespace Damage
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var detectCapabilityTriggerJob = new DetectHitTriggerJob
+            var detectCapabilityTriggerJob = new DetectHitCollisionJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
                 HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
@@ -38,29 +38,34 @@ namespace Damage
         }
     }
     
-    public struct DetectHitTriggerJob : ITriggerEventsJob
+    [BurstCompile]
+    public struct DetectHitCollisionJob : ICollisionEventsJob
     {
         public BufferLookup<HitBufferElement> HitBufferLookup;
         [ReadOnly] public ComponentLookup<CurrentHpComponent> HitPointsLookup;
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         
-        public void Execute(TriggerEvent triggerEvent)
+        public void Execute(CollisionEvent collisionEvent)
         {
-            Entity triggerEntity;
+            
+            Entity entityA = collisionEvent.EntityA;
+            Entity entityB = collisionEvent.EntityB;
+            
+            Entity colliderEntity;
             Entity hitEntity;
             
             // Figure out which entity is the trigger and which entity is the hit entity
             // If there are not exactly 1 of each, this is not a valid trigger event for this case, return from job
-            if (HitBufferLookup.HasBuffer(triggerEvent.EntityA) && HitPointsLookup.HasComponent(triggerEvent.EntityB))
+            if (HitBufferLookup.HasBuffer(entityA) && HitPointsLookup.HasComponent(entityB))
             {
-                triggerEntity = triggerEvent.EntityA;
-                hitEntity = triggerEvent.EntityB;
+                colliderEntity = entityA;
+                hitEntity = entityB;
             }
-            else if (HitBufferLookup.HasBuffer(triggerEvent.EntityB) &&
-                     HitPointsLookup.HasComponent(triggerEvent.EntityA))
+            else if (HitBufferLookup.HasBuffer(entityB) &&
+                     HitPointsLookup.HasComponent(entityA))
             {
-                triggerEntity = triggerEvent.EntityB;
-                hitEntity = triggerEvent.EntityA;
+                colliderEntity = entityB;
+                hitEntity = entityA;
             }
             else
             {
@@ -68,14 +73,14 @@ namespace Damage
             }
             
             // Determine if the hit entity is already added to the trigger entity's hit buffer 
-            var hitBuffer = HitBufferLookup[triggerEntity];
+            var hitBuffer = HitBufferLookup[colliderEntity];
             foreach (var hit in hitBuffer)
             {
                 if (hit.HitEntity == hitEntity) return;
             }
             
             // Need to estimate position and normal as TriggerEvent does not have these details unlike CollisionEvent
-            var triggerEntityPosition = TransformLookup[triggerEntity].Position;
+            var triggerEntityPosition = TransformLookup[colliderEntity].Position;
             var hitEntityPosition = TransformLookup[hitEntity].Position;
             
             var hitPosition = math.lerp(triggerEntityPosition, hitEntityPosition, 0.5f);
@@ -89,7 +94,9 @@ namespace Damage
                 Normal = hitNormal
             };
             
-            HitBufferLookup[triggerEntity].Add(newHitElement);
+            HitBufferLookup[colliderEntity].Add(newHitElement);
+            
+            Debug.Log("Collision Event");
         }
     }
 }

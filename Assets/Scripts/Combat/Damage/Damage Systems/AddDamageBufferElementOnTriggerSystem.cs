@@ -11,7 +11,7 @@ namespace Damage
     /// in later systems for applying damage to entities.
     /// </summary>
     [UpdateInGroup(typeof(CombatSystemGroup))]
-    public partial struct AddDamageBufferOnTriggerSystem : ISystem
+    public partial struct AddDamageBufferElementOnTriggerSystem : ISystem
     {
         [BurstCompile]
         public void OnUpdate(ref SystemState state)

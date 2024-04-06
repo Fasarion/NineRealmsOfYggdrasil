@@ -2158,7 +2158,7 @@ PrefabInstance:
     - target: {fileID: 5402954332122057867, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5488732460988299552, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
@@ -2239,6 +2239,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.647
+      objectReference: {fileID: 0}
+    - target: {fileID: 7139840582480737796, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: m_Material.m_CollisionResponse.m_Value
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8151956283706652933, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}

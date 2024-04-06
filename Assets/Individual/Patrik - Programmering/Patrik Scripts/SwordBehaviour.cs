@@ -8,12 +8,7 @@ namespace Patrik
 {
     public class SwordBehaviour : WeaponBehaviour
     {
-        public static SwordBehaviour Instance;
-
-        private void Awake()
-        {
-            Instance = this;
-        }
+        
 
     }
 }

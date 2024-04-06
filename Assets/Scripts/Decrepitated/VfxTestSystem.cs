@@ -18,7 +18,7 @@ public partial struct VfxTestSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
         foreach (var (playerGameObjectPrefab, entity) in
-                 SystemAPI.Query<GameObjectPrefab>().WithNone<VfxReference>().WithEntityAccess())
+                 SystemAPI.Query<GameObjectVfxPrefab>().WithNone<VfxReference>().WithEntityAccess())
         {
             var newCompanionGameObject = Object.Instantiate((playerGameObjectPrefab.Value));
             var newAnimatorReference = new VfxReference

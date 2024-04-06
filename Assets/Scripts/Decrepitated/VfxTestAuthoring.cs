@@ -4,7 +4,7 @@ using Unity.Entities;
 using UnityEngine;
 using UnityEngine.VFX;
 
-public class GameObjectPrefab : IComponentData
+public class GameObjectVfxPrefab : IComponentData
 {
     public GameObject Value;
 }
@@ -24,7 +24,7 @@ public class VfxTestAuthoring : MonoBehaviour
         public override void Bake(VfxTestAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponentObject(entity, new GameObjectPrefab{Value = authoring.GameObjectPrefab});
+            AddComponentObject(entity, new GameObjectVfxPrefab{Value = authoring.GameObjectPrefab});
         }
     }
 }

@@ -9,6 +9,11 @@ namespace Player
     {
         [Header("Aiming")]
         [SerializeField] private bool autoAim;
+        
+        [Range(0,1)]
+        [Tooltip("How fast will the player rotate? (0 means player always stands still, 1 means the players rotation is always " +
+                 "synced with the mouse")]
+        [SerializeField] private float rotationSpeed = 1;
     
         [Header("Firing")]
         [SerializeField] private bool autoFire;
@@ -20,7 +25,8 @@ namespace Player
                 var entity = GetEntity(TransformUsageFlags.None);
                 AddComponent(entity, new AimSettingsData()
                 {
-                    autoAim = authoring.autoAim
+                    autoAim = authoring.autoAim,
+                    rotationSpeed = authoring.rotationSpeed
                 });
             
                 AddComponent(entity, new FireSettingsData()
@@ -34,6 +40,7 @@ namespace Player
     public struct AimSettingsData : IComponentData
     {
         public bool autoAim;
+        public float rotationSpeed;
     }
 
     public struct FireSettingsData : IComponentData

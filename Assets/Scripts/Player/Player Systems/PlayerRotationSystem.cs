@@ -15,6 +15,7 @@ namespace Player
             // player aim config does not exist
             if (!SystemAPI.TryGetSingleton(out PlayerRotationConfig _))
             {
+                Debug.LogError("No player rotation config, player wont rotate correctly.");
                 return;
             }
             
@@ -42,6 +43,13 @@ namespace Player
 
         private void HandleManualAim()
         {
+            float rotationSpeed = 1f;
+            if (SystemAPI.TryGetSingleton(out AimSettingsData aimSettings))
+            {
+                rotationSpeed = aimSettings.rotationSpeed;
+            }
+            
+            
             float3 mousePosition = GetMousePosition();
             previousPos = mousePosition;
             
@@ -51,7 +59,7 @@ namespace Player
                 var directionToMouse = mousePosition - playerTransform.ValueRO.Position;
                 directionToMouse.y = 0;
                 quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(directionToMouse, math.up()));
-                playerTransform.ValueRW.Rotation = lookRotation; 
+                playerTransform.ValueRW.Rotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
             }
         }
 

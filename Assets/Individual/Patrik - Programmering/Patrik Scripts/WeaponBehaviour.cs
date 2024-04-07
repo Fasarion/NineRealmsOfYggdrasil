@@ -13,13 +13,15 @@ namespace Patrik
         [SerializeField] private Transform attackPoint;
         public Transform AttackPoint => attackPoint;
         
-        public void MakeActive(PlayerWeaponManagerBehaviour weaponManagerBehaviour)
+        public void MakeActive(Transform parent, bool activeWeapon)
         {
-            animator.enabled = false;
+            bool enableAnimator = !activeWeapon;
             
-            transform.parent = weaponManagerBehaviour.ActiveSlot;
-            transform.position = weaponManagerBehaviour.ActiveSlot.position;
-            transform.rotation = weaponManagerBehaviour.ActiveSlot.rotation;
+            animator.enabled = enableAnimator;
+            
+            transform.parent = parent;
+            transform.position = parent.position;
+            transform.rotation = parent.rotation;
         }
 
         public void MakeInActive(PlayerWeaponManagerBehaviour weaponManagerBehaviour)

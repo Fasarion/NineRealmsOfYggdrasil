@@ -12,9 +12,10 @@ public class SwordAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
             AddComponent(entity, new SwordComponent());
-            //AddComponent(entity, new Disabled()); 
         }
     }
 }
 
 public struct SwordComponent : IEnableableComponent, IComponentData{}
+
+public struct HammerComponent : IEnableableComponent, IComponentData{}

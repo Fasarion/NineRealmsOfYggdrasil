@@ -10,7 +10,7 @@ namespace Patrik
     {
         None = 0,
         Sword = 1,
-        Axe = 2,
+        Hammer = 2,
         Mead = 3,
         Birds = 4
     }
@@ -35,8 +35,7 @@ namespace Patrik
         
         [Header("Weapon Slots")]
         [SerializeField] private Transform activeSlot;
-        [SerializeField] private Transform passiveSlot1;
-        [SerializeField] private Transform passiveSlot2;
+        [SerializeField] private List<Transform> passiveSlots = new List<Transform>();
 
         // Weapons
         private static int PASSIVE_WEAPON_COUNT = 2;
@@ -89,7 +88,7 @@ namespace Patrik
 
         private void OnEnable()
         {
-            Invoke(nameof(SetupWeapons), 0.2f);
+            Invoke(nameof(SetupWeapons), 0.1f);
         }
 
         private void SetupWeapons()
@@ -100,12 +99,21 @@ namespace Patrik
             
             foreach (var weapon in weapons)
             {
+                // Handle active weapon
                 if (weapon.WeaponType == startWeaponType)
                 {
                     activeWeapon = weapon;
-                    weapon.MakeActive(this);
-                    return;
+                    weapon.MakeActive(activeSlot, true);
+                    continue;
                 }
+                
+                // Handle passive weapon
+                Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
+                    ? passiveSlots[passiveSlotCounter]
+                    : ActiveSlot;
+                weapon.MakeActive(passiveParent, false);
+                passiveSlotCounter++;
+
             }
         }
 

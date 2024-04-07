@@ -47,6 +47,16 @@ public partial struct HandleAnimationSystem : ISystem
     {
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
+        // remove game objects when animator reference has been destroyed
+        foreach (var (animatorReference, entity) in
+            SystemAPI.Query<AnimatorReference>()
+                .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
+                .WithEntityAccess())
+        {
+            Object.Destroy(animatorReference.Animator.gameObject);
+            ecb.RemoveComponent<AnimatorReference>(entity);
+        }
+        
         // Add animator references
         foreach (var (gameObjectPrefab, entity) in SystemAPI.Query<GameObjectAnimatorPrefab>()
             .WithNone<AnimatorReference>()
@@ -78,15 +88,7 @@ public partial struct HandleAnimationSystem : ISystem
             }
         }
         
-        // remove game objects when animator reference has been destroyed
-        foreach (var (animatorReference, entity) in
-            SystemAPI.Query<AnimatorReference>()
-                .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
-                .WithEntityAccess())
-        {
-            Object.Destroy(animatorReference.Animator.gameObject);
-            ecb.RemoveComponent<AnimatorReference>(entity);
-        }
+        
         
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

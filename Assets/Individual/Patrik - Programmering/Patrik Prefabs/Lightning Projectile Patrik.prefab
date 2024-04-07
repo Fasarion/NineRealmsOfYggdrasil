@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4045521414853887161}
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
+  - component: {fileID: 4093539533502221201}
   m_Layer: 0
   m_Name: Lightning Projectile Patrik
   m_TagString: Untagged
@@ -37,13 +38,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7824363987953266496}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 0.1, y: 0.1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6828548676732317280
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -51,7 +52,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7824363987953266496}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7116539660004222484
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 2
+  maxHP: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -352,7 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 3
+  damageValue: 1
   damageType: 0
 --- !u!114 &7899796359273220732
 MonoBehaviour:
@@ -405,3 +406,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4093539533502221201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistance: 0
+  maxDistance: 20
+  fov: 180

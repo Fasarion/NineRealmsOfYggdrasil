@@ -128,8 +128,9 @@ GameObject:
   - component: {fileID: 4031803512305907226}
   - component: {fileID: 8439146205512849683}
   - component: {fileID: 4376167777974654248}
+  - component: {fileID: -3072027634817329104}
   m_Layer: 0
-  m_Name: Patrik Player
+  m_Name: Player Entity Patrik
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -413,3 +414,16 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 7682055927376984470, guid: d40d17dba583e464ea2f978629477541,
     type: 3}
   followsEntity: 1
+--- !u!114 &-3072027634817329104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353328540331355661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32cbc5ce000c143469fa6045b23281b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  invincibilityTime: 3

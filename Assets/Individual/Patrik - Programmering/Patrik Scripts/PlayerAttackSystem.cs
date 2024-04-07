@@ -62,8 +62,6 @@ namespace Patrik
         
         void OnActiveAttackStart(AttackData data)
         {
-            Debug.Log("Active attack start");
-            
             EnableWeapon(data.WeaponType);
             
             switch (data.AttackType)
@@ -264,17 +262,14 @@ namespace Patrik
 
         private void StartNormalAttack(AttackData data)
         {
-            Debug.Log("Start normal attack");
         }
         
         private void StartSpecialAttack(AttackData data)
         {
-            Debug.Log("Start special attack");
         }
         
         private void StartUltimateAttack(AttackData data)
         {
-            Debug.Log("Start ultimate attack");
         }
     }
 }

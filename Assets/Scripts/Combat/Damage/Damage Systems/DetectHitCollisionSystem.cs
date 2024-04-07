@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Physics.Systems;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Damage
 {
@@ -26,7 +27,8 @@ namespace Damage
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
                 HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
-                TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
+                TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(),
+                InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityComponent>()
             };
 
             var simSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
@@ -40,6 +42,7 @@ namespace Damage
         public BufferLookup<HitBufferElement> HitBufferLookup;
         [ReadOnly] public ComponentLookup<CurrentHpComponent> HitPointsLookup;
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
+        [ReadOnly] public ComponentLookup<InvincibilityComponent> InvincibilityLookup;
         
         public void Execute(CollisionEvent collisionEvent)
         {
@@ -65,7 +68,13 @@ namespace Damage
             {
                 return;
             }
-            
+
+            // ignore collisions if entity has invincibility
+            if (InvincibilityLookup.HasComponent(hitEntity) && InvincibilityLookup.IsComponentEnabled(hitEntity))
+            {
+                return;
+            }
+
             // Determine if the hit entity is already added to the trigger entity's hit buffer 
             var hitBuffer = HitBufferLookup[colliderEntity];
             foreach (var hit in hitBuffer)

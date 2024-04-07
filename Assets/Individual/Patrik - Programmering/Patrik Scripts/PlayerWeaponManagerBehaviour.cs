@@ -70,7 +70,7 @@ namespace Patrik
         
         public void StopActiveAttackEvent()
         {
-            OnActiveAttackStop?.Invoke(GetActiveAttackData());
+            OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
         }
 
         public void FinishActiveAttackAnimationEvent()

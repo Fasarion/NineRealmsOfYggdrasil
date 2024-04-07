@@ -20,7 +20,8 @@ namespace Patrik
         None = 0,
         Normal = 1,
         Special = 2,
-        Ultimate = 3
+        Ultimate = 3,
+        Passive = 4
     }
     
     public class PlayerWeaponManagerBehaviour : MonoBehaviour
@@ -38,16 +39,13 @@ namespace Patrik
         [SerializeField] private List<Transform> passiveSlots = new List<Transform>();
 
         // Weapons
-        private static int PASSIVE_WEAPON_COUNT = 2;
-
-        
         private List<WeaponBehaviour> weapons;
-        private WeaponBehaviour[] passiveWeapons = new WeaponBehaviour[PASSIVE_WEAPON_COUNT];
         private WeaponBehaviour activeWeapon;
-        private AttackType CurrentAttackType { get;  set; }
-        public Transform ActiveSlot => activeSlot;
         
-        // Animator parameter names
+        // Attack Data
+        private AttackType CurrentAttackType { get;  set; }
+        
+        // Animator parameters
         private string attackAnimationName = "Attack";
         private string activeWeaponParameterName = "ActiveWeapon";
         private string currentAttackParameterName = "CurrentAttack";
@@ -55,21 +53,25 @@ namespace Patrik
         private string movingParameterName = "Moving";
         
         // Events
-        public UnityAction<AttackData> OnAttackStart;
-        public UnityAction<AttackData> OnAttackStop;
+        public UnityAction<AttackData> OnActiveAttackStart;
+        public UnityAction<AttackData> OnActiveAttackStop;
+        
+        // Events
+        public UnityAction<AttackData> OnPassiveAttackStart;
+        public UnityAction<AttackData> OnPassiveAttackStop;
 
         
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
-        public void OnStartAttackEvent() => OnAttackStart?.Invoke(GetAttackData());
+        public void StartActiveAttackEvent() => OnActiveAttackStart?.Invoke(GetActiveAttackData());
         
-        public void OnStopAttackEvent() => OnAttackStop?.Invoke(GetAttackData());
+        public void StopActiveAttackEvent() => OnActiveAttackStop?.Invoke(GetActiveAttackData());
         
         /// <summary>
-        /// Attack Data from current attack. Informs DOTS which weapon was attack, which attack type was used and
+        /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
         /// at which point the attack occured.
         /// </summary>
         /// <returns></returns>
-        private AttackData GetAttackData()
+        private AttackData GetActiveAttackData()
         {
             var attackData = new AttackData
             {
@@ -88,7 +90,16 @@ namespace Patrik
 
         private void OnEnable()
         {
+            // wait a few frames to setup weapons to make sure they have spawned from the DOTS side
             Invoke(nameof(SetupWeapons), 0.1f);
+        }
+
+        private void OnDisable()
+        {
+            foreach (var weapon in weapons)
+            {
+                UnsubscribeFromPassiveEvents(weapon);
+            }
         }
 
         private void SetupWeapons()
@@ -110,11 +121,46 @@ namespace Patrik
                 // Handle passive weapon
                 Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
                     ? passiveSlots[passiveSlotCounter]
-                    : ActiveSlot;
+                    : activeSlot;
                 weapon.MakeActive(passiveParent, false);
                 passiveSlotCounter++;
 
+                SubscribeToPassiveEvents(weapon);
             }
+        }
+
+        private void SubscribeToPassiveEvents(WeaponBehaviour weapon)
+        {
+            weapon.OnPassiveAttackStart += StartPassiveAttack;
+            weapon.OnPassiveAttackStop += StopPassiveAttack;
+        }
+        
+        private void UnsubscribeFromPassiveEvents(WeaponBehaviour weapon)
+        {
+            weapon.OnPassiveAttackStart -= StartPassiveAttack;
+            weapon.OnPassiveAttackStop -= StopPassiveAttack;
+        }
+
+        private void StartPassiveAttack(WeaponBehaviour weapon)
+        {
+            OnPassiveAttackStart?.Invoke(GetPassiveAttackData(weapon));
+        }
+        
+        private void StopPassiveAttack(WeaponBehaviour weapon)
+        {
+            OnPassiveAttackStop?.Invoke(GetPassiveAttackData(weapon));
+        }
+
+        private static AttackData GetPassiveAttackData(WeaponBehaviour weapon)
+        {
+            var attackData = new AttackData
+            {
+                AttackType = AttackType.Passive,
+                WeaponType = weapon.WeaponType,
+                AttackPoint = weapon.AttackPoint
+            };
+
+            return attackData;
         }
 
         /// <summary>

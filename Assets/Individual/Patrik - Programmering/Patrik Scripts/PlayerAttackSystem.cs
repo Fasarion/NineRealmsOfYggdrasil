@@ -26,13 +26,8 @@ namespace Patrik
                         return;
                     }
 
+                    DisableAllWeapons();
                     SubscribeToAttackEvents();
-
-                    // disable sword collider at start
-                    OnAttackStop(new AttackData
-                    {
-                        WeaponType = WeaponType.Sword
-                    }); 
                     hasSetUp = true;
                 }
             }
@@ -40,10 +35,35 @@ namespace Patrik
             HandleWeaponInput();
         }
 
+        private void DisableAllWeapons()
+        {
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            
+            foreach (var ( _, entity) in 
+                SystemAPI.Query<WeaponComponent>().WithEntityAccess())
+            {
+                ecb.AddComponent(entity, typeof(Disabled));
+            }
+
+            ecb.Playback(EntityManager);
+        }
+
         private void SubscribeToAttackEvents()
         {
-            _weaponManager.OnAttackStart += OnAttackStart;
-            _weaponManager.OnAttackStop += OnAttackStop;
+            _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
+            _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
+            _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
+            _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+        }
+
+        private void OnPassiveAttackStart(AttackData arg0)
+        {
+            Debug.Log("Passive Start!");
+        }
+
+        private void OnPassiveAttackStop(AttackData arg0)
+        {
+            Debug.Log("Passive Stop!");
         }
 
         private void HandleWeaponInput()
@@ -84,11 +104,14 @@ namespace Patrik
 
         private void UnsubscribeFromAttackEvents()
         {
-            _weaponManager.OnAttackStart -= OnAttackStart;
-            _weaponManager.OnAttackStop -= OnAttackStop;
+            _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
+            _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
+            
+            _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
+            _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
         }
 
-        void OnAttackStart(AttackData data)
+        void OnActiveAttackStart(AttackData data)
         {
             switch (data.AttackType)
             {
@@ -106,7 +129,7 @@ namespace Patrik
             }
         }
         
-        private void OnAttackStop(AttackData data)
+        private void OnActiveAttackStop(AttackData data)
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
@@ -131,7 +154,6 @@ namespace Patrik
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
             
-
             // sword attack start
             if (data.WeaponType == WeaponType.Sword)
             {

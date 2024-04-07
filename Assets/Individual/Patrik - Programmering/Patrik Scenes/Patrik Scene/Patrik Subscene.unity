@@ -717,6 +717,7 @@ GameObject:
   - component: {fileID: 1048000323}
   - component: {fileID: 1048000322}
   - component: {fileID: 1048000324}
+  - component: {fileID: 1048000325}
   m_Layer: 0
   m_Name: Sword Entity
   m_TagString: Untagged
@@ -1025,6 +1026,18 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 297790463905931553, guid: 8c99d21eecc452349a0646a7579c5def,
     type: 3}
   followsEntity: 0
+--- !u!114 &1048000325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048000312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c43f7890dfa43e487b9cecbcf12290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1108011578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1580,6 +1593,7 @@ GameObject:
   - component: {fileID: 1745888671}
   - component: {fileID: 1745888670}
   - component: {fileID: 1745888669}
+  - component: {fileID: 1745888678}
   m_Layer: 0
   m_Name: Hammer Entity
   m_TagString: Untagged
@@ -1888,6 +1902,18 @@ MonoBehaviour:
         Tag07: 0
     m_SerializedVersion: 1
   m_SerializedVersion: 1
+--- !u!114 &1745888678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745888667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c43f7890dfa43e487b9cecbcf12290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1881886483
 PrefabInstance:
   m_ObjectHideFlags: 0

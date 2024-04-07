@@ -62,6 +62,8 @@ namespace Patrik
         
         void OnActiveAttackStart(AttackData data)
         {
+            Debug.Log("Active attack start");
+            
             EnableWeapon(data.WeaponType);
             
             switch (data.AttackType)
@@ -126,6 +128,11 @@ namespace Patrik
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
             Entity entity = GetEnabledWeaponEntity(dataWeaponType);
+            if (entity == default)
+            {
+                Debug.LogError("Entity to disable not found.");
+                return;
+            }
 
             if (EntityManager.HasBuffer<HitBufferElement>(entity))
             {
@@ -210,7 +217,7 @@ namespace Patrik
         
         private void StopPassiveHammerAttack()
         {
-            Debug.Log("Passive Hammer Stop");
+            //TODO: Add hammer passive attack stop behaviour here
         }
 
         private void HandleWeaponInput()
@@ -235,10 +242,7 @@ namespace Patrik
             var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
             if (ultimateAttack.KeyPressed)
             {
-                Debug.Log("Trigger ultimate attack event!");
-                // TODO: ult attack event in weapon manager
-                // todo: energy meter
-                //_weaponManager.UltimateAttack();
+                // TODO: ult attack
                 return;
             }
         }
@@ -260,21 +264,7 @@ namespace Patrik
 
         private void StartNormalAttack(AttackData data)
         {
-            // var ecb = new EntityCommandBuffer(Allocator.Temp);
-            //
-            //
-            // // sword attack start
-            // if (data.WeaponType == WeaponType.Sword)
-            // {
-            //     foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
-            //         .WithAll<Disabled>()
-            //         .WithEntityAccess())
-            //     {
-            //         ecb.RemoveComponent(entity, typeof(Disabled));
-            //     }
-            // }
-            //
-            // ecb.Playback(EntityManager);
+            Debug.Log("Start normal attack");
         }
         
         private void StartSpecialAttack(AttackData data)

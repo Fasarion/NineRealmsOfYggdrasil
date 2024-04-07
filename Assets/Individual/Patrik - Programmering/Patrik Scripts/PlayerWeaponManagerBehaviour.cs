@@ -44,6 +44,7 @@ namespace Patrik
         
         // Attack Data
         private AttackType CurrentAttackType { get;  set; }
+        private bool isAttacking;
         
         // Animator parameters
         private string attackAnimationName = "Attack";
@@ -62,10 +63,21 @@ namespace Patrik
 
         
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
-        public void StartActiveAttackEvent() => OnActiveAttackStart?.Invoke(GetActiveAttackData());
+        public void StartActiveAttackEvent()
+        {
+            OnActiveAttackStart?.Invoke(GetActiveAttackData());
+        } 
         
-        public void StopActiveAttackEvent() => OnActiveAttackStop?.Invoke(GetActiveAttackData());
-        
+        public void StopActiveAttackEvent()
+        {
+            OnActiveAttackStop?.Invoke(GetActiveAttackData());
+        }
+
+        public void FinishActiveAttackAnimationEvent()
+        {
+            isAttacking = false;
+        }
+
         /// <summary>
         /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
         /// at which point the attack occured.
@@ -169,7 +181,7 @@ namespace Patrik
         /// </summary>
         public void PerformNormalAttack()
         {
-            PerformAttack(AttackType.Normal);
+            TryPerformAttack(AttackType.Normal);
         }
         
         /// <summary>
@@ -178,7 +190,7 @@ namespace Patrik
         /// </summary>
         public void PerformSpecialAttack()
         {
-            PerformAttack(AttackType.Special);
+            TryPerformAttack(AttackType.Special);
         }
         
         /// <summary>
@@ -190,8 +202,11 @@ namespace Patrik
             //TODO: Implement ultimate attack
         }
 
-        private void PerformAttack(AttackType type)
+        private void TryPerformAttack(AttackType type)
         {
+            if (isAttacking) return;
+
+            isAttacking = true;
             CurrentAttackType = type;
             UpdateAnimatorAttackParameters();
         }

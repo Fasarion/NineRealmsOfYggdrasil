@@ -19,7 +19,7 @@ namespace Patrik
         
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
         public void StartActiveAttackEvent() => OnPassiveAttackStart?.Invoke(this);
-        public void StopActiveAttackEvent() => OnPassiveAttackStart?.Invoke(this);
+        public void StopActiveAttackEvent() => OnPassiveAttackStop?.Invoke(this);
         
         public void MakeActive(Transform parent, bool activeWeapon)
         {

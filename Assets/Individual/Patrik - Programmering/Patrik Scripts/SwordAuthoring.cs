@@ -16,6 +16,6 @@ public class SwordAuthoring : MonoBehaviour
     }
 }
 
-public struct SwordComponent : IEnableableComponent, IComponentData{}
+public struct SwordComponent :  IComponentData{}
 
-public struct HammerComponent : IEnableableComponent, IComponentData{}
+public struct HammerComponent :  IComponentData{}

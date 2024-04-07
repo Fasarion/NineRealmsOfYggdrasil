@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
   m_Layer: 0
-  m_Name: Patrik Projectile
+  m_Name: Patrik Lightning Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72,7 +72,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 59a32cc54c8cabc4f8014608ef83c088, type: 2}
+  - {fileID: 2100000, guid: 862400417f930424ba859bae9c14d1eb, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -392,6 +392,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 0
+  knockAwayFromPlayer: 0
 --- !u!114 &8116207207063421910
 MonoBehaviour:
   m_ObjectHideFlags: 0

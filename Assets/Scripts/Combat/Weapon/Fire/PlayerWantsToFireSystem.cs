@@ -46,7 +46,7 @@ namespace Weapon
 
         private void FireWithWeapons(ref SystemState state)
         {
-            foreach (var weapon in SystemAPI.Query<RefRW<GunComponent>>().WithAll<BelongsToPlayerTag>())
+            foreach (var weapon in SystemAPI.Query<RefRW<ProjectileSpawnerComponent>>().WithAll<BelongsToPlayerTag>())
             {
                 if (weapon.ValueRO.HasCooledDown)
                 {
@@ -55,13 +55,13 @@ namespace Weapon
             }
         }
         
-        private void Fire(RefRW<GunComponent> weapon)
+        private void Fire(RefRW<ProjectileSpawnerComponent> weapon)
         {
             weapon.ValueRW.WantsToFire = true;
             ResetCoolDown(weapon);
         }
 
-        private void ResetCoolDown(RefRW<GunComponent> weapon)
+        private void ResetCoolDown(RefRW<ProjectileSpawnerComponent> weapon)
         {
             weapon.ValueRW.CurrentCoolDownTime = 0;
         }

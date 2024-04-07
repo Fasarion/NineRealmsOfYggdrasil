@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Weapon
 {
-    public class GunAuthoring : MonoBehaviour 
+    public class ProjectileSpawnerAuthoring : MonoBehaviour 
     {
         [Tooltip("Prefab of the projectile that this weapon launches.")]
         [SerializeField] private GameObject projectilePrefab;
@@ -12,13 +12,13 @@ namespace Weapon
         [Tooltip("Cooldown time between each shot coming from this weapon.")]
         [SerializeField] private float coolDownTime;
     
-        class Baker : Baker<GunAuthoring>
+        class Baker : Baker<ProjectileSpawnerAuthoring>
         {
-            public override void Bake(GunAuthoring authoring)
+            public override void Bake(ProjectileSpawnerAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-                AddComponent(entity, new GunComponent
+                AddComponent(entity, new ProjectileSpawnerComponent
                 {
                     Projectile = GetEntity(authoring.projectilePrefab, TransformUsageFlags.Dynamic),
                     CoolDownTime = authoring.coolDownTime,
@@ -29,7 +29,7 @@ namespace Weapon
         }
     }
 
-    public struct GunComponent : IComponentData
+    public struct ProjectileSpawnerComponent : IComponentData
     {
         public Entity Projectile;
         public float CoolDownTime;

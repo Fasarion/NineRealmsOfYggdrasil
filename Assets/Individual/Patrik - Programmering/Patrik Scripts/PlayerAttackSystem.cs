@@ -1,8 +1,11 @@
 ﻿using Damage;
+using Movement;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using Weapon;
 
 namespace Patrik
 {
@@ -52,18 +55,162 @@ namespace Patrik
         {
             _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
             _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
+            
             _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
             _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
         }
-
-        private void OnPassiveAttackStart(AttackData arg0)
+        
+        void OnActiveAttackStart(AttackData data)
         {
-            Debug.Log("Passive Start!");
+            EnableWeapon(data.WeaponType);
+            
+            switch (data.AttackType)
+            {
+                case AttackType.Normal:
+                    StartNormalAttack(data);
+                    break;
+                
+                case AttackType.Special:
+                    StartSpecialAttack(data);
+                    break;
+                
+                case AttackType.Ultimate:
+                    StartUltimateAttack(data);
+                    break;
+            }
+        }
+        
+        private void OnActiveAttackStop(AttackData data)
+        {
+            DisableWeapon(data.WeaponType);
         }
 
-        private void OnPassiveAttackStop(AttackData arg0)
+        private void OnPassiveAttackStart(AttackData data)
         {
-            Debug.Log("Passive Stop!");
+            EnableWeapon(data.WeaponType);
+            
+            switch (data.WeaponType)
+            {
+                case WeaponType.Hammer:
+                    StartPassiveHammerAttack(data);
+                    break;
+            }
+        }
+        
+        private void OnPassiveAttackStop(AttackData data)
+        {
+            DisableWeapon(data.WeaponType);
+            
+            switch (data.WeaponType)
+            {
+                case WeaponType.Hammer:
+                    StopPassiveHammerAttack();
+                    break;
+            }
+        }
+
+        private void EnableWeapon(WeaponType dataWeaponType)
+        {
+            Entity entity = GetDisabledWeaponEntity(dataWeaponType);
+
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            
+            if (EntityManager.HasComponent<Disabled>(entity))
+                ecb.RemoveComponent(entity, typeof(Disabled));
+            
+            ecb.Playback(EntityManager);
+        }
+        
+        private void DisableWeapon(WeaponType dataWeaponType)
+        {
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            Entity entity = GetEnabledWeaponEntity(dataWeaponType);
+
+            if (EntityManager.HasBuffer<HitBufferElement>(entity))
+            {
+                var buffer = EntityManager.GetBuffer<HitBufferElement>(entity);
+                buffer.Clear();
+            }
+
+            ecb.AddComponent(entity, typeof(Disabled));
+            
+            
+            ecb.Playback(EntityManager);
+        }
+        
+        private Entity GetEnabledWeaponEntity(WeaponType type)
+        {
+            switch (type)
+            {
+                case WeaponType.Sword:
+                    foreach (var (sword, entity) in SystemAPI.Query<SwordComponent>()
+                        .WithEntityAccess())
+                    {
+                        return entity;
+                    }
+                    break;
+                
+                case WeaponType.Hammer:
+                    foreach (var (hammer, entity) in SystemAPI.Query<HammerComponent>()
+                        .WithEntityAccess())
+                    {
+                        return entity;
+                    }
+                    break;
+            }
+
+            return default;
+        }
+
+        private Entity GetDisabledWeaponEntity(WeaponType type)
+        {
+            switch (type)
+            {
+                case WeaponType.Sword:
+                    foreach (var (sword, entity) in SystemAPI.Query<SwordComponent>()
+                        .WithAll<Disabled>()
+                        .WithEntityAccess())
+                    {
+                        return entity;
+                    }
+                    break;
+                
+                case WeaponType.Hammer:
+                    foreach (var (hammer, entity) in SystemAPI.Query<HammerComponent>()
+                        .WithAll<Disabled>()
+                        .WithEntityAccess())
+                    {
+                        return entity;
+                    }
+                    break;
+            }
+
+            return default;
+        }
+
+        private void StartPassiveHammerAttack(AttackData data)
+        {
+            Transform attackPoint = data.AttackPoint;
+            
+            foreach (var ( hammer, projectileSpawner) 
+                in SystemAPI.Query< HammerComponent, ProjectileSpawnerComponent>())
+            {
+                Entity projectileEntity = EntityManager.Instantiate(projectileSpawner.Projectile);
+                var entityTransform = EntityManager.GetComponentData<LocalTransform>(projectileEntity);
+            
+                entityTransform.Position = attackPoint.position;
+                entityTransform.Rotation = math.mul(attackPoint.rotation, entityTransform.Rotation);
+        
+                // set new transform values and direction
+                EntityManager.SetComponentData(projectileEntity, entityTransform);
+                EntityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(attackPoint.forward)));
+            }
+        }
+        
+        private void StopPassiveHammerAttack()
+        {
+            Debug.Log("Passive Hammer Stop");
         }
 
         private void HandleWeaponInput()
@@ -111,61 +258,23 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
         }
 
-        void OnActiveAttackStart(AttackData data)
-        {
-            switch (data.AttackType)
-            {
-                case AttackType.Normal:
-                    StartNormalAttack(data);
-                    break;
-                
-                case AttackType.Special:
-                    StartSpecialAttack(data);
-                    break;
-                
-                case AttackType.Ultimate:
-                    StartUltimateAttack(data);
-                    break;
-            }
-        }
-        
-        private void OnActiveAttackStop(AttackData data)
-        {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-
-            // handle sword attack stop
-            if (data.WeaponType == WeaponType.Sword)
-            {
-                foreach (var (transform, sword, damageBuffer, entity) in 
-                    SystemAPI.Query<RefRW<LocalTransform>, SwordComponent, DynamicBuffer<HitBufferElement>>().WithEntityAccess())
-                {
-                
-                    ecb.AddComponent(entity, typeof(Disabled));
-
-                    damageBuffer.Clear();
-                } 
-            }
-            
-            ecb.Playback(EntityManager);
-        }
-
         private void StartNormalAttack(AttackData data)
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            
-            // sword attack start
-            if (data.WeaponType == WeaponType.Sword)
-            {
-                foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
-                    .WithAll<Disabled>()
-                    .WithEntityAccess())
-                {
-                    ecb.RemoveComponent(entity, typeof(Disabled));
-                }
-            }
-
-            ecb.Playback(EntityManager);
+            // var ecb = new EntityCommandBuffer(Allocator.Temp);
+            //
+            //
+            // // sword attack start
+            // if (data.WeaponType == WeaponType.Sword)
+            // {
+            //     foreach (var (transform, sword, entity) in SystemAPI.Query<RefRW<LocalTransform>, SwordComponent>()
+            //         .WithAll<Disabled>()
+            //         .WithEntityAccess())
+            //     {
+            //         ecb.RemoveComponent(entity, typeof(Disabled));
+            //     }
+            // }
+            //
+            // ecb.Playback(EntityManager);
         }
         
         private void StartSpecialAttack(AttackData data)

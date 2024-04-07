@@ -47,3 +47,7 @@ public struct SeekTargetComponent : IComponentData
 
     public float FovInRadians;
 }
+
+public struct DoNextFrame : IComponentData
+{
+}

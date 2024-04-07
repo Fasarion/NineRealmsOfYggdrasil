@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
 public class WeaponAuthoring : MonoBehaviour
@@ -17,4 +18,5 @@ public class WeaponAuthoring : MonoBehaviour
 public struct WeaponComponent : IEnableableComponent, IComponentData
 {
     public bool InActiveState;
+    public LocalTransform AttackPoint;
 }

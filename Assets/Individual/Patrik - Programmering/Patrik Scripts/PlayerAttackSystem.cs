@@ -1,11 +1,8 @@
 ﻿using Damage;
-using Movement;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-using Weapon;
 
 namespace Patrik
 {
@@ -198,19 +195,25 @@ namespace Patrik
         {
             Transform attackPoint = data.AttackPoint;
             
-            foreach (var ( hammer, projectileSpawner) 
-                in SystemAPI.Query< HammerComponent, ProjectileSpawnerComponent>())
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            // Sets up component for an attack next frame. The reason for waiting for the next frame is because the projectile
+            // must spawn before the Transform System group to avoid being spawned at (0,0,0) for one frame.
+            foreach (var ( weapon, hammer, entity) 
+                in SystemAPI.Query< RefRW<WeaponComponent>, HammerComponent>().WithEntityAccess())
             {
-                Entity projectileEntity = EntityManager.Instantiate(projectileSpawner.Projectile);
-                var entityTransform = EntityManager.GetComponentData<LocalTransform>(projectileEntity);
-            
-                entityTransform.Position = attackPoint.position;
-                entityTransform.Rotation = math.mul(attackPoint.rotation, entityTransform.Rotation);
-        
-                // set new transform values and direction
-                EntityManager.SetComponentData(projectileEntity, entityTransform);
-                EntityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(attackPoint.forward)));
+                ecb.AddComponent(entity, typeof(DoNextFrame));
+
+                LocalTransform transform = new LocalTransform
+                {
+                    Position = attackPoint.position,
+                    Rotation = attackPoint.rotation,
+                };
+
+                weapon.ValueRW.AttackPoint = transform;
             }
+            
+            ecb.Playback(EntityManager);
         }
         
         private void StopPassiveHammerAttack()

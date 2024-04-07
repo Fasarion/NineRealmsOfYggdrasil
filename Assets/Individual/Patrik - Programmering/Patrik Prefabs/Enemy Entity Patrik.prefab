@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 5432305332946967007}
   - component: {fileID: 4663337924807953367}
   - component: {fileID: 6445979045985948300}
+  - component: {fileID: 3590551985909671166}
   m_Layer: 0
   m_Name: Enemy Entity Patrik
   m_TagString: Untagged
@@ -396,3 +397,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   color: {r: 0.24461639, g: 0.6698113, b: 0, a: 1}
+--- !u!114 &3590551985909671166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6072a160256c3154e80301a5d6da7539, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

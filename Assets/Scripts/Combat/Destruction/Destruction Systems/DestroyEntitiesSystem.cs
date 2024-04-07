@@ -16,7 +16,6 @@ namespace Destruction
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         }
         
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -51,7 +50,7 @@ namespace Destruction
             ecb.Playback(state.EntityManager);
         }
 
-        [BurstCompile]
+        // TODO: make burstable
         private static void DestroyChildrenRecursively(SystemState state, Entity entity, EntityCommandBuffer ecb)
         {
             if (state.EntityManager.HasBuffer<Child>(entity))

@@ -10,6 +10,16 @@ using UnityEngine;
 public partial struct ResetInputSystem : ISystem
 {
     [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<PlayerMoveInput>();
+        
+        state.RequireForUpdate<PlayerNormalAttackInput>();
+        state.RequireForUpdate<PlayerSpecialAttackInput>();
+        state.RequireForUpdate<PlayerUltimateAttackInput>();
+    }
+    
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);

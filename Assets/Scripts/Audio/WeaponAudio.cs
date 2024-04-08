@@ -17,17 +17,10 @@ public class WeaponAudio : ScriptableObject
 
     public void SwordSwingAudio(GameObject gameObject)
     {
-        RuntimeManager.PlayOneShotAttached(swordSwing.Guid, gameObject);
+        RuntimeManager.PlayOneShot(swordSwing.Guid);
     }
     public void Test()
     {
-        
-        if (value > 2) value = 0;
-        test = RuntimeManager.CreateInstance(testRef);
-        //RuntimeManager.AttachInstanceToGameObject(test, gameObject.transform);
-        test.setParameterByName("TestParam", value);
-        test.start();
-        test.release();
-        value++;
+       
     }
 }

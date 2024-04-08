@@ -44,7 +44,7 @@ namespace Patrik
         
         // Attack Data
         private AttackType CurrentAttackType { get;  set; }
-        private bool isAttacking;
+        public bool isAttacking;
         
         // Animator parameters
         private string attackAnimationName = "Attack";
@@ -204,7 +204,8 @@ namespace Patrik
 
         private void TryPerformAttack(AttackType type)
         {
-            if (isAttacking) return;
+            //TODO: fix isAttacking parameter
+            // if (isAttacking) return;
 
             isAttacking = true;
             CurrentAttackType = type;
@@ -215,7 +216,7 @@ namespace Patrik
         {
             playerAnimator.SetInteger(currentAttackParameterName, (int) CurrentAttackType);
             playerAnimator.SetInteger(activeWeaponParameterName, (int) activeWeapon.WeaponType);
-
+            
             playerAnimator.Play(attackAnimationName);
         }
 

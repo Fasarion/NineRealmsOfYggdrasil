@@ -21,6 +21,12 @@ public class InputAuthoring : MonoBehaviour
             AddComponent<PlayerNormalAttackInput>();
             AddComponent<PlayerSpecialAttackInput>();
             AddComponent<PlayerUltimateAttackInput>();
+            
+            // Weapon Switch Input
+            AddComponent<WeaponOneInput>();
+            AddComponent<WeaponTwoInput>();
+            AddComponent<WeaponThreeInput>();
+
 
             AddComponent<UpgradeUIButtonPress>();
         }

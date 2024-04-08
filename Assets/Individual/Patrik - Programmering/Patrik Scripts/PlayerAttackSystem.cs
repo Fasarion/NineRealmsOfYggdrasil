@@ -32,7 +32,29 @@ namespace Patrik
                 }
             }
 
+            HandleWeaponSwitch();
             HandleWeaponInput();
+        }
+
+        private void HandleWeaponSwitch()
+        {
+            if (SystemAPI.TryGetSingleton(out WeaponOneInput weapon1) && weapon1.KeyPressed)
+            {
+                _weaponManager.SwitchWeapon(1);
+                return;
+            }
+            
+            if (SystemAPI.TryGetSingleton(out WeaponTwoInput weapon2) && weapon2.KeyPressed)
+            {
+                _weaponManager.SwitchWeapon(2);
+                return;
+            }
+            
+            if (SystemAPI.TryGetSingleton(out WeaponThreeInput weapon3) && weapon3.KeyPressed)
+            {
+                _weaponManager.SwitchWeapon(3);
+                return;
+            }
         }
 
         private void DisableAllWeapons()
@@ -134,7 +156,6 @@ namespace Patrik
             Entity entity = GetEnabledWeaponEntity(dataWeaponType);
             if (entity == default)
             {
-                Debug.LogError("Entity to disable not found.");
                 return;
             }
 

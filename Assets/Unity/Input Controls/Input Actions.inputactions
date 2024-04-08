@@ -1,5 +1,5 @@
 {
-    "name": "Movement Actions",
+    "name": "Input Actions",
     "maps": [
         {
             "name": "InputMap",
@@ -223,6 +223,74 @@
                     "processors": "",
                     "groups": "",
                     "action": "UpgradeUIButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "WeaponMap",
+            "id": "85eb47e4-6968-4d9c-bac5-3cdae9996bee",
+            "actions": [
+                {
+                    "name": "SwitchWeapon1",
+                    "type": "Button",
+                    "id": "95a816a8-3cea-4fe9-b2f6-0ad819b4a61c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeapon2",
+                    "type": "Button",
+                    "id": "fde4f9f1-a631-4463-b8e2-11a92f40d14a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "SwitchWeapon3",
+                    "type": "Button",
+                    "id": "b8524094-5b28-4fc9-bec5-2a0711f5108d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "04d87a4b-4827-4e9b-ba58-04704a21e3d9",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a8fc0db-fb5d-449b-ade9-9b47e0c0dcf8",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon2",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "732f2f57-eb1f-414c-96b2-303c87c8897e",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SwitchWeapon3",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

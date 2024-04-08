@@ -25,9 +25,14 @@ public partial class GetPlayerInputSystem : SystemBase
         playerInputActions.InputMap.PlayerNormalAttack.performed += OnNormalAttack;
         playerInputActions.InputMap.PlayerSpecialAttack.performed += OnSpecialAttack;
         playerInputActions.InputMap.PlayerUltimateAttack.performed += OnUltimateAttack;
+        
+        // Weapon switch
+        playerInputActions.WeaponMap.SwitchWeapon1.performed += OnWeapon1;
+        playerInputActions.WeaponMap.SwitchWeapon2.performed += OnWeapon2;
+        playerInputActions.WeaponMap.SwitchWeapon3.performed += OnWeapon3;
        
         
-        // General
+        // UI
         playerInputActions.InputMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
         
         
@@ -52,11 +57,39 @@ public partial class GetPlayerInputSystem : SystemBase
         playerInputActions.InputMap.PlayerNormalAttack.performed -= OnNormalAttack;
         playerInputActions.InputMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
         playerInputActions.InputMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
+        
+        // Weapon switch
+        playerInputActions.WeaponMap.SwitchWeapon1.performed -= OnWeapon1;
+        playerInputActions.WeaponMap.SwitchWeapon2.performed -= OnWeapon2;
+        playerInputActions.WeaponMap.SwitchWeapon3.performed -= OnWeapon3;
 
         playerInputActions.InputMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
     }
-
     
+    private void OnWeapon1(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<WeaponOneInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+    
+    private void OnWeapon2(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<WeaponTwoInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+
+    private void OnWeapon3(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<WeaponThreeInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+
 
     private void OnNormalAttack(InputAction.CallbackContext obj)
     {

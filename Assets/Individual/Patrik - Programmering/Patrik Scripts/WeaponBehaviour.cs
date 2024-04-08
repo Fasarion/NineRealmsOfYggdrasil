@@ -9,6 +9,7 @@ namespace Patrik
         public WeaponType WeaponType => _weaponType;
         [SerializeField] private Animator animator;
         [SerializeField] private Transform attackPoint;
+        [SerializeField] private Transform model;
         public Transform AttackPoint => attackPoint;
         private bool activeState;
         
@@ -21,16 +22,36 @@ namespace Patrik
         public void StartActiveAttackEvent() => OnPassiveAttackStart?.Invoke(this);
         public void StopActiveAttackEvent() => OnPassiveAttackStop?.Invoke(this);
         
-        public void MakeActive(Transform parent, bool activeWeapon)
+        public void MakeActive(Transform parent)
         {
-            activeState = activeWeapon;
-            bool enableAnimator = !activeState;
+            activeState = true;
+            animator.enabled = false;
             
-            animator.enabled = enableAnimator;
-            
+            SetParent(parent);
+        }
+
+        private void SetParent(Transform parent)
+        {
             transform.parent = parent;
             transform.position = parent.position;
             transform.rotation = parent.rotation;
+        }
+
+        public void MakePassive(Transform parent)
+        {
+            activeState = false;
+            animator.enabled = true;
+            
+            SetParent(parent);
+
+            ResetAnimationModel();
+            StopActiveAttackEvent();
+        }
+
+        private void ResetAnimationModel()
+        {
+            model.position = transform.position;
+            model.rotation = transform.rotation;        
         }
     }
 }

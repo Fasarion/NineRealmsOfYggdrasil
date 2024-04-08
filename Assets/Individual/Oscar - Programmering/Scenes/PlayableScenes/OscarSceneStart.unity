@@ -332,6 +332,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 976199065}
     m_Modifications:
+    - target: {fileID: 417374214087394671, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -431,6 +436,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950178059812699760, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+        type: 3}
+      propertyPath: m_text
+      value: Go To Room2
       objectReference: {fileID: 0}
     - target: {fileID: 5127538796324908209, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
@@ -593,6 +603,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 976199065}
     m_Modifications:
+    - target: {fileID: 417374214087394671, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -671,7 +686,7 @@ PrefabInstance:
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
@@ -692,6 +707,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950178059812699760, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+        type: 3}
+      propertyPath: m_text
+      value: Go To Room3
       objectReference: {fileID: 0}
     - target: {fileID: 5127538796324908209, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
@@ -1049,6 +1069,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 976199065}
     m_Modifications:
+    - target: {fileID: 417374214087394671, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 240
+      objectReference: {fileID: 0}
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -1127,7 +1152,7 @@ PrefabInstance:
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -300
       objectReference: {fileID: 0}
     - target: {fileID: 4501469602246835904, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}
@@ -1148,6 +1173,13 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4950178059812699760, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+        type: 3}
+      propertyPath: m_text
+      value: 'Go To Room1
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 5127538796324908209, guid: 4b9f6675008431d49b15e0be1ca1b80f,
         type: 3}

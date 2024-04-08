@@ -52,7 +52,8 @@ public partial class UpgradeUISystem : SystemBase
         if (_uiManager == null)
         {
             _uiManager = UpgradeCardUIManager.Instance;
-            _uiManager.OnUpgradeChosen += RecieveUpgradeChoice;
+            
+            if (_uiManager) _uiManager.OnUpgradeChosen += RecieveUpgradeChoice;
         }
 
         if (_uiManager == null)

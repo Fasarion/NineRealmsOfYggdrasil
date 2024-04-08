@@ -36,7 +36,7 @@ public class UpgradePoolManager : MonoBehaviour
 
     private void Awake()
     {
-        if (_instance == null)
+        if (_instance == null || _instance != this)
         {
             _instance = this;
             //DontDestroyOnLoad(gameObject);

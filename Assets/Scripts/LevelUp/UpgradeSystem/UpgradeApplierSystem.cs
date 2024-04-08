@@ -11,8 +11,8 @@ public partial class UpgradeApplierSystem : SystemBase
     
     protected override void OnUpdate()
     {
-        bool choiseExists = SystemAPI.TryGetSingletonRW(out RefRW<UpgradeChoice> choice);
-        if (choiseExists)
+        bool choiceExists = SystemAPI.TryGetSingletonRW(out RefRW<UpgradeChoice> choice);
+        if (!choiceExists)
         {
             // No choice found";
             return;

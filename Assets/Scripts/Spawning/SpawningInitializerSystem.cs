@@ -15,7 +15,13 @@ public partial class SpawningInitializerSystem : SystemBase
     
     protected override void OnUpdate()
     {
-        var config = SystemAPI.GetSingletonRW<SpawnConfig>();
+        var configExists = SystemAPI.TryGetSingletonRW<SpawnConfig>(out RefRW<SpawnConfig> config);
+        if (!configExists)
+        {
+            // no config
+            return;
+        }
+        
         config.ValueRW.timerTime += SystemAPI.Time.DeltaTime;
 
         //initialize config

@@ -10,14 +10,19 @@ public partial class XPEventCaller : SystemBase
     
     protected override void OnUpdate()
     {
-        var xp = SystemAPI.GetSingleton<PlayerXP>();
-
+        bool playerXpExist = SystemAPI.TryGetSingleton<PlayerXP>(out PlayerXP xp);
+        if (!playerXpExist)
+        {
+            // No player xp found";
+            return;
+        }
+        
         if (_audioManager == null)
         {
             _audioManager = AudioManager.Instance;
         }
 
-        if (_cachedXP != xp.Value)
+        if (_cachedXP != xp.Value && _audioManager)
         {
             _cachedXP = xp.Value;
             _audioManager.playerAudio.xpAudio();

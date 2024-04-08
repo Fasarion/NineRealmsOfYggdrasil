@@ -201,6 +201,12 @@ namespace Patrik
 
         private void TryPerformAttack(AttackType type)
         {
+            if (!activeWeapon)
+            {
+                Debug.LogWarning("No active weapon, can't perform attack.");
+                return;
+            }
+            
             if (isAttacking) return;
 
             isAttacking = true;

@@ -1673,7 +1673,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 2
+  knockBackForce: 5
   knockAwayFromPlayer: 1
 --- !u!114 &1745888673
 MonoBehaviour:
@@ -1699,7 +1699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 1
+  damageValue: 2
   damageType: 0
 --- !u!114 &1745888675
 MonoBehaviour:
@@ -1783,9 +1783,9 @@ MonoBehaviour:
     y: 0
     z: 0
   m_PrimitiveSize:
-    x: 0.4
-    y: 0.4
-    z: 1.25
+    x: 0.8
+    y: 0.8
+    z: 0.8
   m_PrimitiveOrientation:
     Value:
       x: 0
@@ -1793,15 +1793,15 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 1.25
-    Radius: 0.2
-    Axis: 2
+    Height: 0.8
+    Radius: 0.4
+    Axis: 1
   m_Cylinder:
-    Height: 1.25
-    Radius: 0.2
+    Height: 0.8
+    Radius: 0.4
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.625
+  m_SphereRadius: 0.4
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015

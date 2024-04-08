@@ -279,6 +279,7 @@ GameObject:
   - component: {fileID: 1195005019852973975}
   - component: {fileID: 319813394500139124}
   - component: {fileID: 5316190080056829962}
+  - component: {fileID: 5338198015688568915}
   m_Layer: 0
   m_Name: Player GO Patrik
   m_TagString: Untagged
@@ -399,7 +400,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWeaponType: 1
   playerAnimator: {fileID: 319813394500139124}
+  playerAudio: {fileID: 5338198015688568915}
   activeSlot: {fileID: 7069166450657593313}
   passiveSlots:
   - {fileID: 301345862621219868}
   - {fileID: 1195977342432116209}
+--- !u!114 &5338198015688568915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7682055927376984470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5569a5e7abab4b558e552f92a2cb351d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

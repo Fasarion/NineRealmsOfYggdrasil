@@ -7,24 +7,6 @@ using UnityEngine.Events;
 
 namespace Patrik
 {
-    public enum WeaponType
-    {
-        None = 0,
-        Sword = 1,
-        Hammer = 2,
-        Mead = 3,
-        Birds = 4
-    }
-
-    public enum AttackType
-    {
-        None = 0,
-        Normal = 1,
-        Special = 2,
-        Ultimate = 3,
-        Passive = 4
-    }
-    
     public class PlayerWeaponManagerBehaviour : MonoBehaviour
     {
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
@@ -35,6 +17,9 @@ namespace Patrik
         [Header("Animation")]
         [SerializeField] private Animator playerAnimator;
         
+        [Header("Audio")]
+        [SerializeField] private PlayerAudioBehaviour playerAudio;
+
         [Header("Weapon Slots")]
         [SerializeField] private Transform activeSlot;
         [SerializeField] private List<Transform> passiveSlots = new List<Transform>();
@@ -43,10 +28,12 @@ namespace Patrik
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
         private WeaponType currentWeaponType => activeWeapon.WeaponType;
+        public int CurrentWeaponTypeInt => (int)currentWeaponType;
         
         // Attack Data
-        private AttackType CurrentAttackType { get;  set; }
-        public bool isAttacking;
+        private AttackType currentAttackType { get;  set; }
+        public int CurrentAttackTypeInt => (int)currentAttackType;
+        private bool isAttacking;
         
         // Animator parameters
         private string attackAnimationName = "Attack";
@@ -62,11 +49,8 @@ namespace Patrik
         // Events
         public UnityAction<AttackData> OnPassiveAttackStart;
         public UnityAction<AttackData> OnPassiveAttackStop;
-        
-        //Audio
-        private AudioManager _audioManager;
 
-        
+
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
         public void StartActiveAttackEvent()
         {
@@ -97,7 +81,7 @@ namespace Patrik
         {
             var attackData = new AttackData
             {
-                AttackType = CurrentAttackType,
+                AttackType = currentAttackType,
                 WeaponType = activeWeapon.WeaponType,
                 AttackPoint = activeWeapon.AttackPoint
             };
@@ -108,6 +92,9 @@ namespace Patrik
         private void Awake()
         {
             Instance = this;
+
+            playerAudio = gameObject.GetComponent<PlayerAudioBehaviour>();
+            playerAnimator = gameObject.GetComponent<Animator>();
         }
 
         private void OnEnable()
@@ -217,22 +204,14 @@ namespace Patrik
             if (isAttacking) return;
 
             isAttacking = true;
-            CurrentAttackType = type;
+            currentAttackType = type;
             UpdateAnimatorAttackParameters();
-            
-            if (_audioManager == null)
-            {
-                _audioManager = AudioManager.Instance;
-            }
-            _audioManager.weaponAudio.WeaponSwingAudio((int)currentWeaponType, (int)CurrentAttackType);
-
-            // TODO: hej alex lägg in coolt ljud här vet jag
-            
+            playerAudio.PlayWeaponSwingAudio(CurrentWeaponTypeInt, CurrentAttackTypeInt);
         }
 
         private void UpdateAnimatorAttackParameters()
         {
-            playerAnimator.SetInteger(currentAttackParameterName, (int) CurrentAttackType);
+            playerAnimator.SetInteger(currentAttackParameterName, (int) currentAttackType);
             playerAnimator.SetInteger(activeWeaponParameterName, (int) currentWeaponType);
             
             playerAnimator.Play(attackAnimationName);

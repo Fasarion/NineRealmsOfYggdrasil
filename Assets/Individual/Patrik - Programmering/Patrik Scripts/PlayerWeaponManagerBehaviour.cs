@@ -231,6 +231,8 @@ namespace Patrik
 
         public void UpdateMovementParameter(bool playerIsMoving)
         {
+            if (!playerAnimator) return;
+            
             playerAnimator.SetBool(movingParameterName, playerIsMoving);
         }
     }

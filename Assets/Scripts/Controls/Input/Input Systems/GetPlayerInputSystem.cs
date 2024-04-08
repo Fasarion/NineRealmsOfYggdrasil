@@ -8,27 +8,27 @@ using UnityEngine.InputSystem;
 [UpdateInGroup(typeof(InitializationSystemGroup), OrderLast = true)]
 public partial class GetPlayerInputSystem : SystemBase
 {
-    private MovementActions playerMovementActions;
+    private InputActions playerInputActions;
     private Entity playerEntity;
     
     protected override void OnCreate()
     {
         RequireForUpdate<PlayerTag>();
-        playerMovementActions = new MovementActions();
+        playerInputActions = new InputActions();
     }
 
     protected override void OnStartRunning()
     {
-        playerMovementActions.Enable();
+        playerInputActions.Enable();
         
         // Attack
-        playerMovementActions.MovementMap.PlayerNormalAttack.performed += OnNormalAttack;
-        playerMovementActions.MovementMap.PlayerSpecialAttack.performed += OnSpecialAttack;
-        playerMovementActions.MovementMap.PlayerUltimateAttack.performed += OnUltimateAttack;
+        playerInputActions.InputMap.PlayerNormalAttack.performed += OnNormalAttack;
+        playerInputActions.InputMap.PlayerSpecialAttack.performed += OnSpecialAttack;
+        playerInputActions.InputMap.PlayerUltimateAttack.performed += OnUltimateAttack;
        
         
         // General
-        playerMovementActions.MovementMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
+        playerInputActions.InputMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
         
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
@@ -38,22 +38,22 @@ public partial class GetPlayerInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        var currentMovementActions = playerMovementActions.MovementMap.PlayerMovement.ReadValue<Vector2>();
+        var currentMovementActions = playerInputActions.InputMap.PlayerMovement.ReadValue<Vector2>();
         SystemAPI.SetSingleton(new PlayerMoveInput{Value = currentMovementActions});
 
-        var currentMousePos = playerMovementActions.MovementMap.MousePosition.ReadValue<Vector2>();
+        var currentMousePos = playerInputActions.InputMap.MousePosition.ReadValue<Vector2>();
         SystemAPI.SetSingleton(new MousePositionInput{Value = currentMousePos});
     }
 
     protected override void OnStopRunning()
     {
-        playerMovementActions.Disable();
+        playerInputActions.Disable();
         
-        playerMovementActions.MovementMap.PlayerNormalAttack.performed -= OnNormalAttack;
-        playerMovementActions.MovementMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
-        playerMovementActions.MovementMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
+        playerInputActions.InputMap.PlayerNormalAttack.performed -= OnNormalAttack;
+        playerInputActions.InputMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
+        playerInputActions.InputMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
 
-        playerMovementActions.MovementMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
+        playerInputActions.InputMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
     }
 
     

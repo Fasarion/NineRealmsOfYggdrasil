@@ -6,6 +6,11 @@ public struct PlayerMoveInput : IComponentData
     public float2 Value;
 }
 
+public struct MousePositionInput : IComponentData
+{
+    public float2 Value;
+}
+
 public struct PlayerNormalAttackInput : IComponentData
 {
     public bool KeyPressed;

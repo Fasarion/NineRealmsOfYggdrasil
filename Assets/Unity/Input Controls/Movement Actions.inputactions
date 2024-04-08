@@ -15,18 +15,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "PlayerFire",
+                    "name": "UpgradeUIButton",
                     "type": "Button",
-                    "id": "8fe5cd11-2ac5-4faa-bd9f-0a59d034529c",
+                    "id": "d69ae342-163b-485d-b0e7-2f07266f42ee",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "UpgradeUIButton",
+                    "name": "PlayerNormalAttack",
                     "type": "Button",
-                    "id": "d69ae342-163b-485d-b0e7-2f07266f42ee",
+                    "id": "8fe5cd11-2ac5-4faa-bd9f-0a59d034529c",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "MousePosition",
+                    "type": "Value",
+                    "id": "10528899-8953-402a-a78a-88dd26b7ab39",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -169,18 +178,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PlayerFire",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "45a70dfb-e14e-494e-ac41-2c92e9b96b4f",
-                    "path": "<Keyboard>/tab",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "UpgradeUIButton",
+                    "action": "PlayerNormalAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -203,6 +201,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlayerUltimateAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "339f35f9-2284-4ff0-9a80-dba29b5dbf08",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MousePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "45a70dfb-e14e-494e-ac41-2c92e9b96b4f",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UpgradeUIButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

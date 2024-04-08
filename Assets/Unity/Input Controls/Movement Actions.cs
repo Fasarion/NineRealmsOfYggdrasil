@@ -37,18 +37,18 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PlayerFire"",
+                    ""name"": ""UpgradeUIButton"",
                     ""type"": ""Button"",
-                    ""id"": ""8fe5cd11-2ac5-4faa-bd9f-0a59d034529c"",
+                    ""id"": ""d69ae342-163b-485d-b0e7-2f07266f42ee"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""UpgradeUIButton"",
+                    ""name"": ""PlayerNormalAttack"",
                     ""type"": ""Button"",
-                    ""id"": ""d69ae342-163b-485d-b0e7-2f07266f42ee"",
+                    ""id"": ""8fe5cd11-2ac5-4faa-bd9f-0a59d034529c"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -71,6 +71,15 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MousePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""10528899-8953-402a-a78a-88dd26b7ab39"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -191,18 +200,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PlayerFire"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""45a70dfb-e14e-494e-ac41-2c92e9b96b4f"",
-                    ""path"": ""<Keyboard>/tab"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""UpgradeUIButton"",
+                    ""action"": ""PlayerNormalAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -227,6 +225,28 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                     ""action"": ""PlayerUltimateAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""339f35f9-2284-4ff0-9a80-dba29b5dbf08"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MousePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""45a70dfb-e14e-494e-ac41-2c92e9b96b4f"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UpgradeUIButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -236,10 +256,11 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
         // MovementMap
         m_MovementMap = asset.FindActionMap("MovementMap", throwIfNotFound: true);
         m_MovementMap_PlayerMovement = m_MovementMap.FindAction("PlayerMovement", throwIfNotFound: true);
-        m_MovementMap_PlayerFire = m_MovementMap.FindAction("PlayerFire", throwIfNotFound: true);
         m_MovementMap_UpgradeUIButton = m_MovementMap.FindAction("UpgradeUIButton", throwIfNotFound: true);
+        m_MovementMap_PlayerNormalAttack = m_MovementMap.FindAction("PlayerNormalAttack", throwIfNotFound: true);
         m_MovementMap_PlayerSpecialAttack = m_MovementMap.FindAction("PlayerSpecialAttack", throwIfNotFound: true);
         m_MovementMap_PlayerUltimateAttack = m_MovementMap.FindAction("PlayerUltimateAttack", throwIfNotFound: true);
+        m_MovementMap_MousePosition = m_MovementMap.FindAction("MousePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -302,19 +323,21 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_MovementMap;
     private List<IMovementMapActions> m_MovementMapActionsCallbackInterfaces = new List<IMovementMapActions>();
     private readonly InputAction m_MovementMap_PlayerMovement;
-    private readonly InputAction m_MovementMap_PlayerFire;
     private readonly InputAction m_MovementMap_UpgradeUIButton;
+    private readonly InputAction m_MovementMap_PlayerNormalAttack;
     private readonly InputAction m_MovementMap_PlayerSpecialAttack;
     private readonly InputAction m_MovementMap_PlayerUltimateAttack;
+    private readonly InputAction m_MovementMap_MousePosition;
     public struct MovementMapActions
     {
         private @MovementActions m_Wrapper;
         public MovementMapActions(@MovementActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @PlayerMovement => m_Wrapper.m_MovementMap_PlayerMovement;
-        public InputAction @PlayerFire => m_Wrapper.m_MovementMap_PlayerFire;
         public InputAction @UpgradeUIButton => m_Wrapper.m_MovementMap_UpgradeUIButton;
+        public InputAction @PlayerNormalAttack => m_Wrapper.m_MovementMap_PlayerNormalAttack;
         public InputAction @PlayerSpecialAttack => m_Wrapper.m_MovementMap_PlayerSpecialAttack;
         public InputAction @PlayerUltimateAttack => m_Wrapper.m_MovementMap_PlayerUltimateAttack;
+        public InputAction @MousePosition => m_Wrapper.m_MovementMap_MousePosition;
         public InputActionMap Get() { return m_Wrapper.m_MovementMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -327,18 +350,21 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             @PlayerMovement.started += instance.OnPlayerMovement;
             @PlayerMovement.performed += instance.OnPlayerMovement;
             @PlayerMovement.canceled += instance.OnPlayerMovement;
-            @PlayerFire.started += instance.OnPlayerFire;
-            @PlayerFire.performed += instance.OnPlayerFire;
-            @PlayerFire.canceled += instance.OnPlayerFire;
             @UpgradeUIButton.started += instance.OnUpgradeUIButton;
             @UpgradeUIButton.performed += instance.OnUpgradeUIButton;
             @UpgradeUIButton.canceled += instance.OnUpgradeUIButton;
+            @PlayerNormalAttack.started += instance.OnPlayerNormalAttack;
+            @PlayerNormalAttack.performed += instance.OnPlayerNormalAttack;
+            @PlayerNormalAttack.canceled += instance.OnPlayerNormalAttack;
             @PlayerSpecialAttack.started += instance.OnPlayerSpecialAttack;
             @PlayerSpecialAttack.performed += instance.OnPlayerSpecialAttack;
             @PlayerSpecialAttack.canceled += instance.OnPlayerSpecialAttack;
             @PlayerUltimateAttack.started += instance.OnPlayerUltimateAttack;
             @PlayerUltimateAttack.performed += instance.OnPlayerUltimateAttack;
             @PlayerUltimateAttack.canceled += instance.OnPlayerUltimateAttack;
+            @MousePosition.started += instance.OnMousePosition;
+            @MousePosition.performed += instance.OnMousePosition;
+            @MousePosition.canceled += instance.OnMousePosition;
         }
 
         private void UnregisterCallbacks(IMovementMapActions instance)
@@ -346,18 +372,21 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
             @PlayerMovement.started -= instance.OnPlayerMovement;
             @PlayerMovement.performed -= instance.OnPlayerMovement;
             @PlayerMovement.canceled -= instance.OnPlayerMovement;
-            @PlayerFire.started -= instance.OnPlayerFire;
-            @PlayerFire.performed -= instance.OnPlayerFire;
-            @PlayerFire.canceled -= instance.OnPlayerFire;
             @UpgradeUIButton.started -= instance.OnUpgradeUIButton;
             @UpgradeUIButton.performed -= instance.OnUpgradeUIButton;
             @UpgradeUIButton.canceled -= instance.OnUpgradeUIButton;
+            @PlayerNormalAttack.started -= instance.OnPlayerNormalAttack;
+            @PlayerNormalAttack.performed -= instance.OnPlayerNormalAttack;
+            @PlayerNormalAttack.canceled -= instance.OnPlayerNormalAttack;
             @PlayerSpecialAttack.started -= instance.OnPlayerSpecialAttack;
             @PlayerSpecialAttack.performed -= instance.OnPlayerSpecialAttack;
             @PlayerSpecialAttack.canceled -= instance.OnPlayerSpecialAttack;
             @PlayerUltimateAttack.started -= instance.OnPlayerUltimateAttack;
             @PlayerUltimateAttack.performed -= instance.OnPlayerUltimateAttack;
             @PlayerUltimateAttack.canceled -= instance.OnPlayerUltimateAttack;
+            @MousePosition.started -= instance.OnMousePosition;
+            @MousePosition.performed -= instance.OnMousePosition;
+            @MousePosition.canceled -= instance.OnMousePosition;
         }
 
         public void RemoveCallbacks(IMovementMapActions instance)
@@ -378,9 +407,10 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
     public interface IMovementMapActions
     {
         void OnPlayerMovement(InputAction.CallbackContext context);
-        void OnPlayerFire(InputAction.CallbackContext context);
         void OnUpgradeUIButton(InputAction.CallbackContext context);
+        void OnPlayerNormalAttack(InputAction.CallbackContext context);
         void OnPlayerSpecialAttack(InputAction.CallbackContext context);
         void OnPlayerUltimateAttack(InputAction.CallbackContext context);
+        void OnMousePosition(InputAction.CallbackContext context);
     }
 }

@@ -22,7 +22,7 @@ public partial class GetPlayerInputSystem : SystemBase
         playerMovementActions.Enable();
         
         // Attack
-        playerMovementActions.MovementMap.PlayerFire.performed += OnPlayerShoot;
+        playerMovementActions.MovementMap.PlayerNormalAttack.performed += OnNormalAttack;
         playerMovementActions.MovementMap.PlayerSpecialAttack.performed += OnSpecialAttack;
         playerMovementActions.MovementMap.PlayerUltimateAttack.performed += OnUltimateAttack;
        
@@ -40,13 +40,16 @@ public partial class GetPlayerInputSystem : SystemBase
     {
         var currentMovementActions = playerMovementActions.MovementMap.PlayerMovement.ReadValue<Vector2>();
         SystemAPI.SetSingleton(new PlayerMoveInput{Value = currentMovementActions});
+
+        var currentMousePos = playerMovementActions.MovementMap.MousePosition.ReadValue<Vector2>();
+        SystemAPI.SetSingleton(new MousePositionInput{Value = currentMousePos});
     }
 
     protected override void OnStopRunning()
     {
         playerMovementActions.Disable();
         
-        playerMovementActions.MovementMap.PlayerFire.performed -= OnPlayerShoot;
+        playerMovementActions.MovementMap.PlayerNormalAttack.performed -= OnNormalAttack;
         playerMovementActions.MovementMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
         playerMovementActions.MovementMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
 
@@ -55,7 +58,7 @@ public partial class GetPlayerInputSystem : SystemBase
 
     
 
-    private void OnPlayerShoot(InputAction.CallbackContext obj)
+    private void OnNormalAttack(InputAction.CallbackContext obj)
     {
         if (!SystemAPI.Exists(playerEntity)) return;
 

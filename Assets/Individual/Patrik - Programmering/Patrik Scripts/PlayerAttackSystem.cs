@@ -223,6 +223,12 @@ namespace Patrik
 
         private void HandleWeaponInput()
         {
+            if (!_weaponManager)
+            {
+                Debug.LogWarning("No weapon manager found, cant read weapon inputs.");
+                return;
+            }
+            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
             if (normalAttackInput.KeyPressed)

@@ -24,7 +24,6 @@ public class WeaponAudio : ScriptableObject
         WepInstance.setParameterByName("AttackType", attackType);
         WepInstance.start();
         WepInstance.release();*/
-        Debug.Log("AUDIO AUDIO WEEWOO");
     }
     public void Test()
     {

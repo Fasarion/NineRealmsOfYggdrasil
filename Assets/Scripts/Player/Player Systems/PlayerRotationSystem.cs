@@ -15,7 +15,7 @@ namespace Player
             // player aim config does not exist
             if (!SystemAPI.TryGetSingleton(out PlayerRotationConfig _))
             {
-                Debug.LogError("No player rotation config, player wont rotate correctly.");
+                Debug.LogWarning("No player rotation config, player wont rotate correctly.");
                 return;
             }
             

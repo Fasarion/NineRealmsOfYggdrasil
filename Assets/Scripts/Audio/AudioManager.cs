@@ -24,8 +24,8 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    public void PlayWeaponSound()
+    /*public void PlayWeaponSound(int weapon, int attackType)
     {
-        weaponAudio.SwordSwingAudio(gameObject);
-    }
+        weaponAudio.SwordSwingAudio(gameObject, weapon, attackType);
+    }*/
 }

@@ -1,5 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using DevLocker.Utils;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,5 +15,7 @@ public class RoomChoiceObject : ScriptableObject
     [Tooltip("The name of the room in question")]
     public string roomName;
 
-    public Scene scene;
+    //public SceneAsset scene;
+ 
+    public SceneReference sceneReference;
 }

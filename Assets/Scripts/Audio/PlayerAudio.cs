@@ -16,7 +16,11 @@ public class PlayerAudio : ScriptableObject
     [Header("Events")] 
     public EventReference xpGain;
 
+    public EventReference playerDeath;
+
     private EventInstance xpIns;
+    
+    
     public void movingAudio()
     {
         RuntimeManager.PlayOneShot(footsteps);

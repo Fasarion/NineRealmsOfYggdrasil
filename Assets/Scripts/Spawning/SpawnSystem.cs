@@ -8,6 +8,8 @@ using Unity.Transforms;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
+[UpdateBefore(typeof(TransformSystemGroup))]
 [UpdateAfter(typeof(SpawningInitializerSystem))]
 [BurstCompile]
 public partial struct SpawnSystem : ISystem
@@ -79,11 +81,8 @@ public partial struct SpawnSystem : ISystem
             float randomRadius = random.ValueRW.random.NextFloat(config.ValueRO.innerSpawningRadius, config.ValueRO.outerSpawningRadius);
 
             var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
-            
             float3 spawnPosition = GetRandomSpawnPoint(playerPosition, theta, randomRadius);
-
             int enemyTypeIndex = enemySpawnTypes[i];
-
             var enemyPrefab = GetEnemyPrefabType(enemyTypeIndex);
 
             // Instantiate enemy at the spawn position

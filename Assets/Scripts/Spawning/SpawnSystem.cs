@@ -1,101 +1,93 @@
+using AI;
+using Player;
 using Unity.Burst;
+using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
 
-[UpdateBefore(typeof(AnimationTestSystem))]
+[UpdateAfter(typeof(SpawningInitializerSystem))]
 [BurstCompile]
 public partial struct SpawnSystem : ISystem
 {
+    private NativeArray<float> _enemyProbabilities;
+    private NativeParallelHashMap<int, Entity> _enemyPrefabs;
+    private float _timerCutoffPoint;
+    
+    [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerPositionSingleton>();
         state.RequireForUpdate<SpawnConfig>();
+        state.RequireForUpdate<RandomComponent>();
     }
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var config = SystemAPI.GetSingletonRW<SpawnConfig>();
-        
-        if (config.ValueRO.shouldSpawn)
+        RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
+
+
+        if (!config.ValueRO.isInitialized)
         {
-            InitializeSpawnConfig(config);
-            config.ValueRW.shouldSpawn = false;
+            _enemyProbabilities = new NativeArray<float>(2, Allocator.Persistent);
+            _enemyPrefabs = new NativeParallelHashMap<int, Entity>(2, Allocator.Persistent);
+            _enemyPrefabs.Add(0, config.ValueRO.baseEnemyPrefab);
+            _enemyPrefabs.Add(1, config.ValueRO.crazyBoiEnemyPrefab);
+            config.ValueRW.isInitialized = true;
+            _timerCutoffPoint = config.ValueRO.minTimerTime;
         }
         
-        if(!config.ValueRO.shouldBeSpawning) return;
 
+        config.ValueRW.currentTimerTime += SystemAPI.Time.DeltaTime;
+        var currentTimerTime = config.ValueRO.currentTimerTime;
+        if (currentTimerTime < _timerCutoffPoint) return;
+
+        var query = SystemAPI.QueryBuilder().WithAll<EnemyTag, LocalTransform>().Build();
+        int currentEnemyCount = query.CalculateEntityCount();
+        
+        config.ValueRW.currentTimerTime = 0f;
+        _timerCutoffPoint = GetTimerCutoff(config, currentEnemyCount);
 
         
+        int spawnCount = GetSpawnCount(config, currentEnemyCount);
         
-        config.ValueRW.timerTime += SystemAPI.Time.DeltaTime;
-        var timerTime = config.ValueRO.timerTime;
-        var maxTimerTime = config.ValueRO.maxTimerTime;
+        var enemySpawnTypes = new NativeArray<int>(spawnCount, Allocator.TempJob);
         
-        var timerInterval = config.ValueRO.currentTimerInterval;
-        var maxInterval = config.ValueRO.timerInitialMaxInterval;
+        GenerateEnemyTypesArray(random, config, spawnCount, ref enemySpawnTypes);
+        
+        SpawnEnemies(random, spawnCount, ref enemySpawnTypes, config, state);
 
-        if (timerTime < maxTimerTime) return;
-        
-        if (config.ValueRO.onlySpawnOnce) config.ValueRW.shouldBeSpawning = false;
-        SpawnEnemies(config, state);
-        
-        
-
-        config.ValueRW.currentTimerInterval++;
-        
-        
-
-        if (timerInterval < maxInterval) return;
-        
-        UpdateSpawnValues(config);
-
+        enemySpawnTypes.Dispose();
     }
 
-    [BurstCompile]
-    private void InitializeSpawnConfig(RefRW<SpawnConfig> config)
+    public void OnDestroy(ref SystemState state)
     {
-        config.ValueRW.timerTime = 0f;
-        config.ValueRW.maxTimerTime = config.ValueRO.timerInitialMaxTime;
-        config.ValueRW.shouldSpawn = true;
-        config.ValueRW.currentEnemySpawnCount = config.ValueRO.enemiesInitialMaxSpawnCount;
-        config.ValueRW.currentEnemyMaxCount = config.ValueRO.enemiesInitialMaxCount;
-        config.ValueRW.timerCurrentMaxTime = config.ValueRO.timerInitialMaxTime;
-        config.ValueRW.timerCurrentMaxInterval = config.ValueRO.timerInitialMaxInterval;
-        config.ValueRW.currentTimerDecrease = config.ValueRO.timerInitialDecrease;
-        config.ValueRW.currentTimerInterval = 0;
-        config.ValueRW.currentEnemySpawnGrowth = config.ValueRO.enemiesInitialMaxSpawnGrowth;
-        config.ValueRW.currentEnemyMaxCountGrowth = config.ValueRO.enemiesInitialMaxSpawnGrowth;
-        config.ValueRW.shouldBeSpawning = true;
-        
+        _enemyProbabilities.Dispose();
     }
-
+    
+    //TODO: make into job?
     [BurstCompile]
-    private void SpawnEnemies(RefRW<SpawnConfig> config, SystemState state)
+    private void SpawnEnemies(RefRW<RandomComponent> random, int spawnCount, ref NativeArray<int> enemySpawnTypes, RefRW<SpawnConfig> config, SystemState state)
     {
-        var spawnCount = config.ValueRO.currentEnemySpawnCount;
-        var enemyCount = config.ValueRO.currentEnemyCount;
-        var maxCount = config.ValueRO.currentEnemyMaxCount;
-        var innerRadius = config.ValueRO.innerRadius;
-        var outerRadius = config.ValueRO.outerRadius;
-        var centerPoint = config.ValueRO.centerPoint;
-        
-        RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
-        
-
-        if (spawnCount + enemyCount > maxCount) spawnCount = maxCount;
-        
         for (int i = 0; i < spawnCount; i++)
         {
             float theta = random.ValueRW.random.NextFloat(0f, math.PI * 2);
-            float randomRadius = random.ValueRW.random.NextFloat(innerRadius, outerRadius);
+            float randomRadius = random.ValueRW.random.NextFloat(config.ValueRO.innerSpawningRadius, config.ValueRO.outerSpawningRadius);
+
+            var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
             
-            float3 spawnPosition = GetRandomSpawnPoint(centerPoint, theta, randomRadius);
+            float3 spawnPosition = GetRandomSpawnPoint(playerPosition, theta, randomRadius);
+
+            int enemyTypeIndex = enemySpawnTypes[i];
+
+            var enemyPrefab = GetEnemyPrefabType(enemyTypeIndex);
 
             // Instantiate enemy at the spawn position
-            var enemy = state.EntityManager.Instantiate(config.ValueRO.enemyPrefab);
+            var enemy = state.EntityManager.Instantiate(enemyPrefab);
             
             state.EntityManager.SetComponentData(enemy, new LocalTransform
             {
@@ -106,18 +98,13 @@ public partial struct SpawnSystem : ISystem
         }
     }
 
-    [BurstCompile]
-    private void UpdateSpawnValues(RefRW<SpawnConfig> config)
+    private Entity GetEnemyPrefabType(int enemyTypeIndex)
     {
-        config.ValueRW.timerTime = 0f;
-        config.ValueRW.timerCurrentMaxTime -= (config.ValueRO.currentTimerDecrease + config.ValueRO.timerDecreaseRate);
-        config.ValueRW.currentEnemySpawnGrowth += config.ValueRO.enemiesInitialMaxSpawnGrowth;
-        config.ValueRW.currentEnemyMaxCountGrowth += config.ValueRO.enemiesInitialMaxSpawnGrowth;
-        config.ValueRW.currentEnemySpawnCount += config.ValueRO.currentEnemySpawnGrowth;
-        config.ValueRW.currentEnemyMaxCount += config.ValueRO.currentEnemyMaxCountGrowth;
-        config.ValueRW.currentTimerInterval = 0;
+        Entity prefab = _enemyPrefabs[enemyTypeIndex];
+        return prefab;
     }
-
+    
+    //TODO: make into job
     [BurstCompile]
     private float3 GetRandomSpawnPoint(float3 center, float theta, float randomRadius)
     {
@@ -131,5 +118,47 @@ public partial struct SpawnSystem : ISystem
         // Return the spawn position
         return new float3(x, y, z);
     }
-    
+
+    //TODO: make into job
+    [BurstCompile]
+    private void GenerateEnemyTypesArray(RefRW<RandomComponent> random, RefRW<SpawnConfig> config, int spawnCount, ref NativeArray<int> enemySpawnTypes)
+    {
+        _enemyProbabilities[0] = config.ValueRO.baseEnemyPercentage;
+        _enemyProbabilities[1] = config.ValueRO.crazyBoiEnemyPercentage;
+
+        for (int i = 0; i < spawnCount; i++)
+        {
+            float randomValue = random.ValueRW.random.NextFloat(0, 100) * 0.01f;
+            float cumulativeProbability = 0f;
+            
+            for (int j = 0; j < _enemyProbabilities.Length; j++)
+            {
+                cumulativeProbability += _enemyProbabilities[j];
+                if (randomValue <= cumulativeProbability)
+                {
+                    enemySpawnTypes[i] = j;
+                }
+            }
+        }
+    }
+
+    [BurstCompile]
+    private int GetSpawnCount(RefRW<SpawnConfig> config, int currentEnemyCount)
+    {
+        int minSpawnCount = (int)(config.ValueRO.targetEnemyCount * config.ValueRO.minEnemySpawnPercent);
+        int maxSpawnCount = (int)(config.ValueRO.targetEnemyCount * config.ValueRO.maxEnemySpawnPercent);
+        float currentPercentagePoint = ((float)currentEnemyCount / config.ValueRO.targetEnemyCount);
+        float result = math.lerp(maxSpawnCount, minSpawnCount, currentPercentagePoint);
+        return (int)result;
+    }
+
+    [BurstCompile]
+    private float GetTimerCutoff(RefRW<SpawnConfig> config, int currentEnemyCount)
+    {
+        float minTimerTime =  config.ValueRO.minTimerTime;
+        float maxTimerTime = config.ValueRO.maxTimerTime;
+        float currentPercentagePoint = ((float)currentEnemyCount / config.ValueRO.targetEnemyCount);
+        float result = math.lerp(minTimerTime, maxTimerTime, currentPercentagePoint);
+        return result;
+    }
 }

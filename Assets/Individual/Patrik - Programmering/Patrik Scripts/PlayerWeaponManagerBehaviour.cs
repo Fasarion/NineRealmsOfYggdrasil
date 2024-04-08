@@ -62,6 +62,9 @@ namespace Patrik
         // Events
         public UnityAction<AttackData> OnPassiveAttackStart;
         public UnityAction<AttackData> OnPassiveAttackStop;
+        
+        //Audio
+        private AudioManager _audioManager;
 
         
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
@@ -217,6 +220,12 @@ namespace Patrik
             CurrentAttackType = type;
             UpdateAnimatorAttackParameters();
             
+            if (_audioManager == null)
+            {
+                _audioManager = AudioManager.Instance;
+            }
+            _audioManager.weaponAudio.WeaponSwingAudio((int)currentWeaponType, (int)CurrentAttackType);
+
             // TODO: hej alex lägg in coolt ljud här vet jag
             
         }
@@ -231,6 +240,8 @@ namespace Patrik
 
         public void UpdateMovementParameter(bool playerIsMoving)
         {
+            if (!playerAnimator) return;
+            
             playerAnimator.SetBool(movingParameterName, playerIsMoving);
         }
     }

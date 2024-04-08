@@ -9,4 +9,6 @@ public class EnemyAudio : ScriptableObject
 {
     [Header("BaseEnemy")]
     public EventReference grunts;
+    [Header("WeaponImpacts")] 
+    public EventReference swordImpact;
 }

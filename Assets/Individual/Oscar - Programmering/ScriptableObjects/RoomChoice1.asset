@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c59101f6308e2bb498d81dc51bdbf794, type: 3}
-  m_Name: RoomChoiceObject
+  m_Name: RoomChoice1
   m_EditorClassIdentifier: 
-  roomName: 
-  sceneReference:
-    m_SceneAsset: {fileID: 102900000, guid: 1a95061b27defd64cbc154585a190354, type: 3}
+  roomName: Go To Forest
+  roomDescription: Head to the forest
+  roomSceneReference:
+    m_SceneAsset: {fileID: 102900000, guid: 1f0a85a8e5c26ef4cb1fc3acbb2c63b9, type: 3}
     m_IsDirty: 0
-    m_ScenePath: Assets/Individual/Oscar - Programmering/Scenes/OscarSceneTest.unity
+    m_ScenePath: Assets/Individual/Oscar - Programmering/Scenes/PlayableScenes/OscarSceneRoom1.unity
+  roomSprite: {fileID: 21300000, guid: c0c13889e1edf7b4ca1191fdf37637b9, type: 3}

@@ -90,7 +90,7 @@ public partial struct SpawnSystem : ISystem
             
             state.EntityManager.SetComponentData(enemy, new LocalTransform
             {
-                Position = new float3(spawnPosition.x, .5f, spawnPosition.z),
+                Position = new float3(spawnPosition.x, 0, spawnPosition.z),
                 Rotation = quaternion.identity,
                 Scale = 1
             });

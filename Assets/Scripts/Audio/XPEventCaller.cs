@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
+[DisableAutoCreation]
 public partial class XPEventCaller : SystemBase
 {
     private int _cachedXP;

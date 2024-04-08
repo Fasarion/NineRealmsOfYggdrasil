@@ -176,7 +176,7 @@ public partial class @MovementActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""right"",
                     ""id"": ""e07ed8c7-8853-4571-8a06-f3c4c692907d"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

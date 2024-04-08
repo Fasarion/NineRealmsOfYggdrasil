@@ -20,8 +20,13 @@ public partial class UpgradeUISystem : SystemBase
     
     protected override void OnUpdate()
     {
-        var level = SystemAPI.GetSingleton<PlayerLevel>();
-        
+         bool playerLevelExists = SystemAPI.TryGetSingleton<PlayerLevel>(out PlayerLevel level);
+         if (!playerLevelExists)
+         {
+             // No player level found";
+             return;
+         }
+         
         int currentLevel = level.Value;
         
         SubscribeToManager();

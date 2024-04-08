@@ -7,7 +7,6 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-[DisableAutoCreation]
 public partial struct XPObjectSpawnSystem : ISystem
 {
     public void OnCreate(ref SystemState state)

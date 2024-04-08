@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -41,6 +42,7 @@ namespace Patrik
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
+        private WeaponType currentWeaponType => activeWeapon.WeaponType;
         
         // Attack Data
         private AttackType CurrentAttackType { get;  set; }
@@ -78,12 +80,17 @@ namespace Patrik
             isAttacking = false;
         }
 
+        public void PlayWeaponAudio()
+        {
+           // Debug.Log("swosh");
+        }
+
         /// <summary>
         /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
         /// at which point the attack occured.
         /// </summary>
         /// <returns></returns>
-        private AttackData GetActiveAttackData()
+        private AttackData GetActiveAttackData() 
         {
             var attackData = new AttackData
             {
@@ -204,18 +211,20 @@ namespace Patrik
 
         private void TryPerformAttack(AttackType type)
         {
-            //TODO: fix isAttacking parameter
-            // if (isAttacking) return;
+            if (isAttacking) return;
 
             isAttacking = true;
             CurrentAttackType = type;
             UpdateAnimatorAttackParameters();
+            
+            // TODO: hej alex lägg in coolt ljud här vet jag
+            
         }
 
         private void UpdateAnimatorAttackParameters()
         {
             playerAnimator.SetInteger(currentAttackParameterName, (int) CurrentAttackType);
-            playerAnimator.SetInteger(activeWeaponParameterName, (int) activeWeapon.WeaponType);
+            playerAnimator.SetInteger(activeWeaponParameterName, (int) currentWeaponType);
             
             playerAnimator.Play(attackAnimationName);
         }

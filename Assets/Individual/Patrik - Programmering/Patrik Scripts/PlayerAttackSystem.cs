@@ -57,6 +57,15 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
         }
         
+        private void UnsubscribeFromAttackEvents()
+        {
+            _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
+            _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
+            
+            _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
+            _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+        }
+        
         void OnActiveAttackStart(AttackData data)
         {
             EnableWeapon(data.WeaponType);
@@ -259,16 +268,7 @@ namespace Patrik
         {
             UnsubscribeFromAttackEvents();
         }
-
-        private void UnsubscribeFromAttackEvents()
-        {
-            _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
-            _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
-            
-            _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
-            _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
-        }
-
+        
         private void StartNormalAttack(AttackData data)
         {
         }

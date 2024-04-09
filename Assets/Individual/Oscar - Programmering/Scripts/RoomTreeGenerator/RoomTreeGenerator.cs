@@ -13,6 +13,7 @@ public class RoomTreeGenerator : MonoBehaviour
     
     private int currentLevelNumber;
     private Dictionary<int, List<GameObject>> levelNodeTree;
+    private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
 
     private Canvas canvas;
 
@@ -29,6 +30,7 @@ public class RoomTreeGenerator : MonoBehaviour
 
     public void GenerateRoomTree()
     {
+
         int yPos = -500;
         Random random = new Random(roomSeed);
 
@@ -36,6 +38,7 @@ public class RoomTreeGenerator : MonoBehaviour
         int combinedPreviousNodeCount = 0;
         for (int i = 0; i < numberOfLevels; i++)
         {
+            
 
             for (int j = 0; j < combinedPreviousNodeCount; j++)
             {
@@ -89,6 +92,29 @@ public class RoomTreeGenerator : MonoBehaviour
 
         }
     }
-    
-    
+
+    public void BuildRoomTree(RoomNode thisNode, Random randomizer)
+    {
+        var numberOfChildrenToGenerate = randomizer.Next(1, 4);
+        if (thisNode.nodeLevel < numberOfLevels)
+        {
+            for (int i = 0; i < numberOfChildrenToGenerate; i++)
+            {
+                RoomNode childNode = new RoomNode(thisNode, thisNode.nodeLevel + 1);
+                thisNode.childNodes.Add(childNode);
+                BuildRoomTree(childNode, randomizer);
+            }
+            
+            //roomNodesAtLevel.Add(thisNode.nodeLevel, );
+        }
+    }
+
+    public void GenerateTreeRecursively()
+    { 
+        List<RoomNode> rooms = new List<RoomNode>();
+
+        var roomNode = new RoomNode(null, 0);
+        Random random = new Random(roomSeed);
+        BuildRoomTree(roomNode, random);
+    }
 }

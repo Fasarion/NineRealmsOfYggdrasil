@@ -12,10 +12,7 @@ namespace Damage
     {
         protected override void OnUpdate()
         {
-            // Update Invincibility Timer
-            var deltaTime = SystemAPI.Time.DeltaTime;
-            foreach (var damageTaker in 
-                SystemAPI.Query<HasChangedHP>()
+            foreach (var damageTaker in SystemAPI.Query<HasChangedHP>()
                     .WithAll<PlayerTag>())
             {
                 if (damageTaker.Amount >= 0)

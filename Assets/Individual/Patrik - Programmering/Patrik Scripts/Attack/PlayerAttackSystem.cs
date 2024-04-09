@@ -302,7 +302,7 @@ namespace Patrik
         {
             if (!_weaponManager)
             {
-                Debug.LogWarning("No weapon manager found, cant read weapon inputs.");
+                // No weapon manager found, can't read weapon inputs.
                 return;
             }
             

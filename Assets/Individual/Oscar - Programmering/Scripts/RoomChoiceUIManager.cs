@@ -10,7 +10,7 @@ public class RoomChoiceUIManager : MonoBehaviour
     
     private static RoomChoiceUIManager _instance;
     
-    [SerializeField] private List<RoomSelectionUIBehaviour> roomSelects;
+    [SerializeField] private List<RoomChoiceUIBehaviour> roomSelects;
     //This is probably very ineffective, fix.
     [SerializeField] private List<RoomChoiceObject> roomChoiceObjects;
     private bool _isUIDisplayed;

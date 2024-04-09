@@ -6,13 +6,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class RoomSelectionUIBehaviour : MonoBehaviour
+public class RoomChoiceUIBehaviour : MonoBehaviour
 {
-
-    public RoomChoiceObject roomChoiceObject;
-
-    private Transform _transform;
-
     private RoomChoiceUIManager manager;
     
     [SerializeField] private Image roomImage;
@@ -26,7 +21,6 @@ public class RoomSelectionUIBehaviour : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        _transform = this.GetComponent<RectTransform>();
         manager = RoomChoiceUIManager.Instance;
     }
     

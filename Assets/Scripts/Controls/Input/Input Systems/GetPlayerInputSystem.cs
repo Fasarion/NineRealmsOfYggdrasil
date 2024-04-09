@@ -8,27 +8,32 @@ using UnityEngine.InputSystem;
 [UpdateInGroup(typeof(InitializationSystemGroup), OrderLast = true)]
 public partial class GetPlayerInputSystem : SystemBase
 {
-    private MovementActions playerMovementActions;
+    private InputActions playerInputActions;
     private Entity playerEntity;
     
     protected override void OnCreate()
     {
         RequireForUpdate<PlayerTag>();
-        playerMovementActions = new MovementActions();
+        playerInputActions = new InputActions();
     }
 
     protected override void OnStartRunning()
     {
-        playerMovementActions.Enable();
+        playerInputActions.Enable();
         
         // Attack
-        playerMovementActions.MovementMap.PlayerFire.performed += OnPlayerShoot;
-        playerMovementActions.MovementMap.PlayerSpecialAttack.performed += OnSpecialAttack;
-        playerMovementActions.MovementMap.PlayerUltimateAttack.performed += OnUltimateAttack;
+        playerInputActions.InputMap.PlayerNormalAttack.performed += OnNormalAttack;
+        playerInputActions.InputMap.PlayerSpecialAttack.performed += OnSpecialAttack;
+        playerInputActions.InputMap.PlayerUltimateAttack.performed += OnUltimateAttack;
+        
+        // Weapon switch
+        playerInputActions.WeaponMap.SwitchWeapon1.performed += OnWeapon1;
+        playerInputActions.WeaponMap.SwitchWeapon2.performed += OnWeapon2;
+        playerInputActions.WeaponMap.SwitchWeapon3.performed += OnWeapon3;
        
         
-        // General
-        playerMovementActions.MovementMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
+        // UI
+        playerInputActions.InputMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
         
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
@@ -38,24 +43,55 @@ public partial class GetPlayerInputSystem : SystemBase
 
     protected override void OnUpdate()
     {
-        var currentMovementActions = playerMovementActions.MovementMap.PlayerMovement.ReadValue<Vector2>();
+        var currentMovementActions = playerInputActions.InputMap.PlayerMovement.ReadValue<Vector2>();
         SystemAPI.SetSingleton(new PlayerMoveInput{Value = currentMovementActions});
+
+        var currentMousePos = playerInputActions.InputMap.MousePosition.ReadValue<Vector2>();
+        SystemAPI.SetSingleton(new MousePositionInput{Value = currentMousePos});
     }
 
     protected override void OnStopRunning()
     {
-        playerMovementActions.Disable();
+        playerInputActions.Disable();
         
-        playerMovementActions.MovementMap.PlayerFire.performed -= OnPlayerShoot;
-        playerMovementActions.MovementMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
-        playerMovementActions.MovementMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
+        playerInputActions.InputMap.PlayerNormalAttack.performed -= OnNormalAttack;
+        playerInputActions.InputMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
+        playerInputActions.InputMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
+        
+        // Weapon switch
+        playerInputActions.WeaponMap.SwitchWeapon1.performed -= OnWeapon1;
+        playerInputActions.WeaponMap.SwitchWeapon2.performed -= OnWeapon2;
+        playerInputActions.WeaponMap.SwitchWeapon3.performed -= OnWeapon3;
 
-        playerMovementActions.MovementMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
+        playerInputActions.InputMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
+    }
+    
+    private void OnWeapon1(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<WeaponOneInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+    
+    private void OnWeapon2(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<WeaponTwoInput>();
+        fireInput.ValueRW.KeyPressed = true; 
     }
 
-    
+    private void OnWeapon3(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
 
-    private void OnPlayerShoot(InputAction.CallbackContext obj)
+        var fireInput = SystemAPI.GetSingletonRW<WeaponThreeInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+
+
+    private void OnNormalAttack(InputAction.CallbackContext obj)
     {
         if (!SystemAPI.Exists(playerEntity)) return;
 

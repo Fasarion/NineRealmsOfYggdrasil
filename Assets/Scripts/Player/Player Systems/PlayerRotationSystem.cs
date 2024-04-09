@@ -66,12 +66,29 @@ namespace Player
         private float3 GetMousePosition()
         {
             // Use the Input system to get the mouse position in screen coordinates
-            Vector3 mousePosition = Input.mousePosition;
+           // Vector3 mousePosition = Input.mousePosition;
+            var hasMouseInput = SystemAPI.TryGetSingleton(out MousePositionInput mousePositionInput);
+            if (!hasMouseInput)
+            {
+                Debug.LogWarning("No mouse position found, wont rotate player.");
+                return float3.zero;
+            }
+            
+            
+            float2 mousePosition = mousePositionInput.Value;
 
-            if (!_camera) _camera = Camera.main;
-
-            // Convert the screen coordinates to world coordinates
-            Ray ray = _camera.ScreenPointToRay(mousePosition);
+            if (!_camera)
+            {
+                _camera = Camera.main;
+                if (!_camera)
+                {
+                    Debug.LogWarning("No camera found, wont rotate player.");
+                    return Vector3.zero;
+                }
+            }
+            
+            Vector3 mousePosVector3 = new Vector3(mousePosition.x, mousePosition.y, 0);
+            Ray ray = _camera.ScreenPointToRay(mousePosVector3);
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
                 return hit.point;

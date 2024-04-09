@@ -35,6 +35,14 @@ public partial struct ResetInputSystem : ISystem
         specialAttackInput.ValueRW.KeyPressed = false;
         var ultimateAttackInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
         ultimateAttackInput.ValueRW.KeyPressed = false;
+        
+        // Reset weapon input
+        var weapon1 = SystemAPI.GetSingletonRW<WeaponOneInput>();
+        weapon1.ValueRW.KeyPressed = false;
+        var weapon2 = SystemAPI.GetSingletonRW<WeaponTwoInput>();
+        weapon2.ValueRW.KeyPressed = false;
+        var weapon3 = SystemAPI.GetSingletonRW<WeaponThreeInput>();
+        weapon3.ValueRW.KeyPressed = false;
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

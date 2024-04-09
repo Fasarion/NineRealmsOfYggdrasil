@@ -23,16 +23,17 @@ namespace Patrik
         [Header("Weapon Slots")]
         [SerializeField] private Transform activeSlot;
         [SerializeField] private List<Transform> passiveSlots = new List<Transform>();
-
+        
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
         private WeaponType currentWeaponType => activeWeapon.WeaponType;
-        public int CurrentWeaponTypeInt => (int)currentWeaponType;
-        
+        int CurrentWeaponTypeInt => (int)currentWeaponType;
+        private Dictionary<WeaponBehaviour, Transform> weaponParents = new Dictionary<WeaponBehaviour, Transform>();
+
         // Attack Data
         private AttackType currentAttackType { get;  set; }
-        public int CurrentAttackTypeInt => (int)currentAttackType;
+        int CurrentAttackTypeInt => (int)currentAttackType;
         private bool isAttacking;
         
         // Animator parameters
@@ -46,9 +47,11 @@ namespace Patrik
         public UnityAction<AttackData> OnActiveAttackStart;
         public UnityAction<AttackData> OnActiveAttackStop;
         
-        // Events
         public UnityAction<AttackData> OnPassiveAttackStart;
         public UnityAction<AttackData> OnPassiveAttackStop;
+        
+        public UnityAction<WeaponType> OnWeaponActive;
+        public UnityAction<WeaponType> OnWeaponPassive;
 
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
@@ -113,17 +116,20 @@ namespace Patrik
 
         private void SetupWeapons()
         {
-            weapons = FindObjectsOfType<WeaponBehaviour>().ToList();
+            var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
+            weapons = new List<WeaponBehaviour>(foundWeapons);
 
             int passiveSlotCounter = 0;
             
-            foreach (var weapon in weapons)
+            foreach (var weapon in foundWeapons)
             {
+                SubscribeToPassiveEvents(weapon);
+                
                 // Handle active weapon
                 if (weapon.WeaponType == startWeaponType)
                 {
-                    activeWeapon = weapon;
-                    weapon.MakeActive(activeSlot, true);
+                    MakeWeaponActive(weapon);
+                    weapons[0] = activeWeapon;
                     continue;
                 }
                 
@@ -131,13 +137,30 @@ namespace Patrik
                 Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
                     ? passiveSlots[passiveSlotCounter]
                     : activeSlot;
-                weapon.MakeActive(passiveParent, false);
-                passiveSlotCounter++;
+                MakeWeaponPassive(weapon, passiveParent);
 
-                SubscribeToPassiveEvents(weapon);
+                weapons[passiveSlotCounter + 1] = weapon;
+                passiveSlotCounter++;
             }
         }
-
+        
+        private void MakeWeaponActive(WeaponBehaviour weapon)
+        {
+            activeWeapon = weapon;
+            weapon.MakeActive(activeSlot);
+            weaponParents[weapon] = activeSlot;
+            
+            OnWeaponActive?.Invoke(weapon.WeaponType);
+        }
+        
+        private void MakeWeaponPassive(WeaponBehaviour weapon, Transform passiveParent)
+        {
+            weapon.MakePassive(passiveParent);
+            weaponParents[weapon] = passiveParent;
+            
+            OnWeaponPassive?.Invoke(weapon.WeaponType);
+        }
+        
         private void SubscribeToPassiveEvents(WeaponBehaviour weapon)
         {
             weapon.OnPassiveAttackStart += StartPassiveAttack;
@@ -228,6 +251,29 @@ namespace Patrik
             if (!playerAnimator) return;
             
             playerAnimator.SetBool(movingParameterName, playerIsMoving);
+        }
+
+        public void SwitchWeapon(int weaponNumber)
+        {
+            if (weaponNumber > weapons.Count)
+            {
+                Debug.LogWarning($"Can't switch to weapon {weaponNumber} because there are only {weapons.Count} weapons.");
+                return;
+            }
+
+            int numberInList = weaponNumber - 1;
+            WeaponBehaviour newActiveWeapon = weapons[numberInList];
+            WeaponBehaviour oldActiveWeapon = activeWeapon;
+            if (newActiveWeapon == oldActiveWeapon)
+            {
+                return;
+            }
+
+            Transform newPassiveSlot = weaponParents[newActiveWeapon];
+
+            // switching passive from active
+            MakeWeaponPassive(oldActiveWeapon, newPassiveSlot);
+            MakeWeaponActive(newActiveWeapon);
         }
     }
 }

@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
   - component: {fileID: 4093539533502221201}
+  - component: {fileID: 8608429267351938146}
   m_Layer: 0
   m_Name: Lightning Projectile Patrik
   m_TagString: Untagged
@@ -419,5 +420,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistance: 0
-  maxDistance: 20
-  fov: 180
+  maxDistance: 10
+  fov: 135
+--- !u!114 &8608429267351938146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c745165577242df4896c6ba3358149f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

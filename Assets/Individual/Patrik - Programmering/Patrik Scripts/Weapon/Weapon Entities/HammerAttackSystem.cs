@@ -36,6 +36,9 @@ public partial struct HammerAttackSystem : ISystem
             // set new transform values and direction
             entityManager.SetComponentData(projectileEntity, entityTransform);
             entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(entityTransform.Forward())));
+
+            // set owner data
+            entityManager.SetComponentData(projectileEntity, new OwnerEntity{Value = entity});
         } 
         
         // remove DoNextFrame tag to avoid repeating system in the next frame

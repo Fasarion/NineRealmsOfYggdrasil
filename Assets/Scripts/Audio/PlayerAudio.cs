@@ -36,6 +36,12 @@ public class PlayerAudio : ScriptableObject
         xpIns.release();
         //value++;
     }
+
+    /*public void stepAudio()
+    {
+        RuntimeManager.PlayOneshot(footsteps);
+    }*/
+    
     /*   
        [Header("Movement/VO")] 
        public EventReference footsteps;

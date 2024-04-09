@@ -11,11 +11,22 @@ public class InputAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.None);
                 
+            // Move Inputs
             AddComponent<PlayerMoveInput>();
             
+            // Mouse Inputs
+            AddComponent<MousePositionInput>();
+
+            // Attack Inputs
             AddComponent<PlayerNormalAttackInput>();
             AddComponent<PlayerSpecialAttackInput>();
             AddComponent<PlayerUltimateAttackInput>();
+            
+            // Weapon Switch Input
+            AddComponent<WeaponOneInput>();
+            AddComponent<WeaponTwoInput>();
+            AddComponent<WeaponThreeInput>();
+
 
             AddComponent<UpgradeUIButtonPress>();
         }

@@ -20,7 +20,7 @@ public struct ResetHitBufferComponent : IComponentData
 {
 }
 
-public partial struct ResetHitBufferSystem : ISystem
+public partial struct ResetHitBufferEveryFourthFrameSystem : ISystem
 {
     private int lastHitBufferFrame;
     private int currentBufferFrame;

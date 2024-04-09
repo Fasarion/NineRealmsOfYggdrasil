@@ -7,11 +7,11 @@ using FMOD.Studio;
 public class MusicManager : MonoBehaviour
 {
     //
-    public StudioEventEmitter testMusik;
+    public StudioEventEmitter menuMusic;
     // Start is called before the first frame update
     void Start()
     {
-        testMusik.Play();
+        menuMusic.Play();
     }
 
     // Update is called once per frame
@@ -28,4 +28,7 @@ public class MusicManager : MonoBehaviour
     {
         emitter.SetParameter(parameter, value, false);
     }
+    
+    //TODO: Menu -> Battle musik event? separat script för caller av parametrar
+    //detta skript kan ha metoder np
 }

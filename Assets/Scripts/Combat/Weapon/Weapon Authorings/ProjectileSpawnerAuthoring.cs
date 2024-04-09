@@ -9,8 +9,9 @@ namespace Weapon
         [Tooltip("Prefab of the projectile that this weapon launches.")]
         [SerializeField] private GameObject projectilePrefab;
         
-        [Tooltip("Cooldown time between each shot coming from this weapon.")]
-        [SerializeField] private float coolDownTime;
+        // [Tooltip("Cooldown time between each shot coming from this weapon.")]
+        // [SerializeField] 
+        private float coolDownTime;
     
         class Baker : Baker<ProjectileSpawnerAuthoring>
         {

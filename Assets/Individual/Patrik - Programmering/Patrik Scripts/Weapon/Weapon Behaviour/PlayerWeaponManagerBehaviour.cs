@@ -49,6 +49,9 @@ namespace Patrik
         
         public UnityAction<AttackData> OnPassiveAttackStart;
         public UnityAction<AttackData> OnPassiveAttackStop;
+        
+        public UnityAction<WeaponType> OnWeaponActive;
+        public UnityAction<WeaponType> OnWeaponPassive;
 
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
@@ -146,12 +149,16 @@ namespace Patrik
             activeWeapon = weapon;
             weapon.MakeActive(activeSlot);
             weaponParents[weapon] = activeSlot;
+            
+            OnWeaponActive?.Invoke(weapon.WeaponType);
         }
         
         private void MakeWeaponPassive(WeaponBehaviour weapon, Transform passiveParent)
         {
             weapon.MakePassive(passiveParent);
             weaponParents[weapon] = passiveParent;
+            
+            OnWeaponPassive?.Invoke(weapon.WeaponType);
         }
         
         private void SubscribeToPassiveEvents(WeaponBehaviour weapon)

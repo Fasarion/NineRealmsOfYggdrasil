@@ -14,42 +14,39 @@ public partial struct FillEnergyOnHitSystem : ISystem
     
     public void OnUpdate(ref SystemState state)
     {
+        // Fill active energy bars
+
+
+        // Fill passive energy bars
         foreach (var (energyFill, energyBar, hitBuffer, weaponComponent) in 
-            SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, DynamicBuffer<HitBufferElement>, WeaponComponent>())
+            SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, DynamicBuffer<HitBufferElement>, WeaponComponent>()
+                .WithNone<ActiveWeapon>())
         {
-            // active weapon 
-            if (weaponComponent.InActiveState)
+            // exit out if energy bar is already fill
+            if (energyBar.ValueRO.CurrentEnergy >= energyBar.ValueRO.MaxEnergy)
             {
-                
+                  continue;  
             }
-            // passive weapon
-            else
+            
+            foreach (var hit in hitBuffer)
             {
-                // exit out if energy bar is already fill
+                if (hit.IsHandled) continue;
+
+                float newEnergy = energyBar.ValueRO.CurrentEnergy + energyFill.FillPerHit;
+                energyBar.ValueRW.CurrentEnergy = newEnergy;
+                
+              //  Debug.Log($"New energy: {energyBar.ValueRO.CurrentEnergy}");
+                
                 if (energyBar.ValueRO.CurrentEnergy >= energyBar.ValueRO.MaxEnergy)
                 {
-                      continue;  
-                }
-                
-                foreach (var hit in hitBuffer)
-                {
-                    if (hit.IsHandled) continue;
-
-                    float newEnergy = energyBar.ValueRO.CurrentEnergy + energyFill.FillPerHit;
-                    energyBar.ValueRW.CurrentEnergy = newEnergy;
-                    
-                  //  Debug.Log($"New energy: {energyBar.ValueRO.CurrentEnergy}");
-                    
-                    if (energyBar.ValueRO.CurrentEnergy >= energyBar.ValueRO.MaxEnergy)
-                    {
-                        // cap energy to max
-                        energyBar.ValueRW.CurrentEnergy = energyBar.ValueRO.MaxEnergy;
-                        break;
-                    }
+                    // cap energy to max
+                    energyBar.ValueRW.CurrentEnergy = energyBar.ValueRO.MaxEnergy;
+                    break;
                 }
             }
             
             
+            // Handle active bars
         }
     }
 }

@@ -1,3 +1,4 @@
+using Health;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -11,12 +12,16 @@ public class WeaponAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
             AddComponent(entity, new WeaponComponent());
+            
+            AddComponent(entity, new ActiveWeapon());
+            SetComponentEnabled<ActiveWeapon>(entity, false);
         } 
     }
 }
 
-public struct WeaponComponent : IEnableableComponent, IComponentData
+public struct WeaponComponent : IComponentData
 {
-    public bool InActiveState;
     public LocalTransform AttackPoint;
 }
+
+public struct ActiveWeapon : IComponentData, IEnableableComponent { }

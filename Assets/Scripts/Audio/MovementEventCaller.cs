@@ -7,7 +7,7 @@ using UnityEngine;
 public partial class MovementEventCaller : SystemBase
 {
     private AudioManager _audioManager;
-    private var isMoving;
+    private bool isMoving;
 
     protected override void OnUpdate()
     {

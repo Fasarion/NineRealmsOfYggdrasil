@@ -10,7 +10,7 @@ using Weapon;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 [UpdateBefore(typeof(TransformSystemGroup))]
-public partial struct HammerAttackSystem : ISystem
+public partial struct HammerPassiveAttackSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
     {

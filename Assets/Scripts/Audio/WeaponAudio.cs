@@ -10,14 +10,24 @@ public class WeaponAudio : ScriptableObject
 {
     private int value = 0;
     [Header("Weapons")] 
-    public EventReference weaponAudio;
+    public EventReference swordAudio;
 
-    public EventReference testRef;
-    public EventInstance WepInstance;
-    public EventReference testTwo;
+    public EventReference hammerAudio;
+    
+    public EventInstance SwordInstance;
+    public EventInstance HammerInstance;
 
     public void WeaponSwingAudio(int weapon, int attackType)
     {
+        switch (weapon)
+        {
+            case 0:
+            {
+                SwordInstance = RuntimeManager.CreateInstance(swordAudio);
+                SwordInstance.setParameterByName("AttackType", attackType);
+                break;
+            }
+        }
         /*WepInstance = RuntimeManager.CreateInstance(weaponAudio);
         //RuntimeManager.AttachInstanceToGameObject(gameObject);
         WepInstance.setParameterByName("WeaponType", weapon);

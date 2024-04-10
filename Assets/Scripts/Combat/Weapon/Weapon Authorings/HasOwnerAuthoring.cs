@@ -10,12 +10,12 @@ public class HasOwnerAuthoring : MonoBehaviour
         public override void Bake(HasOwnerAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new OwnerEntity());
+            AddComponent(entity, new OwnerWeapon());
         }
     }
 }
 
-public struct OwnerEntity : IComponentData
+public struct OwnerWeapon : IComponentData
 {
     public Entity Value;
 }

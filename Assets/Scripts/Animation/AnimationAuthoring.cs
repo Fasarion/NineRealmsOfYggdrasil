@@ -4,6 +4,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public class AnimationAuthoring : MonoBehaviour
 {
@@ -74,7 +75,11 @@ public partial struct HandleAnimationSystem : ISystem
         foreach (var (transform, animatorReference, animatorObject) in
             SystemAPI.Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab>())
         {
-            var animatorTransform = animatorReference.Animator.transform;
+            var animator = animatorReference.Animator;
+            if (!animator)
+                continue;
+            
+            var animatorTransform = animator.transform;
             
             if (animatorObject.FollowEntity)
             {

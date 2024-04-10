@@ -7,6 +7,8 @@ public class WeaponStatsConfigAuthoring : MonoBehaviour
 {
     [Header("Damage")]
     [SerializeField] private float baseDamage;
+
+    public float baseArea;
     
     class Baker : Baker<WeaponStatsConfigAuthoring>
     {
@@ -18,7 +20,7 @@ public class WeaponStatsConfigAuthoring : MonoBehaviour
             {
                 
                 baseDamage = authoring.baseDamage,
-                
+                baseArea = authoring.baseArea
                 
                 
                 

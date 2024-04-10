@@ -32,7 +32,7 @@ namespace Damage
                     var knockBackBufferElements = knockBackBufferLookup[hit.HitEntity];
 
                     var forceDirection = knockBackComponent.KnockAwayFromPlayer ?
-                        math.normalize(transform.Position - playerPos.Value).xz:
+                        math.normalize(transform.Position.xz - playerPos.Value.xz):
                         hit.Normal;
 
                     knockBackBufferElements.Add(new KnockBackBufferElement

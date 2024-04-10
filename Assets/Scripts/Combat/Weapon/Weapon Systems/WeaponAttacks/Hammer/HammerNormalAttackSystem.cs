@@ -40,7 +40,6 @@ public partial struct HammerNormalAttackSystem : ISystem
         if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Hammer))
             return;
 
-        Debug.Log("is running");
         attackCaller.ValueRW.shouldActiveAttack = false;
 
         //Play Audio
@@ -78,7 +77,7 @@ public partial struct HammerNormalAttackSystem : ISystem
                 {
 
                     var enemyPos = transformLookup[hit.Entity].Position;
-                    var colPos = hit.Position;// (pos + weapon.AttackPoint.Position) / 2;
+                    var colPos = hit.Position;
                     float2 directionToHit = math.normalizesafe((enemyPos.xz -  weapon.AttackPoint.Position.xz));
                     
                     //Maybe TODO: kolla om hit redan finns i buffer
@@ -93,8 +92,6 @@ public partial struct HammerNormalAttackSystem : ISystem
                     buffer.Add(element);
 
                 }
-
-               // weapon.ValueRW.TargetEntity = closestEntity;
             }
         }
     }

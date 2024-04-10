@@ -1084,7 +1084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f7890dfa43e487b9cecbcf12290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 1
 --- !u!114 &1048000326
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,8 +1754,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 50
-  knockAwayFromPlayer: 1
+  knockBackForce: 10
+  knockAwayFromPlayer: 0
 --- !u!114 &1745888673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2001,7 +2001,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f7890dfa43e487b9cecbcf12290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 2
 --- !u!114 &1745888679
 MonoBehaviour:
   m_ObjectHideFlags: 0

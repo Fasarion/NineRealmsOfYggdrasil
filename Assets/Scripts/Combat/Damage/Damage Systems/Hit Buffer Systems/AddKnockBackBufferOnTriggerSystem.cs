@@ -23,8 +23,8 @@ namespace Damage
             var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
             var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
             
-            foreach (var (transform, hitBuffer, knockBackComponent) 
-                in SystemAPI.Query<LocalTransform, DynamicBuffer<HitBufferElement>, KnockBackForce>())
+            foreach (var ( hitBuffer, knockBackComponent) 
+                in SystemAPI.Query<DynamicBuffer<HitBufferElement>, KnockBackForce>())
             {
                 foreach (var hit in hitBuffer)
                 {
@@ -32,9 +32,9 @@ namespace Damage
                     var knockBackBufferElements = knockBackBufferLookup[hit.HitEntity];
 
                     var forceDirection = knockBackComponent.KnockAwayFromPlayer ?
-                        math.normalize(transform.Position.xz - playerPos.Value.xz):
+                        math.normalize(hit.Position.xz - playerPos.Value.xz):
                         hit.Normal;
-
+                    
                     knockBackBufferElements.Add(new KnockBackBufferElement
                     {
                         KnockBackForce = forceDirection * knockBackComponent.Value

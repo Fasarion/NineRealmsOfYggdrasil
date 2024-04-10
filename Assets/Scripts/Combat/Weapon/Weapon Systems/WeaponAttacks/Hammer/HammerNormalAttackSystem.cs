@@ -59,6 +59,7 @@ public partial struct HammerNormalAttackSystem : ISystem
         
         var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
         var playerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(playerStatsEntity);
+        
         var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
         
         float totalArea = playerStatsComponent.baseArea + hammerStatsComponent.baseArea;
@@ -70,12 +71,10 @@ public partial struct HammerNormalAttackSystem : ISystem
             hits.Clear();
             
             
-            if (collisionWorld.OverlapSphere(weapon.AttackPoint.Position, totalArea, ref hits,
-                    _detectionFilter))
+            if (collisionWorld.OverlapSphere(weapon.AttackPoint.Position, totalArea, ref hits, _detectionFilter))
             {
                 foreach (var hit in hits)
                 {
-
                     var enemyPos = transformLookup[hit.Entity].Position;
                     var colPos = hit.Position;
                     float2 directionToHit = math.normalizesafe((enemyPos.xz -  weapon.AttackPoint.Position.xz));
@@ -90,7 +89,6 @@ public partial struct HammerNormalAttackSystem : ISystem
 
                     };
                     buffer.Add(element);
-
                 }
             }
         }

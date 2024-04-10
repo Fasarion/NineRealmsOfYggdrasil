@@ -17,6 +17,14 @@ public class EnergyBarAuthoring : MonoBehaviour
             {
                 MaxEnergy = authoring.energyToFill,
             });
+            
+            AddComponent(entity, new HasChangedEnergy());
+            SetComponentEnabled<HasChangedEnergy>(entity, false);
         }
     }
+}
+
+public struct HasChangedEnergy : IEnableableComponent, IComponentData
+{
+    public float Value;
 }

@@ -7,9 +7,9 @@ using UnityEngine;
 using UnityEngine.SocialPlatforms;
 using Weapon;
 
+
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 [UpdateBefore(typeof(TransformSystemGroup))]
-//[DisableAutoCreation]
 public partial struct HammerAttackSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
@@ -38,7 +38,15 @@ public partial struct HammerAttackSystem : ISystem
             entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(entityTransform.Forward())));
 
             // set owner data
-            entityManager.SetComponentData(projectileEntity, new OwnerEntity{Value = entity});
+            // TODO: remove?
+            entityManager.SetComponentData(projectileEntity, new OwnerWeapon{Value = entity});
+
+            // // Add projectile to projectile buffer
+            // if (entityManager.HasBuffer<ProjectileBufferElement>(entity))
+            // {
+            //     var projectileBuffer = entityManager.GetBuffer<ProjectileBufferElement>(entity);
+            //     projectileBuffer.Add(new ProjectileBufferElement {Projectile = projectileEntity});
+            // }
         } 
         
         // remove DoNextFrame tag to avoid repeating system in the next frame

@@ -12,11 +12,11 @@ namespace Patrik
     {
         private PlayerWeaponManagerBehaviour _weaponManager;
 
-        private bool hasSetUp;
+        private bool hasSetUpWeaponManager;
 
         protected override void OnUpdate()
         {
-            if (!hasSetUp)
+            if (!hasSetUpWeaponManager)
             {
                 if (_weaponManager == null)
                 {
@@ -30,10 +30,10 @@ namespace Patrik
 
                     DisableAllWeapons();
                     SubscribeToAttackEvents();
-                    hasSetUp = true;
+                    hasSetUpWeaponManager = true;
                 }
             }
-
+            
             HandleWeaponSwitch();
             HandleWeaponInput();
         }
@@ -138,6 +138,12 @@ namespace Patrik
         void OnActiveAttackStart(AttackData data)
         {
             EnableWeapon(data.WeaponType);
+            
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+            
+            weaponCaller.ValueRW.shouldActiveAttack = true;
+            weaponCaller.ValueRW.currentAttackType = data.AttackType;
+            weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
             
             switch (data.AttackType)
             {
@@ -268,6 +274,7 @@ namespace Patrik
             return default;
         }
 
+        //TODO: bryt ut detta till ett eget script imo
         private void StartPassiveHammerAttack(AttackData data)
         {
             Transform attackPoint = data.AttackPoint;

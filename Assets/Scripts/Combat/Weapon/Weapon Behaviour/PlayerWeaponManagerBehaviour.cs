@@ -36,6 +36,7 @@ namespace Patrik
         private AttackType currentAttackType { get;  set; }
         int CurrentAttackTypeInt => (int)currentAttackType;
         private bool isAttacking;
+        private bool isResettingAttackFlag;
         
         // Animator parameters
         private string attackAnimationName = "Attack";
@@ -256,12 +257,24 @@ namespace Patrik
                 return;
             }
             
-            if (isAttacking) return;
+            if (isAttacking)
+            {
+                if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
+                return;
+            }
 
             isAttacking = true;
             currentAttackType = type;
             UpdateAnimatorAttackParameters();
             playerAudio.PlayWeaponSwingAudio(CurrentWeaponTypeInt, CurrentAttackTypeInt);
+        }
+
+        private IEnumerator ResetAttackFlag(float time)
+        {
+            isResettingAttackFlag = true;
+            yield return new WaitForSeconds(time);
+            isAttacking = false;
+            isResettingAttackFlag = false;
         }
 
         private void UpdateAnimatorAttackParameters()

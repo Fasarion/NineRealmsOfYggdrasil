@@ -35,11 +35,12 @@ public partial struct FillEnergyOnHitSystem : ISystem
     private void HandleEnergyFill(ref SystemState state)
     {
         // direct hit
-     //   FillEnergyFromActiveHits(ref state);
+        FillEnergyFromActiveHits(ref state);
         FillEnergyFromPassiveHits(ref state);
         
         // projectile hits
         FillEnergyFromProjectiles(ref state);
+        // TODO: Active projectiles
     }
 
     private void FillEnergyFromActiveHits(ref SystemState state)
@@ -72,6 +73,14 @@ public partial struct FillEnergyOnHitSystem : ISystem
                 {
                     continue;
                 }
+
+                float newEnergy = barToFill.ValueRO.CurrentEnergy + energyToApply;
+                if (barToFill.ValueRO.IsFull)
+                {
+                    newEnergy = barToFill.ValueRO.MaxEnergy;
+                }
+
+                barToFill.ValueRW.CurrentEnergy = barToFill.ValueRO.CurrentEnergy + newEnergy;
             }
         }
     }
@@ -145,10 +154,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
             // energy has changed
             if (totalEnergyChange > 0)
             {
-                state.EntityManager.SetComponentEnabled<HasChangedEnergy>(ownerEntity, true);
-                float previousEnergyChange = state.EntityManager.GetComponentData<HasChangedEnergy>(ownerEntity).Value;
-                state.EntityManager.SetComponentData(ownerEntity,
-                    new HasChangedEnergy {Value = totalEnergyChange + previousEnergyChange});
+                OnEnergyChange(ref state, ref ownerEntity, totalEnergyChange);
             }
             else
             {
@@ -170,5 +176,13 @@ public partial struct FillEnergyOnHitSystem : ISystem
 
             state.EntityManager.SetComponentData(ownerEntity, newEnergyBar);
         }
+    }
+
+    private static void OnEnergyChange(ref SystemState state, ref Entity ownerEntity, float totalEnergyChange)
+    {
+        state.EntityManager.SetComponentEnabled<HasChangedEnergy>(ownerEntity, true);
+        float previousEnergyChange = state.EntityManager.GetComponentData<HasChangedEnergy>(ownerEntity).Value;
+        state.EntityManager.SetComponentData(ownerEntity,
+            new HasChangedEnergy {Value = totalEnergyChange + previousEnergyChange});
     }
 }

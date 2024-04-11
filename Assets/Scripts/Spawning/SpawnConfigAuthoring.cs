@@ -31,6 +31,8 @@ public class SpawnConfigAuthoring : MonoBehaviour
 
     [HideInInspector] public bool isInitialized;
 
+    public List<GameObject> enemies;
+
     public class NewSpawnConfigBaker : Baker<SpawnConfigAuthoring>
     {
         public override void Bake(SpawnConfigAuthoring authoring)
@@ -56,6 +58,15 @@ public class SpawnConfigAuthoring : MonoBehaviour
                     outerSpawningRadius = authoring.outerSpawningRadius,
                     isInitialized = authoring.isInitialized,
                 });
+
+            var buffer = AddBuffer<EnemyEntitys>(entity);
+        //    buffer.Add(new EnemyEntitys {Value = GetEntity(authoring.baseEnemyPrefab, TransformUsageFlags.Dynamic),});
+
+            foreach (var enemyPrefab in authoring.enemies)
+            {
+                buffer.Add(new EnemyEntitys {Value = GetEntity(enemyPrefab, TransformUsageFlags.Dynamic),});
+            }
+
         }
     }
 }
@@ -78,4 +89,9 @@ public struct SpawnConfig : IComponentData
     public float innerSpawningRadius;
     public float outerSpawningRadius;
     public bool isInitialized;
+}
+
+public struct EnemyEntitys : IBufferElementData
+{
+    public Entity Value;
 }

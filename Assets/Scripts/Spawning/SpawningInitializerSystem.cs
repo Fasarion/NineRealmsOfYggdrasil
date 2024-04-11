@@ -31,6 +31,13 @@ public partial class SpawningInitializerSystem : SystemBase
         if (_controller == null)
         {
             _controller = SpawningController.Instance;
+
+            if (_controller == null)
+            {
+                // No spawner exists
+                return;
+            }
+            
             _currentCheckpointIndex = _controller.startingCheckpointIndex;
             _checkpointTimerCutoffs = _controller.spawningCheckpointTimes.ToArray();
             config.ValueRW.timerTime = _checkpointTimerCutoffs[_currentCheckpointIndex];

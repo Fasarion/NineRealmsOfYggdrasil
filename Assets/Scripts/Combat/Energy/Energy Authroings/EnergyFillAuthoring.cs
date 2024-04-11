@@ -3,8 +3,11 @@ using UnityEngine;
 
 public class EnergyFillAuthoring : MonoBehaviour
 {
-    [Tooltip("How much energy that will fill after a hit.")]
-    [SerializeField] private float fillPerHit = 5;
+    [Tooltip("How much energy that will fill after a passive hit.")]
+    [SerializeField] private float passiveFillPerHit = 5;
+    
+    [Tooltip("How much energy that the passive weapons will fill from an active attack with this entity.")]
+    [SerializeField] private float activeFillPerHit = 5;
 
     class Baker : Baker<EnergyFillAuthoring>
     {
@@ -13,7 +16,8 @@ public class EnergyFillAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new EnergyFillComponent
             {
-                FillPerHit = authoring.fillPerHit
+                PassiveFillPerHit = authoring.passiveFillPerHit,
+                ActiveFillPerHit = authoring.activeFillPerHit
             });
         }
     }

@@ -368,32 +368,32 @@ namespace Patrik
         {
             Debug.Log("Ult attack pressed");
             
-            // passive weapons
-            foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            {
-                // // ignore passive weapons
-                // // TODO: Create IEnableable component "InActiveState" ?
-                // if (!weapon.InActiveState)
-                // {
-                //     continue;
-                // }
-
-                if (energyBar.CurrentEnergy >= energyBar.MaxEnergy)
-                {
-                    Debug.Log("Perform ult!");
-                }
-                else
-                {
-                    Debug.Log($"Only have {energyBar.CurrentEnergy} of {energyBar.MaxEnergy}");
-                }
-
-                return;
-            }
-            
-            // active weapons
-            foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            {
-            }
+            // // passive weapons
+            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
+            // {
+            //     // // ignore passive weapons
+            //     // // TODO: Create IEnableable component "InActiveState" ?
+            //     // if (!weapon.InActiveState)
+            //     // {
+            //     //     continue;
+            //     // }
+            //
+            //     if (energyBar.CurrentEnergy >= energyBar.MaxEnergy)
+            //     {
+            //         Debug.Log("Perform ult!");
+            //     }
+            //     else
+            //     {
+            //         Debug.Log($"Only have {energyBar.CurrentEnergy} of {energyBar.MaxEnergy}");
+            //     }
+            //
+            //     return;
+            // }
+            //
+            // // active weapons
+            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
+            // {
+            // }
         }
 
 

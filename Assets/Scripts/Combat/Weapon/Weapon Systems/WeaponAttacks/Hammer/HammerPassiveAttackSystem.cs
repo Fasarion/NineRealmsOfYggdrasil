@@ -38,15 +38,11 @@ public partial struct HammerPassiveAttackSystem : ISystem
             entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(entityTransform.Forward())));
 
             // set owner data
-            // TODO: remove?
-            entityManager.SetComponentData(projectileEntity, new OwnerWeapon{Value = entity});
-
-            // // Add projectile to projectile buffer
-            // if (entityManager.HasBuffer<ProjectileBufferElement>(entity))
-            // {
-            //     var projectileBuffer = entityManager.GetBuffer<ProjectileBufferElement>(entity);
-            //     projectileBuffer.Add(new ProjectileBufferElement {Projectile = projectileEntity});
-            // }
+            entityManager.SetComponentData(projectileEntity, new OwnerWeapon
+            {
+                Value = entity,
+                OwnerWasActive = false
+            });
         } 
         
         // remove DoNextFrame tag to avoid repeating system in the next frame

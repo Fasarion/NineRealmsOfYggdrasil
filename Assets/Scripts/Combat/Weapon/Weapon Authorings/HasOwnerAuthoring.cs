@@ -18,4 +18,5 @@ public class HasOwnerAuthoring : MonoBehaviour
 public struct OwnerWeapon : IComponentData
 {
     public Entity Value;
+    public bool OwnerWasActive;
 }

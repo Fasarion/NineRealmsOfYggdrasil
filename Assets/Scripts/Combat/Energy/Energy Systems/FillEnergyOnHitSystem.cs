@@ -19,45 +19,9 @@ public partial struct FillEnergyOnHitSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         ResetHasChangedEnergy(ref state);
-        
-        // TODO: Fill active energy bars
-
-        FillEnergyFromProjectiles(ref state);
-
-
-        // Fill passive energy bars - direct hit
-        foreach (var (energyFill, energyBar, hitBuffer, weaponComponent) in 
-            SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, DynamicBuffer<HitBufferElement>, WeaponComponent>()
-                .WithNone<ActiveWeapon>())
-        {
-            // exit out if energy bar is already fill
-            if (energyBar.ValueRO.CurrentEnergy >= energyBar.ValueRO.MaxEnergy)
-            {
-                  continue;  
-            }
-
-            foreach (var hit in hitBuffer)
-            {
-                if (hit.IsHandled) continue;
-
-                float newEnergy = energyBar.ValueRO.CurrentEnergy + energyFill.PassiveFillPerHit;
-                energyBar.ValueRW.CurrentEnergy = newEnergy;
-                
-              //  Debug.Log($"New energy: {energyBar.ValueRO.CurrentEnergy}");
-                
-                if (energyBar.ValueRO.CurrentEnergy >= energyBar.ValueRO.MaxEnergy)
-                {
-                    // cap energy to max
-                    energyBar.ValueRW.CurrentEnergy = energyBar.ValueRO.MaxEnergy;
-                    break;
-                }
-            }
-            
-            
-            // Handle active bars
-        }
+        HandleEnergyFill(ref state);
     }
-
+    
     private void ResetHasChangedEnergy(ref SystemState state)
     {
         // Reset Has Changed Energy
@@ -67,6 +31,82 @@ public partial struct FillEnergyOnHitSystem : ISystem
         }
     }
 
+
+    private void HandleEnergyFill(ref SystemState state)
+    {
+        // direct hit
+     //   FillEnergyFromActiveHits(ref state);
+        FillEnergyFromPassiveHits(ref state);
+        
+        // projectile hits
+        FillEnergyFromProjectiles(ref state);
+    }
+
+    private void FillEnergyFromActiveHits(ref SystemState state)
+    {
+        // go through all active weapons (should be 1 maximum)
+        foreach (var (energyFill, hitBuffer) in SystemAPI
+                .Query<EnergyFillComponent, DynamicBuffer<HitBufferElement>>()
+                .WithAll<WeaponComponent, ActiveWeapon>())
+        {
+            float energyToApply = 0; 
+
+            foreach (var hit in hitBuffer)
+            {
+                if (hit.IsHandled) continue;
+
+                energyToApply += energyFill.ActiveFillPerHit;
+            }
+            
+            // exit early if no energy to apply
+            if (energyToApply == 0)
+                continue;
+
+            // go through all passive weapons to fill their bars
+            foreach (var ( barToFill, weaponComponent) in SystemAPI
+                    .Query<RefRW<EnergyBarComponent>, WeaponComponent>()
+                    .WithNone<ActiveWeapon>())
+            {
+                // exit out if energy bar is already fill
+                if (barToFill.ValueRO.CurrentEnergy >= barToFill.ValueRO.MaxEnergy)
+                {
+                    continue;
+                }
+            }
+        }
+    }
+
+    private void FillEnergyFromPassiveHits(ref SystemState state)
+    {
+        // Fill passive energy bars - direct hit
+        foreach (var (energyFill, energyBar, hitBuffer, weaponComponent) in
+            SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, DynamicBuffer<HitBufferElement>, WeaponComponent>()
+                .WithNone<ActiveWeapon>())
+        {
+            // exit out if energy bar is already fill
+            if (energyBar.ValueRO.IsFull)
+            {
+                continue;
+            }
+
+            foreach (var hit in hitBuffer)
+            {
+                if (hit.IsHandled) continue;
+
+                float newEnergy = energyBar.ValueRO.CurrentEnergy + energyFill.PassiveFillPerHit;
+                energyBar.ValueRW.CurrentEnergy = newEnergy;
+
+                if (energyBar.ValueRO.IsFull)
+                {
+                    // cap energy to max
+                    energyBar.ValueRW.CurrentEnergy = energyBar.ValueRO.MaxEnergy;
+                    break;
+                }
+            }
+        }
+    }
+
+   
     private void FillEnergyFromProjectiles(ref SystemState state)
     {
         // Fill passive energy bar from projectiles
@@ -75,10 +115,8 @@ public partial struct FillEnergyOnHitSystem : ISystem
             SystemAPI.Query<OwnerWeapon, DynamicBuffer<HitBufferElement>>().WithAll<HasChangedHP>())
         {
             Entity ownerEntity = ownerWeapon.Value;
-
-            // Ignore projectiles from active weapons
             
-            bool ownerIsActive = state.EntityManager.IsComponentEnabled(ownerEntity, typeof(ActiveWeapon));
+            bool ownerIsActive = ownerWeapon.OwnerWasActive;
             if (ownerIsActive)
             {
                 continue;
@@ -88,7 +126,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
             EnergyBarComponent energyBar = state.EntityManager.GetComponentData<EnergyBarComponent>(ownerEntity);
 
             // exit early if the bar already has reached its max energy
-            if (energyBar.CurrentEnergy >= energyBar.MaxEnergy)
+            if (energyBar.IsFull)
             {
                 continue;
             }

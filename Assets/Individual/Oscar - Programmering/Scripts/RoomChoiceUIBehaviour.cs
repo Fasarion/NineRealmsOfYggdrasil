@@ -18,6 +18,10 @@ public class RoomChoiceUIBehaviour : MonoBehaviour
     private string roomDescription;
     private Sprite roomSprite;
     private SceneReference roomSceneReference;
+
+    [SerializeField] public RoomNode roomNode;
+    
+    
     // Start is called before the first frame update
     private void Awake()
     {

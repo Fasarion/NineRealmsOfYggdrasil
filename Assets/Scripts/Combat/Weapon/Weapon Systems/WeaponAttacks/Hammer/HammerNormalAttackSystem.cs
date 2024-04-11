@@ -46,7 +46,10 @@ public partial struct HammerNormalAttackSystem : ISystem
         var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
         var audioData = new AudioBufferData
         {
-            AudioEnumValue = 1
+            AudioData = new AudioData()
+            {
+                AudioEnumValue = 1
+            }
         };
         audioBuffer.Add(audioData);
 

@@ -28,4 +28,8 @@ public class AudioManager : MonoBehaviour
     {
         weaponAudio.SwordSwingAudio(gameObject, weapon, attackType);
     }*/
+    public void PlayAudioData(AudioData audioData)
+    {
+        //add some codes here
+    }
 }

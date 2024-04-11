@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using FMODUnity;
 using Unity.Entities;
 using UnityEngine;
 
@@ -17,7 +18,8 @@ public class AudioCallerAuthoring : MonoBehaviour
 
 public struct AudioBufferData : IBufferElementData
 {
-    public int AudioEnumValue;
+    public AudioData AudioData;
 }
+
 
 

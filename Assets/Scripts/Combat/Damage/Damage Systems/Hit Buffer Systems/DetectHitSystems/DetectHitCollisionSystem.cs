@@ -17,7 +17,6 @@ namespace Damage
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<SimulationSingleton>();
-            state.RequireForUpdate<HpTriggerConfig>();
         }
 
         [BurstCompile]

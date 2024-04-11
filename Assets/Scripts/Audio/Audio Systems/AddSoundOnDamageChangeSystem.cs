@@ -28,7 +28,8 @@ public partial struct AddSoundOnDamageChangeSystem : ISystem
         var soundCaller = SystemAPI.GetSingletonBuffer<AudioBufferData>();
         
         foreach (var audioDataComponent in 
-            SystemAPI.Query<PlaySoundOnHitComponent>().WithAll<HasChangedHP>())
+            SystemAPI.Query<PlaySoundOnHitComponent>()
+                .WithAll<HasChangedHP>())
         {
             soundCaller.Add(new AudioBufferData {AudioData = audioDataComponent.Value});
         }

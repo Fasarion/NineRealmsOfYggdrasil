@@ -288,7 +288,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4501469602246835904
 RectTransform:
   m_ObjectHideFlags: 0
@@ -318,10 +318,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5127538796324908209}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b0a29ca8e53fb4184d277ea9e2b5d0, type: 3}
+  m_Script: {fileID: 11500000, guid: 7694a386398f44e3af6487d3b9e5df5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomChoiceObject: {fileID: 11400000, guid: 5fc33115404bb1444b2d35e442ba376e, type: 2}
   roomImage: {fileID: 8805670877191633084}
   roomTitleText: {fileID: 4950178059812699760}
   roomDescriptionText: {fileID: 4763886136212124115}

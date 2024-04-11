@@ -359,7 +359,10 @@ namespace Patrik
             var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
             if (ultimateAttack.KeyPressed)
             {
-                HandleUltimateAttackInput();
+                _weaponManager.PerformUltimateAttack();
+
+                
+               // HandleUltimateAttackInput();
                 return;
             }
         }

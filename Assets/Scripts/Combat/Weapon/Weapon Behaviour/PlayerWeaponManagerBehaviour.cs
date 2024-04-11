@@ -219,7 +219,7 @@ namespace Patrik
         /// </summary>
         public void PerformUltimateAttack()
         {
-            //TODO: Implement ultimate attack
+            TryPerformAttack(AttackType.Ultimate);
         }
 
         private void TryPerformAttack(AttackType type)

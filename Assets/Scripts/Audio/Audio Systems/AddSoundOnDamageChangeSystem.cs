@@ -19,8 +19,6 @@ public partial struct AddSoundOnDamageChangeSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
     {
-        // will this work??
-        //state.RequireForUpdate<AudioBufferData>();
     }
     
     [BurstCompile]
@@ -31,7 +29,6 @@ public partial struct AddSoundOnDamageChangeSystem : ISystem
         foreach (var audioDataComponent in 
             SystemAPI.Query<PlaySoundOnHitComponent>().WithAll<HasChangedHP>())
         {
-            Debug.Log("Ow I was hit");
             soundCaller.Add(new AudioBufferData {AudioData = audioDataComponent.Value});
         }
     }

@@ -18,7 +18,9 @@ public partial class PlaySoundsSystem : SystemBase
             }
         }
 
-        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+        bool audioBufferExists = SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<AudioBufferData> audioBuffer);
+        if (!audioBufferExists)
+            return;
 
         foreach (var audioElement in audioBuffer)
         {

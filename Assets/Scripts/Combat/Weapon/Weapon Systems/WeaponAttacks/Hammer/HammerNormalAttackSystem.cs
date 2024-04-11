@@ -23,6 +23,7 @@ public partial struct HammerNormalAttackSystem : ISystem
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerComponent>();
+        state.RequireForUpdate<AudioBufferData>();
 
         state.RequireForUpdate<PhysicsWorldSingleton>();
         _detectionFilter = new CollisionFilter

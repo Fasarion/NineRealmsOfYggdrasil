@@ -19,6 +19,7 @@ public partial struct AddSoundOnDamageChangeSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<AudioBufferData>();
     }
     
     [BurstCompile]

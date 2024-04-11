@@ -36,10 +36,10 @@ public partial struct FillEnergyOnHitSystem : ISystem
     {
         // direct hit
         FillEnergyFromActiveHits(ref state);
-        FillEnergyFromPassiveHits(ref state);
+       // FillEnergyFromPassiveHits(ref state);
         
         // projectile hits
-        FillEnergyFromProjectiles(ref state);
+      //  FillEnergyFromProjectiles(ref state);
         // TODO: Active projectiles
     }
 
@@ -50,37 +50,40 @@ public partial struct FillEnergyOnHitSystem : ISystem
                 .Query<EnergyFillComponent, DynamicBuffer<HitBufferElement>>()
                 .WithAll<WeaponComponent, ActiveWeapon>())
         {
-            float energyToApply = 0; 
-
+            int hitCount = 0;
+            
             foreach (var hit in hitBuffer)
             {
                 if (hit.IsHandled) continue;
 
-                energyToApply += energyFill.ActiveFillPerHit;
+                hitCount++;
             }
             
-            // exit early if no energy to apply
-            if (energyToApply == 0)
+            // exit early if no hits
+            if (hitCount == 0)
                 continue;
+
+            float totalEnergyFill = hitCount * energyFill.ActiveFillPerHit;
 
             // go through all passive weapons to fill their bars
             foreach (var ( barToFill, weaponComponent) in SystemAPI
                     .Query<RefRW<EnergyBarComponent>, WeaponComponent>()
                     .WithNone<ActiveWeapon>())
             {
-                // exit out if energy bar is already fill
-                if (barToFill.ValueRO.CurrentEnergy >= barToFill.ValueRO.MaxEnergy)
+                // exit out if energy bar is already full
+                if (barToFill.ValueRO.IsFull)
                 {
                     continue;
                 }
 
-                float newEnergy = barToFill.ValueRO.CurrentEnergy + energyToApply;
-                if (barToFill.ValueRO.IsFull)
+                float newEnergy = barToFill.ValueRO.CurrentEnergy + totalEnergyFill;
+                if (newEnergy >= barToFill.ValueRO.MaxEnergy)
                 {
                     newEnergy = barToFill.ValueRO.MaxEnergy;
                 }
 
-                barToFill.ValueRW.CurrentEnergy = barToFill.ValueRO.CurrentEnergy + newEnergy;
+                barToFill.ValueRW.CurrentEnergy = newEnergy;
+                //OnEnergyChange(ref state);
             }
         }
     }
@@ -178,11 +181,11 @@ public partial struct FillEnergyOnHitSystem : ISystem
         }
     }
 
-    private static void OnEnergyChange(ref SystemState state, ref Entity ownerEntity, float totalEnergyChange)
+    private static void OnEnergyChange(ref SystemState state, ref Entity entity, float totalEnergyChange)
     {
-        state.EntityManager.SetComponentEnabled<HasChangedEnergy>(ownerEntity, true);
-        float previousEnergyChange = state.EntityManager.GetComponentData<HasChangedEnergy>(ownerEntity).Value;
-        state.EntityManager.SetComponentData(ownerEntity,
+        state.EntityManager.SetComponentEnabled<HasChangedEnergy>(entity, true);
+        float previousEnergyChange = state.EntityManager.GetComponentData<HasChangedEnergy>(entity).Value;
+        state.EntityManager.SetComponentData(entity,
             new HasChangedEnergy {Value = totalEnergyChange + previousEnergyChange});
     }
 }

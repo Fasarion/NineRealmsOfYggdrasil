@@ -9,6 +9,7 @@ public class RoomTreeGenerator : MonoBehaviour
     public int numberOfLevels;
     public List<RoomChoiceObject> possibleRoomChoiceObjects;
     public GameObject roomSelectionUIPrefab;
+    public GameObject connectionUIPrefab;
     public int roomSeed;
 
     private int currentLevelNumber;
@@ -46,8 +47,8 @@ public class RoomTreeGenerator : MonoBehaviour
         foreach (var pair in roomNodeGridMap)
         {
             var newUINode = Instantiate(roomSelectionUIPrefab, canvas.transform);
-            var UInodeRectTransform = newUINode.GetComponent<RectTransform>();
-            UInodeRectTransform.anchoredPosition = new Vector2(pair.Key.y , pair.Key.x )* 200;
+            var uiNodeRectTransform = newUINode.GetComponent<RectTransform>();
+            uiNodeRectTransform.anchoredPosition = new Vector2(pair.Key.y , pair.Key.x )* 200;
             var uiBehaviour = newUINode.GetComponent<RoomChoiceUIBehaviour>();
             var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
             uiBehaviour.UpdateRoomSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
@@ -55,7 +56,25 @@ public class RoomTreeGenerator : MonoBehaviour
             var parentNodes = pair.Value.parentNodes;
             for (int i = 0; i < parentNodes.Count; i++)
             {
-                Debug.DrawLine((Vector2)pair.Value.roomCoordinates, (Vector2)parentNodes[i].roomCoordinates, Color.green); ;
+                var correctedRoomCoordinates =
+                    new Vector2Int(pair.Value.roomCoordinates.y, pair.Value.roomCoordinates.x);
+                var correctedParentRoomCoordinates =    new Vector2Int(parentNodes[i].roomCoordinates.y, parentNodes[i].roomCoordinates.x);
+                var distanceVectorBetweenNodes = (correctedRoomCoordinates - correctedParentRoomCoordinates);
+
+                var connectionPosition = (Vector2)distanceVectorBetweenNodes / 2f;
+
+                var connectionAngle = -Vector3.SignedAngle((Vector2)distanceVectorBetweenNodes, Vector3.up, Vector3.forward);
+                //if(Mathf.Sign(distanceVectorBetweenNodes))
+                var connectionRotation = Quaternion.AngleAxis(connectionAngle, Vector3.forward); 
+                
+                var newConnection = Instantiate(connectionUIPrefab, canvas.transform);
+
+                var uiConnectionRectTransform = newConnection.GetComponent<RectTransform>();
+
+                uiConnectionRectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, distanceVectorBetweenNodes.y * 200);
+                uiConnectionRectTransform.anchoredPosition =
+                    (Vector2) (connectionPosition + correctedParentRoomCoordinates) * 200;
+                uiConnectionRectTransform.rotation = connectionRotation;
             }
             
         }

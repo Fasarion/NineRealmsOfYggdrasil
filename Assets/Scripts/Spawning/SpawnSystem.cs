@@ -1,3 +1,4 @@
+using System.Linq;
 using AI;
 using Player;
 using Unity.Burst;
@@ -31,14 +32,30 @@ public partial struct SpawnSystem : ISystem
     {
         var config = SystemAPI.GetSingletonRW<SpawnConfig>();
         RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
+        var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
 
 
         if (!config.ValueRO.isInitialized)
         {
-            _enemyProbabilities = new NativeArray<float>(2, Allocator.Persistent);
-            _enemyPrefabs = new NativeParallelHashMap<int, Entity>(2, Allocator.Persistent);
-            _enemyPrefabs.Add(0, config.ValueRO.baseEnemyPrefab);
-            _enemyPrefabs.Add(1, config.ValueRO.crazyBoiEnemyPrefab);
+            _enemyProbabilities = new NativeArray<float>(enemyPrefabsBuffer.Length, Allocator.Persistent);
+            _enemyPrefabs = new NativeParallelHashMap<int, Entity>(enemyPrefabsBuffer.Length, Allocator.Persistent);
+
+            for (int i = 0; i < enemyPrefabsBuffer.Length; i++)
+            {
+                _enemyProbabilities[i] = enemyPrefabsBuffer.ElementAt(i).SpawnPercentValue;
+                //enemyPrefabsBuffer.ElementAt(i).TypeValue = 
+            }
+            
+            foreach (var enemyPrefab in enemyPrefabsBuffer)
+            {
+                
+                
+                if (!_enemyPrefabs.ContainsKey((int)enemyPrefab.TypeValue))
+                {
+                    _enemyPrefabs.Add((int)enemyPrefab.TypeValue, enemyPrefab.PrefabValue);
+                }
+            }
+            
             config.ValueRW.isInitialized = true;
             _timerCutoffPoint = config.ValueRO.minTimerTime;
         }
@@ -48,7 +65,7 @@ public partial struct SpawnSystem : ISystem
         var currentTimerTime = config.ValueRO.currentTimerTime;
         if (currentTimerTime < _timerCutoffPoint) return;
 
-        var query = SystemAPI.QueryBuilder().WithAll<EnemyTag, LocalTransform>().Build();
+        var query = SystemAPI.QueryBuilder().WithAll<EnemyTypeComponent, LocalTransform>().Build();
         int currentEnemyCount = query.CalculateEntityCount();
         
         config.ValueRW.currentTimerTime = 0f;
@@ -122,9 +139,6 @@ public partial struct SpawnSystem : ISystem
     [BurstCompile]
     private void GenerateEnemyTypesArray(RefRW<RandomComponent> random, RefRW<SpawnConfig> config, int spawnCount, ref NativeArray<int> enemySpawnTypes)
     {
-        _enemyProbabilities[0] = config.ValueRO.baseEnemyPercentage;
-        _enemyProbabilities[1] = config.ValueRO.crazyBoiEnemyPercentage;
-
         for (int i = 0; i < spawnCount; i++)
         {
             float randomValue = random.ValueRW.random.NextFloat(0, 100) * 0.01f;
@@ -136,6 +150,7 @@ public partial struct SpawnSystem : ISystem
                 if (randomValue <= cumulativeProbability)
                 {
                     enemySpawnTypes[i] = j;
+                    break;
                 }
             }
         }

@@ -83,36 +83,22 @@ public partial class SpawningInitializerSystem : SystemBase
         var controlObject = _controller.checkpointData[_currentCheckpointIndex];
         config.ValueRW.targetEnemyCount = controlObject.targetEnemyCount;
         EnemyTypesInformation[] enemyInfo = controlObject.enemyTypesInformation.ToArray();
+        var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
         
-        //--ADD NEW ENEMIES HERE--
         //reset values
         float totalWeight = 0;
-        float baseEnemyWeight = 0;
-        float crazyBoiEnemyWeight = 0;
-        
-        config.ValueRW.baseEnemyPercentage = 0;
-        config.ValueRW.crazyBoiEnemyPercentage = 0;
 
-        for (int i = 0; i < enemyInfo.Length; i++)
+        var enemyWeights = new float[enemyPrefabsBuffer.Length];
+
+        foreach (var info in enemyInfo)
         {
-            EnemyType et = enemyInfo[i].enemyType;
-            
-            switch (et)
-            {
-                case EnemyType.BaseEnemy:
-                    baseEnemyWeight = enemyInfo[i].enemyWeight;
-                    break;
-                
-                case EnemyType.CrazyBoiEnemy:
-                    crazyBoiEnemyWeight = enemyInfo[i].enemyWeight;
-                    break;
-            }
+            enemyWeights[(int)info.enemyType] += info.enemyWeight;
+            totalWeight += info.enemyWeight;
         }
 
-        totalWeight += baseEnemyWeight;
-        totalWeight += crazyBoiEnemyWeight;
-
-        config.ValueRW.baseEnemyPercentage = baseEnemyWeight / totalWeight;
-        config.ValueRW.crazyBoiEnemyPercentage = crazyBoiEnemyWeight / totalWeight;
+        for (int i = 0; i < enemyPrefabsBuffer.Length; i++)
+        {
+            enemyPrefabsBuffer.ElementAt(i).SpawnPercentValue = enemyWeights[i] / totalWeight;
+        }
     }
 }

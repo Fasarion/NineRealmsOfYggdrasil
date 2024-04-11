@@ -43,7 +43,6 @@ public partial struct SpawnSystem : ISystem
             for (int i = 0; i < enemyPrefabsBuffer.Length; i++)
             {
                 _enemyProbabilities[i] = enemyPrefabsBuffer.ElementAt(i).SpawnPercentValue;
-                //enemyPrefabsBuffer.ElementAt(i).TypeValue = 
             }
             
             foreach (var enemyPrefab in enemyPrefabsBuffer)

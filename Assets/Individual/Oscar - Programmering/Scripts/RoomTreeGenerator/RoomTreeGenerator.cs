@@ -34,10 +34,32 @@ public class RoomTreeGenerator : MonoBehaviour
 
     public void Start()
     {
-        GenerateRoomGrid();
+        Random random = new Random(roomSeed);
+        GenerateRoomGrid(random);
         //GenerateRoomTree();
+        GenerateRoomUINodes(random);
     }
 
+
+    public void GenerateRoomUINodes(Random random)
+    {
+        foreach (var pair in roomNodeGridMap)
+        {
+            var newUINode = Instantiate(roomSelectionUIPrefab, canvas.transform);
+            var UInodeRectTransform = newUINode.GetComponent<RectTransform>();
+            UInodeRectTransform.anchoredPosition = new Vector2(pair.Key.y , pair.Key.x )* 200;
+            var uiBehaviour = newUINode.GetComponent<RoomChoiceUIBehaviour>();
+            var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
+            uiBehaviour.UpdateRoomSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
+
+            var parentNodes = pair.Value.parentNodes;
+            for (int i = 0; i < parentNodes.Count; i++)
+            {
+                Debug.DrawLine((Vector2)pair.Value.roomCoordinates, (Vector2)parentNodes[i].roomCoordinates, Color.green); ;
+            }
+            
+        }
+    }
     public void GenerateRoomTree()
     {
 
@@ -52,7 +74,8 @@ public class RoomTreeGenerator : MonoBehaviour
 
             for (int j = 0; j < combinedPreviousNodeCount; j++)
             {
-
+                //var newUINode = Instantiate(roomSelectionUIPrefab, canvas.transform);
+                //newUINode
             }
 
             int numberOfNodesForLevel;
@@ -107,9 +130,9 @@ public class RoomTreeGenerator : MonoBehaviour
     }
 
     //Generate a room grid with a particular chance of a room being generated.
-    public void GenerateRoomGrid()
+    public void GenerateRoomGrid(Random random)
     {
-        Random random = new Random(roomSeed);
+        
 
         for (int i = 0; i < gridHeight; i++)
         {
@@ -167,13 +190,13 @@ public class RoomTreeGenerator : MonoBehaviour
                     //If it does it means we are trying to cross two connections which is not valid.
                     if (childNeighbour != null)
                     {
-                        if (childNeighbour.parentNode == null)
+                        if (childNeighbour.parentNodes.Count == 0)
                         {
                             //Decide if there should be a connection between the two.
                             var makeConnection = random.Next(0, 3);
                             if (makeConnection < 2)
                             {
-                                childNode.parentNode = pair.Value;
+                                childNode.parentNodes.Add(pair.Value);
                                 pair.Value.childNodes.Add(childNode);
                                 childNodeAdded = true;
                             }
@@ -186,7 +209,7 @@ public class RoomTreeGenerator : MonoBehaviour
                         var makeConnection = random.Next(0, 3);
                         if (makeConnection < 2)
                         {
-                            childNode.parentNode = pair.Value;
+                            childNode.parentNodes.Add(pair.Value);
                             pair.Value.childNodes.Add(childNode);
                             childNodeAdded = true;
                         }
@@ -201,7 +224,7 @@ public class RoomTreeGenerator : MonoBehaviour
                 var guaranteedChildNodeIndex = random.Next(0, potentialChildNodes.Count);
                if (potentialChildNodes.Count > 0)
                {
-                   potentialChildNodes[guaranteedChildNodeIndex].parentNode = pair.Value;
+                   potentialChildNodes[guaranteedChildNodeIndex].parentNodes.Add(pair.Value); ;
                    pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
                    childNodeAdded = true;
                }
@@ -275,28 +298,28 @@ public class RoomTreeGenerator : MonoBehaviour
         if (currentNode.childNodes.Count == 0)
         {
             recursiveRoomNodesToRemove.Add(currentNode.roomCoordinates);
-        }
-        var nodeParent = currentNode.parentNode;
-        if (nodeParent != null)
-        {
-            
-           
-            //This means that the only node should be the node we recurse from.
-            if (nodeParent.childNodes.Count < 2)
-            {
-                //Remove yourself from the parent node's list of children.
-               
-            }
-            else
-            {
-                currentNode.parentNode.childNodes.Remove(currentNode);
-            }
-                      
-        }
-        else
-        {
 
+            for (int i = 0; i < currentNode.parentNodes.Count; i++)
+            {
+                var nodeParent = currentNode.parentNodes[i];
+            
+                if (nodeParent != null)
+                {
+              
+                    //Remove the current node from its parents child list. 
+                    //If the current node is the only node that the parent has in its child list, then the child node list of the parent will be 0
+                    //Therefore the parent node is also slated for removal. If not, the parent node has more children and then it is okay to stop here.
+                    nodeParent.childNodes.Remove(currentNode);
+                    if (nodeParent.childNodes.Count == 0)
+                    {
+                        TraverseRemovedNodesUpwards(nodeParent, recursiveRoomNodesToRemove);
+                    }
+                }
+            }
+           
+            
         }
+        
     }
     
 /*public void BuildRoomTree(RoomNode thisNode, Random randomizer)

@@ -17,7 +17,6 @@ namespace Player
     {
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<PlayerMovementConfig>();
             state.RequireForUpdate<PlayerTag>(); 
             state.RequireForUpdate<PlayerPositionSingleton>(); 
         }
@@ -34,13 +33,7 @@ namespace Player
                 var newPos = playerTransform.ValueRO.Position.xz +  moveInput.Value * speed * SystemAPI.Time.DeltaTime;
                 playerTransform.ValueRW.Position.xz = newPos;
                 playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
-
-                if (PlayerParentBehaviour.Instance != null)
-                {
-                    PlayerParentBehaviour.Instance.transform.position = playerTransform.ValueRO.Position; 
-                    PlayerParentBehaviour.Instance.transform.rotation = playerTransform.ValueRO.Rotation; 
-                }
-
+                
                 if (PlayerWeaponManagerBehaviour.Instance != null)
                 {
                     bool playerIsMoving = !moveInput.Value.Equals(float2.zero);

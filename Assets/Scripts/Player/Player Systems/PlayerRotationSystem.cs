@@ -12,16 +12,9 @@ namespace Player
         
         protected override void OnUpdate()
         {
-            // player aim config does not exist
-            if (!SystemAPI.TryGetSingleton(out PlayerRotationConfig _))
-            {
-                Debug.LogWarning("No player rotation config, player wont rotate correctly.");
-                return;
-            }
-            
-            AimSettingsData data = SystemAPI.GetSingleton<AimSettingsData>();
+            bool hasAimSettings = SystemAPI.TryGetSingleton(out AimSettingsData aimSettings);
 
-            if (data.autoAim)
+            if (hasAimSettings && aimSettings.autoAim)
             {
                 HandleAutoAim();
             }

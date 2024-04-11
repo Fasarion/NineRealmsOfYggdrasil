@@ -13,7 +13,7 @@ namespace Weapon
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<FireSettingsData>();
-            state.RequireForUpdate<PlayerWeaponConfig>();
+          //  state.RequireForUpdate<PlayerWeaponConfig>();
             state.RequireForUpdate<PlayerNormalAttackInput>();
         }
         

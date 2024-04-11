@@ -2,5 +2,6 @@
 
 public struct EnergyFillComponent : IComponentData
 {
-    public float FillPerHit;
+    public float PassiveFillPerHit;
+    public float ActiveFillPerHit;
 } 

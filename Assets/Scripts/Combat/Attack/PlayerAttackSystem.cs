@@ -145,6 +145,8 @@ namespace Patrik
             weaponCaller.ValueRW.currentAttackType = data.AttackType;
             weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
             
+            WriteOverAttackDataToActiveWeapon(data);
+
             switch (data.AttackType)
             {
                 case AttackType.Normal:
@@ -160,7 +162,31 @@ namespace Patrik
                     break;
             }
         }
-        
+
+        private void WriteOverAttackDataToActiveWeapon(AttackData data)
+        {
+            Transform attackPoint = data.AttackPoint;
+
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            // Sets up component for an attack next frame. The reason for waiting for the next frame is because the projectile
+            // must spawn before the Transform System group to avoid being spawned at (0,0,0) for one frame.
+            foreach (var (weapon, entity)
+                     in SystemAPI.Query<RefRW<WeaponComponent>>()
+                         .WithEntityAccess().WithAll<ActiveWeapon>())
+            {
+                LocalTransform transform = new LocalTransform
+                {
+                    Position = attackPoint.position,
+                    Rotation = attackPoint.rotation,
+                };
+
+                weapon.ValueRW.AttackPoint = transform;
+            }
+
+            ecb.Playback(EntityManager);
+        }
+
         private void OnActiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);

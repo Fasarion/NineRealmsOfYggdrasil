@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Transforms;
 using UnityEngine;
 using Random = System.Random;
 
@@ -245,10 +246,18 @@ public class RoomTreeGenerator : MonoBehaviour
                 var guaranteedChildNodeIndex = random.Next(0, potentialChildNodes.Count);
                 if (potentialChildNodes.Count > 0)
                 {
+                    var parentNodes = potentialChildNodes[guaranteedChildNodeIndex].parentNodes;
+                    //Get the neighbour to the left.
+                    var currentCoordinates = pair.Value.roomCoordinates;
+                    var childNeighbourCoordinates = new Vector2(currentCoordinates.x + 1, currentCoordinates.y + 1);
+                    
+                    
+                    
                     potentialChildNodes[guaranteedChildNodeIndex].parentNodes.Add(pair.Value); ;
                     pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
                     childNodeAdded = true;
                 }
+                //This didn't work in a satisfying manner.
                 /*for (int i = 0; i < potentialChildNodes.Count; i++)
                 {
                     if (potentialChildNodes.Count > 0)

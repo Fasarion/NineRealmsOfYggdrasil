@@ -49,7 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7824363987953266496, guid: 00a46bfd6213f1d438cbe2fe38f1fe45,
     type: 3}
-  coolDownTime: 0.1
 --- !u!114 &1338852917101821962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +128,7 @@ GameObject:
   - component: {fileID: 8439146205512849683}
   - component: {fileID: 4376167777974654248}
   - component: {fileID: -3072027634817329104}
+  - component: {fileID: 512962895979738051}
   m_Layer: 0
   m_Name: Player Entity Patrik
   m_TagString: Untagged
@@ -427,3 +427,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   invincibilityTime: 1
+--- !u!114 &512962895979738051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353328540331355661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c4ca67445317e1448d914915041e85f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData:
+    AudioEnumValue: 0
+    eventType: 0
+    environmentType: 0
+    enemyTyping: 0

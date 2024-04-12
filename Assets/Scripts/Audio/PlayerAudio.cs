@@ -20,6 +20,7 @@ public class PlayerAudio : ScriptableObject
 
     private EventInstance xpIns;
     
+    private int shepard = 0;
     
     public void movingAudio()
     {
@@ -28,12 +29,12 @@ public class PlayerAudio : ScriptableObject
 
     public void xpAudio()
     {
-        //if (value > 2) value = 0;
         xpIns = RuntimeManager.CreateInstance(xpGain);
-        //RuntimeManager.AttachInstanceToGameObject(test, gameObject.transform);
-        //test.setParameterByName("TestParam", value);
+        //start coroutine??
+        xpIns.setParameterByName("XPParam", shepard % 25);
         xpIns.start();
         xpIns.release();
+        shepard++;
         //value++;
     }
 

@@ -327,44 +327,35 @@ namespace Patrik
             var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
             if (ultimateAttack.KeyPressed)
             {
-                _weaponManager.PerformUltimateAttack();
-
-                
-               // HandleUltimateAttackInput();
+                HandleUltimateAttackInput();
                 return;
             }
         }
 
         private void HandleUltimateAttackInput()
         {
-            Debug.Log("Ult attack pressed");
+            foreach (var (weapon, energyBar, entity) in SystemAPI
+                .Query<WeaponComponent, RefRW<EnergyBarComponent>>()
+                .WithAll<ActiveWeapon>()
+                .WithNone<ResetEnergyTag>()
+                .WithEntityAccess())
+            {
+                if (energyBar.ValueRO.IsFull)
+                {
+                    EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
+                    _weaponManager.PerformUltimateAttack();
+                    
+                    Debug.Log("Perform Ult!");
+                }
+                else
+                {
+                    Debug.Log("Not enough energy");
+                }
             
-            // // passive weapons
-            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            // {
-            //     // // ignore passive weapons
-            //     // // TODO: Create IEnableable component "InActiveState" ?
-            //     // if (!weapon.InActiveState)
-            //     // {
-            //     //     continue;
-            //     // }
-            //
-            //     if (energyBar.CurrentEnergy >= energyBar.MaxEnergy)
-            //     {
-            //         Debug.Log("Perform ult!");
-            //     }
-            //     else
-            //     {
-            //         Debug.Log($"Only have {energyBar.CurrentEnergy} of {energyBar.MaxEnergy}");
-            //     }
-            //
-            //     return;
-            // }
-            //
-            // // active weapons
-            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            // {
-            // }
+                return;
+            }
+            
+
         }
 
 

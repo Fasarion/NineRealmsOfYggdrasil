@@ -1,5 +1,6 @@
 using Damage;
 using Health;
+using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         ResetHasChangedEnergy(ref state);
+        HandleEnergyReset(ref state);
         HandleEnergyFill(ref state);
     }
     
@@ -26,7 +28,22 @@ public partial struct FillEnergyOnHitSystem : ISystem
             state.EntityManager.SetComponentEnabled<HasChangedEnergy>(entity, false);
         }
     }
-
+    
+    private void HandleEnergyReset(ref SystemState state)
+    {
+        foreach (var ( bar, entity) in SystemAPI
+            .Query<RefRW<EnergyBarComponent>>()
+            .WithAll<ResetEnergyTag>()
+            .WithEntityAccess())
+        {
+            state.EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, false);
+            float energyLoss = -bar.ValueRO.MaxEnergy;
+            
+            Debug.Log($"Add {energyLoss} energy");
+            
+            FillEnergyBarWithRef(ref state, bar, energyLoss, entity);
+        }
+    }
 
     private void HandleEnergyFill(ref SystemState state)
     {

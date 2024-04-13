@@ -18,13 +18,12 @@ public partial struct FillEnergyOnHitSystem : ISystem
     
     public void OnUpdate(ref SystemState state)
     {
-      //  ResetHasChangedEnergy(ref state);
+        ResetHasChangedEnergy(ref state);
         HandleEnergyFill(ref state);
     }
     
     private void ResetHasChangedEnergy(ref SystemState state)
     {
-        // Reset Has Changed Energy
         foreach (var (_, entity) in SystemAPI.Query<HasChangedEnergy>().WithEntityAccess())
         {
             state.EntityManager.SetComponentEnabled<HasChangedEnergy>(entity, false);
@@ -164,8 +163,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
             newEnergy = maxEnergy;
         return newEnergy;
     }
-    
-    
+
     private static void UpdateHasChangedEnergy(ref SystemState state, Entity entity, float changeValue)
     {
         state.EntityManager.SetComponentEnabled<HasChangedEnergy>(entity, true);

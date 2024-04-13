@@ -45,7 +45,7 @@ namespace Patrik
 
         private string movingParameterName = "Moving";
         
-        // Events
+        // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
         public UnityAction<AttackData> OnActiveAttackStop;
         
@@ -144,7 +144,7 @@ namespace Patrik
         private void SetupWeapons()
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
-            weapons = new List<WeaponBehaviour>(foundWeapons);
+            weapons = new List<WeaponBehaviour>();
 
             int passiveSlotCounter = 0;
             
@@ -156,7 +156,10 @@ namespace Patrik
                 if (weapon.WeaponType == startWeaponType)
                 {
                     MakeWeaponActive(weapon);
-                    weapons[0] = activeWeapon;
+                    weapons.Add(activeWeapon);
+                    
+                    EventManager.OnSetupWeapon?.Invoke(weapon, true);
+                    
                     continue;
                 }
                 
@@ -166,8 +169,9 @@ namespace Patrik
                     : activeSlot;
                 MakeWeaponPassive(weapon, passiveParent);
 
-                weapons[passiveSlotCounter + 1] = weapon;
+                weapons.Add(weapon);
                 passiveSlotCounter++;
+                EventManager.OnSetupWeapon?.Invoke(weapon, false);
             }
         }
         
@@ -289,10 +293,6 @@ namespace Patrik
                 isAttacking = false;
                 Debug.Log($"No animation found for weapon attack pair {currentWeaponType}, {currentAttackType}");
             }
-            // playerAnimator.SetInteger(currentAttackParameterName, (int) currentAttackType);
-            // playerAnimator.SetInteger(activeWeaponParameterName, (int) currentWeaponType);
-            //
-            // playerAnimator.Play(attackAnimationName);
         }
 
         private bool GetActiveAttackAnimationName(out string animationName)
@@ -337,6 +337,7 @@ namespace Patrik
             // switching passive from active
             MakeWeaponPassive(oldActiveWeapon, newPassiveSlot);
             MakeWeaponActive(newActiveWeapon);
+            EventManager.OnWeaponSwitch?.Invoke(newActiveWeapon);
         }
     }
 }

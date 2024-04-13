@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.3882353}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -128,7 +128,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4912860643528122635
 RectTransform:
   m_ObjectHideFlags: 0
@@ -513,9 +513,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 398951183e49e1149bc9e25a3ca5d92a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  image: {fileID: 2345284697097857552}
   slider: {fileID: 6211973966439031458}
+  backgroundImage: {fileID: 2073812246860668240}
+  normalBackgroundColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+  fullEnergyBackgroundColor: {r: 1, g: 0.4945004, b: 0, a: 1}
   border: {fileID: 2015286004009063403}
+  weaponImage: {fileID: 2345284697097857552}
+  fullAnimationScaleFactor: 1.1
+  animationLoopTime: 0.5
 --- !u!1 &8808005076018845497
 GameObject:
   m_ObjectHideFlags: 0

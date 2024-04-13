@@ -39,7 +39,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         FillEnergyFromPassiveHits(ref state);
         
         // projectile hits
-        FillEnergyFromProjectiles(ref state);
+        FillEnergyFromPassiveProjectiles(ref state);
         // TODO: Active projectiles
     }
 
@@ -50,19 +50,9 @@ public partial struct FillEnergyOnHitSystem : ISystem
                 .Query<EnergyFillComponent, DynamicBuffer<HitBufferElement>>()
                 .WithAll<WeaponComponent, ActiveWeapon>())
         {
-            int hitCount = 0;
-            
-            foreach (var hit in hitBuffer)
-            {
-                if (hit.IsHandled) continue;
-
-                hitCount++;
-            }
-            
-            // exit early if no hits
-            if (hitCount == 0)
+            if (!HasHit(hitBuffer, out var hitCount))
                 continue;
-
+            
             float totalEnergyFill = hitCount * energyFill.ActiveFillPerHit;
 
             // go through all passive weapons to fill their bars
@@ -72,22 +62,9 @@ public partial struct FillEnergyOnHitSystem : ISystem
                     .WithEntityAccess())
             {
                 // exit out if energy bar is already full
-                if (barToFill.ValueRO.IsFull)
-                {
-                    continue;
-                }
+                if (barToFill.ValueRO.IsFull) continue;
 
-                float oldEnergy = barToFill.ValueRO.CurrentEnergy;
-
-                float newEnergy = oldEnergy + totalEnergyFill;
-                if (newEnergy >= barToFill.ValueRO.MaxEnergy)
-                {
-                    newEnergy = barToFill.ValueRO.MaxEnergy;
-                }
-
-                barToFill.ValueRW.CurrentEnergy = newEnergy;
-                float deltaEnergy = newEnergy - oldEnergy; 
-                OnEnergyChange(ref state, passiveEntity, deltaEnergy);
+                FillEnergyBarWithRef(ref state, barToFill, totalEnergyFill, passiveEntity);
             }
         }
     }
@@ -101,104 +78,95 @@ public partial struct FillEnergyOnHitSystem : ISystem
                 .WithEntityAccess())
         {
             // exit out if energy bar is already fill
-            if (energyBar.ValueRO.IsFull)
-            {
-                continue;
-            }
-            
-            int hitCount = 0;
-            
-            foreach (var hit in hitBuffer)
-            {
-                if (hit.IsHandled) continue;
+            if (energyBar.ValueRO.IsFull) continue;
 
-                hitCount++;
-            }
-            
-            // exit early if no hits
-            if (hitCount == 0)
-                continue;
+            // exit if hit buffer has not hit
+            if (!HasHit(hitBuffer, out int hitCount)) continue;
 
             float totalEnergyFill = hitCount * energyFill.ActiveFillPerHit;
-            
-            float oldEnergy = energyBar.ValueRO.CurrentEnergy;
-
-            float newEnergy = oldEnergy + totalEnergyFill;
-            if (newEnergy >= energyBar.ValueRO.MaxEnergy)
-            {
-                newEnergy = energyBar.ValueRO.MaxEnergy;
-            }
-
-            energyBar.ValueRW.CurrentEnergy = newEnergy;
-            float deltaEnergy = newEnergy - oldEnergy; 
-            OnEnergyChange(ref state, entity, deltaEnergy);
+            FillEnergyBarWithRef(ref state, energyBar, totalEnergyFill, entity);
         }
     }
-
-   
-    private void FillEnergyFromProjectiles(ref SystemState state)
+    
+    private void FillEnergyFromPassiveProjectiles(ref SystemState state)
     {
-        // Fill passive energy bar from projectiles
-        // TODO: make job
         foreach (var (ownerWeapon, projectileHitBuffer) in
             SystemAPI.Query<OwnerWeapon, DynamicBuffer<HitBufferElement>>().WithAll<HasChangedHP>())
         {
-            Entity ownerEntity = ownerWeapon.Value;
+            // only fill when owner is passive
+            if (ownerWeapon.OwnerWasActive) continue;
             
-            bool ownerIsActive = ownerWeapon.OwnerWasActive;
-            if (ownerIsActive)
-            {
-                continue;
-            }
-
-            EnergyFillComponent energyFill = state.EntityManager.GetComponentData<EnergyFillComponent>(ownerEntity);
+            Entity ownerEntity = ownerWeapon.Value;
             EnergyBarComponent energyBar = state.EntityManager.GetComponentData<EnergyBarComponent>(ownerEntity);
 
             // exit early if the bar already has reached its max energy
-            if (energyBar.IsFull)
-            {
-                continue;
-            }
+            if (energyBar.IsFull) continue;
 
-            float totalEnergyChange = 0;
-            foreach (var hit in projectileHitBuffer)
-            {
-                if (hit.IsHandled)
-                {
-                    continue;
-                }
+            if (!HasHit(projectileHitBuffer, out int hitCount)) continue;
 
-                totalEnergyChange += energyFill.PassiveFillPerHit;
-            }
-
-            // energy has changed
-            if (totalEnergyChange > 0)
-            {
-                OnEnergyChange(ref state, ownerEntity, totalEnergyChange);
-            }
-            else
-            {
-                continue;
-            }
-
-            float newEnergy = energyBar.CurrentEnergy + totalEnergyChange;
-            if (newEnergy >= energyBar.MaxEnergy)
-            {
-                newEnergy = energyBar.MaxEnergy;
-                // maybe todo: here we find where the energy reached max, inform UI
-            }
-
-            EnergyBarComponent newEnergyBar = new EnergyBarComponent
-            {
-                CurrentEnergy = newEnergy,
-                MaxEnergy = energyBar.MaxEnergy
-            };
-
-            state.EntityManager.SetComponentData(ownerEntity, newEnergyBar);
+            EnergyFillComponent energyFill = state.EntityManager.GetComponentData<EnergyFillComponent>(ownerEntity);
+            float totalEnergyChange = hitCount * energyFill.PassiveFillPerHit;
+            FillEnergyBarWithEM(ref state, energyBar, totalEnergyChange, ownerEntity);
         }
     }
 
-    private static void OnEnergyChange(ref SystemState state, Entity entity, float changeValue)
+    private bool HasHit(DynamicBuffer<HitBufferElement> hitBuffer, out int hitCount)
+    {
+        hitCount = GetHitCount(hitBuffer);
+        return hitCount > 0;
+    }
+
+    private int GetHitCount(DynamicBuffer<HitBufferElement> hitBuffer)
+    {
+        int hitCount = 0;
+
+        foreach (var hit in hitBuffer)
+        {
+            if (hit.IsHandled) continue;
+
+            hitCount++;
+        }
+
+        return hitCount;
+    }
+
+    private static void FillEnergyBarWithRef(ref SystemState state, RefRW<EnergyBarComponent> energyBar, float energyFill, Entity entity)
+    {
+        var oldEnergy = energyBar.ValueRO.CurrentEnergy;
+        var newEnergy = GetNewEnergy(energyFill, oldEnergy, energyBar.ValueRO.MaxEnergy);
+        float deltaEnergy = newEnergy - oldEnergy;
+
+        energyBar.ValueRW.CurrentEnergy = newEnergy;
+        
+        UpdateHasChangedEnergy(ref state, entity, deltaEnergy);
+    }
+    
+    private static void FillEnergyBarWithEM(ref SystemState state, EnergyBarComponent energyBar, float energyFill, Entity entity)
+    {
+        float oldEnergy = energyBar.CurrentEnergy;
+        float newEnergy = GetNewEnergy(energyFill, oldEnergy, energyBar.MaxEnergy);
+        float deltaEnergy = newEnergy - oldEnergy;
+
+        EnergyBarComponent newEnergyBar = new EnergyBarComponent
+        {
+            CurrentEnergy = newEnergy,
+            MaxEnergy = energyBar.MaxEnergy
+        };
+        state.EntityManager.SetComponentData(entity, newEnergyBar);
+        
+        UpdateHasChangedEnergy(ref state, entity, deltaEnergy);
+    }
+
+    private static float GetNewEnergy(float energyFill, float currentEnergy, float maxEnergy)
+    {
+        float newEnergy = currentEnergy + energyFill;
+        if (newEnergy >= maxEnergy)
+            newEnergy = maxEnergy;
+        return newEnergy;
+    }
+    
+    
+    private static void UpdateHasChangedEnergy(ref SystemState state, Entity entity, float changeValue)
     {
         state.EntityManager.SetComponentEnabled<HasChangedEnergy>(entity, true);
         state.EntityManager.SetComponentData(entity, new HasChangedEnergy {Value = changeValue});

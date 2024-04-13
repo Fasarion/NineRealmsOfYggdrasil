@@ -14,7 +14,7 @@ public class PlayerAudioBehaviour : MonoBehaviour
     {
         if (_audioManager == null)
         {
-            Debug.LogError("Missing Audio Manager, no sound will be played.");
+            Debug.LogWarning("Missing Audio Manager, no sound will be played.");
             return;
         }
         _audioManager.weaponAudio.WeaponSwingAudio(weapon, attackType);

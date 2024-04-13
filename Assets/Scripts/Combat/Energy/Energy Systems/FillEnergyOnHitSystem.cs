@@ -1,13 +1,10 @@
 using Damage;
 using Health;
-using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using UnityEngine;
 
 [UpdateBefore(typeof(HandleHitBufferSystem))]
 [UpdateInGroup(typeof(CombatSystemGroup))]
-//[UpdateAfter(typeof(DetectHitTriggerSystem))]
 public partial struct FillEnergyOnHitSystem : ISystem
 {
     public void OnCreate(ref SystemState state)
@@ -34,21 +31,22 @@ public partial struct FillEnergyOnHitSystem : ISystem
     private void HandleEnergyFill(ref SystemState state)
     {
         // direct hit
-        FillEnergyFromActiveHits(ref state);
-        FillEnergyFromPassiveHits(ref state);
+        FillEnergyFromDirectActiveHits(ref state);
+        FillEnergyFromDirectPassiveHits(ref state);
         
         // projectile hits
         FillEnergyFromPassiveProjectiles(ref state);
         // TODO: Active projectiles
     }
 
-    private void FillEnergyFromActiveHits(ref SystemState state)
+    private void FillEnergyFromDirectActiveHits(ref SystemState state)
     {
         // go through all active weapons (should be 1 maximum)
         foreach (var (energyFill, hitBuffer) in SystemAPI
                 .Query<EnergyFillComponent, DynamicBuffer<HitBufferElement>>()
                 .WithAll<WeaponComponent, ActiveWeapon>())
         {
+            
             if (!HasHit(hitBuffer, out var hitCount))
                 continue;
             
@@ -62,17 +60,17 @@ public partial struct FillEnergyOnHitSystem : ISystem
             {
                 // exit out if energy bar is already full
                 if (barToFill.ValueRO.IsFull) continue;
-
+                
                 FillEnergyBarWithRef(ref state, barToFill, totalEnergyFill, passiveEntity);
             }
         }
     }
 
-    private void FillEnergyFromPassiveHits(ref SystemState state)
+    private void FillEnergyFromDirectPassiveHits(ref SystemState state)
     {
         // Fill passive energy bars - direct hit
-        foreach (var (energyFill, energyBar, hitBuffer, weaponComponent, entity) in
-            SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, DynamicBuffer<HitBufferElement>, WeaponComponent>()
+        foreach (var (energyFill, energyBar, weapon, hitBuffer, entity) in
+            SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, WeaponComponent, DynamicBuffer<HitBufferElement>>()
                 .WithNone<ActiveWeapon>()
                 .WithEntityAccess())
         {
@@ -81,7 +79,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
 
             // exit if hit buffer has not hit
             if (!HasHit(hitBuffer, out int hitCount)) continue;
-
+            
             float totalEnergyFill = hitCount * energyFill.ActiveFillPerHit;
             FillEnergyBarWithRef(ref state, energyBar, totalEnergyFill, entity);
         }
@@ -121,9 +119,8 @@ public partial struct FillEnergyOnHitSystem : ISystem
 
         foreach (var hit in hitBuffer)
         {
-            if (hit.IsHandled) continue;
-
-            hitCount++;
+            if (!hit.IsHandled)
+                hitCount++;
         }
 
         return hitCount;

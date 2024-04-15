@@ -6,7 +6,7 @@ using Unity.Transforms;
 using Unity.VisualScripting;
 using UnityEngine;
 
-[UpdateAfter(typeof(PlayerAttackSystem))]
+[UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
 public partial struct UltimateAttackTargetingSystem : ISystem
 {
     [BurstCompile]
@@ -41,9 +41,6 @@ public partial struct UltimateAttackTargetingSystem : ISystem
         foreach (var (transform, target) in SystemAPI.Query<RefRW<LocalTransform>, PlayerTargetingComponent>())
         {
             transform.ValueRW.Position = mousePos.WorldPosition;
-            
-            // Debug.Log($"target pos: {transform.ValueRO.Position}");
-            // Debug.Log($"mouse pos: {mousePos.WorldPosition}");
         }
 
     }

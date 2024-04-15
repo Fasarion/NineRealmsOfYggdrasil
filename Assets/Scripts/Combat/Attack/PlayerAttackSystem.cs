@@ -317,7 +317,7 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyPressed)
+            if (specialAttack.KeyDown)
             {
                 _weaponManager.PerformSpecialAttack();
                 return;
@@ -335,27 +335,38 @@ namespace Patrik
         private void HandleUltimateAttackInput()
         {
             foreach (var (weapon, energyBar, entity) in SystemAPI
-                .Query<WeaponComponent, RefRW<EnergyBarComponent>>()
+                .Query<RefRW<WeaponComponent>, RefRW<EnergyBarComponent>>()
                 .WithAll<ActiveWeapon>()
                 .WithNone<ResetEnergyTag>()
                 .WithEntityAccess())
             {
-                if (energyBar.ValueRO.IsFull)
+                // exit if weapon doesn't have enough energy
+                if (!energyBar.ValueRO.IsFull) return;
+
+                // attack if ultimate doesn't use targeting
+                if (!weapon.ValueRO.UsesTargetingForUltimate)
                 {
-                    EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
-                    _weaponManager.PerformUltimateAttack();
-                    
-                    Debug.Log("Perform Ult!");
+                    StartUltimateAttack(entity);
                 }
-                else
+
+                // if it uses targeting, attack if target is selected
+                if (weapon.ValueRO.HasSelectedTarget)
                 {
-                    Debug.Log("Not enough energy");
+                    StartUltimateAttack(entity);
                 }
-            
+                
+                // else, start selecting target
+                weapon.ValueRW.ShouldSelectTarget = true;
                 return;
             }
             
 
+        }
+
+        private void StartUltimateAttack(Entity entity)
+        {
+            EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
+            _weaponManager.PerformUltimateAttack();
         }
 
 

@@ -1657,46 +1657,52 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: enemies.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemies.Array.data[0]
-      value: 
-      objectReference: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
-        type: 3}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
       propertyPath: enemyPrefabs.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[0].prefab
-      value: 
-      objectReference: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
-        type: 3}
     - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: enemyPrefabs.Array.data[1].prefab
       value: 
-      objectReference: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
+      objectReference: {fileID: 89125744733743645, guid: 2aca3fe8be642334c9dec21679d5d771,
         type: 3}
     - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: enemyPrefabs.Array.data[1].enemyType
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1655471783161011375, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+      propertyPath: enemyPrefabs.Array.data[2].prefab
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: ac08a3afbf1c0bf419fb86c0949c22cd,
         type: 3}
-      propertyPath: baseArea
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 1655471783161011375, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: baseDamage
-      value: 500
+      propertyPath: enemyPrefabs.Array.data[3].prefab
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: 1f7effe1d143b1049b6ebb1edc704469,
+        type: 3}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[4].prefab
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: 54fc350a511d92f4287617f7bd8ce9c3,
+        type: 3}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[2].enemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[3].enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[4].enemyType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3587502585957426159, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_Name
+      value: IceRingConfig
       objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -1753,6 +1759,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityPrefab
+      value: 
+      objectReference: {fileID: 5728772983705993238, guid: 8a747dec1117ff74f9ea89dce8bdfa6b,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -1,5 +1,6 @@
 using Unity.Entities;
 using Unity.Mathematics;
+using UnityEngine.Serialization;
 
 public struct PlayerMoveInput : IComponentData
 {
@@ -18,7 +19,9 @@ public struct PlayerNormalAttackInput : IComponentData
 
 public struct PlayerSpecialAttackInput : IComponentData
 {
-    public bool KeyPressed;
+    public bool KeyDown;
+    public bool KeyUp;
+    public bool IsHeld;
 }
 
 public struct PlayerUltimateAttackInput : IComponentData

@@ -317,7 +317,7 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyPressed)
+            if (specialAttack.KeyDown)
             {
                 _weaponManager.PerformSpecialAttack();
                 return;

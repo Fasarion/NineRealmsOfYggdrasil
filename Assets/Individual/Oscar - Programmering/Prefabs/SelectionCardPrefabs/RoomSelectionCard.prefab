@@ -38,7 +38,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 240, y: 120}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7142763592653417145
 CanvasRenderer:
@@ -168,8 +168,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 36.8}
-  m_SizeDelta: {x: 240, y: 120}
+  m_AnchoredPosition: {x: 0, y: 100}
+  m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2993725776055196493
 CanvasRenderer:
@@ -283,7 +283,7 @@ GameObject:
   - component: {fileID: 1909775615724223152}
   - component: {fileID: 8805670877191633084}
   m_Layer: 5
-  m_Name: RoomSelectionUI
+  m_Name: RoomSelectionCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -321,9 +321,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7694a386398f44e3af6487d3b9e5df5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomImage: {fileID: 8805670877191633084}
-  roomTitleText: {fileID: 4950178059812699760}
-  roomDescriptionText: {fileID: 4763886136212124115}
+  choiceItemTitleText: {fileID: 0}
+  choiceItemDescriptionText: {fileID: 0}
+  choiceItemImage: {fileID: 0}
+  roomNode:
+    childNodes: []
+    roomCoordinates: {x: 0, y: 0}
+    parentNodes: []
 --- !u!222 &1909775615724223152
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -394,10 +398,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 417374214087394671}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4383177069564822456
 CanvasRenderer:

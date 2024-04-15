@@ -30,6 +30,30 @@ public class AudioManager : MonoBehaviour
     }*/
     public void PlayAudioData(AudioData audioData)
     {
+        switch ((int)audioData.eventType)
+        {
+            case 0: //No category
+            {
+                Debug.Log("No Category Type Set");
+                break;
+            }
+            case 1: //PlayerCategory
+            {
+                //something player gets hit here
+                break;
+            }
+            case 2:  //EnemyCategory
+            {
+                enemyAudio.EnemyAudioCaller((int)audioData.enemyTyping);
+                break;
+            }
+
+            case 3: //EnvironmentCategory
+            {
+                //ENVIRONMENTAUDIO
+                break;
+            }
+        }
         //add some codes here
     }
 }

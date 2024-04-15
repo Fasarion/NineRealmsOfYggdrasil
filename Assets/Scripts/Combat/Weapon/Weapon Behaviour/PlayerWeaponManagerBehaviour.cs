@@ -7,6 +7,7 @@ using UnityEngine.Events;
 
 namespace Patrik
 {
+    // TODO: extract PlayerManager, PlayerWeaponBehaviour, PlayerAnimationBehaviour
     public class PlayerWeaponManagerBehaviour : MonoBehaviour
     {
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
@@ -22,19 +23,20 @@ namespace Patrik
 
         [Header("Weapon Slots")]
         [SerializeField] private Transform activeSlot;
-        [SerializeField] private List<Transform> passiveSlots = new List<Transform>();
+        [SerializeField] private List<Transform> passiveSlots = new ();
         
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
         private WeaponType currentWeaponType => activeWeapon.WeaponType;
         int CurrentWeaponTypeInt => (int)currentWeaponType;
-        private Dictionary<WeaponBehaviour, Transform> weaponParents = new Dictionary<WeaponBehaviour, Transform>();
+        private Dictionary<WeaponBehaviour, Transform> weaponParents = new ();
 
         // Attack Data
         private AttackType currentAttackType { get;  set; }
         int CurrentAttackTypeInt => (int)currentAttackType;
         private bool isAttacking;
+        private bool isResettingAttackFlag;
         
         // Animator parameters
         private string attackAnimationName = "Attack";
@@ -43,7 +45,7 @@ namespace Patrik
 
         private string movingParameterName = "Moving";
         
-        // Events
+        // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
         public UnityAction<AttackData> OnActiveAttackStop;
         
@@ -70,10 +72,35 @@ namespace Patrik
             isAttacking = false;
         }
 
-        public void PlayWeaponAudio()
+        struct WeaponAttackPair
         {
-           // Debug.Log("swosh");
+            public WeaponAttackPair(WeaponType weapon, AttackType attack)
+            {
+                Weapon = weapon;
+                Attack = attack;
+            }
+            
+            WeaponType Weapon;
+            AttackType Attack;
         }
+        
+        /// <summary>
+        /// Dictionary containing the names for the attack animations. Retrieved using weapon name and attack name.
+        /// </summary>
+        private static Dictionary<WeaponAttackPair, string> weaponAttackAnimationNames = new ()
+        {
+            // Sword Animations
+            { new WeaponAttackPair(WeaponType.Sword, AttackType.Normal), "SwordNormal" },
+            { new WeaponAttackPair(WeaponType.Sword, AttackType.Special), "SwordSpecial" },
+            { new WeaponAttackPair(WeaponType.Sword, AttackType.Ultimate), "SwordUltimate" },
+            
+            // Hammer Animations
+            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Normal), "HammerNormal" },
+            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Special), "HammerSpecial" },
+            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Ultimate), "HammerUltimate" },
+            
+            // TODO: Add animation names for other attacks
+        };
 
         /// <summary>
         /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
@@ -117,7 +144,7 @@ namespace Patrik
         private void SetupWeapons()
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
-            weapons = new List<WeaponBehaviour>(foundWeapons);
+            weapons = new List<WeaponBehaviour>();
 
             int passiveSlotCounter = 0;
             
@@ -129,7 +156,10 @@ namespace Patrik
                 if (weapon.WeaponType == startWeaponType)
                 {
                     MakeWeaponActive(weapon);
-                    weapons[0] = activeWeapon;
+                    weapons.Add(activeWeapon);
+                    
+                    EventManager.OnSetupWeapon?.Invoke(weapon, true);
+                    
                     continue;
                 }
                 
@@ -139,8 +169,9 @@ namespace Patrik
                     : activeSlot;
                 MakeWeaponPassive(weapon, passiveParent);
 
-                weapons[passiveSlotCounter + 1] = weapon;
+                weapons.Add(weapon);
                 passiveSlotCounter++;
+                EventManager.OnSetupWeapon?.Invoke(weapon, false);
             }
         }
         
@@ -219,7 +250,7 @@ namespace Patrik
         /// </summary>
         public void PerformUltimateAttack()
         {
-            //TODO: Implement ultimate attack
+            TryPerformAttack(AttackType.Ultimate);
         }
 
         private void TryPerformAttack(AttackType type)
@@ -230,7 +261,11 @@ namespace Patrik
                 return;
             }
             
-            if (isAttacking) return;
+            if (isAttacking)
+            {
+                if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
+                return;
+            }
 
             isAttacking = true;
             currentAttackType = type;
@@ -238,12 +273,40 @@ namespace Patrik
             playerAudio.PlayWeaponSwingAudio(CurrentWeaponTypeInt, CurrentAttackTypeInt);
         }
 
+        private IEnumerator ResetAttackFlag(float time)
+        {
+            isResettingAttackFlag = true;
+            yield return new WaitForSeconds(time);
+            isAttacking = false;
+            isResettingAttackFlag = false;
+        }
+
         private void UpdateAnimatorAttackParameters()
         {
-            playerAnimator.SetInteger(currentAttackParameterName, (int) currentAttackType);
-            playerAnimator.SetInteger(activeWeaponParameterName, (int) currentWeaponType);
+            bool animationNameExists = GetActiveAttackAnimationName(out string name);
+            if (animationNameExists)
+            {
+                playerAnimator.Play(name);
+            }
+            else
+            {
+                isAttacking = false;
+                Debug.Log($"No animation found for weapon attack pair {currentWeaponType}, {currentAttackType}");
+            }
+        }
+
+        private bool GetActiveAttackAnimationName(out string animationName)
+        {
+            animationName = "";
             
-            playerAnimator.Play(attackAnimationName);
+            WeaponAttackPair pair = new WeaponAttackPair(currentWeaponType, currentAttackType);
+            if (weaponAttackAnimationNames.ContainsKey(pair))
+            {
+                animationName = weaponAttackAnimationNames[pair];
+                return true;
+            }
+
+            return false;
         }
 
         public void UpdateMovementParameter(bool playerIsMoving)
@@ -274,6 +337,7 @@ namespace Patrik
             // switching passive from active
             MakeWeaponPassive(oldActiveWeapon, newPassiveSlot);
             MakeWeaponActive(newActiveWeapon);
+            EventManager.OnWeaponSwitch?.Invoke(newActiveWeapon);
         }
     }
 }

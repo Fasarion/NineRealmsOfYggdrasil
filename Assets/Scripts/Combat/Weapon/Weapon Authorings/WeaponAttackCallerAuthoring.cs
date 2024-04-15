@@ -32,10 +32,17 @@ public struct WeaponAttackCaller : IComponentData
     public AttackType currentAttackType;
     public WeaponType currentWeaponType;
 
-    public bool ShouldActiveAttackWithType(WeaponType type)
+    // public bool ShouldActiveAttackWithType(WeaponType type)
+    // {
+    //     if (!shouldActiveAttack) return false;
+    //
+    //     return type == currentWeaponType;
+    // }
+
+    public bool ShouldAttackWithType(WeaponType type, AttackType attackType)
     {
         if (!shouldActiveAttack) return false;
 
-        return type == currentWeaponType;
+        return type == currentWeaponType && attackType == currentAttackType;
     }
 }

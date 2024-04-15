@@ -764,6 +764,7 @@ GameObject:
   - component: {fileID: 1048000325}
   - component: {fileID: 1048000326}
   - component: {fileID: 1048000327}
+  - component: {fileID: 1048000328}
   m_Layer: 0
   m_Name: Sword Entity
   m_TagString: Untagged
@@ -1112,6 +1113,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveFillPerHit: 5
   activeFillPerHit: 5
+--- !u!114 &1048000328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1048000312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef0078a01094115add37040593be669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData:
+    AudioEnumValue: 0
+    eventType: 0
+    environmentType: 0
+    enemyTyping: 0
 --- !u!1001 &1108011578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1393,6 +1411,39 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemies.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
+        type: 3}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[0].prefab
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
+        type: 3}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
+        type: 3}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[1].enemyType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1655471783161011375, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: baseArea
@@ -1682,6 +1733,7 @@ GameObject:
   - component: {fileID: 1745888682}
   - component: {fileID: 1745888680}
   - component: {fileID: 1745888681}
+  - component: {fileID: 1745888683}
   m_Layer: 0
   m_Name: Hammer Entity
   m_TagString: Untagged
@@ -2056,6 +2108,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c6161483e904f2789537c530db8efd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1745888683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1745888667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ef0078a01094115add37040593be669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData:
+    AudioEnumValue: 0
+    eventType: 0
+    environmentType: 0
+    enemyTyping: 0
 --- !u!1001 &1881886483
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -5,6 +5,15 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Serialization;
 
+public enum EnemyType
+{
+    BaseEnemy,
+    CrazyBoiEnemy,
+    Grunt1,
+    Grunt2,
+    Grunt3,
+}
+
 public class SpawnConfigAuthoring : MonoBehaviour
 {
     [HideInInspector] public float timerTime;
@@ -18,18 +27,14 @@ public class SpawnConfigAuthoring : MonoBehaviour
     [HideInInspector] public float minEnemySpawnPercent;
     [HideInInspector] public float maxEnemySpawnPercent;
 
-    public GameObject baseEnemyPrefab;
-    public GameObject crazyBoiEnemyPrefab;
-
-    [HideInInspector] public float baseEnemyPercentage;
-    [HideInInspector] public float crazyBoiEnemyPercentage;
-
     [HideInInspector] public float innerSpawningRadius;
     [HideInInspector] public float outerSpawningRadius;
 
     [HideInInspector] public int currentActiveCheckpoint;
 
     [HideInInspector] public bool isInitialized;
+
+    public List<EnemyPrefabData> enemyPrefabs;
 
     public class NewSpawnConfigBaker : Baker<SpawnConfigAuthoring>
     {
@@ -47,20 +52,27 @@ public class SpawnConfigAuthoring : MonoBehaviour
                     targetEnemyCount = authoring.targetEnemyCount,
                     minEnemySpawnPercent = authoring.minEnemySpawnPercent,
                     maxEnemySpawnPercent = authoring.maxEnemySpawnPercent,
-                    baseEnemyPrefab = GetEntity(authoring.baseEnemyPrefab, TransformUsageFlags.Dynamic),
-                    crazyBoiEnemyPrefab = GetEntity(authoring.crazyBoiEnemyPrefab, TransformUsageFlags.Dynamic),
-                    baseEnemyPercentage = authoring.baseEnemyPercentage,
-                    crazyBoiEnemyPercentage = authoring.crazyBoiEnemyPercentage,
                     currentTimerTime = authoring.currentTimerTime,
                     innerSpawningRadius = authoring.innerSpawningRadius,
                     outerSpawningRadius = authoring.outerSpawningRadius,
                     isInitialized = authoring.isInitialized,
                 });
+
+            var buffer = AddBuffer<EnemyEntityPrefabElement>(entity);
+            
+            foreach (var enemyPrefab in authoring.enemyPrefabs)
+            {
+                buffer.Add(new EnemyEntityPrefabElement
+                {
+                   PrefabValue = GetEntity(enemyPrefab.prefab, TransformUsageFlags.Dynamic), 
+                   TypeValue = enemyPrefab.enemyType
+                });
+            }
         }
     }
 }
 
-public struct SpawnConfig : IComponentData
+public struct SpawnConfig : IComponentData 
 {
     public float timerTime;
     public bool shouldSpawn;
@@ -70,12 +82,22 @@ public struct SpawnConfig : IComponentData
     public int targetEnemyCount;
     public float minEnemySpawnPercent;
     public float maxEnemySpawnPercent;
-    public Entity baseEnemyPrefab;
-    public Entity crazyBoiEnemyPrefab;
-    public float baseEnemyPercentage;
-    public float crazyBoiEnemyPercentage;
     public float currentTimerTime;
     public float innerSpawningRadius;
     public float outerSpawningRadius;
     public bool isInitialized;
+}
+
+public struct EnemyEntityPrefabElement : IBufferElementData
+{
+    public Entity PrefabValue;
+    public EnemyType TypeValue;
+    public float SpawnPercentValue;
+}
+
+[System.Serializable]
+public struct EnemyPrefabData 
+{ 
+    public GameObject prefab;
+   public EnemyType enemyType;
 }

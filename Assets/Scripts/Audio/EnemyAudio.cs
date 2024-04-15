@@ -10,6 +10,8 @@ public class EnemyAudio : ScriptableObject
     [Header("BaseEnemy")]
     public EventReference grunts;
     private EventInstance gruntsIns;
+    public EventReference gruntHit;
+    private EventInstance gruntHitIns;
     //public EventReference gruntAttack;
     public EventReference ranger;
     //public EventReference rangerAttack;
@@ -19,6 +21,22 @@ public class EnemyAudio : ScriptableObject
     private int gruntAmount;
     private int rangerAmount;
 
+    public void EnemyAudioCaller(int enemyType)
+    {
+        //enemytyp, vapentyp?
+        switch (enemyType)
+        {
+            case 0:
+            {
+                break;
+            }
+            case 1:
+            {
+                gruntOnHit();
+                break;
+            }
+        }
+    }
     public void gruntSound(int nbrGrunts)
     {
         gruntsIns = RuntimeManager.CreateInstance(grunts);
@@ -33,6 +51,12 @@ public class EnemyAudio : ScriptableObject
         gruntsIns = RuntimeManager.CreateInstance(grunts);
         gruntsIns.setParameterByName("idk", 2);
         
+    }
+
+    public void gruntOnHit()
+    {
+        RuntimeManager.PlayOneShot(gruntHit);
+        Debug.Log("Du kom hit");
     }
 
 }

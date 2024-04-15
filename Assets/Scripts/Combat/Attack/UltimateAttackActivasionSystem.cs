@@ -22,6 +22,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<PrimaryButtonInput>();
         state.RequireForUpdate<PerformUltimateAttack>();
+        state.RequireForUpdate<GameManagerSingleton>();
     }
 
     [BurstCompile]
@@ -78,7 +79,6 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             }
 
             hasPreparedUltimate = false;
-
             return;
         }
         

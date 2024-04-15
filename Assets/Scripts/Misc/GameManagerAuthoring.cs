@@ -12,7 +12,8 @@ public class GameManagerAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.None);
             AddComponent(entity, new GameManagerSingleton
             {
-                CanAttack = true
+                GameState = GameState.Combat,
+                CombatState = CombatState.Normal
             });
         }
     }
@@ -20,5 +21,19 @@ public class GameManagerAuthoring : MonoBehaviour
 
 public partial struct GameManagerSingleton : IComponentData
 {
-    public bool CanAttack;
+    public GameState GameState;
+    public CombatState CombatState;
+}
+
+public enum GameState
+{
+    None,
+    Combat,
+}
+
+public enum CombatState
+{
+    None,
+    Normal,
+    ActivatingUltimate
 }

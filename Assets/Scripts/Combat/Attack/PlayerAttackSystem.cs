@@ -306,10 +306,17 @@ namespace Patrik
                 // No weapon manager found, can't read weapon inputs.
                 return;
             }
+
+            if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
+                return;
+
+            bool inCombat = gameManager.GameState == GameState.Combat;
+            if (!inCombat)
+                return;
             
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed)
+            if (normalAttackInput.KeyPressed && inCombat)
             {
                 _weaponManager.PerformNormalAttack();
                 return;
@@ -317,7 +324,7 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown)
+            if (specialAttack.KeyDown && inCombat)
             {
                 _weaponManager.PerformSpecialAttack();
                 return;

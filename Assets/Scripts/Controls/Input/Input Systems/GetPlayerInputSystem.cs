@@ -131,7 +131,7 @@ public partial class GetPlayerInputSystem : SystemBase
     {
         if (!SystemAPI.Exists(playerEntity)) return;
         
-        var uiButtonInput = SystemAPI.GetSingletonRW<UpgradeUIButtonPress>();
+        var uiButtonInput = SystemAPI.GetSingletonRW<PrimaryButtonInput>();
         uiButtonInput.ValueRW.isPressed = true;
     }
 }

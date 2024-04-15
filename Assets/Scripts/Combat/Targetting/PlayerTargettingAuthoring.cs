@@ -1,19 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Entities;
+﻿using Unity.Entities;
 using UnityEngine;
 
 public class PlayerTargettingAuthoring : MonoBehaviour
 {
     class Baker : Baker<PlayerTargettingAuthoring>
     {
-        public override void Bake(PlayerTargettingAuthoring authoring)
+        public override void Bake(PlayerTargettingAuthoring spawnerAuthoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
-            AddComponent(entity, new PlayerTargetingComponent());
+            AddComponent(entity, new PlayerTargettingComponent());
         }
     }
 }
 
-public struct PlayerTargetingComponent:IComponentData{}
+public partial struct PlayerTargettingComponent : IComponentData{}

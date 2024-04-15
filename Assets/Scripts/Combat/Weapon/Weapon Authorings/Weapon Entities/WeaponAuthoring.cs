@@ -38,8 +38,6 @@ public struct WeaponComponent : IComponentData
     public WeaponType WeaponType;
     
     public bool UsesTargetingForUltimate;
-    public bool ShouldSelectTarget;
-    public bool HasSelectedTarget;
 }
 
 public struct ActiveWeapon : IComponentData, IEnableableComponent { }

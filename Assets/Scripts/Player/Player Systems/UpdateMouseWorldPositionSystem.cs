@@ -2,7 +2,6 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-[UpdateInGroup(typeof(PresentationSystemGroup))]
 public partial class UpdateMouseWorldPositionSystem : SystemBase
 {
     private Camera _camera;
@@ -10,7 +9,6 @@ public partial class UpdateMouseWorldPositionSystem : SystemBase
     protected override void OnUpdate()
     {
         // Use the Input system to get the mouse position in screen coordinates
-        // Vector3 mousePosition = Input.mousePosition;
         var hasMouseInput = SystemAPI.TryGetSingleton(out MousePositionInput mousePositionInput);
         if (!hasMouseInput)
         {

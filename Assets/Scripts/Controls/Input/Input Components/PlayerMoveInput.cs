@@ -18,6 +18,11 @@ public struct PlayerNormalAttackInput : IComponentData
     public bool KeyPressed;
 }
 
+public struct CanPerformNormalAttack : IComponentData
+{
+    public bool Value;
+}
+
 public struct PlayerSpecialAttackInput : IComponentData
 {
     public bool KeyDown;

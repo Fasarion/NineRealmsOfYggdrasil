@@ -1,3 +1,4 @@
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
@@ -5,26 +6,26 @@ using Unity.Mathematics;
 
 namespace Player
 {
-    public partial class PlayerRotationSystem : SystemBase
+    [UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
+    public partial struct PlayerRotationSystem : ISystem
     {
-        // float3 previousPos = float3.zero;
-        // private Camera _camera;
-        
-        protected override void OnUpdate()
+        [BurstCompile]
+        public void OnUpdate(ref SystemState state)
         {
             bool hasAimSettings = SystemAPI.TryGetSingleton(out AimSettingsData aimSettings);
 
             if (hasAimSettings && aimSettings.autoAim)
             {
-                HandleAutoAim();
+                HandleAutoAim(ref state);
             }
             else
             {
-                HandleManualAim();
+                HandleManualAim(ref state);
             }
         }
 
-        private void HandleAutoAim()
+        [BurstCompile]
+        private void HandleAutoAim(ref SystemState state)
         {
             // TODO: check if player is firing. otherwise, return
             
@@ -34,7 +35,8 @@ namespace Player
 
         }
 
-        private void HandleManualAim()
+        [BurstCompile]
+        private void HandleManualAim(ref SystemState state)
         {
             var hasMouseInput = SystemAPI.TryGetSingleton(out MousePositionInput mousePositionInput);
             if (!hasMouseInput)
@@ -48,8 +50,7 @@ namespace Player
             {
                 rotationSpeed = aimSettings.rotationSpeed;
             }
-
-
+            
             float3 mousePosition = mousePositionInput.WorldPosition;
             
             foreach (var playerTransform in 

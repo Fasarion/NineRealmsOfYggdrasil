@@ -324,48 +324,48 @@ namespace Patrik
             }
             
             // Handle ultimate attack
-            var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
-            if (ultimateAttack.KeyPressed)
+            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
+            if (ultimateAttack.Value == true)
             {
-                HandleUltimateAttackInput();
+                _weaponManager.PerformUltimateAttack();
+
+//                HandleUltimateAttackInput();
                 return;
             }
         }
 
         private void HandleUltimateAttackInput()
         {
-            foreach (var (weapon, energyBar, entity) in SystemAPI
-                .Query<RefRW<WeaponComponent>, RefRW<EnergyBarComponent>>()
-                .WithAll<ActiveWeapon>()
-                .WithNone<ResetEnergyTag>()
-                .WithEntityAccess())
-            {
-                // exit if weapon doesn't have enough energy
-                if (!energyBar.ValueRO.IsFull) return;
-
-                // attack if ultimate doesn't use targeting
-                if (!weapon.ValueRO.UsesTargetingForUltimate)
-                {
-                    StartUltimateAttack(entity);
-                }
-
-                // if it uses targeting, attack if target is selected
-                if (weapon.ValueRO.HasSelectedTarget)
-                {
-                    StartUltimateAttack(entity);
-                }
-                
-                // else, start selecting target
-                weapon.ValueRW.ShouldSelectTarget = true;
-                return;
-            }
-            
-
+            // foreach (var (weapon, energyBar, entity) in SystemAPI
+            //     .Query<RefRW<WeaponComponent>, RefRW<EnergyBarComponent>>()
+            //     .WithAll<ActiveWeapon>()
+            //     .WithNone<ResetEnergyTag>()
+            //     .WithEntityAccess())
+            // {
+            //     // exit if weapon doesn't have enough energy
+            //     if (!energyBar.ValueRO.IsFull) return;
+            //
+            //     // attack if ultimate doesn't use targeting
+            //     if (!weapon.ValueRO.UsesTargetingForUltimate)
+            //     {
+            //         StartUltimateAttack(entity);
+            //     }
+            //
+            //     // if it uses targeting, attack if target is selected
+            //     if (weapon.ValueRO.HasSelectedTarget)
+            //     {
+            //         StartUltimateAttack(entity);
+            //     }
+            //     
+            //     // else, start selecting target
+            //     weapon.ValueRW.ShouldSelectTarget = true;
+            //     return;
+            // }
         }
 
         private void StartUltimateAttack(Entity entity)
         {
-            EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
+         //   EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
             _weaponManager.PerformUltimateAttack();
         }
 

@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 5633831705593173882}
   - component: {fileID: 1624415010773744082}
   - component: {fileID: 3549384680681406170}
+  - component: {fileID: 5784324665813350575}
   m_Layer: 0
   m_Name: PlayerWithBudgetSword
   m_TagString: Untagged
@@ -161,7 +162,8 @@ MonoBehaviour:
   playerAnimator: {fileID: 5633831705593173882}
   playerAudio: {fileID: 0}
   activeSlot: {fileID: 5548605758535354698}
-  passiveSlots: []
+  passiveSlots:
+  - {fileID: 3256514980232900399, guid: ec9d4c2c4ccff424bacb104d90f29de6, type: 3}
 --- !u!320 &3549384680681406170
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -179,6 +181,18 @@ PlayableDirector:
   m_SceneBindings: []
   m_ExposedReferences:
     m_References: []
+--- !u!114 &5784324665813350575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190432657395889218}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5569a5e7abab4b558e552f92a2cb351d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &673744655630799457
 GameObject:
   m_ObjectHideFlags: 0

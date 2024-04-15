@@ -19,7 +19,7 @@ public partial struct HammerNormalAttackSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<SwordStatsTag>();
+        state.RequireForUpdate<HammerStatsTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerComponent>();
@@ -38,7 +38,7 @@ public partial struct HammerNormalAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-        if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Hammer))
+        if (!attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Hammer, AttackType.Normal))
             return;
 
         attackCaller.ValueRW.shouldActiveAttack = false;
@@ -70,6 +70,7 @@ public partial struct HammerNormalAttackSystem : ISystem
 
         foreach (var (weapon, buffer, entity) in 
                  SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
+                     .WithAll<ActiveWeapon>()
                      .WithEntityAccess())
         {
             hits.Clear();

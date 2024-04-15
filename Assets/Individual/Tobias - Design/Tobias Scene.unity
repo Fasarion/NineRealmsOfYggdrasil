@@ -600,7 +600,7 @@ PrefabInstance:
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: minTimerTime
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
@@ -630,7 +630,7 @@ PrefabInstance:
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: checkpointData.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
@@ -652,23 +652,45 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
+      propertyPath: checkpointData.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: f790d799110d09e49a7b7650697bbca9,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef5223d60c1cb754f9a718707a8ad900,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
       propertyPath: spawningCheckpointTimes.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: spawningCheckpointTimes.Array.data[1]
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: spawningCheckpointTimes.Array.data[2]
-      value: 10
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: spawningCheckpointTimes.Array.data[3]
-      value: 20
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[4]
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[5]
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4509144780917976783, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}

@@ -1655,6 +1655,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[1].prefab
+      value: 
+      objectReference: {fileID: 89125744733743645, guid: 2aca3fe8be642334c9dec21679d5d771,
+        type: 3}
     - target: {fileID: 3587502585957426159, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_Name
@@ -1715,6 +1721,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityPrefab
+      value: 
+      objectReference: {fileID: 5728772983705993238, guid: 8a747dec1117ff74f9ea89dce8bdfa6b,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

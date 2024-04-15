@@ -6,6 +6,10 @@ using UnityEngine;
 public class IceRingConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
+    public float maxTime;
+    public float maxChargeTime;
+    public float damage;
+    public float maxArea;
 
     public class IceRingConfigAuthoringBaker : Baker<IceRingConfigAuthoring>
     {

@@ -4,16 +4,16 @@ using FMODUnity;
 using Unity.Entities;
 using UnityEngine;
 
-public class PlaySoundOnHitAuthoring : MonoBehaviour
+public class PlaySoundOnBeingHitAuthoring : MonoBehaviour
 {
     [SerializeField] private AudioData audioData;
     
-    class Baker : Baker<PlaySoundOnHitAuthoring>
+    class Baker : Baker<PlaySoundOnBeingHitAuthoring>
     {
-        public override void Bake(PlaySoundOnHitAuthoring authoring)
+        public override void Bake(PlaySoundOnBeingHitAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new PlaySoundOnHitComponent
+            AddComponent(entity, new PlaySoundOnBeingHitComponent
             {
                 Value = authoring.audioData,
             });
@@ -21,7 +21,7 @@ public class PlaySoundOnHitAuthoring : MonoBehaviour
     }
 }
 
-public struct PlaySoundOnHitComponent : IComponentData
+public struct PlaySoundOnBeingHitComponent : IComponentData
 {
     public AudioData Value;
 }

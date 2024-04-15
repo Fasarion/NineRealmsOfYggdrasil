@@ -70,6 +70,7 @@ public partial struct HammerNormalAttackSystem : ISystem
 
         foreach (var (weapon, buffer, entity) in 
                  SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
+                     .WithAll<ActiveWeapon>()
                      .WithEntityAccess())
         {
             hits.Clear();

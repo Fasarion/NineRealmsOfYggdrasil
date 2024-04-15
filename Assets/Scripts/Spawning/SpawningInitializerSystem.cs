@@ -82,6 +82,7 @@ public partial class SpawningInitializerSystem : SystemBase
     {
         var controlObject = _controller.checkpointData[_currentCheckpointIndex];
         config.ValueRW.targetEnemyCount = controlObject.targetEnemyCount;
+        config.ValueRW.isInitialized = false;
         EnemyTypesInformation[] enemyInfo = controlObject.enemyTypesInformation.ToArray();
         var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
         

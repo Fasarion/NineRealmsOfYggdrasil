@@ -3,8 +3,11 @@ using Damage;
 using Health;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
+using Collider = Unity.Physics.Collider;
+using Material = Unity.Physics.Material;
 
 namespace Patrik
 {
@@ -13,6 +16,8 @@ namespace Patrik
         private PlayerWeaponManagerBehaviour _weaponManager;
 
         private bool hasSetUpWeaponManager;
+
+        private float disabledTransformScale = 0.001f;
 
         protected override void OnUpdate()
         {
@@ -63,10 +68,12 @@ namespace Patrik
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
-            foreach (var ( _, entity) in 
-                SystemAPI.Query<WeaponComponent>().WithEntityAccess())
+            foreach (var ( transform, entity) in SystemAPI
+                .Query<RefRW<LocalTransform>>()
+                .WithAll<WeaponComponent>()
+                .WithEntityAccess())
             {
-                ecb.AddComponent(entity, typeof(Disabled));
+                transform.ValueRW.Scale = disabledTransformScale;
             }
 
             ecb.Playback(EntityManager);
@@ -127,11 +134,6 @@ namespace Patrik
         private Entity GetWeaponEntity(WeaponType type)
         {
             Entity entity = GetEnabledWeaponEntity(type);
-            if (entity == default)
-            {
-                entity = GetDisabledWeaponEntity(type);
-            }
-
             return entity;
         }
 
@@ -218,36 +220,28 @@ namespace Patrik
 
         private void EnableWeapon(WeaponType dataWeaponType)
         {
-            Entity entity = GetDisabledWeaponEntity(dataWeaponType);
-
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            if (EntityManager.HasComponent<Disabled>(entity))
-                ecb.RemoveComponent(entity, typeof(Disabled));
-            
-            ecb.Playback(EntityManager);
+            Entity entity = GetWeaponEntity(dataWeaponType);
+            SetEntityScale(entity, 1);
         }
-        
+
+        private void SetEntityScale(Entity entity, float scale)
+        {
+            var transform = EntityManager.GetComponentData<LocalTransform>(entity);
+            transform.Scale = scale;
+            EntityManager.SetComponentData(entity, transform);
+        }
+
         private void DisableWeapon(WeaponType dataWeaponType)
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            Entity entity = GetWeaponEntity(dataWeaponType);
+            SetEntityScale(entity, disabledTransformScale);
 
-            Entity entity = GetEnabledWeaponEntity(dataWeaponType);
-            if (entity == default)
-            {
-                return;
-            }
-
+            // clear its hit buffer
             if (EntityManager.HasBuffer<HitBufferElement>(entity))
             {
                 var buffer = EntityManager.GetBuffer<HitBufferElement>(entity);
                 buffer.Clear();
             }
-
-            ecb.AddComponent(entity, typeof(Disabled));
-            
-            
-            ecb.Playback(EntityManager);
         }
         
         private Entity GetEnabledWeaponEntity(WeaponType type)
@@ -264,32 +258,6 @@ namespace Patrik
                 
                 case WeaponType.Hammer:
                     foreach (var (hammer, entity) in SystemAPI.Query<HammerComponent>()
-                        .WithEntityAccess())
-                    {
-                        return entity;
-                    }
-                    break;
-            }
-
-            return default;
-        }
-
-        private Entity GetDisabledWeaponEntity(WeaponType type)
-        {
-            switch (type)
-            {
-                case WeaponType.Sword:
-                    foreach (var (sword, entity) in SystemAPI.Query<SwordComponent>()
-                        .WithAll<Disabled>()
-                        .WithEntityAccess())
-                    {
-                        return entity;
-                    }
-                    break;
-                
-                case WeaponType.Hammer:
-                    foreach (var (hammer, entity) in SystemAPI.Query<HammerComponent>()
-                        .WithAll<Disabled>()
                         .WithEntityAccess())
                     {
                         return entity;
@@ -359,44 +327,35 @@ namespace Patrik
             var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
             if (ultimateAttack.KeyPressed)
             {
-                _weaponManager.PerformUltimateAttack();
-
-                
-               // HandleUltimateAttackInput();
+                HandleUltimateAttackInput();
                 return;
             }
         }
 
         private void HandleUltimateAttackInput()
         {
-            Debug.Log("Ult attack pressed");
+            foreach (var (weapon, energyBar, entity) in SystemAPI
+                .Query<WeaponComponent, RefRW<EnergyBarComponent>>()
+                .WithAll<ActiveWeapon>()
+                .WithNone<ResetEnergyTag>()
+                .WithEntityAccess())
+            {
+                if (energyBar.ValueRO.IsFull)
+                {
+                    EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
+                    _weaponManager.PerformUltimateAttack();
+                    
+                    Debug.Log("Perform Ult!");
+                }
+                else
+                {
+                    Debug.Log("Not enough energy");
+                }
             
-            // // passive weapons
-            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            // {
-            //     // // ignore passive weapons
-            //     // // TODO: Create IEnableable component "InActiveState" ?
-            //     // if (!weapon.InActiveState)
-            //     // {
-            //     //     continue;
-            //     // }
-            //
-            //     if (energyBar.CurrentEnergy >= energyBar.MaxEnergy)
-            //     {
-            //         Debug.Log("Perform ult!");
-            //     }
-            //     else
-            //     {
-            //         Debug.Log($"Only have {energyBar.CurrentEnergy} of {energyBar.MaxEnergy}");
-            //     }
-            //
-            //     return;
-            // }
-            //
-            // // active weapons
-            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            // {
-            // }
+                return;
+            }
+            
+
         }
 
 

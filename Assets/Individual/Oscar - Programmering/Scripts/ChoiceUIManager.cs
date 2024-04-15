@@ -26,14 +26,15 @@ public class ChoiceUIManager : MonoBehaviour
     [SerializeField] private SelectionCardInstantiator roomSelectionCardsInstantiator;
     [SerializeField] private SelectionCardInstantiator weaponSelectionCardsInstantiator;
     [SerializeField] private SelectionCardInstantiator shopSelectionCardsInstantiator;
-    
 
-    private int currentSelectionIndex;
+    private SelectionCardInstantiator currentSelectionCardsInstantiator;
+
+    [SerializeField]private int currentSelectionIndex;
     private int maxSelectionIndex = 2;
     
     
     private bool _isUIDisplayed;
-    
+    private bool selectionCardsMoving;
     
     
     public Action<SceneReference> OnRoomChosen;
@@ -51,6 +52,8 @@ public class ChoiceUIManager : MonoBehaviour
     }
     private void Awake()
     {
+        currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
+        //allSelectionCardsHidden = true;
         if (_instance == null)
         {
             _instance = this;
@@ -60,8 +63,29 @@ public class ChoiceUIManager : MonoBehaviour
             //Destroy(gameObject);
         }
 
-        
+        SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
+        SelectionCardInstantiator.hasEnteredScreen += OnSelectionCardEntered;
+         
+
         //HideUI();
+    }
+
+    public void Update()
+    {
+        Debug.Log(selectionCardsMoving);
+    }
+
+    private void OnSelectionCardEntered()
+    {
+        selectionCardsMoving = false;
+    }
+
+    private void OnSelectionCardExited()
+    {
+        currentSelectionCardsInstantiator.MoveSelectionCardsIntoView();
+        
+        // UpdateSelectionType();
+
     }
 
     public void Start()
@@ -69,10 +93,12 @@ public class ChoiceUIManager : MonoBehaviour
         roomSelectionCardsInstantiator.InstantiateSelectionCards(3);
         shopSelectionCardsInstantiator.InstantiateSelectionCards(3);
         weaponSelectionCardsInstantiator.InstantiateSelectionCards(3);
-        weaponSelectionCardsInstantiator.MoveSelectionCardsIntoView();
+        currentSelectionCardsInstantiator.MoveSelectionCardsIntoView();
         //DisplayRoomChoiceTree(roomChoiceObjects);
     }
-    
+
+
+
     private void DisplayRoomChoiceTree(List<RoomChoiceObject> roomChoiceObjects)
     {
         ShowUI(roomChoiceObjects.Count);
@@ -124,28 +150,41 @@ public class ChoiceUIManager : MonoBehaviour
 
     public void SwapScreenRight()
     {
-        if (currentSelectionIndex < maxSelectionIndex)
+        if (!selectionCardsMoving)
         {
-            currentSelectionIndex++;
+            if (currentSelectionIndex < maxSelectionIndex)
+            {
+                currentSelectionIndex++;
+                selectionCardsMoving = true;
+                currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
+                UpdateSelectionType(currentSelectionIndex);
+            }
         }
-        UpdateSelectionType(currentSelectionIndex);
+     
     }
     
     public void SwapScreenLeft()
     {
-        if (currentSelectionIndex > 0)
+        if (!selectionCardsMoving)
         {
-            currentSelectionIndex--;
+            if (currentSelectionIndex > 0)
+            {
+                selectionCardsMoving = true;
+                currentSelectionIndex--;
+                currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
+                UpdateSelectionType(currentSelectionIndex);
+            }
         }
-        UpdateSelectionType(currentSelectionIndex);
     }
     
     public void UpdateSelectionType(int index)
     {
+        
         switch (index)
         {
             case 0:
             {
+               
                 selectionType = SelectionType.roomChoice;
                 UpdateSelectionScreen();
                 break;
@@ -153,12 +192,14 @@ public class ChoiceUIManager : MonoBehaviour
             case 1:
             {
                 selectionType = SelectionType.weaponChoice;
+               
                 UpdateSelectionScreen();
                 break;
             }
             case 2:
             {
                 selectionType = SelectionType.shopChoice;
+               
                 UpdateSelectionScreen();
                 break;
             }
@@ -170,6 +211,7 @@ public class ChoiceUIManager : MonoBehaviour
             
           
         }
+        //currentSelectionCardsInstantiator.MoveSelectionCardsIntoView();
     }
     
 
@@ -179,24 +221,17 @@ public class ChoiceUIManager : MonoBehaviour
         {
             case SelectionType.roomChoice:
             {
-                roomSelectionCardsInstantiator.gameObject.SetActive(true);
-                weaponSelectionCardsInstantiator.gameObject.SetActive(false);
-                shopSelectionCardsInstantiator.gameObject.SetActive(false);
+                currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
                 break;
             }
             case SelectionType.shopChoice:
             {
-                roomSelectionCardsInstantiator.gameObject.SetActive(false);
-                weaponSelectionCardsInstantiator.gameObject.SetActive(false);
-                shopSelectionCardsInstantiator.gameObject.SetActive(true);
+                currentSelectionCardsInstantiator = shopSelectionCardsInstantiator;
                 break;
             }
             case SelectionType.weaponChoice:
             {
-             
-                roomSelectionCardsInstantiator.gameObject.SetActive(false);
-                weaponSelectionCardsInstantiator.gameObject.SetActive(true);
-                shopSelectionCardsInstantiator.gameObject.SetActive(false);
+                currentSelectionCardsInstantiator = weaponSelectionCardsInstantiator;
                 break;
             }
         }

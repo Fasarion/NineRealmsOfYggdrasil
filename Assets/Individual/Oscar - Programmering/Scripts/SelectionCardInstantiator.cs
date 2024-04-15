@@ -11,12 +11,24 @@ public class SelectionCardInstantiator : MonoBehaviour
     [SerializeField] private List<GameObject> cardObjects;
 
     private RectTransform thisRect;
-    private Vector2 startPos;
-    private Vector2 screenCenterPos;
-    private float currentTimeToMoveUIIntoPlace;
+    [SerializeField]private Vector2 startPos;
+    [SerializeField]private Vector2 screenCenterPos;
+    [SerializeField]private float currentTimeToMoveUIIntoScreen;
+    [SerializeField]private float currentTimeToMoveUIFromScreen;
     [SerializeField]private float timeWhenFinished;
-    private bool moveUIToScreen;
-    private bool moveUIOffScreen;
+    [SerializeField]private bool moveUIToScreen;
+    [SerializeField]private bool moveUIOffScreen;
+
+    public static Action hasEnteredScreen;
+    public static Action hasExitedScreen;
+
+    public enum SelectionUIType
+    {
+        room,
+        shop,
+        weapon
+    }
+    
     public void Awake()
     {
         thisRect = GetComponent<RectTransform>();
@@ -30,29 +42,32 @@ public class SelectionCardInstantiator : MonoBehaviour
         //Very boilerplatey but it should run.
         if (moveUIToScreen)
         {
-            if (currentTimeToMoveUIIntoPlace < timeWhenFinished)
+            if (currentTimeToMoveUIIntoScreen < timeWhenFinished)
             {
-                currentTimeToMoveUIIntoPlace += Mathf.Pow(1, 1) * Time.deltaTime;
-                thisRect.anchoredPosition = new Vector2(Mathf.SmoothStep(startPos.x, 0, currentTimeToMoveUIIntoPlace/timeWhenFinished)/*Mathf.Lerp(startPos.x,0,currentTimeToMoveUIIntoPlace/timeWhenFinished)*/, 0);
+                currentTimeToMoveUIIntoScreen += Time.deltaTime;
+                thisRect.anchoredPosition = new Vector2(Mathf.SmoothStep(startPos.x, 0, currentTimeToMoveUIIntoScreen/timeWhenFinished)/*Mathf.Lerp(startPos.x,0,currentTimeToMoveUIIntoPlace/timeWhenFinished)*/, 0);
             }
             else
             {
                 moveUIToScreen = false;
-                currentTimeToMoveUIIntoPlace = 0;
+                currentTimeToMoveUIIntoScreen = 0;
+                hasEnteredScreen?.Invoke();
+                
             }
         }
 
         if (moveUIOffScreen)
         {
-            if (currentTimeToMoveUIIntoPlace < timeWhenFinished)
+            if (currentTimeToMoveUIFromScreen < timeWhenFinished)
             {
-                currentTimeToMoveUIIntoPlace +=  Mathf.Sqrt(Time.deltaTime);
-                thisRect.anchoredPosition = new Vector2(Mathf.Lerp(0,startPos.x,currentTimeToMoveUIIntoPlace/timeWhenFinished), 0);
+                currentTimeToMoveUIFromScreen +=  Time.deltaTime;
+                thisRect.anchoredPosition = new Vector2(Mathf.SmoothStep(0, startPos.x, currentTimeToMoveUIFromScreen/timeWhenFinished), 0);
             }
             else
             {
                 moveUIOffScreen = false;
-                currentTimeToMoveUIIntoPlace = 0;
+                currentTimeToMoveUIFromScreen = 0;
+                hasExitedScreen?.Invoke();
             }
         }
         

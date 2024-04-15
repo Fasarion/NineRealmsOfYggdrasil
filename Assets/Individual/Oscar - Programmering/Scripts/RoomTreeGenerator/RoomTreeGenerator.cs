@@ -53,7 +53,7 @@ public class RoomTreeGenerator : MonoBehaviour
             var uiBehaviour = newUINode.GetComponent<RoomChoiceUIBehaviour>();
             uiBehaviour.roomNode = pair.Value;
             var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
-            uiBehaviour.UpdateRoomSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
+            uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
 
             var parentNodes = pair.Value.parentNodes;
             for (int i = 0; i < parentNodes.Count; i++)
@@ -137,7 +137,7 @@ public class RoomTreeGenerator : MonoBehaviour
                 var rectTransform = newNode.GetComponent<RectTransform>();
                 rectTransform.anchoredPosition = new Vector2(currentXPos, yPos);
                 var uiBehaviour = newNode.GetComponent<RoomChoiceUIBehaviour>();
-                uiBehaviour.UpdateRoomSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
+                uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
                 ;
                 nodesInCurrentLevel.Add(newNode);
 

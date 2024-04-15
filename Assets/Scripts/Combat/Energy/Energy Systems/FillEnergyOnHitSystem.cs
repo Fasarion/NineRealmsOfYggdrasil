@@ -1,5 +1,6 @@
 using Damage;
 using Health;
+using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
@@ -14,6 +15,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         //state.RequireForUpdate<EnergyFillComponent>();
     }
     
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         ResetHasChangedEnergy(ref state);
@@ -21,6 +23,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         HandleEnergyFill(ref state);
     }
     
+    [BurstCompile]
     private void ResetHasChangedEnergy(ref SystemState state)
     {
         foreach (var (_, entity) in SystemAPI.Query<HasChangedEnergy>().WithEntityAccess())
@@ -29,6 +32,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         }
     }
     
+    [BurstCompile]
     private void HandleEnergyReset(ref SystemState state)
     {
         foreach (var ( bar, entity) in SystemAPI
@@ -38,13 +42,11 @@ public partial struct FillEnergyOnHitSystem : ISystem
         {
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, false);
             float energyLoss = -bar.ValueRO.MaxEnergy;
-            
-            Debug.Log($"Add {energyLoss} energy");
-            
             FillEnergyBarWithRef(ref state, bar, energyLoss, entity);
         }
     }
 
+    [BurstCompile]
     private void HandleEnergyFill(ref SystemState state)
     {
         // direct hit
@@ -56,6 +58,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         // TODO: Active projectiles
     }
 
+    [BurstCompile]
     private void FillEnergyFromDirectActiveHits(ref SystemState state)
     {
         // go through all active weapons (should be 1 maximum)
@@ -83,6 +86,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         }
     }
 
+    [BurstCompile]
     private void FillEnergyFromDirectPassiveHits(ref SystemState state)
     {
         // Fill passive energy bars - direct hit
@@ -102,6 +106,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         }
     }
     
+    [BurstCompile]
     private void FillEnergyFromPassiveProjectiles(ref SystemState state)
     {
         foreach (var (ownerWeapon, projectileHitBuffer) in
@@ -124,12 +129,14 @@ public partial struct FillEnergyOnHitSystem : ISystem
         }
     }
 
+    [BurstCompile]
     private bool HasHit(DynamicBuffer<HitBufferElement> hitBuffer, out int hitCount)
     {
         hitCount = GetHitCount(hitBuffer);
         return hitCount > 0;
     }
 
+    [BurstCompile]
     private int GetHitCount(DynamicBuffer<HitBufferElement> hitBuffer)
     {
         int hitCount = 0;
@@ -143,6 +150,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         return hitCount;
     }
 
+    [BurstCompile]
     private static void FillEnergyBarWithRef(ref SystemState state, RefRW<EnergyBarComponent> energyBar, float energyFill, Entity entity)
     {
         var oldEnergy = energyBar.ValueRO.CurrentEnergy;
@@ -154,6 +162,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         UpdateHasChangedEnergy(ref state, entity, deltaEnergy);
     }
     
+    [BurstCompile]
     private static void FillEnergyBarWithEM(ref SystemState state, EnergyBarComponent energyBar, float energyFill, Entity entity)
     {
         float oldEnergy = energyBar.CurrentEnergy;
@@ -170,6 +179,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         UpdateHasChangedEnergy(ref state, entity, deltaEnergy);
     }
 
+    [BurstCompile]
     private static float GetNewEnergy(float energyFill, float currentEnergy, float maxEnergy)
     {
         float newEnergy = currentEnergy + energyFill;
@@ -178,6 +188,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         return newEnergy;
     }
 
+    [BurstCompile]
     private static void UpdateHasChangedEnergy(ref SystemState state, Entity entity, float changeValue)
     {
         state.EntityManager.SetComponentEnabled<HasChangedEnergy>(entity, true);

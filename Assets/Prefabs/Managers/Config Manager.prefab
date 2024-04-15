@@ -77,6 +77,82 @@ Transform:
   - {fileID: 609253781446142820}
   m_Father: {fileID: 6592412589437415871}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1858010214650235062
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2846498616045744737}
+  m_Layer: 0
+  m_Name: AbilityConfigs
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2846498616045744737
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1858010214650235062}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1419748053470036600}
+  m_Father: {fileID: 6481230346474377608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3587502585957426159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1419748053470036600}
+  - component: {fileID: 7414300244194485026}
+  m_Layer: 0
+  m_Name: IceRing
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1419748053470036600
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3587502585957426159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2846498616045744737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7414300244194485026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3587502585957426159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6ed45fb358f6eb44b34790be8bad905, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4384012983194273374
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,6 +308,7 @@ Transform:
   - {fileID: 8550608968480414351}
   - {fileID: 8083649682437676395}
   - {fileID: 2068759709024758603}
+  - {fileID: 2846498616045744737}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4913367270568860942
@@ -417,8 +494,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ec44a314fccbde4389046e96b525fc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDamage: 5
-  baseArea: 0
+  baseDamage: 500
+  baseArea: 50
 --- !u!1 &7747805933802500312
 GameObject:
   m_ObjectHideFlags: 0
@@ -472,16 +549,15 @@ MonoBehaviour:
   targetEnemyCount: 0
   minEnemySpawnPercent: 0
   maxEnemySpawnPercent: 0
-  baseEnemyPrefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
-    type: 3}
-  crazyBoiEnemyPrefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3,
-    type: 3}
-  baseEnemyPercentage: 0
-  crazyBoiEnemyPercentage: 0
   innerSpawningRadius: 0
   outerSpawningRadius: 0
   currentActiveCheckpoint: 0
   isInitialized: 0
+  enemyPrefabs:
+  - prefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3, type: 3}
+    enemyType: 0
+  - prefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3, type: 3}
+    enemyType: 1
 --- !u!1 &8622623107857555801
 GameObject:
   m_ObjectHideFlags: 0

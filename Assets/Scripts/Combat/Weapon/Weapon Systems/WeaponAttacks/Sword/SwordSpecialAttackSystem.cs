@@ -33,28 +33,7 @@ public partial struct SwordSpecialAttackSystem : ISystem
         attackCaller.ValueRW.shouldActiveAttack = false;
 
         Debug.Log("Sword Special");
-        return;
-
-        //CollisionCheck
-        var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-        var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
-
-        var hammerStatsEntity = SystemAPI.GetSingletonEntity<HammerStatsTag>();
-        var hammerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(hammerStatsEntity);
-
-        var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-        var playerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(playerStatsEntity);
-
-        var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
-
-        float totalArea = playerStatsComponent.baseArea + hammerStatsComponent.baseArea;
-
-        foreach (var (weapon, buffer, entity) in
-            SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
-                .WithAll<ActiveWeapon>()
-                .WithEntityAccess())
-        {
-            
-        }
+        
+        
     }
 }

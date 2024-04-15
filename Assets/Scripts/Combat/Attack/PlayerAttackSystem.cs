@@ -309,14 +309,20 @@ namespace Patrik
 
             if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
                 return;
-
-            bool inCombat = gameManager.GameState == GameState.Combat;
-            if (!inCombat)
-                return;
             
+            // Handle ultimate attack
+            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
+            if (ultimateAttack.Value == true)
+            {
+                _weaponManager.PerformUltimateAttack();
+                return;
+            }
+
+            bool normalCombat = gameManager.CombatState == CombatState.Normal;
+           
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && inCombat)
+            if (normalAttackInput.KeyPressed && normalCombat)
             {
                 _weaponManager.PerformNormalAttack();
                 return;
@@ -324,21 +330,13 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && inCombat)
+            if (specialAttack.KeyDown && normalCombat)
             {
                 _weaponManager.PerformSpecialAttack();
                 return;
             }
             
-            // Handle ultimate attack
-            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value == true)
-            {
-                _weaponManager.PerformUltimateAttack();
-
-//                HandleUltimateAttackInput();
-                return;
-            }
+            
         }
 
         private void HandleUltimateAttackInput()

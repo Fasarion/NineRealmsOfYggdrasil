@@ -11,7 +11,7 @@ public enum EnemyType
     CrazyBoiEnemy,
     Grunt1,
     Grunt2,
-    Grunt3,
+    Grunt3
 }
 
 public class SpawnConfigAuthoring : MonoBehaviour

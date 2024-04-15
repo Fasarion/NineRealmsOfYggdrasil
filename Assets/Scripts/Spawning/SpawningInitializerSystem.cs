@@ -80,10 +80,6 @@ public partial class SpawningInitializerSystem : SystemBase
         }
         
         UpdateCheckpointValues(config);
-            
-            
-            
-        
         
     }
 

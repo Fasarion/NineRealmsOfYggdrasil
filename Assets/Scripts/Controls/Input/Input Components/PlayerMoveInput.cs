@@ -9,7 +9,8 @@ public struct PlayerMoveInput : IComponentData
 
 public struct MousePositionInput : IComponentData
 {
-    public float2 Value;
+    public float2 ScreenPosition;
+    public float3 WorldPosition;
 }
 
 public struct PlayerNormalAttackInput : IComponentData

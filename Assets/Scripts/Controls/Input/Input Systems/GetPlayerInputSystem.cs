@@ -48,7 +48,7 @@ public partial class GetPlayerInputSystem : SystemBase
         SystemAPI.SetSingleton(new PlayerMoveInput{Value = currentMovementActions});
 
         var currentMousePos = playerInputActions.InputMap.MousePosition.ReadValue<Vector2>();
-        SystemAPI.SetSingleton(new MousePositionInput{Value = currentMousePos});
+        SystemAPI.SetSingleton(new MousePositionInput{ScreenPosition = currentMousePos});
     }
 
     protected override void OnStopRunning()

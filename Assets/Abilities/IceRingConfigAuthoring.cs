@@ -2,16 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class IceRingConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
-    public GameObject targetAreaPrefab;
+    public GameObject chargeAreaPrefab;
     [HideInInspector] public float maxDisplayTime;
+    public float damageDelayTime;
     public float maxChargeTime;
     public float damage;
     public float maxArea;
-    public bool isAbilityReleased;
+    [HideInInspector] public bool isAbilityReleased;
 
     public class IceRingConfigAuthoringBaker : Baker<IceRingConfigAuthoring>
     {
@@ -22,8 +24,9 @@ public class IceRingConfigAuthoring : MonoBehaviour
                 new IceRingConfig
                 {
                     abilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
-                    targetAreaPrefab = GetEntity(authoring.targetAreaPrefab, TransformUsageFlags.Dynamic),
+                    chargeAreaPrefab = GetEntity(authoring.chargeAreaPrefab, TransformUsageFlags.Dynamic),
                     maxDisplayTime = authoring.maxDisplayTime,
+                    damageDelayTime = authoring.damageDelayTime,
                     maxChargeTime = authoring.maxChargeTime,
                     damage = authoring.damage,
                     maxArea = authoring.maxArea,
@@ -36,8 +39,9 @@ public class IceRingConfigAuthoring : MonoBehaviour
 public struct IceRingConfig : IComponentData
 {
     public Entity abilityPrefab;
-    public Entity targetAreaPrefab;
+    public Entity chargeAreaPrefab;
     public float maxDisplayTime;
+    public float damageDelayTime;
     public float maxChargeTime;
     public float damage;
     public float maxArea;

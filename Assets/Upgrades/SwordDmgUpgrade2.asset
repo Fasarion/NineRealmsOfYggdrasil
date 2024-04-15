@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: TestUpgrade 3
+  m_Name: SwordDmgUpgrade2
   m_EditorClassIdentifier: 
-  upgradeTitle: Gluffs4
+  upgradeTitle: Sword upgrade
   upgradeSprite: {fileID: 21300000, guid: 77db78c3eb859dc44be312f7ad78a012, type: 3}
-  upgradeDescription: Born to Gluffs
+  upgradeDescription: The sword will deal more damage every attack
   upgrades:
   - thingToUpgrade: 0
     valueToUpgrade: 0
-    valueAmount: 0
-  startUnlocked: 1
+    valueAmount: 20
+  startUnlocked: 0
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []

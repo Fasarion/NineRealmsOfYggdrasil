@@ -3,9 +3,6 @@ using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
-//using FMODUnity;
-//using FMOD.Studio;
-
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Audio/PlayerAudio")]
 public class PlayerAudio : ScriptableObject
@@ -16,11 +13,32 @@ public class PlayerAudio : ScriptableObject
     [Header("Events")] 
     public EventReference xpGain;
 
+    public EventReference playerHit;
+
     public EventReference playerDeath;
 
     private EventInstance xpIns;
     
+    private int shepard = 0;
     
+    //for footstep sounds, raycast, check when hit ground, what ground
+    //do instance, set parameter for ground, play.
+
+    public void PlayerAudioCaller(int eventType)
+    {
+        switch (eventType)
+        {
+            case 0: //none
+            {
+                break;
+            }
+            case 1: //HitAudio
+            {
+                RuntimeManager.PlayOneShot(playerHit);
+                break;
+            }
+        }
+    }
     public void movingAudio()
     {
         RuntimeManager.PlayOneShot(footsteps);
@@ -28,14 +46,15 @@ public class PlayerAudio : ScriptableObject
 
     public void xpAudio()
     {
-        //if (value > 2) value = 0;
         xpIns = RuntimeManager.CreateInstance(xpGain);
-        //RuntimeManager.AttachInstanceToGameObject(test, gameObject.transform);
-        //test.setParameterByName("TestParam", value);
+        //start coroutine??
+        xpIns.setParameterByName("XPParam", shepard % 25);
         xpIns.start();
         xpIns.release();
-        //value++;
+        shepard++;
+       
     }
+    
 
     /*public void stepAudio()
     {

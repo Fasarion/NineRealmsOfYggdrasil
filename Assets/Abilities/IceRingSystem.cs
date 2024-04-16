@@ -108,7 +108,7 @@ public partial struct IceRingSystem : ISystem
                 var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
         
                 var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-                var playerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(playerStatsEntity);
+                var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
         
                 var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
         

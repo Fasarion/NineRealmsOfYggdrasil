@@ -7,5 +7,6 @@ namespace Patrik
         public AttackType AttackType;
         public WeaponType WeaponType;
         public Transform AttackPoint;
+        public int ComboCounter;
     }
 }

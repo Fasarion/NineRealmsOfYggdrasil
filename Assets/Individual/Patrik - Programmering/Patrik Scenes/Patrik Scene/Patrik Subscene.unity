@@ -854,6 +854,102 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1108011578}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1182470485
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1182470487}
+  - component: {fileID: 1182470486}
+  m_Layer: 0
+  m_Name: Stats Suggestion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1182470486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182470485}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e97ceb27a04cd980d131d2d1c6d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverallStats:
+    BaseDamage: 0
+    AttackComboMultiplier:
+      AttackOne: 0
+      AttackTwo: 0
+      AttackThree: 0
+    CriticalDamage: 0
+    CriticalRate: 0
+    Area: 0
+    AttackSpeed: 0
+    Cooldown: 0
+    MaxEnergy: 0
+    EnergyFillPerHit: 0
+  NormalAttack:
+    BaseDamage: 0
+    AttackComboMultiplier:
+      AttackOne: 0
+      AttackTwo: 0
+      AttackThree: 0
+    CriticalDamage: 0
+    CriticalRate: 0
+    Area: 0
+    AttackSpeed: 0
+    Cooldown: 0
+    MaxEnergy: 0
+    EnergyFillPerHit: 0
+  SpecialAttack:
+    BaseDamage: 0
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1.2
+      AttackThree: 1.3
+    CriticalDamage: 0
+    CriticalRate: 0
+    Area: 0
+    AttackSpeed: 0
+    Cooldown: 0
+    MaxEnergy: 0
+    EnergyFillPerHit: 0
+  PassiveAttack:
+    BaseDamage: 0
+    AttackComboMultiplier:
+      AttackOne: 0
+      AttackTwo: 0
+      AttackThree: 0
+    CriticalDamage: 0
+    CriticalRate: 0
+    Area: 0
+    AttackSpeed: 0
+    Cooldown: 0
+    MaxEnergy: 0
+    EnergyFillPerHit: 0
+--- !u!4 &1182470487
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1182470485}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1436472641
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1743,6 +1839,16 @@ PrefabInstance:
       propertyPath: ultimateAttackUsesTarget
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2457381261264463122, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163681344479688090, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6980750288525973889, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: energyToFill
@@ -1848,3 +1954,4 @@ SceneRoots:
   - {fileID: 1979165969}
   - {fileID: 182378480}
   - {fileID: 1892657948}
+  - {fileID: 1182470487}

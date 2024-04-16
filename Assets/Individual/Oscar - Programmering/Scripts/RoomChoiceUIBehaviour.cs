@@ -10,7 +10,7 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
 {
     
     
-    private SceneReference roomSceneReference;
+    [SerializeField]private SceneReference roomSceneReference;
 
     [SerializeField] public RoomNode roomNode;
     

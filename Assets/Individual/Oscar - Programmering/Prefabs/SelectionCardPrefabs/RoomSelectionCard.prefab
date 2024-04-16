@@ -321,13 +321,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7694a386398f44e3af6487d3b9e5df5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  choiceItemTitleText: {fileID: 0}
-  choiceItemDescriptionText: {fileID: 0}
+  choiceItemTitleText: {fileID: 4950178059812699760}
+  choiceItemDescriptionText: {fileID: 4763886136212124115}
   choiceItemImage: {fileID: 0}
   roomNode:
     childNodes: []
     roomCoordinates: {x: 0, y: 0}
     parentNodes: []
+    chosenRoomTypeIndex: 0
 --- !u!222 &1909775615724223152
 CanvasRenderer:
   m_ObjectHideFlags: 0

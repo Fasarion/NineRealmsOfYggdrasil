@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class SelectionCardInstantiator : MonoBehaviour
 {
-    public Transform parentToPopulate;
-    public GameObject prefabType;
+    [SerializeField]private Transform parentToPopulate;
+    [SerializeField]private GameObject prefabType;
 
     [SerializeField] private List<GameObject> cardObjects;
-
-    private RectTransform thisRect;
-    [SerializeField]private Vector2 startPos;
-    [SerializeField]private Vector2 screenCenterPos;
-    [SerializeField]private float currentTimeToMoveUIIntoScreen;
-    [SerializeField]private float currentTimeToMoveUIFromScreen;
     [SerializeField]private float timeWhenFinished;
-    [SerializeField]private bool moveUIToScreen;
-    [SerializeField]private bool moveUIOffScreen;
+    
+    private RectTransform thisRect;
+    private Vector2 startPos;
+    private float currentTimeToMoveUIIntoScreen;
+    private float currentTimeToMoveUIFromScreen;
+   
+    private bool moveUIToScreen;
+    private bool moveUIOffScreen;
 
     public static Action hasEnteredScreen;
     public static Action hasExitedScreen;
@@ -76,13 +76,17 @@ public class SelectionCardInstantiator : MonoBehaviour
       
     }
 
+    public List<GameObject> GetCardObjects()
+    {
+        return cardObjects;
+    }
     public void InstantiateSelectionCards(int numberOfCardsToInstantiate)
     {
-        
-
+        DestroySelectionCards();
         for (int i = 0; i < numberOfCardsToInstantiate; i++)
         {
            var cardObject =  Instantiate(prefabType, parentToPopulate);
+           cardObjects.Add(cardObject);
         }
        
     }

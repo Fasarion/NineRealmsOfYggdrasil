@@ -7,20 +7,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-[CreateAssetMenu(fileName = "RoomChoiceObject", menuName = "RoomUI/RoomChoiceObject" +
+[CreateAssetMenu(fileName = "RoomChoiceObject", menuName = "ChoiceUI/ChoiceObjects/RoomChoiceObject" +
                                                            "")]
-public class RoomChoiceObject : ScriptableObject
+public class RoomChoiceObject : ChoiceObject
 {
-    [Header("--Name--")] 
-    [Tooltip("The name of the room in question")]
-    public string roomName;
-
-    [Tooltip("A description of the room in question")]
-    public string roomDescription;
-    //public SceneAsset scene;
     [Tooltip("Reference to the scene being sent to")]
     public SceneReference roomSceneReference;
-
-    [Tooltip("Sprite showing what the room selected will be like")]
-    public Sprite roomSprite;
 }

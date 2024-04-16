@@ -19,23 +19,26 @@ public struct UpgradeInformation
 public enum UpgradeValueTypes
 {
     Damage,
-    Cooldown,
-    Size,
-    Force,
-    AreaEffect,
-    Speed,
-    Pierce,
-    Amount,
-    ThrustBool,
-    Lifesteal,
+    energyRegen,
+    attackSpeed,
+    deffence,
+    areaEffect,
+    chargeSpeed,
+    hp,
+    moveSpeed,
+    cooldown,
     Unlock
 }
 
 public enum UpgradeBaseType
 {
     Sword,
-    Axe,
-    Fireball
+    Hammer,
+    Birds,
+    Mead,
+
+
+    
     
 }
 

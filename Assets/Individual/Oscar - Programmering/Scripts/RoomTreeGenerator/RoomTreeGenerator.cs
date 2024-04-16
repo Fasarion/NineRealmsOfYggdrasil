@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Transforms;
 using UnityEngine;
 using Random = System.Random;
 
@@ -50,8 +51,9 @@ public class RoomTreeGenerator : MonoBehaviour
             var uiNodeRectTransform = newUINode.GetComponent<RectTransform>();
             uiNodeRectTransform.anchoredPosition = new Vector2(pair.Key.y , pair.Key.x )* 200;
             var uiBehaviour = newUINode.GetComponent<RoomChoiceUIBehaviour>();
+            uiBehaviour.roomNode = pair.Value;
             var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
-            uiBehaviour.UpdateRoomSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
+            uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
 
             var parentNodes = pair.Value.parentNodes;
             for (int i = 0; i < parentNodes.Count; i++)
@@ -135,7 +137,7 @@ public class RoomTreeGenerator : MonoBehaviour
                 var rectTransform = newNode.GetComponent<RectTransform>();
                 rectTransform.anchoredPosition = new Vector2(currentXPos, yPos);
                 var uiBehaviour = newNode.GetComponent<RoomChoiceUIBehaviour>();
-                uiBehaviour.UpdateRoomSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
+                uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
                 ;
                 nodesInCurrentLevel.Add(newNode);
 
@@ -176,13 +178,12 @@ public class RoomTreeGenerator : MonoBehaviour
         //
         foreach (var pair in roomNodeGridMap)
         {
-            //Check if we are on the first level or we have a parent. If we do not, then we can be removed.
-            /*if (pair.Key.x != 0 && pair.Value.parentNode == null)
+            //Check if we are on the first level or we have a parent. If we are not at the first level and we do not have a parent, then we can be removed straight away.
+            if (pair.Key.x != 0 && pair.Value.parentNodes.Count == 0)
             {
-                
                 itemsToRemove.Add(pair.Key);
                 continue;
-            }*/
+            }
             var coordinate = pair.Key;
 
             int currentChildNodeIndex = -1;
@@ -224,7 +225,6 @@ public class RoomTreeGenerator : MonoBehaviour
                     //If there is no neighbour, then it's okay to just add a connection anyways.
                     else
                     {
-
                         var makeConnection = random.Next(0, 3);
                         if (makeConnection < 2)
                         {
@@ -238,15 +238,52 @@ public class RoomTreeGenerator : MonoBehaviour
             }
 
             //If we haven't added any child nodes 
+            //this doesn't respect neighbours
             if (childNodeAdded == false)
             {
+              
+                
                 var guaranteedChildNodeIndex = random.Next(0, potentialChildNodes.Count);
-               if (potentialChildNodes.Count > 0)
-               {
-                   potentialChildNodes[guaranteedChildNodeIndex].parentNodes.Add(pair.Value); ;
-                   pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
-                   childNodeAdded = true;
-               }
+                if (potentialChildNodes.Count > 0)
+                {
+                    var parentNodes = potentialChildNodes[guaranteedChildNodeIndex].parentNodes;
+                    //Get the neighbour to the left.
+                    var currentCoordinates = pair.Value.roomCoordinates;
+                    var childNeighbourCoordinates = new Vector2(currentCoordinates.x + 1, currentCoordinates.y + 1);
+                    
+                    
+                    
+                    potentialChildNodes[guaranteedChildNodeIndex].parentNodes.Add(pair.Value); ;
+                    pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
+                    childNodeAdded = true;
+                }
+                //This didn't work in a satisfying manner.
+                /*for (int i = 0; i < potentialChildNodes.Count; i++)
+                {
+                    if (potentialChildNodes.Count > 0)
+                    {
+                        var chosenChildNode = potentialChildNodes[i];
+                        //for (int i = 0; i < 3; i++)
+                        //{
+                
+                        var neighbourCoordinates = new Vector2Int(chosenChildNode.roomCoordinates.x, chosenChildNode.roomCoordinates.y + 1);
+                        roomNodeGridMap.TryGetValue(neighbourCoordinates, out var childNeighbour);
+                        if (childNeighbour != null)
+                        {
+                            if (childNeighbour.parentNodes.Count == 0)
+                            {
+                            
+                                chosenChildNode.parentNodes.Add(pair.Value);
+                                pair.Value.childNodes.Add(chosenChildNode);
+                                
+                            }
+                            childNodeAdded = true;
+                        }
+                    }
+                   
+                }*/
+               
+                
                 
               
                 //If we also have a parent
@@ -309,7 +346,24 @@ public class RoomTreeGenerator : MonoBehaviour
         {
             roomNodeGridMap.Remove(recursiveRoomNodesToRemove[i]);
         }
-        
+       /* itemsToRemove.Clear();
+        foreach (var pair in roomNodeGridMap)
+        {
+            if (pair.Value.parentNodes.Count == 0)
+            {
+                for (int i = 0; i < pair.Value.childNodes.Count; i++)
+                {
+                    pair.Value.childNodes.Remove(pair.Value);
+                }
+              
+                itemsToRemove.Add(pair.Key);
+            }
+        }
+
+        for (int i = 0; i < itemsToRemove.Count; i++)
+        {
+            roomNodeGridMap.Remove(itemsToRemove[i]);
+        }*/
         
     }
     public void TraverseRemovedNodesUpwards(RoomNode currentNode, List<Vector2Int> recursiveRoomNodesToRemove)

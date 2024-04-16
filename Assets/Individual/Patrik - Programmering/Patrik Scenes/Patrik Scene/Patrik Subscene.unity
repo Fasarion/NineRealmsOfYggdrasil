@@ -1078,6 +1078,111 @@ PrefabInstance:
       propertyPath: m_Name
       value: Config Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.Area
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.Cooldown
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.MaxEnergy
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.AttackSpeed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.CriticalRate
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.CriticalRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.BaseKnockBack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.BaseKnockBack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.CriticalDamage
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.CriticalDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.EnergyFillPerHit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.CriticalMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.AttackComboMultiplier.AttackOne
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.AttackComboMultiplier.AttackTwo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.AttackComboMultiplier.AttackOne
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.AttackComboMultiplier.AttackTwo
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.AttackComboMultiplier.AttackThree
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.AttackComboMultiplier.AttackThree
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.KnockBackComboMultiplier.AttackOne
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.KnockBackComboMultiplier.AttackTwo
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879657686653505998, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.KnockBackComboMultiplier.AttackThree
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1127,6 +1232,61 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.BaseDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.CriticalRate
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.BaseKnockBack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: OverallStats.BaseKnockBack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.CriticalDamage
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.CriticalMultiplier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.AttackComboMultiplier.AttackTwo
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.AttackComboMultiplier.AttackThree
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.KnockBackComboMultiplier.AttackOne
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.KnockBackComboMultiplier.AttackTwo
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8359434333002218643, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: NormalAttack.KnockBackComboMultiplier.AttackThree
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

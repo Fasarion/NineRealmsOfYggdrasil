@@ -23,7 +23,7 @@ public partial struct HammerNormalAttackSystem : ISystem
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerComponent>();
-        state.RequireForUpdate<AudioBufferData>();
+        state.RequireForUpdate<RandomComponent>();
 
         state.RequireForUpdate<PhysicsWorldSingleton>();
         _detectionFilter = new CollisionFilter
@@ -43,77 +43,24 @@ public partial struct HammerNormalAttackSystem : ISystem
 
         attackCaller.ValueRW.shouldActiveAttack = false;
 
-        //Play Audio
-        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
-        var audioData = new AudioBufferData
-        {
-            AudioData = new AudioData()
-            {
-                AudioEnumValue = 1
-            }
-        };
-        audioBuffer.Add(audioData);
-        
         var hammerStatsEntity = SystemAPI.GetSingletonEntity<HammerStatsTag>();
         var hammerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(hammerStatsEntity);
         
         var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
         var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
-        
-        
-        float totalDamage = playerStatsComponent.OverallStats.BaseDamage 
-                            * playerStatsComponent.NormalAttackStats.BaseDamage 
-                            
-                           + hammerStatsComponent.OverallStats.BaseDamage 
-                            * hammerStatsComponent.NormalAttackStats.BaseDamage
-                            * hammerStatsComponent.NormalAttackStats.AttackComboMultiplier.GetCombo(attackCaller.ValueRO.currentCombo);
-        
-        Debug.Log($"Current Damage to deal: {totalDamage}");
 
-        
-        // //CollisionCheck
-        // var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-        // var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
-        //
-        // var hammerStatsEntity = SystemAPI.GetSingletonEntity<HammerStatsTag>();
-        // var hammerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(hammerStatsEntity);
-        //
-        // var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-        // var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
-        //
-        // var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
-        //
-        // float totalArea = playerStatsComponent.OverallStats.Area * playerStatsComponent.NormalAttackStats.Area 
-        //                   + hammerStatsComponent.OverallStats.Area * hammerStatsComponent.NormalAttackStats.Area;
-        //
-        // foreach (var (weapon, buffer, entity) in 
-        //          SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
-        //              .WithAll<ActiveWeapon>()
-        //              .WithEntityAccess())
-        // {
-        //     hits.Clear();
-        //     
-        //     
-        //     if (collisionWorld.OverlapSphere(weapon.AttackPoint.Position, totalArea, ref hits, _detectionFilter))
-        //     {
-        //         foreach (var hit in hits)
-        //         {
-        //             var enemyPos = transformLookup[hit.Entity].Position;
-        //             var colPos = hit.Position;
-        //             float2 directionToHit = math.normalizesafe((enemyPos.xz -  weapon.AttackPoint.Position.xz));
-        //             
-        //             //Maybe TODO: kolla om hit redan finns i buffer
-        //             HitBufferElement element = new HitBufferElement
-        //             {
-        //                 IsHandled = false,
-        //                 HitEntity = hit.Entity,
-        //                 Position = colPos,
-        //                 Normal = directionToHit
-        //
-        //             };
-        //             buffer.Add(element);
-        //         }
-        //     }
-        // }
+        var randomFloat = SystemAPI.GetSingletonRW<RandomComponent>().ValueRW.random.NextFloat();
+
+        int combo = attackCaller.ValueRO.currentCombo;
+        float totalDamage = CombatStats.GetTotalDamageWithCrit(playerStatsComponent, hammerStatsComponent, AttackType.Normal, randomFloat, combo);
+        float totalKnockBack = CombatStats.GetTotalKnockBack(playerStatsComponent, hammerStatsComponent, AttackType.Normal, combo);
+
+        foreach (var (damageComp, knockBackComp) in SystemAPI
+            .Query<RefRW<DamageOnTriggerComponent>, RefRW<KnockBackForce>>()
+            .WithAll<HammerComponent>())
+        {
+            damageComp.ValueRW.DamageValue = totalDamage;
+            knockBackComp.ValueRW.Value = totalKnockBack; 
+        }
     }
 }

@@ -35,6 +35,9 @@ namespace Patrik
         // Attack Data
         private AttackType currentAttackType { get;  set; }
         int CurrentAttackTypeInt => (int)currentAttackType;
+        private int currentCombo = 0;
+        
+        
         private bool isAttacking;
         private bool isResettingAttackFlag;
         
@@ -59,13 +62,15 @@ namespace Patrik
 
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
-        public void StartActiveAttackEvent()
+        public void StartActiveAttackEvent(int combo = 0)
         {
+            currentCombo = combo;
             OnActiveAttackStart?.Invoke(GetActiveAttackData());
         } 
         
-        public void StopActiveAttackEvent()
+        public void StopActiveAttackEvent(int combo = 0)
         {
+            currentCombo = combo;
             OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
         }
 
@@ -74,12 +79,15 @@ namespace Patrik
             isAttacking = true;
         }
 
+        public void SetCurrentCombo(int combo)
+        {
+            isAttacking = true;
+            currentCombo = combo;
+        }
+
         public void FinishActiveAttackAnimationEvent()
         {
-            Debug.Log("Attack Finished.");
-            
             isAttacking = false;
-
             StartCoroutine(ResetBufferNextFrame());
         }
 
@@ -135,7 +143,8 @@ namespace Patrik
             {
                 AttackType = currentAttackType,
                 WeaponType = activeWeapon.WeaponType,
-                AttackPoint = activeWeapon.AttackPoint
+                AttackPoint = activeWeapon.AttackPoint,
+                ComboCounter = currentCombo,
             };
 
             return attackData;
@@ -288,7 +297,7 @@ namespace Patrik
                 // set attack buffer
                 playerAnimator.SetBool(bufferAttackParamterName, true);
 
-                if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
+                //  if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
                 return;
             }
 

@@ -146,6 +146,7 @@ namespace Patrik
             weaponCaller.ValueRW.shouldActiveAttack = true;
             weaponCaller.ValueRW.currentAttackType = data.AttackType;
             weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
+            weaponCaller.ValueRW.currentCombo = data.ComboCounter;
             
             WriteOverAttackDataToActiveWeapon(data);
         }

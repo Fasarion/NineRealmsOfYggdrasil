@@ -674,9 +674,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventType: 0
+    eventCategoryType: 0
     environmentType: 0
     enemyTyping: 0
+    audioEventType: 0
 --- !u!114 &604296123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,9 +1098,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventType: 0
+    eventCategoryType: 0
     environmentType: 0
     enemyTyping: 0
+    audioEventType: 0
 --- !u!114 &687790007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1711,6 +1713,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxDisplayTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8396824266348004795, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: damageValue
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -58,6 +58,11 @@ public class RoomTreeGenerator : MonoBehaviour
         return currentParentNode.childNodes;
     }
 
+    public RoomNode GetCurrentNode()
+    {
+        return currentParentNode;
+    }
+
     public void UpdateNodeLevel(RoomNode nodeChoice)
     {
         currentParentNode = nodeChoice;

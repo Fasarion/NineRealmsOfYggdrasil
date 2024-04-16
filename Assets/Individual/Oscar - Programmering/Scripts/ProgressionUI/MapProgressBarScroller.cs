@@ -11,8 +11,8 @@ public class MapProgressBarScroller : MonoBehaviour
     [SerializeField]  private float scrollRate = 1.5f;
     [SerializeField]   private float lerpDuration = 0.1f;
     // Start is called before the first frame update
-    public Button leftScrollButton;
-    public Button rightScrollButton;
+    //public Button leftScrollButton;
+    //public Button rightScrollButton;
     
     private float scrollStart;
     private float scrollFinished;

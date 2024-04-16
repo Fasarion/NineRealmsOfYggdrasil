@@ -26,8 +26,7 @@ public class ChoiceUIManager : MonoBehaviour
     [SerializeField] private SelectionCardInstantiator roomSelectionCardsInstantiator;
     [SerializeField] private SelectionCardInstantiator weaponSelectionCardsInstantiator;
     [SerializeField] private SelectionCardInstantiator shopSelectionCardsInstantiator;
-
-    [SerializeField]private int currentRoomLevel = 0;
+    
     
     private SelectionCardInstantiator currentSelectionCardsInstantiator;
 
@@ -39,6 +38,7 @@ public class ChoiceUIManager : MonoBehaviour
     private bool selectionCardsMoving;
 
     private RoomTreeGenerator roomTreeGenerator;
+    private LevelProgressionManager levelProgressionManager;
     
     
     public Action<SceneReference> OnRoomChosen;
@@ -56,16 +56,13 @@ public class ChoiceUIManager : MonoBehaviour
     }
     private void Awake()
     {
+        RoomChoiceUIBehaviour.onRoomChanged += OnRoomChanged;
         currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
         roomTreeGenerator = GetComponent<RoomTreeGenerator>();
         //allSelectionCardsHidden = true;
         if (_instance == null)
         {
             _instance = this;
-        }
-        else
-        {
-            //Destroy(gameObject);
         }
 
         SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
@@ -75,11 +72,19 @@ public class ChoiceUIManager : MonoBehaviour
         //HideUI();
     }
 
-    public void Update()
+    private void OnRoomChanged(RoomNode chosenNode)
     {
+        roomTreeGenerator.UpdateNodeLevel(chosenNode);
         
+        var nodeList = roomTreeGenerator.GetCurrentNodeList();
+        roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
+        var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();
+        for (int i = 0; i < cardObjects.Count; i++)
+        {
+            roomTreeGenerator.PopulateRoomPrefab(cardObjects[i], nodeList[i]);
+        }
+        levelProgressionManager.UpdateTargetObject();
     }
-
     private void OnSelectionCardEntered()
     {
         selectionCardsMoving = false;
@@ -95,7 +100,6 @@ public class ChoiceUIManager : MonoBehaviour
 
     public void Start()
     {
-        
         var nodeList = roomTreeGenerator.GetCurrentNodeList();
         roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
         var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();

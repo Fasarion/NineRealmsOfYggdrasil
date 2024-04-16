@@ -39,11 +39,13 @@ namespace Patrik
         private bool isResettingAttackFlag;
         
         // Animator parameters
-        private string attackAnimationName = "Attack";
-        private string activeWeaponParameterName = "ActiveWeapon";
-        private string currentAttackParameterName = "CurrentAttack";
+        // private string attackAnimationName = "Attack";
+        // private string activeWeaponParameterName = "ActiveWeapon";
+        // private string currentAttackParameterName = "CurrentAttack";
 
         private string movingParameterName = "Moving";
+        private string bufferAttackParamterName = "AttackBuffered";
+        private string isAttackingParameterName = "IsAttacking";
         
         // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
@@ -67,9 +69,29 @@ namespace Patrik
             OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
         }
 
+        public void SetIsAttackingEvent()
+        {
+            isAttacking = true;
+        }
+
         public void FinishActiveAttackAnimationEvent()
         {
+            Debug.Log("Attack Finished.");
+            
             isAttacking = false;
+
+            StartCoroutine(ResetBufferNextFrame());
+        }
+
+        private IEnumerator ResetBufferNextFrame()
+        {
+            yield return new WaitForEndOfFrame();
+            playerAnimator.SetBool(bufferAttackParamterName, false);
+        }
+
+        private void Update()
+        {
+            playerAnimator.SetBool(isAttackingParameterName, isAttacking);
         }
 
         struct WeaponAttackPair
@@ -129,25 +151,16 @@ namespace Patrik
 
         private void OnEnable()
         {
-            EventManager.OnAttackInput += OnAttackInput;
-            
             // wait a few frames to setup weapons to make sure they have spawned from the DOTS side
             Invoke(nameof(SetupWeapons), 0.1f);
         }
 
         private void OnDisable()
         {
-            EventManager.OnAttackInput -= OnAttackInput;
-
             foreach (var weapon in weapons)
             {
                 UnsubscribeFromPassiveEvents(weapon);
             }
-        }
-
-        private void OnAttackInput(AttackType attackType)
-        {
-            Debug.Log($"Attack input: {attackType}");
         }
 
         private void SetupWeapons()
@@ -272,6 +285,9 @@ namespace Patrik
             
             if (isAttacking)
             {
+                // set attack buffer
+                playerAnimator.SetBool(bufferAttackParamterName, true);
+
                 if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
                 return;
             }
@@ -302,6 +318,7 @@ namespace Patrik
                 isAttacking = false;
                 Debug.Log($"No animation found for weapon attack pair {currentWeaponType}, {currentAttackType}");
             }
+            
         }
 
         private bool GetActiveAttackAnimationName(out string animationName)

@@ -129,16 +129,25 @@ namespace Patrik
 
         private void OnEnable()
         {
+            EventManager.OnAttackInput += OnAttackInput;
+            
             // wait a few frames to setup weapons to make sure they have spawned from the DOTS side
             Invoke(nameof(SetupWeapons), 0.1f);
         }
 
         private void OnDisable()
         {
+            EventManager.OnAttackInput -= OnAttackInput;
+
             foreach (var weapon in weapons)
             {
                 UnsubscribeFromPassiveEvents(weapon);
             }
+        }
+
+        private void OnAttackInput(AttackType attackType)
+        {
+            Debug.Log($"Attack input: {attackType}");
         }
 
         private void SetupWeapons()

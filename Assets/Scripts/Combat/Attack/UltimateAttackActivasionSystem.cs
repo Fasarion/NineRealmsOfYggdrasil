@@ -22,6 +22,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<PrimaryButtonInput>();
         state.RequireForUpdate<PerformUltimateAttack>();
+        state.RequireForUpdate<GameManagerSingleton>();
     }
 
     [BurstCompile]
@@ -29,6 +30,9 @@ public partial struct UltimateAttackActivasionSystem : ISystem
     {
         var performUltra = SystemAPI.GetSingletonRW<PerformUltimateAttack>();
         performUltra.ValueRW.Value = false;
+
+        var gameManager = SystemAPI.GetSingletonRW<GameManagerSingleton>();
+        gameManager.ValueRW.CombatState = hasPreparedUltimate ? CombatState.ActivatingUltimate : CombatState.Normal;
         
         bool activeWeaponHasFullEnergy = false;
         Entity weaponEntity = Entity.Null;
@@ -78,11 +82,10 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             }
 
             hasPreparedUltimate = false;
-
             return;
         }
         
-        // handle  weapon that does use targeting
+        // Instantiate target
         if (ultimateAttackKeyPressed && !hasPreparedUltimate)
         {
             var playerTargetPrefab = SystemAPI.GetSingleton<PlayerTargetingPrefab>();
@@ -100,7 +103,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
 
         // handle activating ultimate
         bool activationKeyPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyPressed;
-        if (activationKeyPressed)
+        if (activationKeyPressed && hasPreparedUltimate)
         {
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
             performUltra.ValueRW.Value = true;

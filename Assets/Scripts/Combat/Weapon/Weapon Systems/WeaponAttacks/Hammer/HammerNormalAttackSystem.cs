@@ -54,6 +54,8 @@ public partial struct HammerNormalAttackSystem : ISystem
         };
         audioBuffer.Add(audioData);
 
+        return;
+        
         //CollisionCheck
         var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
         var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);

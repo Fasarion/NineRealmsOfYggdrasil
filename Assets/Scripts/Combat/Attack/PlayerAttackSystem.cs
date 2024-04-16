@@ -148,21 +148,6 @@ namespace Patrik
             weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
             
             WriteOverAttackDataToActiveWeapon(data);
-
-            switch (data.AttackType)
-            {
-                case AttackType.Normal:
-                    StartNormalAttack(data);
-                    break;
-                
-                case AttackType.Special:
-                    StartSpecialAttack(data);
-                    break;
-                
-                case AttackType.Ultimate:
-                    StartUltimateAttack(data);
-                    break;
-            }
         }
 
         private void WriteOverAttackDataToActiveWeapon(AttackData data)
@@ -209,13 +194,6 @@ namespace Patrik
         private void OnPassiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);
-            
-            switch (data.WeaponType)
-            {
-                case WeaponType.Hammer:
-                    StopPassiveHammerAttack();
-                    break;
-            }
         }
 
         private void EnableWeapon(WeaponType dataWeaponType)
@@ -293,11 +271,6 @@ namespace Patrik
             
             ecb.Playback(EntityManager);
         }
-        
-        private void StopPassiveHammerAttack()
-        {
-            //TODO: Add hammer passive attack stop behaviour here
-        }
 
         private void HandleWeaponInput()
         {
@@ -306,10 +279,23 @@ namespace Patrik
                 // No weapon manager found, can't read weapon inputs.
                 return;
             }
+
+            if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
+                return;
             
+            // Handle ultimate attack
+            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
+            if (ultimateAttack.Value == true)
+            {
+                _weaponManager.PerformUltimateAttack();
+                return;
+            }
+
+            bool normalCombat = gameManager.CombatState == CombatState.Normal;
+           
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed)
+            if (normalAttackInput.KeyPressed && normalCombat)
             {
                 _weaponManager.PerformNormalAttack();
                 return;
@@ -317,74 +303,16 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown)
+            if (specialAttack.KeyDown && normalCombat)
             {
                 _weaponManager.PerformSpecialAttack();
                 return;
             }
-            
-            // Handle ultimate attack
-            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value == true)
-            {
-                _weaponManager.PerformUltimateAttack();
-
-//                HandleUltimateAttackInput();
-                return;
-            }
         }
-
-        private void HandleUltimateAttackInput()
-        {
-            // foreach (var (weapon, energyBar, entity) in SystemAPI
-            //     .Query<RefRW<WeaponComponent>, RefRW<EnergyBarComponent>>()
-            //     .WithAll<ActiveWeapon>()
-            //     .WithNone<ResetEnergyTag>()
-            //     .WithEntityAccess())
-            // {
-            //     // exit if weapon doesn't have enough energy
-            //     if (!energyBar.ValueRO.IsFull) return;
-            //
-            //     // attack if ultimate doesn't use targeting
-            //     if (!weapon.ValueRO.UsesTargetingForUltimate)
-            //     {
-            //         StartUltimateAttack(entity);
-            //     }
-            //
-            //     // if it uses targeting, attack if target is selected
-            //     if (weapon.ValueRO.HasSelectedTarget)
-            //     {
-            //         StartUltimateAttack(entity);
-            //     }
-            //     
-            //     // else, start selecting target
-            //     weapon.ValueRW.ShouldSelectTarget = true;
-            //     return;
-            // }
-        }
-
-        private void StartUltimateAttack(Entity entity)
-        {
-         //   EntityManager.SetComponentEnabled<ResetEnergyTag>(entity, true);
-            _weaponManager.PerformUltimateAttack();
-        }
-
-
+        
         protected override void OnStopRunning()
         {
             UnsubscribeFromAttackEvents();
-        }
-        
-        private void StartNormalAttack(AttackData data)
-        {
-        }
-        
-        private void StartSpecialAttack(AttackData data)
-        {
-        }
-        
-        private void StartUltimateAttack(AttackData data)
-        {
         }
     }
 }

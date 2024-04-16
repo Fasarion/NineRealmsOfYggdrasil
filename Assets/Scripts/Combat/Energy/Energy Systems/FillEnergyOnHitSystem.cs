@@ -10,6 +10,12 @@ using UnityEngine;
 public partial struct FillEnergyOnHitSystem : ISystem
 {
     [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<EnergyBarComponent>();
+    }
+    
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         ResetHasChangedEnergy(ref state);

@@ -76,6 +76,15 @@ public partial class UpgradeApplierSystem : SystemBase
                     return stats;
                 }
                 break;
+            case UpgradeBaseType.Hammer:
+                
+                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
+                             .WithAll<HammerStatsTag>())
+                {
+                    return stats;
+                }
+                break;
+                
         }
 
         return default;
@@ -87,6 +96,18 @@ public partial class UpgradeApplierSystem : SystemBase
         {
             case UpgradeValueTypes.Damage:
                 statsComponent.ValueRW.OverallStats.Damage.BaseValue += upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.cooldown:
+                statsComponent.ValueRW.OverallStats.Cooldown.BaseValue -= upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.areaEffect:
+                statsComponent.ValueRW.OverallStats.Area.BaseValue += upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.attackSpeed:
+                statsComponent.ValueRW.OverallStats.AttackSpeed.BaseValue += upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.energyRegen:
+                statsComponent.ValueRW.OverallStats.EnergyFillPerHit.BaseValue += upgrade.valueAmount;
                 break;
         }
     }

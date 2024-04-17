@@ -29,7 +29,6 @@ public enum UpgradeValueTypes
     cooldown,
     crit,
     reactionDamage,
-    cooldown,
     reactionArea, //Hur stort område reactionerna (combustion, lightningchain etc) gör skada
     damage, //this is in % on player
     Unlock

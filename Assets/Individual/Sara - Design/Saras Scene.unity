@@ -463,59 +463,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &556173427
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 556173429}
-  - component: {fileID: 556173428}
-  m_Layer: 0
-  m_Name: Patrik Subscene
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &556173428
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556173427}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45a335734b1572644a6a5d09d87adc65, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _SceneAsset: {fileID: 102900000, guid: f8d45e557fc8e894db4c1ef2892313d8, type: 3}
-  _HierarchyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  AutoLoadScene: 1
-  _SceneGUID:
-    Value:
-      x: 1441090959
-      y: 1234078967
-      z: 803325117
-      w: 2368811672
---- !u!4 &556173429
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556173427}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &572662106
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -584,6 +531,59 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8828964f69b6634b9ce598e258638aa, type: 3}
+--- !u!1 &680617864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 680617866}
+  - component: {fileID: 680617865}
+  m_Layer: 0
+  m_Name: Sara subscene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &680617865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680617864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45a335734b1572644a6a5d09d87adc65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _SceneAsset: {fileID: 102900000, guid: 8297b1268bcf16c47bbec82ebf4cb1c4, type: 3}
+  _HierarchyColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+  AutoLoadScene: 1
+  _SceneGUID:
+    Value:
+      x: 1645967656
+      y: 1281490104
+      z: 3800886199
+      w: 1276888315
+--- !u!4 &680617866
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 680617864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2012171691
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -592,6 +592,106 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: maxTimerTime
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: minTimerTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: innerSpawningRadius
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: outerSpawningRadius
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: maxEnemySpawnPercent
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: minEnemySpawnPercent
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: startingCheckpointIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 716918b05e15ebb4b86b7a8ec9f5e7e5,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 61c00b7355fb8944cbdd6e0839524b52,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: d6ce3f35cdd736c40b3ddb73bbcc3098,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: f790d799110d09e49a7b7650697bbca9,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: checkpointData.Array.data[4]
+      value: 
+      objectReference: {fileID: 11400000, guid: ef5223d60c1cb754f9a718707a8ad900,
+        type: 2}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[2]
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[3]
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[4]
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1601107627460829310, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: spawningCheckpointTimes.Array.data[5]
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 4509144780917976783, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: m_Name
@@ -676,4 +776,4 @@ SceneRoots:
   - {fileID: 542927935}
   - {fileID: 93512671}
   - {fileID: 2012171691}
-  - {fileID: 556173429}
+  - {fileID: 680617866}

@@ -1738,6 +1738,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1634519359496565414, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: ultimateAttackUsesTarget
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457381261264463122, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163681344479688090, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6980750288525973889, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: energyToFill
@@ -1824,7 +1839,7 @@ PrefabInstance:
     - target: {fileID: 8785231685900876182, guid: f14416850a4f08e4e9e8370655f3495e,
         type: 3}
       propertyPath: ultimateAttackUsesTarget
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

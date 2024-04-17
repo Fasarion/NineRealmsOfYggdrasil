@@ -82,8 +82,8 @@ public partial struct IceRingSystem : ISystem
             }
         }
 
-        foreach (var (ability, timer, transform, entity) in
-                 SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
+        foreach (var (ability, timer, buffer, transform, entity) in
+                 SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>, RefRW<LocalTransform>>()
                      .WithEntityAccess().WithNone<ChargeTimer>())
         {
             //set up
@@ -108,41 +108,34 @@ public partial struct IceRingSystem : ISystem
                 var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
         
                 var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-                var playerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(playerStatsEntity);
+                var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
         
                 var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
         
                 float totalArea = ability.ValueRO.area;
-
-                foreach (var (weapon, buffer, entity2) in 
-                         SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
-                             .WithAll<ActiveWeapon>()
-                             .WithEntityAccess())
+                
+                hits.Clear();
+                    
+                if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
                 {
-                    hits.Clear();
-                    
-                    if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
+                    foreach (var hit in hits)
                     {
-                        foreach (var hit in hits)
-                        {
-                            var enemyPos = transformLookup[hit.Entity].Position;
-                            var colPos = hit.Position;
-                            float2 directionToHit = math.normalizesafe((enemyPos.xz -  weapon.AttackPoint.Position.xz));
+                        var enemyPos = transformLookup[hit.Entity].Position;
+                        var colPos = hit.Position;
+                        float2 directionToHit = math.normalizesafe((enemyPos.xz -  transform.ValueRO.Position.xz));
                     
-                            //Maybe TODO: kolla om hit redan finns i buffer
-                            HitBufferElement element = new HitBufferElement
-                            {
-                                IsHandled = false,
-                                HitEntity = hit.Entity,
-                                Position = colPos,
-                                Normal = directionToHit
+                        //Maybe TODO: kolla om hit redan finns i buffer
+                        HitBufferElement element = new HitBufferElement
+                        {
+                            IsHandled = false,
+                            HitEntity = hit.Entity,
+                            Position = colPos,
+                            Normal = directionToHit
 
-                            };
-                            buffer.Add(element);
-                        }
+                        };
+                        buffer.Add(element);
                     }
                 }
-                
                 ability.ValueRW.hasFired = true;
             }
         }

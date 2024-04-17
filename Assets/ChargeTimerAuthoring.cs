@@ -12,7 +12,7 @@ public class ChargeTimerAuthoring : MonoBehaviour
     {
         public override void Bake(ChargeTimerAuthoring authoring)
         {
-            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            var entity = GetEntity(TransformUsageFlags.None);
             AddComponent(entity,
                 new ChargeTimer
                     {

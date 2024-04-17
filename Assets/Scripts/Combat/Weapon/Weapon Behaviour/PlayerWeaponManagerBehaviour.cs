@@ -35,15 +35,20 @@ namespace Patrik
         // Attack Data
         private AttackType currentAttackType { get;  set; }
         int CurrentAttackTypeInt => (int)currentAttackType;
+        private int currentCombo = 0;
+        
+        
         private bool isAttacking;
         private bool isResettingAttackFlag;
         
         // Animator parameters
-        private string attackAnimationName = "Attack";
-        private string activeWeaponParameterName = "ActiveWeapon";
-        private string currentAttackParameterName = "CurrentAttack";
+        // private string attackAnimationName = "Attack";
+        // private string activeWeaponParameterName = "ActiveWeapon";
+        // private string currentAttackParameterName = "CurrentAttack";
 
         private string movingParameterName = "Moving";
+        private string bufferAttackParamterName = "AttackBuffered";
+        private string isAttackingParameterName = "IsAttacking";
         
         // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
@@ -57,19 +62,44 @@ namespace Patrik
 
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
-        public void StartActiveAttackEvent()
+        public void StartActiveAttackEvent(int combo = 0)
         {
+            currentCombo = combo;
             OnActiveAttackStart?.Invoke(GetActiveAttackData());
         } 
         
-        public void StopActiveAttackEvent()
+        public void StopActiveAttackEvent(int combo = 0)
         {
+            currentCombo = combo;
             OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
+        }
+
+        public void SetIsAttackingEvent()
+        {
+            isAttacking = true;
+        }
+
+        public void SetCurrentCombo(int combo)
+        {
+            isAttacking = true;
+            currentCombo = combo;
         }
 
         public void FinishActiveAttackAnimationEvent()
         {
             isAttacking = false;
+            StartCoroutine(ResetBufferNextFrame());
+        }
+
+        private IEnumerator ResetBufferNextFrame()
+        {
+            yield return new WaitForEndOfFrame();
+            playerAnimator.SetBool(bufferAttackParamterName, false);
+        }
+
+        private void Update()
+        {
+            playerAnimator.SetBool(isAttackingParameterName, isAttacking);
         }
 
         struct WeaponAttackPair
@@ -113,7 +143,8 @@ namespace Patrik
             {
                 AttackType = currentAttackType,
                 WeaponType = activeWeapon.WeaponType,
-                AttackPoint = activeWeapon.AttackPoint
+                AttackPoint = activeWeapon.AttackPoint,
+                ComboCounter = currentCombo,
             };
 
             return attackData;
@@ -263,7 +294,10 @@ namespace Patrik
             
             if (isAttacking)
             {
-                if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
+                // set attack buffer
+                playerAnimator.SetBool(bufferAttackParamterName, true);
+
+                //  if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
                 return;
             }
 
@@ -293,6 +327,7 @@ namespace Patrik
                 isAttacking = false;
                 Debug.Log($"No animation found for weapon attack pair {currentWeaponType}, {currentAttackType}");
             }
+            
         }
 
         private bool GetActiveAttackAnimationName(out string animationName)

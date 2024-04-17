@@ -53,49 +53,67 @@ public partial struct HammerNormalAttackSystem : ISystem
             }
         };
         audioBuffer.Add(audioData);
-
-        //CollisionCheck
-        var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-        var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
-
+        
         var hammerStatsEntity = SystemAPI.GetSingletonEntity<HammerStatsTag>();
-        var hammerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(hammerStatsEntity);
+        var hammerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(hammerStatsEntity);
         
         var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-        var playerStatsComponent = state.EntityManager.GetComponentData<WeaponStatsComponent>(playerStatsEntity);
+        var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
         
-        var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
         
-        float totalArea = playerStatsComponent.baseArea + hammerStatsComponent.baseArea;
+        float totalDamage = playerStatsComponent.OverallStats.BaseDamage 
+                            * playerStatsComponent.NormalAttackStats.BaseDamage 
+                            
+                           + hammerStatsComponent.OverallStats.BaseDamage 
+                            * hammerStatsComponent.NormalAttackStats.BaseDamage
+                            * hammerStatsComponent.NormalAttackStats.AttackComboMultiplier.GetCombo(attackCaller.ValueRO.currentCombo);
+        
+        Debug.Log($"Current Damage to deal: {totalDamage}");
 
-        foreach (var (weapon, buffer, entity) in 
-                 SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
-                     .WithAll<ActiveWeapon>()
-                     .WithEntityAccess())
-        {
-            hits.Clear();
-            
-            
-            if (collisionWorld.OverlapSphere(weapon.AttackPoint.Position, totalArea, ref hits, _detectionFilter))
-            {
-                foreach (var hit in hits)
-                {
-                    var enemyPos = transformLookup[hit.Entity].Position;
-                    var colPos = hit.Position;
-                    float2 directionToHit = math.normalizesafe((enemyPos.xz -  weapon.AttackPoint.Position.xz));
-                    
-                    //Maybe TODO: kolla om hit redan finns i buffer
-                    HitBufferElement element = new HitBufferElement
-                    {
-                        IsHandled = false,
-                        HitEntity = hit.Entity,
-                        Position = colPos,
-                        Normal = directionToHit
-
-                    };
-                    buffer.Add(element);
-                }
-            }
-        }
+        
+        // //CollisionCheck
+        // var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
+        // var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
+        //
+        // var hammerStatsEntity = SystemAPI.GetSingletonEntity<HammerStatsTag>();
+        // var hammerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(hammerStatsEntity);
+        //
+        // var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
+        // var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
+        //
+        // var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
+        //
+        // float totalArea = playerStatsComponent.OverallStats.Area * playerStatsComponent.NormalAttackStats.Area 
+        //                   + hammerStatsComponent.OverallStats.Area * hammerStatsComponent.NormalAttackStats.Area;
+        //
+        // foreach (var (weapon, buffer, entity) in 
+        //          SystemAPI.Query<WeaponComponent, DynamicBuffer<HitBufferElement>>()
+        //              .WithAll<ActiveWeapon>()
+        //              .WithEntityAccess())
+        // {
+        //     hits.Clear();
+        //     
+        //     
+        //     if (collisionWorld.OverlapSphere(weapon.AttackPoint.Position, totalArea, ref hits, _detectionFilter))
+        //     {
+        //         foreach (var hit in hits)
+        //         {
+        //             var enemyPos = transformLookup[hit.Entity].Position;
+        //             var colPos = hit.Position;
+        //             float2 directionToHit = math.normalizesafe((enemyPos.xz -  weapon.AttackPoint.Position.xz));
+        //             
+        //             //Maybe TODO: kolla om hit redan finns i buffer
+        //             HitBufferElement element = new HitBufferElement
+        //             {
+        //                 IsHandled = false,
+        //                 HitEntity = hit.Entity,
+        //                 Position = colPos,
+        //                 Normal = directionToHit
+        //
+        //             };
+        //             buffer.Add(element);
+        //         }
+        //     }
+        // }
     }
 }

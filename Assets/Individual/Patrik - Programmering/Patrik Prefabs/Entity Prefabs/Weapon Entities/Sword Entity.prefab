@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 195254114635209368}
+  - component: {fileID: 3609673491606412705}
   - component: {fileID: 7636761816899745512}
   - component: {fileID: 7889665709517289732}
   - component: {fileID: 7801334704937826242}
@@ -22,6 +23,7 @@ GameObject:
   - component: {fileID: 8099106034715878466}
   - component: {fileID: 4031505932382415400}
   - component: {fileID: 9206287725747069478}
+  - component: {fileID: 9077788839747236107}
   m_Layer: 0
   m_Name: Sword Entity
   m_TagString: Untagged
@@ -37,13 +39,115 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8261443476895494700}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3609673491606412705
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261443476895494700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e97ceb27a04cd980d131d2d1c6d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverallStats:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  NormalAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  SpecialAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  PassiveAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  UltimateAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
 --- !u!114 &7636761816899745512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,8 +367,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 1
-  damageType: 0
+  damageContents:
+    DamageValue: 1
+    DamageType: 0
+    CriticalRate: 0.5
+    CriticalModifier: 3
 --- !u!114 &5182783140504931862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,6 +450,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  ultimateAttackUsesTarget: 0
 --- !u!114 &8099106034715878466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0926d93b98014cec9db2721b9133e149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveFillPerHit: 5
+  passiveFillPerHit: 2
   activeFillPerHit: 5
 --- !u!114 &9206287725747069478
 MonoBehaviour:
@@ -384,6 +492,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventType: 0
+    eventCategoryType: 0
     environmentType: 0
     enemyTyping: 0
+    audioEventType: 0
+--- !u!114 &9077788839747236107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261443476895494700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac40d39d6dc4c3984cb86065f020b03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,34 +1,104 @@
 ﻿using Patrik;
+using Unity.Mathematics;
 using UnityEngine;
+
+[System.Serializable]
+public struct CombatStatValue
+{
+    public float BaseValue;
+    public ComboMultiplier Multiplier;
+
+    public static readonly CombatStatValue Default = new CombatStatValue
+    {
+        BaseValue = 1,
+        Multiplier = ComboMultiplier.Default
+    };
+
+    public static float GetTotalStatValue(CombatStatValue stat, int combo)
+    {
+        return stat.BaseValue * stat.Multiplier.GetCombo(combo);
+    }
+}
+
+public enum CombatStatType
+{
+     Damage,
+     CriticalRate,
+     CriticalModifier,
+    
+     Area,
+    
+     AttackSpeed,
+
+     KnockBack,
+     Cooldown,
+     EnergyFillPerHit,
+}
 
 [System.Serializable]
 public struct CombatStats
 {
-    [Header("Damage")]
-    public float BaseDamage;
-    public ComboMultiplier AttackComboMultiplier;
+    [Header("Damage")] 
+    public CombatStatValue Damage;
 
     [Header("Critical")]
-    public float CriticalMultiplier;
-    [Range(0,1f)]
-    public float CriticalRate;
+    public CombatStatValue CriticalRate;
+    public CombatStatValue CriticalModifier;
     
     [Header("Area")]
-    public float Area;
+    public CombatStatValue Area;
     
     [Header("Speed")]
-    public float AttackSpeed;
+    public CombatStatValue AttackSpeed;
 
     [Header("KnockBack")] 
-    public float BaseKnockBack;
-    public ComboMultiplier KnockBackComboMultiplier;
+    public CombatStatValue KnockBack;
     
     [Header("Cooldown")]
-    public float Cooldown;
+    public CombatStatValue Cooldown;
     
     [Header("Energy")]
-    public float MaxEnergy;
-    public float EnergyFillPerHit;
+    public CombatStatValue EnergyFillPerHit;
+
+    public CombatStatValue GetStatValueFromType(CombatStatType type)
+    {
+        switch (type)
+        {
+               case CombatStatType.Damage : return Damage;
+               case CombatStatType.CriticalRate : return CriticalRate;
+               case CombatStatType.CriticalModifier : return CriticalModifier;
+               case CombatStatType.Area : return Area;
+               case CombatStatType.AttackSpeed : return AttackSpeed;
+               case CombatStatType.KnockBack : return KnockBack;
+               case CombatStatType.Cooldown : return Cooldown;
+               case CombatStatType.EnergyFillPerHit : return EnergyFillPerHit;
+        }
+
+        return default;
+    }
+    
+
+    public static readonly CombatStats Default = new CombatStats
+    {
+        Damage = CombatStatValue.Default,
+        
+        CriticalRate = new CombatStatValue
+        {
+            BaseValue = 0, // avoid having 100% crit chance per default
+            Multiplier = ComboMultiplier.Default
+        },
+            
+        CriticalModifier = CombatStatValue.Default, 
+        
+        Area = CombatStatValue.Default,
+        
+        AttackSpeed = CombatStatValue.Default,
+
+        KnockBack = CombatStatValue.Default,
+        
+        Cooldown = CombatStatValue.Default,
+        EnergyFillPerHit = CombatStatValue.Default
+    };
 
     private static CombatStats GetAttackStatsFromComponent(CombatStatsComponent stats, AttackType attackType)
     {
@@ -49,67 +119,29 @@ public struct CombatStats
         
         return default;
     }
-    
-    public static float GetTotalDamageWithCrit(CombatStatsComponent stats1, CombatStatsComponent stats2, AttackType attackType, float randomFloat, int combo = 0)
-    {
-        float uncritDamage = GetTotalDamageWithoutCrit(stats1, stats2, attackType, combo);
-        float critMultiplier = GetCriticalMultiplier(stats1, stats2, attackType, randomFloat);
 
-        return uncritDamage * critMultiplier;
+    /// <summary>
+    /// Gets the total stat value from two CombatStatsComponents for a specific combat stat.
+    /// </summary>
+    /// <param name="stats1"> First stat component to get value from. </param>
+    /// <param name="stats2"> Second stat component to get value from. </param>
+    /// <param name="attackType"> What kind of attack that is performed. </param>
+    /// <param name="combatStatType"> Which combat stat to retrieve. </param>
+    /// <param name="combo"> In what combo the attack was performed. </param>
+    /// <returns></returns>
+    public static float GetCombinedStatValue(CombatStatsComponent stats1, CombatStatsComponent stats2, AttackType attackType, CombatStatType combatStatType, int combo)
+    {
+        return GetStatValue(stats1, attackType, combatStatType, combo) +
+               GetStatValue(stats2, attackType, combatStatType, combo);
     }
 
-    private static float GetCriticalMultiplier(CombatStatsComponent stats1, CombatStatsComponent stats2, AttackType attackType, float randomFloat)
+    static float GetStatValue(CombatStatsComponent statsComponent, AttackType attackType, CombatStatType statType, int combo)
     {
-        var critRate1 = GetCritRate(stats1, attackType, out float critDamage1);
-        var critRate2 = GetCritRate(stats2, attackType, out float critDamage2);
-        float totalCritRate = critRate1 + critRate2;
+        CombatStats attackStats = GetAttackStatsFromComponent(statsComponent, attackType);
         
-        bool applyCrit = totalCritRate > randomFloat;
-        if (applyCrit)
-        {
-            float totalCritDamage = critDamage1 + critDamage2;
-            return totalCritDamage * totalCritRate;
-        }
-        else
-        {
-            return 1;
-        }
-    }
-
-    private static float GetCritRate(CombatStatsComponent stats1, AttackType attackType, out float critDamage)
-    {
-        CombatStats attackStats = GetAttackStatsFromComponent(stats1, attackType);
-        var critRate1 = attackStats.CriticalRate;
-        critDamage = attackStats.CriticalMultiplier;
-        return critRate1;
-    }
-
-    static float GetTotalDamageWithoutCrit(CombatStatsComponent stats1, CombatStatsComponent stats2, AttackType attackType, int combo = 0)
-    {
-        return GetTotalDamageWithoutCrit(stats1, attackType, combo) + GetTotalDamageWithoutCrit(stats2, attackType, combo);
-    }
-
-    static float GetTotalDamageWithoutCrit(CombatStatsComponent stats, AttackType attackType, int combo = 0)
-    {
-        CombatStats attackStats = GetAttackStatsFromComponent(stats, attackType);
-        float totalDamage = stats.OverallStats.BaseDamage 
-                            * attackStats.BaseDamage
-                            * attackStats.AttackComboMultiplier.GetCombo(combo);
-
-        return totalDamage;
-    }
-    
-    public static float GetTotalKnockBack(CombatStatsComponent stats1, CombatStatsComponent stats2, AttackType attackType, int combo)
-    {
-        return GetTotalKnockBack(stats1, attackType, combo) + GetTotalKnockBack(stats2, attackType, combo);
-    }
-
-    private static float GetTotalKnockBack(CombatStatsComponent stats1, AttackType attackType, int combo)
-    {
-        CombatStats attackStats = GetAttackStatsFromComponent(stats1, attackType);
-        float knockBack = stats1.OverallStats.BaseKnockBack
-                          * attackStats.BaseKnockBack
-                          * attackStats.KnockBackComboMultiplier.GetCombo(combo);
-        return knockBack;
+        float overallStat = CombatStatValue.GetTotalStatValue(statsComponent.OverallStats.GetStatValueFromType(statType), combo);
+        float attackStat = CombatStatValue.GetTotalStatValue(attackStats.GetStatValueFromType(statType), combo);
+        
+        return overallStat + attackStat;
     }
 }

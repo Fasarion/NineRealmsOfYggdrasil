@@ -1,20 +1,21 @@
 ﻿using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class WeaponStatsAuthoring : MonoBehaviour 
 {
     [Header("Overall Stats")] 
-    public CombatStats OverallStats; 
+    public CombatStats OverallStats = CombatStats.Default; 
     
     [Header("Attack Stats")]
-    public CombatStats NormalAttack;
+    public CombatStats NormalAttack = CombatStats.Default;
     [Space]
-    public CombatStats SpecialAttack;
+    public CombatStats SpecialAttack = CombatStats.Default;
     [Space]
-    public CombatStats PassiveAttack;
+    public CombatStats PassiveAttack = CombatStats.Default;
     [Space]
-    public CombatStats UltimateAttack;
+    public CombatStats UltimateAttack = CombatStats.Default;
     
    
    class Baker : Baker<WeaponStatsAuthoring>
@@ -52,6 +53,13 @@ public struct ComboMultiplier
     public float AttackOne;
     public float AttackTwo;
     public float AttackThree;
+    
+    public static readonly ComboMultiplier Default = new ComboMultiplier
+    {
+        AttackOne = 1,
+        AttackTwo = 1,
+        AttackThree = 1,
+    };
 
     public float GetCombo(int index = 0)
     {
@@ -67,7 +75,7 @@ public struct ComboMultiplier
                 return AttackThree;
             
             default:
-                return AttackOne;
+                return 1;
         }
     }
 }

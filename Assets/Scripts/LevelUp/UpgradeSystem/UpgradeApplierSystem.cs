@@ -44,6 +44,24 @@ public partial class UpgradeApplierSystem : SystemBase
             
             ApplyUpgrade(upgrade, statsComponent);
         }
+
+        InformStatHandler();
+    }
+
+    private void InformStatHandler()
+    {
+        bool statHandlerExists = SystemAPI.TryGetSingletonRW(out RefRW<StatHandlerComponent> statHandler);
+        bool attackCallerExists = SystemAPI.TryGetSingleton(out WeaponAttackCaller attackCaller);
+        if (!statHandlerExists || !attackCallerExists)
+        {
+            Debug.LogWarning("Need Attack Caller and StatHandler to update weapon stats correctly.");
+            return;
+        }
+
+        statHandler.ValueRW.ShouldUpdateStats = true;
+        statHandler.ValueRW.WeaponType = attackCaller.currentWeaponType;
+        statHandler.ValueRW.AttackType = attackCaller.currentAttackType;
+        statHandler.ValueRW.ComboCounter = attackCaller.currentCombo;
     }
 
     private RefRW<CombatStatsComponent> GetStatsComponent(UpgradeBaseType baseType)

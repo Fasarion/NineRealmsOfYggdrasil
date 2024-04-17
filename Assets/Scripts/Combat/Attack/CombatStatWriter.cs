@@ -1,16 +1,19 @@
 ﻿using Damage;
 using Patrik;
+using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
 public partial struct CombatStatHandleSystem : ISystem
 {
+    [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<StatHandlerComponent>();
     }
 
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
@@ -20,6 +23,7 @@ public partial struct CombatStatHandleSystem : ISystem
         WriteOverAttackData(ref state);
     }
     
+    [BurstCompile]
     void WriteOverAttackData(ref SystemState state)
     {
         var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();

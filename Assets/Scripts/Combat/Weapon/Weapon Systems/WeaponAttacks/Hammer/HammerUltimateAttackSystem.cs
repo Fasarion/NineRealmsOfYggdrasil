@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using Patrik;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Physics;
+using Unity.Transforms;
 using UnityEngine;
 
 [BurstCompile]
@@ -14,6 +16,7 @@ public partial struct HammerUltimateAttackSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<ThunderStrikeConfig>();
         state.RequireForUpdate<HammerStatsTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
@@ -36,5 +39,13 @@ public partial struct HammerUltimateAttackSystem : ISystem
 
         attackCaller.ValueRW.shouldActiveAttack = false;
         Debug.Log("ult!");
+
+        var config = SystemAPI.GetSingleton<ThunderStrikeConfig>();
+        var ability = state.EntityManager.Instantiate(config.gluffs);
+        state.EntityManager.SetComponentData(ability, new TimerObject
+        {
+            maxTime = 3
+        });
+        
     }
 }

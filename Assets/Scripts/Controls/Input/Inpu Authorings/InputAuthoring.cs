@@ -27,8 +27,8 @@ public class InputAuthoring : MonoBehaviour
             AddComponent<WeaponTwoInput>();
             AddComponent<WeaponThreeInput>();
 
-
-            AddComponent<UpgradeUIButtonPress>();
+            // General Input
+            AddComponent<PrimaryButtonInput>();
         }
     }
 }

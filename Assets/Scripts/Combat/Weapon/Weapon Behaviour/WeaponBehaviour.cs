@@ -1,14 +1,24 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace Patrik
 {
     public class WeaponBehaviour : MonoBehaviour
     {
+        [Header("Weapon Type")]
         [SerializeField] private WeaponType _weaponType;
         public WeaponType WeaponType => _weaponType;
+        
+        [Header("Animation")]
         [SerializeField] private Animator animator;
+
+        [Header("Graphics")] 
+        [SerializeField] private Sprite sprite;
+        public Sprite Sprite => sprite;
+        
+        [Header("Transforms")]
         [SerializeField] private Transform attackPoint;
         [SerializeField] private Transform model;
         public Transform AttackPoint => attackPoint;

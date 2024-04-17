@@ -3,8 +3,11 @@ using Damage;
 using Health;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
+using Collider = Unity.Physics.Collider;
+using Material = Unity.Physics.Material;
 
 namespace Patrik
 {
@@ -13,6 +16,8 @@ namespace Patrik
         private PlayerWeaponManagerBehaviour _weaponManager;
 
         private bool hasSetUpWeaponManager;
+
+        private float disabledTransformScale = 0.001f;
 
         protected override void OnUpdate()
         {
@@ -63,10 +68,12 @@ namespace Patrik
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
-            foreach (var ( _, entity) in 
-                SystemAPI.Query<WeaponComponent>().WithEntityAccess())
+            foreach (var ( transform, entity) in SystemAPI
+                .Query<RefRW<LocalTransform>>()
+                .WithAll<WeaponComponent>()
+                .WithEntityAccess())
             {
-                ecb.AddComponent(entity, typeof(Disabled));
+                transform.ValueRW.Scale = disabledTransformScale;
             }
 
             ecb.Playback(EntityManager);
@@ -127,11 +134,6 @@ namespace Patrik
         private Entity GetWeaponEntity(WeaponType type)
         {
             Entity entity = GetEnabledWeaponEntity(type);
-            if (entity == default)
-            {
-                entity = GetDisabledWeaponEntity(type);
-            }
-
             return entity;
         }
 
@@ -144,23 +146,9 @@ namespace Patrik
             weaponCaller.ValueRW.shouldActiveAttack = true;
             weaponCaller.ValueRW.currentAttackType = data.AttackType;
             weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
+            weaponCaller.ValueRW.currentCombo = data.ComboCounter;
             
             WriteOverAttackDataToActiveWeapon(data);
-
-            switch (data.AttackType)
-            {
-                case AttackType.Normal:
-                    StartNormalAttack(data);
-                    break;
-                
-                case AttackType.Special:
-                    StartSpecialAttack(data);
-                    break;
-                
-                case AttackType.Ultimate:
-                    StartUltimateAttack(data);
-                    break;
-            }
         }
 
         private void WriteOverAttackDataToActiveWeapon(AttackData data)
@@ -207,47 +195,32 @@ namespace Patrik
         private void OnPassiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);
-            
-            switch (data.WeaponType)
-            {
-                case WeaponType.Hammer:
-                    StopPassiveHammerAttack();
-                    break;
-            }
         }
 
         private void EnableWeapon(WeaponType dataWeaponType)
         {
-            Entity entity = GetDisabledWeaponEntity(dataWeaponType);
-
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            if (EntityManager.HasComponent<Disabled>(entity))
-                ecb.RemoveComponent(entity, typeof(Disabled));
-            
-            ecb.Playback(EntityManager);
+            Entity entity = GetWeaponEntity(dataWeaponType);
+            SetEntityScale(entity, 1);
         }
-        
+
+        private void SetEntityScale(Entity entity, float scale)
+        {
+            var transform = EntityManager.GetComponentData<LocalTransform>(entity);
+            transform.Scale = scale;
+            EntityManager.SetComponentData(entity, transform);
+        }
+
         private void DisableWeapon(WeaponType dataWeaponType)
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            Entity entity = GetWeaponEntity(dataWeaponType);
+            SetEntityScale(entity, disabledTransformScale);
 
-            Entity entity = GetEnabledWeaponEntity(dataWeaponType);
-            if (entity == default)
-            {
-                return;
-            }
-
+            // clear its hit buffer
             if (EntityManager.HasBuffer<HitBufferElement>(entity))
             {
                 var buffer = EntityManager.GetBuffer<HitBufferElement>(entity);
                 buffer.Clear();
             }
-
-            ecb.AddComponent(entity, typeof(Disabled));
-            
-            
-            ecb.Playback(EntityManager);
         }
         
         private Entity GetEnabledWeaponEntity(WeaponType type)
@@ -264,32 +237,6 @@ namespace Patrik
                 
                 case WeaponType.Hammer:
                     foreach (var (hammer, entity) in SystemAPI.Query<HammerComponent>()
-                        .WithEntityAccess())
-                    {
-                        return entity;
-                    }
-                    break;
-            }
-
-            return default;
-        }
-
-        private Entity GetDisabledWeaponEntity(WeaponType type)
-        {
-            switch (type)
-            {
-                case WeaponType.Sword:
-                    foreach (var (sword, entity) in SystemAPI.Query<SwordComponent>()
-                        .WithAll<Disabled>()
-                        .WithEntityAccess())
-                    {
-                        return entity;
-                    }
-                    break;
-                
-                case WeaponType.Hammer:
-                    foreach (var (hammer, entity) in SystemAPI.Query<HammerComponent>()
-                        .WithAll<Disabled>()
                         .WithEntityAccess())
                     {
                         return entity;
@@ -325,11 +272,6 @@ namespace Patrik
             
             ecb.Playback(EntityManager);
         }
-        
-        private void StopPassiveHammerAttack()
-        {
-            //TODO: Add hammer passive attack stop behaviour here
-        }
 
         private void HandleWeaponInput()
         {
@@ -338,10 +280,23 @@ namespace Patrik
                 // No weapon manager found, can't read weapon inputs.
                 return;
             }
+
+            if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
+                return;
             
+            // Handle ultimate attack
+            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
+            if (ultimateAttack.Value == true)
+            {
+                _weaponManager.PerformUltimateAttack();
+                return;
+            }
+
+            bool normalCombat = gameManager.CombatState == CombatState.Normal;
+           
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed)
+            if (normalAttackInput.KeyPressed && normalCombat)
             {
                 _weaponManager.PerformNormalAttack();
                 return;
@@ -349,72 +304,16 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyPressed)
+            if (specialAttack.KeyDown && normalCombat)
             {
                 _weaponManager.PerformSpecialAttack();
                 return;
             }
-            
-            // Handle ultimate attack
-            var ultimateAttack = SystemAPI.GetSingleton<PlayerUltimateAttackInput>();
-            if (ultimateAttack.KeyPressed)
-            {
-                _weaponManager.PerformUltimateAttack();
-
-                
-               // HandleUltimateAttackInput();
-                return;
-            }
         }
-
-        private void HandleUltimateAttackInput()
-        {
-            Debug.Log("Ult attack pressed");
-            
-            // // passive weapons
-            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            // {
-            //     // // ignore passive weapons
-            //     // // TODO: Create IEnableable component "InActiveState" ?
-            //     // if (!weapon.InActiveState)
-            //     // {
-            //     //     continue;
-            //     // }
-            //
-            //     if (energyBar.CurrentEnergy >= energyBar.MaxEnergy)
-            //     {
-            //         Debug.Log("Perform ult!");
-            //     }
-            //     else
-            //     {
-            //         Debug.Log($"Only have {energyBar.CurrentEnergy} of {energyBar.MaxEnergy}");
-            //     }
-            //
-            //     return;
-            // }
-            //
-            // // active weapons
-            // foreach (var (weapon, energyBar) in SystemAPI.Query<WeaponComponent, EnergyBarComponent>().WithAll<ActiveWeapon>())
-            // {
-            // }
-        }
-
-
+        
         protected override void OnStopRunning()
         {
             UnsubscribeFromAttackEvents();
-        }
-        
-        private void StartNormalAttack(AttackData data)
-        {
-        }
-        
-        private void StartSpecialAttack(AttackData data)
-        {
-        }
-        
-        private void StartUltimateAttack(AttackData data)
-        {
         }
     }
 }

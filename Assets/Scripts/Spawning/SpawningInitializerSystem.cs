@@ -42,7 +42,7 @@ public partial class SpawningInitializerSystem : SystemBase
             _checkpointTimerCutoffs = _controller.spawningCheckpointTimes.ToArray();
             config.ValueRW.timerTime = _checkpointTimerCutoffs[_currentCheckpointIndex];
             
-            if (_checkpointTimerCutoffs.Length <= _currentCheckpointIndex)
+            if (_checkpointTimerCutoffs.Length - 1 <= _currentCheckpointIndex)
             {
                 _currentCheckpointTimerCutoff = int.MaxValue;
             }
@@ -70,11 +70,16 @@ public partial class SpawningInitializerSystem : SystemBase
             
         _cachedCheckpointIndex = _currentCheckpointIndex;
         
-        UpdateCheckpointValues(config);
-            
-            
-            
+        if (_checkpointTimerCutoffs.Length - 1 <= _currentCheckpointIndex)
+        {
+            _currentCheckpointTimerCutoff = int.MaxValue;
+        }
+        else
+        {
+            _currentCheckpointTimerCutoff = _checkpointTimerCutoffs[_currentCheckpointIndex + 1];
+        }
         
+        UpdateCheckpointValues(config);
         
     }
 
@@ -82,6 +87,7 @@ public partial class SpawningInitializerSystem : SystemBase
     {
         var controlObject = _controller.checkpointData[_currentCheckpointIndex];
         config.ValueRW.targetEnemyCount = controlObject.targetEnemyCount;
+        config.ValueRW.isInitialized = false;
         EnemyTypesInformation[] enemyInfo = controlObject.enemyTypesInformation.ToArray();
         var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
         

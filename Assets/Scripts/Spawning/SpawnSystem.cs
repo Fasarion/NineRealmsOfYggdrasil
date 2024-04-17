@@ -158,8 +158,8 @@ public partial struct SpawnSystem : ISystem
     [BurstCompile]
     private int GetSpawnCount(RefRW<SpawnConfig> config, int currentEnemyCount)
     {
-        int minSpawnCount = (int)(config.ValueRO.targetEnemyCount * config.ValueRO.minEnemySpawnPercent);
-        int maxSpawnCount = (int)(config.ValueRO.targetEnemyCount * config.ValueRO.maxEnemySpawnPercent);
+        int minSpawnCount = (int)math.ceil(config.ValueRO.targetEnemyCount * config.ValueRO.minEnemySpawnPercent);
+        int maxSpawnCount = (int)math.ceil(config.ValueRO.targetEnemyCount * config.ValueRO.maxEnemySpawnPercent);
         float currentPercentagePoint = ((float)currentEnemyCount / config.ValueRO.targetEnemyCount);
         float result = math.lerp(maxSpawnCount, minSpawnCount, currentPercentagePoint);
         return (int)result;

@@ -23,7 +23,8 @@ public partial class GetPlayerInputSystem : SystemBase
         
         // Attack
         playerInputActions.InputMap.PlayerNormalAttack.performed += OnNormalAttack;
-        playerInputActions.InputMap.PlayerSpecialAttack.performed += OnSpecialAttack;
+        playerInputActions.InputMap.PlayerSpecialAttack.performed += OnSpecialAttackDown;
+        playerInputActions.InputMap.PlayerSpecialAttack.canceled += OnSpecialAttackUp;
         playerInputActions.InputMap.PlayerUltimateAttack.performed += OnUltimateAttack;
         
         // Weapon switch
@@ -38,8 +39,8 @@ public partial class GetPlayerInputSystem : SystemBase
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
     }
-
     
+
 
     protected override void OnUpdate()
     {
@@ -47,7 +48,7 @@ public partial class GetPlayerInputSystem : SystemBase
         SystemAPI.SetSingleton(new PlayerMoveInput{Value = currentMovementActions});
 
         var currentMousePos = playerInputActions.InputMap.MousePosition.ReadValue<Vector2>();
-        SystemAPI.SetSingleton(new MousePositionInput{Value = currentMousePos});
+        SystemAPI.SetSingleton(new MousePositionInput{ScreenPosition = currentMousePos});
     }
 
     protected override void OnStopRunning()
@@ -55,7 +56,8 @@ public partial class GetPlayerInputSystem : SystemBase
         playerInputActions.Disable();
         
         playerInputActions.InputMap.PlayerNormalAttack.performed -= OnNormalAttack;
-        playerInputActions.InputMap.PlayerSpecialAttack.performed -= OnSpecialAttack;
+        playerInputActions.InputMap.PlayerSpecialAttack.performed -= OnSpecialAttackDown;
+        playerInputActions.InputMap.PlayerSpecialAttack.canceled -= OnSpecialAttackUp;
         playerInputActions.InputMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
         
         // Weapon switch
@@ -65,7 +67,16 @@ public partial class GetPlayerInputSystem : SystemBase
 
         playerInputActions.InputMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
     }
-    
+
+    private void OnSpecialAttackUp(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
+        fireInput.ValueRW.KeyUp = true;
+        fireInput.ValueRW.IsHeld = false;
+    }
+
     private void OnWeapon1(InputAction.CallbackContext obj)
     {
         if (!SystemAPI.Exists(playerEntity)) return;
@@ -99,12 +110,13 @@ public partial class GetPlayerInputSystem : SystemBase
         fireInput.ValueRW.KeyPressed = true;
     }
     
-    private void OnSpecialAttack(InputAction.CallbackContext obj)
+    private void OnSpecialAttackDown(InputAction.CallbackContext obj)
     {
         if (!SystemAPI.Exists(playerEntity)) return;
 
         var fireInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
-        fireInput.ValueRW.KeyPressed = true;
+        fireInput.ValueRW.KeyDown = true;
+        fireInput.ValueRW.IsHeld = true;
     }
     
     private void OnUltimateAttack(InputAction.CallbackContext obj)
@@ -119,7 +131,7 @@ public partial class GetPlayerInputSystem : SystemBase
     {
         if (!SystemAPI.Exists(playerEntity)) return;
         
-        var uiButtonInput = SystemAPI.GetSingletonRW<UpgradeUIButtonPress>();
+        var uiButtonInput = SystemAPI.GetSingletonRW<PrimaryButtonInput>();
         uiButtonInput.ValueRW.isPressed = true;
     }
 }

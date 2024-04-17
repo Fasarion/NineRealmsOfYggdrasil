@@ -30,7 +30,7 @@ public class AudioManager : MonoBehaviour
     }*/
     public void PlayAudioData(AudioData audioData)
     {
-        switch ((int)audioData.eventType)
+        switch ((int)audioData.eventCategoryType)
         {
             case 0: //No category
             {
@@ -39,7 +39,7 @@ public class AudioManager : MonoBehaviour
             }
             case 1: //PlayerCategory
             {
-                //something player gets hit here
+                playerAudio.PlayerAudioCaller((int) audioData.audioEventType);
                 break;
             }
             case 2:  //EnemyCategory

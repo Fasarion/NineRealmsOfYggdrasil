@@ -3,9 +3,10 @@ public struct AudioData
 {
     public int AudioEnumValue;
     
-    public EventCategoryType eventType;
+    public EventCategoryType eventCategoryType;
     public EnvironmentType environmentType;
     public EnemyTyping enemyTyping;
+    public AudioEventType audioEventType;
 }
 [System.Serializable]
 public enum EnvironmentType
@@ -32,4 +33,11 @@ public enum EnemyTyping
     Ranger = 2,
     CoolDude = 3,
     
+}
+
+[System.Serializable]
+public enum AudioEventType
+{
+    None = 0,
+    HitAudio = 1
 }

@@ -46,13 +46,13 @@ public partial class UpgradeApplierSystem : SystemBase
         }
     }
 
-    private RefRW<WeaponStatsComponent> GetStatsComponent(UpgradeBaseType baseType)
+    private RefRW<CombatStatsComponent> GetStatsComponent(UpgradeBaseType baseType)
     {
         switch (baseType)
         {
             case UpgradeBaseType.Sword:
                 
-                foreach (var stats in SystemAPI.Query<RefRW<WeaponStatsComponent>>()
+                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
                     .WithAll<SwordStatsTag>())
                 {
                     return stats;
@@ -63,12 +63,12 @@ public partial class UpgradeApplierSystem : SystemBase
         return default;
     }
 
-    private void ApplyUpgrade(UpgradeInformation upgrade, RefRW<WeaponStatsComponent> statsComponent)
+    private void ApplyUpgrade(UpgradeInformation upgrade, RefRW<CombatStatsComponent> statsComponent)
     {
         switch (upgrade.valueToUpgrade)
         {
             case UpgradeValueTypes.Damage:
-                statsComponent.ValueRW.baseDamage += upgrade.valueAmount;
+                statsComponent.ValueRW.OverallStats.BaseDamage += upgrade.valueAmount;
                 break;
         }
     }

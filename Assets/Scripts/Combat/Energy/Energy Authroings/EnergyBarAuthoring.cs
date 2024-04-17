@@ -20,6 +20,9 @@ public class EnergyBarAuthoring : MonoBehaviour
             
             AddComponent(entity, new HasChangedEnergy());
             SetComponentEnabled<HasChangedEnergy>(entity, false);
+            
+            AddComponent(entity, new ResetEnergyTag());
+            SetComponentEnabled<ResetEnergyTag>(entity, false);
         }
     }
 }
@@ -28,3 +31,5 @@ public struct HasChangedEnergy : IEnableableComponent, IComponentData
 {
     public float Value;
 }
+
+public struct ResetEnergyTag : IEnableableComponent, IComponentData{}

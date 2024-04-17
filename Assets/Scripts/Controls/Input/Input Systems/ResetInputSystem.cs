@@ -32,7 +32,8 @@ public partial struct ResetInputSystem : ISystem
         var normalAttackInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
         normalAttackInput.ValueRW.KeyPressed = false;
         var specialAttackInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
-        specialAttackInput.ValueRW.KeyPressed = false;
+        specialAttackInput.ValueRW.KeyDown = false;
+        specialAttackInput.ValueRW.KeyUp = false;
         var ultimateAttackInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
         ultimateAttackInput.ValueRW.KeyPressed = false;
         

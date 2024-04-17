@@ -32,16 +32,13 @@ public partial struct SwordSpecialAttackSystem : ISystem
             return;
 
         attackCaller.ValueRW.shouldActiveAttack = false;
-
-        Debug.Log("Sword Special");
+        
         
         var config = SystemAPI.GetSingleton<IceRingConfig>();
         
         var query = SystemAPI.QueryBuilder().WithAll<IceRingConfig, ChargeTimer>().Build();
         if (query.CalculateEntityCount() == 0)
         {
-            Debug.Log("Spawn special ability charge");
-            
             var ability = state.EntityManager.Instantiate(config.chargeAreaPrefab);
             state.EntityManager.SetComponentData(ability, new ChargeTimer
             {

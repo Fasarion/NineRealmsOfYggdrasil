@@ -34,7 +34,7 @@ public partial struct HammerUltimateAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-        if (!attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Hammer, AttackType.Ultimate))
+        if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Hammer, AttackType.Ultimate))
             return;
 
         attackCaller.ValueRW.shouldActiveAttack = false;

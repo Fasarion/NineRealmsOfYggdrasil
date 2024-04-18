@@ -37,7 +37,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         
         if (_isActive)
         {
-            if (attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Sword, AttackType.Normal))
+            if (attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Normal))
             {
                 _attackCount++;
             }
@@ -52,7 +52,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         }
         
         
-        if (!attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Sword, AttackType.Ultimate))
+        if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Ultimate))
             return;
         
         attackCaller.ValueRW.shouldActiveAttack = false;

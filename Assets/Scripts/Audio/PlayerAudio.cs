@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using FMOD.Studio;
 using FMODUnity;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Audio/PlayerAudio")]
 public class PlayerAudio : ScriptableObject
@@ -43,16 +44,30 @@ public class PlayerAudio : ScriptableObject
     {
         RuntimeManager.PlayOneShot(footsteps);
     }
+    
 
+    private float lastXpSoundTime;
+    private float shepardResetTime = 3f;
+    
     public void xpAudio()
     {
         xpIns = RuntimeManager.CreateInstance(xpGain);
         //start coroutine??
+        
+        float timeOfXpSound = Time.time;
+        
+        // reset shepard
+        if (timeOfXpSound > lastXpSoundTime + shepardResetTime)
+        {
+            shepard = 1;
+        }
+        
         xpIns.setParameterByName("XPParam", shepard % 25);
         xpIns.start();
         xpIns.release();
         shepard++;
-       
+
+        lastXpSoundTime = timeOfXpSound;
     }
     
 

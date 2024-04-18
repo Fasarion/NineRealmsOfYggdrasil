@@ -67,8 +67,8 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         switch (upgrade.valueToUpgrade)
         {
-            case UpgradeValueTypes.Damage:
-                statsComponent.ValueRW.OverallStats.BaseDamage += upgrade.valueAmount;
+            case UpgradeValueTypes.damage:
+                statsComponent.ValueRW.OverallStats.Damage.BaseValue += upgrade.valueAmount;
                 break;
         }
     }

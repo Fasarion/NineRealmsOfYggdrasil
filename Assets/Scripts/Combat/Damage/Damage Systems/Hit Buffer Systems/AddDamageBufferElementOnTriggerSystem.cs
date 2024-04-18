@@ -1,6 +1,7 @@
 using Health;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Physics;
 using Unity.Physics.Systems;
 using UnityEngine;
 
@@ -14,20 +15,30 @@ namespace Damage
     public partial struct AddDamageBufferElementOnTriggerSystem : ISystem
     {
         [BurstCompile]
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<RandomComponent>();
+        }
+        
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var damageBufferLookup = SystemAPI.GetBufferLookup<DamageBufferElement>();
+            var random = SystemAPI.GetSingletonRW<RandomComponent>();
             
             foreach (var (hitBuffer, damageOnTrigger) in SystemAPI.Query<DynamicBuffer<HitBufferElement>, DamageOnTriggerComponent>())
             {
                 foreach (var hit in hitBuffer)
                 {
                     if (hit.IsHandled) continue;
+
                     var damageBuffer = damageBufferLookup[hit.HitEntity];
+
+                   // float randomFloat = random.ValueRW.random.NextFloat();
+                    
                     damageBuffer.Add(new DamageBufferElement
                     {
-                        HitPoints = damageOnTrigger.DamageValue,
-                        DamageType = damageOnTrigger.DamageType,
+                        DamageContents = damageOnTrigger.Value
                     });
                 }
             }

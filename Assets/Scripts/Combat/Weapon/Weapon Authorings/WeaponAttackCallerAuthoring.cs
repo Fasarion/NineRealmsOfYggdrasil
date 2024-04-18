@@ -32,7 +32,7 @@ public struct WeaponAttackCaller : IComponentData
     public AttackType currentAttackType;
     public WeaponType currentWeaponType;
     public int currentCombo;
-
+    
     public bool ShouldAttackWithType(WeaponType type, AttackType attackType)
     {
         if (!shouldActiveAttack) return false;

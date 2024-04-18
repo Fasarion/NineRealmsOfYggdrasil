@@ -8,7 +8,7 @@ public class IceRingConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
     public GameObject chargeAreaPrefab;
-    [HideInInspector] public float maxDisplayTime;
+    public float maxDisplayTime;
     public float damageDelayTime;
     public float maxChargeTime;
     public float damage;

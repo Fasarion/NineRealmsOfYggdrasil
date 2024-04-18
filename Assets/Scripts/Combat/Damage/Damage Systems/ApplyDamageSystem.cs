@@ -10,9 +10,16 @@ namespace Damage
     public partial struct ApplyDamageSystem : ISystem
     {
         [BurstCompile]
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<RandomComponent>();
+        }
+
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+            var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
 
             foreach (var (currentHP, damageBuffer, damageReceivingEntity) in SystemAPI
                 .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>>()
@@ -21,10 +28,18 @@ namespace Damage
                 float totalDamageToDeal = 0;
 
                 // Add damage from all damage elements in Damage Element Buffer
-                // TODO: Handle specific damage types, multiplier etc
                 foreach (var damageElement in damageBuffer)
                 {
-                    totalDamageToDeal += damageElement.HitPoints;
+                    float randomFloat = randomComponent.ValueRW.random.NextFloat();
+                    float damageToDeal = damageElement.DamageContents.DamageValue;
+
+                    // Add critical damage
+                    if (damageElement.DamageContents.CriticalRate > randomFloat)
+                    {
+                        damageToDeal *= damageElement.DamageContents.CriticalModifier;
+                    }
+                    
+                    totalDamageToDeal += damageToDeal;
                 }
                 
                 // Clear damage buffer to avoid dealing damage multiple times an different frames
@@ -50,9 +65,6 @@ namespace Damage
                 if (currentHP.ValueRO.Value <= 0)
                 {
                     ecb.SetComponentEnabled<ShouldBeDestroyed>(damageReceivingEntity, true);
-
-                    
-                    //ecb.AddComponent<ShouldBeDestroyed>(damageReceivingEntity);
                 }
             }
             

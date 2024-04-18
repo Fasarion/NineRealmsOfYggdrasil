@@ -17,6 +17,9 @@ namespace Patrik
         private PlayerWeaponManagerBehaviour _weaponManager;
         private bool hasSetUpWeaponManager;
 
+        private AttackData previousActiveAttackData;
+        private AttackData previousPassiveAttackData;
+
         CollisionFilter collisionFilter = new CollisionFilter()
         {
             BelongsTo = 1, // Projectile
@@ -140,54 +143,36 @@ namespace Patrik
             weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
             weaponCaller.ValueRW.currentCombo = data.ComboCounter;
             
-            WriteOverAttackData(data);
+            if (DifferentAttackData(data, previousActiveAttackData))
+            {
+                WriteOverAttackData(data);
+                previousActiveAttackData = data;
+            }
+        }
+
+        private bool DifferentAttackData(AttackData newData, AttackData lastData)
+        {
+            if (newData.AttackType != lastData.AttackType) return true;
+            if (newData.ComboCounter != lastData.ComboCounter) return true;
+            if (newData.WeaponType != lastData.WeaponType) return true;
+
+            return false;
         }
 
         private void WriteOverAttackData(AttackData data)
         {
-            var entity = GetWeaponEntity(data.WeaponType);
-            
-            // fetch attack data
-            AttackType attackType = data.AttackType;
-            Transform attackPoint = data.AttackPoint;
-            
-            // update weapon component data
-            var weapon = EntityManager.GetComponentData<WeaponComponent>(entity);
-            LocalTransform transform = new LocalTransform
+            bool statHandlerExists =
+                SystemAPI.TryGetSingletonRW<StatHandlerComponent>(out RefRW<StatHandlerComponent> statHandler);
+            if (!statHandlerExists)
             {
-                Position = attackPoint.position,
-                Rotation = attackPoint.rotation,
-            };
-            weapon.AttackPoint = transform;
-            EntityManager.SetComponentData(entity, weapon);
+                Debug.LogWarning("No stat handler exists, can't update stats.");
+                return;
+            }
             
-            // update damage data
-            var weaponStatsComponent = EntityManager.GetComponentData<CombatStatsComponent>(entity);
-            var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-            var playerStatsComponent = EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
-            
-            int combo = data.ComboCounter;
-            float totalDamage = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Damage, combo);
-            float totalCritRate = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.CriticalRate, combo);
-            float totalCritMod = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.CriticalModifier, combo);
-            
-            DamageContents damageContents = new DamageContents()
-            {
-                DamageValue = totalDamage,
-                CriticalRate = totalCritRate,
-                CriticalModifier = totalCritMod,
-            };
-
-            DamageOnTriggerComponent damageComp = EntityManager.GetComponentData<DamageOnTriggerComponent>(entity);
-            damageComp.Value = damageContents;
-            EntityManager.SetComponentData(entity, damageComp);
-            
-            // set knockback
-            float totalKnockBack = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.KnockBack, combo);
-
-            KnockBackForce knockBackComp = EntityManager.GetComponentData<KnockBackForce>(entity);
-            knockBackComp.Value = totalKnockBack;
-            EntityManager.SetComponentData(entity, knockBackComp);
+            statHandler.ValueRW.ShouldUpdateStats = true;
+            statHandler.ValueRW.WeaponType = data.WeaponType;
+            statHandler.ValueRW.AttackType = data.AttackType;
+            statHandler.ValueRW.ComboCounter = data.ComboCounter;
         }
 
         private void OnActiveAttackStop(AttackData data)
@@ -198,8 +183,13 @@ namespace Patrik
         private void OnPassiveAttackStart(AttackData data)
         {
             EnableWeapon(data.WeaponType);
-            WriteOverAttackData(data);
-
+            
+            if (DifferentAttackData(data, previousPassiveAttackData))
+            {
+                WriteOverAttackData(data);
+                previousPassiveAttackData = data;
+            }
+            
             switch (data.WeaponType)
             {
                 case WeaponType.Hammer:

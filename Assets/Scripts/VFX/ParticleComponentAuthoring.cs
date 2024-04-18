@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.VFX;
@@ -25,7 +26,7 @@ class Baker : Baker<ParticleComponentAuthoring>
         public override void Bake(ParticleComponentAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponentObject(entity, new GameObjectAnimatorPrefab
+            AddComponentObject(entity, new GameObjectParticlePrefab
             {
                 Value = authoring.gameObjectPrefab,
                 FollowEntity = authoring.followsEntity
@@ -78,21 +79,23 @@ public partial struct HandleParticleSystem : ISystem
         foreach (var (transform, particleReference, particleObject) in
             SystemAPI.Query<RefRW<LocalTransform>, ParticleReference, GameObjectParticlePrefab>())
         {
-            var animator = particleReference.Particle;
-            if (!animator)
+            var particleSystem = particleReference.Particle;
+            if (!particleSystem)
                 continue;
             
-            var animatorTransform = animator.transform;
+            var particleSystemTransform = particleSystem.transform;
             
             if (particleObject.FollowEntity)
             {
-                animatorTransform.position = transform.ValueRO.Position;
-                animatorTransform.rotation = transform.ValueRO.Rotation;
+                particleSystemTransform.position = transform.ValueRO.Position;
+                particleSystemTransform.rotation = transform.ValueRO.Rotation;
+                particleSystemTransform.localScale = (float3)transform.ValueRO.Scale;
             }
             else
             {
-                transform.ValueRW.Position = animatorTransform.position;
-                transform.ValueRW.Rotation = animatorTransform.rotation;
+                transform.ValueRW.Position = particleSystemTransform.position;
+                transform.ValueRW.Rotation = particleSystemTransform.rotation;
+                transform.ValueRW.Scale = particleSystemTransform.localScale.x;
             }
         }
         

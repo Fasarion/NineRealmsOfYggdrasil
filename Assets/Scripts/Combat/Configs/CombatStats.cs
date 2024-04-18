@@ -27,6 +27,7 @@ public enum CombatStatType
      CriticalModifier,
     
      Area,
+     Size,
     
      AttackSpeed,
 
@@ -48,6 +49,9 @@ public struct CombatStats
     [Header("Area")]
     public CombatStatValue Area;
     
+    [Header("Area")]
+    public CombatStatValue Size;
+    
     [Header("Speed")]
     public CombatStatValue AttackSpeed;
 
@@ -68,6 +72,7 @@ public struct CombatStats
                case CombatStatType.CriticalRate : return CriticalRate;
                case CombatStatType.CriticalModifier : return CriticalModifier;
                case CombatStatType.Area : return Area;
+               case CombatStatType.Size : return Size;
                case CombatStatType.AttackSpeed : return AttackSpeed;
                case CombatStatType.KnockBack : return KnockBack;
                case CombatStatType.Cooldown : return Cooldown;
@@ -91,6 +96,7 @@ public struct CombatStats
         CriticalModifier = CombatStatValue.Default, 
         
         Area = CombatStatValue.Default,
+        Size = CombatStatValue.Default,
         
         AttackSpeed = CombatStatValue.Default,
 

@@ -5,7 +5,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MapProgressBarScroller : MonoBehaviour
+public class MapProgressionBarScroller : MonoBehaviour
 {
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField]  private float scrollRate = 1.5f;

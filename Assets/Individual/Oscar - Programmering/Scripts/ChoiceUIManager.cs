@@ -71,6 +71,7 @@ public class ChoiceUIManager : MonoBehaviour
 
         //HideUI();
     }
+    
 
     private void OnRoomChanged(RoomNode chosenNode)
     {
@@ -100,6 +101,15 @@ public class ChoiceUIManager : MonoBehaviour
 
     public void Start()
     {
+       
+        
+        
+        
+        //DisplayRoomChoiceTree(roomChoiceObjects);
+    }
+
+    public void OnRoomTreeGenerated()
+    {
         var nodeList = roomTreeGenerator.GetCurrentNodeList();
         roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
         var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();
@@ -111,7 +121,6 @@ public class ChoiceUIManager : MonoBehaviour
         shopSelectionCardsInstantiator.InstantiateSelectionCards(3);
         weaponSelectionCardsInstantiator.InstantiateSelectionCards(3);
         currentSelectionCardsInstantiator.MoveSelectionCardsIntoView();
-        //DisplayRoomChoiceTree(roomChoiceObjects);
     }
 
 
@@ -139,7 +148,9 @@ public class ChoiceUIManager : MonoBehaviour
     
     private void OnEnable()
     {
-        
+
+        RoomTreeGenerator.roomTreeGenerated += OnRoomTreeGenerated;
+
         //var upgradeUISystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<UpgradeUISystem>();
         //upgradeUISystem.OnUpgradeUIDisplayCall += DisplayUpgradeCards;
     }

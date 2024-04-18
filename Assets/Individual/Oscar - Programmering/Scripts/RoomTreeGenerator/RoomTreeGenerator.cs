@@ -20,7 +20,7 @@ public class RoomTreeGenerator : MonoBehaviour
     private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
 
     public int gridWidth;
-    public int gridHeight;
+    private int gridHeight;
     private Vector2Int roomNodeCoordinates;
 
     private Canvas canvas;
@@ -30,17 +30,42 @@ public class RoomTreeGenerator : MonoBehaviour
 
     private RoomNode startingRoomNode;
     private RoomNode currentParentNode;
+
+
+    public static Action roomTreeGenerated;
+
     
 
     public void Awake()
     {
         canvas = FindObjectOfType<Canvas>();
+       
+
         levelNodeTree = new Dictionary<int, List<GameObject>>();
         roomNodeGridMap = new Dictionary<Vector2Int, RoomNode>();
+        
+        
+        
+    }
+
+    public void OnEnable()
+    {
+        ProgressionBarContentContainer.onProgressionContentSet += OnMapProgressionContentSet;
+    }
+
+    public void OnDisable()
+    {
+        ProgressionBarContentContainer.onProgressionContentSet -= OnMapProgressionContentSet;
     }
 
     public void Start()
     {
+       
+    }
+    
+    public void OnMapProgressionContentSet(int levelsInUI)
+    {
+        gridHeight = levelsInUI;
         Random random = new Random(roomSeed);
         GenerateRoomGrid(random);
         GenerateStartingRoomNode();
@@ -51,7 +76,11 @@ public class RoomTreeGenerator : MonoBehaviour
         {
             GenerateRoomUINodes();
         }
+        roomTreeGenerated.Invoke();
+        
     }
+
+  
     
     public List<RoomNode> GetCurrentNodeList()
     {

@@ -16,7 +16,7 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
     [SerializeField] public RoomNode roomNode;
 
 
-    public static Action<RoomNode> onRoomChanged;
+    public static Action<RoomNode, SceneReference> onRoomChanged;
     // Start is called before the first frame update
 
     protected override void PopulateDisplayValues(ChoiceObject newRoomChoiceObject)
@@ -35,7 +35,7 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
     
     public override void RegisterMouseClick()
     {
-        onRoomChanged?.Invoke(roomNode);
-        manager.RegisterRoomSelectionClick(roomSceneReference);
+        onRoomChanged?.Invoke(roomNode, roomSceneReference);
+        //manager.RegisterRoomSelectionClick(roomSceneReference);
     }
 }

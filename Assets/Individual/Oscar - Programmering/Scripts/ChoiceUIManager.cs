@@ -7,7 +7,9 @@ using UnityEngine.SceneManagement;
 
 public class ChoiceUIManager : MonoBehaviour
 {
-
+    
+    
+    //private ChoiceSO choiceSo;
     public enum SelectionType
     {
         roomChoice,
@@ -42,6 +44,9 @@ public class ChoiceUIManager : MonoBehaviour
     
     
     public Action<SceneReference> OnRoomChosen;
+
+    private Dictionary<Vector2Int, RoomNode> roomNodeGridMap;
+
     public static ChoiceUIManager Instance
     {
         get
@@ -57,6 +62,8 @@ public class ChoiceUIManager : MonoBehaviour
     private void Awake()
     {
         RoomChoiceUIBehaviour.onRoomChanged += OnRoomChanged;
+        ChoiceUIBehaviour.onCardMouseClick += OnCardClicked;
+        //ChoiceSO.loadChoiceData;
         currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
         roomTreeGenerator = GetComponent<RoomTreeGenerator>();
         //allSelectionCardsHidden = true;
@@ -71,10 +78,16 @@ public class ChoiceUIManager : MonoBehaviour
 
         //HideUI();
     }
-    
 
-    private void OnRoomChanged(RoomNode chosenNode)
+    private void OnCardClicked()
     {
+        SwapScreenRight();
+    }
+
+
+    private void OnRoomChanged(RoomNode chosenNode, SceneReference roomSceneReference)
+    {
+        currentSelectionIndex++;
         roomTreeGenerator.UpdateNodeLevel(chosenNode);
         
         var nodeList = roomTreeGenerator.GetCurrentNodeList();
@@ -85,6 +98,8 @@ public class ChoiceUIManager : MonoBehaviour
             roomTreeGenerator.PopulateRoomPrefab(cardObjects[i], nodeList[i]);
         }
         levelProgressionManager.UpdateTargetObject();
+        
+        RegisterRoomSelectionClick(roomSceneReference);
     }
     private void OnSelectionCardEntered()
     {
@@ -108,8 +123,9 @@ public class ChoiceUIManager : MonoBehaviour
         //DisplayRoomChoiceTree(roomChoiceObjects);
     }
 
-    public void OnRoomTreeGenerated()
+    public void OnRoomTreeGenerated(Dictionary<Vector2Int, RoomNode> generatedRoomNodeGridMap)
     {
+        roomNodeGridMap = generatedRoomNodeGridMap;
         var nodeList = roomTreeGenerator.GetCurrentNodeList();
         roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
         var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();

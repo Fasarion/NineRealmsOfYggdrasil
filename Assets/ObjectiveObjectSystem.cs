@@ -10,11 +10,8 @@ using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-[UpdateAfter(typeof(PlayerMovement))]
-[BurstCompile]
-public partial struct XPObjectSystem : ISystem
+public partial struct ObjectiveObjectSystem : ISystem
 {
     private JobHandle _checkDistanceJob;
     private JobHandle _moveObjectJob;
@@ -30,6 +27,8 @@ public partial struct XPObjectSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        
+        /*
         state.Dependency.Complete();
         
         var config = SystemAPI.GetSingleton<XPObjectConfig>();
@@ -143,4 +142,7 @@ partial struct MoveXPObjectJob : IJobEntity
         }
         
     }
+    */
+}
+
 }

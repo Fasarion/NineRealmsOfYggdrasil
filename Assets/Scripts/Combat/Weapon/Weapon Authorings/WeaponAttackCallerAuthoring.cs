@@ -19,8 +19,8 @@ public class WeaponAttackCallerAuthoring : MonoBehaviour
                 new WeaponAttackCaller
                     {
                         shouldActiveAttack = authoring.shouldActiveAttack,
-                        currentAttackType = authoring.currentAttackType,
-                        currentWeaponType = authoring.currentWeaponType
+                        currentActiveAttackType = authoring.currentAttackType,
+                        currentActiveWeaponType = authoring.currentWeaponType
                     });
         }
     }
@@ -29,14 +29,24 @@ public class WeaponAttackCallerAuthoring : MonoBehaviour
 public struct WeaponAttackCaller : IComponentData
 {
     public bool shouldActiveAttack;
-    public AttackType currentAttackType;
-    public WeaponType currentWeaponType;
-    public int currentCombo;
+    public AttackType currentActiveAttackType;
+    public WeaponType currentActiveWeaponType;
+    public int currentActiveCombo;
+
+    public bool shouldPassiveAttack;
+    public WeaponType currentPassiveWeaponType;
     
-    public bool ShouldAttackWithType(WeaponType type, AttackType attackType)
+    public bool ShouldActiveAttackWithType(WeaponType type, AttackType attackType)
     {
         if (!shouldActiveAttack) return false;
 
-        return type == currentWeaponType && attackType == currentAttackType;
+        return type == currentActiveWeaponType && attackType == currentActiveAttackType;
+    }
+    
+    public bool ShouldPassiveAttackWithType(WeaponType type)
+    {
+        if (!shouldPassiveAttack) return false;
+
+        return type == currentPassiveWeaponType;
     }
 }

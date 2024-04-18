@@ -11,7 +11,7 @@ namespace Weapon
         
         // [Tooltip("Cooldown time between each shot coming from this weapon.")]
         // [SerializeField] 
-        private float coolDownTime;
+        //private float coolDownTime;
     
         class Baker : Baker<ProjectileSpawnerAuthoring>
         {
@@ -22,10 +22,13 @@ namespace Weapon
                 AddComponent(entity, new ProjectileSpawnerComponent
                 {
                     Projectile = GetEntity(authoring.projectilePrefab, TransformUsageFlags.Dynamic),
-                    CoolDownTime = authoring.coolDownTime,
-                
-                    CurrentCoolDownTime = authoring.coolDownTime
+                    // CoolDownTime = authoring.coolDownTime,
+                    //
+                    // CurrentCoolDownTime = authoring.coolDownTime
                 });
+                
+                AddComponent(entity, new ShouldSpawnProjectile());
+                SetComponentEnabled<ShouldSpawnProjectile>(entity, false);
             }
         }
     }

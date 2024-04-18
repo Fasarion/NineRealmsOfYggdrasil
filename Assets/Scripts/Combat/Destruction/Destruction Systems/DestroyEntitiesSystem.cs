@@ -23,21 +23,26 @@ namespace Destruction
                 .CreateCommandBuffer(state.WorldUnmanaged);
             
             var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
-            var spawnEntityOnDestroyLookup = SystemAPI.GetComponentLookup<SpawnEntityOnDestroy>();
+            var spawnEntityOnDestroyLookup = SystemAPI.GetBufferLookup<SpawnEntityOnDestroyElement>();
 
             foreach (var (_, entity) in SystemAPI.Query<RefRW<ShouldBeDestroyed>>().WithEntityAccess())
             {
                 
                 // Spawn Objects on destroy
-                if (spawnEntityOnDestroyLookup.TryGetComponent(entity, out var spawnEntityOnDestroy))
+                if (spawnEntityOnDestroyLookup.HasBuffer(entity))
                 {
-                    var spawnedEntity = beginSimECB.Instantiate(spawnEntityOnDestroy.Value);
-                    if (transformLookup.TryGetComponent(entity, out var transform))
+                    var spawnBuffer = spawnEntityOnDestroyLookup[entity];
+
+                    foreach (var spawnElement in spawnBuffer)
                     {
-                        var localTransform = SystemAPI.GetComponent<LocalTransform>(spawnEntityOnDestroy.Value);
-                        localTransform.Position = transform.Position;
-                        localTransform.Rotation = transform.Rotation;
-                        beginSimECB.SetComponent(spawnedEntity, localTransform);
+                        var spawnedEntity = beginSimECB.Instantiate(spawnElement.Value);
+                        if (transformLookup.TryGetComponent(entity, out var transform))
+                        {
+                            var localTransform = SystemAPI.GetComponent<LocalTransform>(entity);
+                            localTransform.Position = transform.Position;
+                            localTransform.Rotation = transform.Rotation;
+                            beginSimECB.SetComponent(spawnedEntity, localTransform);
+                        }
                     }
                 }
 

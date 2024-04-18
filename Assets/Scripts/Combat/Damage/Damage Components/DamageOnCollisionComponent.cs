@@ -4,6 +4,6 @@ namespace Damage
 {
     public struct DamageOnCollisionComponent : IComponentData
     {
-        public float Amount;
+        public DamageContents DamageContents;
     }
 }

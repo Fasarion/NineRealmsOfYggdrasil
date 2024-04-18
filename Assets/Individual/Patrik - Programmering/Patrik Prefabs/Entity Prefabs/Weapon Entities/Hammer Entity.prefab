@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1241454776382192550}
   - component: {fileID: 4163681344479688090}
   - component: {fileID: 2457381261264463122}
+  - component: {fileID: 7174780387647835181}
   - component: {fileID: 4043427351486798972}
   - component: {fileID: 2372089618107141578}
   - component: {fileID: 5186246801072734339}
@@ -24,6 +25,7 @@ GameObject:
   - component: {fileID: 6980750288525973889}
   - component: {fileID: 5855346060607729036}
   - component: {fileID: 9177841472888272778}
+  - component: {fileID: 4066208094940666673}
   m_Layer: 0
   m_Name: Hammer Entity
   m_TagString: Untagged
@@ -39,7 +41,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8745109184148579111}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
@@ -53,7 +55,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8745109184148579111}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
   m_Name: 
@@ -196,7 +198,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8745109184148579111}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ccea9ea98e38942e0b0938c27ed1903e, type: 3}
   m_Name: 
@@ -240,6 +242,108 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
+--- !u!114 &7174780387647835181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e97ceb27a04cd980d131d2d1c6d72a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OverallStats:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0.518
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  NormalAttack:
+    BaseDamage: 5
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0.1
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 2
+      AttackThree: 5
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  SpecialAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  PassiveAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
+  UltimateAttack:
+    BaseDamage: 1
+    AttackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    BaseCriticalMultiplier: 1
+    BaseCriticalRate: 0
+    Area: 1
+    AttackSpeed: 1
+    BaseKnockBack: 1
+    KnockBackComboMultiplier:
+      AttackOne: 1
+      AttackTwo: 1
+      AttackThree: 1
+    Cooldown: 1
+    MaxEnergy: 1
+    EnergyFillPerHit: 1
 --- !u!114 &4043427351486798972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,8 +369,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 0
-  damageType: 0
+  damageContents:
+    DamageValue: 1
+    DamageType: 0
+    CriticalRate: 0.5
+    CriticalModifier: 1.5
 --- !u!114 &5186246801072734339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 2
+  ultimateAttackUsesTarget: 1
 --- !u!114 &7149218614033731635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,8 +504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0926d93b98014cec9db2721b9133e149, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passiveFillPerHit: 5
-  activeFillPerHit: 1
+  passiveFillPerHit: 2
+  activeFillPerHit: 5
 --- !u!114 &9177841472888272778
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -412,6 +520,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventType: 0
+    eventCategoryType: 0
     environmentType: 0
     enemyTyping: 0
+    audioEventType: 0
+--- !u!114 &4066208094940666673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa22a4f92c784c3ab1a74c429d3c59d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

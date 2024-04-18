@@ -250,8 +250,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageValue: 500
-  damageType: 1
+  damageContents:
+    DamageValue: 1
+    DamageType: 0
+    CriticalRate: 0.294
+    CriticalModifier: 1.1
 --- !u!114 &3681451223392617389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,70 +339,250 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverallStats:
-    BaseDamage: 1
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   NormalAttack:
-    BaseDamage: 1
-    AttackComboMultiplier:
-      AttackOne: 1
-      AttackTwo: 1.1
-      AttackThree: 1.2
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   SpecialAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   PassiveAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   UltimateAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
 --- !u!1 &4554353561460571771
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,70 +641,250 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverallStats:
-    BaseDamage: 1
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   NormalAttack:
-    BaseDamage: 1
-    AttackComboMultiplier:
-      AttackOne: 1
-      AttackTwo: 1.1
-      AttackThree: 1.2
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   SpecialAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   PassiveAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   UltimateAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
 --- !u!1 &4849479046651394249
 GameObject:
   m_ObjectHideFlags: 0
@@ -562,6 +925,7 @@ Transform:
   - {fileID: 2846498616045744737}
   - {fileID: 313021785713749217}
   - {fileID: 2495837115672680443}
+  - {fileID: 5349570221472495303}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4913367270568860942
@@ -623,7 +987,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6592412589437415871
 Transform:
   m_ObjectHideFlags: 0
@@ -690,6 +1054,50 @@ MonoBehaviour:
   experience: 1
   baseDistance: 5
   moveSpeed: 10
+--- !u!1 &7310385346746404717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5349570221472495303}
+  - component: {fileID: 1715486469529400681}
+  m_Layer: 0
+  m_Name: Stat Change Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5349570221472495303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310385346746404717}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6481230346474377608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1715486469529400681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7310385346746404717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 625100ca95d60d64face717bbfdcfba3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7637475363350875275
 GameObject:
   m_ObjectHideFlags: 0
@@ -748,70 +1156,250 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OverallStats:
-    BaseDamage: 1
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   NormalAttack:
-    BaseDamage: 1
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   SpecialAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   PassiveAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
   UltimateAttack:
-    BaseDamage: 0
-    AttackComboMultiplier:
-      AttackOne: 0
-      AttackTwo: 0
-      AttackThree: 0
-    CriticalDamage: 0
-    CriticalRate: 0
-    Area: 0
-    AttackSpeed: 0
-    Cooldown: 0
-    MaxEnergy: 0
-    EnergyFillPerHit: 0
+    Damage:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalRate:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    CriticalModifier:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    AttackSpeed:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    KnockBack:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Cooldown:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    EnergyFillPerHit:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
 --- !u!1 &7747805933802500312
 GameObject:
   m_ObjectHideFlags: 0
@@ -872,14 +1460,8 @@ MonoBehaviour:
   enemyPrefabs:
   - prefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3, type: 3}
     enemyType: 0
-  - prefab: {fileID: 89125744733743645, guid: 2aca3fe8be642334c9dec21679d5d771, type: 3}
+  - prefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3, type: 3}
     enemyType: 1
-  - prefab: {fileID: 89125744733743645, guid: ac08a3afbf1c0bf419fb86c0949c22cd, type: 3}
-    enemyType: 2
-  - prefab: {fileID: 89125744733743645, guid: 1f7effe1d143b1049b6ebb1edc704469, type: 3}
-    enemyType: 3
-  - prefab: {fileID: 89125744733743645, guid: 54fc350a511d92f4287617f7bd8ce9c3, type: 3}
-    enemyType: 4
 --- !u!1 &7981734215352036249
 GameObject:
   m_ObjectHideFlags: 0

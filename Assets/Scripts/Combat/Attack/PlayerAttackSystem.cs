@@ -8,16 +8,23 @@ using Unity.Transforms;
 using UnityEngine;
 using Collider = Unity.Physics.Collider;
 using Material = Unity.Physics.Material;
+using Random = UnityEngine.Random;
 
 namespace Patrik
 {
     public partial class PlayerAttackSystem : SystemBase
     {
         private PlayerWeaponManagerBehaviour _weaponManager;
-
         private bool hasSetUpWeaponManager;
 
-        private float disabledTransformScale = 0.001f;
+        private AttackData previousActiveAttackData;
+        private AttackData previousPassiveAttackData;
+
+        CollisionFilter collisionFilter = new CollisionFilter()
+        {
+            BelongsTo = 1, // Projectile
+            CollidesWith = 1 << 1 // Enemy
+        };
 
         protected override void OnUpdate()
         {
@@ -66,17 +73,13 @@ namespace Patrik
 
         private void DisableAllWeapons()
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-            
-            foreach (var ( transform, entity) in SystemAPI
-                .Query<RefRW<LocalTransform>>()
+            foreach (var ( collider, entity) in SystemAPI
+                .Query<RefRW<PhysicsCollider>>()
                 .WithAll<WeaponComponent>()
                 .WithEntityAccess())
             {
-                transform.ValueRW.Scale = disabledTransformScale;
+                collider.ValueRW.Value.Value.SetCollisionFilter(CollisionFilter.Zero);
             }
-
-            ecb.Playback(EntityManager);
         }
 
         private void SubscribeToAttackEvents()
@@ -106,29 +109,21 @@ namespace Patrik
         private void SetWeaponActive(WeaponType type)
         {
             Entity entity = GetWeaponEntity(type);
-
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
             
             if (SystemAPI.HasComponent<ActiveWeapon>(entity))
             {
                 SystemAPI.SetComponentEnabled<ActiveWeapon>(entity, true);
             }
-            
-            ecb.Playback(EntityManager);
         }
         
         private void SetWeaponPassive(WeaponType type)
         {
             Entity entity = GetWeaponEntity(type);
             
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
-
             if (SystemAPI.HasComponent<ActiveWeapon>(entity))
             {
                 SystemAPI.SetComponentEnabled<ActiveWeapon>(entity, false);
             }
-            
-            ecb.Playback(EntityManager);
         }
 
         private Entity GetWeaponEntity(WeaponType type)
@@ -148,31 +143,36 @@ namespace Patrik
             weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
             weaponCaller.ValueRW.currentCombo = data.ComboCounter;
             
-            WriteOverAttackDataToActiveWeapon(data);
+            if (DifferentAttackData(data, previousActiveAttackData))
+            {
+                WriteOverAttackData(data);
+                previousActiveAttackData = data;
+            }
         }
 
-        private void WriteOverAttackDataToActiveWeapon(AttackData data)
+        private bool DifferentAttackData(AttackData newData, AttackData lastData)
         {
-            Transform attackPoint = data.AttackPoint;
+            if (newData.AttackType != lastData.AttackType) return true;
+            if (newData.ComboCounter != lastData.ComboCounter) return true;
+            if (newData.WeaponType != lastData.WeaponType) return true;
 
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            return false;
+        }
 
-            // Sets up component for an attack next frame. The reason for waiting for the next frame is because the projectile
-            // must spawn before the Transform System group to avoid being spawned at (0,0,0) for one frame.
-            foreach (var (weapon, entity)
-                     in SystemAPI.Query<RefRW<WeaponComponent>>()
-                         .WithEntityAccess().WithAll<ActiveWeapon>())
+        private void WriteOverAttackData(AttackData data)
+        {
+            bool statHandlerExists =
+                SystemAPI.TryGetSingletonRW<StatHandlerComponent>(out RefRW<StatHandlerComponent> statHandler);
+            if (!statHandlerExists)
             {
-                LocalTransform transform = new LocalTransform
-                {
-                    Position = attackPoint.position,
-                    Rotation = attackPoint.rotation,
-                };
-
-                weapon.ValueRW.AttackPoint = transform;
+                Debug.LogWarning("No stat handler exists, can't update stats.");
+                return;
             }
-
-            ecb.Playback(EntityManager);
+            
+            statHandler.ValueRW.ShouldUpdateStats = true;
+            statHandler.ValueRW.WeaponType = data.WeaponType;
+            statHandler.ValueRW.AttackType = data.AttackType;
+            statHandler.ValueRW.ComboCounter = data.ComboCounter;
         }
 
         private void OnActiveAttackStop(AttackData data)
@@ -183,6 +183,12 @@ namespace Patrik
         private void OnPassiveAttackStart(AttackData data)
         {
             EnableWeapon(data.WeaponType);
+            
+            if (DifferentAttackData(data, previousPassiveAttackData))
+            {
+                WriteOverAttackData(data);
+                previousPassiveAttackData = data;
+            }
             
             switch (data.WeaponType)
             {
@@ -200,20 +206,17 @@ namespace Patrik
         private void EnableWeapon(WeaponType dataWeaponType)
         {
             Entity entity = GetWeaponEntity(dataWeaponType);
-            SetEntityScale(entity, 1);
-        }
-
-        private void SetEntityScale(Entity entity, float scale)
-        {
-            var transform = EntityManager.GetComponentData<LocalTransform>(entity);
-            transform.Scale = scale;
-            EntityManager.SetComponentData(entity, transform);
+            
+            var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
+            collider.ValueRW.Value.Value.SetCollisionFilter(collisionFilter);
         }
 
         private void DisableWeapon(WeaponType dataWeaponType)
         {
             Entity entity = GetWeaponEntity(dataWeaponType);
-            SetEntityScale(entity, disabledTransformScale);
+            
+            var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
+            collider.ValueRW.Value.Value.SetCollisionFilter(CollisionFilter.Zero);
 
             // clear its hit buffer
             if (EntityManager.HasBuffer<HitBufferElement>(entity))

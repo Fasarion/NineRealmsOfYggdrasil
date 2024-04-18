@@ -20,20 +20,31 @@ public partial struct SwordSpecialAttackSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<AudioBufferData>();
+        state.RequireForUpdate<IceRingConfig>();
     }
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-
+        
         if (!attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Sword, AttackType.Special))
             return;
 
         attackCaller.ValueRW.shouldActiveAttack = false;
-
-        Debug.Log("Sword Special");
         
         
+        var config = SystemAPI.GetSingleton<IceRingConfig>();
+        
+        var query = SystemAPI.QueryBuilder().WithAll<IceRingConfig, ChargeTimer>().Build();
+        if (query.CalculateEntityCount() == 0)
+        {
+            var ability = state.EntityManager.Instantiate(config.chargeAreaPrefab);
+            state.EntityManager.SetComponentData(ability, new ChargeTimer
+            {
+                maxChargeTime = 3
+            });
+            
+        }
     }
 }

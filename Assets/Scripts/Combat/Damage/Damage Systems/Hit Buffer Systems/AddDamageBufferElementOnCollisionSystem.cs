@@ -23,7 +23,7 @@ namespace Damage
                     var damageBuffer = damageBufferLookup[hit.HitEntity];
                     damageBuffer.Add(new DamageBufferElement
                     {
-                        HitPoints = damageOnCollision.Amount,
+                        DamageContents = damageOnCollision.DamageContents,
                     });
                 }
             }

@@ -39,6 +39,16 @@ public partial struct IceRingSystem : ISystem
         var config = SystemAPI.GetSingletonRW<IceRingConfig>();
         var input = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+        var buffer = new DynamicBuffer<HitBufferElement>();
+
+        //TODO: fixa smidigare...
+        foreach (var (configEntity, hitBuffer, entity) in
+                 SystemAPI.Query<RefRW<IceRingConfig>, DynamicBuffer<HitBufferElement>>()
+                     .WithEntityAccess())
+        {
+            buffer = hitBuffer;
+        }
 
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
@@ -48,6 +58,7 @@ public partial struct IceRingSystem : ISystem
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
                 ability.ValueRW.isInitialized = true;
+                transform.ValueRW.Rotation = Quaternion.Euler(-90f, 0f, 0f);
             }
 
             chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime;
@@ -61,19 +72,19 @@ public partial struct IceRingSystem : ISystem
                 );
             ability.ValueRW.area = area;
 
-            transform.ValueRW.Scale = tValue;
-
+            transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
+            transform.ValueRW.Scale = area * 50;
 
             if (!input.IsHeld)
             {
-                state.EntityManager.AddComponent<ShouldBeDestroyed>(entity);
+                ecb.AddComponent<ShouldBeDestroyed>(entity);
                 var effect = state.EntityManager.Instantiate(config.ValueRO.abilityPrefab);
 
                 state.EntityManager.SetComponentData(effect, new LocalTransform
                 {
-                    Position = playerPos.Value,
-                    Rotation = quaternion.identity,
-                    Scale = tValue
+                    Position = playerPos.Value + new float3(0, 0, 0),
+                    Rotation = Quaternion.Euler(-90f, 0f, 0f),
+                    Scale = area * 50
                 });
                 state.EntityManager.SetComponentData(effect, new IceRingAbility
                 {
@@ -82,8 +93,8 @@ public partial struct IceRingSystem : ISystem
             }
         }
 
-        foreach (var (ability, timer, buffer, transform, entity) in
-                 SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>, RefRW<LocalTransform>>()
+        foreach (var (ability, timer, transform, entity) in
+                 SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
                      .WithEntityAccess().WithNone<ChargeTimer>())
         {
             //set up
@@ -95,9 +106,9 @@ public partial struct IceRingSystem : ISystem
             
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
             
-            if (timer.ValueRO.currentTime > timer.ValueRO.maxTime)
+            if (timer.ValueRO.currentTime >= timer.ValueRO.maxTime)
             {
-                state.EntityManager.AddComponent<ShouldBeDestroyed>(entity);
+                ecb.AddComponent<ShouldBeDestroyed>(entity);
             }
 
             if (ability.ValueRO.hasFired) return;
@@ -139,5 +150,6 @@ public partial struct IceRingSystem : ISystem
                 ability.ValueRW.hasFired = true;
             }
         }
+        ecb.Playback(state.EntityManager);
     }
 }

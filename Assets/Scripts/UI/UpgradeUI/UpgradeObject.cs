@@ -18,15 +18,19 @@ public struct UpgradeInformation
 
 public enum UpgradeValueTypes
 {
-    Damage,
-    energyRegen,
+    baseAtk,
+    energyRegen, //this is in %
     attackSpeed,
-    deffence,
+    defence,
     areaEffect,
     chargeSpeed,
     hp,
-    moveSpeed,
+    movementSpeed,
     cooldown,
+    crit,
+    reactionDamage,
+    reactionArea, //Hur stort område reactionerna (combustion, lightningchain etc) gör skada
+    damage, //this is in % on player
     Unlock
 }
 
@@ -36,6 +40,7 @@ public enum UpgradeBaseType
     Hammer,
     Birds,
     Mead,
+    Player,
 
 
     

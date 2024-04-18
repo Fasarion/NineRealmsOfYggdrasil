@@ -7,7 +7,7 @@ namespace Damage
 {
    public class DamageOnCollisionAuthoring : MonoBehaviour
    {
-      [SerializeField] private float damageAmount;
+      [SerializeField] private DamageContents damageContents;
 
       class Baker : Baker<DamageOnCollisionAuthoring>
       {
@@ -16,7 +16,7 @@ namespace Damage
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new DamageOnCollisionComponent
             {
-               Amount = authoring.damageAmount
+               DamageContents = authoring.damageContents
             });
          }
       }

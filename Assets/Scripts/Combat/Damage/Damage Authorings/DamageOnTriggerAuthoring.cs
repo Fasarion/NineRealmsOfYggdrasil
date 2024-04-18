@@ -8,11 +8,7 @@ namespace Damage
 {
     public class DamageOnTriggerAuthoring : MonoBehaviour
     {
-        [Tooltip("How much damage will this object inflict upon trigger?")]
-        [SerializeField] private float damageValue = 1f;
-
-        [Tooltip("What type of damage will this object inflict?")]
-        [SerializeField] private DamageType damageType;
+        [SerializeField] private DamageContents damageContents;
     
         class Baker : Baker<DamageOnTriggerAuthoring>
         {
@@ -22,8 +18,7 @@ namespace Damage
             
                 AddComponent(entity, new DamageOnTriggerComponent
                 {
-                    DamageValue = authoring.damageValue,
-                    DamageType = authoring.damageType
+                    Value = authoring.damageContents
                 });
             }
         }

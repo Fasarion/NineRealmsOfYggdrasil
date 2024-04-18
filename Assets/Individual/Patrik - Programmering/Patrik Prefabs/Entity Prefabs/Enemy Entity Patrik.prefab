@@ -354,7 +354,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167db7d933b629f40887ed580858e246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
+  damageContents:
+    DamageValue: 1
+    DamageType: 0
+    CriticalRate: 0
+    CriticalModifier: 0
 --- !u!114 &4663337924807953367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +413,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventType: 2
+    eventCategoryType: 0
     environmentType: 0
     enemyTyping: 1
+    audioEventType: 0

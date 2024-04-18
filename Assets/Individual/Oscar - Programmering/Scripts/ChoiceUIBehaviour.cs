@@ -21,6 +21,7 @@ public class ChoiceUIBehaviour : MonoBehaviour
     private void Awake()
     {
         manager = ChoiceUIManager.Instance;
+       
     }
     protected virtual void PopulateDisplayValues(ChoiceObject newChoiceObject)
     {
@@ -36,7 +37,11 @@ public class ChoiceUIBehaviour : MonoBehaviour
 
         choiceItemTitleText.text = choiceItemName;
         choiceItemDescriptionText.text = choiceItemDescription;
-        choiceItemImage.sprite = choiceItemSprite;
+        if (choiceItemImage != null)
+        {
+            choiceItemImage.sprite = choiceItemSprite;
+        }
+        
     }
     
     public virtual void RegisterMouseClick()

@@ -23,13 +23,19 @@ public partial struct MoveTowardsPlayerSystem : ISystem
         float3 playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         float deltaTime = SystemAPI.Time.DeltaTime;
 
+        float directionMultiplier = 1;
+
         foreach (var (transform, moveSpeed, moveToPlayer) 
             in SystemAPI.Query<RefRW<LocalTransform>, MoveSpeedComponent, MoveTowardsPlayerComponent>())
         {
             var distanceToPlayer = math.distancesq(playerPos, transform.ValueRO.Position);
-            if (distanceToPlayer < moveToPlayer.MinimumDistanceForMoving)
+            if (distanceToPlayer < moveToPlayer.MinimumDistanceForMovingSquared)
             {
-                continue;
+                directionMultiplier = -1;
+            }
+            else
+            {
+                directionMultiplier = 1;
             }
             
             var direction = playerPos - transform.ValueRO.Position;
@@ -37,7 +43,7 @@ public partial struct MoveTowardsPlayerSystem : ISystem
             quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(direction, math.up()));
             
             transform.ValueRW.Rotation = lookRotation;
-            transform.ValueRW.Position += math.normalize(direction) * moveSpeed.Value * deltaTime;
+            transform.ValueRW.Position += math.normalize(direction) * moveSpeed.Value * deltaTime * directionMultiplier;
         }
     }
 }

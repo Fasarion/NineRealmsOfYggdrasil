@@ -14,7 +14,7 @@ public class MoveTowardsPlayerAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new MoveTowardsPlayerComponent
             {
-                MinimumDistanceForMoving = authoring.minimumDistanceForMoving
+                MinimumDistanceForMovingSquared = authoring.minimumDistanceForMoving * authoring.minimumDistanceForMoving
             });
         }
     }

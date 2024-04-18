@@ -2,5 +2,5 @@
 
 public struct MoveTowardsPlayerComponent : IComponentData
 {
-    public float MinimumDistanceForMoving;
+    public float MinimumDistanceForMovingSquared;
 }

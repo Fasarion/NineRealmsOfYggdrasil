@@ -392,6 +392,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4163681344479688090, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_Material.m_BelongsToCategories.m_Value.Category02
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4163681344479688090, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_Material.m_BelongsToCategories.m_Value.Category03
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: NormalAttack.BaseDamage
@@ -400,7 +410,7 @@ PrefabInstance:
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: PassiveAttack.Damage.BaseValue
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
@@ -411,6 +421,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OverallStats.CriticalRate.BaseValue
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: PassiveAttack.CriticalRate.BaseValue
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
@@ -440,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: NormalAttack.KnockBack.Multiplier.AttackThree
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
@@ -497,7 +512,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer Entity
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4043427351486798972, guid: 8c0c34ffce5617749ad66e43edc83939, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -606,6 +622,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7636761816899745512, guid: f14416850a4f08e4e9e8370655f3495e,
+        type: 3}
+      propertyPath: m_Material.m_BelongsToCategories.m_Value.Category02
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7636761816899745512, guid: f14416850a4f08e4e9e8370655f3495e,
+        type: 3}
+      propertyPath: m_Material.m_BelongsToCategories.m_Value.Category03
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8099106034715878466, guid: f14416850a4f08e4e9e8370655f3495e,
         type: 3}
       propertyPath: energyToFill
@@ -616,7 +642,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Sword Entity
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7801334704937826242, guid: f14416850a4f08e4e9e8370655f3495e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:

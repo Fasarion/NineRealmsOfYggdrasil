@@ -4,6 +4,7 @@ using UnityEngine;
 public class ShootPlayerWhenCloseAuthoring : MonoBehaviour
 {
     [SerializeField] private float shootingCooldown;
+    [SerializeField] private float shootDistance;
     
     class Baker : Baker<ShootPlayerWhenCloseAuthoring>
     {
@@ -12,7 +13,8 @@ public class ShootPlayerWhenCloseAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new ShootPlayerWhenCloseComponent
             {
-                ShootingCooldownTime = authoring.shootingCooldown 
+                ShootingCooldownTime = authoring.shootingCooldown,
+                MinimumDistanceForShootingSquared = authoring.shootDistance * authoring.shootDistance
             });
         }
     }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-[DisableAutoCreation]
 public partial class XPEventCaller : SystemBase
 {
     private int _cachedXP;
@@ -14,7 +13,7 @@ public partial class XPEventCaller : SystemBase
         bool playerXpExist = SystemAPI.TryGetSingleton<PlayerXP>(out PlayerXP xp);
         if (!playerXpExist)
         {
-            // No player xp found";
+            Debug.Log("No player xp found");
             return;
         }
         

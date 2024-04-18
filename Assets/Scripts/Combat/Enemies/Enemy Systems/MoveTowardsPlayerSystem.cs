@@ -7,6 +7,7 @@ using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine.Analytics;
 
 public partial struct MoveTowardsPlayerSystem : ISystem
 {
@@ -25,6 +26,12 @@ public partial struct MoveTowardsPlayerSystem : ISystem
         foreach (var (transform, moveSpeed, moveToPlayer) 
             in SystemAPI.Query<RefRW<LocalTransform>, MoveSpeedComponent, MoveTowardsPlayerComponent>())
         {
+            var distanceToPlayer = math.distancesq(playerPos, transform.ValueRO.Position);
+            if (distanceToPlayer < moveToPlayer.MinimumDistanceForMoving)
+            {
+                continue;
+            }
+            
             var direction = playerPos - transform.ValueRO.Position;
             direction.y = 0;
             quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(direction, math.up()));

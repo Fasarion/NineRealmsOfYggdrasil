@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DevLocker.Utils;
@@ -10,10 +11,12 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
 {
     
     
-    private SceneReference roomSceneReference;
+    [SerializeField]private SceneReference roomSceneReference;
 
     [SerializeField] public RoomNode roomNode;
-    
+
+
+    public static Action<RoomNode, SceneReference> onRoomChanged;
     // Start is called before the first frame update
 
     protected override void PopulateDisplayValues(ChoiceObject newRoomChoiceObject)
@@ -32,6 +35,7 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
     
     public override void RegisterMouseClick()
     {
-        manager.RegisterRoomSelectionClick(roomSceneReference);
+        onRoomChanged?.Invoke(roomNode, roomSceneReference);
+        //manager.RegisterRoomSelectionClick(roomSceneReference);
     }
 }

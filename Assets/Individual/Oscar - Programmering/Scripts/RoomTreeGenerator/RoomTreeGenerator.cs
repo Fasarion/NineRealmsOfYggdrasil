@@ -13,38 +13,165 @@ public class RoomTreeGenerator : MonoBehaviour
     public GameObject connectionUIPrefab;
     public int roomSeed;
 
+    [SerializeField] private bool generateTreePreview;
+    
     private int currentLevelNumber;
     private Dictionary<int, List<GameObject>> levelNodeTree;
     private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
 
     public int gridWidth;
-    public int gridHeight;
+    private int gridHeight;
     private Vector2Int roomNodeCoordinates;
 
     private Canvas canvas;
 
     private Dictionary<Vector2Int, RoomNode> roomNodeGridMap;
-
     Vector2[][] branchConnections;
+
+    private RoomNode startingRoomNode;
+    private RoomNode currentParentNode;
+
+
+    public static Action< Dictionary<Vector2Int, RoomNode>> roomTreeGenerated;
+
+    [SerializeField]private bool cacheGridMap = true;
+    private bool roomNodeGridMapCached = false;
+
+    public ChoiceDataScriptableObject choiceDataScriptableObject;
+    
 
     public void Awake()
     {
         canvas = FindObjectOfType<Canvas>();
+       
+
         levelNodeTree = new Dictionary<int, List<GameObject>>();
+        //roomNodeGridMap = new Dictionary<Vector2Int, RoomNode>();
+
+        if (!cacheGridMap)
+        {
+            roomNodeGridMapCached = false;
+        }
+
+        if (!roomNodeGridMapCached)
+        {
+            ClearCachedRoomNode();
+        }
+        
+
+
+    }
+
+    private void ClearCachedRoomNode()
+    {
         roomNodeGridMap = new Dictionary<Vector2Int, RoomNode>();
+        choiceDataScriptableObject.ClearCachedGridMap();
+    }
+
+    public void OnEnable()
+    {
+        ProgressionBarContentContainer.onProgressionContentSet += OnMapProgressionContentSet;
+    }
+
+    public void OnDisable()
+    {
+        ProgressionBarContentContainer.onProgressionContentSet -= OnMapProgressionContentSet;
     }
 
     public void Start()
     {
-        Random random = new Random(roomSeed);
-        GenerateRoomGrid(random);
-        //GenerateRoomTree();
-        GenerateRoomUINodes(random);
+       
+    }
+    
+    public void OnMapProgressionContentSet(int levelsInUI)
+    {
+        if (!roomNodeGridMapCached)
+        {
+            gridHeight = levelsInUI;
+            Random random = new Random(roomSeed);
+            GenerateRoomGrid(random);
+            GenerateStartingRoomNode();
+            if (generateTreePreview)
+            {
+                GenerateRoomUINodes();
+            }
+            
+            //GenerateRoomTree();
+        }
+        else
+        {
+            GetCachedRoomNodeGridMap();
+        }
+        roomTreeGenerated.Invoke(roomNodeGridMap);
+
+
+     
+        
+    }
+
+    private void GetCachedRoomNodeGridMap()
+    {
+        roomNodeGridMap = choiceDataScriptableObject.roomNodeGridMap;
     }
 
 
-    public void GenerateRoomUINodes(Random random)
+    public List<RoomNode> GetCurrentNodeList()
     {
+        return currentParentNode.childNodes;
+    }
+
+    public RoomNode GetCurrentNode()
+    {
+        return currentParentNode;
+    }
+
+    public void UpdateNodeLevel(RoomNode nodeChoice)
+    {
+        currentParentNode = nodeChoice;
+    }
+    
+
+    private void GenerateStartingRoomNode()
+    {
+        startingRoomNode = new RoomNode(new Vector2Int(-1,0));
+        for (int i = 0; i < gridWidth; i++)
+        {
+            roomNodeGridMap.TryGetValue(new Vector2Int(0, i), out var roomNode);
+            if (roomNode != null)
+            {
+                roomNode.parentNodes.Add(startingRoomNode);
+                startingRoomNode.childNodes.Add(roomNode);
+            }
+            
+        }
+
+        currentParentNode = startingRoomNode;
+    }
+
+    public Dictionary<Vector2Int, RoomNode> GetRoomGridMap()
+    {
+        return roomNodeGridMap;
+    }
+
+
+    public void PopulateRoomPrefab(GameObject RoomUIInstance, RoomNode node)
+    {
+       
+        var UINodeRectTransform = RoomUIInstance.GetComponent<RectTransform>();
+        UINodeRectTransform.anchoredPosition = new Vector2(0 , -1)* 200;
+        var UIBehaviour = RoomUIInstance.GetComponent<RoomChoiceUIBehaviour>();
+        UIBehaviour.roomNode = node;
+        UIBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[node.chosenRoomTypeIndex]);
+    }
+    public void GenerateRoomUINodes()
+    {
+        var startingUINode = Instantiate(roomSelectionUIPrefab, canvas.transform);
+        var startingUINodeRectTransform = startingUINode.GetComponent<RectTransform>();
+        startingUINodeRectTransform.anchoredPosition = new Vector2(0 , -1)* 200;
+        var startingUIBehaviour = startingUINode.GetComponent<RoomChoiceUIBehaviour>();
+        startingUIBehaviour.roomNode = startingRoomNode;
+        startingUIBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[startingRoomNode.chosenRoomTypeIndex]);
+        
         foreach (var pair in roomNodeGridMap)
         {
             var newUINode = Instantiate(roomSelectionUIPrefab, canvas.transform);
@@ -52,8 +179,8 @@ public class RoomTreeGenerator : MonoBehaviour
             uiNodeRectTransform.anchoredPosition = new Vector2(pair.Key.y , pair.Key.x )* 200;
             var uiBehaviour = newUINode.GetComponent<RoomChoiceUIBehaviour>();
             uiBehaviour.roomNode = pair.Value;
-            var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
-            uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[chosenRoomIndex]);
+            //What am I doing here? Ah, I am selecting from the possible roomTypes that can be created for a given card. That choice needs to be cached.
+            uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[pair.Value.chosenRoomTypeIndex]);
 
             var parentNodes = pair.Value.parentNodes;
             for (int i = 0; i < parentNodes.Count; i++)
@@ -151,10 +278,8 @@ public class RoomTreeGenerator : MonoBehaviour
     }
 
     //Generate a room grid with a particular chance of a room being generated.
-    public void GenerateRoomGrid(Random random)
+    private void GenerateRoomGrid(Random random)
     {
-        
-
         for (int i = 0; i < gridHeight; i++)
         {
             for (int j = 0; j < gridWidth; j++)
@@ -164,18 +289,14 @@ public class RoomTreeGenerator : MonoBehaviour
                 {
                     var nodeCoordinates = new Vector2Int(i, j);
                     RoomNode newNode = new RoomNode(nodeCoordinates);
+                    var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
+                    newNode.chosenRoomTypeIndex = chosenRoomIndex;
                     roomNodeGridMap.Add(nodeCoordinates, newNode);
                 }
             }
         }
-
-
-        //Ok, what next? Vi ska accessa alla noder på en viss nivå
-        //int currentLevel = 0;
-
+        
         List<Vector2Int> itemsToRemove = new List<Vector2Int>();
-        //Dictionary<Vector2Int, RoomNode> nodesToAdd = new Dictionary<Vector2Int,RoomNode>();
-        //
         foreach (var pair in roomNodeGridMap)
         {
             //Check if we are on the first level or we have a parent. If we are not at the first level and we do not have a parent, then we can be removed straight away.
@@ -246,61 +367,17 @@ public class RoomTreeGenerator : MonoBehaviour
                 var guaranteedChildNodeIndex = random.Next(0, potentialChildNodes.Count);
                 if (potentialChildNodes.Count > 0)
                 {
-                    var parentNodes = potentialChildNodes[guaranteedChildNodeIndex].parentNodes;
+                    
+                    //This is if you want to try and fix the overlapping neighbours
+                    //var parentNodes = potentialChildNodes[guaranteedChildNodeIndex].parentNodes;
                     //Get the neighbour to the left.
-                    var currentCoordinates = pair.Value.roomCoordinates;
-                    var childNeighbourCoordinates = new Vector2(currentCoordinates.x + 1, currentCoordinates.y + 1);
-                    
-                    
+                    //var currentCoordinates = pair.Value.roomCoordinates;
+                    //var childNeighbourCoordinates = new Vector2(currentCoordinates.x + 1, currentCoordinates.y + 1);
                     
                     potentialChildNodes[guaranteedChildNodeIndex].parentNodes.Add(pair.Value); ;
                     pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
                     childNodeAdded = true;
                 }
-                //This didn't work in a satisfying manner.
-                /*for (int i = 0; i < potentialChildNodes.Count; i++)
-                {
-                    if (potentialChildNodes.Count > 0)
-                    {
-                        var chosenChildNode = potentialChildNodes[i];
-                        //for (int i = 0; i < 3; i++)
-                        //{
-                
-                        var neighbourCoordinates = new Vector2Int(chosenChildNode.roomCoordinates.x, chosenChildNode.roomCoordinates.y + 1);
-                        roomNodeGridMap.TryGetValue(neighbourCoordinates, out var childNeighbour);
-                        if (childNeighbour != null)
-                        {
-                            if (childNeighbour.parentNodes.Count == 0)
-                            {
-                            
-                                chosenChildNode.parentNodes.Add(pair.Value);
-                                pair.Value.childNodes.Add(chosenChildNode);
-                                
-                            }
-                            childNodeAdded = true;
-                        }
-                    }
-                   
-                }*/
-               
-                
-                
-              
-                //If we also have a parent
-                /*if (pair.Value.parentNode != null)
-                {
-                    itemsToRemove.Add(pair.Key);
-                }*/
-                /*var guaranteedChildNodeIndex = random.Next(0, potentialChildNodes.Count);
-                if (potentialChildNodes.Count > 0)
-                {
-                    potentialChildNodes[guaranteedChildNodeIndex].parentNode = pair.Value;
-                    pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
-                }*/
-                /*else
-                {
-                    nodesToAdd.Add(new Vector2Int(pair.Key.x+1, pair.Key.y+1), new RoomNode(new Vector2Int(pair.Key.x+1, pair.Key.y+1)));
-                }*/
 
             }
 
@@ -312,14 +389,7 @@ public class RoomTreeGenerator : MonoBehaviour
                     itemsToRemove.Add(pair.Key);
                 }
             }
-
-           
         }
-
-        /*foreach (var nodePair in nodesToAdd)
-        {
-            roomNodeGridMap.TryAdd(nodePair.Key, nodePair.Value);
-        }*/
 
 
         List<Vector2Int> recursiveRoomNodesToRemove = new List<Vector2Int>();
@@ -330,41 +400,21 @@ public class RoomTreeGenerator : MonoBehaviour
             if (node != null)
             {
                 TraverseRemovedNodesUpwards(node, recursiveRoomNodesToRemove);
-               
             }
             else
             {
                 Debug.LogError("No node to remove, dictionary did not contain node");
             }
-
             roomNodeGridMap.Remove(itemsToRemove[i]);
-
-
         }
 
         for (int i = 0; i < recursiveRoomNodesToRemove.Count; i++)
         {
             roomNodeGridMap.Remove(recursiveRoomNodesToRemove[i]);
         }
-       /* itemsToRemove.Clear();
-        foreach (var pair in roomNodeGridMap)
-        {
-            if (pair.Value.parentNodes.Count == 0)
-            {
-                for (int i = 0; i < pair.Value.childNodes.Count; i++)
-                {
-                    pair.Value.childNodes.Remove(pair.Value);
-                }
-              
-                itemsToRemove.Add(pair.Key);
-            }
-        }
 
-        for (int i = 0; i < itemsToRemove.Count; i++)
-        {
-            roomNodeGridMap.Remove(itemsToRemove[i]);
-        }*/
-        
+        roomNodeGridMapCached = true;
+
     }
     public void TraverseRemovedNodesUpwards(RoomNode currentNode, List<Vector2Int> recursiveRoomNodesToRemove)
     {
@@ -378,7 +428,6 @@ public class RoomTreeGenerator : MonoBehaviour
             
                 if (nodeParent != null)
                 {
-              
                     //Remove the current node from its parents child list. 
                     //If the current node is the only node that the parent has in its child list, then the child node list of the parent will be 0
                     //Therefore the parent node is also slated for removal. If not, the parent node has more children and then it is okay to stop here.

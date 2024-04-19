@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c59101f6308e2bb498d81dc51bdbf794, type: 3}
   m_Name: RoomChoice2
   m_EditorClassIdentifier: 
-  roomName: Go to mountains
-  roomDescription: Scale the mountains
+  choiceObjectName: Go to mountains
+  choiceObjectDescription: Beware of landslides
+  choiceObjectSprite: {fileID: 0}
   roomSceneReference:
     m_SceneAsset: {fileID: 102900000, guid: 19d26e9a257758a4cabcef7bf3f1c11f, type: 3}
     m_IsDirty: 0
     m_ScenePath: Assets/Individual/Oscar - Programmering/Scenes/PlayableScenes/OscarSceneRoom2.unity
-  roomSprite: {fileID: 21300000, guid: 98fb38a5413fd86478669964e6c03726, type: 3}

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3845421138794295039
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7545610099883204745}
+  - component: {fileID: 7699027108122558872}
+  m_Layer: 0
+  m_Name: SpawningController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7545610099883204745
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845421138794295039}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7699027108122558872
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3845421138794295039}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e399e7200a8ba1648a4fa6e4f92217cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawningCheckpointTimes: 0000000014000000280000003c0000005000000064000000
+  checkpointData:
+  - {fileID: 11400000, guid: e4bd19c17073aa046912339b533c2066, type: 2}
+  - {fileID: 11400000, guid: 6ab14844730ce314a83ab03b947a8ed6, type: 2}
+  - {fileID: 11400000, guid: 44203f0456083724bbf33f608d209b8b, type: 2}
+  - {fileID: 11400000, guid: da4ddc1231bdc7f4ab46dfbb567d5be1, type: 2}
+  - {fileID: 11400000, guid: 42bb4b65bd313ee42ac73f7de43ed856, type: 2}
+  minTimerTime: 3
+  maxTimerTime: 4
+  minEnemySpawnPercent: 0.01
+  maxEnemySpawnPercent: 0.05
+  innerSpawningRadius: 15
+  outerSpawningRadius: 22
+  startingCheckpointIndex: 0
+  spawningCenterPoint: {fileID: 7545610099883204745}
+  VisualizationThickness: 0.23

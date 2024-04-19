@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 4
+  maxHP: 40
 --- !u!114 &5845518096462122248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d92a0f33fd05c4bbe2707605dbf9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 0
+  enemyType: 3
 --- !u!114 &3581742490104402230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,8 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObject: {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf,
-    type: 3}
+  spawnObjects:
+  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minimumDistanceForMoving: 0
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +355,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 167db7d933b629f40887ed580858e246, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageAmount: 1
+  damageContents:
+    DamageValue: 0
+    DamageType: 0
+    CriticalRate: 0
+    CriticalModifier: 0
 --- !u!114 &4663337924807953367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +414,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventType: 2
+    eventCategoryType: 0
     environmentType: 0
     enemyTyping: 1
+    audioEventType: 0

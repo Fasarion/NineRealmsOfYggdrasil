@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class ChoiceUIBehaviour : MonoBehaviour
 {
     
-    protected ChoiceUIManager manager;
+   // protected ChoiceUIManager manager;
     
     
     [SerializeField] protected TextMeshProUGUI choiceItemTitleText;
@@ -16,11 +17,14 @@ public class ChoiceUIBehaviour : MonoBehaviour
     protected string choiceItemName;
     protected string choiceItemDescription;
     protected Sprite choiceItemSprite;
+
+    public static Action onCardMouseClick;
     // Start is called before the first frame update
     
     private void Awake()
     {
-        manager = ChoiceUIManager.Instance;
+        //manager = ChoiceUIManager.Instance;
+       
     }
     protected virtual void PopulateDisplayValues(ChoiceObject newChoiceObject)
     {
@@ -36,10 +40,16 @@ public class ChoiceUIBehaviour : MonoBehaviour
 
         choiceItemTitleText.text = choiceItemName;
         choiceItemDescriptionText.text = choiceItemDescription;
-        choiceItemImage.sprite = choiceItemSprite;
+        if (choiceItemImage != null)
+        {
+            choiceItemImage.sprite = choiceItemSprite;
+        }
+        
     }
     
     public virtual void RegisterMouseClick()
     {
+        onCardMouseClick.Invoke();
+        //manager.SwapScreenRight();
     }
 }

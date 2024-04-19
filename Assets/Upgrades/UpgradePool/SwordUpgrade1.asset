@@ -13,15 +13,18 @@ MonoBehaviour:
   m_Name: SwordUpgrade1
   m_EditorClassIdentifier: 
   upgradeTitle: Sword upgrade
-  upgradeSprite: {fileID: 21300000, guid: 328e19d3162cb9246a695ed0a862b6f8, type: 3}
-  upgradeDescription: Sword will deal +10 damage for every attack
+  upgradeSprite: {fileID: 21300000, guid: 35821e8744e62ae45b4e4fd8e936af37, type: 3}
+  upgradeDescription: 'The atack speed of the sword will increes
+
+
+    +20% atk speed'
   upgrades:
   - thingToUpgrade: 0
-    valueToUpgrade: 0
-    valueAmount: 10
+    valueToUpgrade: 2
+    valueAmount: 0.2
   startUnlocked: 1
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: 8a023c04647314645b553718a53033b6, type: 2}
+  - {fileID: 11400000, guid: 14f3e7558f602f442bbb18ead2b83e36, type: 2}

@@ -10,22 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: SwordUpgrade2
+  m_Name: SwordUpgrade5
   m_EditorClassIdentifier: 
   upgradeTitle: Sword upgrade
   upgradeSprite: {fileID: 21300000, guid: 35821e8744e62ae45b4e4fd8e936af37, type: 3}
-  upgradeDescription: 'Sword will deal more damage every hit
+  upgradeDescription: 'The sword will attack faster
 
 
-    Atk 10 -> Atk
-    15'
+    +20% Atk speed'
   upgrades:
   - thingToUpgrade: 0
-    valueToUpgrade: 0
-    valueAmount: 5
+    valueToUpgrade: 2
+    valueAmount: 0.2
   startUnlocked: 0
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: 457bfc49d054e474fbb6f4406a6eabd4, type: 2}
+  - {fileID: 11400000, guid: 7e4d750be706fb8479c23bfcffe138c9, type: 2}

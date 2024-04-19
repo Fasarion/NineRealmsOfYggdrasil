@@ -17,6 +17,7 @@ public partial struct HammerUltimateAttackSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<ThunderStrikeConfig>();
+        state.RequireForUpdate<ThunderBoltConfig>();
         state.RequireForUpdate<HammerStatsTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
@@ -41,10 +42,10 @@ public partial struct HammerUltimateAttackSystem : ISystem
         Debug.Log("ult!");
 
         var config = SystemAPI.GetSingleton<ThunderStrikeConfig>();
-        var ability = state.EntityManager.Instantiate(config.gluffs);
+        var ability = state.EntityManager.Instantiate(config.abilityPrefab);
         state.EntityManager.SetComponentData(ability, new TimerObject
         {
-            maxTime = 3
+            maxTime = config.maxDisplayTime
         });
         
     }

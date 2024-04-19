@@ -3,43 +3,37 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-public class ThunderStrikeConfigAuthoring : MonoBehaviour
+public class ThunderBoltConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
     public float damage;
     public float maxArea;
-    public int maxStrikes;
-    public float timeBetweenStrikes;
 
-    public class ThunderStrikeConfigAuthoringBaker : Baker<ThunderStrikeConfigAuthoring>
+    public class ThunderBoltConfigAuthoringBaker : Baker<ThunderBoltConfigAuthoring>
     {
-        public override void Bake(ThunderStrikeConfigAuthoring authoring)
+        public override void Bake(ThunderBoltConfigAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
-                new ThunderStrikeConfig
+                new ThunderBoltConfig
                 {
                     abilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
                     maxDisplayTime = authoring.maxDisplayTime,
                     damageDelayTime = authoring.damageDelayTime,
                     damage = authoring.damage,
-                    maxArea = authoring.maxArea,
-                    maxStrikes = authoring.maxStrikes,
-                    timeBetweenStrikes = authoring.timeBetweenStrikes
+                    maxArea = authoring.maxArea
                 });
         }
     }
 }
 
-public struct ThunderStrikeConfig : IComponentData
+public struct ThunderBoltConfig : IComponentData
 {
     public Entity abilityPrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
     public float damage;
     public float maxArea;
-    public int maxStrikes;
-    public float timeBetweenStrikes;
 }

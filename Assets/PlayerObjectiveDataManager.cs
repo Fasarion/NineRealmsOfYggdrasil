@@ -35,12 +35,15 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     private void Update()
     {
         int counter = 0;
-        foreach (KeyValuePair<ObjectiveObjectType, int> pair in objectiveObjectsDictionary)
+        if (objectiveObjectsDictionary != null)
         {
-            uiElements[counter].gameObject.SetActive(true);
-            Sprite sprite = GetObjectiveObjectSprite(pair.Key);
-            uiElements[counter].PopulateUI(sprite, pair.Value);
-            counter++;
+            foreach (KeyValuePair<ObjectiveObjectType, int> pair in objectiveObjectsDictionary)
+            {
+                uiElements[counter].gameObject.SetActive(true);
+                Sprite sprite = GetObjectiveObjectSprite(pair.Key);
+                uiElements[counter].PopulateUI(sprite, pair.Value);
+                counter++;
+            }
         }
     }
 

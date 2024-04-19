@@ -46,6 +46,7 @@ public class ParticleReference : ICleanupComponentData
     public ParticleSystem Particle;
 }
 
+[UpdateAfter(typeof(TransformSystemGroup))]
 public partial struct HandleParticleSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
@@ -67,7 +68,7 @@ public partial struct HandleParticleSystem : ISystem
             .WithNone<ParticleReference>()
             .WithEntityAccess())
         {
-            var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value);
+            var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value, new Vector3(0, 1000f, 0), quaternion.identity);
             var particleReference = new ParticleReference()
             {
                 Particle = gameObjectInstance.GetComponent<ParticleSystem>()

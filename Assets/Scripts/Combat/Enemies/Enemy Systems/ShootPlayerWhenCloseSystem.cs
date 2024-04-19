@@ -21,8 +21,9 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
         float3 playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         float deltaTime = SystemAPI.Time.DeltaTime;
 
-        foreach (var (transform, shootWhenClose, projectileSpawner) 
-            in SystemAPI.Query<LocalTransform, RefRW<ShootPlayerWhenCloseComponent>, ProjectileSpawnerComponent>())
+        foreach (var (transform, shootWhenClose, projectileSpawner, entity) 
+            in SystemAPI.Query<LocalTransform, RefRW<ShootPlayerWhenCloseComponent>, ProjectileSpawnerComponent>()
+                .WithEntityAccess())
         {
             shootWhenClose.ValueRW.CurrentCooldownTime += deltaTime;
             
@@ -31,15 +32,18 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
             {
                 if (shootWhenClose.ValueRO.CurrentCooldownTime > shootWhenClose.ValueRO.ShootingCooldownTime)
                 {
-                    Entity projectileEntity = state.EntityManager.Instantiate(projectileSpawner.Projectile);
-                    var entityTransform = state.EntityManager.GetComponentData<LocalTransform>(projectileEntity);
-            
-                    entityTransform.Position = transform.Position;
-                    entityTransform.Rotation = math.mul(transform.Rotation, entityTransform.Rotation);
-        
-                    // set new transform values and direction
-                    state.EntityManager.SetComponentData(projectileEntity, entityTransform);
-                    state.EntityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(entityTransform.Forward())));
+                    state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, true);
+
+                    
+                    // Entity projectileEntity = state.EntityManager.Instantiate(projectileSpawner.Projectile);
+                    // var entityTransform = state.EntityManager.GetComponentData<LocalTransform>(projectileEntity);
+                    //
+                    // entityTransform.Position = transform.Position;
+                    // entityTransform.Rotation = math.mul(transform.Rotation, entityTransform.Rotation);
+                    //
+                    // // set new transform values and direction
+                    // state.EntityManager.SetComponentData(projectileEntity, entityTransform);
+                    // state.EntityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(entityTransform.Forward())));
                     
                     shootWhenClose.ValueRW.CurrentCooldownTime = 0;
                 }

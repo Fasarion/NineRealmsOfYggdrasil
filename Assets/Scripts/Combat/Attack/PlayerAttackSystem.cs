@@ -139,9 +139,9 @@ namespace Patrik
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
             
             weaponCaller.ValueRW.shouldActiveAttack = true;
-            weaponCaller.ValueRW.currentAttackType = data.AttackType;
-            weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
-            weaponCaller.ValueRW.currentCombo = data.ComboCounter;
+            weaponCaller.ValueRW.currentActiveAttackType = data.AttackType;
+            weaponCaller.ValueRW.currentActiveWeaponType = data.WeaponType;
+            weaponCaller.ValueRW.currentActiveCombo = data.ComboCounter;
             
             if (DifferentAttackData(data, previousActiveAttackData))
             {
@@ -168,11 +168,17 @@ namespace Patrik
                 Debug.LogWarning("No stat handler exists, can't update stats.");
                 return;
             }
-            
+
             statHandler.ValueRW.ShouldUpdateStats = true;
             statHandler.ValueRW.WeaponType = data.WeaponType;
             statHandler.ValueRW.AttackType = data.AttackType;
             statHandler.ValueRW.ComboCounter = data.ComboCounter;
+
+            // TODO: Move this to seperate system at the moment when weapon is switched?
+            Entity entity = GetWeaponEntity(data.WeaponType);
+            var weapon = EntityManager.GetComponentData<WeaponComponent>(entity);
+            weapon.InActiveState = data.AttackType != AttackType.Passive;
+            EntityManager.SetComponentData(entity, weapon);
         }
 
         private void OnActiveAttackStop(AttackData data)
@@ -183,6 +189,11 @@ namespace Patrik
         private void OnPassiveAttackStart(AttackData data)
         {
             EnableWeapon(data.WeaponType);
+            
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.shouldPassiveAttack = true;
+            weaponCaller.ValueRW.currentPassiveWeaponType = WeaponType.Hammer;
             
             if (DifferentAttackData(data, previousPassiveAttackData))
             {

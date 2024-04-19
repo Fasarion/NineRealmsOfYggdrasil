@@ -1725,6 +1725,11 @@ PrefabInstance:
       propertyPath: maxDisplayTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8396824266348004795, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: damageValue
@@ -2577,6 +2582,22 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408663256009089072, guid: 99ca0da65bd1fe24eb3ecb0a80f02d02,
+        type: 3}
+      propertyPath: spawn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4408663256009089072, guid: 99ca0da65bd1fe24eb3ecb0a80f02d02,
+        type: 3}
+      propertyPath: objectToSpawn
+      value: 
+      objectReference: {fileID: 5736946099070336933, guid: 8a747dec1117ff74f9ea89dce8bdfa6b,
+        type: 3}
+    - target: {fileID: 4408663256009089072, guid: 99ca0da65bd1fe24eb3ecb0a80f02d02,
+        type: 3}
+      propertyPath: numberOfObjectsToSpawnSquare
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

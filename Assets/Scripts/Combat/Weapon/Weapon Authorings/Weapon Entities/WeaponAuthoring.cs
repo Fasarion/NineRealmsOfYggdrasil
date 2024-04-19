@@ -38,6 +38,7 @@ public struct WeaponComponent : IComponentData
     public WeaponType WeaponType;
     
     public bool UsesTargetingForUltimate;
+    public bool InActiveState;
 }
 
 public struct ActiveWeapon : IComponentData, IEnableableComponent { }

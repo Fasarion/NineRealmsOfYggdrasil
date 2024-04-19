@@ -363,6 +363,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -407,6 +413,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -461,6 +473,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -510,6 +528,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -554,6 +578,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -665,6 +695,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -709,6 +745,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -763,6 +805,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -812,6 +860,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -856,6 +910,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -1052,8 +1112,8 @@ MonoBehaviour:
   xPObjectPrefab: {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf,
     type: 3}
   experience: 1
-  baseDistance: 5
-  moveSpeed: 10
+  baseDistance: 2
+  moveSpeed: 7
 --- !u!1 &7310385346746404717
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1240,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -1224,6 +1290,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -1278,6 +1350,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -1327,6 +1405,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -1371,6 +1455,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -1462,6 +1552,12 @@ MonoBehaviour:
     enemyType: 0
   - prefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3, type: 3}
     enemyType: 1
+  - prefab: {fileID: 89125744733743645, guid: ac08a3afbf1c0bf419fb86c0949c22cd, type: 3}
+    enemyType: 2
+  - prefab: {fileID: 89125744733743645, guid: 1f7effe1d143b1049b6ebb1edc704469, type: 3}
+    enemyType: 3
+  - prefab: {fileID: 89125744733743645, guid: 54fc350a511d92f4287617f7bd8ce9c3, type: 3}
+    enemyType: 4
 --- !u!1 &7981734215352036249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1597,8 +1693,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fbbbb2a9e029714d8f38a573be1b532, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseXPNeeded: 5
-  addedXPNeededPerLevel: 20
+  baseXPNeeded: 7
+  addedXPNeededPerLevel: 7
   playerStartingXP: 0
   playerStartingLevel: 0
   playerStartingSkillpoints: 0

@@ -21,7 +21,7 @@ public struct WeaponAttackCaller : IComponentData
     public WeaponCallData ActiveAttackData;
     public WeaponCallData PassiveAttackData;
     
-    public bool ShouldStartActiveAttack(WeaponType weaponType, AttackType attackType)
+    public readonly bool ShouldStartActiveAttack(WeaponType weaponType, AttackType attackType)
     {
         return ActiveAttackData.ShouldStartAttack(weaponType, attackType);
     }

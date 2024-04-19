@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
   m_Layer: 0
-  m_Name: Ranger Enemy Entity Patrik 2
+  m_Name: Ranger2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 90
+  maxHP: 70
 --- !u!114 &5845518096462122248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,7 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects: []
+  spawnObjects:
+  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 8
+  minimumDistanceForMoving: 7
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5186fce7de95e4d49948125afabc1d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8870220498742206646, guid: 2b9401bb44e0e6740a99ef7eaa0ddf3b,
+  gameObjectPrefab: {fileID: 8870220498742206646, guid: 8b7fb940cd1c8964dac8aedb6f82893b,
     type: 3}
   followsEntity: 1
 --- !u!114 &6445979045985948300

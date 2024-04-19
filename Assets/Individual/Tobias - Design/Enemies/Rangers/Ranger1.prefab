@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
   m_Layer: 0
-  m_Name: Ranger Enemy Entity Patrik
+  m_Name: Ranger1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -315,7 +315,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects: []
+  spawnObjects:
+  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0

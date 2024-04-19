@@ -44,6 +44,24 @@ public partial class UpgradeApplierSystem : SystemBase
             
             ApplyUpgrade(upgrade, statsComponent);
         }
+
+        InformStatHandler();
+    }
+
+    private void InformStatHandler()
+    {
+        bool statHandlerExists = SystemAPI.TryGetSingletonRW(out RefRW<StatHandlerComponent> statHandler);
+        bool attackCallerExists = SystemAPI.TryGetSingleton(out WeaponAttackCaller attackCaller);
+        if (!statHandlerExists || !attackCallerExists)
+        {
+            Debug.LogWarning("Need Attack Caller and StatHandler to update weapon stats correctly.");
+            return;
+        }
+
+        statHandler.ValueRW.ShouldUpdateStats = true;
+        statHandler.ValueRW.WeaponType = attackCaller.currentWeaponType;
+        statHandler.ValueRW.AttackType = attackCaller.currentAttackType;
+        statHandler.ValueRW.ComboCounter = attackCaller.currentCombo;
     }
 
     private RefRW<CombatStatsComponent> GetStatsComponent(UpgradeBaseType baseType)
@@ -58,6 +76,15 @@ public partial class UpgradeApplierSystem : SystemBase
                     return stats;
                 }
                 break;
+            case UpgradeBaseType.Hammer:
+                
+                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
+                             .WithAll<HammerStatsTag>())
+                {
+                    return stats;
+                }
+                break;
+                
         }
 
         return default;
@@ -69,6 +96,18 @@ public partial class UpgradeApplierSystem : SystemBase
         {
             case UpgradeValueTypes.damage:
                 statsComponent.ValueRW.OverallStats.Damage.BaseValue += upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.cooldown:
+                statsComponent.ValueRW.OverallStats.Cooldown.BaseValue -= upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.areaEffect:
+                statsComponent.ValueRW.OverallStats.Area.BaseValue += upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.attackSpeed:
+                statsComponent.ValueRW.OverallStats.AttackSpeed.BaseValue += upgrade.valueAmount;
+                break;
+            case UpgradeValueTypes.energyRegen:
+                statsComponent.ValueRW.OverallStats.EnergyFillPerHit.BaseValue += upgrade.valueAmount;
                 break;
         }
     }

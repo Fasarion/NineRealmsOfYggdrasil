@@ -58,6 +58,7 @@ public partial struct IceRingSystem : ISystem
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
                 ability.ValueRW.isInitialized = true;
+                transform.ValueRW.Rotation = Quaternion.Euler(-90f, 0f, 0f);
             }
 
             chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime;
@@ -71,8 +72,8 @@ public partial struct IceRingSystem : ISystem
                 );
             ability.ValueRW.area = area;
 
-            transform.ValueRW.Position = playerPos.Value;
-            transform.ValueRW.Scale = tValue * 100;
+            transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
+            transform.ValueRW.Scale = area * 50;
 
             if (!input.IsHeld)
             {
@@ -81,9 +82,9 @@ public partial struct IceRingSystem : ISystem
 
                 state.EntityManager.SetComponentData(effect, new LocalTransform
                 {
-                    Position = playerPos.Value,
-                    Rotation = quaternion.identity,
-                    Scale = tValue * 100
+                    Position = playerPos.Value + new float3(0, 0, 0),
+                    Rotation = Quaternion.Euler(-90f, 0f, 0f),
+                    Scale = area * 50
                 });
                 state.EntityManager.SetComponentData(effect, new IceRingAbility
                 {

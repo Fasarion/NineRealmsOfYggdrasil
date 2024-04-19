@@ -5,8 +5,13 @@ using UnityEngine;
 
 public class ThunderStrikeConfigAuthoring : MonoBehaviour
 {
-    public float test;
-    public GameObject gluffs;
+    public GameObject abilityPrefab;
+    public float maxDisplayTime;
+    public float damageDelayTime;
+    public float damage;
+    public float maxArea;
+    public int maxStrikes;
+    public float timeBetweenStrikes;
 
     public class ThunderStrikeConfigAuthoringBaker : Baker<ThunderStrikeConfigAuthoring>
     {
@@ -15,15 +20,26 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
                 new ThunderStrikeConfig
-                    {
-                        test = authoring.test, gluffs = GetEntity(authoring.gluffs, TransformUsageFlags.Dynamic)
-                    });
+                {
+                    abilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
+                    maxDisplayTime = authoring.maxDisplayTime,
+                    damageDelayTime = authoring.damageDelayTime,
+                    damage = authoring.damage,
+                    maxArea = authoring.maxArea,
+                    maxStrikes = authoring.maxStrikes,
+                    timeBetweenStrikes = authoring.timeBetweenStrikes
+                });
         }
     }
 }
 
 public struct ThunderStrikeConfig : IComponentData
 {
-    public float test;
-    public Entity gluffs;
+    public Entity abilityPrefab;
+    public float maxDisplayTime;
+    public float damageDelayTime;
+    public float damage;
+    public float maxArea;
+    public int maxStrikes;
+    public float timeBetweenStrikes;
 }

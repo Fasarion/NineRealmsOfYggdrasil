@@ -13,7 +13,6 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 [UpdateAfter(typeof(PlayerMovement))]
-[UpdateAfter(typeof(XPObjectSpawnSystem))]
 [BurstCompile]
 public partial struct XPObjectSystem : ISystem
 {
@@ -99,16 +98,12 @@ public partial struct XPObjectSystem : ISystem
         ecb.Dispose();
         ecb2.Dispose();
         //state.Dependency.Complete();
-        
-
-        
     }
-    
-    
 }
 
 [WithAll(typeof(XpObject))]
 [WithNone(typeof(DirectionComponent))]
+[BurstCompile]
 partial struct CheckXPObjectDistanceJob : IJobEntity
 {
     public float3 PlayerPosition;

@@ -5,19 +5,23 @@ using UnityEngine;
 
 public class SpawnEntityOnDestroyAuthoring : MonoBehaviour
 {
-    [Tooltip("Game Object to spawn when this entity gets destroyed.")]
-    [SerializeField] private GameObject spawnObject;
+    [Tooltip("Game Objects to spawn when this entity gets destroyed.")]
+    [SerializeField] private List<GameObject> spawnObjects;
 
     class Baker : Baker<SpawnEntityOnDestroyAuthoring>
     {
         public override void Bake(SpawnEntityOnDestroyAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity,
-            new SpawnEntityOnDestroy
+            
+            var buffer = AddBuffer<SpawnEntityOnDestroyElement>(entity);
+            foreach (var spawnObject in authoring.spawnObjects)
             {
-                Value = GetEntity(authoring.spawnObject, TransformUsageFlags.Dynamic)
-            });
+                buffer.Add(new SpawnEntityOnDestroyElement
+                {
+                    Value = GetEntity(spawnObject, TransformUsageFlags.Dynamic), 
+                });
+            }
         }
     }
 }

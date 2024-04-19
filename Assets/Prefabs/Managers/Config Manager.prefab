@@ -166,6 +166,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1419748053470036600}
+  - {fileID: 6554383039780088272}
+  - {fileID: 165676981975482711}
   m_Father: {fileID: 6481230346474377608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3587502585957426159
@@ -220,7 +222,7 @@ MonoBehaviour:
     type: 3}
   chargeAreaPrefab: {fileID: 3054128452994836860, guid: 3296f554ce86fa64e90a6efcfdbbc810,
     type: 3}
-  maxDisplayTime: 0
+  maxDisplayTime: 1
   damageDelayTime: 1
   maxChargeTime: 3
   damage: 500
@@ -251,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageContents:
-    DamageValue: 1
+    DamageValue: 500
     DamageType: 0
     CriticalRate: 0.294
     CriticalModifier: 1.1
@@ -279,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 20
+  knockBackForce: 1
   knockAwayFromPlayer: 1
 --- !u!1 &4384012983194273374
 GameObject:
@@ -363,6 +365,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -407,6 +415,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -461,6 +475,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -510,6 +530,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -554,6 +580,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -665,6 +697,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -709,6 +747,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -763,6 +807,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -812,6 +862,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -856,6 +912,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -926,8 +988,118 @@ Transform:
   - {fileID: 313021785713749217}
   - {fileID: 2495837115672680443}
   - {fileID: 5349570221472495303}
+  - {fileID: 5126593603747287879}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4857469732540965416
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 165676981975482711}
+  - component: {fileID: 5796034013704642493}
+  - component: {fileID: 2255676438054158767}
+  - component: {fileID: 553901321217074928}
+  - component: {fileID: 5931773600313845237}
+  - component: {fileID: 2826854435034433488}
+  m_Layer: 0
+  m_Name: ThunderBoltAbilityConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &165676981975482711
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857469732540965416}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2846498616045744737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5796034013704642493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857469732540965416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21261e3ff7693c74ba3c9cbb2b3b7640, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityPrefab: {fileID: 320877796225084080, guid: 91f0693c4daf7c64489679106a607d9a,
+    type: 3}
+  maxDisplayTime: 1
+  damageDelayTime: 0.3
+  damage: 5
+  maxArea: 5
+--- !u!114 &2255676438054158767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857469732540965416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &553901321217074928
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857469732540965416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageContents:
+    DamageValue: 1
+    DamageType: 1
+    CriticalRate: 0
+    CriticalModifier: 0
+--- !u!114 &5931773600313845237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857469732540965416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2826854435034433488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4857469732540965416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 5
+  knockAwayFromPlayer: 0
 --- !u!1 &4913367270568860942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1005,6 +1177,52 @@ Transform:
   - {fileID: 1813191095129232351}
   m_Father: {fileID: 6481230346474377608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7076700863367281020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5126593603747287879}
+  - component: {fileID: 5383670924653943581}
+  m_Layer: 0
+  m_Name: ObjectivePickupsConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5126593603747287879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076700863367281020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6481230346474377608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5383670924653943581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076700863367281020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea6943f5954a1c45bc99683614b07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDistance: 5
+  moveSpeed: 10
 --- !u!1 &7170910165949330236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1180,6 +1398,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -1224,6 +1448,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -1278,6 +1508,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -1322,6 +1558,12 @@ MonoBehaviour:
         AttackTwo: 1
         AttackThree: 1
     Area:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
+    Size:
       BaseValue: 1
       Multiplier:
         AttackOne: 1
@@ -1376,6 +1618,12 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+    Size:
+      BaseValue: 1
+      Multiplier:
+        AttackOne: 1
+        AttackTwo: 1
+        AttackThree: 1
     AttackSpeed:
       BaseValue: 1
       Multiplier:
@@ -1400,6 +1648,58 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+--- !u!1 &7727780417294271403
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6554383039780088272}
+  - component: {fileID: 8679604310254679132}
+  m_Layer: 0
+  m_Name: ThunderStrikeAbilityConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6554383039780088272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2846498616045744737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8679604310254679132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a3e1697e30513439bc6686fb018daa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  abilityPrefab: {fileID: 6208798233002451104, guid: e0dd21cf62a016a43a3a8de702a1aaff,
+    type: 3}
+  maxDisplayTime: 5
+  damageDelayTime: 0.3
+  damage: 5
+  maxArea: 5
+  maxStrikes: 10
+  timeBetweenStrikes: 0.25
 --- !u!1 &7747805933802500312
 GameObject:
   m_ObjectHideFlags: 0

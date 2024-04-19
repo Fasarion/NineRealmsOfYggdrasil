@@ -27,7 +27,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
 
         // TODO: put in config
         scaleChangeFactor = 2;
-        numberOfScaledAttacks = 2;
+        numberOfScaledAttacks = 3;
     }
 
 
@@ -35,19 +35,19 @@ public partial struct SwordUltimateAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         var swordEntity = SystemAPI.GetSingletonEntity<SwordStatsTag>();
-
+        
         if (_isActive)
         {
-            bool weaponSwitch = false;
-            if (attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Normal) || weaponSwitch)
+            bool stoppedSwordAttack = attackCaller.ValueRO.ActiveAttackData.ShouldStopAttack(WeaponType.Sword) ||
+                                      attackCaller.ValueRO.PassiveAttackData.ShouldStopAttack(WeaponType.Sword);
+            if (stoppedSwordAttack)
             {
                 _attackCount++;
                 
                 if (_attackCount > numberOfScaledAttacks)
                 {
                     var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
-                    weaponStatsComponent.NormalAttackStats.Size.BaseValue /= scaleChangeFactor;
-                    
+                    weaponStatsComponent.OverallStats.Size.BaseValue /= scaleChangeFactor;
                     state.EntityManager.SetComponentData(swordEntity, weaponStatsComponent);
                     
                     var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
@@ -68,8 +68,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         if (!_isActive)
         {
             var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
-            weaponStatsComponent.NormalAttackStats.Size.BaseValue *= scaleChangeFactor;
-                    
+            weaponStatsComponent.OverallStats.Size.BaseValue *= scaleChangeFactor;
             state.EntityManager.SetComponentData(swordEntity, weaponStatsComponent);
             
             var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();

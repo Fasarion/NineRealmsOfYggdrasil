@@ -388,8 +388,3 @@ namespace Patrik
         }
     }
 }
-
-public partial struct ResetAttackData : ISystem
-{
-    
-}

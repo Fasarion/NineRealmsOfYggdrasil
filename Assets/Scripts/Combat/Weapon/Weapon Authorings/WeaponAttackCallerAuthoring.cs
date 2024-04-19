@@ -63,4 +63,11 @@ public struct WeaponCallData
 
         return weaponType == WeaponType && attackType == AttackType;
     }
+    
+    public bool ShouldStopAttack(WeaponType weaponType)
+    {
+        if (!ShouldStop) return false;
+
+        return weaponType == WeaponType;
+    }
 }

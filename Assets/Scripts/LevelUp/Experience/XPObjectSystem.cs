@@ -103,6 +103,7 @@ public partial struct XPObjectSystem : ISystem
 
 [WithAll(typeof(XpObject))]
 [WithNone(typeof(DirectionComponent))]
+[BurstCompile]
 partial struct CheckXPObjectDistanceJob : IJobEntity
 {
     public float3 PlayerPosition;

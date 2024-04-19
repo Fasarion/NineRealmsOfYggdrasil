@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 public enum ObjectiveObjectType
@@ -24,10 +25,31 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public List<ObjectiveObjectUIElementBehaviour> uiElements;
     public List<ObjectiveObjectSpriteReference> ObjectiveObjectSpriteReferences;
     public Sprite defaultSprite;
-    
+
+    private void OnEnable()
+    {
+        var upgradeUISystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<ObjectiveBufferReaderSystem>();
+        upgradeUISystem.OnObjectiveObjectPickedUp += RecieveObjectivePickups;
+    }
+
+    private void OnDisable()
+    {
+        if (World.DefaultGameObjectInjectionWorld == null) return;
+        var upgradeUISystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<ObjectiveBufferReaderSystem>();
+        upgradeUISystem.OnObjectiveObjectPickedUp -= RecieveObjectivePickups;
+    }
+
+    private void RecieveObjectivePickups(List<ObjectiveObjectType> types)
+    {
+        foreach (var type in types)
+        {
+            dataHolder.AddObjectiveObject(type, 1);
+        }
+    }
 
     private void Awake()
     {
+        dataHolder.ClearPlayerInventory();
         objectiveObjectsDictionary = dataHolder.objectiveObjectsDictionary;
         ClearUI();
     }

@@ -253,7 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageContents:
-    DamageValue: 1
+    DamageValue: 500
     DamageType: 0
     CriticalRate: 0.294
     CriticalModifier: 1.1
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 20
+  knockBackForce: 1
   knockAwayFromPlayer: 1
 --- !u!1 &4384012983194273374
 GameObject:
@@ -988,6 +988,7 @@ Transform:
   - {fileID: 313021785713749217}
   - {fileID: 2495837115672680443}
   - {fileID: 5349570221472495303}
+  - {fileID: 5126593603747287879}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4857469732540965416
@@ -1041,8 +1042,8 @@ MonoBehaviour:
   abilityPrefab: {fileID: 320877796225084080, guid: 91f0693c4daf7c64489679106a607d9a,
     type: 3}
   maxDisplayTime: 1
-  damageDelayTime: 1
-  damage: 1
+  damageDelayTime: 0.3
+  damage: 5
   maxArea: 5
 --- !u!114 &2255676438054158767
 MonoBehaviour:
@@ -1069,8 +1070,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageContents:
-    DamageValue: 0
-    DamageType: 0
+    DamageValue: 1
+    DamageType: 1
     CriticalRate: 0
     CriticalModifier: 0
 --- !u!114 &5931773600313845237
@@ -1097,7 +1098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 1
+  knockBackForce: 5
   knockAwayFromPlayer: 0
 --- !u!1 &4913367270568860942
 GameObject:
@@ -1176,6 +1177,52 @@ Transform:
   - {fileID: 1813191095129232351}
   m_Father: {fileID: 6481230346474377608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7076700863367281020
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5126593603747287879}
+  - component: {fileID: 5383670924653943581}
+  m_Layer: 0
+  m_Name: ObjectivePickupsConfig
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5126593603747287879
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076700863367281020}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6481230346474377608}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5383670924653943581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7076700863367281020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ea6943f5954a1c45bc99683614b07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseDistance: 5
+  moveSpeed: 10
 --- !u!1 &7170910165949330236
 GameObject:
   m_ObjectHideFlags: 0
@@ -1647,12 +1694,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityPrefab: {fileID: 6208798233002451104, guid: e0dd21cf62a016a43a3a8de702a1aaff,
     type: 3}
-  maxDisplayTime: 1
-  damageDelayTime: 1
-  damage: 1
+  maxDisplayTime: 5
+  damageDelayTime: 0.3
+  damage: 5
   maxArea: 5
-  maxStrikes: 5
-  timeBetweenStrikes: 0.5
+  maxStrikes: 10
+  timeBetweenStrikes: 0.25
 --- !u!1 &7747805933802500312
 GameObject:
   m_ObjectHideFlags: 0

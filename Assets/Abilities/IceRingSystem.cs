@@ -40,10 +40,7 @@ public partial struct IceRingSystem : ISystem
         var input = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-        var buffer = new DynamicBuffer<HitBufferElement>();
-
-
-
+        
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
                      .WithEntityAccess())

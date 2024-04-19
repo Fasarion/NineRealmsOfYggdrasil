@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7509220275690175602}
   - component: {fileID: -7431143130490588973}
   m_Layer: 0
-  m_Name: ObjectiveObjectPrefab
+  m_Name: ObjectiveObjectPrefabPurple
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: ff9a0ec776dc2934c962c3a12aac8ee0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -96,3 +96,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf1007ce23f40f3468db8da647591ed5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1

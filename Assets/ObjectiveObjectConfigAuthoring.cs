@@ -21,6 +21,7 @@ public class ObjectiveObjectConfigAuthoring : MonoBehaviour
                     {
                         baseDistance = authoring.baseDistance, moveSpeed = authoring.moveSpeed
                     });
+            var buffer = AddBuffer<ObjectivePickupBufferElement>(entity);
         }
     }
 }
@@ -29,4 +30,9 @@ public struct ObjectiveObjectConfig : IComponentData
 {
     public float baseDistance;
     public float moveSpeed;
+}
+
+public struct ObjectivePickupBufferElement : IBufferElementData
+{
+    public ObjectiveObjectType Value;
 }

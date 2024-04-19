@@ -11,6 +11,8 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateAfter(typeof(PlayerMovement))]
+[BurstCompile]
 public partial struct ObjectiveObjectSystem : ISystem
 {
     private JobHandle _checkDistanceJob;
@@ -19,24 +21,22 @@ public partial struct ObjectiveObjectSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<PlayerXP>();
-        state.RequireForUpdate<XPObjectConfig>();
+        state.RequireForUpdate<ObjectiveObjectConfig>();
         state.RequireForUpdate<PlayerPositionSingleton>();
     }
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        
-        /*
         state.Dependency.Complete();
         
-        var config = SystemAPI.GetSingleton<XPObjectConfig>();
+        var config = SystemAPI.GetSingleton<ObjectiveObjectConfig>();
+
 
         var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-        _checkDistanceJob = new CheckXPObjectDistanceJob
+        _checkDistanceJob = new CheckObjectiveObjectDistanceJob
         {
             PlayerPosition = playerPosition.Value,
             ECB = ecb.AsParallelWriter(),
@@ -49,7 +49,7 @@ public partial struct ObjectiveObjectSystem : ISystem
 
         var ecb2 = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
-        _moveObjectJob = new MoveXPObjectJob
+        _moveObjectJob = new MoveObjectiveObjectJob()
         {
             PlayerPosition = playerPosition.Value,
             ECB = ecb2.AsParallelWriter(),
@@ -60,39 +60,20 @@ public partial struct ObjectiveObjectSystem : ISystem
         
         _moveObjectJob.Complete();
         
+
+        
         ecb2.Playback(state.EntityManager);
-
-
-        var query = SystemAPI.QueryBuilder().WithAll<ShouldBeDestroyed, XpObject>().Build();
-        
-        var queryCount = query.CalculateEntityCount();
-
-        var destroyArray = query.ToEntityArray(Allocator.Temp);
-        
-        state.EntityManager.DestroyEntity(destroyArray);
         
         state.Dependency.Complete();
         
-        
-        
-         var xp = SystemAPI.GetSingletonRW<PlayerXP>();
-        
-        var xpToAddPerObject = config.experience;
-        var totalXpToAdd = 0;
+        var buffer = SystemAPI.GetSingletonBuffer<ObjectivePickupBufferElement>();
 
-        if (queryCount > 0)
+        foreach (var (obj, _) in
+                 SystemAPI.Query<ObjectiveObject, ShouldBeDestroyed>())
         {
-            for (int i = 0; i < queryCount; i++)
-            {
-                totalXpToAdd += xpToAddPerObject;
-            }
-
-            totalXpToAdd += xp.ValueRO.Value;
-            xp.ValueRW.Value = totalXpToAdd;
-        
-            //Debug.Log($"{xp.ValueRO.Value}");
+            var element = new ObjectivePickupBufferElement{ Value = obj.type};
+            buffer.Add(element);
         }
-        
         
         ecb.Dispose();
         ecb2.Dispose();
@@ -100,9 +81,10 @@ public partial struct ObjectiveObjectSystem : ISystem
     }
 }
 
-[WithAll(typeof(XpObject))]
+[WithAll(typeof(ObjectiveObject))]
 [WithNone(typeof(DirectionComponent))]
-partial struct CheckXPObjectDistanceJob : IJobEntity
+[BurstCompile]
+partial struct CheckObjectiveObjectDistanceJob : IJobEntity
 {
     public float3 PlayerPosition;
     public EntityCommandBuffer.ParallelWriter ECB;
@@ -117,10 +99,10 @@ partial struct CheckXPObjectDistanceJob : IJobEntity
     }
 }
 
-[WithAll(typeof(XpObject))]
+[WithAll(typeof(ObjectiveObject))]
 [WithAll(typeof(DirectionComponent))]
 [BurstCompile]
-partial struct MoveXPObjectJob : IJobEntity
+partial struct MoveObjectiveObjectJob : IJobEntity
 {
     public float3 PlayerPosition;
     public EntityCommandBuffer.ParallelWriter ECB;
@@ -130,9 +112,7 @@ partial struct MoveXPObjectJob : IJobEntity
     void Execute(Entity entity, ref LocalTransform transform, [ChunkIndexInQuery] int chunkIndex)
     {
         var velocity = math.normalizesafe(PlayerPosition - transform.Position) * MoveSpeed;
-
         var newPos = transform.Position + (velocity * DeltaTime);
-
         transform.Position = newPos;
         
         
@@ -142,7 +122,7 @@ partial struct MoveXPObjectJob : IJobEntity
         }
         
     }
-    */
+    
 }
 
-}
+

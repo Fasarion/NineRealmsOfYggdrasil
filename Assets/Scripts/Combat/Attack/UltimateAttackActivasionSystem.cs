@@ -54,7 +54,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         if (!activeWeaponHasFullEnergy)
         {
             // removing existing target 
-            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargettingComponent>(out Entity targeter);
+            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);
@@ -75,7 +75,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             }
             
             // removing existing target 
-            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargettingComponent>(out Entity targeter);
+            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);
@@ -96,7 +96,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         
         // handle following
         var mousePos = SystemAPI.GetSingleton<MousePositionInput>();
-        foreach (var (transform, target) in SystemAPI.Query<RefRW<LocalTransform>, PlayerTargettingComponent>())
+        foreach (var (transform, target) in SystemAPI.Query<RefRW<LocalTransform>, PlayerTargetingComponent>())
         {
             transform.ValueRW.Position = mousePos.WorldPosition;
         }
@@ -108,7 +108,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
             performUltra.ValueRW.Value = true;
             
-            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargettingComponent>(out Entity targeter);
+            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);

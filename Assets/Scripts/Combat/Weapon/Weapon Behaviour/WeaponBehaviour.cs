@@ -51,7 +51,7 @@ namespace Patrik
             
             model.position = transform1.position;
             model.rotation = transform1.rotation;
-            model.localScale = transform1.localScale;
+           // model.localScale = transform1.localScale;
         }
 
 

@@ -43,6 +43,8 @@ namespace Patrik
                     DisableAllWeapons();
                     SubscribeToAttackEvents();
                     hasSetUpWeaponManager = true;
+
+                    _weaponManager.SetupWeapons();
                 }
             }
             
@@ -93,7 +95,7 @@ namespace Patrik
             _weaponManager.OnWeaponActive += SetWeaponActive;
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
         }
-        
+
         private void UnsubscribeFromAttackEvents()
         {
             _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
@@ -105,7 +107,8 @@ namespace Patrik
             _weaponManager.OnWeaponActive -= SetWeaponActive;
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
         }
-
+        
+     
         private void SetWeaponActive(WeaponType type)
         {
             Entity entity = GetWeaponEntity(type);
@@ -114,6 +117,15 @@ namespace Patrik
             {
                 SystemAPI.SetComponentEnabled<ActiveWeapon>(entity, true);
             }
+            
+            var data = new AttackData
+            {
+                AttackType = AttackType.Normal,
+                WeaponType = type,
+                ComboCounter = 0,
+            };
+            
+            WriteOverAttackData(data);
         }
         
         private void SetWeaponPassive(WeaponType type)
@@ -124,6 +136,15 @@ namespace Patrik
             {
                 SystemAPI.SetComponentEnabled<ActiveWeapon>(entity, false);
             }
+            
+            var data = new AttackData
+            {
+                AttackType = AttackType.Passive,
+                WeaponType = type,
+                ComboCounter = 0,
+            };
+            
+            WriteOverAttackData(data);
         }
 
         private Entity GetWeaponEntity(WeaponType type)
@@ -154,7 +175,7 @@ namespace Patrik
         {
             if (newData.AttackType != lastData.AttackType) return true;
             if (newData.ComboCounter != lastData.ComboCounter) return true;
-            if (newData.WeaponType != lastData.WeaponType) return true;
+          //  if (newData.WeaponType != lastData.WeaponType) return true;
 
             return false;
         }
@@ -162,13 +183,14 @@ namespace Patrik
         private void WriteOverAttackData(AttackData data)
         {
             bool statHandlerExists =
-                SystemAPI.TryGetSingletonRW<StatHandlerComponent>(out RefRW<StatHandlerComponent> statHandler);
+                SystemAPI.TryGetSingletonRW(out RefRW<StatHandlerComponent> statHandler);
             if (!statHandlerExists)
             {
                 Debug.LogWarning("No stat handler exists, can't update stats.");
                 return;
             }
 
+            Debug.Log("Should update stats");
             statHandler.ValueRW.ShouldUpdateStats = true;
             statHandler.ValueRW.WeaponType = data.WeaponType;
             statHandler.ValueRW.AttackType = data.AttackType;
@@ -178,6 +200,10 @@ namespace Patrik
             Entity entity = GetWeaponEntity(data.WeaponType);
             var weapon = EntityManager.GetComponentData<WeaponComponent>(entity);
             weapon.InActiveState = data.AttackType != AttackType.Passive;
+
+            weapon.CurrentAttackCombo = data.ComboCounter;
+            weapon.CurrentAttackType = data.AttackType;
+            
             EntityManager.SetComponentData(entity, weapon);
         }
 
@@ -193,7 +219,7 @@ namespace Patrik
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
             weaponCaller.ValueRW.shouldPassiveAttack = true;
-            weaponCaller.ValueRW.currentPassiveWeaponType = WeaponType.Hammer;
+            weaponCaller.ValueRW.currentPassiveWeaponType = data.WeaponType;
             
             if (DifferentAttackData(data, previousPassiveAttackData))
             {
@@ -330,4 +356,9 @@ namespace Patrik
             UnsubscribeFromAttackEvents();
         }
     }
+}
+
+public partial struct ResetAttackData : ISystem
+{
+    
 }

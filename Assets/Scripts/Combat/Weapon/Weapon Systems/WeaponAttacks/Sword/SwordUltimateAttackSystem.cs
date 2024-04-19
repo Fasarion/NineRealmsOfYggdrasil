@@ -12,8 +12,6 @@ public partial struct SwordUltimateAttackSystem : ISystem
 {
     private int _attackCount;
     private bool _isActive;
-    private float _cachedScale;
-    private Vector3 _cachedLocalTransformSize;
 
     private float scaleChangeFactor;
     private float numberOfScaledAttacks;
@@ -35,14 +33,8 @@ public partial struct SwordUltimateAttackSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-        
         var swordEntity = SystemAPI.GetSingletonEntity<SwordStatsTag>();
-      //  var swordTransform = state.EntityManager.GetComponentData<LocalTransform>(swordEntity);
-       // var swordGO = state.EntityManager.GetComponentData<AnimatorReference>(swordEntity);
-      //  var size = SystemAPI.GetComponent<SizeComponent>(swordEntity).Value;
-      
-      
-      
+
         if (_isActive)
         {
             bool weaponSwitch = false;
@@ -61,8 +53,6 @@ public partial struct SwordUltimateAttackSystem : ISystem
                     statHandler.ValueRW.ShouldUpdateStats = true;
                 
                     _isActive = false;
-                    //    swordTransform.Scale = _cachedScale;
-                    //     swordGO.Animator.transform.localScale = _cachedLocalTransformSize;
                 }
             }
         }
@@ -71,9 +61,9 @@ public partial struct SwordUltimateAttackSystem : ISystem
         if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Ultimate))
             return;
         
-        attackCaller.ValueRW.shouldActiveAttack = false;
+        attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
         
-        
+        // Initialize attack
         if (!_isActive)
         {
             var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
@@ -84,13 +74,6 @@ public partial struct SwordUltimateAttackSystem : ISystem
             var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
             statHandler.ValueRW.ShouldUpdateStats = true;
 
-
-            // _cachedScale = swordTransform.Scale;
-            // _cachedLocalTransformSize = swordGO.Animator.transform.localScale;
-            // swordTransform.Scale = size;
-            // state.EntityManager.SetComponentData(swordEntity, swordTransform);
-            // swordGO.Animator.transform.localScale = Vector3.one * size;
-            
             _isActive = true;
             _attackCount = 0;
         }

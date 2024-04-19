@@ -21,7 +21,7 @@ public partial struct SwordNormalAttackSystem : ISystem
         
         if (attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Normal))
         {
-            attackCaller.ValueRW.shouldActiveAttack = false;
+            attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
         }
     }
 }

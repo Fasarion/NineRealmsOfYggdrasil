@@ -38,7 +38,7 @@ public partial struct HammerUltimateAttackSystem : ISystem
         if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Hammer, AttackType.Ultimate))
             return;
 
-        attackCaller.ValueRW.shouldActiveAttack = false;
+        attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
         Debug.Log("ult!");
 
         var config = SystemAPI.GetSingleton<ThunderStrikeConfig>();

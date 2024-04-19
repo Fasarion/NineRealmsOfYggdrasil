@@ -84,6 +84,6 @@ public partial struct HammerPassiveAttackSystem : ISystem
             entityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, true);
         }
 
-        attackCaller.ValueRW.shouldPassiveAttack = false;
+        attackCaller.ValueRW.shouldStartPassiveAttack = false;
     }
 }

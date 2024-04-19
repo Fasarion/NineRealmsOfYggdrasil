@@ -158,11 +158,19 @@ namespace Patrik
             EnableWeapon(data.WeaponType);
             
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.StartActiveAttackData = new WeaponCallData()
+            {
+                Enabled = true,
+                AttackType = data.AttackType,
+                WeaponType = data.WeaponType,
+                Combo = data.ComboCounter
+            };
             
-            weaponCaller.ValueRW.shouldActiveAttack = true;
-            weaponCaller.ValueRW.currentActiveAttackType = data.AttackType;
-            weaponCaller.ValueRW.currentActiveWeaponType = data.WeaponType;
-            weaponCaller.ValueRW.currentActiveCombo = data.ComboCounter;
+            // weaponCaller.ValueRW.shouldStartActiveAttack = true;
+            // weaponCaller.ValueRW.currentStartedActiveAttackType = data.AttackType;
+            // weaponCaller.ValueRW.currentStartedActiveWeaponType = data.WeaponType;
+            // weaponCaller.ValueRW.currentStartedActiveCombo = data.ComboCounter;
             
             if (DifferentAttackData(data, previousActiveAttackData))
             {
@@ -218,8 +226,8 @@ namespace Patrik
             
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-            weaponCaller.ValueRW.shouldPassiveAttack = true;
-            weaponCaller.ValueRW.currentPassiveWeaponType = data.WeaponType;
+            weaponCaller.ValueRW.shouldStartPassiveAttack = true;
+            weaponCaller.ValueRW.currentStartedPassiveWeaponType = data.WeaponType;
             
             if (DifferentAttackData(data, previousPassiveAttackData))
             {

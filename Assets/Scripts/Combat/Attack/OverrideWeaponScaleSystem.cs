@@ -26,22 +26,17 @@ public partial struct OverrideWeaponScaleSystem : ISystem
     
     void WriteOverAttackData(ref SystemState state)
     {
-        Debug.Log("Write over size attack data");
-        
         var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
         var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
-
-
+        
         foreach (var (transform, animatorReference, weaponStatsComponent, weapon, entity) in SystemAPI
             .Query<RefRW<LocalTransform>, AnimatorReference, CombatStatsComponent, WeaponComponent>()
             .WithEntityAccess())
         {
             float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, weapon.CurrentAttackType, CombatStatType.Size, weapon.CurrentAttackCombo);
-            Debug.Log($"New size: {size}");
             
             transform.ValueRW.Scale = size;
             animatorReference.Animator.transform.localScale = Vector3.one * size;
         }
-        
     }
 }

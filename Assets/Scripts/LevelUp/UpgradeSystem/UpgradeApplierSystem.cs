@@ -59,9 +59,9 @@ public partial class UpgradeApplierSystem : SystemBase
         }
 
         statHandler.ValueRW.ShouldUpdateStats = true;
-        statHandler.ValueRW.WeaponType = attackCaller.currentActiveWeaponType;
-        statHandler.ValueRW.AttackType = attackCaller.currentActiveAttackType;
-        statHandler.ValueRW.ComboCounter = attackCaller.currentActiveCombo;
+        statHandler.ValueRW.WeaponType = attackCaller.StartActiveAttackData.WeaponType;
+        statHandler.ValueRW.AttackType = attackCaller.StartActiveAttackData.AttackType;
+        statHandler.ValueRW.ComboCounter = attackCaller.StartActiveAttackData.Combo;
     }
 
     private RefRW<CombatStatsComponent> GetStatsComponent(UpgradeBaseType baseType)

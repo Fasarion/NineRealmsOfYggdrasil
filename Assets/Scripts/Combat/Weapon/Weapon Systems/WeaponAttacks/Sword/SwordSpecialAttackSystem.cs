@@ -31,7 +31,7 @@ public partial struct SwordSpecialAttackSystem : ISystem
         if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Special))
             return;
 
-        attackCaller.ValueRW.shouldActiveAttack = false;
+        attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
         
         
         var config = SystemAPI.GetSingleton<IceRingConfig>();

@@ -213,9 +213,6 @@ namespace Patrik
             weaponParents[weapon] = activeSlot;
             
             OnWeaponActive?.Invoke(weapon.WeaponType);
-            
-            Debug.Log("On weapon active invoked");
-
         }
         
         private void MakeWeaponPassive(WeaponBehaviour weapon, Transform passiveParent)

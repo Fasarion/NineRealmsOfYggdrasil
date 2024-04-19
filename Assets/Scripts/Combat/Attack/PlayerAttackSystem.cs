@@ -159,18 +159,15 @@ namespace Patrik
             
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-            weaponCaller.ValueRW.StartActiveAttackData = new WeaponCallData()
+            weaponCaller.ValueRW.ActiveAttackData = new WeaponCallData()
             {
-                Enabled = true,
+                ShouldStart = true,
+                ShouldStop = false,
                 AttackType = data.AttackType,
                 WeaponType = data.WeaponType,
                 Combo = data.ComboCounter
             };
             
-            // weaponCaller.ValueRW.shouldStartActiveAttack = true;
-            // weaponCaller.ValueRW.currentStartedActiveAttackType = data.AttackType;
-            // weaponCaller.ValueRW.currentStartedActiveWeaponType = data.WeaponType;
-            // weaponCaller.ValueRW.currentStartedActiveCombo = data.ComboCounter;
             
             if (DifferentAttackData(data, previousActiveAttackData))
             {
@@ -198,7 +195,6 @@ namespace Patrik
                 return;
             }
 
-            Debug.Log("Should update stats");
             statHandler.ValueRW.ShouldUpdateStats = true;
             statHandler.ValueRW.WeaponType = data.WeaponType;
             statHandler.ValueRW.AttackType = data.AttackType;
@@ -218,6 +214,17 @@ namespace Patrik
         private void OnActiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);
+            
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.ActiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = false,
+                ShouldStop = true,
+                WeaponType = data.WeaponType,
+                AttackType = data.AttackType,
+                Combo = data.ComboCounter
+            };
         }
 
         private void OnPassiveAttackStart(AttackData data)
@@ -226,9 +233,15 @@ namespace Patrik
             
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-            weaponCaller.ValueRW.shouldStartPassiveAttack = true;
-            weaponCaller.ValueRW.currentStartedPassiveWeaponType = data.WeaponType;
-            
+            weaponCaller.ValueRW.PassiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = true,
+                ShouldStop = false,
+                WeaponType = data.WeaponType,
+                AttackType = data.AttackType,
+                Combo = data.ComboCounter
+            };
+
             if (DifferentAttackData(data, previousPassiveAttackData))
             {
                 WriteOverAttackData(data);
@@ -246,6 +259,16 @@ namespace Patrik
         private void OnPassiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);
+            
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.PassiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = false,
+                ShouldStop = true,
+                WeaponType = data.WeaponType,
+                AttackType = AttackType.Passive
+            };
         }
 
         private void EnableWeapon(WeaponType dataWeaponType)

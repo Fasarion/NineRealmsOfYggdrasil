@@ -25,6 +25,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<AudioBufferData>();
 
+        // TODO: put in config
         scaleChangeFactor = 2;
         numberOfScaledAttacks = 2;
     }
@@ -38,7 +39,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         if (_isActive)
         {
             bool weaponSwitch = false;
-            if (attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Normal) || weaponSwitch)
+            if (attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Normal) || weaponSwitch)
             {
                 _attackCount++;
                 
@@ -58,10 +59,10 @@ public partial struct SwordUltimateAttackSystem : ISystem
         }
         
         
-        if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Ultimate))
+        if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Ultimate))
             return;
         
-        attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
+        attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
         
         // Initialize attack
         if (!_isActive)
@@ -77,10 +78,5 @@ public partial struct SwordUltimateAttackSystem : ISystem
             _isActive = true;
             _attackCount = 0;
         }
-
-
-
-
     }
-
 }

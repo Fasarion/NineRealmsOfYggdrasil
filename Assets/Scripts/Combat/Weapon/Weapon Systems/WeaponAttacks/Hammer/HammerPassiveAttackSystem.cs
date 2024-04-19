@@ -67,7 +67,7 @@ public partial struct HammerPassiveAttackSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-        if (!attackCaller.ValueRO.ShouldPassiveAttackWithType(WeaponType.Hammer))
+        if (!attackCaller.ValueRO.ShouldStartPassiveAttack(WeaponType.Hammer))
         {
             return;
         }
@@ -84,6 +84,6 @@ public partial struct HammerPassiveAttackSystem : ISystem
             entityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, true);
         }
 
-        attackCaller.ValueRW.shouldStartPassiveAttack = false;
+        attackCaller.ValueRW.PassiveAttackData.ShouldStart = false;
     }
 }

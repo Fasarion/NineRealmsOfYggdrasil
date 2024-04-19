@@ -60,7 +60,7 @@ public class PlayerAudio : ScriptableObject
         if (timeOfXpSound > lastXpSoundTime + shepardResetTime)
         {
             shepard = 1;
-            Debug.Log("Shepard Reset");
+            
             lastXpSoundTime = timeOfXpSound;
         }
        // else if (timeOfXpSound >= lastXpSoundTime + 0.1f)
@@ -71,7 +71,7 @@ public class PlayerAudio : ScriptableObject
             shepard++;
             //Debug.Log(shepard%25);
             lastXpSoundTime = timeOfXpSound;
-            Debug.Log(timeOfXpSound);
+            
        // }
 
         /*else

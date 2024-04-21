@@ -43,8 +43,6 @@ public class RoomTreeGenerator : MonoBehaviour
     
     public void Awake()
     {
-        choiceDataScriptableObject.testList = new List<int>();
-        choiceDataScriptableObject.testList.Add(0);
         //roomNodeGridMap = choiceDataScriptableObject.roomNodeGridMap;
         canvas = FindObjectOfType<Canvas>();
 
@@ -112,7 +110,7 @@ public class RoomTreeGenerator : MonoBehaviour
         {
             GetCachedRoomNodeGridMap();
             //If it doesn't exist, we generate a new one.
-            if (roomNodeGridMapBehaviour == null)
+            if (roomNodeGridMapBehaviour == null|| roomNodeGridMapBehaviour.Count == 0)
             {
                 gridHeight = levelsInUI;
                 Random random = new Random(roomSeed);
@@ -136,12 +134,11 @@ public class RoomTreeGenerator : MonoBehaviour
     {
         if (choiceDataScriptableObject.roomNodeGridMapSO == null)
         {
-            
+            Debug.LogWarning("SerializedDictionary was null, was this intended?");
         }
         else
         {
-            //roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>(choiceDataScriptableObject.roomNodeGridMapSO);
-            keys = choiceDataScriptableObject.keys;
+            roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>(choiceDataScriptableObject.roomNodeGridMapSO);
         }
         
        
@@ -450,15 +447,13 @@ public class RoomTreeGenerator : MonoBehaviour
         {
             roomNodeGridMapBehaviour.Remove(recursiveRoomNodesToRemove[i]);
         }
-
-
-        choiceDataScriptableObject.roomNodeGridMapSO = new Dictionary<Vector2Int, RoomNode>();
+        
         foreach (var pair in roomNodeGridMapBehaviour)
         {
             choiceDataScriptableObject.roomNodeGridMapSO.Add(pair.Key,pair.Value);
         }
-        //choiceDataScriptableObject.roomNodeGridMapSO = roomNodeGridMapBehaviour;
-        choiceDataScriptableObject.keys = keys;
+        choiceDataScriptableObject.roomNodeGridMapSO = new SerializableDictionary<Vector2Int, RoomNode>(roomNodeGridMapBehaviour);
+        //choiceDataScriptableObject.keys = keys;
         roomNodeGridMapCached = true;
 
     }

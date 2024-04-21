@@ -126,6 +126,7 @@ public class ChoiceUIManager : MonoBehaviour
     public void OnRoomTreeGenerated(Dictionary<Vector2Int, RoomNode> generatedRoomNodeGridMap)
     {
         roomNodeGridMap = generatedRoomNodeGridMap;
+        
         var nodeList = roomTreeGenerator.GetCurrentNodeList();
         roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
         var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();

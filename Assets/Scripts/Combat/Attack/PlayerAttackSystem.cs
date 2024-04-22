@@ -180,7 +180,6 @@ namespace Patrik
         {
             if (newData.AttackType != lastData.AttackType) return true;
             if (newData.ComboCounter != lastData.ComboCounter) return true;
-          //  if (newData.WeaponType != lastData.WeaponType) return true;
 
             return false;
         }
@@ -354,20 +353,26 @@ namespace Patrik
 
             if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
                 return;
+
+            bool inCombatState = gameManager.GameState == GameState.Combat;
+            if (!inCombatState)
+                return;
             
             // Handle ultimate attack
             var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value == true)
+            if (ultimateAttack.Value)
             {
                 _weaponManager.PerformUltimateAttack();
                 return;
             }
-
+            
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
+            if (!normalCombat)
+                return;
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && normalCombat)
+            if (normalAttackInput.KeyPressed)
             {
                 _weaponManager.PerformNormalAttack();
                 return;
@@ -375,8 +380,16 @@ namespace Patrik
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && normalCombat)
+            if (specialAttack.KeyDown)
             {
+              //  Debug.Log("Preparing special...");
+            //    _weaponManager.PerformSpecialAttack();
+                return;
+            }
+            
+            if (specialAttack.KeyUp)
+            {
+              //  Debug.Log("Perform special!");
                 _weaponManager.PerformSpecialAttack();
                 return;
             }

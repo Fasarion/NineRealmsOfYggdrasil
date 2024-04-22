@@ -115,8 +115,9 @@ public class RoomTreeGenerator : MonoBehaviour
                 gridHeight = levelsInUI;
                 Random random = new Random(roomSeed);
                 GenerateRoomGrid(random);
-                GenerateStartingRoomNode();
+                
             }
+            GenerateStartingRoomNode();
             
         }
         if (generateTreePreview)

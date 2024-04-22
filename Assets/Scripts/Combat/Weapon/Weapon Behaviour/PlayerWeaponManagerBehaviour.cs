@@ -28,8 +28,8 @@ namespace Patrik
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
-        private WeaponType currentWeaponType => activeWeapon.WeaponType;
-        int CurrentWeaponTypeInt => (int)currentWeaponType;
+        public WeaponType CurrentWeaponType => activeWeapon.WeaponType;
+        int CurrentWeaponTypeInt => (int)CurrentWeaponType;
         private Dictionary<WeaponBehaviour, Transform> weaponParents = new ();
 
         // Attack Data
@@ -42,13 +42,10 @@ namespace Patrik
         private bool isResettingAttackFlag;
         
         // Animator parameters
-        // private string attackAnimationName = "Attack";
-        // private string activeWeaponParameterName = "ActiveWeapon";
-        // private string currentAttackParameterName = "CurrentAttack";
-
         private string movingParameterName = "Moving";
-        private string bufferAttackParamterName = "AttackBuffered";
+        private string bufferAttackParameterName = "AttackBuffered";
         private string isAttackingParameterName = "IsAttacking";
+        private string attackReleasedParameterName = "AttackReleased";
         
         // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
@@ -94,12 +91,7 @@ namespace Patrik
         private IEnumerator ResetBufferNextFrame()
         {
             yield return new WaitForEndOfFrame();
-            playerAnimator.SetBool(bufferAttackParamterName, false);
-        }
-
-        private void Update()
-        {
-            playerAnimator.SetBool(isAttackingParameterName, isAttacking);
+            playerAnimator.SetBool(bufferAttackParameterName, false);
         }
 
         struct WeaponAttackPair
@@ -121,12 +113,12 @@ namespace Patrik
         {
             // Sword Animations
             { new WeaponAttackPair(WeaponType.Sword, AttackType.Normal), "SwordNormal" },
-            { new WeaponAttackPair(WeaponType.Sword, AttackType.Special), "SwordSpecial" },
+            { new WeaponAttackPair(WeaponType.Sword, AttackType.Special), "SwordSpecialWindup" },
             { new WeaponAttackPair(WeaponType.Sword, AttackType.Ultimate), "SwordUltimate" },
             
             // Hammer Animations
             { new WeaponAttackPair(WeaponType.Hammer, AttackType.Normal), "HammerNormal" },
-            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Special), "HammerSpecial" },
+            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Special), "HammerSpecialWindUp" },
             { new WeaponAttackPair(WeaponType.Hammer, AttackType.Ultimate), "HammerUltimate" },
             
             // TODO: Add animation names for other attacks
@@ -213,9 +205,6 @@ namespace Patrik
             weaponParents[weapon] = activeSlot;
             
             OnWeaponActive?.Invoke(weapon.WeaponType);
-            
-            Debug.Log("On weapon active invoked");
-
         }
         
         private void MakeWeaponPassive(WeaponBehaviour weapon, Transform passiveParent)
@@ -273,9 +262,10 @@ namespace Patrik
         /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
         /// is registered.
         /// </summary>
-        public void PerformSpecialAttack()
+        public void StartChargingSpecial()
         {
             TryPerformAttack(AttackType.Special);
+            playerAnimator.SetBool(attackReleasedParameterName, false);
         }
         
         /// <summary>
@@ -298,7 +288,7 @@ namespace Patrik
             if (isAttacking)
             {
                 // set attack buffer
-                playerAnimator.SetBool(bufferAttackParamterName, true);
+                playerAnimator.SetBool(bufferAttackParameterName, true);
 
                 //  if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
                 return;
@@ -328,7 +318,7 @@ namespace Patrik
             else
             {
                 isAttacking = false;
-                Debug.Log($"No animation found for weapon attack pair {currentWeaponType}, {currentAttackType}");
+                Debug.Log($"No animation found for weapon attack pair {CurrentWeaponType}, {currentAttackType}");
             }
             
         }
@@ -337,7 +327,7 @@ namespace Patrik
         {
             animationName = "";
             
-            WeaponAttackPair pair = new WeaponAttackPair(currentWeaponType, currentAttackType);
+            WeaponAttackPair pair = new WeaponAttackPair(CurrentWeaponType, currentAttackType);
             if (weaponAttackAnimationNames.ContainsKey(pair))
             {
                 animationName = weaponAttackAnimationNames[pair];
@@ -376,6 +366,11 @@ namespace Patrik
             MakeWeaponPassive(oldActiveWeapon, newPassiveSlot);
             MakeWeaponActive(newActiveWeapon);
             EventManager.OnWeaponSwitch?.Invoke(newActiveWeapon);
+        }
+
+        public void ReleaseSpecial()
+        {
+            playerAnimator.SetBool(attackReleasedParameterName, true);
         }
     }
 }

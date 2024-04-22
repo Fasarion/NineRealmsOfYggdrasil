@@ -36,6 +36,5 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
     public override void RegisterMouseClick()
     {
         onRoomChanged?.Invoke(roomNode, roomSceneReference);
-        //manager.RegisterRoomSelectionClick(roomSceneReference);
     }
 }

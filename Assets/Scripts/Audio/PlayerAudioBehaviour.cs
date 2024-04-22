@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Patrik;
+using UnityEngine;
 
 
 public class PlayerAudioBehaviour : MonoBehaviour
@@ -8,6 +10,21 @@ public class PlayerAudioBehaviour : MonoBehaviour
     private void Awake()
     {
         _audioManager = AudioManager.Instance;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.OnWeaponSwitch += OnWeaponSwitch;
+    }
+    
+    private void OnDisable()
+    {
+        EventManager.OnWeaponSwitch -= OnWeaponSwitch;
+    }
+
+    private void OnWeaponSwitch(WeaponBehaviour currentWeapon)
+    {
+        WeaponType weaponType = currentWeapon.WeaponType;
     }
 
     public void PlayWeaponSwingAudio(int weapon, int attackType)

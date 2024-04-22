@@ -27,7 +27,7 @@ public class ChoiceUIManager : MonoBehaviour
 
     [SerializeField] private SelectionCardInstantiator roomSelectionCardsInstantiator;
     [SerializeField] private SelectionCardInstantiator weaponSelectionCardsInstantiator;
-    [SerializeField] private SelectionCardInstantiator shopSelectionCardsInstantiator;
+    [SerializeField] private SelectionCardInstantiator relicSelectionCardsInstantiator;
     
     
     private SelectionCardInstantiator currentSelectionCardsInstantiator;
@@ -47,6 +47,13 @@ public class ChoiceUIManager : MonoBehaviour
 
     private Dictionary<Vector2Int, RoomNode> roomNodeGridMap;
 
+
+    private ProgressionBarLevelContainer[] levelContainers;
+    private ProgressionBarBehaviour[] currentSymbols;
+
+    private int currentLevelIndex;
+    public ChoiceDataScriptableObject choiceDataScriptableObject;
+    
     public static ChoiceUIManager Instance
     {
         get
@@ -61,10 +68,8 @@ public class ChoiceUIManager : MonoBehaviour
     }
     private void Awake()
     {
-        RoomChoiceUIBehaviour.onRoomChanged += OnRoomChanged;
-        ChoiceUIBehaviour.onCardMouseClick += OnCardClicked;
+       
         //ChoiceSO.loadChoiceData;
-        currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
         roomTreeGenerator = GetComponent<RoomTreeGenerator>();
         //allSelectionCardsHidden = true;
         if (_instance == null)
@@ -72,9 +77,8 @@ public class ChoiceUIManager : MonoBehaviour
             _instance = this;
         }
 
-        SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
-        SelectionCardInstantiator.hasEnteredScreen += OnSelectionCardEntered;
-         
+        
+        
 
         //HideUI();
     }
@@ -90,14 +94,15 @@ public class ChoiceUIManager : MonoBehaviour
         currentSelectionIndex++;
         roomTreeGenerator.UpdateNodeLevel(chosenNode);
         
-        var nodeList = roomTreeGenerator.GetCurrentNodeList();
-        roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
-        var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();
-        for (int i = 0; i < cardObjects.Count; i++)
-        {
-            roomTreeGenerator.PopulateRoomPrefab(cardObjects[i], nodeList[i]);
-        }
-        levelProgressionManager.UpdateTargetObject();
+        //
+        //var nodeList = roomTreeGenerator.GetCurrentNodeList();
+        //roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
+        //var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();
+        //for (int i = 0; i < cardObjects.Count; i++)
+        //{
+          //  roomTreeGenerator.PopulateRoomPrefab(cardObjects[i], nodeList[i]);
+        //}
+        //levelProgressionManager.UpdateTargetObject();
         
         RegisterRoomSelectionClick(roomSceneReference);
     }
@@ -113,6 +118,8 @@ public class ChoiceUIManager : MonoBehaviour
         // UpdateSelectionType();
 
     }
+    
+   
 
     public void Start()
     {
@@ -123,9 +130,76 @@ public class ChoiceUIManager : MonoBehaviour
         //DisplayRoomChoiceTree(roomChoiceObjects);
     }
 
-    public void OnRoomTreeGenerated(Dictionary<Vector2Int, RoomNode> generatedRoomNodeGridMap)
+    public void OnRoomTreeGenerated(Dictionary<Vector2Int, RoomNode> generatedRoomNodeGridMap, ProgressionBarLevelContainer[] updatedLevelContainers)
+    {
+        levelContainers = updatedLevelContainers;
+        //We need to make sure that currentRoomNode has been populated here, otherwise it's going to show the wrong level
+        //Or lead to a null reference exception.
+        currentLevelIndex = choiceDataScriptableObject.currentRoomNode.roomCoordinates.x;
+        currentSymbols = levelContainers[currentLevelIndex].symbolBehaviours;
+        maxSelectionIndex = currentSymbols.Length - 1;
+
+        switch (currentSymbols[0].CardType)
+        {
+            case ProgressionBarBehaviour.ProgressionBarCardType.room:
+            {
+                currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
+                break;
+            }
+                
+            case ProgressionBarBehaviour.ProgressionBarCardType.relic:
+            {
+                currentSelectionCardsInstantiator = relicSelectionCardsInstantiator;
+                break;
+            }
+            case ProgressionBarBehaviour.ProgressionBarCardType.weapon:
+            {
+                currentSelectionCardsInstantiator = weaponSelectionCardsInstantiator;
+                break;
+            }
+        }
+        
+        for (int i = 0; i < currentSymbols.Length; i++)
+        {
+            switch (currentSymbols[i].CardType)
+            {
+                case ProgressionBarBehaviour.ProgressionBarCardType.room:
+                {
+                    CreateRoomCards(generatedRoomNodeGridMap);
+                    break;
+                }
+                
+                case ProgressionBarBehaviour.ProgressionBarCardType.relic:
+                {
+                    relicSelectionCardsInstantiator.InstantiateSelectionCards(3);
+                    break;
+                }
+                case ProgressionBarBehaviour.ProgressionBarCardType.weapon:
+                {
+                    weaponSelectionCardsInstantiator.InstantiateSelectionCards(3);
+                    break;
+                }
+            }
+        }
+
+        currentSelectionIndex = 0;
+    
+        
+        //This is for generating room cards
+        
+        
+        //This is for generating relicCards
+       
+       
+        
+        currentSelectionCardsInstantiator.MoveSelectionCardsIntoView();
+    }
+
+
+    public void CreateRoomCards(Dictionary<Vector2Int, RoomNode> generatedRoomNodeGridMap)
     {
         roomNodeGridMap = generatedRoomNodeGridMap;
+        
         var nodeList = roomTreeGenerator.GetCurrentNodeList();
         roomSelectionCardsInstantiator.InstantiateSelectionCards(nodeList.Count);
         var cardObjects = roomSelectionCardsInstantiator.GetCardObjects();
@@ -133,12 +207,7 @@ public class ChoiceUIManager : MonoBehaviour
         {
             roomTreeGenerator.PopulateRoomPrefab(cardObjects[i], nodeList[i]);
         }
-        
-        shopSelectionCardsInstantiator.InstantiateSelectionCards(3);
-        weaponSelectionCardsInstantiator.InstantiateSelectionCards(3);
-        currentSelectionCardsInstantiator.MoveSelectionCardsIntoView();
     }
-
 
     public void PopulateRoomCards()
     {
@@ -167,15 +236,24 @@ public class ChoiceUIManager : MonoBehaviour
 
         RoomTreeGenerator.roomTreeGenerated += OnRoomTreeGenerated;
 
-        //var upgradeUISystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<UpgradeUISystem>();
-        //upgradeUISystem.OnUpgradeUIDisplayCall += DisplayUpgradeCards;
+        RoomChoiceUIBehaviour.onRoomChanged += OnRoomChanged;
+        ChoiceUIBehaviour.onCardMouseClick += OnCardClicked;
+        
+        SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
+        SelectionCardInstantiator.hasEnteredScreen += OnSelectionCardEntered;
     }
+
+    
 
     private void OnDisable()
     {
-        //if (World.DefaultGameObjectInjectionWorld == null) return;
-        //var upgradeUISystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<UpgradeUISystem>();
-        //upgradeUISystem.OnUpgradeUIDisplayCall -= DisplayUpgradeCards;
+        RoomTreeGenerator.roomTreeGenerated -= OnRoomTreeGenerated;
+        
+        RoomChoiceUIBehaviour.onRoomChanged -= OnRoomChanged;
+        ChoiceUIBehaviour.onCardMouseClick -= OnCardClicked;
+        
+        SelectionCardInstantiator.hasExitedScreen -= OnSelectionCardExited;
+        SelectionCardInstantiator.hasEnteredScreen -= OnSelectionCardEntered;
     }
     
 
@@ -210,7 +288,27 @@ public class ChoiceUIManager : MonoBehaviour
                 currentSelectionIndex++;
                 selectionCardsMoving = true;
                 currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
-                UpdateSelectionType(currentSelectionIndex);
+                //UpdateSelectionType(currentSelectionIndex);
+                //Turn this into a function for the love of god.
+                switch (currentSymbols[currentSelectionIndex].CardType)
+                {
+                    case ProgressionBarBehaviour.ProgressionBarCardType.room:
+                    {
+                        currentSelectionCardsInstantiator = roomSelectionCardsInstantiator;
+                        break;
+                    }
+                
+                    case ProgressionBarBehaviour.ProgressionBarCardType.relic:
+                    {
+                        currentSelectionCardsInstantiator = relicSelectionCardsInstantiator;
+                        break;
+                    }
+                    case ProgressionBarBehaviour.ProgressionBarCardType.weapon:
+                    {
+                        currentSelectionCardsInstantiator = weaponSelectionCardsInstantiator;
+                        break;
+                    }
+                }
             }
         }
      
@@ -225,7 +323,7 @@ public class ChoiceUIManager : MonoBehaviour
                 selectionCardsMoving = true;
                 currentSelectionIndex--;
                 currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
-                UpdateSelectionType(currentSelectionIndex);
+                //UpdateSelectionType(currentSelectionIndex);
             }
         }
     }
@@ -279,7 +377,7 @@ public class ChoiceUIManager : MonoBehaviour
             }
             case SelectionType.shopChoice:
             {
-                currentSelectionCardsInstantiator = shopSelectionCardsInstantiator;
+                currentSelectionCardsInstantiator = relicSelectionCardsInstantiator;
                 break;
             }
             case SelectionType.weaponChoice:

@@ -19,9 +19,9 @@ public partial struct SwordNormalAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
-        if (attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Normal))
+        if (attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Normal))
         {
-            attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
+            attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
         }
     }
 }

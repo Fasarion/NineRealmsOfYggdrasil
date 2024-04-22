@@ -7,9 +7,6 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
     public float maxDisplayTime;
-    public float damageDelayTime;
-    public float damage;
-    public float maxArea;
     public int maxStrikes;
     public float timeBetweenStrikes;
 
@@ -22,10 +19,7 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
                 new ThunderStrikeConfig
                 {
                     abilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
-                    maxDisplayTime = authoring.maxDisplayTime,
-                    damageDelayTime = authoring.damageDelayTime,
-                    damage = authoring.damage,
-                    maxArea = authoring.maxArea,
+                    MaxDurationTime = authoring.maxDisplayTime,
                     maxStrikes = authoring.maxStrikes,
                     timeBetweenStrikes = authoring.timeBetweenStrikes
                 });
@@ -36,10 +30,7 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
 public struct ThunderStrikeConfig : IComponentData
 {
     public Entity abilityPrefab;
-    public float maxDisplayTime;
-    public float damageDelayTime;
-    public float damage;
-    public float maxArea;
+    public float MaxDurationTime;
     public int maxStrikes;
     public float timeBetweenStrikes;
 }

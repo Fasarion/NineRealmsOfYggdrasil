@@ -4,4 +4,13 @@ using UnityEngine;
 
 public class ProgressionBarBehaviour : MonoBehaviour
 {
+    public enum ProgressionBarCardType
+    {
+        relic,
+        weapon,
+        room
+
+    }
+
+    public ProgressionBarCardType CardType;
 }

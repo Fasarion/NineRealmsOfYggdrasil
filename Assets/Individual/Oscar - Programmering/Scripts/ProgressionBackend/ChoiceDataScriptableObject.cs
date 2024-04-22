@@ -6,9 +6,18 @@ using UnityEngine;
                                                            "")]
 public class ChoiceDataScriptableObject : ScriptableObject
 {
-    public Dictionary<Vector2Int, RoomNode> roomNodeGridMap;
-    public void ClearCachedGridMap()
+    //public List<Vector2Int> keys;
+    public bool saveGeneratedGridMap = false;
+    public bool resetNodeProgression = false;
+    public SerializableDictionary<Vector2Int, RoomNode> roomNodeGridMapSO;
+    public RoomNode currentRoomNode;
+    
+
+    //public List<int> testList;
+    public void ClearCachedData()
     {
-        roomNodeGridMap = null;
+        roomNodeGridMapSO = null;
+        currentRoomNode = null;
+        //keys = null;
     }
 }

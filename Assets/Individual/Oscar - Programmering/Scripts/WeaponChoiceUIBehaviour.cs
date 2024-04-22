@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 
 public class WeaponChoiceUIBehaviour : ChoiceUIBehaviour
 {
+    //public static Action onWeaponChoiceSelected;
     protected override void PopulateDisplayValues(ChoiceObject newWeaponChoiceObject)
     {
         WeaponChoiceObject weaponChoiceObject = (WeaponChoiceObject) newWeaponChoiceObject;
@@ -19,18 +21,11 @@ public class WeaponChoiceUIBehaviour : ChoiceUIBehaviour
 
        
     }
-
-
-
-
+    
     public override void RegisterMouseClick()
     {
-        //Do something about the player choosing a weapon here.
+        base.RegisterMouseClick();
+        //onWeaponChoiceSelected?.Invoke();
 
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

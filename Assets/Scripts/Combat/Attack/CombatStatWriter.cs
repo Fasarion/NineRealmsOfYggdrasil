@@ -26,8 +26,6 @@ public partial struct CombatStatHandleSystem : ISystem
     [BurstCompile]
     void WriteOverAttackData(ref SystemState state)
     {
-        Debug.Log("Write over default attack data");
-        
         var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
 
         var weaponType = statHandler.ValueRO.WeaponType;

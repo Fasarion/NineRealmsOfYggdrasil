@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
-public class PlayerTargettingSpawnerAuthoring : MonoBehaviour
+public class PlayerTargetingManagerAuthoring : MonoBehaviour
 {
     [SerializeField] private GameObject TargetPrefab;
     
-    class Baker : Baker<PlayerTargettingSpawnerAuthoring>
+    class Baker : Baker<PlayerTargetingManagerAuthoring>
     {
-        public override void Bake(PlayerTargettingSpawnerAuthoring spawnerAuthoring)
+        public override void Bake(PlayerTargetingManagerAuthoring spawnerAuthoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
@@ -18,8 +19,15 @@ public class PlayerTargettingSpawnerAuthoring : MonoBehaviour
                     Value = GetEntity(spawnerAuthoring.TargetPrefab, TransformUsageFlags.Dynamic)
                 }
             );
+            
+            AddComponent(entity, new PlayerTargetInfoSingleton());
         }
     }
+}
+
+public struct PlayerTargetInfoSingleton : IComponentData
+{
+    public float3 LastPosition;
 }
 
 public struct PlayerTargetingPrefab : IComponentData

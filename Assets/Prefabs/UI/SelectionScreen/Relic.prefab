@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3147654481759526924}
   - component: {fileID: 6666007944376430113}
   - component: {fileID: 1492123435452855745}
+  - component: {fileID: -5842694181533819679}
   m_Layer: 5
-  m_Name: Shop
+  m_Name: Relic
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,3 +76,16 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-5842694181533819679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1289760936011128575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f426f4259bd6c4e848ca09870723f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CardType: 0

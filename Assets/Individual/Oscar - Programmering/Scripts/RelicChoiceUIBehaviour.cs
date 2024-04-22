@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShopChoiceUIBehaviour : ChoiceUIBehaviour
+public class RelicChoiceUIBehaviour : ChoiceUIBehaviour
 {
+    //public static Action onRelicChoiceSelected;
     protected override void PopulateDisplayValues(ChoiceObject newShopChoiceObject)
     {
         ShopChoiceObject shopChoiceObject = (ShopChoiceObject)newShopChoiceObject;
@@ -19,6 +21,7 @@ public class ShopChoiceUIBehaviour : ChoiceUIBehaviour
     
     public override void RegisterMouseClick()
     {
-       
+        base.RegisterMouseClick();
+        //onRelicChoiceSelected?.Invoke();
     }
 }

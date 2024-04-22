@@ -42,7 +42,7 @@ public partial struct SwordSpecialAttackSystem : ISystem
         
         var config = SystemAPI.GetSingleton<IceRingConfig>();
         
-        var query = SystemAPI.QueryBuilder().WithAll<IceRingConfig, ChargeTimer>().Build();
+        var query = SystemAPI.QueryBuilder().WithAll<IceRingAbility, ChargeTimer>().Build();
         
         if (query.CalculateEntityCount() == 0)
         {

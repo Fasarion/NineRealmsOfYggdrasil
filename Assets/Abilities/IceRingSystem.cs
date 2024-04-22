@@ -127,9 +127,6 @@ public partial struct IceRingSystem : ISystem
                          SystemAPI.Query<RefRW<IceRingConfig>, DynamicBuffer<HitBufferElement>>())
                              
                 {
-                    
-                
-                    
                     if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
                     {
                         foreach (var hit in hits)

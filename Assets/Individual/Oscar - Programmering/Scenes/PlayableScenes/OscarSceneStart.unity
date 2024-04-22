@@ -2145,7 +2145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acdaa934bae2f14088b3b8317f7849d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfLevels: 6
   possibleRoomChoiceObjects:
   - {fileID: 11400000, guid: 5fc33115404bb1444b2d35e442ba376e, type: 2}
   - {fileID: 11400000, guid: e17e402113f63bc48b338fb4599f9c52, type: 2}
@@ -2158,6 +2157,8 @@ MonoBehaviour:
   roomSeed: 13
   generateTreePreview: 0
   gridWidth: 7
+  choiceDataScriptableObject: {fileID: 11400000, guid: 73c68f66ba6eace4abc3020789d330aa,
+    type: 2}
 --- !u!114 &2036219824 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,

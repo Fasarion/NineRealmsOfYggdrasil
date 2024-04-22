@@ -33,18 +33,6 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
                 if (shootWhenClose.ValueRO.CurrentCooldownTime > shootWhenClose.ValueRO.ShootingCooldownTime)
                 {
                     state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, true);
-
-                    
-                    // Entity projectileEntity = state.EntityManager.Instantiate(projectileSpawner.Projectile);
-                    // var entityTransform = state.EntityManager.GetComponentData<LocalTransform>(projectileEntity);
-                    //
-                    // entityTransform.Position = transform.Position;
-                    // entityTransform.Rotation = math.mul(transform.Rotation, entityTransform.Rotation);
-                    //
-                    // // set new transform values and direction
-                    // state.EntityManager.SetComponentData(projectileEntity, entityTransform);
-                    // state.EntityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(entityTransform.Forward())));
-                    
                     shootWhenClose.ValueRW.CurrentCooldownTime = 0;
                 }
             }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1068,7 +1068,7 @@ MonoBehaviour:
       Data2: 1144386062
       Data3: 499171749
       Data4: 2066879772
-    Path: event:/TestEvent
+    Path: event:/LJUD/UI/EXP_PickUP
   Event: 
   PlayEvent: 1
   StopEvent: 0
@@ -1168,7 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db5ca004995708949ba9fd4e45608007, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  testMusik: {fileID: 892562355}
+  menuMusic: {fileID: 0}
 --- !u!4 &1864850875
 Transform:
   m_ObjectHideFlags: 0

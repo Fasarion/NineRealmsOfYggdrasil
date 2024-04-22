@@ -20,7 +20,7 @@ public class PlayerAudio : ScriptableObject
 
     private EventInstance xpIns;
     
-    private int shepard = 0;
+    private int shepard = 1;
     
     //for footstep sounds, raycast, check when hit ground, what ground
     //do instance, set parameter for ground, play.
@@ -49,7 +49,7 @@ public class PlayerAudio : ScriptableObject
     private float lastXpSoundTime;
     private float shepardResetTime = 3f;
     
-    public void xpAudio()
+    public void XpAudio()
     {
         xpIns = RuntimeManager.CreateInstance(xpGain);
         //start coroutine??
@@ -60,14 +60,27 @@ public class PlayerAudio : ScriptableObject
         if (timeOfXpSound > lastXpSoundTime + shepardResetTime)
         {
             shepard = 1;
+            
+            lastXpSoundTime = timeOfXpSound;
         }
-        
-        xpIns.setParameterByName("XPParam", shepard % 25);
-        xpIns.start();
-        xpIns.release();
-        shepard++;
+       // else if (timeOfXpSound >= lastXpSoundTime + 0.1f)
+       // {
+            xpIns.setParameterByName("XPParam", shepard % 25);
+            xpIns.start();
+            xpIns.release();
+            shepard++;
+            //Debug.Log(shepard%25);
+            lastXpSoundTime = timeOfXpSound;
+            
+       // }
 
-        lastXpSoundTime = timeOfXpSound;
+        /*else
+        {
+            xpIns.release();
+        }
+        */
+
+
     }
     
 

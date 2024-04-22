@@ -3,60 +3,74 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.UIElements.Experimental;
 using Random = System.Random;
 
 public class RoomTreeGenerator : MonoBehaviour
 {
-    public int numberOfLevels;
+    
     public List<RoomChoiceObject> possibleRoomChoiceObjects;
     public GameObject roomSelectionUIPrefab;
     public GameObject connectionUIPrefab;
     public int roomSeed;
-
+    public ChoiceDataScriptableObject choiceDataScriptableObject;
+    
+    public static Action<Dictionary<Vector2Int, RoomNode>, ProgressionBarLevelContainer[]> roomTreeGenerated;
+    
     [SerializeField] private bool generateTreePreview;
     
-    private int currentLevelNumber;
-    private Dictionary<int, List<GameObject>> levelNodeTree;
-    private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
-
+    
     public int gridWidth;
     private int gridHeight;
     private Vector2Int roomNodeCoordinates;
-
+    private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
+    
+    private int numberOfLevels;
+    private int currentLevelNumber;
+    
     private Canvas canvas;
 
-    private Dictionary<Vector2Int, RoomNode> roomNodeGridMap;
+    private Dictionary<Vector2Int, RoomNode> roomNodeGridMapBehaviour;
     Vector2[][] branchConnections;
 
     private RoomNode startingRoomNode;
     private RoomNode currentParentNode;
 
 
-    public static Action< Dictionary<Vector2Int, RoomNode>> roomTreeGenerated;
+   
 
-    [SerializeField]private bool cacheGridMap = true;
-    private bool roomNodeGridMapCached = false;
+    //[SerializeField]private bool cacheGridMap = true;
+    private bool roomNodeGridMapCached = true;
 
-    public ChoiceDataScriptableObject choiceDataScriptableObject;
     
-
+    private List<Vector2Int> keys;
+    
     public void Awake()
     {
+        //roomNodeGridMap = choiceDataScriptableObject.roomNodeGridMap;
         canvas = FindObjectOfType<Canvas>();
-       
 
-        levelNodeTree = new Dictionary<int, List<GameObject>>();
+        if (choiceDataScriptableObject.roomNodeGridMapSO != null)
+        {
+            Debug.Log(choiceDataScriptableObject.roomNodeGridMapSO.Count);
+        }
+        
+
+        //levelNodeTree = new Dictionary<int, List<GameObject>>();
         //roomNodeGridMap = new Dictionary<Vector2Int, RoomNode>();
 
-        if (!cacheGridMap)
+        if (!choiceDataScriptableObject.saveGeneratedGridMap)
         {
             roomNodeGridMapCached = false;
+            
         }
-
+        
         if (!roomNodeGridMapCached)
         {
             ClearCachedRoomNode();
         }
+
+      
         
 
 
@@ -64,8 +78,9 @@ public class RoomTreeGenerator : MonoBehaviour
 
     private void ClearCachedRoomNode()
     {
-        roomNodeGridMap = new Dictionary<Vector2Int, RoomNode>();
-        choiceDataScriptableObject.ClearCachedGridMap();
+        roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>();
+        keys = new List<Vector2Int>();
+        choiceDataScriptableObject.ClearCachedData();
     }
 
     public void OnEnable()
@@ -83,26 +98,49 @@ public class RoomTreeGenerator : MonoBehaviour
        
     }
     
-    public void OnMapProgressionContentSet(int levelsInUI)
+    public void OnMapProgressionContentSet(ProgressionBarLevelContainer[] levelContainers)
     {
+        var levelsInUI = levelContainers.Length;
         if (!roomNodeGridMapCached)
         {
             gridHeight = levelsInUI;
             Random random = new Random(roomSeed);
             GenerateRoomGrid(random);
             GenerateStartingRoomNode();
-            if (generateTreePreview)
-            {
-                GenerateRoomUINodes();
-            }
+           
             
             //GenerateRoomTree();
         }
         else
         {
             GetCachedRoomNodeGridMap();
+            //If it doesn't exist, we generate a new one.
+            if (roomNodeGridMapBehaviour == null|| roomNodeGridMapBehaviour.Count == 0)
+            {
+                gridHeight = levelsInUI;
+                Random random = new Random(roomSeed);
+                GenerateRoomGrid(random);
+                GenerateStartingRoomNode();
+                
+            }
+            else if(choiceDataScriptableObject.resetNodeProgression == false)
+            {
+                currentParentNode = choiceDataScriptableObject.currentRoomNode;
+                
+            }
+            else
+            {
+                
+                GenerateStartingRoomNode();
+            }
+            
+            
         }
-        roomTreeGenerated.Invoke(roomNodeGridMap);
+        if (generateTreePreview)
+        {
+            GenerateRoomUINodes();
+        }
+        roomTreeGenerated?.Invoke(roomNodeGridMapBehaviour, levelContainers);
 
 
      
@@ -111,7 +149,16 @@ public class RoomTreeGenerator : MonoBehaviour
 
     private void GetCachedRoomNodeGridMap()
     {
-        roomNodeGridMap = choiceDataScriptableObject.roomNodeGridMap;
+        if (choiceDataScriptableObject.roomNodeGridMapSO == null)
+        {
+            Debug.LogWarning("SerializedDictionary was null, was this intended?");
+        }
+        else
+        {
+            roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>(choiceDataScriptableObject.roomNodeGridMapSO);
+        }
+        
+       
     }
 
 
@@ -133,10 +180,11 @@ public class RoomTreeGenerator : MonoBehaviour
 
     private void GenerateStartingRoomNode()
     {
-        startingRoomNode = new RoomNode(new Vector2Int(-1,0));
+        choiceDataScriptableObject.currentRoomNode = null;
+        startingRoomNode = new RoomNode(new Vector2Int(0,0));
         for (int i = 0; i < gridWidth; i++)
         {
-            roomNodeGridMap.TryGetValue(new Vector2Int(0, i), out var roomNode);
+            roomNodeGridMapBehaviour.TryGetValue(new Vector2Int(1, i), out var roomNode);
             if (roomNode != null)
             {
                 roomNode.parentNodes.Add(startingRoomNode);
@@ -146,11 +194,12 @@ public class RoomTreeGenerator : MonoBehaviour
         }
 
         currentParentNode = startingRoomNode;
+        choiceDataScriptableObject.currentRoomNode = currentParentNode;
     }
 
     public Dictionary<Vector2Int, RoomNode> GetRoomGridMap()
     {
-        return roomNodeGridMap;
+        return roomNodeGridMapBehaviour;
     }
 
 
@@ -172,7 +221,7 @@ public class RoomTreeGenerator : MonoBehaviour
         startingUIBehaviour.roomNode = startingRoomNode;
         startingUIBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[startingRoomNode.chosenRoomTypeIndex]);
         
-        foreach (var pair in roomNodeGridMap)
+        foreach (var pair in roomNodeGridMapBehaviour)
         {
             var newUINode = Instantiate(roomSelectionUIPrefab, canvas.transform);
             var uiNodeRectTransform = newUINode.GetComponent<RectTransform>();
@@ -208,7 +257,7 @@ public class RoomTreeGenerator : MonoBehaviour
             
         }
     }
-    public void GenerateRoomTree()
+    /*public void GenerateRoomTree()
     {
 
         int yPos = -500;
@@ -272,15 +321,18 @@ public class RoomTreeGenerator : MonoBehaviour
 
             combinedPreviousNodeCount = numberOfNodesAddedWithPreviousLevel;
             yPos += 200;
-            levelNodeTree.Add(i, nodesInCurrentLevel);
+            //levelNodeTree.Add(i, nodesInCurrentLevel);
 
         }
-    }
+    }*/
 
     //Generate a room grid with a particular chance of a room being generated.
     private void GenerateRoomGrid(Random random)
     {
-        for (int i = 0; i < gridHeight; i++)
+        roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>();
+        keys = new List<Vector2Int>();
+        
+        for (int i = 1; i < gridHeight + 1; i++)
         {
             for (int j = 0; j < gridWidth; j++)
             {
@@ -291,16 +343,18 @@ public class RoomTreeGenerator : MonoBehaviour
                     RoomNode newNode = new RoomNode(nodeCoordinates);
                     var chosenRoomIndex = random.Next(0, possibleRoomChoiceObjects.Count);
                     newNode.chosenRoomTypeIndex = chosenRoomIndex;
-                    roomNodeGridMap.Add(nodeCoordinates, newNode);
+                    roomNodeGridMapBehaviour.Add(nodeCoordinates, newNode);
                 }
             }
         }
         
         List<Vector2Int> itemsToRemove = new List<Vector2Int>();
-        foreach (var pair in roomNodeGridMap)
+        foreach (var pair in roomNodeGridMapBehaviour)
         {
+            keys.Add(pair.Key);
+            //values.Add(pair.Value);
             //Check if we are on the first level or we have a parent. If we are not at the first level and we do not have a parent, then we can be removed straight away.
-            if (pair.Key.x != 0 && pair.Value.parentNodes.Count == 0)
+            if (pair.Key.x != 1 && pair.Value.parentNodes.Count == 0)
             {
                 itemsToRemove.Add(pair.Key);
                 continue;
@@ -317,7 +371,7 @@ public class RoomTreeGenerator : MonoBehaviour
             {
                 var childCoordinates = new Vector2Int(coordinate.x + 1, coordinate.y + currentChildNodeIndex);
                 currentChildNodeIndex++;
-                roomNodeGridMap.TryGetValue(childCoordinates, out RoomNode childNode);
+                roomNodeGridMapBehaviour.TryGetValue(childCoordinates, out RoomNode childNode);
 
                 //Check that there is actually a node on that coordinate if it's within the grid.
 
@@ -326,7 +380,7 @@ public class RoomTreeGenerator : MonoBehaviour
                     potentialChildNodes.Add(childNode);
                     var nodeToRightOfChildCoord = new Vector2Int(childCoordinates.x, childCoordinates.y + 1);
                     RoomNode childNeighbour;
-                    roomNodeGridMap.TryGetValue(nodeToRightOfChildCoord, out childNeighbour);
+                    roomNodeGridMapBehaviour.TryGetValue(nodeToRightOfChildCoord, out childNeighbour);
                     //Check if that node's right hand neighbour has a parent node.
                     //If it does it means we are trying to cross two connections which is not valid.
                     if (childNeighbour != null)
@@ -384,7 +438,7 @@ public class RoomTreeGenerator : MonoBehaviour
             //If there is still no node to add, we tag the node for removal.
             if (childNodeAdded == false)
             {
-                if (pair.Key.x != gridHeight - 1 && pair.Value.childNodes.Count == 0)
+                if (pair.Key.x != gridHeight && pair.Value.childNodes.Count == 0)
                 {
                     itemsToRemove.Add(pair.Key);
                 }
@@ -396,7 +450,7 @@ public class RoomTreeGenerator : MonoBehaviour
 
         for (int i = 0; i < itemsToRemove.Count; i++)
         {
-            roomNodeGridMap.TryGetValue(itemsToRemove[i], out var node);
+            roomNodeGridMapBehaviour.TryGetValue(itemsToRemove[i], out var node);
             if (node != null)
             {
                 TraverseRemovedNodesUpwards(node, recursiveRoomNodesToRemove);
@@ -405,15 +459,25 @@ public class RoomTreeGenerator : MonoBehaviour
             {
                 Debug.LogError("No node to remove, dictionary did not contain node");
             }
-            roomNodeGridMap.Remove(itemsToRemove[i]);
+            roomNodeGridMapBehaviour.Remove(itemsToRemove[i]);
         }
 
         for (int i = 0; i < recursiveRoomNodesToRemove.Count; i++)
         {
-            roomNodeGridMap.Remove(recursiveRoomNodesToRemove[i]);
+            roomNodeGridMapBehaviour.Remove(recursiveRoomNodesToRemove[i]);
         }
-
-        roomNodeGridMapCached = true;
+        
+        //foreach (var pair in roomNodeGridMapBehaviour)
+        //{
+          //  choiceDataScriptableObject.roomNodeGridMapSO.Add(pair.Key,pair.Value);
+        //}
+        choiceDataScriptableObject.roomNodeGridMapSO = new SerializableDictionary<Vector2Int, RoomNode>(roomNodeGridMapBehaviour);
+        //choiceDataScriptableObject.keys = keys;
+        if (!choiceDataScriptableObject.saveGeneratedGridMap)
+        {
+            roomNodeGridMapCached = false;
+            
+        }
 
     }
     public void TraverseRemovedNodesUpwards(RoomNode currentNode, List<Vector2Int> recursiveRoomNodesToRemove)

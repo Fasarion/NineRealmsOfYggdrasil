@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 3175653555495389885}
   - component: {fileID: 6823690169033370430}
   m_Layer: 5
-  m_Name: ShopSelectionCards
+  m_Name: RelicSelectionCards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,3 +114,5 @@ MonoBehaviour:
   parentToPopulate: {fileID: 522879850493233811}
   prefabType: {fileID: 7172285684755207846, guid: 9d8c82e2dc73a4e4aa35ad41b44fc088,
     type: 3}
+  cardObjects: []
+  timeWhenFinished: 0

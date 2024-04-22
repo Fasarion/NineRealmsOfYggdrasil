@@ -1038,6 +1038,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f7890dfa43e487b9cecbcf12290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
+  ultimateAttackUsesTarget: 0
 --- !u!1001 &1108011578
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1377,6 +1379,11 @@ PrefabInstance:
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1920,6 +1927,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c43f7890dfa43e487b9cecbcf12290d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponType: 0
+  ultimateAttackUsesTarget: 0
 --- !u!114 &1745888679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1934,7 +1943,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7824363987953266496, guid: 00a46bfd6213f1d438cbe2fe38f1fe45,
     type: 3}
-  coolDownTime: 0
 --- !u!1001 &1881886483
 PrefabInstance:
   m_ObjectHideFlags: 0

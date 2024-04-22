@@ -181,10 +181,10 @@ public class RoomTreeGenerator : MonoBehaviour
     private void GenerateStartingRoomNode()
     {
         choiceDataScriptableObject.currentRoomNode = null;
-        startingRoomNode = new RoomNode(new Vector2Int(-1,0));
+        startingRoomNode = new RoomNode(new Vector2Int(0,0));
         for (int i = 0; i < gridWidth; i++)
         {
-            roomNodeGridMapBehaviour.TryGetValue(new Vector2Int(0, i), out var roomNode);
+            roomNodeGridMapBehaviour.TryGetValue(new Vector2Int(1, i), out var roomNode);
             if (roomNode != null)
             {
                 roomNode.parentNodes.Add(startingRoomNode);
@@ -332,7 +332,7 @@ public class RoomTreeGenerator : MonoBehaviour
         roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>();
         keys = new List<Vector2Int>();
         
-        for (int i = 0; i < gridHeight; i++)
+        for (int i = 1; i < gridHeight + 1; i++)
         {
             for (int j = 0; j < gridWidth; j++)
             {
@@ -354,7 +354,7 @@ public class RoomTreeGenerator : MonoBehaviour
             keys.Add(pair.Key);
             //values.Add(pair.Value);
             //Check if we are on the first level or we have a parent. If we are not at the first level and we do not have a parent, then we can be removed straight away.
-            if (pair.Key.x != 0 && pair.Value.parentNodes.Count == 0)
+            if (pair.Key.x != 1 && pair.Value.parentNodes.Count == 0)
             {
                 itemsToRemove.Add(pair.Key);
                 continue;
@@ -438,7 +438,7 @@ public class RoomTreeGenerator : MonoBehaviour
             //If there is still no node to add, we tag the node for removal.
             if (childNodeAdded == false)
             {
-                if (pair.Key.x != gridHeight - 1 && pair.Value.childNodes.Count == 0)
+                if (pair.Key.x != gridHeight && pair.Value.childNodes.Count == 0)
                 {
                     itemsToRemove.Add(pair.Key);
                 }

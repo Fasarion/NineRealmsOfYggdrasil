@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerAtkSpeedUpgrade
   m_EditorClassIdentifier: 
   upgradeTitle: Attack speed upgrade
-  upgradeSprite: {fileID: 0}
+  upgradeSprite: {fileID: 21300000, guid: 50e35435d988d5b498c69be7a5a20c52, type: 3}
   upgradeDescription: 
   upgrades:
   - thingToUpgrade: 4
@@ -21,7 +21,7 @@ MonoBehaviour:
     valueAmount: 1
   startUnlocked: 1
   upgradeIndex: 3
-  isUnlocked: 0
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 367d90e60f139864094b5bad6506fc71, type: 2}

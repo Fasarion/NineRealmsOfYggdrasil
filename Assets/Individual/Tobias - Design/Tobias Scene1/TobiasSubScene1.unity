@@ -1399,6 +1399,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Config Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5796034013704642493, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1467,6 +1472,11 @@ PrefabInstance:
     - target: {fileID: 8396824266348004795, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: damageContents.DamageValue
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8679604310254679132, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: damage
       value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []

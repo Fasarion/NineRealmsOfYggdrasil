@@ -111,8 +111,7 @@ public partial class UpgradeApplierSystem : SystemBase
                 break;
         }
     }
-
-
+    
     private void HandleLocks(UpgradeObject upgradeObject)
     {
         upgradeObject.isUnlocked = false;

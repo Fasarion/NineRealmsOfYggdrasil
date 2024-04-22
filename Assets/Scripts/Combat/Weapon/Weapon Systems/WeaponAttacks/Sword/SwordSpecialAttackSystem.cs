@@ -28,7 +28,13 @@ public partial struct SwordSpecialAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
-        if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Special))
+        if (!attackCaller.ValueRO.ChargeInfo.IsCharging)
+            return;
+        
+        if (attackCaller.ValueRO.ChargeInfo.ChargingWeapon != WeaponType.Sword)
+            return;
+        
+        if (attackCaller.ValueRO.ActiveAttackData.IsAttacking)
             return;
 
         attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;

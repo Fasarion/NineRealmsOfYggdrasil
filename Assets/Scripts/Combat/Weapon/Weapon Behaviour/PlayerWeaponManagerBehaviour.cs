@@ -28,8 +28,8 @@ namespace Patrik
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
-        private WeaponType currentWeaponType => activeWeapon.WeaponType;
-        int CurrentWeaponTypeInt => (int)currentWeaponType;
+        public WeaponType CurrentWeaponType => activeWeapon.WeaponType;
+        int CurrentWeaponTypeInt => (int)CurrentWeaponType;
         private Dictionary<WeaponBehaviour, Transform> weaponParents = new ();
 
         // Attack Data
@@ -318,7 +318,7 @@ namespace Patrik
             else
             {
                 isAttacking = false;
-                Debug.Log($"No animation found for weapon attack pair {currentWeaponType}, {currentAttackType}");
+                Debug.Log($"No animation found for weapon attack pair {CurrentWeaponType}, {currentAttackType}");
             }
             
         }
@@ -327,7 +327,7 @@ namespace Patrik
         {
             animationName = "";
             
-            WeaponAttackPair pair = new WeaponAttackPair(currentWeaponType, currentAttackType);
+            WeaponAttackPair pair = new WeaponAttackPair(CurrentWeaponType, currentAttackType);
             if (weaponAttackAnimationNames.ContainsKey(pair))
             {
                 animationName = weaponAttackAnimationNames[pair];

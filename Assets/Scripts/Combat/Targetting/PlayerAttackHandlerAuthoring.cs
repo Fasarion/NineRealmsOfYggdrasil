@@ -10,7 +10,7 @@ public class PlayerAttackHandlerAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
             AddComponent(entity, new PerformUltimateAttack());
-            AddComponent(entity, new SpecialAttackChargeInfo());
+            //AddComponent(entity, new SpecialAttackChargeInfo());
         }
     }
 }
@@ -20,9 +20,5 @@ public partial struct PerformUltimateAttack : IComponentData
     public bool Value;
 }
 
-public partial struct SpecialAttackChargeInfo : IComponentData
-{
-    public bool IsCharging;
-    public float ChargeTimer;
-}
+
 

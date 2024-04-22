@@ -31,6 +31,7 @@ public enum UpgradeValueTypes
     reactionDamage,
     reactionArea, //Hur stort område reactionerna (combustion, lightningchain etc) gör skada
     damage, //this is in % on player
+    lightningchains,
     Unlock
 }
 

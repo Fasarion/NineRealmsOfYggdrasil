@@ -14,7 +14,6 @@ public partial struct OverrideWeaponScaleSystem : ISystem
         state.RequireForUpdate<StatHandlerComponent>();
     }
 
-    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();

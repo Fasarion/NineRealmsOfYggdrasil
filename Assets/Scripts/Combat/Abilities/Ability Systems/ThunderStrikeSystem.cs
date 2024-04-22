@@ -19,6 +19,7 @@ public partial struct ThunderStrikeSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerTargetingComponent>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<ThunderBoltConfig>();
         state.RequireForUpdate<ThunderStrikeAbility>();
@@ -37,12 +38,9 @@ public partial struct ThunderStrikeSystem : ISystem
         var thunderConfig = SystemAPI.GetSingleton<ThunderStrikeConfig>();
         var boltConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-        var buffer = new DynamicBuffer<HitBufferElement>();
+        var enemiesBuffer = new DynamicBuffer<HitBufferElement>();
         var targetPositions = new NativeArray<float3>(thunderConfig.maxStrikes * 2, Allocator.Temp);
-
-        
-
-
+        var target = SystemAPI.GetSingletonEntity<PlayerTargetingComponent>();
 
         foreach (var (ability, timer, entity) in
                  SystemAPI.Query<RefRW<ThunderStrikeAbility>, RefRW<TimerObject>>()
@@ -58,13 +56,12 @@ public partial struct ThunderStrikeSystem : ISystem
             
             if (!ability.ValueRO.isInitialized)
             {
-                timer.ValueRW.maxTime = thunderConfig.maxDisplayTime;
+                timer.ValueRW.maxTime = thunderConfig.MaxDurationTime;
                 ability.ValueRW.isInitialized = true;
             }
 
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
             
-
 
             var currentCheckpointTime = thunderConfig.timeBetweenStrikes * ability.ValueRO.strikeCounter + 1;
             if (timer.ValueRO.currentTime > currentCheckpointTime)
@@ -75,6 +72,11 @@ public partial struct ThunderStrikeSystem : ISystem
                 
                 var effect = state.EntityManager.Instantiate(boltConfig.abilityPrefab);
 
+                float3 pos = state.EntityManager.GetComponentData<LocalTransform>(target).Position;
+                
+                Debug.Log($"pos: {pos}");
+                
+                //TODO: byt ut till target area
                 int counter = 0;
                 foreach (var transform in
                          SystemAPI.Query<LocalTransform>().WithAll<EnemyTypeComponent>())

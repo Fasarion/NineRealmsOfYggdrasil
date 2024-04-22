@@ -45,7 +45,7 @@ public partial struct HammerUltimateAttackSystem : ISystem
         var ability = state.EntityManager.Instantiate(config.abilityPrefab);
         state.EntityManager.SetComponentData(ability, new TimerObject
         {
-            maxTime = config.maxDisplayTime
+            maxTime = config.MaxDurationTime
         });
         
     }

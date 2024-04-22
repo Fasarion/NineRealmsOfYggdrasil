@@ -23,6 +23,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         state.RequireForUpdate<PrimaryButtonInput>();
         state.RequireForUpdate<PerformUltimateAttack>();
         state.RequireForUpdate<GameManagerSingleton>();
+        state.RequireForUpdate<PlayerTargetInfoSingleton>();
     }
 
     [BurstCompile]
@@ -96,9 +97,11 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         
         // handle following
         var mousePos = SystemAPI.GetSingleton<MousePositionInput>();
+        var targetSingleton = SystemAPI.GetSingletonRW<PlayerTargetInfoSingleton>();
         foreach (var (transform, target) in SystemAPI.Query<RefRW<LocalTransform>, PlayerTargetingComponent>())
         {
             transform.ValueRW.Position = mousePos.WorldPosition;
+            targetSingleton.ValueRW.LastPosition = transform.ValueRW.Position; 
         }
 
         // handle activating ultimate

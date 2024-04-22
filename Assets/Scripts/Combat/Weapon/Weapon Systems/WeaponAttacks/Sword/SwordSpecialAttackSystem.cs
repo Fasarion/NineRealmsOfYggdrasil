@@ -28,7 +28,13 @@ public partial struct SwordSpecialAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
-        if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Special))
+        if (!attackCaller.ValueRO.ChargeInfo.IsCharging)
+            return;
+        
+        if (attackCaller.ValueRO.ChargeInfo.ChargingWeapon != WeaponType.Sword)
+            return;
+        
+        if (attackCaller.ValueRO.ActiveAttackData.IsAttacking)
             return;
 
         attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
@@ -36,7 +42,8 @@ public partial struct SwordSpecialAttackSystem : ISystem
         
         var config = SystemAPI.GetSingleton<IceRingConfig>();
         
-        var query = SystemAPI.QueryBuilder().WithAll<IceRingConfig, ChargeTimer>().Build();
+        var query = SystemAPI.QueryBuilder().WithAll<IceRingAbility, ChargeTimer>().Build();
+        
         if (query.CalculateEntityCount() == 0)
         {
             var ability = state.EntityManager.Instantiate(config.chargeAreaPrefab);

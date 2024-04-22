@@ -41,7 +41,7 @@ namespace Patrik
                     }
 
                     DisableAllWeapons();
-                    SubscribeToAttackEvents();
+                    SubscribeToEvents();
                     hasSetUpWeaponManager = true;
 
                     _weaponManager.SetupWeapons();
@@ -84,7 +84,7 @@ namespace Patrik
             }
         }
 
-        private void SubscribeToAttackEvents()
+        private void SubscribeToEvents()
         {
             _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
             _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
@@ -123,6 +123,16 @@ namespace Patrik
                 AttackType = AttackType.Normal,
                 WeaponType = type,
                 ComboCounter = 0,
+            };
+
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+            weaponCaller.ValueRW.ActiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = false,
+                ShouldStop = false,
+                AttackType = data.AttackType,
+                WeaponType = data.WeaponType,
+                Combo = data.ComboCounter
             };
             
             WriteOverAttackData(data);
@@ -163,6 +173,7 @@ namespace Patrik
             {
                 ShouldStart = true,
                 ShouldStop = false,
+                IsAttacking = true,
                 AttackType = data.AttackType,
                 WeaponType = data.WeaponType,
                 Combo = data.ComboCounter
@@ -180,7 +191,6 @@ namespace Patrik
         {
             if (newData.AttackType != lastData.AttackType) return true;
             if (newData.ComboCounter != lastData.ComboCounter) return true;
-          //  if (newData.WeaponType != lastData.WeaponType) return true;
 
             return false;
         }
@@ -221,6 +231,7 @@ namespace Patrik
             {
                 ShouldStart = false,
                 ShouldStop = true,
+                IsAttacking = false,
                 WeaponType = data.WeaponType,
                 AttackType = data.AttackType,
                 Combo = data.ComboCounter
@@ -237,6 +248,7 @@ namespace Patrik
             {
                 ShouldStart = true,
                 ShouldStop = false,
+                IsAttacking = true,
                 WeaponType = data.WeaponType,
                 AttackType = data.AttackType,
                 Combo = data.ComboCounter
@@ -266,6 +278,7 @@ namespace Patrik
             {
                 ShouldStart = false,
                 ShouldStop = true,
+                IsAttacking = false,
                 WeaponType = data.WeaponType,
                 AttackType = AttackType.Passive
             };
@@ -354,31 +367,59 @@ namespace Patrik
 
             if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
                 return;
+
+            bool inCombatState = gameManager.GameState == GameState.Combat;
+            if (!inCombatState)
+                return;
+
+            int attackButtonsPressed = 0;
             
             // Handle ultimate attack
             var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value == true)
+            if (ultimateAttack.Value)
             {
                 _weaponManager.PerformUltimateAttack();
-                return;
+                attackButtonsPressed++;
             }
-
+            
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
+            if (!normalCombat)
+                return;
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && normalCombat)
+            if (normalAttackInput.KeyPressed && attackButtonsPressed == 0)
             {
                 _weaponManager.PerformNormalAttack();
-                return;
+                attackButtonsPressed++;
             }
+
+            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && normalCombat)
+            if (specialAttack.KeyDown && attackButtonsPressed == 0)
             {
-                _weaponManager.PerformSpecialAttack();
-                return;
+              //  Debug.Log("Preparing special...");
+                _weaponManager.StartChargingSpecial();
+                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                {
+                    ChargingWeapon = _weaponManager.CurrentWeaponType,
+                    IsCharging = true
+                };
+                
+                attackButtonsPressed++;
+            }
+            
+            if (specialAttack.KeyUp)
+            {
+              //  Debug.Log("Perform special!");
+                _weaponManager.ReleaseSpecial();
+                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                {
+                    ChargingWeapon = _weaponManager.CurrentWeaponType,
+                    IsCharging = false
+                };
             }
         }
         

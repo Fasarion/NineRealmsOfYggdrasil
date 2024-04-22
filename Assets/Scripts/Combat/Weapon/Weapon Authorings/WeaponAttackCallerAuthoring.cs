@@ -20,7 +20,9 @@ public struct WeaponAttackCaller : IComponentData
 {
     public WeaponCallData ActiveAttackData;
     public WeaponCallData PassiveAttackData;
-    
+
+    public ChargeInfo ChargeInfo;
+
     public readonly bool ShouldStartActiveAttack(WeaponType weaponType, AttackType attackType)
     {
         return ActiveAttackData.ShouldStartAttack(weaponType, attackType);
@@ -42,6 +44,12 @@ public struct WeaponAttackCaller : IComponentData
     }
 }
 
+public partial struct ChargeInfo
+{
+    public bool IsCharging;
+    public WeaponType ChargingWeapon;
+}
+
 public struct WeaponCallData
 {
     public bool ShouldStart;
@@ -49,7 +57,8 @@ public struct WeaponCallData
     public AttackType AttackType;
     public WeaponType WeaponType;
     public int Combo;
-    
+    public bool IsAttacking;
+
     public bool ShouldStartAttack(WeaponType weaponType, AttackType attackType)
     {
         if (!ShouldStart) return false;

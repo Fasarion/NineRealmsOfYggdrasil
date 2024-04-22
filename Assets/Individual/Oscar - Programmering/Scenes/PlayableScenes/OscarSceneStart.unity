@@ -1195,18 +1195,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &721391683 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1095748555468045370, guid: 8e3804d1184be8a42b9e771f10d7084f,
-    type: 3}
-  m_PrefabInstance: {fileID: 8160148053336166232}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &739857108 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2106492903225081491, guid: b9605c22f46facd4792fd147be349cc3,
+--- !u!114 &739857112 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7181415787249038925, guid: b9605c22f46facd4792fd147be349cc3,
     type: 3}
   m_PrefabInstance: {fileID: 7995991946346894747}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4f426f4259bd6c4e848ca09870723f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &798529187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1396,60 +1396,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8160148053336166232}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2036219823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721391683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acdaa934bae2f14088b3b8317f7849d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  possibleRoomChoiceObjects:
-  - {fileID: 11400000, guid: 5fc33115404bb1444b2d35e442ba376e, type: 2}
-  - {fileID: 11400000, guid: e17e402113f63bc48b338fb4599f9c52, type: 2}
-  - {fileID: 11400000, guid: d40c10a953b437d458dbf3935d41e5f6, type: 2}
-  - {fileID: 11400000, guid: 0c2954b7f8e14924695b520160272e23, type: 2}
-  roomSelectionUIPrefab: {fileID: 5127538796324908209, guid: 4b9f6675008431d49b15e0be1ca1b80f,
-    type: 3}
-  connectionUIPrefab: {fileID: 994018812610073705, guid: 105060936a2b25d498f5b113fdad6481,
-    type: 3}
-  roomSeed: 12
-  choiceDataScriptableObject: {fileID: 11400000, guid: 73c68f66ba6eace4abc3020789d330aa,
-    type: 2}
-  generateTreePreview: 0
-  gridWidth: 7
 --- !u!114 &2036219824 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
     type: 3}
   m_PrefabInstance: {fileID: 8160148053336166232}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721391683}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05ce4d57eeab19648b18282800d8d419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2036219825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 721391683}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309af089b3d1a1a4b87739613a4736b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  roomTreeGenerator: {fileID: 2036219823}
-  currentRoomLevel: 0
-  contentContainer: {fileID: 0}
-  currentTargetObject: {fileID: 739857108}
 --- !u!114 &2044564449 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7161917371825969758, guid: 4b9f6675008431d49b15e0be1ca1b80f,
@@ -1815,6 +1773,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 658264812357748372, guid: b9605c22f46facd4792fd147be349cc3,
+        type: 3}
+      propertyPath: m_Name
+      value: RelicSelectionCards
       objectReference: {fileID: 0}
     - target: {fileID: 886540061554049552, guid: b9605c22f46facd4792fd147be349cc3,
         type: 3}
@@ -2254,16 +2217,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: ChoiceManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1095748555468045370, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
         type: 3}
       propertyPath: roomSelects.Array.data[0]
@@ -2281,42 +2234,24 @@ PrefabInstance:
       objectReference: {fileID: 339972256}
     - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
         type: 3}
-      propertyPath: roomChoiceObjects.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
       propertyPath: roomSelectionCardsInstantiator
       value: 
       objectReference: {fileID: 1959981677}
     - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
         type: 3}
-      propertyPath: shopSelectionCardsInstantiator
+      propertyPath: relicSelectionCardsInstantiator
       value: 
       objectReference: {fileID: 1466733828}
-    - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      propertyPath: roomChoiceObjects.Array.data[0]
-      value: 
-      objectReference: {fileID: 11400000, guid: 5fc33115404bb1444b2d35e442ba376e,
-        type: 2}
-    - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      propertyPath: roomChoiceObjects.Array.data[1]
-      value: 
-      objectReference: {fileID: 11400000, guid: e17e402113f63bc48b338fb4599f9c52,
-        type: 2}
-    - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      propertyPath: roomChoiceObjects.Array.data[2]
-      value: 
-      objectReference: {fileID: 11400000, guid: d40c10a953b437d458dbf3935d41e5f6,
-        type: 2}
     - target: {fileID: 1877677660695127521, guid: 8e3804d1184be8a42b9e771f10d7084f,
         type: 3}
       propertyPath: weaponSelectionCardsInstantiator
       value: 
       objectReference: {fileID: 1708718970}
+    - target: {fileID: 4718337671032485216, guid: 8e3804d1184be8a42b9e771f10d7084f,
+        type: 3}
+      propertyPath: currentTargetObject
+      value: 
+      objectReference: {fileID: 739857112}
     - target: {fileID: 8624504167211068729, guid: 8e3804d1184be8a42b9e771f10d7084f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2370,15 +2305,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1095748555468045370, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2036219823}
-    - targetCorrespondingSourceObject: {fileID: 1095748555468045370, guid: 8e3804d1184be8a42b9e771f10d7084f,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2036219825}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e3804d1184be8a42b9e771f10d7084f, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

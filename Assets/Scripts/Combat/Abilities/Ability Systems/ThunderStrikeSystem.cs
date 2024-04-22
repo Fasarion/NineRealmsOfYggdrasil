@@ -19,7 +19,7 @@ public partial struct ThunderStrikeSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<PlayerTargetingComponent>();
+        state.RequireForUpdate<PlayerTargetInfoSingleton>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<ThunderBoltConfig>();
         state.RequireForUpdate<ThunderStrikeAbility>();
@@ -38,9 +38,8 @@ public partial struct ThunderStrikeSystem : ISystem
         var thunderConfig = SystemAPI.GetSingleton<ThunderStrikeConfig>();
         var boltConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-        var enemiesBuffer = new DynamicBuffer<HitBufferElement>();
         var targetPositions = new NativeArray<float3>(thunderConfig.maxStrikes * 2, Allocator.Temp);
-        var target = SystemAPI.GetSingletonEntity<PlayerTargetingComponent>();
+        var target = SystemAPI.GetSingleton<PlayerTargetInfoSingleton>();
 
         foreach (var (ability, timer, entity) in
                  SystemAPI.Query<RefRW<ThunderStrikeAbility>, RefRW<TimerObject>>()
@@ -72,9 +71,8 @@ public partial struct ThunderStrikeSystem : ISystem
                 
                 var effect = state.EntityManager.Instantiate(boltConfig.abilityPrefab);
 
-                float3 pos = state.EntityManager.GetComponentData<LocalTransform>(target).Position;
+                var targetPos = target.LastPosition;
                 
-                Debug.Log($"pos: {pos}");
                 
                 //TODO: byt ut till target area
                 int counter = 0;

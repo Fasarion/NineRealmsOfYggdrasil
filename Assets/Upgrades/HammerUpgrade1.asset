@@ -10,18 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: HammerUpgrade3
+  m_Name: HammerUpgrade1
   m_EditorClassIdentifier: 
-  upgradeTitle: hammer upgrade
+  upgradeTitle: Hammer upgrade
   upgradeSprite: {fileID: 21300000, guid: 328e19d3162cb9246a695ed0a862b6f8, type: 3}
-  upgradeDescription: Hammer will deal more damage
+  upgradeDescription: 'Hammer does more damage
+
+
+    +5 atk'
   upgrades:
   - thingToUpgrade: 1
     valueToUpgrade: 0
-    valueAmount: 10
-  startUnlocked: 0
-  upgradeIndex: 3
-  isUnlocked: 0
+    valueAmount: 5
+  startUnlocked: 1
+  upgradeIndex: 1
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: 6c0c6755a105e7947b4ad32fe10feacc, type: 2}
+  - {fileID: 11400000, guid: 672e38fb2e1188a41ba5b9a3c45d9004, type: 2}

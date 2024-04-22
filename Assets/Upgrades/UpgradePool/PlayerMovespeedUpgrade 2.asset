@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: SwordUpgrade
+  m_Name: PlayerMovespeedUpgrade 2
   m_EditorClassIdentifier: 
-  upgradeTitle: 
+  upgradeTitle: Movement speed upgrade
   upgradeSprite: {fileID: 0}
   upgradeDescription: 
-  upgrades: []
+  upgrades:
+  - thingToUpgrade: 4
+    valueToUpgrade: 7
+    valueAmount: 1
   startUnlocked: 0
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock: []
+  upgradesToUnlock:
+  - {fileID: 11400000}

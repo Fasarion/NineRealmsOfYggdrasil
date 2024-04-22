@@ -47,8 +47,6 @@ public partial struct SpawnSystem : ISystem
             
             foreach (var enemyPrefab in enemyPrefabsBuffer)
             {
-                
-                
                 if (!_enemyPrefabs.ContainsKey((int)enemyPrefab.TypeValue))
                 {
                     _enemyPrefabs.Add((int)enemyPrefab.TypeValue, enemyPrefab.PrefabValue);
@@ -115,6 +113,17 @@ public partial struct SpawnSystem : ISystem
 
     private Entity GetEnemyPrefabType(int enemyTypeIndex)
     {
+
+        if (!_enemyPrefabs.ContainsKey(enemyTypeIndex))
+        {
+            Debug.LogError("Error with the spawning setup! Double check that all enemy types are represented as " +
+                           "prefabs in the SpawnConfig and/or ask David for help.");
+            foreach (var enemyPrefab in _enemyPrefabs)
+            {
+                Entity defaultPrefab = enemyPrefab.Value;
+                return defaultPrefab;
+            }
+        }
         Entity prefab = _enemyPrefabs[enemyTypeIndex];
         return prefab;
     }

@@ -8,22 +8,26 @@ using Random = System.Random;
 
 public class RoomTreeGenerator : MonoBehaviour
 {
-    private int numberOfLevels;
+    
     public List<RoomChoiceObject> possibleRoomChoiceObjects;
     public GameObject roomSelectionUIPrefab;
     public GameObject connectionUIPrefab;
     public int roomSeed;
-
+    public ChoiceDataScriptableObject choiceDataScriptableObject;
+    
+    public static Action<Dictionary<Vector2Int, RoomNode>, ProgressionBarLevelContainer[]> roomTreeGenerated;
+    
     [SerializeField] private bool generateTreePreview;
     
-    private int currentLevelNumber;
-    //private Dictionary<int, List<GameObject>> levelNodeTree;
-    private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
-
+    
     public int gridWidth;
     private int gridHeight;
     private Vector2Int roomNodeCoordinates;
-
+    private Dictionary<int, List<RoomNode>> roomNodesAtLevel;
+    
+    private int numberOfLevels;
+    private int currentLevelNumber;
+    
     private Canvas canvas;
 
     private Dictionary<Vector2Int, RoomNode> roomNodeGridMapBehaviour;
@@ -33,12 +37,12 @@ public class RoomTreeGenerator : MonoBehaviour
     private RoomNode currentParentNode;
 
 
-    public static Action< Dictionary<Vector2Int, RoomNode>> roomTreeGenerated;
+   
 
     //[SerializeField]private bool cacheGridMap = true;
     private bool roomNodeGridMapCached = true;
 
-    public ChoiceDataScriptableObject choiceDataScriptableObject;
+    
     private List<Vector2Int> keys;
     
     public void Awake()
@@ -76,7 +80,7 @@ public class RoomTreeGenerator : MonoBehaviour
     {
         roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>();
         keys = new List<Vector2Int>();
-        choiceDataScriptableObject.ClearCachedGridMap();
+        choiceDataScriptableObject.ClearCachedData();
     }
 
     public void OnEnable()
@@ -94,8 +98,9 @@ public class RoomTreeGenerator : MonoBehaviour
        
     }
     
-    public void OnMapProgressionContentSet(int levelsInUI)
+    public void OnMapProgressionContentSet(ProgressionBarLevelContainer[] levelContainers)
     {
+        var levelsInUI = levelContainers.Length;
         if (!roomNodeGridMapCached)
         {
             gridHeight = levelsInUI;
@@ -115,16 +120,27 @@ public class RoomTreeGenerator : MonoBehaviour
                 gridHeight = levelsInUI;
                 Random random = new Random(roomSeed);
                 GenerateRoomGrid(random);
+                GenerateStartingRoomNode();
                 
             }
-            GenerateStartingRoomNode();
+            else if(choiceDataScriptableObject.resetNodeProgression == false)
+            {
+                currentParentNode = choiceDataScriptableObject.currentRoomNode;
+                
+            }
+            else
+            {
+                
+                GenerateStartingRoomNode();
+            }
+            
             
         }
         if (generateTreePreview)
         {
             GenerateRoomUINodes();
         }
-        roomTreeGenerated?.Invoke(roomNodeGridMapBehaviour);
+        roomTreeGenerated?.Invoke(roomNodeGridMapBehaviour, levelContainers);
 
 
      
@@ -164,6 +180,7 @@ public class RoomTreeGenerator : MonoBehaviour
 
     private void GenerateStartingRoomNode()
     {
+        choiceDataScriptableObject.currentRoomNode = null;
         startingRoomNode = new RoomNode(new Vector2Int(-1,0));
         for (int i = 0; i < gridWidth; i++)
         {
@@ -177,6 +194,7 @@ public class RoomTreeGenerator : MonoBehaviour
         }
 
         currentParentNode = startingRoomNode;
+        choiceDataScriptableObject.currentRoomNode = currentParentNode;
     }
 
     public Dictionary<Vector2Int, RoomNode> GetRoomGridMap()
@@ -449,13 +467,17 @@ public class RoomTreeGenerator : MonoBehaviour
             roomNodeGridMapBehaviour.Remove(recursiveRoomNodesToRemove[i]);
         }
         
-        foreach (var pair in roomNodeGridMapBehaviour)
-        {
-            choiceDataScriptableObject.roomNodeGridMapSO.Add(pair.Key,pair.Value);
-        }
+        //foreach (var pair in roomNodeGridMapBehaviour)
+        //{
+          //  choiceDataScriptableObject.roomNodeGridMapSO.Add(pair.Key,pair.Value);
+        //}
         choiceDataScriptableObject.roomNodeGridMapSO = new SerializableDictionary<Vector2Int, RoomNode>(roomNodeGridMapBehaviour);
         //choiceDataScriptableObject.keys = keys;
-        roomNodeGridMapCached = true;
+        if (!choiceDataScriptableObject.saveGeneratedGridMap)
+        {
+            roomNodeGridMapCached = false;
+            
+        }
 
     }
     public void TraverseRemovedNodesUpwards(RoomNode currentNode, List<Vector2Int> recursiveRoomNodesToRemove)

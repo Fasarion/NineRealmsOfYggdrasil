@@ -22,13 +22,6 @@ public class SelectionCardInstantiator : MonoBehaviour
     public static Action hasEnteredScreen;
     public static Action hasExitedScreen;
 
-    public enum SelectionUIType
-    {
-        room,
-        shop,
-        weapon
-    }
-    
     public void Awake()
     {
         thisRect = GetComponent<RectTransform>();

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8624504167211068729}
   - component: {fileID: 1877677660695127521}
+  - component: {fileID: 4332727090398157555}
+  - component: {fileID: 4718337671032485216}
   m_Layer: 0
   m_Name: RoomSelectionManager
   m_TagString: Untagged
@@ -44,7 +46,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05ce4d57eeab19648b18282800d8d419, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectionType: 0
   roomSelects:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  roomSelectionCardsInstantiator: {fileID: 0}
+  weaponSelectionCardsInstantiator: {fileID: 0}
+  relicSelectionCardsInstantiator: {fileID: 0}
+  currentSelectionIndex: 0
+  choiceDataScriptableObject: {fileID: 11400000, guid: 73c68f66ba6eace4abc3020789d330aa,
+    type: 2}
+--- !u!114 &4332727090398157555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095748555468045370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acdaa934bae2f14088b3b8317f7849d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  possibleRoomChoiceObjects:
+  - {fileID: 11400000, guid: 5fc33115404bb1444b2d35e442ba376e, type: 2}
+  - {fileID: 11400000, guid: e17e402113f63bc48b338fb4599f9c52, type: 2}
+  - {fileID: 11400000, guid: d40c10a953b437d458dbf3935d41e5f6, type: 2}
+  - {fileID: 11400000, guid: 0c2954b7f8e14924695b520160272e23, type: 2}
+  roomSelectionUIPrefab: {fileID: 5127538796324908209, guid: 4b9f6675008431d49b15e0be1ca1b80f,
+    type: 3}
+  connectionUIPrefab: {fileID: 994018812610073705, guid: 105060936a2b25d498f5b113fdad6481,
+    type: 3}
+  roomSeed: 12
+  choiceDataScriptableObject: {fileID: 11400000, guid: 73c68f66ba6eace4abc3020789d330aa,
+    type: 2}
+  generateTreePreview: 0
+  gridWidth: 7
+--- !u!114 &4718337671032485216
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095748555468045370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 309af089b3d1a1a4b87739613a4736b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomTreeGenerator: {fileID: 4332727090398157555}
+  currentRoomLevel: 0
+  contentContainer: {fileID: 0}
+  currentTargetObject: {fileID: 0}

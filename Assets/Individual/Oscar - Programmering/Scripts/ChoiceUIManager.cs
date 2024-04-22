@@ -91,7 +91,7 @@ public class ChoiceUIManager : MonoBehaviour
 
     private void OnRoomChanged(RoomNode chosenNode, SceneReference roomSceneReference)
     {
-        currentSelectionIndex++;
+        //currentSelectionIndex++;
         roomTreeGenerator.UpdateNodeLevel(chosenNode);
         
         //
@@ -409,7 +409,7 @@ public class ChoiceUIManager : MonoBehaviour
     
     public void RegisterRoomSelectionClick(SceneReference roomSceneReference)
     {
-        HideUI();
+        //HideUI();
        
         OnRoomChosen?.Invoke(roomSceneReference);
         SceneManager.LoadScene(roomSceneReference.SceneName);

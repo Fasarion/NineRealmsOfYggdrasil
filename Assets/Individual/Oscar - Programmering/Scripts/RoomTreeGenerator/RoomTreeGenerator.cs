@@ -174,7 +174,7 @@ public class RoomTreeGenerator : MonoBehaviour
 
     public void UpdateNodeLevel(RoomNode nodeChoice)
     {
-        currentParentNode = nodeChoice;
+        choiceDataScriptableObject.currentRoomNode = nodeChoice;
     }
     
 

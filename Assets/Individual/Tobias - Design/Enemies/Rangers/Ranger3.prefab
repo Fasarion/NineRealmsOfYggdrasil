@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 8796295642388451722}
   - component: {fileID: 9062196686115931803}
   - component: {fileID: 8071667428324845191}
+  - component: {fileID: -7775856522873016308}
+  - component: {fileID: -5364092481966609310}
   - component: {fileID: 5432305332946967007}
   - component: {fileID: 4663337924807953367}
   - component: {fileID: 6445979045985948300}
@@ -329,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 8
+  minimumDistanceForMoving: 12
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +344,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 2
+  speedValue: 3
+--- !u!114 &-7775856522873016308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingCooldown: 3
+  shootDistance: 14
+--- !u!114 &-5364092481966609310
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f9a11865114d5c8b91b2ee672d192e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7824363987953266496, guid: 5e68954400681ba47a60c4f7f560c74b,
+    type: 3}
 --- !u!114 &5432305332946967007
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -378,19 +378,23 @@ namespace Patrik
                 return;
             }
 
+            var specialAttackInfo = SystemAPI.GetSingletonRW<SpecialAttackChargeInfo>();
+
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             if (specialAttack.KeyDown)
             {
               //  Debug.Log("Preparing special...");
-            //    _weaponManager.PerformSpecialAttack();
+                _weaponManager.StartChargingSpecial();
+                specialAttackInfo.ValueRW.IsCharging = true;
                 return;
             }
             
             if (specialAttack.KeyUp)
             {
               //  Debug.Log("Perform special!");
-                _weaponManager.PerformSpecialAttack();
+                _weaponManager.ReleaseSpecial();
+                specialAttackInfo.ValueRW.IsCharging = false;
                 return;
             }
         }

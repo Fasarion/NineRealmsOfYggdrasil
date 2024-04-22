@@ -37,6 +37,7 @@ public partial struct SwordSpecialAttackSystem : ISystem
         var config = SystemAPI.GetSingleton<IceRingConfig>();
         
         var query = SystemAPI.QueryBuilder().WithAll<IceRingConfig, ChargeTimer>().Build();
+        
         if (query.CalculateEntityCount() == 0)
         {
             var ability = state.EntityManager.Instantiate(config.chargeAreaPrefab);

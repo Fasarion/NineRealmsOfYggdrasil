@@ -42,13 +42,10 @@ namespace Patrik
         private bool isResettingAttackFlag;
         
         // Animator parameters
-        // private string attackAnimationName = "Attack";
-        // private string activeWeaponParameterName = "ActiveWeapon";
-        // private string currentAttackParameterName = "CurrentAttack";
-
         private string movingParameterName = "Moving";
-        private string bufferAttackParamterName = "AttackBuffered";
+        private string bufferAttackParameterName = "AttackBuffered";
         private string isAttackingParameterName = "IsAttacking";
+        private string attackReleasedParameterName = "AttackReleased";
         
         // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
@@ -94,12 +91,7 @@ namespace Patrik
         private IEnumerator ResetBufferNextFrame()
         {
             yield return new WaitForEndOfFrame();
-            playerAnimator.SetBool(bufferAttackParamterName, false);
-        }
-
-        private void Update()
-        {
-            playerAnimator.SetBool(isAttackingParameterName, isAttacking);
+            playerAnimator.SetBool(bufferAttackParameterName, false);
         }
 
         struct WeaponAttackPair
@@ -121,12 +113,12 @@ namespace Patrik
         {
             // Sword Animations
             { new WeaponAttackPair(WeaponType.Sword, AttackType.Normal), "SwordNormal" },
-            { new WeaponAttackPair(WeaponType.Sword, AttackType.Special), "SwordSpecial" },
+            { new WeaponAttackPair(WeaponType.Sword, AttackType.Special), "SwordSpecialWindup" },
             { new WeaponAttackPair(WeaponType.Sword, AttackType.Ultimate), "SwordUltimate" },
             
             // Hammer Animations
             { new WeaponAttackPair(WeaponType.Hammer, AttackType.Normal), "HammerNormal" },
-            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Special), "HammerSpecial" },
+            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Special), "HammerSpecialWindUp" },
             { new WeaponAttackPair(WeaponType.Hammer, AttackType.Ultimate), "HammerUltimate" },
             
             // TODO: Add animation names for other attacks
@@ -270,9 +262,10 @@ namespace Patrik
         /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
         /// is registered.
         /// </summary>
-        public void PerformSpecialAttack()
+        public void StartChargingSpecial()
         {
             TryPerformAttack(AttackType.Special);
+            playerAnimator.SetBool(attackReleasedParameterName, false);
         }
         
         /// <summary>
@@ -295,7 +288,7 @@ namespace Patrik
             if (isAttacking)
             {
                 // set attack buffer
-                playerAnimator.SetBool(bufferAttackParamterName, true);
+                playerAnimator.SetBool(bufferAttackParameterName, true);
 
                 //  if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
                 return;
@@ -373,6 +366,11 @@ namespace Patrik
             MakeWeaponPassive(oldActiveWeapon, newPassiveSlot);
             MakeWeaponActive(newActiveWeapon);
             EventManager.OnWeaponSwitch?.Invoke(newActiveWeapon);
+        }
+
+        public void ReleaseSpecial()
+        {
+            playerAnimator.SetBool(attackReleasedParameterName, true);
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HasOwnerAuthoring : MonoBehaviour
 {
-    public class Baker:Baker<HasOwnerAuthoring>
+    class Baker:Baker<HasOwnerAuthoring>
     {
         public override void Bake(HasOwnerAuthoring authoring)
         {

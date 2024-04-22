@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 [UpdateInGroup(typeof(SimulationSystemGroup), OrderLast = true)]
 [UpdateAfter(typeof(EndSimulationEntityCommandBufferSystem))]
-public partial struct ResetAttackData : ISystem
+public partial struct ResetGameVariablesSystem : ISystem
 {
     [BurstCompile]
     public void OnUpdate(ref SystemState state)

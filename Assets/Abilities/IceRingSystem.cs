@@ -45,6 +45,7 @@ public partial struct IceRingSystem : ISystem
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
                      .WithEntityAccess())
         {
+            //set up
             if (!ability.ValueRW.isInitialized)
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
@@ -52,7 +53,8 @@ public partial struct IceRingSystem : ISystem
                 transform.ValueRW.Rotation = Quaternion.Euler(-90f, 0f, 0f);
             }
 
-            chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime;
+            //Charge behaviour
+            chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime * config.ValueRO.chargeSpeed;
             if (chargeTimer.ValueRO.currentChargeTime >= config.ValueRO.maxChargeTime)
             {
                 chargeTimer.ValueRW.currentChargeTime = config.ValueRO.maxChargeTime;
@@ -66,6 +68,7 @@ public partial struct IceRingSystem : ISystem
             transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
             transform.ValueRW.Scale = area * 50;
 
+            //On button release
             if (!input.IsHeld)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
@@ -84,6 +87,7 @@ public partial struct IceRingSystem : ISystem
             }
         }
 
+        //spawned ability handling
         foreach (var (ability, timer, transform, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
                      .WithEntityAccess().WithNone<ChargeTimer>())

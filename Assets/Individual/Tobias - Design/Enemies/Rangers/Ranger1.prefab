@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
   m_Layer: 0
-  m_Name: Grunt2
+  m_Name: Ranger1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d92a0f33fd05c4bbe2707605dbf9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 3
+  enemyType: 5
 --- !u!114 &3581742490104402230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,7 +329,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 0
+  minimumDistanceForMoving: 6
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -356,7 +356,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageContents:
-    DamageValue: 0
+    DamageValue: 1
     DamageType: 0
     CriticalRate: 0
     CriticalModifier: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5186fce7de95e4d49948125afabc1d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8870220498742206646, guid: 0b664a3c25f353f428c79d4b91a5ff2a,
+  gameObjectPrefab: {fileID: 8870220498742206646, guid: 5b6570f0dd7d66f45a0085c37820403d,
     type: 3}
   followsEntity: 1
 --- !u!114 &6445979045985948300

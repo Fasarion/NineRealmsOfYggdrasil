@@ -12,8 +12,9 @@ public partial struct SwordUltimateAttackSystem : ISystem
 {
     private int _attackCount;
     private bool _isActive;
-    private float _cachedScale;
-    private Vector3 _cachedLocalTransformSize;
+
+    private float scaleChangeFactor;
+    private float numberOfScaledAttacks;
     
 
     public void OnCreate(ref SystemState state)
@@ -23,31 +24,36 @@ public partial struct SwordUltimateAttackSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<AudioBufferData>();
+
+        scaleChangeFactor = 2;
+        numberOfScaledAttacks = 2;
     }
 
 
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-        
         var swordEntity = SystemAPI.GetSingletonEntity<SwordStatsTag>();
-        var swordTransform = state.EntityManager.GetComponentData<LocalTransform>(swordEntity);
-        var swordGO = state.EntityManager.GetComponentData<AnimatorReference>(swordEntity);
-        var size = SystemAPI.GetComponent<SizeComponent>(swordEntity).Value;
-        
+
         if (_isActive)
         {
-            if (attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Normal))
+            bool weaponSwitch = false;
+            if (attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Normal) || weaponSwitch)
             {
                 _attackCount++;
-            }
-            
-            
-            if (_attackCount > 2)
-            {
-                _isActive = false;
-                swordTransform.Scale = _cachedScale;
-                swordGO.Animator.transform.localScale = _cachedLocalTransformSize;
+                
+                if (_attackCount > numberOfScaledAttacks)
+                {
+                    var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
+                    weaponStatsComponent.NormalAttackStats.Size.BaseValue /= scaleChangeFactor;
+                    
+                    state.EntityManager.SetComponentData(swordEntity, weaponStatsComponent);
+                    
+                    var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
+                    statHandler.ValueRW.ShouldUpdateStats = true;
+                
+                    _isActive = false;
+                }
             }
         }
         
@@ -55,16 +61,19 @@ public partial struct SwordUltimateAttackSystem : ISystem
         if (!attackCaller.ValueRO.ShouldActiveAttackWithType(WeaponType.Sword, AttackType.Ultimate))
             return;
         
-        attackCaller.ValueRW.shouldActiveAttack = false;
+        attackCaller.ValueRW.StartActiveAttackData.Enabled = false;
         
-        
+        // Initialize attack
         if (!_isActive)
         {
-            _cachedScale = swordTransform.Scale;
-            _cachedLocalTransformSize = swordGO.Animator.transform.localScale;
-            swordTransform.Scale = size;
-            state.EntityManager.SetComponentData(swordEntity, swordTransform);
-            swordGO.Animator.transform.localScale = Vector3.one * size;
+            var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
+            weaponStatsComponent.NormalAttackStats.Size.BaseValue *= scaleChangeFactor;
+                    
+            state.EntityManager.SetComponentData(swordEntity, weaponStatsComponent);
+            
+            var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
+            statHandler.ValueRW.ShouldUpdateStats = true;
+
             _isActive = true;
             _attackCount = 0;
         }

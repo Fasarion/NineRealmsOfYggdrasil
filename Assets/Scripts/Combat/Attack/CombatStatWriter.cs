@@ -2,7 +2,6 @@
 using Patrik;
 using Unity.Burst;
 using Unity.Entities;
-using Unity.Transforms;
 using UnityEngine;
 
 public partial struct CombatStatHandleSystem : ISystem
@@ -27,6 +26,8 @@ public partial struct CombatStatHandleSystem : ISystem
     [BurstCompile]
     void WriteOverAttackData(ref SystemState state)
     {
+        Debug.Log("Write over default attack data");
+        
         var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
 
         var weaponType = statHandler.ValueRO.WeaponType;
@@ -83,12 +84,19 @@ public partial struct CombatStatHandleSystem : ISystem
         state.EntityManager.SetComponentData(entity, areaComponent);
         
         
-        // size
-        float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Size, combo);
-        SizeComponent sizeComponent = state.EntityManager.GetComponentData<SizeComponent>(entity);
-        sizeComponent.Value = size;
-        state.EntityManager.SetComponentData(entity, sizeComponent);
-
+        // // size
+        // float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Size, combo);
+        // var transform = state.EntityManager.GetComponentData<LocalTransform>(entity);
+        // transform.Scale = size;
+        // state.EntityManager.SetComponentData(entity, transform);
+        //
+        // var gameObjectReference = state.EntityManager.GetComponentData<AnimatorReference>(entity);
+        // gameObjectReference.Animator.transform.localScale = Vector3.one * size;
+        
+        // SizeComponent sizeComponent = state.EntityManager.GetComponentData<SizeComponent>(entity);
+        // sizeComponent.Value = size;
+        // state.EntityManager.SetComponentData(entity, sizeComponent);
+        
         statHandler.ValueRW.ShouldUpdateStats = false;
     }
     

@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class WeaponAttackCallerAuthoring : MonoBehaviour
 {
-    public bool shouldActiveAttack;
-    public AttackType currentAttackType;
-    public WeaponType currentWeaponType;
+    // public bool shouldActiveAttack;
+    // public AttackType currentAttackType;
+    // public WeaponType currentWeaponType;
 
     public class WeaponAttackCallerAuthoringBaker : Baker<WeaponAttackCallerAuthoring>
     {
@@ -18,9 +18,9 @@ public class WeaponAttackCallerAuthoring : MonoBehaviour
             AddComponent(entity,
                 new WeaponAttackCaller
                     {
-                        shouldActiveAttack = authoring.shouldActiveAttack,
-                        currentActiveAttackType = authoring.currentAttackType,
-                        currentActiveWeaponType = authoring.currentWeaponType
+                        // shouldStartActiveAttack = authoring.shouldActiveAttack,
+                        // currentStartedActiveAttackType = authoring.currentAttackType,
+                        // currentStartedActiveWeaponType = authoring.currentWeaponType
                     });
         }
     }
@@ -28,25 +28,35 @@ public class WeaponAttackCallerAuthoring : MonoBehaviour
 
 public struct WeaponAttackCaller : IComponentData
 {
-    public bool shouldActiveAttack;
-    public AttackType currentActiveAttackType;
-    public WeaponType currentActiveWeaponType;
-    public int currentActiveCombo;
+    public WeaponCallData StartActiveAttackData;
+    
+    // public bool shouldStartActiveAttack;
+    // public AttackType currentStartedActiveAttackType;
+    // public WeaponType currentStartedActiveWeaponType;
+    // public int currentStartedActiveCombo;
 
-    public bool shouldPassiveAttack;
-    public WeaponType currentPassiveWeaponType;
+    public bool shouldStartPassiveAttack;
+    public WeaponType currentStartedPassiveWeaponType;
     
     public bool ShouldActiveAttackWithType(WeaponType type, AttackType attackType)
     {
-        if (!shouldActiveAttack) return false;
+        if (!StartActiveAttackData.Enabled) return false;
 
-        return type == currentActiveWeaponType && attackType == currentActiveAttackType;
+        return type == StartActiveAttackData.WeaponType && attackType == StartActiveAttackData.AttackType;
     }
     
     public bool ShouldPassiveAttackWithType(WeaponType type)
     {
-        if (!shouldPassiveAttack) return false;
+        if (!shouldStartPassiveAttack) return false;
 
-        return type == currentPassiveWeaponType;
+        return type == currentStartedPassiveWeaponType;
     }
+}
+
+public struct WeaponCallData
+{
+    public bool Enabled;
+    public AttackType AttackType;
+    public WeaponType WeaponType;
+    public int Combo;
 }

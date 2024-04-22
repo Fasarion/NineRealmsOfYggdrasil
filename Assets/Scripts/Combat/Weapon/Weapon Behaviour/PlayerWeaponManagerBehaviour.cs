@@ -158,11 +158,11 @@ namespace Patrik
             playerAnimator = gameObject.GetComponent<Animator>();
         }
 
-        private void OnEnable()
-        {
-            // wait a few frames to setup weapons to make sure they have spawned from the DOTS side
-            Invoke(nameof(SetupWeapons), 0.1f);
-        }
+        // private void OnEnable()
+        // {
+        //     // wait a few frames to setup weapons to make sure they have spawned from the DOTS side
+        //     Invoke(nameof(SetupWeapons), 0.1f);
+        // }
 
         private void OnDisable()
         {
@@ -172,7 +172,7 @@ namespace Patrik
             }
         }
 
-        private void SetupWeapons()
+        public void SetupWeapons()
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
             weapons = new List<WeaponBehaviour>();
@@ -213,6 +213,9 @@ namespace Patrik
             weaponParents[weapon] = activeSlot;
             
             OnWeaponActive?.Invoke(weapon.WeaponType);
+            
+            Debug.Log("On weapon active invoked");
+
         }
         
         private void MakeWeaponPassive(WeaponBehaviour weapon, Transform passiveParent)

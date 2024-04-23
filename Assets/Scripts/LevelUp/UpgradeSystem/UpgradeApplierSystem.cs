@@ -41,29 +41,33 @@ public partial class UpgradeApplierSystem : SystemBase
         foreach (var upgrade in upgradeObject.upgrades)
         {
             UpgradeBaseType baseType = upgrade.thingToUpgrade;
+            UpgradeValueTypes valueType = upgrade.valueToUpgrade;
+            float upgradeAmount = upgrade.valueAmount;
             var entity = GetEntityToUpgrade(upgrade.thingToUpgrade);
-            // var component = GetComponentToUpgrade(upgrade.valueToUpgrade);
-            //
-            // ApplyUpgrade(upgrade, statsComponent);
+            ApplyComponentUpgrade(valueType, upgradeAmount, entity);
         }
 
         InformStatHandler();
     }
 
-    private IComponentData GetComponentToUpgrade(UpgradeValueTypes upgradeValueToUpgrade, Entity entity)
+    private void ApplyComponentUpgrade(UpgradeValueTypes upgradeValueToUpgrade, float valueAmount, Entity entity)
     {
         switch (upgradeValueToUpgrade)
         {
             case UpgradeValueTypes.damage:
-                if (EntityManager.HasComponent<DamageComponent>(entity))
+                if (!EntityManager.HasComponent<DamageComponent>(entity))
                 {
-                    return EntityManager.GetComponentData<DamageComponent>(entity);
+                    EntityManager.AddComponent<DamageComponent>(entity);
                 }
-                
-                return default;
-        }
 
-        return default;
+                var component = EntityManager.GetComponentData<DamageComponent>(entity);
+                component.Value.DamageValue += valueAmount;
+                EntityManager.SetComponentData(entity, component);
+                break;
+                
+                
+        }
+        
     }
 
     private Entity GetEntityToUpgrade(UpgradeBaseType upgradeThingToUpgrade)
@@ -107,54 +111,7 @@ public partial class UpgradeApplierSystem : SystemBase
         statHandler.ValueRW.AttackType = attackCaller.ActiveAttackData.AttackType;
         statHandler.ValueRW.ComboCounter = attackCaller.ActiveAttackData.Combo;
     }
-
-    private RefRW<CombatStatsComponent> GetStatsComponent(UpgradeBaseType baseType)
-    {
-        switch (baseType)
-        {
-            case UpgradeBaseType.Sword:
-                
-                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
-                    .WithAll<SwordStatsTag>())
-                {
-                    return stats;
-                }
-                break;
-            case UpgradeBaseType.Hammer:
-                
-                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
-                             .WithAll<HammerStatsTag>())
-                {
-                    return stats;
-                }
-                break;
-                
-        }
-
-        return default;
-    }
-
-    private void ApplyUpgrade(UpgradeInformation upgrade, RefRW<CombatStatsComponent> statsComponent)
-    {
-        switch (upgrade.valueToUpgrade)
-        {
-            case UpgradeValueTypes.damage:
-                statsComponent.ValueRW.OverallStats.Damage.BaseValue += upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.cooldown:
-                statsComponent.ValueRW.OverallStats.Cooldown.BaseValue -= upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.areaEffect:
-                statsComponent.ValueRW.OverallStats.Area.BaseValue += upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.attackSpeed:
-                statsComponent.ValueRW.OverallStats.AttackSpeed.BaseValue += upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.energyRegen:
-                statsComponent.ValueRW.OverallStats.EnergyFillPerHit.BaseValue += upgrade.valueAmount;
-                break;
-        }
-    }
+    
     
     private void HandleLocks(UpgradeObject upgradeObject)
     {

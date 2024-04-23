@@ -50,14 +50,17 @@ public partial class UpgradeApplierSystem : SystemBase
         InformStatHandler();
     }
 
-    private object GetComponentToUpgrade(UpgradeValueTypes upgradeValueToUpgrade, Entity entity)
+    private IComponentData GetComponentToUpgrade(UpgradeValueTypes upgradeValueToUpgrade, Entity entity)
     {
         switch (upgradeValueToUpgrade)
         {
             case UpgradeValueTypes.damage:
-                if (EntityManager.HasComponent<>())
-                    return default;
-                break;
+                if (EntityManager.HasComponent<DamageComponent>(entity))
+                {
+                    return EntityManager.GetComponentData<DamageComponent>(entity);
+                }
+                
+                return default;
         }
 
         return default;

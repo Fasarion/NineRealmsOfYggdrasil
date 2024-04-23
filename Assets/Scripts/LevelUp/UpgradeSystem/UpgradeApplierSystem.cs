@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using Unity.Entities;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -60,11 +61,21 @@ public partial class UpgradeApplierSystem : SystemBase
                     EntityManager.AddComponent<DamageComponent>(entity);
                 }
 
-                var component = EntityManager.GetComponentData<DamageComponent>(entity);
-                component.Value.DamageValue += valueAmount;
-                EntityManager.SetComponentData(entity, component);
-                break;
-                
+                var damageComponent = EntityManager.GetComponentData<DamageComponent>(entity);
+                damageComponent.Value.DamageValue += valueAmount;
+                EntityManager.SetComponentData(entity, damageComponent);
+                return;
+            
+            case UpgradeValueTypes.damageModifier:
+                if (!EntityManager.HasComponent<PlayerDamageModifiersComponent>(entity))
+                {
+                    EntityManager.AddComponent<PlayerDamageModifiersComponent>(entity);
+                }
+
+                var damageModComponent = EntityManager.GetComponentData<PlayerDamageModifiersComponent>(entity);
+                damageModComponent.DamageModifier += valueAmount;
+                EntityManager.SetComponentData(entity, damageModComponent);
+                return;
                 
         }
         
@@ -74,6 +85,17 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         switch (upgradeThingToUpgrade)
         {
+                
+            case UpgradeBaseType.Player:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<PlayerTag>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            
             case UpgradeBaseType.Sword:
                 
                 foreach (var(_, entity)  in SystemAPI.Query<SwordComponent>()

@@ -8,7 +8,6 @@ namespace Damage
 {
     public class DamageOnTriggerAuthoring : MonoBehaviour
     {
-        [SerializeField] private DamageContents damageContents;
     
         class Baker : Baker<DamageOnTriggerAuthoring>
         {
@@ -18,7 +17,7 @@ namespace Damage
             
                 AddComponent(entity, new DamageOnTriggerComponent
                 {
-                    Value = authoring.damageContents
+                    
                 });
             }
         }

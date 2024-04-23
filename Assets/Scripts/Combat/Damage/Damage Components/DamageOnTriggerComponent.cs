@@ -8,7 +8,6 @@ namespace Damage
     /// </summary>
     public struct DamageOnTriggerComponent : IComponentData
     {
-        public DamageContents Value;
     }
 
     [System.Serializable]

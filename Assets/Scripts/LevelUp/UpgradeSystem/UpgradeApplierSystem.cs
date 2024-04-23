@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]
@@ -40,12 +41,52 @@ public partial class UpgradeApplierSystem : SystemBase
         foreach (var upgrade in upgradeObject.upgrades)
         {
             UpgradeBaseType baseType = upgrade.thingToUpgrade;
-            var statsComponent = GetStatsComponent(baseType);
-            
-            ApplyUpgrade(upgrade, statsComponent);
+            var entity = GetEntityToUpgrade(upgrade.thingToUpgrade);
+            // var component = GetComponentToUpgrade(upgrade.valueToUpgrade);
+            //
+            // ApplyUpgrade(upgrade, statsComponent);
         }
 
         InformStatHandler();
+    }
+
+    private object GetComponentToUpgrade(UpgradeValueTypes upgradeValueToUpgrade, Entity entity)
+    {
+        switch (upgradeValueToUpgrade)
+        {
+            case UpgradeValueTypes.damage:
+                if (EntityManager.HasComponent<>())
+                    return default;
+                break;
+        }
+
+        return default;
+    }
+
+    private Entity GetEntityToUpgrade(UpgradeBaseType upgradeThingToUpgrade)
+    {
+        switch (upgradeThingToUpgrade)
+        {
+            case UpgradeBaseType.Sword:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<SwordComponent>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            case UpgradeBaseType.Hammer:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<HammerComponent>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+                
+        }
+
+        return default;
     }
 
     private void InformStatHandler()

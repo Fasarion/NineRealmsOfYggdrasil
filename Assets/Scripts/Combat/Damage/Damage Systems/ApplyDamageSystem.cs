@@ -9,6 +9,8 @@ namespace Damage
     [UpdateInGroup(typeof(CombatSystemGroup))]
     public partial struct ApplyDamageSystem : ISystem
     {
+        private static float CRITICAL_MODIFIER = 2;
+        
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
@@ -36,7 +38,7 @@ namespace Damage
                     // Add critical damage
                     if (damageElement.DamageContents.CriticalRate > randomFloat)
                     {
-                        damageToDeal *= damageElement.DamageContents.CriticalModifier;
+                        damageToDeal *= CRITICAL_MODIFIER; //damageElement.DamageContents.CriticalModifier;
                     }
                     
                     totalDamageToDeal += damageToDeal;
@@ -48,6 +50,8 @@ namespace Damage
                 // Skip entity if no damage should be dealt
                 if (totalDamageToDeal == 0)
                     continue;
+                
+                Debug.Log($"Damage to deal: {totalDamageToDeal}");
                 
                 // mark entity as "HasChangedHP" with given HP change amount
                 // TODO: add damage to amount instead of overriding it. Otherwise, this might cause problems if other systems

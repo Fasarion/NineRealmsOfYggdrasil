@@ -18,12 +18,12 @@ namespace Damage
         [Tooltip("How much damage will this object inflict upon hit?")]
         public float DamageValue;
         
-        [Tooltip("What type of damage will this object inflict?")]
-        public DamageType DamageType;
+        // [Tooltip("What type of damage will this object inflict?")]
+        // public DamageType DamageType;
 
         [Header("Critical")] 
         [Range(0,1)]
         public float CriticalRate;
-        public float CriticalModifier;
+//        public float CriticalModifier;
     }
 }

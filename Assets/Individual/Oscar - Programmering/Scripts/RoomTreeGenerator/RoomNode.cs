@@ -5,10 +5,10 @@ using UnityEngine;
 [System.Serializable]
 public class RoomNode
 {
-    //public RoomNode previousNode;
+    //Having both child and parent nodes stored causes circular referencing leading to memory leaks
     public List<RoomNode> childNodes;
     public Vector2Int roomCoordinates;
-    public List<RoomNode> parentNodes;
+    [HideInInspector]public List<RoomNode> parentNodes;
     public int chosenRoomTypeIndex;
     public RoomNode(/*RoomNode previousNode,*/ Vector2Int roomCoordinates)
     {

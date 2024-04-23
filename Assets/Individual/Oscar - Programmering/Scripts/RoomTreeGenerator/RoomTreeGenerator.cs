@@ -140,6 +140,12 @@ public class RoomTreeGenerator : MonoBehaviour
         {
             GenerateRoomUINodes();
         }
+
+        //Let's see how much breaks because of that.
+        foreach (var pair in roomNodeGridMapBehaviour)
+        {
+            pair.Value.parentNodes = null;
+        }
         roomTreeGenerated?.Invoke(roomNodeGridMapBehaviour, levelContainers);
 
 
@@ -187,6 +193,7 @@ public class RoomTreeGenerator : MonoBehaviour
             roomNodeGridMapBehaviour.TryGetValue(new Vector2Int(1, i), out var roomNode);
             if (roomNode != null)
             {
+                
                 roomNode.parentNodes.Add(startingRoomNode);
                 startingRoomNode.childNodes.Add(roomNode);
             }
@@ -231,6 +238,7 @@ public class RoomTreeGenerator : MonoBehaviour
             //What am I doing here? Ah, I am selecting from the possible roomTypes that can be created for a given card. That choice needs to be cached.
             uiBehaviour.UpdateSelectionDisplay(possibleRoomChoiceObjects[pair.Value.chosenRoomTypeIndex]);
 
+           
             var parentNodes = pair.Value.parentNodes;
             for (int i = 0; i < parentNodes.Count; i++)
             {

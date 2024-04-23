@@ -9,10 +9,9 @@ public class ChoiceDataScriptableObject : ScriptableObject
     //public List<Vector2Int> keys;
     public bool saveGeneratedGridMap = false;
     public bool resetNodeProgression = false;
-    public SerializableDictionary<Vector2Int, RoomNode> roomNodeGridMapSO;
-    public RoomNode currentRoomNode;
     
-
+    public RoomNode currentRoomNode;
+    [HideInInspector] public SerializableDictionary<Vector2Int, RoomNode> roomNodeGridMapSO;
     //public List<int> testList;
     public void ClearCachedData()
     {

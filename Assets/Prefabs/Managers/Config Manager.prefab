@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7183653010182722053}
   - component: {fileID: 7033136328684440268}
   m_Layer: 0
-  m_Name: Player Ultimate Attack Handler
+  m_Name: Player Targeting
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -168,6 +168,7 @@ Transform:
   - {fileID: 1419748053470036600}
   - {fileID: 6554383039780088272}
   - {fileID: 165676981975482711}
+  - {fileID: 6889097690578337976}
   m_Father: {fileID: 6481230346474377608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3587502585957426159
@@ -225,8 +226,9 @@ MonoBehaviour:
   maxDisplayTime: 1
   damageDelayTime: 1
   maxChargeTime: 3
-  damage: 500
   maxArea: 50
+  chargeSpeed: 1
+  isInitialized: 0
   isAbilityReleased: 0
 --- !u!114 &2001761474607423481
 MonoBehaviour:
@@ -252,11 +254,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageContents:
-    DamageValue: 500
-    DamageType: 0
-    CriticalRate: 0.294
-    CriticalModifier: 1.1
 --- !u!114 &3681451223392617389
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1069,11 +1066,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageContents:
-    DamageValue: 1
-    DamageType: 1
-    CriticalRate: 0
-    CriticalModifier: 0
 --- !u!114 &5931773600313845237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1695,9 +1687,6 @@ MonoBehaviour:
   abilityPrefab: {fileID: 6208798233002451104, guid: e0dd21cf62a016a43a3a8de702a1aaff,
     type: 3}
   maxDisplayTime: 5
-  damageDelayTime: 0.3
-  damage: 5
-  maxArea: 5
   maxStrikes: 10
   timeBetweenStrikes: 0.25
 --- !u!1 &7747805933802500312
@@ -1812,6 +1801,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59891220b17b36145962f3db0fb42c83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &8158956754324773142
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6889097690578337976}
+  - component: {fileID: 6846989975432270340}
+  m_Layer: 0
+  m_Name: Hammer Special Config
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6889097690578337976
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8158956754324773142}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2846498616045744737}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6846989975432270340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8158956754324773142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df4acc583b2d2a648a61f34fba0e05e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 3054128452994836860, guid: 3fc5d8f156d574a4cbcf87c013aff39b,
+    type: 3}
 --- !u!1 &8622623107857555801
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,9 +1891,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8f39bdd13d95a48b8e2c7983eaeaae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shouldActiveAttack: 0
-  currentAttackType: 0
-  currentWeaponType: 0
 --- !u!1 &8670426449157290199
 GameObject:
   m_ObjectHideFlags: 0

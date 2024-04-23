@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 3282528094519435972}
   - component: {fileID: 5457081741902125940}
   - component: {fileID: 3609844279876431546}
+  - component: {fileID: 8574011558162687106}
   m_Layer: 0
   m_Name: Player Entity Patrik
   m_TagString: Untagged
@@ -473,11 +474,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageModifier: 1
-  skillModifier:
-    Normal: 0.9
-    Special: 1.1
-    Ultimate: 3
-    Passive: 0.5
 --- !u!114 &3609844279876431546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,3 +488,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 2
   criticalChance: 0.1
+--- !u!114 &8574011558162687106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353328540331355661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947779016d2c49e79d7e948ef6670b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModifier:
+    Normal: 1
+    Special: 1
+    Ultimate: 1
+    Passive: 1

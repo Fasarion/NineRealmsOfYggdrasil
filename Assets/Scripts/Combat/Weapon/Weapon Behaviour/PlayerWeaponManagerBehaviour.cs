@@ -56,6 +56,8 @@ namespace Patrik
         
         public UnityAction<WeaponType> OnWeaponActive;
         public UnityAction<WeaponType> OnWeaponPassive;
+        
+        public UnityAction<AttackData> OnSpecialCharge;
 
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
@@ -253,36 +255,43 @@ namespace Patrik
         /// Function to be called when a normal attack is about to be performed. Called from DOTS after the correct input
         /// is registered.
         /// </summary>
-        public void PerformNormalAttack()
+        public bool PerformNormalAttack()
         {
-            TryPerformAttack(AttackType.Normal);
+            return TryPerformAttack(AttackType.Normal);
         }
         
         /// <summary>
         /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
         /// is registered.
         /// </summary>
-        public void StartChargingSpecial()
+        public bool StartChargingSpecial()
         {
-            TryPerformAttack(AttackType.Special);
-            playerAnimator.SetBool(attackReleasedParameterName, false);
+            bool canAttack = TryPerformAttack(AttackType.Special);
+
+            if (canAttack)
+            {
+                playerAnimator.SetBool(attackReleasedParameterName, false);
+                OnSpecialCharge?.Invoke(GetActiveAttackData());
+            }
+
+            return canAttack;
         }
         
         /// <summary>
         /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
         /// is registered.
         /// </summary>
-        public void PerformUltimateAttack()
+        public bool PerformUltimateAttack()
         {
-            TryPerformAttack(AttackType.Ultimate);
+            return TryPerformAttack(AttackType.Ultimate);
         }
 
-        private void TryPerformAttack(AttackType type)
+        private bool TryPerformAttack(AttackType type)
         {
             if (!activeWeapon)
             {
                 Debug.LogWarning("No active weapon, can't perform attack.");
-                return;
+                return false;
             }
             
             if (isAttacking)
@@ -291,13 +300,14 @@ namespace Patrik
                 playerAnimator.SetBool(bufferAttackParameterName, true);
 
                 //  if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
-                return;
+                return false;
             }
 
             isAttacking = true;
             currentAttackType = type;
             UpdateAnimatorAttackParameters();
             playerAudio.PlayWeaponSwingAudio(CurrentWeaponTypeInt, CurrentAttackTypeInt);
+            return true;
         }
 
         private IEnumerator ResetAttackFlag(float time)

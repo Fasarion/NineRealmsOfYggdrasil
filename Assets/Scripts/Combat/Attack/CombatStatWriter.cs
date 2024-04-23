@@ -46,12 +46,12 @@ public partial struct CombatStatHandleSystem : ISystem
         
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         var playerAtkModsComponent = state.EntityManager.GetComponentData<PlayerDamageModifiersComponent>(playerEntity);
-        var playerDamageComp = state.EntityManager.GetComponentData<BaseAttackDamageComponent>(playerEntity);
+        var playerDamageComp = state.EntityManager.GetComponentData<DamageComponent>(playerEntity);
         
       //  var baseWeaponDmgComponent = state.EntityManager.GetComponentData<BaseAttackDamageComponent>(weaponEntity);
 
         foreach (var (baseWeaponDmgComponent, currDamageComp, weapon) in SystemAPI
-            .Query<BaseAttackDamageComponent, RefRW<CurrentAttackDamageComponent>, WeaponComponent>())
+            .Query<DamageComponent, RefRW<CachedDamageComponent>, WeaponComponent>())
         {
             AttackType weaponAttack = weapon.CurrentAttackType;
             

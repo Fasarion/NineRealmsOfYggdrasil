@@ -46,7 +46,7 @@ namespace Damage
             var damageBufferLookup = SystemAPI.GetBufferLookup<DamageBufferElement>();
             
             foreach (var (hitBuffer, attackDamage) in SystemAPI
-                .Query<DynamicBuffer<HitBufferElement>, CurrentAttackDamageComponent>()
+                .Query<DynamicBuffer<HitBufferElement>, CachedDamageComponent>()
                 .WithAll<DamageOnTriggerComponent>())
             {
                 foreach (var hit in hitBuffer)

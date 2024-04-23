@@ -22,24 +22,24 @@ public class AttackDamageAuthoring : MonoBehaviour
                 CriticalRate = authoring.criticalChance
             };
             
-            AddComponent(entity, new BaseAttackDamageComponent{Value = damageInfo});
-            AddComponent(entity, new CurrentAttackDamageComponent{Value = damageInfo});
+            AddComponent(entity, new DamageComponent{Value = damageInfo});
+            AddComponent(entity, new CachedDamageComponent{Value = damageInfo});
         }
     }
 }
 
-public struct BaseAttackDamageComponent : IComponentData
+/// <summary>
+///  Base damage data for a particular entity. Can be updated from upgrades.
+/// </summary>
+public struct DamageComponent : IComponentData
 {
     public DamageContents Value;
 }
 
-public struct CurrentAttackDamageComponent : IComponentData
+/// <summary>
+/// Cached data that is calculated before, and used for, damage calculations. Should NOT be directly changed from upgrades.
+/// </summary>
+public struct CachedDamageComponent : IComponentData
 {
     public DamageContents Value;
 }
-
-// public struct AttackDamageInfo
-// {
-//     public float Damage;
-//     public float CriticalChance;
-// }

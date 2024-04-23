@@ -45,19 +45,20 @@ public partial struct CombatStatHandleSystem : ISystem
         // float totalCritMod = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.CriticalModifier, combo);
         
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
-        var playerAtkModsComponent = state.EntityManager.GetComponentData<PlayerDamageModifiersComponent>(playerEntity);
+        var playerDamageMod = state.EntityManager.GetComponentData<DamageModifierComponent>(playerEntity);
+        var playerSkillMod = state.EntityManager.GetComponentData<SkillModifierComponent>(playerEntity);
         var playerDamageComp = state.EntityManager.GetComponentData<DamageComponent>(playerEntity);
         
       //  var baseWeaponDmgComponent = state.EntityManager.GetComponentData<BaseAttackDamageComponent>(weaponEntity);
 
-        foreach (var (baseWeaponDmgComponent, currDamageComp, weapon) in SystemAPI
-            .Query<DamageComponent, RefRW<CachedDamageComponent>, WeaponComponent>())
+        foreach (var (baseWeaponDmgComponent, currDamageComp, damageModifier, skillModifier, weapon) in SystemAPI
+            .Query<DamageComponent, RefRW<CachedDamageComponent>,  DamageModifierComponent, SkillModifierComponent, WeaponComponent>())
         {
             AttackType weaponAttack = weapon.CurrentAttackType;
             
             float totalDamage = (playerDamageComp.Value.DamageValue + baseWeaponDmgComponent.Value.DamageValue)
-                                * playerAtkModsComponent.DamageModifier
-                                * playerAtkModsComponent.AttackTypeModifier.GetModifier(weaponAttack);
+                                * (playerDamageMod.Value + damageModifier.Value)
+                                * (playerSkillMod.Value.GetModifier(weaponAttack) + skillModifier.Value.GetModifier(weaponAttack));
             
             float totalCritRate = playerDamageComp.Value.CriticalRate + baseWeaponDmgComponent.Value.CriticalRate;
 

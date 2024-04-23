@@ -65,20 +65,62 @@ public partial class UpgradeApplierSystem : SystemBase
                 damageComponent.Value.DamageValue += valueAmount;
                 EntityManager.SetComponentData(entity, damageComponent);
                 return;
-            
+
             case UpgradeValueTypes.damageModifier:
-                if (!EntityManager.HasComponent<PlayerDamageModifiersComponent>(entity))
+                if (!EntityManager.HasComponent<DamageModifierComponent>(entity))
                 {
-                    EntityManager.AddComponent<PlayerDamageModifiersComponent>(entity);
+                    EntityManager.AddComponent<DamageModifierComponent>(entity);
                 }
 
-                var damageModComponent = EntityManager.GetComponentData<PlayerDamageModifiersComponent>(entity);
-                damageModComponent.DamageModifier += valueAmount;
+                var damageModComponent = EntityManager.GetComponentData<DamageModifierComponent>(entity);
+                damageModComponent.Value += valueAmount;
                 EntityManager.SetComponentData(entity, damageModComponent);
                 return;
-                
+
+            case UpgradeValueTypes.normalModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var normalMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                normalMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, normalMod);
+                return;
+            
+            case UpgradeValueTypes.specialModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var specialMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                specialMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, specialMod);
+                return;
+            
+            case UpgradeValueTypes.ultimateModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var ultMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                ultMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, ultMod);
+                return;
+            
+            case UpgradeValueTypes.passiveModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var passiveMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                passiveMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, passiveMod);
+                return;
         }
-        
     }
 
     private Entity GetEntityToUpgrade(UpgradeBaseType upgradeThingToUpgrade)

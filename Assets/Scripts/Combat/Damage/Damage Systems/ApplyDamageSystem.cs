@@ -51,8 +51,6 @@ namespace Damage
                 if (totalDamageToDeal == 0)
                     continue;
                 
-                Debug.Log($"Damage to deal: {totalDamageToDeal}");
-                
                 // mark entity as "HasChangedHP" with given HP change amount
                 // TODO: add damage to amount instead of overriding it. Otherwise, this might cause problems if other systems
                 // have changed the HP themselves (i.e. by healing)

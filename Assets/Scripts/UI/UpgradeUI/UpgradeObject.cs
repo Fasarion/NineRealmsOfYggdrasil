@@ -33,6 +33,13 @@ public enum UpgradeValueTypes
     damage, //this is in % on player
     lightningchains,
     damageModifier,
+    
+    // skill modifiers
+    normalModifier,
+    specialModifier,
+    ultimateModifier,
+    passiveModifier,
+    
     Unlock
 }
 

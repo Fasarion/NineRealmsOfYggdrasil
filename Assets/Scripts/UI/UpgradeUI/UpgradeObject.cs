@@ -46,14 +46,18 @@ public enum UpgradeValueTypes
 public enum UpgradeBaseType
 {
     Sword,
+    SwordSpecialAbility,
+    SwordUltimateAbility,
+    SwordPassiveAbility,
+    
     Hammer,
+    HammerSpecialAbility,
+    HammerUltimateAbility,
+    HammerPassiveAbility,
+    
     Birds,
     Mead,
     Player,
-
-
-    
-    
 }
 
 [CreateAssetMenu(fileName = "UpgradeObject", menuName = "Upgrades/UpgradeObject" +

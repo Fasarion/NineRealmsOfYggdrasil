@@ -185,6 +185,7 @@ GameObject:
   - component: {fileID: 8396824266348004795}
   - component: {fileID: 3681451223392617389}
   - component: {fileID: 2623615028845185692}
+  - component: {fileID: 5238492828145925422}
   m_Layer: 0
   m_Name: IceRingConfig
   m_TagString: Untagged
@@ -278,8 +279,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 1
+  knockBackForce: 50
   knockAwayFromPlayer: 1
+--- !u!114 &5238492828145925422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3587502585957426159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  criticalChance: 0
 --- !u!1 &4384012983194273374
 GameObject:
   m_ObjectHideFlags: 0
@@ -1650,6 +1665,11 @@ GameObject:
   m_Component:
   - component: {fileID: 6554383039780088272}
   - component: {fileID: 8679604310254679132}
+  - component: {fileID: 4521537810697397799}
+  - component: {fileID: 1953149236494982241}
+  - component: {fileID: 2392080274725197513}
+  - component: {fileID: 5023740080430468351}
+  - component: {fileID: 5436305752502215806}
   m_Layer: 0
   m_Name: ThunderStrikeAbilityConfig
   m_TagString: Untagged
@@ -1684,11 +1704,80 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67a3e1697e30513439bc6686fb018daa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  abilityPrefab: {fileID: 6208798233002451104, guid: e0dd21cf62a016a43a3a8de702a1aaff,
+  mainAbilityPrefab: {fileID: 6208798233002451104, guid: e0dd21cf62a016a43a3a8de702a1aaff,
     type: 3}
-  maxDisplayTime: 5
   maxStrikes: 10
   timeBetweenStrikes: 0.25
+  initialStrikeDelay: 0
+  shockwaveAbilityPrefab: {fileID: 3383446916815051859, guid: 57fc5cf891427aa41ba63479f6aa85f5,
+    type: 3}
+  maxAftermathDisplayTime: 0
+  damageDelayTime: 0
+  damageArea: 0
+--- !u!114 &4521537810697397799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1953149236494982241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2392080274725197513
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  criticalChance: 0
+--- !u!114 &5023740080430468351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5436305752502215806
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7727780417294271403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 1
+  knockAwayFromPlayer: 0
 --- !u!1 &7747805933802500312
 GameObject:
   m_ObjectHideFlags: 0

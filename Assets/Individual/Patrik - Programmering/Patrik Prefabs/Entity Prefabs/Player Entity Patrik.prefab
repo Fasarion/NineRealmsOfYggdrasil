@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 5457081741902125940}
   - component: {fileID: 3609844279876431546}
   - component: {fileID: 8574011558162687106}
+  - component: {fileID: 3599724072978458201}
   m_Layer: 0
   m_Name: Player Entity Patrik
   m_TagString: Untagged
@@ -505,3 +506,16 @@ MonoBehaviour:
     Special: 1
     Ultimate: 1
     Passive: 1
+--- !u!114 &3599724072978458201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353328540331355661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3b71ad01aa8f4cab8cd178a8b6c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1

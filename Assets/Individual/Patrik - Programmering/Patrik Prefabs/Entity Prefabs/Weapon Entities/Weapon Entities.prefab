@@ -547,6 +547,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7364503994779296283}
+    - targetCorrespondingSourceObject: {fileID: 8745109184148579111, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2638642179500276995}
   m_SourcePrefab: {fileID: 100100000, guid: 8c0c34ffce5617749ad66e43edc83939, type: 3}
 --- !u!4 &934767159348844900 stripped
 Transform:
@@ -630,6 +634,19 @@ MonoBehaviour:
     Special: 1
     Ultimate: 1
     Passive: 1
+--- !u!114 &2638642179500276995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7250411902124556773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3b71ad01aa8f4cab8cd178a8b6c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
 --- !u!1001 &2665734043480455173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -733,6 +750,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3372213329053059802}
+    - targetCorrespondingSourceObject: {fileID: 8261443476895494700, guid: f14416850a4f08e4e9e8370655f3495e,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4800628189721429173}
   m_SourcePrefab: {fileID: 100100000, guid: f14416850a4f08e4e9e8370655f3495e, type: 3}
 --- !u!4 &2759361216166142621 stripped
 Transform:
@@ -813,6 +834,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillModifier:
     Normal: 1
-    Special: 1
+    Special: 0.1
     Ultimate: 1
     Passive: 1
+--- !u!114 &4800628189721429173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221755797999946281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3b71ad01aa8f4cab8cd178a8b6c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Movement;
 using Player;
 using Unity.Entities;
 using Unity.VisualScripting;
@@ -41,7 +42,6 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         foreach (var upgrade in upgradeObject.upgrades)
         {
-            UpgradeBaseType baseType = upgrade.thingToUpgrade;
             UpgradeValueTypes valueType = upgrade.valueToUpgrade;
             float upgradeAmount = upgrade.valueAmount;
             var entity = GetEntityToUpgrade(upgrade.thingToUpgrade);
@@ -64,6 +64,28 @@ public partial class UpgradeApplierSystem : SystemBase
                 var damageComponent = EntityManager.GetComponentData<DamageComponent>(entity);
                 damageComponent.Value.DamageValue += valueAmount;
                 EntityManager.SetComponentData(entity, damageComponent);
+                return;
+            
+            case UpgradeValueTypes.crit:
+                if (!EntityManager.HasComponent<DamageComponent>(entity))
+                {
+                    EntityManager.AddComponent<DamageComponent>(entity);
+                }
+
+                var critComponent = EntityManager.GetComponentData<DamageComponent>(entity);
+                critComponent.Value.CriticalRate += valueAmount;
+                EntityManager.SetComponentData(entity, critComponent);
+                return;
+            
+            case UpgradeValueTypes.attackSpeed:
+                if (!EntityManager.HasComponent<AttackSpeedModifier>(entity))
+                {
+                    EntityManager.AddComponent<AttackSpeedModifier>(entity);
+                }
+
+                var attackSpeedComponent = EntityManager.GetComponentData<AttackSpeedModifier>(entity);
+                attackSpeedComponent.Value += valueAmount;
+                EntityManager.SetComponentData(entity, attackSpeedComponent);
                 return;
 
             case UpgradeValueTypes.damageModifier:
@@ -120,6 +142,17 @@ public partial class UpgradeApplierSystem : SystemBase
                 passiveMod.Value.Normal += valueAmount;
                 EntityManager.SetComponentData(entity, passiveMod);
                 return;
+            
+            case UpgradeValueTypes.movementSpeed:
+                if (!EntityManager.HasComponent<MoveSpeedComponent>(entity))
+                {
+                    EntityManager.AddComponent<MoveSpeedComponent>(entity);
+                }
+
+                var moveSpeed = EntityManager.GetComponentData<MoveSpeedComponent>(entity);
+                moveSpeed.Value += valueAmount;
+                EntityManager.SetComponentData(entity, moveSpeed);
+                return;
         }
     }
 
@@ -155,6 +188,24 @@ public partial class UpgradeApplierSystem : SystemBase
                 }
                 break;
                 
+            case UpgradeBaseType.SwordSpecialAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<IceRingConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.HammerUltimateAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<ThunderStrikeConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
         }
 
         return default;

@@ -9,6 +9,8 @@ namespace Damage
     [UpdateInGroup(typeof(CombatSystemGroup))]
     public partial struct ApplyDamageSystem : ISystem
     {
+        private static float CRITICAL_MODIFIER = 2;
+        
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
@@ -36,7 +38,7 @@ namespace Damage
                     // Add critical damage
                     if (damageElement.DamageContents.CriticalRate > randomFloat)
                     {
-                        damageToDeal *= damageElement.DamageContents.CriticalModifier;
+                        damageToDeal *= CRITICAL_MODIFIER; //damageElement.DamageContents.CriticalModifier;
                     }
                     
                     totalDamageToDeal += damageToDeal;

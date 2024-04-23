@@ -23,10 +23,31 @@ namespace Damage
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var damageBufferLookup = SystemAPI.GetBufferLookup<DamageBufferElement>();
-            var random = SystemAPI.GetSingletonRW<RandomComponent>();
+            // var damageBufferLookup = SystemAPI.GetBufferLookup<DamageBufferElement>();
+            // var random = SystemAPI.GetSingletonRW<RandomComponent>();
+            //
+            // foreach (var (hitBuffer, damageOnTrigger) in SystemAPI.Query<DynamicBuffer<HitBufferElement>, DamageOnTriggerComponent>())
+            // {
+            //     foreach (var hit in hitBuffer)
+            //     {
+            //         if (hit.IsHandled) continue;
+            //
+            //         var damageBuffer = damageBufferLookup[hit.HitEntity];
+            //
+            //        // float randomFloat = random.ValueRW.random.NextFloat();
+            //         
+            //         damageBuffer.Add(new DamageBufferElement
+            //         {
+            //             DamageContents = damageOnTrigger.Value
+            //         });
+            //     }
+            // }
             
-            foreach (var (hitBuffer, damageOnTrigger) in SystemAPI.Query<DynamicBuffer<HitBufferElement>, DamageOnTriggerComponent>())
+            var damageBufferLookup = SystemAPI.GetBufferLookup<DamageBufferElement>();
+            
+            foreach (var (hitBuffer, attackDamage) in SystemAPI
+                .Query<DynamicBuffer<HitBufferElement>, CachedDamageComponent>()
+                .WithAll<DamageOnTriggerComponent>())
             {
                 foreach (var hit in hitBuffer)
                 {
@@ -34,11 +55,11 @@ namespace Damage
 
                     var damageBuffer = damageBufferLookup[hit.HitEntity];
 
-                   // float randomFloat = random.ValueRW.random.NextFloat();
+                    // float randomFloat = random.ValueRW.random.NextFloat();
                     
                     damageBuffer.Add(new DamageBufferElement
                     {
-                        DamageContents = damageOnTrigger.Value
+                        DamageContents = attackDamage.Value
                     });
                 }
             }

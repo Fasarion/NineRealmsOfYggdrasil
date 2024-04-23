@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 4045521414853887161}
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
+  - component: {fileID: 1112584073020001983}
   m_Layer: 0
   m_Name: Enemy Projectile
   m_TagString: Untagged
@@ -354,9 +355,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageContents:
     DamageValue: 1
-    DamageType: 0
     CriticalRate: 0
-    CriticalModifier: 0
 --- !u!114 &7899796359273220732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,3 +407,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1112584073020001983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 1
+  criticalChance: 1.5

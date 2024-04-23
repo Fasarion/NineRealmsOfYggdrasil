@@ -6,6 +6,7 @@ using Player;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Entities.Content;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
@@ -19,6 +20,7 @@ public partial struct IceRingSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<IceRingAbility>();
@@ -40,12 +42,13 @@ public partial struct IceRingSystem : ISystem
         var input = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+
         
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
                      .WithEntityAccess())
         {
-            //set up
+            //set up ability
             if (!ability.ValueRW.isInitialized)
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
@@ -123,7 +126,7 @@ public partial struct IceRingSystem : ISystem
                 hits.Clear();
                 
                 //TODO: fixa smidigare...
-                foreach (var (configEntity, hitBuffer) in
+                foreach (var (_, hitBuffer) in
                          SystemAPI.Query<RefRW<IceRingConfig>, DynamicBuffer<HitBufferElement>>())
                              
                 {

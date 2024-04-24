@@ -672,7 +672,7 @@ PrefabInstance:
     - target: {fileID: 2634354093496779514, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4086213906278513554, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
@@ -684,6 +684,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameObject Managers
       objectReference: {fileID: 0}
+    - target: {fileID: 4990379630351611153, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: upgradeCards.Array.data[0]
+      value: 
+      objectReference: {fileID: 93512674}
+    - target: {fileID: 4990379630351611153, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: upgradeCards.Array.data[1]
+      value: 
+      objectReference: {fileID: 93512673}
+    - target: {fileID: 4990379630351611153, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: upgradeCards.Array.data[2]
+      value: 
+      objectReference: {fileID: 93512672}
     - target: {fileID: 5293798080204851680, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: upgradeCards.Array.data[0]

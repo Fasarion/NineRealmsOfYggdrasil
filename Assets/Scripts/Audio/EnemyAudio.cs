@@ -13,11 +13,16 @@ public class EnemyAudio : ScriptableObject
     private EventInstance gruntsIns;
     public EventReference gruntHit;
     private EventInstance gruntHitIns;
+
+    public EventReference gruntBackup;
+
+    private EventInstance gruntBackIns;
     //public EventReference gruntAttack;
     public EventReference ranger;
     //public EventReference rangerAttack;
     [Header("WeaponImpacts")] 
     public EventReference swordImpact;
+    public EventReference hammerImpact;
 
     private int gruntAmount;
     private int rangerAmount;
@@ -56,12 +61,26 @@ public class EnemyAudio : ScriptableObject
 
     public void gruntOnHit()
     {
-        //RuntimeManager.PlayOneShot(gruntHit);
-        gruntHitIns = RuntimeManager.CreateInstance(gruntHit);
+        switch (PlayerAudioBehaviour.GetWeaponTypeAudio())
+        {
+            case 1:
+            {
+                RuntimeManager.PlayOneShot(swordImpact);
+                break;
+            }
+            case 2:
+            {
+                RuntimeManager.PlayOneShot(hammerImpact);
+                break;
+            }
+
+        }
+        /*gruntHitIns = RuntimeManager.CreateInstance(gruntHit);
         gruntHitIns.setParameterByName("WeaponTest", PlayerAudioBehaviour.GetWeaponTypeAudio());
         gruntHitIns.start();
         gruntHitIns.release();
-        Debug.Log("Du kom hit");
+        Debug.Log("Du kom hit");*/
     }
+
 
 }

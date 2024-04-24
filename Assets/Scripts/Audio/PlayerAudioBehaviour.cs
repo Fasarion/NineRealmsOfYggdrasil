@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerAudioBehaviour : MonoBehaviour
 {
     private AudioManager _audioManager;
-    private static WeaponType weaponType;
+    private static WeaponType weaponType = WeaponType.Sword;
 
     private void Awake()
     {

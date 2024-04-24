@@ -29,12 +29,10 @@ namespace Patrik
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
         public WeaponType CurrentWeaponType => activeWeapon.WeaponType;
-        int CurrentWeaponTypeInt => (int)CurrentWeaponType;
         private Dictionary<WeaponBehaviour, Transform> weaponParents = new ();
 
         // Attack Data
         private AttackType currentAttackType { get;  set; }
-        int CurrentAttackTypeInt => (int)currentAttackType;
         private int currentCombo = 0;
         
         
@@ -43,9 +41,12 @@ namespace Patrik
         
         // Animator parameters
         private string movingParameterName = "Moving";
-        private string bufferAttackParameterName = "AttackBuffered";
+      //  private string bufferAttackParameterName = "AttackBuffered";
+        private string bufferAttackParameterName = "BufferedAttack";
         private string isAttackingParameterName = "IsAttacking";
         private string attackReleasedParameterName = "AttackReleased";
+        private string currentWeaponParameterName = "CurrentWeapon";
+        private string currentAttackParameterName = "CurrentAttack";
         
         // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;
@@ -94,7 +95,7 @@ namespace Patrik
         private IEnumerator ResetBufferNextFrame()
         {
             yield return new WaitForEndOfFrame();
-            playerAnimator.SetBool(bufferAttackParameterName, false);
+            playerAnimator.SetInteger(bufferAttackParameterName, -1);
         }
 
         struct WeaponAttackPair
@@ -126,6 +127,7 @@ namespace Patrik
             
             // TODO: Add animation names for other attacks
         };
+        
 
         /// <summary>
         /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
@@ -152,12 +154,6 @@ namespace Patrik
             playerAudio = gameObject.GetComponent<PlayerAudioBehaviour>();
             playerAnimator = gameObject.GetComponent<Animator>();
         }
-
-        // private void OnEnable()
-        // {
-        //     // wait a few frames to setup weapons to make sure they have spawned from the DOTS side
-        //     Invoke(nameof(SetupWeapons), 0.1f);
-        // }
 
         private void OnDisable()
         {
@@ -298,16 +294,17 @@ namespace Patrik
             if (isAttacking)
             {
                 // set attack buffer
-                playerAnimator.SetBool(bufferAttackParameterName, true);
-
-                //  if (!isResettingAttackFlag) StartCoroutine(ResetAttackFlag(1f));
+               // playerAnimator.SetBool(bufferAttackParameterName, true);
+                
+                playerAnimator.SetInteger(bufferAttackParameterName, (int)type);
+                
                 return false;
             }
 
             isAttacking = true;
             currentAttackType = type;
             UpdateAnimatorAttackParameters();
-            playerAudio.PlayWeaponSwingAudio(CurrentWeaponTypeInt, CurrentAttackTypeInt);
+            playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
             return true;
         }
 
@@ -325,6 +322,8 @@ namespace Patrik
             if (animationNameExists)
             {
                 playerAnimator.Play(name);
+                playerAnimator.SetInteger(currentAttackParameterName, (int)currentAttackType);
+                playerAnimator.SetInteger(currentWeaponParameterName, (int)CurrentWeaponType);
             }
             else
             {

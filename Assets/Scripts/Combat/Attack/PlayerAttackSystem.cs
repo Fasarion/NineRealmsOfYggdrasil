@@ -404,6 +404,7 @@ namespace Patrik
             else if (ultimateAttack.HasPreparedThisFrame)
             {
                 _weaponManager.PrepareUltimateAttack();
+                attackButtonsPressed++;
             }
             
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
@@ -444,6 +445,8 @@ namespace Patrik
                     ChargingWeapon = _weaponManager.CurrentWeaponType,
                     IsCharging = false
                 };
+                
+                attackButtonsPressed++;
             }
         }
         

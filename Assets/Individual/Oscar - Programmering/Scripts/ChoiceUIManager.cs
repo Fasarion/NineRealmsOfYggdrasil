@@ -417,6 +417,4 @@ public class ChoiceUIManager : MonoBehaviour
         OnRoomChosen?.Invoke(roomSceneReference);
         SceneManager.LoadScene(roomSceneReference.SceneName);
     }
-
-    //We will use this to reset the scriptableobject's current node.
 }

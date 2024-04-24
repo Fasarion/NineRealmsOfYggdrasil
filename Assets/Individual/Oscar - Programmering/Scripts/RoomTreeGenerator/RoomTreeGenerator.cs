@@ -123,16 +123,30 @@ public class RoomTreeGenerator : MonoBehaviour
                 GenerateStartingRoomNode();
                 
             }
-            else if(choiceDataScriptableObject.resetNodeProgression == false)
-            {
-                currentParentNode = choiceDataScriptableObject.currentRoomNode;
-                
-            }
+            //else if(choiceDataScriptableObject.resetNodeProgression == false)
+            //{
+            //Feels like a cheap way to do it.
             else
             {
-                
-                GenerateStartingRoomNode();
+                if (choiceDataScriptableObject.currentRoomNode != null && choiceDataScriptableObject.currentRoomNode.roomCoordinates.x > 0)
+                {
+                    currentParentNode = choiceDataScriptableObject.currentRoomNode;
+                }
+                else
+                {
+                    GenerateStartingRoomNode();
+                }
             }
+              
+                
+                
+                
+            //}
+            //else
+            //{
+                
+                //GenerateStartingRoomNode();
+            //}
             
             
         }
@@ -170,7 +184,13 @@ public class RoomTreeGenerator : MonoBehaviour
 
     public List<RoomNode> GetCurrentNodeList()
     {
-        return currentParentNode.childNodes;
+        List<RoomNode> childNodes = new List<RoomNode>();
+        foreach (var key in currentParentNode.childNodeCoordinates)
+        {
+            choiceDataScriptableObject.roomNodeGridMapSO.TryGetValue(key, out RoomNode value);
+            childNodes.Add(value);
+        }
+        return childNodes;
     }
 
     public RoomNode GetCurrentNode()
@@ -194,8 +214,10 @@ public class RoomTreeGenerator : MonoBehaviour
             if (roomNode != null)
             {
                 
-                roomNode.parentNodes.Add(startingRoomNode);
-                startingRoomNode.childNodes.Add(roomNode);
+                //roomNode.parentNodes.Add(startingRoomNode);
+                roomNode.parentNodeCoordinates.Add(startingRoomNode.roomCoordinates);
+                //startingRoomNode.childNodes.Add(roomNode);
+                startingRoomNode.childNodeCoordinates.Add(roomNode.roomCoordinates);
             }
             
         }
@@ -401,6 +423,8 @@ public class RoomTreeGenerator : MonoBehaviour
                             {
                                 childNode.parentNodes.Add(pair.Value);
                                 pair.Value.childNodes.Add(childNode);
+                                pair.Value.childNodeCoordinates.Add(childNode.roomCoordinates);
+                                childNode.parentNodeCoordinates.Add(pair.Key);
                                 childNodeAdded = true;
                             }
                         }
@@ -413,6 +437,8 @@ public class RoomTreeGenerator : MonoBehaviour
                         {
                             childNode.parentNodes.Add(pair.Value);
                             pair.Value.childNodes.Add(childNode);
+                            pair.Value.childNodeCoordinates.Add(childNode.roomCoordinates);
+                            childNode.parentNodeCoordinates.Add(pair.Key);
                             childNodeAdded = true;
                         }
                     }
@@ -438,6 +464,8 @@ public class RoomTreeGenerator : MonoBehaviour
                     
                     potentialChildNodes[guaranteedChildNodeIndex].parentNodes.Add(pair.Value); ;
                     pair.Value.childNodes.Add(potentialChildNodes[guaranteedChildNodeIndex]);
+                    pair.Value.childNodeCoordinates.Add(potentialChildNodes[guaranteedChildNodeIndex].roomCoordinates);
+                    potentialChildNodes[guaranteedChildNodeIndex].parentNodeCoordinates.Add(pair.Key);
                     childNodeAdded = true;
                 }
 
@@ -490,20 +518,26 @@ public class RoomTreeGenerator : MonoBehaviour
     }
     public void TraverseRemovedNodesUpwards(RoomNode currentNode, List<Vector2Int> recursiveRoomNodesToRemove)
     {
+        //If the current node does not have any children
         if (currentNode.childNodes.Count == 0)
         {
+            //Prepare the node for removal
             recursiveRoomNodesToRemove.Add(currentNode.roomCoordinates);
 
+            //Go through the parent nodes of the current node.
             for (int i = 0; i < currentNode.parentNodes.Count; i++)
             {
                 var nodeParent = currentNode.parentNodes[i];
             
+                //If there is a parent
                 if (nodeParent != null)
                 {
                     //Remove the current node from its parents child list. 
                     //If the current node is the only node that the parent has in its child list, then the child node list of the parent will be 0
                     //Therefore the parent node is also slated for removal. If not, the parent node has more children and then it is okay to stop here.
                     nodeParent.childNodes.Remove(currentNode);
+                    nodeParent.childNodeCoordinates.Remove(currentNode.roomCoordinates);
+                    //If the parent node doesn't have any children anymore, we move one step up in the hierarchy
                     if (nodeParent.childNodes.Count == 0)
                     {
                         TraverseRemovedNodesUpwards(nodeParent, recursiveRoomNodesToRemove);

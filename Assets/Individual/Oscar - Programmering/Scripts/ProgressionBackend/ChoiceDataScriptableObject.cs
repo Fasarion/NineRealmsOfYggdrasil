@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,13 +11,27 @@ public class ChoiceDataScriptableObject : ScriptableObject
     public bool saveGeneratedGridMap = false;
     public bool resetNodeProgression = false;
     
-    public RoomNode currentRoomNode;
-    [HideInInspector] public SerializableDictionary<Vector2Int, RoomNode> roomNodeGridMapSO;
+    public RoomNode currentRoomNode; 
+    public SerializableDictionary<Vector2Int, RoomNode> roomNodeGridMapSO;
+
+    public List<Vector2Int> roomNodeCoordinates;
+
+    public void Awake()
+    {
+        
+    }
+
     //public List<int> testList;
     public void ClearCachedData()
     {
         roomNodeGridMapSO = null;
         currentRoomNode = null;
-        //keys = null;
+        //keys = {null;
+    }
+
+    public RoomNode GetNodeFromGridMap(Vector2Int keyRoomNodeCoordinates)
+    {
+        roomNodeGridMapSO.TryGetValue(keyRoomNodeCoordinates, out var value);
+        return value;
     }
 }

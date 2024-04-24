@@ -721,8 +721,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1083420052580891302}
   - {fileID: 1247973131801891729}
+  - {fileID: 1083420052580891302}
   m_Father: {fileID: 1457161691200369662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -769,6 +769,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childTransformArray: []
+  symbolBehaviours: []
 --- !u!1 &1780089627096625321
 GameObject:
   m_ObjectHideFlags: 0
@@ -1179,8 +1180,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2647166125687935817}
   - {fileID: 1975534900566650118}
+  - {fileID: 2647166125687935817}
   m_Father: {fileID: 1457161691200369662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1227,6 +1228,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childTransformArray: []
+  symbolBehaviours: []
 --- !u!1 &2797374176197785882
 GameObject:
   m_ObjectHideFlags: 0
@@ -1600,6 +1602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childTransformArray: []
+  symbolBehaviours: []
 --- !u!1 &3491455031488375988
 GameObject:
   m_ObjectHideFlags: 0
@@ -1706,8 +1709,8 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4342062973822807044}
-  - {fileID: 643605932397312003}
   - {fileID: 920035532767642694}
+  - {fileID: 643605932397312003}
   m_Father: {fileID: 1457161691200369662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -1754,6 +1757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childTransformArray: []
+  symbolBehaviours: []
 --- !u!1 &3556249766267766288
 GameObject:
   m_ObjectHideFlags: 0
@@ -1965,7 +1969,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd2eb24ea1a2369479ea234111706248, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelContainers: []
 --- !u!1 &4071202516727549248
 GameObject:
   m_ObjectHideFlags: 0
@@ -2354,8 +2357,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5959935242621739601}
   - {fileID: 7271110358379274128}
+  - {fileID: 5959935242621739601}
   m_Father: {fileID: 1457161691200369662}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -2402,6 +2405,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   childTransformArray: []
+  symbolBehaviours: []
 --- !u!1 &6547188778819526289
 GameObject:
   m_ObjectHideFlags: 0

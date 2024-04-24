@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DevLocker.Utils;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -241,9 +242,11 @@ public class ChoiceUIManager : MonoBehaviour
         
         SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
         SelectionCardInstantiator.hasEnteredScreen += OnSelectionCardEntered;
+        
     }
 
-    
+   
+
 
     private void OnDisable()
     {
@@ -414,4 +417,6 @@ public class ChoiceUIManager : MonoBehaviour
         OnRoomChosen?.Invoke(roomSceneReference);
         SceneManager.LoadScene(roomSceneReference.SceneName);
     }
+
+    //We will use this to reset the scriptableobject's current node.
 }

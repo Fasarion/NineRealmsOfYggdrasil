@@ -12,404 +12,219 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5abc911be60829439a7d6bcdf4d0008, type: 3}
   m_Name: ChoiceData
   m_EditorClassIdentifier: 
-  saveGeneratedGridMap: 0
+  saveGeneratedGridMap: 1
   resetNodeProgression: 0
   currentRoomNode:
-    childNodes:
-    - childNodes:
-      - childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 1}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 4, y: 2}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 3, y: 3}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
-        roomCoordinates: {x: 2, y: 2}
-        parentNodes: []
-        chosenRoomTypeIndex: 2
-      roomCoordinates: {x: 1, y: 1}
-      parentNodes: []
-      chosenRoomTypeIndex: 0
-    - childNodes:
-      - childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 1}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 4, y: 2}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 3, y: 3}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
-        roomCoordinates: {x: 2, y: 2}
-        parentNodes: []
-        chosenRoomTypeIndex: 2
-      roomCoordinates: {x: 1, y: 2}
-      parentNodes: []
-      chosenRoomTypeIndex: 2
-    - childNodes:
-      - childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 1}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 4, y: 2}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 3, y: 3}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
-        roomCoordinates: {x: 2, y: 2}
-        parentNodes: []
-        chosenRoomTypeIndex: 2
-      roomCoordinates: {x: 1, y: 3}
-      parentNodes: []
-      chosenRoomTypeIndex: 1
-    - childNodes:
-      - childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 1}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 4, y: 2}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 3, y: 3}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
-        roomCoordinates: {x: 2, y: 4}
-        parentNodes: []
-        chosenRoomTypeIndex: 0
-      roomCoordinates: {x: 1, y: 4}
-      parentNodes: []
-      chosenRoomTypeIndex: 1
-    - childNodes:
-      - childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 4}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 6}
-              parentNodes: []
-              chosenRoomTypeIndex: 0
-            roomCoordinates: {x: 4, y: 5}
-            parentNodes: []
-            chosenRoomTypeIndex: 3
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 6}
-              parentNodes: []
-              chosenRoomTypeIndex: 0
-            roomCoordinates: {x: 4, y: 6}
-            parentNodes: []
-            chosenRoomTypeIndex: 0
-          roomCoordinates: {x: 3, y: 5}
-          parentNodes: []
-          chosenRoomTypeIndex: 2
-        roomCoordinates: {x: 2, y: 6}
-        parentNodes: []
-        chosenRoomTypeIndex: 3
-      roomCoordinates: {x: 1, y: 6}
-      parentNodes: []
-      chosenRoomTypeIndex: 3
     roomCoordinates: {x: 0, y: 0}
-    parentNodes: []
     chosenRoomTypeIndex: 0
+    childNodeCoordinates:
+    - {x: 1, y: 1}
+    - {x: 1, y: 2}
+    - {x: 1, y: 3}
+    - {x: 1, y: 4}
+    - {x: 1, y: 6}
+    parentNodeCoordinates: []
   roomNodeGridMapSO:
     list:
     - Key: {x: 1, y: 1}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes:
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 1}
-                parentNodes: []
-                chosenRoomTypeIndex: 1
-              roomCoordinates: {x: 4, y: 2}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 3, y: 3}
-            parentNodes: []
-            chosenRoomTypeIndex: 3
-          roomCoordinates: {x: 2, y: 2}
-          parentNodes: []
-          chosenRoomTypeIndex: 2
         roomCoordinates: {x: 1, y: 1}
-        parentNodes: []
         chosenRoomTypeIndex: 0
+        childNodeCoordinates:
+        - {x: 2, y: 2}
+        parentNodeCoordinates:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
     - Key: {x: 1, y: 2}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes:
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 1}
-                parentNodes: []
-                chosenRoomTypeIndex: 1
-              roomCoordinates: {x: 4, y: 2}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 3, y: 3}
-            parentNodes: []
-            chosenRoomTypeIndex: 3
-          roomCoordinates: {x: 2, y: 2}
-          parentNodes: []
-          chosenRoomTypeIndex: 2
         roomCoordinates: {x: 1, y: 2}
-        parentNodes: []
         chosenRoomTypeIndex: 2
+        childNodeCoordinates:
+        - {x: 2, y: 2}
+        parentNodeCoordinates:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
     - Key: {x: 1, y: 3}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes:
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 1}
-                parentNodes: []
-                chosenRoomTypeIndex: 1
-              roomCoordinates: {x: 4, y: 2}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 3, y: 3}
-            parentNodes: []
-            chosenRoomTypeIndex: 3
-          roomCoordinates: {x: 2, y: 2}
-          parentNodes: []
-          chosenRoomTypeIndex: 2
         roomCoordinates: {x: 1, y: 3}
-        parentNodes: []
         chosenRoomTypeIndex: 1
+        childNodeCoordinates:
+        - {x: 2, y: 2}
+        parentNodeCoordinates:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
     - Key: {x: 1, y: 4}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes:
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 1}
-                parentNodes: []
-                chosenRoomTypeIndex: 1
-              roomCoordinates: {x: 4, y: 2}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 3, y: 3}
-            parentNodes: []
-            chosenRoomTypeIndex: 3
-          roomCoordinates: {x: 2, y: 4}
-          parentNodes: []
-          chosenRoomTypeIndex: 0
         roomCoordinates: {x: 1, y: 4}
-        parentNodes: []
         chosenRoomTypeIndex: 1
+        childNodeCoordinates:
+        - {x: 2, y: 4}
+        parentNodeCoordinates:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
     - Key: {x: 1, y: 6}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes:
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 4}
-                parentNodes: []
-                chosenRoomTypeIndex: 1
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 6}
-                parentNodes: []
-                chosenRoomTypeIndex: 0
-              roomCoordinates: {x: 4, y: 5}
-              parentNodes: []
-              chosenRoomTypeIndex: 3
-            - childNodes:
-              - childNodes: []
-                roomCoordinates: {x: 5, y: 6}
-                parentNodes: []
-                chosenRoomTypeIndex: 0
-              roomCoordinates: {x: 4, y: 6}
-              parentNodes: []
-              chosenRoomTypeIndex: 0
-            roomCoordinates: {x: 3, y: 5}
-            parentNodes: []
-            chosenRoomTypeIndex: 2
-          roomCoordinates: {x: 2, y: 6}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
         roomCoordinates: {x: 1, y: 6}
-        parentNodes: []
         chosenRoomTypeIndex: 3
+        childNodeCoordinates:
+        - {x: 2, y: 6}
+        parentNodeCoordinates:
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
+        - {x: 0, y: 0}
     - Key: {x: 2, y: 2}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 1}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 4, y: 2}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 3, y: 3}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
         roomCoordinates: {x: 2, y: 2}
-        parentNodes: []
         chosenRoomTypeIndex: 2
+        childNodeCoordinates:
+        - {x: 3, y: 3}
+        parentNodeCoordinates:
+        - {x: 1, y: 1}
+        - {x: 1, y: 2}
+        - {x: 1, y: 3}
     - Key: {x: 2, y: 4}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 1}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            roomCoordinates: {x: 4, y: 2}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 3, y: 3}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
         roomCoordinates: {x: 2, y: 4}
-        parentNodes: []
         chosenRoomTypeIndex: 0
+        childNodeCoordinates:
+        - {x: 3, y: 3}
+        parentNodeCoordinates:
+        - {x: 1, y: 4}
     - Key: {x: 2, y: 6}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 4}
-              parentNodes: []
-              chosenRoomTypeIndex: 1
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 6}
-              parentNodes: []
-              chosenRoomTypeIndex: 0
-            roomCoordinates: {x: 4, y: 5}
-            parentNodes: []
-            chosenRoomTypeIndex: 3
-          - childNodes:
-            - childNodes: []
-              roomCoordinates: {x: 5, y: 6}
-              parentNodes: []
-              chosenRoomTypeIndex: 0
-            roomCoordinates: {x: 4, y: 6}
-            parentNodes: []
-            chosenRoomTypeIndex: 0
-          roomCoordinates: {x: 3, y: 5}
-          parentNodes: []
-          chosenRoomTypeIndex: 2
         roomCoordinates: {x: 2, y: 6}
-        parentNodes: []
         chosenRoomTypeIndex: 3
+        childNodeCoordinates:
+        - {x: 3, y: 5}
+        parentNodeCoordinates:
+        - {x: 1, y: 6}
     - Key: {x: 3, y: 3}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes: []
-            roomCoordinates: {x: 5, y: 1}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          roomCoordinates: {x: 4, y: 2}
-          parentNodes: []
-          chosenRoomTypeIndex: 1
         roomCoordinates: {x: 3, y: 3}
-        parentNodes: []
         chosenRoomTypeIndex: 3
+        childNodeCoordinates:
+        - {x: 4, y: 2}
+        parentNodeCoordinates:
+        - {x: 2, y: 2}
+        - {x: 2, y: 4}
     - Key: {x: 3, y: 5}
       Value:
-        childNodes:
-        - childNodes:
-          - childNodes: []
-            roomCoordinates: {x: 5, y: 4}
-            parentNodes: []
-            chosenRoomTypeIndex: 1
-          - childNodes: []
-            roomCoordinates: {x: 5, y: 6}
-            parentNodes: []
-            chosenRoomTypeIndex: 0
-          roomCoordinates: {x: 4, y: 5}
-          parentNodes: []
-          chosenRoomTypeIndex: 3
-        - childNodes:
-          - childNodes: []
-            roomCoordinates: {x: 5, y: 6}
-            parentNodes: []
-            chosenRoomTypeIndex: 0
-          roomCoordinates: {x: 4, y: 6}
-          parentNodes: []
-          chosenRoomTypeIndex: 0
         roomCoordinates: {x: 3, y: 5}
-        parentNodes: []
         chosenRoomTypeIndex: 2
+        childNodeCoordinates:
+        - {x: 4, y: 5}
+        - {x: 4, y: 6}
+        parentNodeCoordinates:
+        - {x: 2, y: 6}
     - Key: {x: 4, y: 2}
       Value:
-        childNodes:
-        - childNodes: []
-          roomCoordinates: {x: 5, y: 1}
-          parentNodes: []
-          chosenRoomTypeIndex: 1
         roomCoordinates: {x: 4, y: 2}
-        parentNodes: []
         chosenRoomTypeIndex: 1
+        childNodeCoordinates:
+        - {x: 5, y: 1}
+        parentNodeCoordinates:
+        - {x: 3, y: 3}
     - Key: {x: 4, y: 5}
       Value:
-        childNodes:
-        - childNodes: []
-          roomCoordinates: {x: 5, y: 4}
-          parentNodes: []
-          chosenRoomTypeIndex: 1
-        - childNodes: []
-          roomCoordinates: {x: 5, y: 6}
-          parentNodes: []
-          chosenRoomTypeIndex: 0
         roomCoordinates: {x: 4, y: 5}
-        parentNodes: []
         chosenRoomTypeIndex: 3
+        childNodeCoordinates:
+        - {x: 5, y: 4}
+        - {x: 5, y: 6}
+        parentNodeCoordinates:
+        - {x: 3, y: 5}
     - Key: {x: 4, y: 6}
       Value:
-        childNodes:
-        - childNodes: []
-          roomCoordinates: {x: 5, y: 6}
-          parentNodes: []
-          chosenRoomTypeIndex: 0
         roomCoordinates: {x: 4, y: 6}
-        parentNodes: []
         chosenRoomTypeIndex: 0
+        childNodeCoordinates:
+        - {x: 5, y: 6}
+        parentNodeCoordinates:
+        - {x: 3, y: 5}
     - Key: {x: 5, y: 1}
       Value:
-        childNodes: []
         roomCoordinates: {x: 5, y: 1}
-        parentNodes: []
         chosenRoomTypeIndex: 1
+        childNodeCoordinates: []
+        parentNodeCoordinates:
+        - {x: 4, y: 2}
     - Key: {x: 5, y: 4}
       Value:
-        childNodes: []
         roomCoordinates: {x: 5, y: 4}
-        parentNodes: []
         chosenRoomTypeIndex: 1
+        childNodeCoordinates: []
+        parentNodeCoordinates:
+        - {x: 4, y: 5}
     - Key: {x: 5, y: 6}
       Value:
-        childNodes: []
         roomCoordinates: {x: 5, y: 6}
-        parentNodes: []
         chosenRoomTypeIndex: 0
+        childNodeCoordinates: []
+        parentNodeCoordinates:
+        - {x: 4, y: 5}
+        - {x: 4, y: 6}
+  roomNodeCoordinates: []

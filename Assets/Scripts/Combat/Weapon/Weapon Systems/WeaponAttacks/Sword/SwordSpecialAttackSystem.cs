@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Damage;
 using Patrik;
+using Player;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -10,11 +11,13 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateAfter(typeof(CombatStatHandleSystem))]
 public partial struct SwordSpecialAttackSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<SwordStatsTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
@@ -28,17 +31,38 @@ public partial struct SwordSpecialAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
-        if (!attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Sword, AttackType.Special))
+        if (!attackCaller.ValueRO.ChargeInfo.IsCharging)
+            return;
+        
+        if (attackCaller.ValueRO.ChargeInfo.ChargingWeapon != WeaponType.Sword)
+            return;
+        
+        if (attackCaller.ValueRO.ActiveAttackData.IsAttacking)
             return;
 
-        attackCaller.ValueRW.shouldActiveAttack = false;
+        attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
         
         
-        var config = SystemAPI.GetSingleton<IceRingConfig>();
+
         
-        var query = SystemAPI.QueryBuilder().WithAll<IceRingConfig, ChargeTimer>().Build();
+        
+        var query = SystemAPI.QueryBuilder().WithAll<IceRingAbility, ChargeTimer>().Build();
+        
         if (query.CalculateEntityCount() == 0)
         {
+            
+            var config = SystemAPI.GetSingleton<IceRingConfig>();
+        
+            var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
+            var abilityDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+            var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
+            var swordDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(swordEntity);
+            abilityDamage.Value = swordDamage.Value;
+            state.EntityManager.SetComponentData(configEntity, abilityDamage);
+            
+            
+            
+            
             var ability = state.EntityManager.Instantiate(config.chargeAreaPrefab);
             state.EntityManager.SetComponentData(ability, new ChargeTimer
             {

@@ -9,9 +9,9 @@ public class PlayerTargettingAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
-            AddComponent(entity, new PlayerTargettingComponent());
+            AddComponent(entity, new PlayerTargetingComponent());
         }
     }
 }
 
-public partial struct PlayerTargettingComponent : IComponentData{}
+public partial struct PlayerTargetingComponent : IComponentData{}

@@ -5,19 +5,25 @@ using UnityEngine;
 
 public class ThunderStrikeAbilityAuthoring : MonoBehaviour
 {
-    public float test;
+    public int strikeCounter;
+    public bool isInitialized;
 
     public class ThunderStrikeAbilityAuthoringBaker : Baker<ThunderStrikeAbilityAuthoring>
     {
         public override void Bake(ThunderStrikeAbilityAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new ThunderStrikeAbility { test = authoring.test });
+            AddComponent(entity,
+                new ThunderStrikeAbility
+                    {
+                        strikeCounter = authoring.strikeCounter, isInitialized = authoring.isInitialized
+                    });
         }
     }
 }
 
 public struct ThunderStrikeAbility : IComponentData
 {
-    public float test;
+    public int strikeCounter;
+    public bool isInitialized;
 }

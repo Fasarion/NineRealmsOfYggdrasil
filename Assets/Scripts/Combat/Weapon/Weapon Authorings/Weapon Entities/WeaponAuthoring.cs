@@ -36,8 +36,12 @@ public struct WeaponComponent : IComponentData
 {
     public LocalTransform AttackPoint;
     public WeaponType WeaponType;
+
+    public AttackType CurrentAttackType;
+    public int CurrentAttackCombo;
     
     public bool UsesTargetingForUltimate;
+    public bool InActiveState;
 }
 
 public struct ActiveWeapon : IComponentData, IEnableableComponent { }

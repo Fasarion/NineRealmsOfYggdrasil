@@ -49,7 +49,7 @@ public struct CombatStats
     [Header("Area")]
     public CombatStatValue Area;
     
-    [Header("Area")]
+    [Header("Size")]
     public CombatStatValue Size;
     
     [Header("Speed")]
@@ -148,6 +148,6 @@ public struct CombatStats
         float overallStat = CombatStatValue.GetTotalStatValue(statsComponent.OverallStats.GetStatValueFromType(statType), combo);
         float attackStat = CombatStatValue.GetTotalStatValue(attackStats.GetStatValueFromType(statType), combo);
         
-        return overallStat + attackStat;
+        return overallStat * attackStat;
     }
 }

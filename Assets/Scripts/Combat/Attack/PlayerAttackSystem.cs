@@ -41,8 +41,10 @@ namespace Patrik
                     }
 
                     DisableAllWeapons();
-                    SubscribeToAttackEvents();
+                    SubscribeToEvents();
                     hasSetUpWeaponManager = true;
+
+                    _weaponManager.SetupWeapons();
                 }
             }
             
@@ -82,18 +84,20 @@ namespace Patrik
             }
         }
 
-        private void SubscribeToAttackEvents()
+        private void SubscribeToEvents()
         {
             _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
             _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
             
             _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
             _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            
+            _weaponManager.OnSpecialCharge += OnSpecialCharge;
 
             _weaponManager.OnWeaponActive += SetWeaponActive;
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
         }
-        
+
         private void UnsubscribeFromAttackEvents()
         {
             _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
@@ -102,9 +106,21 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
             _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
             
+            _weaponManager.OnSpecialCharge -= OnSpecialCharge;
+            
             _weaponManager.OnWeaponActive -= SetWeaponActive;
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
         }
+
+        private void OnSpecialCharge(AttackData data)
+        {
+            if (DifferentAttackData(data, previousActiveAttackData))
+            {
+                WriteOverAttackData(data);
+                previousActiveAttackData = data;
+            }
+        }
+
 
         private void SetWeaponActive(WeaponType type)
         {
@@ -114,6 +130,25 @@ namespace Patrik
             {
                 SystemAPI.SetComponentEnabled<ActiveWeapon>(entity, true);
             }
+            
+            var data = new AttackData
+            {
+                AttackType = AttackType.Normal,
+                WeaponType = type,
+                ComboCounter = 0,
+            };
+
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+            weaponCaller.ValueRW.ActiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = false,
+                ShouldStop = false,
+                AttackType = data.AttackType,
+                WeaponType = data.WeaponType,
+                Combo = data.ComboCounter
+            };
+            
+            WriteOverAttackData(data);
         }
         
         private void SetWeaponPassive(WeaponType type)
@@ -124,6 +159,15 @@ namespace Patrik
             {
                 SystemAPI.SetComponentEnabled<ActiveWeapon>(entity, false);
             }
+            
+            var data = new AttackData
+            {
+                AttackType = AttackType.Passive,
+                WeaponType = type,
+                ComboCounter = 0,
+            };
+            
+            WriteOverAttackData(data);
         }
 
         private Entity GetWeaponEntity(WeaponType type)
@@ -137,11 +181,17 @@ namespace Patrik
             EnableWeapon(data.WeaponType);
             
             var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.ActiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = true,
+                ShouldStop = false,
+                IsAttacking = true,
+                AttackType = data.AttackType,
+                WeaponType = data.WeaponType,
+                Combo = data.ComboCounter
+            };
             
-            weaponCaller.ValueRW.shouldActiveAttack = true;
-            weaponCaller.ValueRW.currentAttackType = data.AttackType;
-            weaponCaller.ValueRW.currentWeaponType = data.WeaponType;
-            weaponCaller.ValueRW.currentCombo = data.ComboCounter;
             
             if (DifferentAttackData(data, previousActiveAttackData))
             {
@@ -154,7 +204,6 @@ namespace Patrik
         {
             if (newData.AttackType != lastData.AttackType) return true;
             if (newData.ComboCounter != lastData.ComboCounter) return true;
-            if (newData.WeaponType != lastData.WeaponType) return true;
 
             return false;
         }
@@ -162,28 +211,62 @@ namespace Patrik
         private void WriteOverAttackData(AttackData data)
         {
             bool statHandlerExists =
-                SystemAPI.TryGetSingletonRW<StatHandlerComponent>(out RefRW<StatHandlerComponent> statHandler);
+                SystemAPI.TryGetSingletonRW(out RefRW<StatHandlerComponent> statHandler);
             if (!statHandlerExists)
             {
                 Debug.LogWarning("No stat handler exists, can't update stats.");
                 return;
             }
-            
+
             statHandler.ValueRW.ShouldUpdateStats = true;
             statHandler.ValueRW.WeaponType = data.WeaponType;
             statHandler.ValueRW.AttackType = data.AttackType;
             statHandler.ValueRW.ComboCounter = data.ComboCounter;
+
+            // TODO: Move this to seperate system at the moment when weapon is switched?
+            Entity entity = GetWeaponEntity(data.WeaponType);
+            var weapon = EntityManager.GetComponentData<WeaponComponent>(entity);
+            weapon.InActiveState = data.AttackType != AttackType.Passive;
+
+            weapon.CurrentAttackCombo = data.ComboCounter;
+            weapon.CurrentAttackType = data.AttackType;
+            
+            EntityManager.SetComponentData(entity, weapon);
         }
 
         private void OnActiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);
+            
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.ActiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = false,
+                ShouldStop = true,
+                IsAttacking = false,
+                WeaponType = data.WeaponType,
+                AttackType = data.AttackType,
+                Combo = data.ComboCounter
+            };
         }
 
         private void OnPassiveAttackStart(AttackData data)
         {
             EnableWeapon(data.WeaponType);
             
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.PassiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = true,
+                ShouldStop = false,
+                IsAttacking = true,
+                WeaponType = data.WeaponType,
+                AttackType = data.AttackType,
+                Combo = data.ComboCounter
+            };
+
             if (DifferentAttackData(data, previousPassiveAttackData))
             {
                 WriteOverAttackData(data);
@@ -201,6 +284,17 @@ namespace Patrik
         private void OnPassiveAttackStop(AttackData data)
         {
             DisableWeapon(data.WeaponType);
+            
+            var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+
+            weaponCaller.ValueRW.PassiveAttackData = new WeaponCallData()
+            {
+                ShouldStart = false,
+                ShouldStop = true,
+                IsAttacking = false,
+                WeaponType = data.WeaponType,
+                AttackType = AttackType.Passive
+            };
         }
 
         private void EnableWeapon(WeaponType dataWeaponType)
@@ -286,31 +380,59 @@ namespace Patrik
 
             if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
                 return;
+
+            bool inCombatState = gameManager.GameState == GameState.Combat;
+            if (!inCombatState)
+                return;
+
+            int attackButtonsPressed = 0;
             
             // Handle ultimate attack
             var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value == true)
+            if (ultimateAttack.Value)
             {
                 _weaponManager.PerformUltimateAttack();
-                return;
+                attackButtonsPressed++;
             }
-
+            
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
+            if (!normalCombat)
+                return;
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && normalCombat)
+            if (normalAttackInput.KeyPressed && attackButtonsPressed == 0)
             {
                 _weaponManager.PerformNormalAttack();
-                return;
+                attackButtonsPressed++;
             }
+
+            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && normalCombat)
+            if (specialAttack.KeyDown && attackButtonsPressed == 0)
             {
-                _weaponManager.PerformSpecialAttack();
-                return;
+              //  Debug.Log("Preparing special...");
+                _weaponManager.StartChargingSpecial();
+                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                {
+                    ChargingWeapon = _weaponManager.CurrentWeaponType,
+                    IsCharging = true
+                };
+                
+                attackButtonsPressed++;
+            }
+            
+            if (specialAttack.KeyUp)
+            {
+              //  Debug.Log("Perform special!");
+                _weaponManager.ReleaseSpecial();
+                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                {
+                    ChargingWeapon = _weaponManager.CurrentWeaponType,
+                    IsCharging = false
+                };
             }
         }
         

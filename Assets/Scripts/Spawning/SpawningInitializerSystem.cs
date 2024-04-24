@@ -95,6 +95,12 @@ public partial class SpawningInitializerSystem : SystemBase
         float totalWeight = 0;
 
         var enemyWeights = new float[enemyPrefabsBuffer.Length];
+        if (enemyInfo.Length > enemyPrefabsBuffer.Length)
+        {
+            Debug.LogError("Error with the spawning setup! Double check that all enemy types are represented as " +
+                           "prefabs in the SpawnConfig and/or ask David for help.");
+            return;
+        }
 
         foreach (var info in enemyInfo)
         {

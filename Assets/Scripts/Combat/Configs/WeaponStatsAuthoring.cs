@@ -38,13 +38,19 @@ public class WeaponStatsAuthoring : MonoBehaviour
 
 public struct CombatStatsComponent : IComponentData
 {
+    
+    
     public CombatStats OverallStats;
     
     public CombatStats NormalAttackStats;
     public CombatStats SpecialAttackStats;
     public CombatStats UltimateAttackStats;
     public CombatStats PassiveAttackStats;
+    
+    
 }
+
+
 
 [System.Serializable]
 public struct ComboMultiplier

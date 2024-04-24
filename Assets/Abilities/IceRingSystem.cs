@@ -6,6 +6,7 @@ using Player;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Entities.Content;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
@@ -19,6 +20,7 @@ public partial struct IceRingSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<IceRingAbility>();
@@ -40,20 +42,13 @@ public partial struct IceRingSystem : ISystem
         var input = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-        var buffer = new DynamicBuffer<HitBufferElement>();
 
-        //TODO: fixa smidigare...
-        foreach (var (configEntity, hitBuffer, entity) in
-                 SystemAPI.Query<RefRW<IceRingConfig>, DynamicBuffer<HitBufferElement>>()
-                     .WithEntityAccess())
-        {
-            buffer = hitBuffer;
-        }
-
+        
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
                      .WithEntityAccess())
         {
+            //set up ability
             if (!ability.ValueRW.isInitialized)
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
@@ -61,7 +56,8 @@ public partial struct IceRingSystem : ISystem
                 transform.ValueRW.Rotation = Quaternion.Euler(-90f, 0f, 0f);
             }
 
-            chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime;
+            //Charge behaviour
+            chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime * config.ValueRO.chargeSpeed;
             if (chargeTimer.ValueRO.currentChargeTime >= config.ValueRO.maxChargeTime)
             {
                 chargeTimer.ValueRW.currentChargeTime = config.ValueRO.maxChargeTime;
@@ -75,6 +71,7 @@ public partial struct IceRingSystem : ISystem
             transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
             transform.ValueRW.Scale = area * 50;
 
+            //On button release
             if (!input.IsHeld)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
@@ -93,6 +90,7 @@ public partial struct IceRingSystem : ISystem
             }
         }
 
+        //spawned ability handling
         foreach (var (ability, timer, transform, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
                      .WithEntityAccess().WithNone<ChargeTimer>())
@@ -111,7 +109,7 @@ public partial struct IceRingSystem : ISystem
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
             }
 
-            if (ability.ValueRO.hasFired) return;
+            if (ability.ValueRO.hasFired) continue;
             
             if (timer.ValueRO.currentTime >= config.ValueRO.damageDelayTime)
             {
@@ -126,25 +124,31 @@ public partial struct IceRingSystem : ISystem
                 float totalArea = ability.ValueRO.area;
                 
                 hits.Clear();
-                    
-                if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
+                
+                //TODO: fixa smidigare...
+                foreach (var (_, hitBuffer) in
+                         SystemAPI.Query<RefRW<IceRingConfig>, DynamicBuffer<HitBufferElement>>())
+                             
                 {
-                    foreach (var hit in hits)
+                    if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
                     {
-                        var enemyPos = transformLookup[hit.Entity].Position;
-                        var colPos = hit.Position;
-                        float2 directionToHit = math.normalizesafe((enemyPos.xz -  transform.ValueRO.Position.xz));
-                    
-                        //Maybe TODO: kolla om hit redan finns i buffer
-                        HitBufferElement element = new HitBufferElement
+                        foreach (var hit in hits)
                         {
-                            IsHandled = false,
-                            HitEntity = hit.Entity,
-                            Position = colPos,
-                            Normal = directionToHit
+                            var enemyPos = transformLookup[hit.Entity].Position;
+                            var colPos = hit.Position;
+                            float2 directionToHit = math.normalizesafe((enemyPos.xz - transform.ValueRO.Position.xz));
 
-                        };
-                        buffer.Add(element);
+                            //Maybe TODO: kolla om hit redan finns i buffer
+                            HitBufferElement element = new HitBufferElement
+                            {
+                                IsHandled = false,
+                                HitEntity = hit.Entity,
+                                Position = colPos,
+                                Normal = directionToHit
+
+                            };
+                            hitBuffer.Add(element);
+                        }
                     }
                 }
                 ability.ValueRW.hasFired = true;

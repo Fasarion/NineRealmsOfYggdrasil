@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: PlayerAtkUpgrade 2
+  m_EditorClassIdentifier: 
+  upgradeTitle: Atttack upgrade
+  upgradeSprite: {fileID: 21300000, guid: 50e35435d988d5b498c69be7a5a20c52, type: 3}
+  upgradeDescription: 'Increases you attack stat by 2
+
+
+    +2 Atk'
+  upgrades:
+  - thingToUpgrade: 10
+    valueToUpgrade: 12
+    valueAmount: 2
+  startUnlocked: 0
+  upgradeIndex: 5
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: ac451ef3af7011948aa31d48a1a4b687, type: 2}

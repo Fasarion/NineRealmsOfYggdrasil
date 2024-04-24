@@ -17,6 +17,7 @@ public partial struct HammerUltimateAttackSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<ThunderStrikeConfig>();
+        state.RequireForUpdate<ThunderBoltConfig>();
         state.RequireForUpdate<HammerStatsTag>();
         state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
@@ -34,17 +35,17 @@ public partial struct HammerUltimateAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-        if (!attackCaller.ValueRO.ShouldAttackWithType(WeaponType.Hammer, AttackType.Ultimate))
+        if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Hammer, AttackType.Ultimate))
             return;
 
-        attackCaller.ValueRW.shouldActiveAttack = false;
+        attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
         Debug.Log("ult!");
 
         var config = SystemAPI.GetSingleton<ThunderStrikeConfig>();
-        var ability = state.EntityManager.Instantiate(config.gluffs);
+        var ability = state.EntityManager.Instantiate(config.mainAbilityPrefab);
         state.EntityManager.SetComponentData(ability, new TimerObject
         {
-            maxTime = 3
+            maxTime = config.maxAftermathDisplayTime
         });
         
     }

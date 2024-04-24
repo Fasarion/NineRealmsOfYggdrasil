@@ -7,29 +7,26 @@ using Debug = UnityEngine.Debug;
 
 public class ProgressionBarContentContainer : MonoBehaviour
 {
+    //public List<ProgressionBarLevelContainer> levelContainers;
 
-    public List<ProgressionBarLevelContainer> levelContainers;
 
-
-    public static Action<int> onProgressionContentSet;
-    // Start is called before the first frame update
+    public static Action<ProgressionBarLevelContainer[]> onProgressionContentSet;
     public void Awake()
     {
-        levelContainers = new List<ProgressionBarLevelContainer>();
+        //levelContainers = new List<ProgressionBarLevelContainer>();
     }
 
     void Start()
-    {
-        
-       var levelContainerArray =  transform.GetComponentsInChildren<ProgressionBarLevelContainer>();
-       if (levelContainerArray == null || levelContainerArray.Length == 0)
-       {
-           Debug.LogError("List of possible levels for the room tree generator did not exist in the content container on the UI canvas");
-       }
-       else
-       {
-           onProgressionContentSet.Invoke(levelContainerArray.Length);
-       }
+    { 
+        var levelContainerArray =  transform.GetComponentsInChildren<ProgressionBarLevelContainer>();
+        if (levelContainerArray == null || levelContainerArray.Length == 0)
+        {
+            Debug.LogError("List of possible levels for the room tree generator did not exist in the content container on the UI canvas");
+        }
+        else
+        {
+            onProgressionContentSet?.Invoke(levelContainerArray);
+        }
        
     }
 

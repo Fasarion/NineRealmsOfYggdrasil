@@ -38,6 +38,7 @@ public class MapProgressionBarScroller : MonoBehaviour
     //Used by 
     public void ScrollRight()
     {
+        
         scrollStart = scrollRect.horizontalNormalizedPosition;
         scrollFinished = scrollRect.horizontalNormalizedPosition + scrollRate;
         currentTime = 0;

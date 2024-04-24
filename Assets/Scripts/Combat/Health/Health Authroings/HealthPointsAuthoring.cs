@@ -9,7 +9,7 @@ namespace Health
     {
         [Tooltip("Maximum health points of this object.")]
         [SerializeField] private float maxHP = 5;
-    
+        
         class Baker : Baker<HealthPointsAuthoring>
         {
             public override void Bake(HealthPointsAuthoring authoring)

@@ -1,7 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Movement;
+using Player;
 using Unity.Entities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]
@@ -39,13 +42,173 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         foreach (var upgrade in upgradeObject.upgrades)
         {
-            UpgradeBaseType baseType = upgrade.thingToUpgrade;
-            var statsComponent = GetStatsComponent(baseType);
-            
-            ApplyUpgrade(upgrade, statsComponent);
+            UpgradeValueTypes valueType = upgrade.valueToUpgrade;
+            float upgradeAmount = upgrade.valueAmount;
+            var entity = GetEntityToUpgrade(upgrade.thingToUpgrade);
+            ApplyComponentUpgrade(valueType, upgradeAmount, entity);
         }
 
         InformStatHandler();
+    }
+
+    private void ApplyComponentUpgrade(UpgradeValueTypes upgradeValueToUpgrade, float valueAmount, Entity entity)
+    {
+        switch (upgradeValueToUpgrade)
+        {
+            case UpgradeValueTypes.damage:
+                if (!EntityManager.HasComponent<DamageComponent>(entity))
+                {
+                    EntityManager.AddComponent<DamageComponent>(entity);
+                }
+
+                var damageComponent = EntityManager.GetComponentData<DamageComponent>(entity);
+                damageComponent.Value.DamageValue += valueAmount;
+                EntityManager.SetComponentData(entity, damageComponent);
+                return;
+            
+            case UpgradeValueTypes.crit:
+                if (!EntityManager.HasComponent<DamageComponent>(entity))
+                {
+                    EntityManager.AddComponent<DamageComponent>(entity);
+                }
+
+                var critComponent = EntityManager.GetComponentData<DamageComponent>(entity);
+                critComponent.Value.CriticalRate += valueAmount;
+                EntityManager.SetComponentData(entity, critComponent);
+                return;
+            
+            case UpgradeValueTypes.attackSpeed:
+                if (!EntityManager.HasComponent<AttackSpeedModifier>(entity))
+                {
+                    EntityManager.AddComponent<AttackSpeedModifier>(entity);
+                }
+
+                var attackSpeedComponent = EntityManager.GetComponentData<AttackSpeedModifier>(entity);
+                attackSpeedComponent.Value += valueAmount;
+                EntityManager.SetComponentData(entity, attackSpeedComponent);
+                return;
+
+            case UpgradeValueTypes.damageModifier:
+                if (!EntityManager.HasComponent<DamageModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<DamageModifierComponent>(entity);
+                }
+
+                var damageModComponent = EntityManager.GetComponentData<DamageModifierComponent>(entity);
+                damageModComponent.Value += valueAmount;
+                EntityManager.SetComponentData(entity, damageModComponent);
+                return;
+
+            case UpgradeValueTypes.normalModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var normalMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                normalMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, normalMod);
+                return;
+            
+            case UpgradeValueTypes.specialModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var specialMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                specialMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, specialMod);
+                return;
+            
+            case UpgradeValueTypes.ultimateModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var ultMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                ultMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, ultMod);
+                return;
+            
+            case UpgradeValueTypes.passiveModifier:
+                if (!EntityManager.HasComponent<SkillModifierComponent>(entity))
+                {
+                    EntityManager.AddComponent<SkillModifierComponent>(entity);
+                }
+
+                var passiveMod = EntityManager.GetComponentData<SkillModifierComponent>(entity);
+                passiveMod.Value.Normal += valueAmount;
+                EntityManager.SetComponentData(entity, passiveMod);
+                return;
+            
+            case UpgradeValueTypes.movementSpeed:
+                if (!EntityManager.HasComponent<MoveSpeedComponent>(entity))
+                {
+                    EntityManager.AddComponent<MoveSpeedComponent>(entity);
+                }
+
+                var moveSpeed = EntityManager.GetComponentData<MoveSpeedComponent>(entity);
+                moveSpeed.Value += valueAmount;
+                EntityManager.SetComponentData(entity, moveSpeed);
+                return;
+        }
+    }
+
+    private Entity GetEntityToUpgrade(UpgradeBaseType upgradeThingToUpgrade)
+    {
+        switch (upgradeThingToUpgrade)
+        {
+                
+            case UpgradeBaseType.Player:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<PlayerTag>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            
+            case UpgradeBaseType.Sword:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<SwordComponent>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            case UpgradeBaseType.Hammer:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<HammerComponent>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+                
+            case UpgradeBaseType.SwordSpecialAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<IceRingConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.HammerUltimateAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<ThunderStrikeConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+        }
+
+        return default;
     }
 
     private void InformStatHandler()
@@ -59,60 +222,12 @@ public partial class UpgradeApplierSystem : SystemBase
         }
 
         statHandler.ValueRW.ShouldUpdateStats = true;
-        statHandler.ValueRW.WeaponType = attackCaller.currentWeaponType;
-        statHandler.ValueRW.AttackType = attackCaller.currentAttackType;
-        statHandler.ValueRW.ComboCounter = attackCaller.currentCombo;
+        statHandler.ValueRW.WeaponType = attackCaller.ActiveAttackData.WeaponType;
+        statHandler.ValueRW.AttackType = attackCaller.ActiveAttackData.AttackType;
+        statHandler.ValueRW.ComboCounter = attackCaller.ActiveAttackData.Combo;
     }
-
-    private RefRW<CombatStatsComponent> GetStatsComponent(UpgradeBaseType baseType)
-    {
-        switch (baseType)
-        {
-            case UpgradeBaseType.Sword:
-                
-                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
-                    .WithAll<SwordStatsTag>())
-                {
-                    return stats;
-                }
-                break;
-            case UpgradeBaseType.Hammer:
-                
-                foreach (var stats in SystemAPI.Query<RefRW<CombatStatsComponent>>()
-                             .WithAll<HammerStatsTag>())
-                {
-                    return stats;
-                }
-                break;
-                
-        }
-
-        return default;
-    }
-
-    private void ApplyUpgrade(UpgradeInformation upgrade, RefRW<CombatStatsComponent> statsComponent)
-    {
-        switch (upgrade.valueToUpgrade)
-        {
-            case UpgradeValueTypes.damage:
-                statsComponent.ValueRW.OverallStats.Damage.BaseValue += upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.cooldown:
-                statsComponent.ValueRW.OverallStats.Cooldown.BaseValue -= upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.areaEffect:
-                statsComponent.ValueRW.OverallStats.Area.BaseValue += upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.attackSpeed:
-                statsComponent.ValueRW.OverallStats.AttackSpeed.BaseValue += upgrade.valueAmount;
-                break;
-            case UpgradeValueTypes.energyRegen:
-                statsComponent.ValueRW.OverallStats.EnergyFillPerHit.BaseValue += upgrade.valueAmount;
-                break;
-        }
-    }
-
-
+    
+    
     private void HandleLocks(UpgradeObject upgradeObject)
     {
         upgradeObject.isUnlocked = false;

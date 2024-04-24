@@ -10,7 +10,7 @@ public partial struct CombatStatHandleSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<BasePlayerStatsTag>();
+      //  state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<StatHandlerComponent>();
     }
 
@@ -35,9 +35,9 @@ public partial struct CombatStatHandleSystem : ISystem
         
         var weaponEntity = GetWeaponEntity(ref state, weaponType);
 
-        var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(weaponEntity);
-        var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-        var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
+      //  var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(weaponEntity);
+      //  var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
+       // var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
             
         // update damage data
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
@@ -51,7 +51,7 @@ public partial struct CombatStatHandleSystem : ISystem
             AttackType weaponAttack = weapon.CurrentAttackType;
             
             float totalDamage = (playerDamageComp.Value.DamageValue + baseWeaponDmgComponent.Value.DamageValue)
-                                * (playerDamageMod.Value + damageModifier.Value)
+                                * (1 + playerDamageMod.Value + damageModifier.Value)
                                 * (playerSkillMod.Value.GetModifier(weaponAttack) + skillModifier.Value.GetModifier(weaponAttack));
             
             float totalCritRate = playerDamageComp.Value.CriticalRate + baseWeaponDmgComponent.Value.CriticalRate;
@@ -64,33 +64,33 @@ public partial struct CombatStatHandleSystem : ISystem
 
             currDamageComp.ValueRW.Value = damageContents;
         }
-
-        // update knockback data [OLD]
-        float totalKnockBack = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.KnockBack, combo);
-
-        KnockBackForce knockBackComp = state.EntityManager.GetComponentData<KnockBackForce>(weaponEntity);
-        knockBackComp.Value = totalKnockBack;
-        state.EntityManager.SetComponentData(weaponEntity, knockBackComp);
-        
-        // update energy data  [OLD]
-        float totalEnergyFill = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent,
-            attackType, CombatStatType.EnergyFillPerHit, combo);
-        EnergyFillComponent energyFillComp =  state.EntityManager.GetComponentData<EnergyFillComponent>(weaponEntity);
-        if (attackType == AttackType.Passive)
-        {
-            energyFillComp.PassiveFillPerHit = totalEnergyFill;
-        }
-        else
-        {
-            energyFillComp.ActiveFillPerHit = totalEnergyFill;
-        }
-        state.EntityManager.SetComponentData(weaponEntity, energyFillComp);
-        
-        // update area data  [OLD]
-        float area = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Area, combo);
-        AreaComponentData areaComponent = state.EntityManager.GetComponentData<AreaComponentData>(weaponEntity);
-        areaComponent.Value = area;
-        state.EntityManager.SetComponentData(weaponEntity, areaComponent);
+        //
+        // // update knockback data [OLD]
+        // float totalKnockBack = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.KnockBack, combo);
+        //
+        // KnockBackForce knockBackComp = state.EntityManager.GetComponentData<KnockBackForce>(weaponEntity);
+        // knockBackComp.Value = totalKnockBack;
+        // state.EntityManager.SetComponentData(weaponEntity, knockBackComp);
+        //
+        // // update energy data  [OLD]
+        // float totalEnergyFill = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent,
+        //     attackType, CombatStatType.EnergyFillPerHit, combo);
+        // EnergyFillComponent energyFillComp =  state.EntityManager.GetComponentData<EnergyFillComponent>(weaponEntity);
+        // if (attackType == AttackType.Passive)
+        // {
+        //     energyFillComp.PassiveFillPerHit = totalEnergyFill;
+        // }
+        // else
+        // {
+        //     energyFillComp.ActiveFillPerHit = totalEnergyFill;
+        // }
+        // state.EntityManager.SetComponentData(weaponEntity, energyFillComp);
+        //
+        // // update area data  [OLD]
+        // float area = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Area, combo);
+        // AreaComponentData areaComponent = state.EntityManager.GetComponentData<AreaComponentData>(weaponEntity);
+        // areaComponent.Value = area;
+        // state.EntityManager.SetComponentData(weaponEntity, areaComponent);
 
         statHandler.ValueRW.ShouldUpdateStats = false;
     }

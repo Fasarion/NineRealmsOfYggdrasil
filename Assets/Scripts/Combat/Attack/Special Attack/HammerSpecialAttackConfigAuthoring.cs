@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
@@ -33,6 +34,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 
                 TimeToSwitchBack = authoring.timeToTurnBack,
                 TimeToReturnAfterTurning = authoring.timeToReturnAfterTurning,
+                
+                TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack
             });
         }
     }
@@ -50,4 +53,9 @@ public struct HammerSpecialConfig : IComponentData
     
     public float TimeToSwitchBack;
     public float TimeToReturnAfterTurning;
+
+    public float TravelForwardSpeed;
+
+    public bool HasStarted;
+    public float3 DirectionOfTravel;
 }

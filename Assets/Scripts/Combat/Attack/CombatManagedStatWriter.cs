@@ -11,7 +11,7 @@ public partial struct CombatManagedStatWriter : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<BasePlayerStatsTag>();
+     //   state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<StatHandlerComponent>();
     }
 
@@ -27,17 +27,35 @@ public partial struct CombatManagedStatWriter : ISystem
     void WriteOverAttackData(ref SystemState state)
     {
         // Write Over Scale
-        var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-        var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
+        // var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
+        // var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
         
-        foreach (var (transform, animatorReference, weaponStatsComponent, weapon, entity) in SystemAPI
-            .Query<RefRW<LocalTransform>, AnimatorReference, CombatStatsComponent, WeaponComponent>()
+        
+        var playerStatsEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
+        var playerSize = state.EntityManager.GetComponentData<SizeComponent>(playerStatsEntity).Value;
+        
+        // foreach (var (transform, animatorReference, weaponStatsComponent, weapon, entity) in SystemAPI
+        //     .Query<RefRW<LocalTransform>, AnimatorReference, CombatStatsComponent, WeaponComponent>()
+        //     .WithEntityAccess())
+        // {
+        //     float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, weapon.CurrentAttackType, CombatStatType.Size, weapon.CurrentAttackCombo);
+        //     
+        //     transform.ValueRW.Scale = size;
+        //     animatorReference.Animator.transform.localScale = Vector3.one * size;
+        // }
+        
+        foreach (var (transform, cachedSize, animatorReference, sizeComponent, weapon, entity) in SystemAPI
+            .Query<RefRW<LocalTransform>, RefRW<CachedSizeComponent>, AnimatorReference, SizeComponent, WeaponComponent>()
             .WithEntityAccess())
         {
-            float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, weapon.CurrentAttackType, CombatStatType.Size, weapon.CurrentAttackCombo);
-            
-            transform.ValueRW.Scale = size;
-            animatorReference.Animator.transform.localScale = Vector3.one * size;
+           // float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, weapon.CurrentAttackType, CombatStatType.Size, weapon.CurrentAttackCombo);
+           
+           // TODO: change formula?
+           float finalSize = 1 + playerSize + sizeComponent.Value;
+           
+            cachedSize.ValueRW.Value = finalSize;
+            transform.ValueRW.Scale = finalSize;
+            animatorReference.Animator.transform.localScale = Vector3.one * finalSize;
         }
 
         // var playerAttackSpeed = state.EntityManager.GetComponentData<AttackSpeedModifier>(playerStatsEntity);

@@ -11,12 +11,14 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
     public int maxStrikes;
     public float timeBetweenStrikes;
     public float initialStrikeDelay;
+    public float mainEffectHeightOffset;
     
     [Header("Shockwave Values")]
     public GameObject shockwaveAbilityPrefab;
     public float maxAftermathDisplayTime;
     public float damageDelayTime;
     public float damageArea;
+    public float shockwaveEffectHeightOffset;
     
 
     public class ThunderStrikeConfigAuthoringBaker : Baker<ThunderStrikeConfigAuthoring>
@@ -35,6 +37,8 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
                     damageArea = authoring.damageArea,
                     damageDelayTime = authoring.damageDelayTime,
                     initialStrikeDelay = authoring.initialStrikeDelay,
+                    mainEffectHeightOffset = authoring.mainEffectHeightOffset,
+                    shockwaveEffectHeightOffset = authoring.shockwaveEffectHeightOffset,
                 });
         }
     }
@@ -50,4 +54,6 @@ public struct ThunderStrikeConfig : IComponentData
     public float damageDelayTime;
     public float damageArea;
     public float initialStrikeDelay;
+    public float mainEffectHeightOffset;
+    public float shockwaveEffectHeightOffset;
 }

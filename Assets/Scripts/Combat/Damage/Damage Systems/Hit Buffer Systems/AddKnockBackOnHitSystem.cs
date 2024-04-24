@@ -10,7 +10,7 @@ using UnityEngine;
 namespace Damage
 {
     [UpdateInGroup(typeof(CombatSystemGroup))]
-    public partial struct AddKnockBackBufferOnTriggerSystem : ISystem
+    public partial struct AddKnockBackOnHitSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
@@ -24,7 +24,7 @@ namespace Damage
             var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
             
             foreach (var ( hitBuffer, knockBackComponent) 
-                in SystemAPI.Query<DynamicBuffer<HitBufferElement>, KnockBackForce>())
+                in SystemAPI.Query<DynamicBuffer<HitBufferElement>, KnockBackOnHitComponent>())
             {
                 foreach (var hit in hitBuffer)
                 {

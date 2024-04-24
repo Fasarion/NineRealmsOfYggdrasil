@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Damage
 {
-    public class KnockBackOnTriggerAuthoring : MonoBehaviour
+    public class KnockBackOnHitAuthoring : MonoBehaviour
     {
         [Tooltip("Force to be applied on entity to knock it back on impact.")]
         [SerializeField] private float knockBackForce = 1;
@@ -12,18 +12,24 @@ namespace Damage
                  "but perhaps not for ranged ones.")]
         [SerializeField] private bool knockAwayFromPlayer = false;
          
-        public class CapabilityBaker : Baker<KnockBackOnTriggerAuthoring>
+        public class CapabilityBaker : Baker<KnockBackOnHitAuthoring>
         {
-            public override void Bake(KnockBackOnTriggerAuthoring authoring)
+            public override void Bake(KnockBackOnHitAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                
-                AddComponent(entity, new KnockBackForce
+                AddComponent(entity, new KnockBackOnHitComponent
                 {
                     Value = authoring.knockBackForce,
                     KnockAwayFromPlayer = authoring.knockAwayFromPlayer
                 });
             }
         }
+    }
+    
+    public struct KnockBackOnHitComponent : IComponentData
+    {
+        public float Value;
+        public bool KnockAwayFromPlayer;
     }
 }

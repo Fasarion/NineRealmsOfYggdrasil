@@ -17,7 +17,8 @@ public class PlayerAttackHandlerAuthoring : MonoBehaviour
 
 public partial struct PerformUltimateAttack : IComponentData
 {
-    public bool Value;
+    public bool Perform;
+    public bool HasPreparedThisFrame;
 }
 
 

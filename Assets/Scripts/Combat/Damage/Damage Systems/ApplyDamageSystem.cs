@@ -9,7 +9,7 @@ namespace Damage
     [UpdateInGroup(typeof(CombatSystemGroup))]
     public partial struct ApplyDamageSystem : ISystem
     {
-        private static float CRITICAL_MODIFIER = 2;
+        private static readonly float CRITICAL_MODIFIER = 2;
         
         [BurstCompile]
         public void OnCreate(ref SystemState state)

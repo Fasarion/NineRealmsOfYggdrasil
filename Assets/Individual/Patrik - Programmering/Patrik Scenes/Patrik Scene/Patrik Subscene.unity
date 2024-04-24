@@ -377,26 +377,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &297629733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3587502585957426159, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-    type: 3}
-  m_PrefabInstance: {fileID: 1612235977}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &297629740
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 297629733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 0
-  criticalChance: 0
 --- !u!1001 &341078151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -593,7 +573,7 @@ PrefabInstance:
     - target: {fileID: 89125744733743645, guid: fbce19803621980458a0e425f1081fc3,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8071667428324845191, guid: fbce19803621980458a0e425f1081fc3,
         type: 3}
@@ -1215,6 +1195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Config Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1268,11 +1253,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3587502585957426159, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 297629740}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
 --- !u!1 &1699122739
 GameObject:
@@ -1825,6 +1806,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Entity
       objectReference: {fileID: 0}
+    - target: {fileID: 6353328540331355661, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1842,6 +1828,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Weapon Entities
+      objectReference: {fileID: 0}
+    - target: {fileID: 1573172003656105017, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2022134639620927376, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}

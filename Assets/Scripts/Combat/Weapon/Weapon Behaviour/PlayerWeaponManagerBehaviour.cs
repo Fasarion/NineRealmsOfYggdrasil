@@ -58,6 +58,7 @@ namespace Patrik
         public UnityAction<WeaponType> OnWeaponPassive;
         
         public UnityAction<AttackData> OnSpecialCharge;
+        public UnityAction<AttackData> OnUltimatePrepare;
 
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
@@ -381,6 +382,12 @@ namespace Patrik
         public void ReleaseSpecial()
         {
             playerAnimator.SetBool(attackReleasedParameterName, true);
+        }
+
+        public void PrepareUltimateAttack()
+        {
+            currentAttackType = AttackType.Ultimate;
+            OnUltimatePrepare?.Invoke(GetActiveAttackData());
         }
     }
 }

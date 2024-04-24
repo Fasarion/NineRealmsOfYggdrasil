@@ -30,7 +30,8 @@ public partial struct UltimateAttackActivasionSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var performUltra = SystemAPI.GetSingletonRW<PerformUltimateAttack>();
-        performUltra.ValueRW.Value = false;
+        performUltra.ValueRW.Perform = false;
+        performUltra.ValueRW.HasPreparedThisFrame = false;
 
         var gameManager = SystemAPI.GetSingletonRW<GameManagerSingleton>();
         gameManager.ValueRW.CombatState = hasPreparedUltimate ? CombatState.ActivatingUltimate : CombatState.Normal;
@@ -72,7 +73,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             if (ultimateAttackKeyPressed)
             {
                 state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
-                performUltra.ValueRW.Value = true;
+                performUltra.ValueRW.Perform = true;
             }
             
             // removing existing target 
@@ -81,6 +82,9 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);
             }
+            
+            
+            //
 
             hasPreparedUltimate = false;
             return;
@@ -92,6 +96,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             var playerTargetPrefab = SystemAPI.GetSingleton<PlayerTargetingPrefab>();
             state.EntityManager.Instantiate(playerTargetPrefab.Value);
             hasPreparedUltimate = true;
+            performUltra.ValueRW.HasPreparedThisFrame = true;
             return;
         }
         
@@ -109,7 +114,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         if (activationKeyPressed && hasPreparedUltimate)
         {
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
-            performUltra.ValueRW.Value = true;
+            performUltra.ValueRW.Perform = true;
             
             var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)

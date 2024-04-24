@@ -93,6 +93,7 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
             
             _weaponManager.OnSpecialCharge += OnSpecialCharge;
+            _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
 
             _weaponManager.OnWeaponActive += SetWeaponActive;
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
@@ -107,12 +108,23 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
             
             _weaponManager.OnSpecialCharge -= OnSpecialCharge;
-            
+            _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
+
             _weaponManager.OnWeaponActive -= SetWeaponActive;
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
         }
 
+        private void OnUltimatePrepare(AttackData data)
+        {
+            TryWriteOverActiveAttackData(data);
+        }
+
         private void OnSpecialCharge(AttackData data)
+        {
+            TryWriteOverActiveAttackData(data);
+        }
+
+        private void TryWriteOverActiveAttackData(AttackData data)
         {
             if (DifferentAttackData(data, previousActiveAttackData))
             {
@@ -192,12 +204,7 @@ namespace Patrik
                 Combo = data.ComboCounter
             };
             
-            
-            if (DifferentAttackData(data, previousActiveAttackData))
-            {
-                WriteOverAttackData(data);
-                previousActiveAttackData = data;
-            }
+            TryWriteOverActiveAttackData(data);
         }
 
         private bool DifferentAttackData(AttackData newData, AttackData lastData)
@@ -389,10 +396,14 @@ namespace Patrik
             
             // Handle ultimate attack
             var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value)
+            if (ultimateAttack.Perform)
             {
                 _weaponManager.PerformUltimateAttack();
                 attackButtonsPressed++;
+            }
+            else if (ultimateAttack.HasPreparedThisFrame)
+            {
+                _weaponManager.PrepareUltimateAttack();
             }
             
             bool normalCombat = gameManager.CombatState == CombatState.Normal;

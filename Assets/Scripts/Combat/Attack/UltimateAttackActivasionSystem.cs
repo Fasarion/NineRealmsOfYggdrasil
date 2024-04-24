@@ -21,7 +21,10 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         state.RequireForUpdate<PlayerTargetingPrefab>();
         state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<PrimaryButtonInput>();
-        state.RequireForUpdate<PerformUltimateAttack>();
+        
+      //  state.RequireForUpdate<PerformUltimateAttack>();
+        state.RequireForUpdate<WeaponAttackCaller>();
+        
         state.RequireForUpdate<GameManagerSingleton>();
         state.RequireForUpdate<PlayerTargetInfoSingleton>();
     }
@@ -29,9 +32,13 @@ public partial struct UltimateAttackActivasionSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var performUltra = SystemAPI.GetSingletonRW<PerformUltimateAttack>();
-        performUltra.ValueRW.Perform = false;
-        performUltra.ValueRW.HasPreparedThisFrame = false;
+       // var performUltra = SystemAPI.GetSingletonRW<PerformUltimateAttack>();
+        var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+        
+        
+        attackCaller.ValueRW.PrepareUltimateInfo.Perform = false;
+        attackCaller.ValueRW.PrepareUltimateInfo.HasPreparedThisFrame = false;
+        attackCaller.ValueRW.PrepareUltimateInfo.IsPreparing = false;
 
         var gameManager = SystemAPI.GetSingletonRW<GameManagerSingleton>();
         gameManager.ValueRW.CombatState = hasPreparedUltimate ? CombatState.ActivatingUltimate : CombatState.Normal;
@@ -73,7 +80,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             if (ultimateAttackKeyPressed)
             {
                 state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
-                performUltra.ValueRW.Perform = true;
+                attackCaller.ValueRW.PrepareUltimateInfo.Perform = true;
             }
             
             // removing existing target 
@@ -96,7 +103,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             var playerTargetPrefab = SystemAPI.GetSingleton<PlayerTargetingPrefab>();
             state.EntityManager.Instantiate(playerTargetPrefab.Value);
             hasPreparedUltimate = true;
-            performUltra.ValueRW.HasPreparedThisFrame = true;
+            attackCaller.ValueRW.PrepareUltimateInfo.HasPreparedThisFrame = true;
             return;
         }
         
@@ -114,7 +121,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         if (activationKeyPressed && hasPreparedUltimate)
         {
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
-            performUltra.ValueRW.Perform = true;
+            attackCaller.ValueRW.PrepareUltimateInfo.Perform = true;
             
             var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
@@ -124,5 +131,8 @@ public partial struct UltimateAttackActivasionSystem : ISystem
 
             hasPreparedUltimate = false;
         }
+
+        attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+        attackCaller.ValueRW.PrepareUltimateInfo.IsPreparing = hasPreparedUltimate;
     }
 }

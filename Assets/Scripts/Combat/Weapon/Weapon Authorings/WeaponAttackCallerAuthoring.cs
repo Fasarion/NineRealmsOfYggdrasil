@@ -21,7 +21,8 @@ public struct WeaponAttackCaller : IComponentData
     public WeaponCallData ActiveAttackData;
     public WeaponCallData PassiveAttackData;
 
-    public ChargeInfo ChargeInfo;
+    public SpecialChargeInfo SpecialChargeInfo;
+    public PrepareUltimateInfo PrepareUltimateInfo;
 
     public readonly bool ShouldStartActiveAttack(WeaponType weaponType, AttackType attackType)
     {
@@ -44,11 +45,20 @@ public struct WeaponAttackCaller : IComponentData
     }
 }
 
-public partial struct ChargeInfo
+public partial struct SpecialChargeInfo
 {
     public bool IsCharging;
     public WeaponType ChargingWeapon;
 }
+
+public partial struct PrepareUltimateInfo
+{
+    public bool Perform;
+    public bool HasPreparedThisFrame;
+    public bool IsPreparing;
+}
+
+
 
 public struct WeaponCallData
 {

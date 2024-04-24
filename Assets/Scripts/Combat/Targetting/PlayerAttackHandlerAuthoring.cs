@@ -9,17 +9,16 @@ public class PlayerAttackHandlerAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
 
-            AddComponent(entity, new PerformUltimateAttack());
-            //AddComponent(entity, new SpecialAttackChargeInfo());
+      //      AddComponent(entity, new PerformUltimateAttack());
         }
     }
 }
 
-public partial struct PerformUltimateAttack : IComponentData
-{
-    public bool Perform;
-    public bool HasPreparedThisFrame;
-}
-
+// public partial struct PerformUltimateAttack : IComponentData
+// {
+//     public bool Perform;
+//     public bool HasPreparedThisFrame;
+// }
+//
 
 

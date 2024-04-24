@@ -31,10 +31,10 @@ public partial struct SwordSpecialAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
-        if (!attackCaller.ValueRO.ChargeInfo.IsCharging)
+        if (!attackCaller.ValueRO.SpecialChargeInfo.IsCharging)
             return;
         
-        if (attackCaller.ValueRO.ChargeInfo.ChargingWeapon != WeaponType.Sword)
+        if (attackCaller.ValueRO.SpecialChargeInfo.ChargingWeapon != WeaponType.Sword)
             return;
         
         if (attackCaller.ValueRO.ActiveAttackData.IsAttacking)

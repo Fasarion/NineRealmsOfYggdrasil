@@ -168,65 +168,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0422dd4ccec69154c825e6bc0b2db67f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &3279646290990161069
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3102014066131160241}
-  - component: {fileID: 5541103911860253269}
-  - component: {fileID: 5678540802982144668}
-  m_Layer: 0
-  m_Name: Player Targeting
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3102014066131160241
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279646290990161069}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.138168, y: 0.30418053, z: 1.797398}
-  m_LocalScale: {x: 2.54, y: 2.54, z: 2.54}
-  m_ConstrainProportionsScale: 1
-  m_Children: []
-  m_Father: {fileID: 3325858196796821600}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5541103911860253269
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279646290990161069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 96e457b00d456b4439860db0566e8fef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TargetPrefab: {fileID: 7243317063527557172, guid: b8380bd8cc7175c46ba34bd6786bb8c3,
-    type: 3}
---- !u!114 &5678540802982144668
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3279646290990161069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfc60d670d6f4339a278bc5f2449b629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3935152726990137574
 GameObject:
   m_ObjectHideFlags: 0
@@ -291,7 +232,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3102014066131160241}
   - {fileID: 3738329651221744411}
   - {fileID: 636214349842764337}
   - {fileID: 7307652493139138199}
@@ -475,6 +415,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3738329651221744411}
   - component: {fileID: 826645314179869841}
+  - component: {fileID: 4752178367869977053}
   m_Layer: 0
   m_Name: WeaponAttackCaller
   m_TagString: Untagged
@@ -509,6 +450,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c8f39bdd13d95a48b8e2c7983eaeaae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4752178367869977053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6412339668423196937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 96e457b00d456b4439860db0566e8fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TargetPrefab: {fileID: 7243317063527557172, guid: b8380bd8cc7175c46ba34bd6786bb8c3,
+    type: 3}
 --- !u!1 &6804636726475307334
 GameObject:
   m_ObjectHideFlags: 0

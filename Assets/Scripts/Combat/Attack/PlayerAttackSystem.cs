@@ -395,13 +395,13 @@ namespace Patrik
             int attackButtonsPressed = 0;
             
             // Handle ultimate attack
-            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Perform)
+            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+            if (attackCaller.ValueRO.PrepareUltimateInfo.Perform)
             {
                 _weaponManager.PerformUltimateAttack();
                 attackButtonsPressed++;
             }
-            else if (ultimateAttack.HasPreparedThisFrame)
+            else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame)
             {
                 _weaponManager.PrepareUltimateAttack();
                 attackButtonsPressed++;
@@ -418,16 +418,13 @@ namespace Patrik
                 _weaponManager.PerformNormalAttack();
                 attackButtonsPressed++;
             }
-
-            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-
+            
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             if (specialAttack.KeyDown && attackButtonsPressed == 0)
             {
-              //  Debug.Log("Preparing special...");
                 _weaponManager.StartChargingSpecial();
-                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
                 {
                     ChargingWeapon = _weaponManager.CurrentWeaponType,
                     IsCharging = true
@@ -440,7 +437,7 @@ namespace Patrik
             {
               //  Debug.Log("Perform special!");
                 _weaponManager.ReleaseSpecial();
-                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
                 {
                     ChargingWeapon = _weaponManager.CurrentWeaponType,
                     IsCharging = false

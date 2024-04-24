@@ -36,7 +36,7 @@ namespace Patrik
                     
                     if (_weaponManager == null)
                     {
-                        Debug.LogWarning("Missing Player Weapon Handler, attacks not possible.");
+                        // Missing Player Weapon Handler, attacks not possible.;
                         return;
                     }
 
@@ -62,6 +62,10 @@ namespace Patrik
             {
                 return;
             }
+
+            // don't switch mid attack
+            if (_weaponManager && _weaponManager.isAttacking)
+                return;
             
             
             if (SystemAPI.TryGetSingleton(out WeaponOneInput weapon1) && weapon1.KeyPressed)
@@ -405,8 +409,8 @@ namespace Patrik
             if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
                 return;
 
-            bool canAttack = !attackCaller.ValueRO.IsPreparingAttack();
-
+            bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
+            bool canAttack = !isPreparingAttack;
 
             // Handle ultimate attack
             if (attackCaller.ValueRO.PrepareUltimateInfo.Perform && canAttack)
@@ -414,9 +418,10 @@ namespace Patrik
                 _weaponManager.PerformUltimateAttack();
                 canAttack = false;
             }
-            else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame)
+            else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame && canAttack)
             {
                 _weaponManager.PrepareUltimateAttack();
+                attackCaller.ValueRW.PrepareUltimateInfo.ValidPrepareInputPressed = true;
                 canAttack = false;
             }
             

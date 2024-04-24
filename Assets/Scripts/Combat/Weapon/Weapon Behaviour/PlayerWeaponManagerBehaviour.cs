@@ -35,13 +35,10 @@ namespace Patrik
         private AttackType currentAttackType { get;  set; }
         private int currentCombo = 0;
         
-        
-        private bool isAttacking;
-        private bool isResettingAttackFlag;
+        public bool isAttacking { get; private set; }
         
         // Animator parameters
         private string movingParameterName = "Moving";
-      //  private string bufferAttackParameterName = "AttackBuffered";
         private string bufferAttackParameterName = "BufferedAttack";
         private string isAttackingParameterName = "IsAttacking";
         private string attackReleasedParameterName = "AttackReleased";
@@ -308,14 +305,6 @@ namespace Patrik
             return true;
         }
 
-        private IEnumerator ResetAttackFlag(float time)
-        {
-            isResettingAttackFlag = true;
-            yield return new WaitForSeconds(time);
-            isAttacking = false;
-            isResettingAttackFlag = false;
-        }
-
         private void UpdateAnimatorAttackParameters()
         {
             bool animationNameExists = GetActiveAttackAnimationName(out string name);
@@ -330,7 +319,6 @@ namespace Patrik
                 isAttacking = false;
                 Debug.Log($"No animation found for weapon attack pair {CurrentWeaponType}, {currentAttackType}");
             }
-            
         }
 
         private bool GetActiveAttackAnimationName(out string animationName)

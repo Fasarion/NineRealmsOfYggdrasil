@@ -61,9 +61,9 @@ public partial struct PrepareUltimateInfo
     public bool Perform;
     public bool HasPreparedThisFrame;
     public bool IsPreparing;
+
+    public bool ValidPrepareInputPressed;
 }
-
-
 
 public struct WeaponCallData
 {

@@ -35,22 +35,16 @@ public partial struct CombatStatHandleSystem : ISystem
         
         var weaponEntity = GetWeaponEntity(ref state, weaponType);
 
-        // update damage data
         var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(weaponEntity);
         var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
         var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
             
-        // float totalDamage = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Damage, combo);
-        // float totalCritRate = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.CriticalRate, combo);
-        // float totalCritMod = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.CriticalModifier, combo);
-        
+        // update damage data
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         var playerDamageMod = state.EntityManager.GetComponentData<DamageModifierComponent>(playerEntity);
         var playerSkillMod = state.EntityManager.GetComponentData<SkillModifierComponent>(playerEntity);
         var playerDamageComp = state.EntityManager.GetComponentData<DamageComponent>(playerEntity);
         
-      //  var baseWeaponDmgComponent = state.EntityManager.GetComponentData<BaseAttackDamageComponent>(weaponEntity);
-
         foreach (var (baseWeaponDmgComponent, currDamageComp, damageModifier, skillModifier, weapon) in SystemAPI
             .Query<DamageComponent, RefRW<CachedDamageComponent>,  DamageModifierComponent, SkillModifierComponent, WeaponComponent>())
         {
@@ -71,36 +65,14 @@ public partial struct CombatStatHandleSystem : ISystem
             currDamageComp.ValueRW.Value = damageContents;
         }
 
-        // float totalDamage = (playerDamageComp.Value.DamageValue + baseWeaponDmgComponent.Value.DamageValue)
-        //                     * playerAtkModsComponent.DamageModifier
-        //                     * playerAtkModsComponent.AttackTypeModifier.GetModifier(attackType);
-
-        // float totalCritRate = playerDamageComp.Value.CriticalRate + baseWeaponDmgComponent.Value.CriticalRate;
-        
-        
-        // DamageContents damageContents = new DamageContents()
-        // {
-        //     DamageValue = totalDamage,
-        //     CriticalRate = totalCritRate,
-        //    // CriticalModifier = totalCritMod,
-        // };
-        // //
-        // var currDamageComp = state.EntityManager.GetComponentData<CurrentAttackDamageComponent>(weaponEntity);
-        // currDamageComp.Value = damageContents;
-        // state.EntityManager.SetComponentData(weaponEntity, currDamageComp);
-
-        // DamageOnTriggerComponent damageComp = state.EntityManager.GetComponentData<DamageOnTriggerComponent>(weaponEntity);
-        // damageComp.Value = damageContents;
-        // state.EntityManager.SetComponentData(weaponEntity, damageComp);
-            
-        // update knockback data
+        // update knockback data [OLD]
         float totalKnockBack = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.KnockBack, combo);
 
         KnockBackForce knockBackComp = state.EntityManager.GetComponentData<KnockBackForce>(weaponEntity);
         knockBackComp.Value = totalKnockBack;
         state.EntityManager.SetComponentData(weaponEntity, knockBackComp);
         
-        // update energy data
+        // update energy data  [OLD]
         float totalEnergyFill = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent,
             attackType, CombatStatType.EnergyFillPerHit, combo);
         EnergyFillComponent energyFillComp =  state.EntityManager.GetComponentData<EnergyFillComponent>(weaponEntity);
@@ -114,26 +86,12 @@ public partial struct CombatStatHandleSystem : ISystem
         }
         state.EntityManager.SetComponentData(weaponEntity, energyFillComp);
         
-        // area
+        // update area data  [OLD]
         float area = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Area, combo);
         AreaComponentData areaComponent = state.EntityManager.GetComponentData<AreaComponentData>(weaponEntity);
         areaComponent.Value = area;
         state.EntityManager.SetComponentData(weaponEntity, areaComponent);
-        
-        
-        // // size
-        // float size = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Size, combo);
-        // var transform = state.EntityManager.GetComponentData<LocalTransform>(entity);
-        // transform.Scale = size;
-        // state.EntityManager.SetComponentData(entity, transform);
-        //
-        // var gameObjectReference = state.EntityManager.GetComponentData<AnimatorReference>(entity);
-        // gameObjectReference.Animator.transform.localScale = Vector3.one * size;
-        
-        // SizeComponent sizeComponent = state.EntityManager.GetComponentData<SizeComponent>(entity);
-        // sizeComponent.Value = size;
-        // state.EntityManager.SetComponentData(entity, sizeComponent);
-        
+
         statHandler.ValueRW.ShouldUpdateStats = false;
     }
     

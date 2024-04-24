@@ -1,11 +1,12 @@
 ﻿using Patrik;
+using Player;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
 using UnityEngine;
 
 [UpdateBefore(typeof(CombatStatHandleSystem))]
-public partial struct OverrideWeaponScaleSystem : ISystem
+public partial struct CombatManagedStatWriter : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -25,6 +26,7 @@ public partial struct OverrideWeaponScaleSystem : ISystem
     
     void WriteOverAttackData(ref SystemState state)
     {
+        // Write Over Scale
         var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
         var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
         
@@ -37,5 +39,22 @@ public partial struct OverrideWeaponScaleSystem : ISystem
             transform.ValueRW.Scale = size;
             animatorReference.Animator.transform.localScale = Vector3.one * size;
         }
+
+        // var playerAttackSpeed = state.EntityManager.GetComponentData<AttackSpeedModifier>(playerStatsEntity);
+        //
+        // // Write Over Attack Speed
+        // foreach (var (attackSpeedModifier, animatorReference, entity) in SystemAPI
+        //     .Query<AttackSpeedModifier, AnimatorReference>().WithEntityAccess())
+        // {
+        //     bool isPlayer = state.EntityManager.HasComponent<PlayerTag>(entity);
+        //     if (isPlayer)
+        //     {
+        //         animatorReference.Animator.speed = attackSpeedModifier.Value;
+        //     }
+        //     else
+        //     {
+        //         animatorReference.Animator.speed = attackSpeedModifier.Value * playerAttackSpeed.Value;
+        //     }
+        // }
     }
 }

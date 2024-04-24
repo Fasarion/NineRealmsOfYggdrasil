@@ -91,6 +91,8 @@ namespace Patrik
             
             _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
             _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            
+            _weaponManager.OnSpecialCharge += OnSpecialCharge;
 
             _weaponManager.OnWeaponActive += SetWeaponActive;
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
@@ -104,11 +106,22 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
             _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
             
+            _weaponManager.OnSpecialCharge -= OnSpecialCharge;
+            
             _weaponManager.OnWeaponActive -= SetWeaponActive;
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
         }
-        
-     
+
+        private void OnSpecialCharge(AttackData data)
+        {
+            if (DifferentAttackData(data, previousActiveAttackData))
+            {
+                WriteOverAttackData(data);
+                previousActiveAttackData = data;
+            }
+        }
+
+
         private void SetWeaponActive(WeaponType type)
         {
             Entity entity = GetWeaponEntity(type);

@@ -13,7 +13,8 @@ public class IceRingConfigAuthoring : MonoBehaviour
     public float maxChargeTime;
     public float maxArea;
     public float chargeSpeed;
-    
+
+    [HideInInspector] public bool isInitialized;
     [HideInInspector] public bool isAbilityReleased;
 
     public class IceRingConfigAuthoringBaker : Baker<IceRingConfigAuthoring>
@@ -31,7 +32,8 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     maxChargeTime = authoring.maxChargeTime,
                     maxArea = authoring.maxArea,
                     isAbilityReleased = authoring.isAbilityReleased,
-                    chargeSpeed = authoring.chargeSpeed
+                    chargeSpeed = authoring.chargeSpeed,
+                    isInitialized = authoring.isInitialized,
                 });
         }
     }
@@ -47,4 +49,5 @@ public struct IceRingConfig : IComponentData
     public float maxArea;
     public bool isAbilityReleased;
     public float chargeSpeed;
+    public bool isInitialized;
 }

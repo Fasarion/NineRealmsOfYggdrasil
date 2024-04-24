@@ -55,7 +55,7 @@ public partial struct ThunderStrikeSystem : ISystem
             
             if (!ability.ValueRO.isInitialized)
             {
-                timer.ValueRW.maxTime = thunderConfig.MaxDurationTime;
+                timer.ValueRW.maxTime = thunderConfig.maxAftermathDisplayTime;
                 ability.ValueRW.isInitialized = true;
             }
 

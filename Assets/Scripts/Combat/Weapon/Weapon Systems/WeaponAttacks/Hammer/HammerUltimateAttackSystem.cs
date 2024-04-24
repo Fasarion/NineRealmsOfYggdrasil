@@ -42,10 +42,10 @@ public partial struct HammerUltimateAttackSystem : ISystem
         Debug.Log("ult!");
 
         var config = SystemAPI.GetSingleton<ThunderStrikeConfig>();
-        var ability = state.EntityManager.Instantiate(config.abilityPrefab);
+        var ability = state.EntityManager.Instantiate(config.mainAbilityPrefab);
         state.EntityManager.SetComponentData(ability, new TimerObject
         {
-            maxTime = config.MaxDurationTime
+            maxTime = config.maxAftermathDisplayTime
         });
         
     }

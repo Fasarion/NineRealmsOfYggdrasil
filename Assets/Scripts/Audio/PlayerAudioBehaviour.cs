@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAudioBehaviour : MonoBehaviour
 {
     private AudioManager _audioManager;
+    private static WeaponType weaponType;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class PlayerAudioBehaviour : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnWeaponSwitch += OnWeaponSwitch;
+        
     }
     
     private void OnDisable()
@@ -24,7 +26,14 @@ public class PlayerAudioBehaviour : MonoBehaviour
 
     private void OnWeaponSwitch(WeaponBehaviour currentWeapon)
     {
-        WeaponType weaponType = currentWeapon.WeaponType;
+        weaponType = currentWeapon.WeaponType;
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("ActiveWeapon", (int)weaponType);
+        Debug.Log((int)weaponType);
+    }
+
+    public static int GetWeaponTypeAudio()
+    {
+        return (int)weaponType;
     }
 
     public void PlayWeaponSwingAudio(int weapon, int attackType)

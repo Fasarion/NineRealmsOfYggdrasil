@@ -671,24 +671,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 774443872662608797}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &909868871 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6353328540331355661, guid: 167eb942ef45ef24f88317949ed379d6,
-    type: 3}
-  m_PrefabInstance: {fileID: 6376788031811257008}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &909868882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909868871}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &932389155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1223,7 +1205,7 @@ PrefabInstance:
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1232,7 +1214,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3587502585957426159, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1612235979}
+      addedObject: {fileID: 1612235986}
   m_SourcePrefab: {fileID: 100100000, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
 --- !u!1 &1612235978 stripped
 GameObject:
@@ -1240,7 +1222,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1612235977}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1612235979
+--- !u!114 &1612235986
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1249,284 +1231,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1612235978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e97ceb27a04cd980d131d2d1c6d72a, type: 3}
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OverallStats:
-    Damage:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalRate:
-      BaseValue: 0
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalModifier:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Area:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Size:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    AttackSpeed:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    KnockBack:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Cooldown:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    EnergyFillPerHit:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-  NormalAttack:
-    Damage:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalRate:
-      BaseValue: 0
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalModifier:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Area:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Size:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    AttackSpeed:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    KnockBack:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Cooldown:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    EnergyFillPerHit:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-  SpecialAttack:
-    Damage:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalRate:
-      BaseValue: 0
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalModifier:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Area:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Size:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    AttackSpeed:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    KnockBack:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Cooldown:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    EnergyFillPerHit:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-  PassiveAttack:
-    Damage:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalRate:
-      BaseValue: 0
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalModifier:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Area:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Size:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    AttackSpeed:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    KnockBack:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Cooldown:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    EnergyFillPerHit:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-  UltimateAttack:
-    Damage:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalRate:
-      BaseValue: 0
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    CriticalModifier:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Area:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Size:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    AttackSpeed:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    KnockBack:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    Cooldown:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
-    EnergyFillPerHit:
-      BaseValue: 1
-      Multiplier:
-        AttackOne: 1
-        AttackTwo: 1
-        AttackThree: 1
+  attackDamage: 0
+  criticalChance: 0
 --- !u!1 &1699122739
 GameObject:
   m_ObjectHideFlags: 0
@@ -2067,11 +1776,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6353328540331355661, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 909868882}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167eb942ef45ef24f88317949ed379d6, type: 3}
 --- !u!1001 &7933183929404982451
 PrefabInstance:

@@ -32,20 +32,32 @@ public enum UpgradeValueTypes
     reactionArea, //Hur stort område reactionerna (combustion, lightningchain etc) gör skada
     damage, //this is in % on player
     lightningchains,
+    damageModifier,
+    
+    // skill modifiers
+    normalModifier,
+    specialModifier,
+    ultimateModifier,
+    passiveModifier,
+    
     Unlock
 }
 
 public enum UpgradeBaseType
 {
     Sword,
+    SwordSpecialAbility,
+    SwordUltimateAbility,
+    SwordPassiveAbility,
+    
     Hammer,
+    HammerSpecialAbility,
+    HammerUltimateAbility,
+    HammerPassiveAbility,
+    
     Birds,
     Mead,
     Player,
-
-
-    
-    
 }
 
 [CreateAssetMenu(fileName = "UpgradeObject", menuName = "Upgrades/UpgradeObject" +

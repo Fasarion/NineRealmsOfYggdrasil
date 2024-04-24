@@ -19,8 +19,12 @@ public partial struct UltimateAttackActivasionSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<PlayerTargetingPrefab>();
+        
         state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<PrimaryButtonInput>();
+        state.RequireForUpdate<PlayerNormalAttackInput>();
+        state.RequireForUpdate<PlayerSpecialAttackInput>();
+        
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<GameManagerSingleton>();
         state.RequireForUpdate<PlayerTargetInfoSingleton>();
@@ -119,7 +123,11 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         }
 
         // handle activating ultimate
-        bool activationKeyPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyPressed;
+        bool activationKeyPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyPressed 
+                                    || SystemAPI.GetSingleton<PlayerSpecialAttackInput>().KeyDown
+                                    || SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyPressed;
+        //bool ultKeyPressedAfterActivation = SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyPressed && 
+        
         if (activationKeyPressed && hasPreparedUltimate)
         {
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);

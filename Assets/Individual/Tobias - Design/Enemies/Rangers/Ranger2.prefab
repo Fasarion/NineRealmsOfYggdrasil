@@ -344,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 3
+  speedValue: 1
 --- !u!114 &-4640334276824931819
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,7 +357,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingCooldown: 3
+  shootingCooldown: 4
   shootDistance: 12
 --- !u!114 &6163977068082220584
 MonoBehaviour:
@@ -387,9 +387,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageContents:
     DamageValue: 1
-    DamageType: 0
     CriticalRate: 0
-    CriticalModifier: 0
 --- !u!114 &4663337924807953367
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -23,6 +23,11 @@ public struct WeaponAttackCaller : IComponentData
 
     public SpecialChargeInfo SpecialChargeInfo;
     public PrepareUltimateInfo PrepareUltimateInfo;
+    
+    public readonly bool IsPreparingAttack()
+    {
+        return SpecialChargeInfo.IsCharging || PrepareUltimateInfo.IsPreparing;
+    }
 
     public readonly bool ShouldStartActiveAttack(WeaponType weaponType, AttackType attackType)
     {

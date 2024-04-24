@@ -54,6 +54,16 @@ namespace Patrik
 
         private void HandleWeaponSwitch()
         {
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
+                return;
+
+            // don't switch weapon when preparing an attack
+            if (attackCaller.ValueRO.IsPreparingAttack())
+            {
+                return;
+            }
+            
+            
             if (SystemAPI.TryGetSingleton(out WeaponOneInput weapon1) && weapon1.KeyPressed)
             {
                 _weaponManager.SwitchWeapon(1);
@@ -391,20 +401,23 @@ namespace Patrik
             bool inCombatState = gameManager.GameState == GameState.Combat;
             if (!inCombatState)
                 return;
-
-            int attackButtonsPressed = 0;
             
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
+                return;
+
+            bool canAttack = !attackCaller.ValueRO.IsPreparingAttack();
+
+
             // Handle ultimate attack
-            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-            if (attackCaller.ValueRO.PrepareUltimateInfo.Perform)
+            if (attackCaller.ValueRO.PrepareUltimateInfo.Perform && canAttack)
             {
                 _weaponManager.PerformUltimateAttack();
-                attackButtonsPressed++;
+                canAttack = false;
             }
             else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame)
             {
                 _weaponManager.PrepareUltimateAttack();
-                attackButtonsPressed++;
+                canAttack = false;
             }
             
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
@@ -413,15 +426,15 @@ namespace Patrik
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && attackButtonsPressed == 0)
+            if (normalAttackInput.KeyPressed && canAttack)
             {
                 _weaponManager.PerformNormalAttack();
-                attackButtonsPressed++;
+                canAttack = false;
             }
             
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && attackButtonsPressed == 0)
+            if (specialAttack.KeyDown && canAttack)
             {
                 _weaponManager.StartChargingSpecial();
                 attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
@@ -430,12 +443,11 @@ namespace Patrik
                     IsCharging = true
                 };
                 
-                attackButtonsPressed++;
+                canAttack = false;
             }
             
             if (specialAttack.KeyUp)
             {
-              //  Debug.Log("Perform special!");
                 _weaponManager.ReleaseSpecial();
                 attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
                 {
@@ -443,7 +455,7 @@ namespace Patrik
                     IsCharging = false
                 };
                 
-                attackButtonsPressed++;
+                canAttack = false;
             }
         }
         

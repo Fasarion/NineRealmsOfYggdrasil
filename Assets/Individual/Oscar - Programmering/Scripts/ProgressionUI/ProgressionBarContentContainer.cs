@@ -9,6 +9,7 @@ public class ProgressionBarContentContainer : MonoBehaviour
 {
     //public List<ProgressionBarLevelContainer> levelContainers;
 
+    public Transform levelsRuntimeParent;
 
     public static Action<ProgressionBarLevelContainer[]> onProgressionContentSet;
     public void Awake()
@@ -25,6 +26,14 @@ public class ProgressionBarContentContainer : MonoBehaviour
         }
         else
         {
+            for (int i = 0; i < levelContainerArray.Length; i++)
+            {
+                levelContainerArray[i].SetProgressionBarContentContainerAsParent(transform);
+                levelContainerArray[i].transform.parent = levelsRuntimeParent;
+            }
+            
+          
+            
             onProgressionContentSet?.Invoke(levelContainerArray);
         }
        

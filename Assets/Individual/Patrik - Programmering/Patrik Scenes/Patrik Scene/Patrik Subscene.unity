@@ -1707,6 +1707,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4376167777974654248, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: gameObjectPrefab
+      value: 
+      objectReference: {fileID: 7682055927376984470, guid: 734d03c222e02954c9b1eb6c360902bc,
+        type: 3}
     - target: {fileID: 5488732460988299552, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1875,13 +1881,7 @@ PrefabInstance:
       propertyPath: audioData.eventCategoryType
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 8379516016871174216, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
-    - {fileID: 9016405671610290206, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
-    - {fileID: 9102775344472583919, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
-    - {fileID: 1650204325580465572, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
-    - {fileID: 845241622404222716, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
-    - {fileID: 8103551877121865117, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

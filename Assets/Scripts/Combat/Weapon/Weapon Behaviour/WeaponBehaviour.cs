@@ -45,6 +45,7 @@ namespace Patrik
         public void SetParent(Transform parent)
         {
             var thisTransform = transform;
+            
             thisTransform.parent = parent;
             thisTransform.position = parent.position;
             thisTransform.rotation = parent.rotation;

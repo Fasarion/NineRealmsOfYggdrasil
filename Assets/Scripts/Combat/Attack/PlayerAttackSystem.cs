@@ -47,9 +47,24 @@ namespace Patrik
                     _weaponManager.SetupWeapons();
                 }
             }
+
+            if (!_weaponManager) return;
             
+            HandleWeaponStates();
             HandleWeaponSwitch();
             HandleWeaponInput();
+        }
+
+        private void HandleWeaponStates()
+        {
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
+                return;
+            
+            if (attackCaller.ValueRO.ResetWeaponCurrentWeaponTransform)
+            {
+                _weaponManager.ResetActiveWeapon();
+                attackCaller.ValueRW.ResetWeaponCurrentWeaponTransform = false;
+            }
         }
 
         private void HandleWeaponSwitch()

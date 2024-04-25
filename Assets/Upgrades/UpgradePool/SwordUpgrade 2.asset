@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: SwordUpgrade 2
+  m_EditorClassIdentifier: 
+  upgradeTitle: Sword upgrade
+  upgradeSprite: {fileID: 21300000, guid: 35821e8744e62ae45b4e4fd8e936af37, type: 3}
+  upgradeDescription: +5 ATK, +20% crit chance
+  upgrades:
+  - thingToUpgrade: 0
+    valueToUpgrade: 0
+    valueAmount: 5
+  - thingToUpgrade: 0
+    valueToUpgrade: 9
+    valueAmount: 0.2
+  startUnlocked: 0
+  upgradeIndex: 0
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 3761c5cd91846a04c9e4e1ac00c538fd, type: 2}

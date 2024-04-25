@@ -23,6 +23,9 @@ public struct WeaponAttackCaller : IComponentData
 
     public SpecialChargeInfo SpecialChargeInfo;
     public PrepareUltimateInfo PrepareUltimateInfo;
+
+    // tempo variable, TODO: make general
+    public bool ResetWeaponCurrentWeaponTransform;
     
     public readonly bool IsPreparingAttack()
     {

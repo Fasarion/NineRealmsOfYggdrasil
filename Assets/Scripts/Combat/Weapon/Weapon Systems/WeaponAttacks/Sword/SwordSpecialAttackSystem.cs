@@ -18,8 +18,8 @@ public partial struct SwordSpecialAttackSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<PlayerTag>();
-        state.RequireForUpdate<SwordStatsTag>();
-        state.RequireForUpdate<BasePlayerStatsTag>();
+      //  state.RequireForUpdate<SwordStatsTag>();
+     //   state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<AudioBufferData>();
@@ -43,14 +43,10 @@ public partial struct SwordSpecialAttackSystem : ISystem
         attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
         
         
-
-        
-        
         var query = SystemAPI.QueryBuilder().WithAll<IceRingAbility, ChargeTimer>().Build();
         
         if (query.CalculateEntityCount() == 0)
         {
-            
             var config = SystemAPI.GetSingleton<IceRingConfig>();
         
             var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
@@ -60,15 +56,11 @@ public partial struct SwordSpecialAttackSystem : ISystem
             abilityDamage.Value = swordDamage.Value;
             state.EntityManager.SetComponentData(configEntity, abilityDamage);
             
-            
-            
-            
             var ability = state.EntityManager.Instantiate(config.chargeAreaPrefab);
             state.EntityManager.SetComponentData(ability, new ChargeTimer
             {
                 maxChargeTime = 3
             });
-            
         }
     }
 }

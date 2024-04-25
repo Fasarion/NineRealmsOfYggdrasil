@@ -37,16 +37,16 @@ public class MusicManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    public void play(StudioEventEmitter emitter)
+    public void Play(StudioEventEmitter emitter)
     {
         emitter.Play();
     }
-    public void stop(StudioEventEmitter emitter)
+    public void Stop(StudioEventEmitter emitter)
     {
         emitter.Stop();
     }
 
-    public void setParamater(StudioEventEmitter emitter, string parameter, float value)
+    public void SetParameter(StudioEventEmitter emitter, string parameter, float value)
     {
         emitter.SetParameter(parameter, value, false);
     }

@@ -21,7 +21,6 @@ public partial struct IceRingSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<PlayerTag>();
-        state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<IceRingAbility>();
         state.RequireForUpdate<IceRingConfig>();
@@ -115,10 +114,7 @@ public partial struct IceRingSystem : ISystem
             {
                 var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
                 var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
-        
-                var playerStatsEntity = SystemAPI.GetSingletonEntity<BasePlayerStatsTag>();
-                var playerStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(playerStatsEntity);
-        
+                
                 var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
         
                 float totalArea = ability.ValueRO.area;
@@ -128,7 +124,6 @@ public partial struct IceRingSystem : ISystem
                 //TODO: fixa smidigare...
                 foreach (var (_, hitBuffer) in
                          SystemAPI.Query<RefRW<IceRingConfig>, DynamicBuffer<HitBufferElement>>())
-                             
                 {
                     if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
                     {

@@ -22,8 +22,6 @@ public class PlayerAudio : ScriptableObject
     
     private int shepard = 1;
     
-    //for footstep sounds, raycast, check when hit ground, what ground
-    //do instance, set parameter for ground, play.
 
     public void PlayerAudioCaller(int eventType)
     {
@@ -40,6 +38,8 @@ public class PlayerAudio : ScriptableObject
             }
         }
     }
+    //for footstep sounds, raycast, check when hit ground, what ground
+    //do instance, set parameter for ground, play.
     public void movingAudio()
     {
         RuntimeManager.PlayOneShot(footsteps);
@@ -52,8 +52,7 @@ public class PlayerAudio : ScriptableObject
     public void XpAudio()
     {
         xpIns = RuntimeManager.CreateInstance(xpGain);
-        //start coroutine??
-        
+
         float timeOfXpSound = Time.time;
         
         // reset shepard
@@ -63,32 +62,26 @@ public class PlayerAudio : ScriptableObject
             
             lastXpSoundTime = timeOfXpSound;
         }
-       // else if (timeOfXpSound >= lastXpSoundTime + 0.1f)
-       // {
-            xpIns.setParameterByName("XPParam", shepard % 25);
+        xpIns.setParameterByName("XPParam", shepard % 25);
             xpIns.start();
             xpIns.release();
             shepard++;
-            //Debug.Log(shepard%25);
             lastXpSoundTime = timeOfXpSound;
-            
-       // }
-
-        /*else
-        {
-            xpIns.release();
-        }
-        */
-
 
     }
-    
+
+    public void DeathAudio()
+    {
+        RuntimeManager.PlayOneShot(playerDeath);
+        //Snapshot, music stuff here too?
+    }
+
 
     /*public void stepAudio()
     {
         RuntimeManager.PlayOneshot(footsteps);
     }*/
-    
+
     /*   
        [Header("Movement/VO")] 
        public EventReference footsteps;

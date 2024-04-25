@@ -13,7 +13,7 @@ public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
     
     [SerializeField]private SceneReference roomSceneReference;
 
-    [SerializeField] public RoomNode roomNode;
+    public RoomNode roomNode;
 
 
     public static Action<RoomNode, SceneReference> onRoomChanged;

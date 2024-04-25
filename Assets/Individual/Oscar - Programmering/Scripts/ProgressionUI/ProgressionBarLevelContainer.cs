@@ -17,4 +17,12 @@ public class ProgressionBarLevelContainer : MonoBehaviour
         childTransformArray =  transform.GetComponentsInChildren<Transform>();
         symbolBehaviours =  transform.GetComponentsInChildren<ProgressionBarBehaviour>();
     }
+
+    public void SetProgressionBarContentContainerAsParent(Transform parent)
+    {
+        foreach (var progressionBarBehaviour in symbolBehaviours)
+        {
+            progressionBarBehaviour.transform.parent = parent;
+        }
+    }
 }

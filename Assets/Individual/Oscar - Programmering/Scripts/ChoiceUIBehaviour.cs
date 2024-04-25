@@ -50,6 +50,7 @@ public class ChoiceUIBehaviour : MonoBehaviour
     public virtual void RegisterMouseClick()
     {
         onCardMouseClick.Invoke();
+        
         //manager.SwapScreenRight();
     }
 }

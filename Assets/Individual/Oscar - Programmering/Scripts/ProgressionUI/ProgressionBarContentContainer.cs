@@ -12,6 +12,7 @@ public class ProgressionBarContentContainer : MonoBehaviour
     public Transform levelsRuntimeParent;
 
     public static Action<ProgressionBarLevelContainer[]> onProgressionContentSet;
+    public float contentWidth;
     public void Awake()
     {
         //levelContainers = new List<ProgressionBarLevelContainer>();
@@ -31,8 +32,8 @@ public class ProgressionBarContentContainer : MonoBehaviour
                 levelContainerArray[i].SetProgressionBarContentContainerAsParent(transform);
                 levelContainerArray[i].transform.parent = levelsRuntimeParent;
             }
-            
-          
+
+            contentWidth = GetComponent<RectTransform>();
             
             onProgressionContentSet?.Invoke(levelContainerArray);
         }

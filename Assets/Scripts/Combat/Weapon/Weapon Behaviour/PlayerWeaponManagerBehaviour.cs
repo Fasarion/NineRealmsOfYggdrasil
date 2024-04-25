@@ -376,5 +376,11 @@ namespace Patrik
             currentAttackType = AttackType.Ultimate;
             OnUltimatePrepare?.Invoke(GetActiveAttackData());
         }
+
+        public void ResetActiveWeapon()
+        {
+            activeWeapon.SetParent(activeSlot);
+            FinishActiveAttackAnimationEvent();
+        }
     }
 }

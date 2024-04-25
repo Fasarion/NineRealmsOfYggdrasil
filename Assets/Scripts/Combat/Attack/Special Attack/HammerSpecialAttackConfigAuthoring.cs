@@ -35,7 +35,7 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TimeToSwitchBack = authoring.timeToTurnBack,
                 TimeToReturnAfterTurning = authoring.timeToReturnAfterTurning,
                 
-                TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack
+                TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack,
             });
         }
     }
@@ -50,6 +50,10 @@ public struct HammerSpecialConfig : IComponentData
     
     public float MinTimeBetweenZaps;
     public float MaxTimeBetweenZaps;
+    public float Timer;
+
+    public bool HasSwitchedBack;
+    public bool HasReturned;
     
     public float TimeToSwitchBack;
     public float TimeToReturnAfterTurning;

@@ -11,11 +11,17 @@ public class SizeAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new SizeComponent{Value = authoring.value});
+            AddComponent(entity, new CachedSizeComponent{Value = authoring.value});
         }
     }
 }
 
 public struct SizeComponent : IComponentData
+{
+    public float Value;
+}
+
+public struct CachedSizeComponent : IComponentData
 {
     public float Value;
 }

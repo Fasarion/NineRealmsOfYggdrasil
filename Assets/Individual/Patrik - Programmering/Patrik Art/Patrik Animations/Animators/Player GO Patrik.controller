@@ -378,14 +378,26 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: AttackBuffered
-    m_Type: 4
+  - m_Name: BufferedAttack
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: AttackReleased
     m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: CurrentWeapon
+    m_Type: 3
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: CurrentAttack
+    m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
@@ -541,9 +553,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: AttackBuffered
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: BufferedAttack
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -4563981602387822689}
   m_Solo: 0
@@ -584,10 +596,10 @@ AnimatorStateMachine:
     m_Position: {x: 100, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6753619291056011377}
-    m_Position: {x: 560, y: 610, z: 0}
+    m_Position: {x: 530, y: 630, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6837670265912234425}
-    m_Position: {x: -160, y: 470, z: 0}
+    m_Position: {x: -230, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 558248206296609690}
     m_Position: {x: 250, y: 530, z: 0}
@@ -596,7 +608,7 @@ AnimatorStateMachine:
     m_Position: {x: 250, y: 620, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2196522555495096480}
-    m_Position: {x: 540, y: 450, z: 0}
+    m_Position: {x: 510, y: 440, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4970828067540377368}
     m_Position: {x: 470, y: 520, z: 0}
@@ -650,9 +662,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: AttackBuffered
-    m_EventTreshold: 0
+  - m_ConditionMode: 7
+    m_ConditionEvent: BufferedAttack
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3160374960096353737}
   m_Solo: 0
@@ -798,9 +810,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: AttackBuffered
-    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: BufferedAttack
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 558248206296609690}
   m_Solo: 0
@@ -823,9 +835,9 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: AttackBuffered
-    m_EventTreshold: 0
+  - m_ConditionMode: 7
+    m_ConditionEvent: BufferedAttack
+    m_EventTreshold: 1
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3160374960096353737}
   m_Solo: 0

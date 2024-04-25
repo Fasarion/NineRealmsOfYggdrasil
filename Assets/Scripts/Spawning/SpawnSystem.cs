@@ -64,6 +64,7 @@ public partial struct SpawnSystem : ISystem
 
         var query = SystemAPI.QueryBuilder().WithAll<EnemyTypeComponent, LocalTransform>().Build();
         int currentEnemyCount = query.CalculateEntityCount();
+        config.ValueRW.enemyCount = currentEnemyCount;
         
         config.ValueRW.currentTimerTime = 0f;
         _timerCutoffPoint = GetTimerCutoff(config, currentEnemyCount);

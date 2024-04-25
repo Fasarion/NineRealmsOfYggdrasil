@@ -237,6 +237,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3609844279876431546, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: attackDamage
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3609844279876431546, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: criticalChance
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5457081741902125940, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: damageModifier
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5488732460988299552, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -291,11 +306,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player Entity
-      objectReference: {fileID: 0}
-    - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: maxHP
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -369,6 +379,16 @@ PrefabInstance:
         type: 3}
       propertyPath: enemyPrefabs.Array.data[7].enemyType
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178434585940269983, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: baseXPNeeded
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1178434585940269983, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: addedXPNeededPerLevel
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1687086637676089817, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}

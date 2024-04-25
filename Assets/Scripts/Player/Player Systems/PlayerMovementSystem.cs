@@ -19,6 +19,7 @@ namespace Player
         {
             state.RequireForUpdate<PlayerTag>(); 
             state.RequireForUpdate<PlayerPositionSingleton>(); 
+            state.RequireForUpdate<PlayerMoveInput>(); 
         }
     
         public void OnUpdate(ref SystemState state)

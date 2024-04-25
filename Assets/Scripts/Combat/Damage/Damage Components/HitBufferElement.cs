@@ -6,11 +6,5 @@ using UnityEngine;
 
 namespace Damage
 {
-    public struct HitBufferElement : IBufferElementData
-    {
-        public bool IsHandled;
-        public float3 Position;
-        public float2 Normal;
-        public Entity HitEntity;
-    }
+    
 }

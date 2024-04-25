@@ -1,4 +1,5 @@
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Damage
@@ -13,5 +14,10 @@ namespace Damage
                 AddBuffer<KnockBackBufferElement>(entity);
             }
         }
+    }
+    
+    public struct KnockBackBufferElement : IBufferElementData
+    {
+        public float2 KnockBackForce;
     }
 }

@@ -25,6 +25,8 @@ public class ChoiceUIManager : MonoBehaviour
     [SerializeField] private List<RoomChoiceUIBehaviour> roomSelects;
     //This is probably very ineffective, fix.
     
+    
+    
 
     [SerializeField] private SelectionCardInstantiator roomSelectionCardsInstantiator;
     [SerializeField] private SelectionCardInstantiator weaponSelectionCardsInstantiator;
@@ -55,6 +57,9 @@ public class ChoiceUIManager : MonoBehaviour
     private int currentLevelIndex;
     public ChoiceDataScriptableObject choiceDataScriptableObject;
     
+    public ArrowIndicatorUI arrowIndicator;
+    
+    
     public static ChoiceUIManager Instance
     {
         get
@@ -84,8 +89,16 @@ public class ChoiceUIManager : MonoBehaviour
         //HideUI();
     }
 
+    public void Update()
+    {
+        arrowIndicator.SetXPosition(currentSymbols[0].symbolXpos);
+    }
+
     private void OnCardClicked()
     {
+        
+        
+       
         SwapScreenRight();
     }
 
@@ -140,6 +153,7 @@ public class ChoiceUIManager : MonoBehaviour
         currentSymbols = levelContainers[currentLevelIndex].symbolBehaviours;
         maxSelectionIndex = currentSymbols.Length - 1;
 
+        
         switch (currentSymbols[0].CardType)
         {
             case ProgressionBarBehaviour.ProgressionBarCardType.room:
@@ -242,10 +256,15 @@ public class ChoiceUIManager : MonoBehaviour
         
         SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
         SelectionCardInstantiator.hasEnteredScreen += OnSelectionCardEntered;
-        
+
+        ProgressionBarContentContainer.onRectBoundsSet += OnRectBoundsSet;
+
     }
 
-   
+    private void OnRectBoundsSet(Rect rect)
+    {
+        
+    }
 
 
     private void OnDisable()
@@ -293,6 +312,7 @@ public class ChoiceUIManager : MonoBehaviour
                 currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
                 //UpdateSelectionType(currentSelectionIndex);
                 //Turn this into a function for the love of god.
+                arrowIndicator.SetXPosition(currentSymbols[currentSelectionIndex].symbolXpos); 
                 switch (currentSymbols[currentSelectionIndex].CardType)
                 {
                     case ProgressionBarBehaviour.ProgressionBarCardType.room:

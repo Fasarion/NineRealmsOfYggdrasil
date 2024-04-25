@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class WeaponChoiceUIBehaviour : ChoiceUIBehaviour
 {
     //public static Action onWeaponChoiceSelected;
+
+    
     protected override void PopulateDisplayValues(ChoiceObject newWeaponChoiceObject)
     {
         WeaponChoiceObject weaponChoiceObject = (WeaponChoiceObject) newWeaponChoiceObject;
@@ -25,6 +27,7 @@ public class WeaponChoiceUIBehaviour : ChoiceUIBehaviour
     public override void RegisterMouseClick()
     {
         base.RegisterMouseClick();
+       
         //onWeaponChoiceSelected?.Invoke();
 
     }

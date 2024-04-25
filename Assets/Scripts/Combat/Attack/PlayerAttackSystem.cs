@@ -62,11 +62,9 @@ namespace Patrik
             
             if (attackCaller.ValueRO.ResetWeaponCurrentWeaponTransform)
             {
-                Debug.Log("Reset weapon states.");
                 _weaponManager.ResetActiveWeapon();
                 attackCaller.ValueRW.ResetWeaponCurrentWeaponTransform = false;
             }
-
         }
 
         private void HandleWeaponSwitch()

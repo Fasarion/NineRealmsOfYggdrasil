@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
+using Patrik;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Audio/EnemyAudio")]
 public class EnemyAudio : ScriptableObject
@@ -39,7 +40,7 @@ public class EnemyAudio : ScriptableObject
     }
     public void gruntSound(int nbrGrunts)
     {
-        gruntsIns = RuntimeManager.CreateInstance(grunts);
+        /*gruntsIns = RuntimeManager.CreateInstance(grunts);
         //Instance med parameter ändring i guess? kan också vara en if!!
         //Threshholds för fiende antal, får väl prata med designers/progs
         //kanske threshholds of like 100s? probably easiest
@@ -49,13 +50,17 @@ public class EnemyAudio : ScriptableObject
         }
 
         gruntsIns = RuntimeManager.CreateInstance(grunts);
-        gruntsIns.setParameterByName("idk", 2);
+        gruntsIns.setParameterByName("idk", 2);*/
         
     }
 
     public void gruntOnHit()
     {
-        RuntimeManager.PlayOneShot(gruntHit);
+        //RuntimeManager.PlayOneShot(gruntHit);
+        gruntHitIns = RuntimeManager.CreateInstance(gruntHit);
+        gruntHitIns.setParameterByName("WeaponTest", PlayerAudioBehaviour.GetWeaponTypeAudio());
+        gruntHitIns.start();
+        gruntHitIns.release();
         Debug.Log("Du kom hit");
     }
 

@@ -48,6 +48,7 @@ public class UpgradePoolManager : MonoBehaviour
         
         GenerateUpgradePool();
         pickedUpgradeSet = new HashSet<int>();
+        unlockedUpgradeSet = new HashSet<int>();
     }
 
     public void GenerateUpgradePool()
@@ -70,6 +71,7 @@ public class UpgradePoolManager : MonoBehaviour
                 generationIndex++;
             }
         }
+        
     }
 
     public void GenerateActiveUpgradesSet()
@@ -85,6 +87,7 @@ public class UpgradePoolManager : MonoBehaviour
                 unlockedUpgradeSet.Add(upgrade.upgradeIndex);
             }
         }
+
     }
 
     public UpgradeObject[] GetAllUpgradesInPool()
@@ -97,7 +100,7 @@ public class UpgradePoolManager : MonoBehaviour
     private int GetRandomRoll(int upgradeIndecisLength)
     {
         if (upgradeIndecisLength == 1) return 0;
-        int result = (int)UnityEngine.Random.Range(0, upgradeIndecisLength - 1);
+        int result = (int)UnityEngine.Random.Range(0, upgradeIndecisLength);
         return result;
     }
     
@@ -125,7 +128,14 @@ public class UpgradePoolManager : MonoBehaviour
     public List<int> GetActiveUpgradesIndecisList()
     {
         GenerateActiveUpgradesSet();
-        List<int> unlockedUpgrades = unlockedUpgradeSet.ToList();
+        List<int> unlockedUpgrades = new List<int>();
+
+        foreach (var index in unlockedUpgradeSet)
+        {
+            unlockedUpgrades.Add(index);
+        }
+
+        
         return unlockedUpgrades;
     }
 

@@ -7,6 +7,7 @@ public class ThunderStrikeAbilityAuthoring : MonoBehaviour
 {
     public int strikeCounter;
     public bool isInitialized;
+    public bool hasDoneFirstStrike;
 
     public class ThunderStrikeAbilityAuthoringBaker : Baker<ThunderStrikeAbilityAuthoring>
     {
@@ -16,7 +17,7 @@ public class ThunderStrikeAbilityAuthoring : MonoBehaviour
             AddComponent(entity,
                 new ThunderStrikeAbility
                     {
-                        strikeCounter = authoring.strikeCounter, isInitialized = authoring.isInitialized
+                        strikeCounter = authoring.strikeCounter, isInitialized = authoring.isInitialized, hasDoneFirstStrike = authoring.hasDoneFirstStrike,
                     });
         }
     }
@@ -26,4 +27,5 @@ public struct ThunderStrikeAbility : IComponentData
 {
     public int strikeCounter;
     public bool isInitialized;
+    public bool hasDoneFirstStrike;
 }

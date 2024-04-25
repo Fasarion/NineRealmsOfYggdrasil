@@ -7,6 +7,13 @@ using Unity.Mathematics;
 public partial struct ResetGameVariablesSystem : ISystem
 {
     [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+       state.RequireForUpdate<PlayerMoveInput>();
+       state.RequireForUpdate<WeaponAttackCaller>();
+    }
+    
+    [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
         // Reset move input

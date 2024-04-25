@@ -16,11 +16,8 @@ public partial struct SwordUltimateAttackSystem : ISystem
     private float scaleChangeFactor;
     private float numberOfScaledAttacks;
     
-
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<SwordStatsTag>();
-        state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<AudioBufferData>();
@@ -34,7 +31,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-        var swordEntity = SystemAPI.GetSingletonEntity<SwordStatsTag>();
+        var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         
         if (_isActive)
         {
@@ -46,10 +43,10 @@ public partial struct SwordUltimateAttackSystem : ISystem
                 
                 if (_attackCount > numberOfScaledAttacks)
                 {
-                    var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
-                    weaponStatsComponent.OverallStats.Size.BaseValue /= scaleChangeFactor;
-                    state.EntityManager.SetComponentData(swordEntity, weaponStatsComponent);
-                    
+                    var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
+                    scaleComp.Value -= scaleChangeFactor;
+                    state.EntityManager.SetComponentData(swordEntity, scaleComp);
+
                     var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
                     statHandler.ValueRW.ShouldUpdateStats = true;
                 
@@ -67,9 +64,12 @@ public partial struct SwordUltimateAttackSystem : ISystem
         // Initialize attack
         if (!_isActive)
         {
-            var weaponStatsComponent = state.EntityManager.GetComponentData<CombatStatsComponent>(swordEntity);
-            weaponStatsComponent.OverallStats.Size.BaseValue *= scaleChangeFactor;
-            state.EntityManager.SetComponentData(swordEntity, weaponStatsComponent);
+            var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
+
+            float newSize = scaleComp.Value += scaleChangeFactor;
+            
+            scaleComp.Value = newSize;
+            state.EntityManager.SetComponentData(swordEntity, scaleComp);
             
             var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
             statHandler.ValueRW.ShouldUpdateStats = true;

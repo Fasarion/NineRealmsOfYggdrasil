@@ -31,8 +31,6 @@ public class EnergyManager : MonoBehaviour
     {
         var icon = weaponIconMap[weaponType];
         icon.UpdateBar(currentEnergy, maxEnergy);
-        
-       // Debug.Log($"Weapon: {weaponType}, curr: {currentEnergy}, max: {maxEnergy}");
     }
 
     private void SetupWeapon(WeaponBehaviour weapon, bool active)
@@ -47,7 +45,7 @@ public class EnergyManager : MonoBehaviour
         weaponIcons.Add(icon);
         weaponIconMap.Add(weapon.WeaponType, icon);
     }
-    
+
     private void OnWeaponSwitch(WeaponBehaviour activeWeapon)
     {
         foreach (var weaponIcon in weaponIcons)
@@ -56,5 +54,4 @@ public class EnergyManager : MonoBehaviour
             weaponIcon.SetActiveWeapon(isActive);
         }
     }
-
 }

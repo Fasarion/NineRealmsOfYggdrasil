@@ -36,7 +36,7 @@ namespace Patrik
                     
                     if (_weaponManager == null)
                     {
-                        Debug.LogWarning("Missing Player Weapon Handler, attacks not possible.");
+                        // Missing Player Weapon Handler, attacks not possible.;
                         return;
                     }
 
@@ -54,6 +54,20 @@ namespace Patrik
 
         private void HandleWeaponSwitch()
         {
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
+                return;
+
+            // don't switch weapon when preparing an attack
+            if (attackCaller.ValueRO.IsPreparingAttack())
+            {
+                return;
+            }
+
+            // don't switch mid attack
+            if (_weaponManager && _weaponManager.isAttacking)
+                return;
+            
+            
             if (SystemAPI.TryGetSingleton(out WeaponOneInput weapon1) && weapon1.KeyPressed)
             {
                 _weaponManager.SwitchWeapon(1);
@@ -93,6 +107,7 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
             
             _weaponManager.OnSpecialCharge += OnSpecialCharge;
+            _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
 
             _weaponManager.OnWeaponActive += SetWeaponActive;
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
@@ -107,12 +122,23 @@ namespace Patrik
             _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
             
             _weaponManager.OnSpecialCharge -= OnSpecialCharge;
-            
+            _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
+
             _weaponManager.OnWeaponActive -= SetWeaponActive;
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
         }
 
+        private void OnUltimatePrepare(AttackData data)
+        {
+            TryWriteOverActiveAttackData(data);
+        }
+
         private void OnSpecialCharge(AttackData data)
+        {
+            TryWriteOverActiveAttackData(data);
+        }
+
+        private void TryWriteOverActiveAttackData(AttackData data)
         {
             if (DifferentAttackData(data, previousActiveAttackData))
             {
@@ -192,12 +218,7 @@ namespace Patrik
                 Combo = data.ComboCounter
             };
             
-            
-            if (DifferentAttackData(data, previousActiveAttackData))
-            {
-                WriteOverAttackData(data);
-                previousActiveAttackData = data;
-            }
+            TryWriteOverActiveAttackData(data);
         }
 
         private bool DifferentAttackData(AttackData newData, AttackData lastData)
@@ -384,15 +405,24 @@ namespace Patrik
             bool inCombatState = gameManager.GameState == GameState.Combat;
             if (!inCombatState)
                 return;
-
-            int attackButtonsPressed = 0;
             
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
+                return;
+
+            bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
+            bool canAttack = !isPreparingAttack;
+
             // Handle ultimate attack
-            var ultimateAttack = SystemAPI.GetSingleton<PerformUltimateAttack>();
-            if (ultimateAttack.Value)
+            if (attackCaller.ValueRO.PrepareUltimateInfo.Perform && canAttack)
             {
                 _weaponManager.PerformUltimateAttack();
-                attackButtonsPressed++;
+                canAttack = false;
+            }
+            else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame && canAttack)
+            {
+                _weaponManager.PrepareUltimateAttack();
+                attackCaller.ValueRW.PrepareUltimateInfo.ValidPrepareInputPressed = true;
+                canAttack = false;
             }
             
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
@@ -401,38 +431,36 @@ namespace Patrik
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && attackButtonsPressed == 0)
+            if (normalAttackInput.KeyPressed && canAttack)
             {
                 _weaponManager.PerformNormalAttack();
-                attackButtonsPressed++;
+                canAttack = false;
             }
-
-            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-
+            
             // Handle special attack
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && attackButtonsPressed == 0)
+            if (specialAttack.KeyDown && canAttack)
             {
-              //  Debug.Log("Preparing special...");
                 _weaponManager.StartChargingSpecial();
-                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
                 {
                     ChargingWeapon = _weaponManager.CurrentWeaponType,
                     IsCharging = true
                 };
                 
-                attackButtonsPressed++;
+                canAttack = false;
             }
             
             if (specialAttack.KeyUp)
             {
-              //  Debug.Log("Perform special!");
                 _weaponManager.ReleaseSpecial();
-                attackCaller.ValueRW.ChargeInfo = new ChargeInfo
+                attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
                 {
                     ChargingWeapon = _weaponManager.CurrentWeaponType,
                     IsCharging = false
                 };
+                
+                canAttack = false;
             }
         }
         

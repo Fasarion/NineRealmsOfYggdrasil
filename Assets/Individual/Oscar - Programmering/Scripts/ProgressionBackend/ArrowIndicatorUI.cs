@@ -7,11 +7,13 @@ public class ArrowIndicatorUI : MonoBehaviour
 {
 
 
-    public RectTransform rectTransform;
+    private RectTransform rectTransform;
 
+    public RectTransform runtimeParentRectTransform;
     public void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        Debug.Log("Awake called on ChoiceUIManager!");
     }
 
     // Start is called before the first frame update
@@ -20,9 +22,10 @@ public class ArrowIndicatorUI : MonoBehaviour
        // ProgressionBarContentContainer.onRectBoundsSet += OnRectBoundsSet;
     }
 
-    public void SetXPosition(float position)
+    public void AddSymbolXPosition(float position)
     {
-        rectTransform.anchoredPosition = new Vector2(position, rectTransform.anchoredPosition.y);
+        var parentRect = runtimeParentRectTransform.rect;
+        rectTransform.anchoredPosition = new Vector2( runtimeParentRectTransform.anchoredPosition.x - (parentRect.width/2) + position, rectTransform.anchoredPosition.y);
     }
     /*private void OnRectBoundsSet(Rect rect)
     {
@@ -32,6 +35,6 @@ public class ArrowIndicatorUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //SetXPosition();
     }
 }

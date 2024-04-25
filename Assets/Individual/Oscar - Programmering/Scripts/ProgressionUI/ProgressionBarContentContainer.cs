@@ -20,7 +20,7 @@ public class ProgressionBarContentContainer : MonoBehaviour
     private CustomHorizontalLayoutGroup horizontalLayoutGroup;
 
     private bool rectBoundsSet = false;
-    public static Action<Rect> onRectBoundsSet;
+    public static Action<RectTransform> onRectBoundsSet;
     private ProgressionBarLevelContainer[] levelContainerArray;
     
     public void Awake()
@@ -70,7 +70,7 @@ public class ProgressionBarContentContainer : MonoBehaviour
             contentWidth = rect.width;
             rectBoundsSet = true;
             OnRectBoundsSet(rect);
-            onRectBoundsSet?.Invoke(rect);
+            onRectBoundsSet?.Invoke(rectTransform);
             
 
             //Debug.Log("Rebuilt!");

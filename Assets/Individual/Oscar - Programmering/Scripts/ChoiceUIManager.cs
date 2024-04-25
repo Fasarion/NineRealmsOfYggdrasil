@@ -58,6 +58,9 @@ public class ChoiceUIManager : MonoBehaviour
     public ChoiceDataScriptableObject choiceDataScriptableObject;
     
     public ArrowIndicatorUI arrowIndicator;
+    public ProgressIndicatorBackgroundUI progressBackgroundIndicator;
+
+    //private Rect runtimeRect;
     
     
     public static ChoiceUIManager Instance
@@ -91,7 +94,8 @@ public class ChoiceUIManager : MonoBehaviour
 
     public void Update()
     {
-        arrowIndicator.SetXPosition(currentSymbols[0].symbolXpos);
+        arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); //-126 + currentSymbols[currentSelectionIndex].symbolXpos);
+        progressBackgroundIndicator.UpdateProgressBackgroundXPosition();
     }
 
     private void OnCardClicked()
@@ -260,10 +264,9 @@ public class ChoiceUIManager : MonoBehaviour
         ProgressionBarContentContainer.onRectBoundsSet += OnRectBoundsSet;
 
     }
-
-    private void OnRectBoundsSet(Rect rect)
+    private void OnRectBoundsSet(RectTransform rectTransform)
     {
-        
+        //runtimeRect = rectTransform;
     }
 
 
@@ -311,8 +314,9 @@ public class ChoiceUIManager : MonoBehaviour
                 selectionCardsMoving = true;
                 currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
                 //UpdateSelectionType(currentSelectionIndex);
+                //Not sure if this is redundant
+                arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); 
                 //Turn this into a function for the love of god.
-                arrowIndicator.SetXPosition(currentSymbols[currentSelectionIndex].symbolXpos); 
                 switch (currentSymbols[currentSelectionIndex].CardType)
                 {
                     case ProgressionBarBehaviour.ProgressionBarCardType.room:

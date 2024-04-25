@@ -6,8 +6,6 @@ using UnityEngine;
 public class ElementalIceEffectAuthoring : MonoBehaviour
 {
     public float currentDurationTime;
-    public bool hasBeenApplied;
-    public int stacks;
 
     public class ElementalIceEffectAuthoringBaker : Baker<ElementalIceEffectAuthoring>
     {
@@ -15,12 +13,7 @@ public class ElementalIceEffectAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
-                new ElementalIceEffectComponent
-                {
-                    CurrentDurationTime = authoring.currentDurationTime,
-                    HasBeenApplied = authoring.hasBeenApplied,
-                    Stacks = authoring.stacks
-                });
+                new ElementalIceEffectComponent { CurrentDurationTime = authoring.currentDurationTime });
         }
     }
 }
@@ -28,6 +21,4 @@ public class ElementalIceEffectAuthoring : MonoBehaviour
 public struct ElementalIceEffectComponent : IComponentData
 {
     public float CurrentDurationTime;
-    public bool HasBeenApplied;
-    public int Stacks;
 }

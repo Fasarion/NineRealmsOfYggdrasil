@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
+[UpdateAfter(typeof(SpawnSystem))]
 public partial class EnemyCountReporterSystem : SystemBase
 {
     private int _cachedEnemyCount;

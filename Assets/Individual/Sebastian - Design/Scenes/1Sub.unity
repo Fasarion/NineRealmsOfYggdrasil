@@ -630,6 +630,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5e0c49908cb89b548acbdb8a5988662e, type: 3}
+--- !u!4 &826953955 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2464281583569693902, guid: 5e0c49908cb89b548acbdb8a5988662e,
+    type: 3}
+  m_PrefabInstance: {fileID: 826953954}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &885879032 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8248458485825962027, guid: 5ccd93032e3467c45a462381c5677cb3,
@@ -926,12 +932,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8248458485825962027, guid: 5ccd93032e3467c45a462381c5677cb3,
     type: 3}
   m_PrefabInstance: {fileID: 1108011578}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1405722922 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 459194095076139608, guid: 5e0c49908cb89b548acbdb8a5988662e,
-    type: 3}
-  m_PrefabInstance: {fileID: 826953954}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1436472641
 PrefabInstance:
@@ -1273,7 +1273,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: caaa12457dc07f44bb22b4f51775a569, type: 2}
+  - {fileID: 2100000, guid: e9b21adb99940844a9fc7c7aa169c129, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1766,7 +1766,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5488732460988299552, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1405722922}
+      addedObject: {fileID: 826953955}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167eb942ef45ef24f88317949ed379d6, type: 3}
 --- !u!1001 &8658241511836974095

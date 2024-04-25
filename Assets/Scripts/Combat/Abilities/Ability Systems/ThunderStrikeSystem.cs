@@ -81,5 +81,6 @@ public partial struct ThunderStrikeSystem : ISystem
         }
         
         ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

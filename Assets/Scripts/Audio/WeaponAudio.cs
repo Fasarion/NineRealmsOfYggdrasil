@@ -4,6 +4,7 @@ using UnityEngine;
 using FMODUnity;
 using FMOD.Studio;
 using Patrik;
+using Unity.VisualScripting;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Audio/WeaponAudio")]
 public class WeaponAudio : ScriptableObject
@@ -11,16 +12,16 @@ public class WeaponAudio : ScriptableObject
     private int value = 0;
     [Header("Weapons")] 
     public EventReference swordAudio;
-
     public EventReference hammerAudio;
-
     public EventReference meadAudio;
     public EventReference crowAudio;
+    public EventReference chargeAttack;
 
     private EventInstance _swordInstance;
     private EventInstance _hammerInstance;
     private EventInstance _meadInstance;
     private EventInstance _crowInstance;
+    private EventInstance _chargeInstance;
     public void WeaponSwingAudio(int weapon, int attackType)
     {
         switch (weapon)
@@ -66,8 +67,11 @@ public class WeaponAudio : ScriptableObject
         WepInstance.start();
         WepInstance.release();*/
     }
-    public void Test()
+    public void ChargeAttackAudio(int chargeLevel)
     {
-       
+        _chargeInstance = RuntimeManager.CreateInstance(chargeAttack);
+        _chargeInstance.setParameterByName("ChargeLevel", chargeLevel);
+        _chargeInstance.start();
+        _chargeInstance.release();
     }
 }

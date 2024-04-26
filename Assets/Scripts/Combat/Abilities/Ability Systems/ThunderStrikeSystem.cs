@@ -41,8 +41,7 @@ public partial struct ThunderStrikeSystem : ISystem
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
             }
-
-
+            
             
             if (!ability.ValueRO.isInitialized)
             {
@@ -82,5 +81,6 @@ public partial struct ThunderStrikeSystem : ISystem
         }
         
         ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

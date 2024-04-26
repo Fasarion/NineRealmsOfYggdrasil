@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DevLocker.Utils;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,8 @@ public class ChoiceUIManager : MonoBehaviour
     
     [SerializeField] private List<RoomChoiceUIBehaviour> roomSelects;
     //This is probably very ineffective, fix.
+    
+    
     
 
     [SerializeField] private SelectionCardInstantiator roomSelectionCardsInstantiator;
@@ -54,6 +57,12 @@ public class ChoiceUIManager : MonoBehaviour
     private int currentLevelIndex;
     public ChoiceDataScriptableObject choiceDataScriptableObject;
     
+    public ArrowIndicatorUI arrowIndicator;
+    public ProgressIndicatorBackgroundUI progressBackgroundIndicator;
+
+    //private Rect runtimeRect;
+    
+    
     public static ChoiceUIManager Instance
     {
         get
@@ -83,8 +92,17 @@ public class ChoiceUIManager : MonoBehaviour
         //HideUI();
     }
 
+    public void Update()
+    {
+        arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); //-126 + currentSymbols[currentSelectionIndex].symbolXpos);
+        progressBackgroundIndicator.UpdateProgressBackgroundXPosition();
+    }
+
     private void OnCardClicked()
     {
+        
+        
+       
         SwapScreenRight();
     }
 
@@ -139,6 +157,7 @@ public class ChoiceUIManager : MonoBehaviour
         currentSymbols = levelContainers[currentLevelIndex].symbolBehaviours;
         maxSelectionIndex = currentSymbols.Length - 1;
 
+        
         switch (currentSymbols[0].CardType)
         {
             case ProgressionBarBehaviour.ProgressionBarCardType.room:
@@ -241,9 +260,15 @@ public class ChoiceUIManager : MonoBehaviour
         
         SelectionCardInstantiator.hasExitedScreen += OnSelectionCardExited;
         SelectionCardInstantiator.hasEnteredScreen += OnSelectionCardEntered;
+
+        ProgressionBarContentContainer.onRectBoundsSet += OnRectBoundsSet;
+
+    }
+    private void OnRectBoundsSet(RectTransform rectTransform)
+    {
+        //runtimeRect = rectTransform;
     }
 
-    
 
     private void OnDisable()
     {
@@ -289,6 +314,8 @@ public class ChoiceUIManager : MonoBehaviour
                 selectionCardsMoving = true;
                 currentSelectionCardsInstantiator.MoveSelectionCardsOutOfView();
                 //UpdateSelectionType(currentSelectionIndex);
+                //Not sure if this is redundant
+                arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); 
                 //Turn this into a function for the love of god.
                 switch (currentSymbols[currentSelectionIndex].CardType)
                 {

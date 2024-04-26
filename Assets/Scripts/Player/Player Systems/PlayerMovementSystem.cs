@@ -38,7 +38,10 @@ namespace Player
                 if (PlayerWeaponManagerBehaviour.Instance != null)
                 {
                     bool playerIsMoving = !moveInput.Value.Equals(float2.zero);
-                    PlayerWeaponManagerBehaviour.Instance.UpdateMovementParameter(playerIsMoving);
+                    
+                    // TODO: lerp
+                    float t = math.length(moveInput.Value);
+                    PlayerWeaponManagerBehaviour.Instance.UpdateMovementParameter(t);
                 }
                 
             }

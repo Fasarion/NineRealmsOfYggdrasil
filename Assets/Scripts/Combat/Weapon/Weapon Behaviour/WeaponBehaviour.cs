@@ -42,15 +42,17 @@ namespace Patrik
             SetParent(parent);
         }
 
-        private void SetParent(Transform parent)
+        public void SetParent(Transform parent)
         {
-            var transform1 = transform;
-            transform1.parent = parent;
-            transform1.position = parent.position;
-            transform1.rotation = parent.rotation;
+            var thisTransform = transform;
             
-            model.position = transform1.position;
-            model.rotation = transform1.rotation;
+            thisTransform.parent = parent;
+            thisTransform.position = parent.position;
+            thisTransform.rotation = parent.rotation;
+            
+            
+            model.position = thisTransform.position;
+            model.rotation = thisTransform.rotation;
            // model.localScale = transform1.localScale;
         }
 

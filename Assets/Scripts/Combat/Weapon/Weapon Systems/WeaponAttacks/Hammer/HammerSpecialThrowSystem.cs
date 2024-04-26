@@ -10,8 +10,8 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
-//[DisableAutoCreation]
-public partial struct HammerSpecialSystem : ISystem
+
+public partial struct HammerSpecialThrowSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -69,7 +69,8 @@ public partial struct HammerSpecialSystem : ISystem
             return;
         
         // Update timer
-        config.ValueRW.Timer += SystemAPI.Time.DeltaTime;
+        float deltaTime = SystemAPI.Time.DeltaTime;
+        config.ValueRW.Timer += deltaTime;
         
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
 
@@ -124,6 +125,13 @@ public partial struct HammerSpecialSystem : ISystem
                 config.ValueRW.Timer = 0;
             }
         }
+        
+        // Rotate Hammer
+        foreach (var transform in SystemAPI
+            .Query<RefRW<LocalTransform>>().WithAll<HammerComponent>())
+        {
+            transform.ValueRW = transform.ValueRO.RotateY(deltaTime * config.ValueRO.ResolutionsPerSecond);
+        }
     }
     
     [BurstCompile]
@@ -132,9 +140,7 @@ public partial struct HammerSpecialSystem : ISystem
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
         if (!config.ValueRO.HasStarted || !config.ValueRO.HasReturned)
             return;
-        
-        
-        
+
         // make hammer entity follow GO again
         foreach (var (animatorGO, knockBack) in SystemAPI
             .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>>().WithAll<HammerComponent>())
@@ -152,35 +158,4 @@ public partial struct HammerSpecialSystem : ISystem
         var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         weaponCaller.ValueRW.ResetWeaponCurrentWeaponTransform = true;
     }
-    
-    
 }
-
-// public partial class ResetHammerSystem : SystemBase
-// {
-//     protected override void OnUpdate()
-//     {
-//         
-//         
-//         
-//         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
-//         if (!config.ValueRO.HasStarted || !config.ValueRO.HasReturned)
-//             return;
-//         
-//         // make hammer entity follow GO again
-//         foreach (var (transform, animatorReference, animatorGO, hammer) in SystemAPI
-//             .Query<LocalTransform, AnimatorReference, GameObjectAnimatorPrefab, HammerComponent>())
-//         {
-//             animatorGO.FollowEntity = false;
-//         }
-//
-//         // reset config
-//         config.ValueRW.HasReturned = false;
-//         config.ValueRW.HasStarted = false;
-//         config.ValueRW.HasSwitchedBack = false;
-//
-//         var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-//         weaponCaller.ValueRW.ResetWeaponCurrentWeaponTransform = true;
-//
-//     }
-// }

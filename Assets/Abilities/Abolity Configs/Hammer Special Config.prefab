@@ -49,7 +49,8 @@ MonoBehaviour:
   electricChargePrefab: {fileID: 0}
   minTimeBetweenZaps: 0.5
   maxTimeBetweenZaps: 1.5
-  distanceToTravel: 42.9
-  timeToTurnBack: 2
-  timeToReturnAfterTurning: 2
+  distanceToTravel: 40
+  timeToTurnBack: 0.7
+  timeToReturnAfterTurning: 0.35
+  resolutionsPerSecond: 50
   distanceFromPlayerToGrab: 1

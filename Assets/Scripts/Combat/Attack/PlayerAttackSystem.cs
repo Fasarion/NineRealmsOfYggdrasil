@@ -335,9 +335,6 @@ namespace Patrik
 
         private void EnableWeapon(WeaponType dataWeaponType)
         {
-            if (dataWeaponType == WeaponType.Hammer)
-                Debug.Log($"Enable {dataWeaponType}");
-            
             Entity entity = GetWeaponEntity(dataWeaponType);
             
             var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
@@ -346,9 +343,6 @@ namespace Patrik
 
         private void DisableWeapon(WeaponType dataWeaponType)
         {
-            if (dataWeaponType == WeaponType.Hammer)
-                Debug.Log($"Disable {dataWeaponType}");
-
             Entity entity = GetWeaponEntity(dataWeaponType);
             
             var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);

@@ -6,8 +6,6 @@ using UnityEngine;
 public class ElementalFireEffectAuthoring : MonoBehaviour
 {
     public float currentDurationTime;
-    public bool hasBeenApplied;
-    public int stacks;
 
     public class ElementalFireEffectAuthoringBaker : Baker<ElementalFireEffectAuthoring>
     {
@@ -15,12 +13,7 @@ public class ElementalFireEffectAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
-                new ElementalFireEffectComponent
-                {
-                    CurrentDurationTime = authoring.currentDurationTime,
-                    HasBeenApplied = authoring.hasBeenApplied,
-                    Stacks = authoring.stacks
-                });
+                new ElementalFireEffectComponent { CurrentDurationTime = authoring.currentDurationTime });
         }
     }
 }
@@ -28,6 +21,5 @@ public class ElementalFireEffectAuthoring : MonoBehaviour
 public struct ElementalFireEffectComponent : IComponentData
 {
     public float CurrentDurationTime;
-    public bool HasBeenApplied;
-    public int Stacks;
 }
+

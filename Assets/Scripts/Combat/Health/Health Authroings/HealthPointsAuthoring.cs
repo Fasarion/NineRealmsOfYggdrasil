@@ -9,6 +9,8 @@ namespace Health
     {
         [Tooltip("Maximum health points of this object.")]
         [SerializeField] private float maxHP = 5;
+
+        [SerializeField] private float damageReductionValue = 1;
         
         class Baker : Baker<HealthPointsAuthoring>
         {
@@ -19,6 +21,7 @@ namespace Health
                 // TODO: Create an aspect to group components and make functions
                 AddComponent(entity, new MaxHpComponent {Value = authoring.maxHP,});
                 AddComponent(entity, new CurrentHpComponent {Value = authoring.maxHP,});
+                AddComponent(entity, new DamageReductionComponent() {Value = authoring.damageReductionValue,});
                 
                 // Damage Buffer in order to be able to take damage
                 AddBuffer<DamageBufferElement>(entity);
@@ -40,6 +43,11 @@ namespace Health
     }
     
     public struct CurrentHpComponent : IComponentData
+    {
+        public float Value;
+    }
+
+    public struct DamageReductionComponent : IComponentData
     {
         public float Value;
     }

@@ -19,6 +19,7 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [SerializeField] private float distanceToTravel = 20;
     [SerializeField] private float timeToTurnBack = 2f;
     [SerializeField] private float timeToReturnAfterTurning = 2f;
+    [SerializeField] private float resolutionsPerSecond = 2f;
     
     [Header("Catching")]
     [SerializeField] private float distanceFromPlayerToGrab = 1f;
@@ -44,6 +45,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack,
                 DistanceFromPlayerToGrab = authoring.distanceFromPlayerToGrab,
                 
+                ResolutionsPerSecond = authoring.resolutionsPerSecond,
+                
                 CurrentDistanceFromPlayer = float.MaxValue
             });
         }
@@ -60,6 +63,8 @@ public struct HammerSpecialConfig : IComponentData
     public float MinTimeBetweenZaps;
     public float MaxTimeBetweenZaps;
     public float Timer;
+
+    public float ResolutionsPerSecond;
 
     public bool HasSwitchedBack;
     public bool HasReturned;

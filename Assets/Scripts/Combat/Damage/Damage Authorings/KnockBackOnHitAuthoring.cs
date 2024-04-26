@@ -8,9 +8,11 @@ namespace Damage
         [Tooltip("Force to be applied on entity to knock it back on impact.")]
         [SerializeField] private float knockBackForce = 1;
 
-        [Tooltip("This will cause the collision direction to always point away from the player. Suitable for physical attacks," +
-                 "but perhaps not for ranged ones.")]
-        [SerializeField] private bool knockAwayFromPlayer = false;
+        // [Tooltip("This will cause the collision direction to always point away from the player. Suitable for physical attacks," +
+        //          "but perhaps not for ranged ones.")]
+        // [SerializeField] private bool knockAwayFromPlayer = false;
+
+        [SerializeField] private KnockDirectionType KnockDirection = KnockDirectionType.AlongHitNormal;
          
         public class CapabilityBaker : Baker<KnockBackOnHitAuthoring>
         {
@@ -21,7 +23,8 @@ namespace Damage
                 AddComponent(entity, new KnockBackOnHitComponent
                 {
                     Value = authoring.knockBackForce,
-                    KnockAwayFromPlayer = authoring.knockAwayFromPlayer
+                    KnockDirection = authoring.KnockDirection
+                   // KnockAwayFromPlayer = authoring.knockAwayFromPlayer
                 });
             }
         }
@@ -30,6 +33,15 @@ namespace Damage
     public struct KnockBackOnHitComponent : IComponentData
     {
         public float Value;
-        public bool KnockAwayFromPlayer;
+       // public bool KnockAwayFromPlayer;
+
+        public KnockDirectionType KnockDirection;
+    }
+
+    public enum KnockDirectionType
+    {
+        AlongHitNormal,
+        PerpendicularToPlayer,
+        AwayFromPlayer,
     }
 }

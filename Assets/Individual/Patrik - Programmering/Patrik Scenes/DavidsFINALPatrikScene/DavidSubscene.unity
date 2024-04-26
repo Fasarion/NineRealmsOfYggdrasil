@@ -1146,6 +1146,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Config Manager
       objectReference: {fileID: 0}
+    - target: {fileID: 5991482223618236709, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: freezeDuration
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991482223618236709, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxFreezeStacks
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5991482223618236709, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: freezeMovementSlowPercentage
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1194,6 +1209,11 @@ PrefabInstance:
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

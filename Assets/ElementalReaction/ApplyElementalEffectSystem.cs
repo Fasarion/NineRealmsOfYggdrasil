@@ -28,15 +28,22 @@ public partial struct ApplyElementalEffectSystem : ISystem
         {
             freezeComponent.ValueRW.CurrentDurationTime += SystemAPI.Time.DeltaTime;
             
-            if (freezeComponent.ValueRO.CurrentDurationTime > config.FreezeDuration)
+            if (freezeComponent.ValueRO.CurrentDurationTime > config.FreezeDuration && freezeComponent.ValueRO.HasBeenApplied)
             {
-                
+                moveSpeedComponent.ValueRW.Value /=
+                    (config.FreezeMovementSlowPercentage * freezeComponent.ValueRO.Stacks);
                 ecb.RemoveComponent<ElementalFreezeEffectComponent>(affectedEntity);
+                continue;
             }
                 
             if (freezeComponent.ValueRO.HasBeenApplied) continue;
             
-            
+            moveSpeedComponent.ValueRW.Value *= (config.FreezeMovementSlowPercentage * freezeComponent.ValueRO.Stacks);
+            freezeComponent.ValueRW.HasBeenApplied = true;
+
         }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

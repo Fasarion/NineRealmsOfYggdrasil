@@ -39,6 +39,7 @@ public partial struct AddElementalEffectSystem : ISystem
                     if (!state.EntityManager.HasComponent<ElementalFreezeEffectComponent>(hit.HitEntity))
                     {
                         ecb.AddComponent<ElementalFreezeEffectComponent>(hit.HitEntity);
+                        stacks = 1;
                     }
                     else
                     {

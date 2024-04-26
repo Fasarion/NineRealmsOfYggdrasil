@@ -23,8 +23,8 @@ namespace Damage
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
 
-            foreach (var (currentHP, damageBuffer, damageReceivingEntity) in SystemAPI
-                .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>>()
+            foreach (var (currentHP, damageBuffer, damageReduction, damageReceivingEntity) in SystemAPI
+                .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>, DamageReductionComponent>()
                 .WithEntityAccess())
             {
                 float totalDamageToDeal = 0;
@@ -42,6 +42,9 @@ namespace Damage
                     }
                     
                     totalDamageToDeal += damageToDeal;
+                    
+                    //Apply damage reduction or increase
+                    totalDamageToDeal *= damageReduction.Value;
                 }
                 
                 // Clear damage buffer to avoid dealing damage multiple times an different frames

@@ -1191,21 +1191,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6846989975432270340, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeToTurnBack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846989975432270340, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: distanceToTravel
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 6846989975432270340, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeToReturnAfterTurning
-      value: 0.5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1707,6 +1692,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4031803512305907226, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: healthBarOffset.y
+      value: 2.5
+      objectReference: {fileID: 0}
     - target: {fileID: 5488732460988299552, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1782,6 +1772,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
+      propertyPath: KnockDirection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
       propertyPath: knockBackForce
       value: 20
       objectReference: {fileID: 0}
@@ -1845,6 +1840,56 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_Capsule.Axis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_SphereRadius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_Cylinder.Axis
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_Capsule.Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_Capsule.Radius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_Cylinder.Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_Cylinder.Radius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_PrimitiveSize.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_PrimitiveSize.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2596926972943226712, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: m_PrimitiveSize.z
+      value: 1.5
+      objectReference: {fileID: 0}
     - target: {fileID: 3372213329053059802, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: skillModifier.Normal
@@ -1854,6 +1899,16 @@ PrefabInstance:
         type: 3}
       propertyPath: skillModifier.Special
       value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3492190810403210148, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: KnockDirection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3492190810403210148, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: knockBackForce
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 4600464888170940368, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
@@ -1874,6 +1929,11 @@ PrefabInstance:
         type: 3}
       propertyPath: audioData.eventCategoryType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390462214705800887, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: attackDamage
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

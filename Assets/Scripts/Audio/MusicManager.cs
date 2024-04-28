@@ -12,16 +12,23 @@ public class MusicManager : MonoBehaviour
     
     //
     public StudioEventEmitter menuMusic;
+    public StudioEventEmitter levelMusic;
+
+    public int countParameterOne;
+    public int countParameterTwo;
+    public int countParameterThree;
     // Start is called before the first frame update
     void Start()
     {
-        menuMusic.Play();
+        levelMusic.Play();
     }
+    //FRÅGA PATRIK OM VAR FAN LÄGGA METOD AAAAAA
 
     private void OnEnable()
     {
         var enemyCountSystem = World.DefaultGameObjectInjectionWorld.GetExistingSystemManaged<EnemyCountReporterSystem>();
         enemyCountSystem.OnEnemyCountChanged += RecieveEnemyCountData;
+        
     }
 
     private void OnDisable()

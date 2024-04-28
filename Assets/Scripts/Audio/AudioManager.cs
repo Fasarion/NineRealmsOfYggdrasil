@@ -53,6 +53,11 @@ public class AudioManager : MonoBehaviour
                 //ENVIRONMENTAUDIO
                 break;
             }
+            case 4:
+            {
+                weaponAudio.WeaponAudioCaller((int)audioData.weaponType);
+                break;
+            }
         }
         //add some codes here
     }

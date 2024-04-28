@@ -4,16 +4,18 @@ public struct AudioData
     public int AudioEnumValue;
     
     public EventCategoryType eventCategoryType;
-    public EnvironmentType environmentType;
+    public WeaponTyping weaponType;
     public EnemyTyping enemyTyping;
     public AudioEventType audioEventType;
 }
 [System.Serializable]
-public enum EnvironmentType
+public enum WeaponTyping
 {
     None = 0,
-    Tree = 1,
-    Rock = 2,
+    Sword = 1,
+    Hammer = 2,
+    Mead = 3,
+    Birds = 4,
 }
 
 [System.Serializable]
@@ -23,6 +25,7 @@ public enum EventCategoryType
     Player = 1,
     Enemy = 2,
     Environment = 3,
+    Weapon = 4,
 }
 
 [System.Serializable]

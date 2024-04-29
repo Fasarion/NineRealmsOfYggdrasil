@@ -16,7 +16,11 @@ public class UpgradeCardUIManager : MonoBehaviour
 
     public Action<int> OnUpgradeChosen;
 
-    
+    public float upgradeUIClickDelay = 0.5f;
+
+    private float _upgradeUIClickDelayTimer = 0;
+
+    private float _cachedTimeStamp;
     
     
     public static UpgradeCardUIManager Instance
@@ -46,8 +50,15 @@ public class UpgradeCardUIManager : MonoBehaviour
         HideUI();
     }
 
+    private void Update()
+    {
+        _upgradeUIClickDelayTimer = Time.unscaledTime;
+    }
+
     private void DisplayUpgradeCards(UpgradeObject[] upgradeObjects)
     {
+        _cachedTimeStamp = Time.unscaledTime;
+        
         ShowUI(upgradeObjects.Length);
         
         for (int i = 0; i < upgradeObjects.Length; i++)
@@ -106,6 +117,8 @@ public class UpgradeCardUIManager : MonoBehaviour
     
     public void RegisterUpgradeCardClick(int index)
     {
+        if (_upgradeUIClickDelayTimer < _cachedTimeStamp + upgradeUIClickDelay) return;
+        
         HideUI();
         OnUpgradeChosen?.Invoke(index);
     }

@@ -44,17 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e399e7200a8ba1648a4fa6e4f92217cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningCheckpointTimes: 0000000014000000280000003c0000005000000064000000
+  spawningCheckpointTimes: 000000001e0000003c0000005a0000007800000096000000
   checkpointData:
   - {fileID: 11400000, guid: e4bd19c17073aa046912339b533c2066, type: 2}
   - {fileID: 11400000, guid: 6ab14844730ce314a83ab03b947a8ed6, type: 2}
   - {fileID: 11400000, guid: 44203f0456083724bbf33f608d209b8b, type: 2}
   - {fileID: 11400000, guid: da4ddc1231bdc7f4ab46dfbb567d5be1, type: 2}
   - {fileID: 11400000, guid: 42bb4b65bd313ee42ac73f7de43ed856, type: 2}
-  minTimerTime: 3
+  minTimerTime: 1
   maxTimerTime: 5
-  minEnemySpawnPercent: 0.1
-  maxEnemySpawnPercent: 0.3
+  minEnemySpawnCount: 1
+  maxEnemySpawnCount: 3
   innerSpawningRadius: 18.6
   outerSpawningRadius: 26.4
   startingCheckpointIndex: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   currentTimerTime: 0
   enemyCount: 0
   targetEnemyCount: 0
-  minEnemySpawnPercent: 0
-  maxEnemySpawnPercent: 0
+  minEnemySpawnCount: 0
+  maxEnemySpawnCount: 0
   innerSpawningRadius: 0
   outerSpawningRadius: 0
   currentActiveCheckpoint: 0

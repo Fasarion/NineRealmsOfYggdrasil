@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Serialization;
 
 
 public class SpawningController : MonoBehaviour
@@ -17,9 +17,9 @@ public class SpawningController : MonoBehaviour
     public float maxTimerTime;
 
     [Tooltip("The minimum number of enemies allowed to spawn in a single batch, as a percentage of the target enemy count. Should be a value between 0 and 1!")]
-    public float minEnemySpawnPercent;
+    public float minEnemySpawnCount;
     [Tooltip("The maximum number of enemies allowed to spawn in a single batch, as a percentage of the target enemy count. Should be a value between 0 and 1!")]
-    public float maxEnemySpawnPercent;
+    public float maxEnemySpawnCount;
 
     [Tooltip("The inner ring of the spawning area. Place a Transform in the spawningCenterPoint field to see" +
              "a visualization of the area.")]

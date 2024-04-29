@@ -54,8 +54,8 @@ public partial class SpawningInitializerSystem : SystemBase
             _checkpointDataObjects = _controller.checkpointData.ToArray();
             config.ValueRW.maxTimerTime = _controller.maxTimerTime;
             config.ValueRW.minTimerTime = _controller.minTimerTime;
-            config.ValueRW.minEnemySpawnPercent = _controller.minEnemySpawnPercent;
-            config.ValueRW.maxEnemySpawnPercent = _controller.maxEnemySpawnPercent;
+            config.ValueRW.minEnemySpawnCount = _controller.minEnemySpawnPercent;
+            config.ValueRW.maxEnemySpawnCount = _controller.maxEnemySpawnPercent;
             config.ValueRW.innerSpawningRadius = _controller.innerSpawningRadius;
             config.ValueRW.outerSpawningRadius = _controller.outerSpawningRadius;
             _maxCheckpointIndex = _checkpointDataObjects.Length - 1;

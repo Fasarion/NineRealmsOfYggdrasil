@@ -41,7 +41,8 @@ public partial struct IceRingSystem : ISystem
         var input = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-
+        var stageBuffer = SystemAPI.GetSingletonBuffer<IceRingStageElement>(false);
+        
         
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
@@ -57,15 +58,17 @@ public partial struct IceRingSystem : ISystem
 
             //Charge behaviour
             chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime * config.ValueRO.chargeSpeed;
-            if (chargeTimer.ValueRO.currentChargeTime >= config.ValueRO.maxChargeTime)
+            if (chargeTimer.ValueRO.currentChargeTime >= stageBuffer[ability.ValueRO.currentAbilityStage].maxChargeTime)
             {
-                chargeTimer.ValueRW.currentChargeTime = config.ValueRO.maxChargeTime;
+                chargeTimer.ValueRW.currentChargeTime = 0;
+                ability.ValueRW.currentAbilityStage++;
             }
             //TODO: Factor in player base stats into area calculation
-            var tValue = chargeTimer.ValueRO.currentChargeTime / config.ValueRO.maxChargeTime;
-            var area = math.lerp(0, config.ValueRO.maxArea, tValue
-                );
-            ability.ValueRW.area = area;
+            // var tValue = chargeTimer.ValueRO.currentChargeTime / config.ValueRO.maxChargeTime;
+            // var area = math.lerp(0, config.ValueRO.maxArea, tValue
+            //     );
+            // ability.ValueRW.area = area;
+            var area = stageBuffer[ability.ValueRO.currentAbilityStage].maxArea;
 
             transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
             transform.ValueRW.Scale = area * 50;

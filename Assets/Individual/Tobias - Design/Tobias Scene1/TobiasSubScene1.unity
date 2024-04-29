@@ -493,7 +493,12 @@ PrefabInstance:
     - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: maxArea
-      value: 15
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxDisplayTime
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}

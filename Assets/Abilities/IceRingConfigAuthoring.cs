@@ -10,12 +10,14 @@ public class IceRingConfigAuthoring : MonoBehaviour
     public GameObject chargeAreaPrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
-    public float maxChargeTime;
-    public float maxArea;
-    public float chargeSpeed;
+    [HideInInspector] public float maxChargeTime;
+    [HideInInspector] public float maxArea;
+    [HideInInspector] public float chargeSpeed;
+    public List<IceRingStage> abilityStages;
 
     [HideInInspector] public bool isInitialized;
     [HideInInspector] public bool isAbilityReleased;
+    
 
     public class IceRingConfigAuthoringBaker : Baker<IceRingConfigAuthoring>
     {
@@ -35,6 +37,18 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     chargeSpeed = authoring.chargeSpeed,
                     isInitialized = authoring.isInitialized,
                 });
+            
+            var buffer = AddBuffer<IceRingStageElement>(entity);
+            
+            foreach (var stage in authoring.abilityStages)
+            {
+                buffer.Add(new IceRingStageElement
+                {
+                    damageModifier = stage.damageModifier,
+                    maxArea = stage.maxArea,
+                    maxChargeTime = stage.maxChargeTime,
+                });
+            }
         }
     }
 }
@@ -50,4 +64,19 @@ public struct IceRingConfig : IComponentData
     public bool isAbilityReleased;
     public float chargeSpeed;
     public bool isInitialized;
+}
+
+public struct IceRingStageElement : IBufferElementData
+{
+    public float damageModifier;
+    public float maxArea;
+    public float maxChargeTime;
+}
+
+[System.Serializable]
+public struct IceRingStage
+{
+    public float damageModifier;
+    public float maxArea;
+    public float maxChargeTime;
 }

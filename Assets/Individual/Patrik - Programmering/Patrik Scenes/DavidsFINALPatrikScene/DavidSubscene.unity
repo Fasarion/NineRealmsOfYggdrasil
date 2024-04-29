@@ -503,7 +503,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  spawn: 1
+  spawn: 0
 --- !u!4 &434715216
 Transform:
   m_ObjectHideFlags: 0
@@ -1263,10 +1263,45 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].maxArea
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[1].maxArea
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[2].maxArea
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].maxChargeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[1].maxChargeTime
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[2].maxChargeTime
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

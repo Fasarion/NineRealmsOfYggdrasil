@@ -54,7 +54,7 @@ public class CombatUIWeaponHandler : MonoBehaviour
         currentWeapon = weaponType;
         //currentInactiveWeapons.AddRange(selectableWeapons);
                 
-        onCurrentWeaponUpdated?.Invoke(weaponType, currentInactiveWeapons);
+        //onCurrentWeaponUpdated?.Invoke(weaponType, currentInactiveWeapons);
     }
     // Update is called once per frame
     void Update()

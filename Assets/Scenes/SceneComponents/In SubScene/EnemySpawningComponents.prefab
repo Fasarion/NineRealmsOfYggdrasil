@@ -51,10 +51,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 44203f0456083724bbf33f608d209b8b, type: 2}
   - {fileID: 11400000, guid: da4ddc1231bdc7f4ab46dfbb567d5be1, type: 2}
   - {fileID: 11400000, guid: 42bb4b65bd313ee42ac73f7de43ed856, type: 2}
-  minTimerTime: 3
+  minTimerTime: 1
   maxTimerTime: 5
-  minEnemySpawnPercent: 1
-  maxEnemySpawnPercent: 3
+  minEnemySpawnCount: 1
+  maxEnemySpawnCount: 3
   innerSpawningRadius: 18.6
   outerSpawningRadius: 26.4
   startingCheckpointIndex: 0

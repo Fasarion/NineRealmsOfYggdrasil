@@ -21,7 +21,21 @@ public partial struct AddElementalEffectSystem : ISystem
     {
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var config = SystemAPI.GetSingleton<ElementalReactionsConfig>();
+        int stacks = 0;
         
+        
+        ApplyFireEffect(state, ecb, config);
+        ApplyLightningEffect(state, ecb, config);
+        ApplyIceEffect(state, ecb, config);
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
+    }
+
+    [BurstCompile]
+    private void ApplyIceEffect(SystemState state, EntityCommandBuffer ecb, ElementalReactionsConfig config)
+    {
+        //Apply Ice
         foreach (var ( hitBuffer, _) 
                  in SystemAPI.Query<DynamicBuffer<HitBufferElement>, ElementalShouldApplyIceComponent>())
         {
@@ -30,11 +44,12 @@ public partial struct AddElementalEffectSystem : ISystem
                 if (hit.IsHandled) continue;
                 if (!state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
                 {
+                    //Add Ice effect
                     ecb.AddComponent<ElementalIceEffectComponent>(hit.HitEntity);
-                    //ecb.SetComponent(hit.HitEntity, new ElementalIceEffectComponent());
                 }
                 else
                 {
+                    //Add Freeze Effect
                     int stacks = 0;
                     if (!state.EntityManager.HasComponent<ElementalFreezeEffectComponent>(hit.HitEntity))
                     {
@@ -54,12 +69,199 @@ public partial struct AddElementalEffectSystem : ISystem
                         HasBeenApplied = false,
                         CurrentDurationTime = 0,
                     });
+                    
+                    //Add Conduct Effect
+                    if (state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
+                    {
+                        ApplyConductEffect(state, hit, ecb, config);
+                    }
+                    
+                    //Add Vulnerable Effect
+                    if (state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
+                    {
+                        ApplyVulnerableEffect(state, hit, ecb, config);
+                    }
                 }
             }
         }
-        
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
-
     }
+
+    [BurstCompile]
+    private void ApplyLightningEffect(SystemState state, EntityCommandBuffer ecb, ElementalReactionsConfig config)
+    {
+        //Apply Lightning
+        foreach (var ( hitBuffer, _) 
+                 in SystemAPI.Query<DynamicBuffer<HitBufferElement>, ElementalShouldApplyLightningComponent>())
+        {
+            foreach (var hit in hitBuffer)
+            {
+                if (hit.IsHandled) continue;
+                if (!state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
+                {
+                    //Set Lightning
+                    ecb.AddComponent<ElementalLightningEffectComponent>(hit.HitEntity);
+                }
+                else
+                {
+                    //Set Shock
+                    int stacks = 0;
+                    if (!state.EntityManager.HasComponent<ElementalShockEffectComponent>(hit.HitEntity))
+                    {
+                        ecb.AddComponent<ElementalShockEffectComponent>(hit.HitEntity);
+                        stacks = 1;
+                    }
+                    else
+                    {
+                        stacks = state.EntityManager.GetComponentData<ElementalShockEffectComponent>(hit.HitEntity).Stacks +
+                                 1;
+                        if (stacks > config.MaxShockStacks) stacks = (int)config.MaxShockStacks;
+                    }
+                    
+                    ecb.SetComponent(hit.HitEntity, new ElementalShockEffectComponent
+                    {
+                        Stacks = stacks,
+                        HasBeenApplied = false,
+                        CurrentDurationTime = 0,
+                    });
+                    
+                    //Add Conduct Effect
+                    if (state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
+                    {
+                        ApplyConductEffect(state, hit, ecb, config);
+                    }
+                    
+                    //Add combust effect
+                    if (state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
+                    {
+                        ApplyCombustionEffect(state, hit, ecb, config);
+                    }
+                    
+                }
+            }
+        }
+    }
+
+    [BurstCompile]
+    private void ApplyFireEffect(SystemState state, EntityCommandBuffer ecb, ElementalReactionsConfig config)
+    {
+                //Apply Fire
+        foreach (var ( hitBuffer, _) 
+                 in SystemAPI.Query<DynamicBuffer<HitBufferElement>, ElementalShouldApplyFireComponent>())
+        {
+            foreach (var hit in hitBuffer)
+            {
+                if (hit.IsHandled) continue;
+                if (!state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
+                {
+                    ecb.AddComponent<ElementalFireEffectComponent>(hit.HitEntity);
+                }
+                else
+                {
+                    //Add Burn effect
+                    int stacks = 0;
+                    if (!state.EntityManager.HasComponent<ElementalBurnEffectComponent>(hit.HitEntity))
+                    {
+                        ecb.AddComponent<ElementalBurnEffectComponent>(hit.HitEntity);
+                        stacks = 1;
+                    }
+                    else
+                    {
+                        stacks = state.EntityManager.GetComponentData<ElementalBurnEffectComponent>(hit.HitEntity).Stacks +
+                                 1;
+                        if (stacks > config.MaxBurnStacks) stacks = (int)config.MaxBurnStacks;
+                    }
+                    
+                    ecb.SetComponent(hit.HitEntity, new ElementalBurnEffectComponent
+                    {
+                        Stacks = stacks,
+                        HasBeenApplied = false,
+                        CurrentDurationTime = 0,
+                    });
+
+                    //apply vulnerable
+                    if (state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
+                    {
+                        ApplyVulnerableEffect(state, hit, ecb, config);
+                    }
+                    
+                    //apply combustion
+                    if (state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
+                    {
+                        ApplyCombustionEffect(state, hit, ecb, config);
+                    }
+                }
+            }
+        }
+    }
+
+    [BurstCompile]
+    private void ApplyCombustionEffect(SystemState state, HitBufferElement hit, EntityCommandBuffer ecb,
+        ElementalReactionsConfig config)
+    {
+        if (!state.EntityManager.HasComponent<ElementalCombustionEffectComponent>(hit.HitEntity))
+        {
+            ecb.AddComponent<ElementalCombustionEffectComponent>(hit.HitEntity);
+        }
+        else
+        {
+            return;
+        }
+                    
+        ecb.SetComponent(hit.HitEntity, new ElementalCombustionEffectComponent
+        {
+            HasBeenApplied = false,
+        });
+    }
+
+    [BurstCompile]
+    private void ApplyConductEffect(SystemState state, HitBufferElement hit, EntityCommandBuffer ecb,
+        ElementalReactionsConfig config)
+    {
+        int stacks = 0;
+        if (!state.EntityManager.HasComponent<ElementalConductEffectComponent>(hit.HitEntity))
+        {
+            ecb.AddComponent<ElementalConductEffectComponent>(hit.HitEntity);
+            stacks = 1;
+        }
+        else
+        {
+            stacks = state.EntityManager.GetComponentData<ElementalConductEffectComponent>(hit.HitEntity).Stacks +
+                     1;
+            if (stacks > config.MaxConductStacks) stacks = (int)config.MaxConductStacks;
+        }
+                    
+        ecb.SetComponent(hit.HitEntity, new ElementalConductEffectComponent
+        {
+            Stacks = stacks,
+            HasBeenApplied = false,
+            CurrentDurationTime = 0,
+        });
+    }
+    
+    [BurstCompile]
+    private void ApplyVulnerableEffect(SystemState state, HitBufferElement hit, EntityCommandBuffer ecb, ElementalReactionsConfig config)
+    {
+        //Add Vulnerable Effect
+
+            int stacks = 0;
+            if (!state.EntityManager.HasComponent<ElementalVulnerableEffectComponent>(hit.HitEntity))
+            {
+                ecb.AddComponent<ElementalVulnerableEffectComponent>(hit.HitEntity);
+                stacks = 1;
+            }
+            else
+            {
+                stacks = state.EntityManager.GetComponentData<ElementalVulnerableEffectComponent>(hit.HitEntity).Stacks +
+                         1;
+                if (stacks > config.MaxVulnurableStacks) stacks = (int)config.MaxVulnurableStacks;
+            }
+                    
+            ecb.SetComponent(hit.HitEntity, new ElementalVulnerableEffectComponent
+            {
+                Stacks = stacks,
+                HasBeenApplied = false,
+                CurrentDurationTime = 0,
+            });
+    }
+    
 }

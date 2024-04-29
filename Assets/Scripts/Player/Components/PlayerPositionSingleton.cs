@@ -7,4 +7,9 @@ namespace Player
     {
         public float3 Value;
     }
+    
+    public struct PlayerRotationSingleton : IComponentData
+    {
+        public quaternion Value;
+    }
 }

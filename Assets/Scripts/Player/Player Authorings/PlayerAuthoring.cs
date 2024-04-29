@@ -14,6 +14,7 @@ namespace Player
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
                 AddComponent<PlayerTag>();
                 AddComponent<PlayerPositionSingleton>();
+                AddComponent<PlayerRotationSingleton>();
             }
         }
     }

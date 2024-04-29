@@ -15,6 +15,8 @@ public class WeaponAudio : ScriptableObject
     public EventReference hammerAudio;
     public EventReference meadAudio;
     public EventReference crowAudio;
+    public EventReference swordImpact;
+    public EventReference hammerImpact;
     public EventReference chargeAttack;
 
     private EventInstance _swordInstance;
@@ -60,12 +62,25 @@ public class WeaponAudio : ScriptableObject
                 break;
             }
         }
-        /*WepInstance = RuntimeManager.CreateInstance(weaponAudio);
-        //RuntimeManager.AttachInstanceToGameObject(gameObject);
-        WepInstance.setParameterByName("WeaponType", weapon);
-        WepInstance.setParameterByName("AttackType", attackType);
-        WepInstance.start();
-        WepInstance.release();*/
+        
+    }
+
+    public void WeaponAudioCaller(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1:
+            {
+                RuntimeManager.PlayOneShot(swordImpact);
+                Debug.Log("hur många?");
+                break;
+            }
+            case 2:
+            {
+                RuntimeManager.PlayOneShot(hammerImpact);
+                break;
+            }
+        }
     }
     public void ChargeAttackAudio(int chargeLevel)
     {

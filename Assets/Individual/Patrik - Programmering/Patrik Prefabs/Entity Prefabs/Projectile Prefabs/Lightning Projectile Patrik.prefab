@@ -329,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
+  damageReductionValue: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,11 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageContents:
-    DamageValue: 1
-    DamageType: 0
-    CriticalRate: 0
-    CriticalModifier: 0
 --- !u!114 &7899796359273220732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 0
-  knockAwayFromPlayer: 0
+  KnockDirection: 0
 --- !u!114 &8116207207063421910
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-public class ElementalLightningAuthoring : MonoBehaviour
+public class ElementalBurnEffectAuthoring : MonoBehaviour
 {
     public float currentDurationTime;
     public bool hasBeenApplied;
     public int stacks;
 
-    public class ElementalLightningAuthoringBaker : Baker<ElementalLightningAuthoring>
+    public class ElementalBurnEffectAuthoringBaker : Baker<ElementalBurnEffectAuthoring>
     {
-        public override void Bake(ElementalLightningAuthoring authoring)
+        public override void Bake(ElementalBurnEffectAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
-                new ElementalLightningComponent
+                new ElementalBurnEffectComponent
                 {
                     CurrentDurationTime = authoring.currentDurationTime,
                     HasBeenApplied = authoring.hasBeenApplied,
@@ -25,7 +25,7 @@ public class ElementalLightningAuthoring : MonoBehaviour
     }
 }
 
-public struct ElementalLightningComponent : IComponentData
+public struct ElementalBurnEffectComponent : IComponentData
 {
     public float CurrentDurationTime;
     public bool HasBeenApplied;

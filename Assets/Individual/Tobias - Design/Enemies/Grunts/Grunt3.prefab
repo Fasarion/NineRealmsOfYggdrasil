@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 110
+  damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -316,7 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObjects:
-  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
+  - {fileID: 5345650359192567939, guid: d49b4f8ea3373074986815d09ff9cc18, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,9 +358,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageContents:
     DamageValue: 3
-    DamageType: 0
     CriticalRate: 0
-    CriticalModifier: 0
 --- !u!114 &4663337924807953367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +414,6 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 0
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 1
     audioEventType: 0

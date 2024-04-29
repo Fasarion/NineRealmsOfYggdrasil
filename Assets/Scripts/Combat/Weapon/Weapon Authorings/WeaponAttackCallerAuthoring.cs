@@ -57,6 +57,13 @@ public partial struct SpecialChargeInfo
 {
     public bool IsCharging;
     public WeaponType ChargingWeapon;
+
+    public readonly bool IsChargingWithWeapon(WeaponType weaponType)
+    {
+        if (!IsCharging) return false;
+
+        return weaponType == ChargingWeapon;
+    }
 }
 
 public partial struct PrepareUltimateInfo

@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Damage;
 using Patrik;
 using Player;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
-//[DisableAutoCreation]
-public partial struct HammerSpecialSystem : ISystem
+
+public partial struct HammerSpecialThrowSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -40,16 +42,20 @@ public partial struct HammerSpecialSystem : ISystem
 
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         var playerDirection = state.EntityManager.GetComponentData<LocalTransform>(playerEntity).Forward();
+        playerDirection.y = 0;
         config.ValueRW.DirectionOfTravel = playerDirection;
 
         // Reset timer
         config.ValueRW.Timer = 0;
         
         // make hammer GO follow entity
-        foreach (var (transform, animatorReference, animatorGO, hammer) in SystemAPI
-            .Query<LocalTransform, AnimatorReference, GameObjectAnimatorPrefab, HammerComponent>())
+        foreach (var (animatorGO, knockBack) in SystemAPI
+            .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>>().WithAll<HammerComponent>())
         {
             animatorGO.FollowEntity = true;
+
+            config.ValueRW.KnockBackBeforeSpecial = knockBack.ValueRO.KnockDirection;
+            knockBack.ValueRW.KnockDirection = KnockDirectionType.PerpendicularToPlayer;
         }
         
         //TODO: Don't call on attack stop until hammer is back and player has played its catch hammer animation
@@ -63,7 +69,10 @@ public partial struct HammerSpecialSystem : ISystem
             return;
         
         // Update timer
-        config.ValueRW.Timer += SystemAPI.Time.DeltaTime;
+        float deltaTime = SystemAPI.Time.DeltaTime;
+        config.ValueRW.Timer += deltaTime;
+        
+        var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
 
         // Handle moving forwards
         if (!config.ValueRO.HasSwitchedBack)
@@ -75,6 +84,11 @@ public partial struct HammerSpecialSystem : ISystem
                     .Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab, HammerComponent>())
                 {
                     transform.ValueRW.Position += config.ValueRO.DirectionOfTravel * config.ValueRO.TravelForwardSpeed * SystemAPI.Time.DeltaTime;
+                    
+                    var directionToPlayer = playerPos - transform.ValueRO.Position;
+                    
+                    var distance = math.length(directionToPlayer);
+                    config.ValueRW.CurrentDistanceFromPlayer = distance;
                 }
             }
             else
@@ -86,22 +100,19 @@ public partial struct HammerSpecialSystem : ISystem
         else
         {
             // go back
-            if (config.ValueRO.Timer < config.ValueRO.TimeToReturnAfterTurning)
+            bool finishedReturning =
+                (config.ValueRO.CurrentDistanceFromPlayer <= config.ValueRO.DistanceFromPlayerToGrab) ||
+                config.ValueRO.Timer >= config.ValueRO.TimeToReturnAfterTurning;
+            
+            if (!finishedReturning)
             {
-
-                var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
-
                 foreach (var transform in SystemAPI
                     .Query<RefRW<LocalTransform>>().WithAll<HammerComponent>()) 
                 {
-                    // var directionToPlayer = playerPos - transform.ValueRO.Position;
-                    //
-                    // var distance = math.length(directionToPlayer);
-                    // var directionNorm = math.normalize(directionToPlayer);
-                    //
-                    // var travelBackSpeed = distance / config.ValueRO.TimeToReturnAfterTurning;
+                    var directionToPlayer = playerPos - transform.ValueRO.Position;
                     
-                  //  transform.ValueRW.Position += directionNorm * travelBackSpeed * SystemAPI.Time.DeltaTime;
+                    var distance = math.length(directionToPlayer);
+                    config.ValueRW.CurrentDistanceFromPlayer = distance;
 
                     float t = config.ValueRO.Timer * config.ValueRO.TimeToReturnAfterTurning;
                     transform.ValueRW.Position = math.lerp(transform.ValueRW.Position, playerPos, t);
@@ -114,6 +125,13 @@ public partial struct HammerSpecialSystem : ISystem
                 config.ValueRW.Timer = 0;
             }
         }
+        
+        // Rotate Hammer
+        foreach (var transform in SystemAPI
+            .Query<RefRW<LocalTransform>>().WithAll<HammerComponent>())
+        {
+            transform.ValueRW = transform.ValueRO.RotateY(deltaTime * config.ValueRO.ResolutionsPerSecond);
+        }
     }
     
     [BurstCompile]
@@ -122,14 +140,14 @@ public partial struct HammerSpecialSystem : ISystem
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
         if (!config.ValueRO.HasStarted || !config.ValueRO.HasReturned)
             return;
-        
-        
-        
+
         // make hammer entity follow GO again
-        foreach (var (transform, animatorReference, animatorGO, hammer) in SystemAPI
-            .Query<LocalTransform, AnimatorReference, GameObjectAnimatorPrefab, HammerComponent>())
+        foreach (var (animatorGO, knockBack) in SystemAPI
+            .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>>().WithAll<HammerComponent>())
         {
             animatorGO.FollowEntity = false;
+            
+            knockBack.ValueRW.KnockDirection = config.ValueRO.KnockBackBeforeSpecial;
         }
 
         // reset config
@@ -140,35 +158,4 @@ public partial struct HammerSpecialSystem : ISystem
         var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         weaponCaller.ValueRW.ResetWeaponCurrentWeaponTransform = true;
     }
-    
-    
 }
-
-// public partial class ResetHammerSystem : SystemBase
-// {
-//     protected override void OnUpdate()
-//     {
-//         
-//         
-//         
-//         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
-//         if (!config.ValueRO.HasStarted || !config.ValueRO.HasReturned)
-//             return;
-//         
-//         // make hammer entity follow GO again
-//         foreach (var (transform, animatorReference, animatorGO, hammer) in SystemAPI
-//             .Query<LocalTransform, AnimatorReference, GameObjectAnimatorPrefab, HammerComponent>())
-//         {
-//             animatorGO.FollowEntity = false;
-//         }
-//
-//         // reset config
-//         config.ValueRW.HasReturned = false;
-//         config.ValueRW.HasStarted = false;
-//         config.ValueRW.HasSwitchedBack = false;
-//
-//         var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-//         weaponCaller.ValueRW.ResetWeaponCurrentWeaponTransform = true;
-//
-//     }
-// }

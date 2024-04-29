@@ -1,22 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
+using Damage;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
 
 public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
 {
+    [Header("Indicator")]
     [SerializeField] private GameObject indicatorPrefab;
+    
+    [Header("Charge")]
     [SerializeField] private GameObject electricChargePrefab;
-    
-    [SerializeField] private float distanceToTravel = 20;
-    
     [SerializeField] private float minTimeBetweenZaps = 0.5f;
     [SerializeField] private float maxTimeBetweenZaps = 1.5f;
     
+    [Header("Travel ")]
+    [SerializeField] private float distanceToTravel = 20;
     [SerializeField] private float timeToTurnBack = 2f;
     [SerializeField] private float timeToReturnAfterTurning = 2f;
+    [SerializeField] private float resolutionsPerSecond = 2f;
     
+    [Header("Catching")]
+    [SerializeField] private float distanceFromPlayerToGrab = 1f;
+
     class Baker : Baker<HammerSpecialAttackConfigAuthoring>
     {
         public override void Bake(HammerSpecialAttackConfigAuthoring authoring)
@@ -36,6 +43,11 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TimeToReturnAfterTurning = authoring.timeToReturnAfterTurning,
                 
                 TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack,
+                DistanceFromPlayerToGrab = authoring.distanceFromPlayerToGrab,
+                
+                ResolutionsPerSecond = authoring.resolutionsPerSecond,
+                
+                CurrentDistanceFromPlayer = float.MaxValue
             });
         }
     }
@@ -52,6 +64,8 @@ public struct HammerSpecialConfig : IComponentData
     public float MaxTimeBetweenZaps;
     public float Timer;
 
+    public float ResolutionsPerSecond;
+
     public bool HasSwitchedBack;
     public bool HasReturned;
     
@@ -62,4 +76,9 @@ public struct HammerSpecialConfig : IComponentData
 
     public bool HasStarted;
     public float3 DirectionOfTravel;
+
+    public float DistanceFromPlayerToGrab;
+    public float CurrentDistanceFromPlayer;
+
+    public KnockDirectionType KnockBackBeforeSpecial;
 }

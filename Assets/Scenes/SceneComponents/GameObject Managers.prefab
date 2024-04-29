@@ -103,6 +103,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8648172130289102669}
     m_Modifications:
+    - target: {fileID: 1411533470002659700, guid: 25304f12165a9034ba1ed98d16f1536e,
+        type: 3}
+      propertyPath: folderPath
+      value: Assets/Upgrades/UpgradeTestPool
+      objectReference: {fileID: 0}
     - target: {fileID: 5900043865703822598, guid: 25304f12165a9034ba1ed98d16f1536e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -177,6 +182,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8648172130289102669}
     m_Modifications:
+    - target: {fileID: 3604638637460087170, guid: 96451babddfeea240bd0ea79b6b76d91,
+        type: 3}
+      propertyPath: upgradeUIClickDelay
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 7822618112616986989, guid: 96451babddfeea240bd0ea79b6b76d91,
         type: 3}
       propertyPath: m_Name
@@ -327,7 +337,7 @@ PrefabInstance:
     - target: {fileID: 6631405530544009219, guid: b5b1309cf2495224d8d1b8cce31e481e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2550240157414216729}
   - component: {fileID: 4796548659548809643}
+  - component: {fileID: 1575699031406846970}
   m_Layer: 0
   m_Name: Leveling Configs
   m_TagString: Untagged
@@ -130,6 +131,23 @@ MonoBehaviour:
   xPObjectPrefab: {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf,
     type: 3}
   experience: 1
+  baseDistance: 2.2
+  moveSpeed: 7
+--- !u!114 &1575699031406846970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3926381318032591694}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cae5e4ccc96c1743b6f6be8c1bb5d8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xPObjectPrefab: {fileID: 5345650359192567939, guid: d49b4f8ea3373074986815d09ff9cc18,
+    type: 3}
+  experience: 5
   baseDistance: 2
   moveSpeed: 7
 --- !u!1001 &7828563988701451680

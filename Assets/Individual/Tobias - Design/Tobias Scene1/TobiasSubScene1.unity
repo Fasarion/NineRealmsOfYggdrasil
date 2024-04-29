@@ -307,6 +307,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Entity
       objectReference: {fileID: 0}
+    - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: damageReductionValue
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       propertyPath: skillModifier.Ultimate
@@ -351,44 +356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: attackDamage
       value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[5].prefab
-      value: 
-      objectReference: {fileID: 89125744733743645, guid: 2c9cb8dfbbf8523489faaf197919c143,
-        type: 3}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[6].prefab
-      value: 
-      objectReference: {fileID: 89125744733743645, guid: f3218c258add83b428372c22a5b7c80e,
-        type: 3}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[7].prefab
-      value: 
-      objectReference: {fileID: 89125744733743645, guid: 88b5d28f137fe204ea6f00683fae5712,
-        type: 3}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[5].enemyType
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[6].enemyType
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: enemyPrefabs.Array.data[7].enemyType
-      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1178434585940269983, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -489,6 +456,16 @@ PrefabInstance:
         type: 3}
       propertyPath: knockBackForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762351246152799829, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: minTimerTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762351246152799829, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxEnemySpawnPercent
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}

@@ -53,8 +53,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 42bb4b65bd313ee42ac73f7de43ed856, type: 2}
   minTimerTime: 3
   maxTimerTime: 5
-  minEnemySpawnPercent: 0.1
-  maxEnemySpawnPercent: 0.3
+  minEnemySpawnPercent: 1
+  maxEnemySpawnPercent: 3
   innerSpawningRadius: 18.6
   outerSpawningRadius: 26.4
   startingCheckpointIndex: 0
@@ -144,8 +144,8 @@ MonoBehaviour:
   currentTimerTime: 0
   enemyCount: 0
   targetEnemyCount: 0
-  minEnemySpawnPercent: 0
-  maxEnemySpawnPercent: 0
+  minEnemySpawnCount: 0
+  maxEnemySpawnCount: 0
   innerSpawningRadius: 0
   outerSpawningRadius: 0
   currentActiveCheckpoint: 0

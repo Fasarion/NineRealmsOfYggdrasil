@@ -24,7 +24,7 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
     public Sprite meadActiveSymbol;
     public Sprite birdActiveSymbol;
 
-    private Sprite currentlySelectedWeapon;
+    private Sprite currentlySelectedWeaponSymbol;
     public Sprite spriteToUpdateTo;
 
     public Image image;
@@ -38,8 +38,8 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
         mainWeaponSymbolTransform = GetComponent<RectTransform>();
         mainWeaponSymbolTransform.localScale = new Vector3(baseScale, baseScale, baseScale);
         animatedScale = baseScale;
-        currentlySelectedWeapon = hammerActiveSymbol;
-        image.sprite = currentlySelectedWeapon;
+        currentlySelectedWeaponSymbol = hammerActiveSymbol;
+        image.sprite = currentlySelectedWeaponSymbol;
         var rect = image.sprite.rect;
         imageTransform = image.GetComponent<RectTransform>();
         image.SetNativeSize();
@@ -59,17 +59,50 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
     //For debugging purposes
     public void OnCurrentWeaponUpdatedButton()
     {
-        currentlySelectedWeapon = spriteToUpdateTo;
-        image.sprite = currentlySelectedWeapon;
+        currentlySelectedWeaponSymbol = spriteToUpdateTo;
+        image.sprite = currentlySelectedWeaponSymbol;
         //var rect = image.sprite.rect;
         image.SetNativeSize();
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
     }
     
-    public void OnCurrentWeaponUpdated(WeaponType weaponType, List<WeaponType> inactiveWeapons)
+    public void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
     {
-        currentlySelectedWeapon = spriteToUpdateTo;
-        image.sprite = currentlySelectedWeapon;
+        //We won't use the left and right inactives here.
+        switch (weaponType)
+        {
+            case WeaponType.Hammer:
+            {
+                currentlySelectedWeaponSymbol = hammerActiveSymbol;
+                break;
+            }
+            case WeaponType.Mead:
+            {
+                currentlySelectedWeaponSymbol = meadActiveSymbol;
+                break;
+            }
+            case WeaponType.Sword:
+            {
+                currentlySelectedWeaponSymbol = swordActiveSymbol;
+                break;
+            }
+            case WeaponType.Birds:
+            {
+                currentlySelectedWeaponSymbol = birdActiveSymbol;
+                break;
+            }
+            case WeaponType.None:
+            {
+                Debug.Log("The weapon enum was none, which should not be possible!");
+                break;
+            }
+            default:
+            {
+                Debug.Log("The weapon enum was null which should not be possible!");
+                break;
+            }
+        }
+        image.sprite = currentlySelectedWeaponSymbol;
         //var rect = image.sprite.rect;
         image.SetNativeSize();
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);

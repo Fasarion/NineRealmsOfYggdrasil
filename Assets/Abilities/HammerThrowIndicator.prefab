@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6006510307695221267}
   - component: {fileID: 3724563127122919482}
   - component: {fileID: 4591163097437562532}
-  - component: {fileID: 2978877030738649632}
   - component: {fileID: 4130307957200949669}
+  - component: {fileID: 4461909571796949888}
   m_Layer: 0
   m_Name: HammerThrowIndicator
   m_TagString: Untagged
@@ -100,21 +100,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxChargeTime: 0
   currentChargeTime: 0
---- !u!114 &2978877030738649632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3054128452994836860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea0b3afab19949546bc7e090605b36cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isInitialized: 0
-  area: 0
-  hasFired: 0
 --- !u!114 &4130307957200949669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +112,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afa493f1eebb75941af3bd96d0c5d8fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 1314887653557277300, guid: 3da353c3ecc266840a079a9b7fd8d545,
+  gameObjectPrefab: {fileID: 1117679983495964835, guid: adec461b75f832641badfe8eb151bb03,
     type: 3}
-  followsEntity: 0
+  followsEntity: 1
+--- !u!114 &4461909571796949888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3054128452994836860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb0a6b582970453f88071d2ffa7904b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

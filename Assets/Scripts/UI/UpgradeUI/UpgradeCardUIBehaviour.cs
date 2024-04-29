@@ -34,6 +34,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     public void UpdateCardDisplay(UpgradeObject upgradeObject)
     {
         PopulateDisplayValues(upgradeObject);
+        OnMouseHoverExit();
 
         cardTitleText.text = _cardTitle;
         cardDescriptionText.text = _cardDescription;
@@ -52,7 +53,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
 
     public void RegisterMouseClick()
     {
-        OnMouseHoverExit();
+
         _manager.RegisterUpgradeCardClick(_upgradeObjectIndex);
 
     }

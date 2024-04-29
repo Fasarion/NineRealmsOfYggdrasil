@@ -44,12 +44,17 @@ namespace Player
                 Debug.LogWarning("No mouse position found, wont rotate player.");
                 return;
             }
+
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
+                return;
+
             
             float rotationSpeed = 1f;
             if (SystemAPI.TryGetSingleton(out AimSettingsData aimSettings))
             {
                 rotationSpeed = aimSettings.rotationSpeed;
             }
+            
             
             float3 mousePosition = mousePositionInput.WorldPosition;
             
@@ -60,6 +65,10 @@ namespace Player
                 directionToMouse.y = 0;
                 quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(directionToMouse, math.up()));
                 playerTransform.ValueRW.Rotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
+                playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
+                
+                
+
             }
         }
     }

@@ -27,8 +27,8 @@ public class SpawnConfigAuthoring : MonoBehaviour
 
     [HideInInspector] public int enemyCount;
     [HideInInspector] public int targetEnemyCount;
-    [HideInInspector] public float minEnemySpawnPercent;
-    [HideInInspector] public float maxEnemySpawnPercent;
+    [HideInInspector] public float minEnemySpawnCount;
+    [HideInInspector] public float maxEnemySpawnCount;
 
     [HideInInspector] public float innerSpawningRadius;
     [HideInInspector] public float outerSpawningRadius;
@@ -53,8 +53,8 @@ public class SpawnConfigAuthoring : MonoBehaviour
                     maxTimerTime = authoring.maxTimerTime,
                     enemyCount = authoring.enemyCount,
                     targetEnemyCount = authoring.targetEnemyCount,
-                    minEnemySpawnPercent = authoring.minEnemySpawnPercent,
-                    maxEnemySpawnPercent = authoring.maxEnemySpawnPercent,
+                    minEnemySpawnCount = authoring.minEnemySpawnCount,
+                    maxEnemySpawnCount = authoring.maxEnemySpawnCount,
                     currentTimerTime = authoring.currentTimerTime,
                     innerSpawningRadius = authoring.innerSpawningRadius,
                     outerSpawningRadius = authoring.outerSpawningRadius,
@@ -83,8 +83,8 @@ public struct SpawnConfig : IComponentData
     public float maxTimerTime;
     public int enemyCount;
     public int targetEnemyCount;
-    public float minEnemySpawnPercent;
-    public float maxEnemySpawnPercent;
+    public float minEnemySpawnCount;
+    public float maxEnemySpawnCount;
     public float currentTimerTime;
     public float innerSpawningRadius;
     public float outerSpawningRadius;

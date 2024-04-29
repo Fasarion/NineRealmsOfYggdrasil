@@ -26,7 +26,7 @@ public partial struct MoveTowardsPlayerSystem : ISystem
         float directionMultiplier = 1;
 
         foreach (var (transform, moveSpeed, moveToPlayer) 
-            in SystemAPI.Query<RefRW<LocalTransform>, MoveSpeedComponent, MoveTowardsPlayerComponent>())
+            in SystemAPI.Query<RefRW<LocalTransform>, MoveSpeedComponent, MoveTowardsPlayerComponent>().WithNone<HitStopComponent>())
         {
             var distanceToPlayer = math.distancesq(playerPos, transform.ValueRO.Position);
             if (distanceToPlayer < moveToPlayer.MinimumDistanceForMovingSquared)

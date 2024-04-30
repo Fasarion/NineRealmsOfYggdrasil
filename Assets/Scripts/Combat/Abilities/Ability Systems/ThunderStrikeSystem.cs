@@ -12,6 +12,8 @@ using Unity.Transforms;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[UpdateBefore(typeof(HitStopSystem))]
+[UpdateBefore(typeof(HandleHitBufferSystem))]
 [BurstCompile]
 public partial struct ThunderStrikeSystem : ISystem
 {

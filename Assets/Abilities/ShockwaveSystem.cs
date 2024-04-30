@@ -10,6 +10,7 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateBefore(typeof(HitStopSystem))]
 [BurstCompile]
 public partial struct ShockwaveSystem : ISystem
 {

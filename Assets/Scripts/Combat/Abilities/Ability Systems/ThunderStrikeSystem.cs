@@ -48,7 +48,7 @@ public partial struct ThunderStrikeSystem : ISystem
                 ability.ValueRW.isInitialized = true;
 
                 originTransform.ValueRW.Position = targetPos + new float3(0, thunderConfig.mainEffectHeightOffset, 0);
-                originTransform.ValueRW.Rotation = Quaternion.Euler(-90f, 0f, 0f);
+                originTransform.ValueRW.Rotation = Quaternion.Euler(0f, 0f, 0f);
                 originTransform.ValueRW.Scale = 1;
             }
 

@@ -62,6 +62,10 @@ public partial struct IceRingSystem : ISystem
             {
                 chargeTimer.ValueRW.currentChargeTime = 0;
                 ability.ValueRW.currentAbilityStage++;
+                if (ability.ValueRO.currentAbilityStage >= stageBuffer.Length)
+                {
+                    ability.ValueRW.currentAbilityStage = stageBuffer.Length - 1;
+                }
             }
             //TODO: Factor in player base stats into area calculation
             // var tValue = chargeTimer.ValueRO.currentChargeTime / config.ValueRO.maxChargeTime;

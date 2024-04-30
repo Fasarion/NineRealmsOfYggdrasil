@@ -7,7 +7,7 @@ using Unity.Entities;
 using UnityEngine;
 
 [BurstCompile]
-[UpdateBefore(typeof(ApplyDamageSystem))]
+[UpdateBefore(typeof(HandleHitBufferSystem))]
 public partial struct HitStopSystem : ISystem
 {
     [BurstCompile]

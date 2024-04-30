@@ -36,6 +36,11 @@ public class PlayerAudioBehaviour : MonoBehaviour
         return (int)weaponType;
     }
 
+    public void PlayFootstepAudio()
+    {
+        _audioManager.playerAudio.PlayFootstepAudio();
+    }
+
     public void PlayWeaponSwingAudio(int weapon, int attackType)
     {
         if (_audioManager == null)

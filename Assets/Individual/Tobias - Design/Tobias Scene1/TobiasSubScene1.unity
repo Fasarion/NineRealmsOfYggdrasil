@@ -123,6 +123,26 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &505779751 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3261211697884552786, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    type: 3}
+  m_PrefabInstance: {fileID: 1650605478}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &505779759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 505779751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbd023080c5337d4ab45ec5732438c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentElapsedTime: 0
+  maxDuration: 0.3
 --- !u!1 &1500777181
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +329,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
+      propertyPath: maxHP
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
       propertyPath: damageReductionValue
       value: 1
       objectReference: {fileID: 0}
@@ -467,6 +492,71 @@ PrefabInstance:
       propertyPath: maxDisplayTime
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].maxArea
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[1].maxArea
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[2].maxArea
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].maxChargeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[1].maxChargeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[2].maxChargeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].damageModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[1].damageModifier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[2].damageModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: damageArea
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: damageDelayTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: shockwaveEffectHeightOffset
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: damage
@@ -495,7 +585,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3261211697884552786, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 505779759}
   m_SourcePrefab: {fileID: 100100000, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
 --- !u!1001 &2129983241
 PrefabInstance:

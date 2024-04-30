@@ -40,7 +40,7 @@ public class PlayerAudio : ScriptableObject
     }
     //for footstep sounds, raycast, check when hit ground, what ground
     //do instance, set parameter for ground, play.
-    public void movingAudio()
+    public void PlayFootstepAudio()
     {
         RuntimeManager.PlayOneShot(footsteps);
     }

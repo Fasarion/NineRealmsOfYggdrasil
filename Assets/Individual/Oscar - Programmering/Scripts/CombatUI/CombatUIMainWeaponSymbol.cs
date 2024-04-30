@@ -19,7 +19,7 @@ public class CombatUIMainWeaponSymbol : CombatUIWeaponSymbol
     // Start is called before the first frame update
     private bool shouldExpand;
     
-    //public Sprite spriteToUpdateTo;
+    public Sprite spriteToUpdateTo;
 
     //public Image image;
 
@@ -36,6 +36,8 @@ public class CombatUIMainWeaponSymbol : CombatUIWeaponSymbol
        
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
     }
+    
+    
 
     /*public void OnEnable()
     {
@@ -46,16 +48,17 @@ public class CombatUIMainWeaponSymbol : CombatUIWeaponSymbol
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
     }*/
-
+    
+    
     //For debugging purposes
-    /*public void OnCurrentWeaponUpdatedButton()
+    public void OnCurrentWeaponUpdatedButton()
     {
-        currentlySelectedWeaponSymbol = spriteToUpdateTo;
-        image.sprite = currentlySelectedWeaponSymbol;
+        currentlySelectedUltSymbol = spriteToUpdateTo;
+        ultImage.sprite = currentlySelectedUltSymbol;
         //var rect = image.sprite.rect;
-        image.SetNativeSize();
+        ultImage.SetNativeSize();
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
-    }*/
+    }
     
     /*public void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
     {

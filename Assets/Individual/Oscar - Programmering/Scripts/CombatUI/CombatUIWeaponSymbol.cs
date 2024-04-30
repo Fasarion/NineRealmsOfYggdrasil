@@ -12,24 +12,31 @@ public class CombatUIWeaponSymbol : MonoBehaviour
         Left,
         Right
     }
-    public Sprite hammerSymbol;
-    public Sprite swordSymbol;
-    public Sprite meadSymbol;
-    public Sprite birdSymbol;
+    public List<Sprite> hammerSymbols;
+    public List<Sprite> swordSymbols;
+    public List<Sprite> meadSymbols;
+    public List<Sprite> birdSymbols;
     
     //public Sprite spriteToUpdateTo;
-    public Image image;
+    public Image normalImage;
+    public Image ultImage;
+    public Image specialImage;
+
     [SerializeField]private SymbolType symbolType;
     
-    protected Sprite currentlySelectedWeaponSymbol;
+    protected Sprite currentlySelectedUltSymbol;
+    protected Sprite currentlySelectedNormalSymbol;
+    protected Sprite currentlySelectedSpecialSymbol;
     
     // Start is called before the first frame update
     public virtual void Start()
     {
-        currentlySelectedWeaponSymbol = hammerSymbol;
-        image.sprite = currentlySelectedWeaponSymbol;
-        var rect = image.sprite.rect;
-        image.SetNativeSize();
+        currentlySelectedUltSymbol = hammerSymbols[1];
+        currentlySelectedNormalSymbol = hammerSymbols[0];
+        currentlySelectedSpecialSymbol = hammerSymbols[2];
+        ultImage.sprite = currentlySelectedUltSymbol;
+        var rect = ultImage.sprite.rect;
+        ultImage.SetNativeSize();
     }
     
     public void OnEnable()
@@ -65,9 +72,9 @@ public class CombatUIWeaponSymbol : MonoBehaviour
             } 
         }
       
-        image.sprite = currentlySelectedWeaponSymbol;
-        //var rect = image.sprite.rect;
-        image.SetNativeSize();
+        SetSymbols(ultImage, currentlySelectedUltSymbol);
+        SetSymbols(normalImage, currentlySelectedNormalSymbol);
+        SetSymbols(specialImage, currentlySelectedSpecialSymbol);
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
     }
 
@@ -77,23 +84,31 @@ public class CombatUIWeaponSymbol : MonoBehaviour
         {
             case WeaponType.Hammer:
             {
-                currentlySelectedWeaponSymbol = hammerSymbol;
+                currentlySelectedNormalSymbol = hammerSymbols[0];
+                currentlySelectedUltSymbol = hammerSymbols[1];
+                currentlySelectedSpecialSymbol = hammerSymbols[2];
                 break;
             }
             case WeaponType.Sword:
             {
-                currentlySelectedWeaponSymbol = swordSymbol;
+                currentlySelectedNormalSymbol = swordSymbols[0];
+                currentlySelectedUltSymbol = swordSymbols[1];
+                currentlySelectedSpecialSymbol = swordSymbols[2];
                 break;
             }
             case WeaponType.Mead:
             {
-                currentlySelectedWeaponSymbol = meadSymbol;
+                currentlySelectedNormalSymbol = meadSymbols[0];
+                currentlySelectedUltSymbol = meadSymbols[1];
+                currentlySelectedSpecialSymbol = meadSymbols[2];
                 break;
             }
            
             case WeaponType.Birds:
             {
-                currentlySelectedWeaponSymbol = birdSymbol;
+                currentlySelectedNormalSymbol = birdSymbols[0];
+                currentlySelectedUltSymbol = birdSymbols[1];
+                currentlySelectedSpecialSymbol = birdSymbols[2];
                 break;
             }
             case WeaponType.None:
@@ -106,14 +121,20 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 Debug.Log("The weapon enum was null which should not be possible!");
                 break;
             }
+            
+            
         }
+        
+       
+    }
+    
+    private void SetSymbols(Image image, Sprite current)
+    {
+        image.sprite = current;
+        image.SetNativeSize();
     }
 
-    // Update is called once per frame
-    public virtual void Update()
-    {
-        
-    }
+    
     
    
 }

@@ -522,7 +522,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  spawn: 0
+  spawn: 1
 --- !u!4 &434715216
 Transform:
   m_ObjectHideFlags: 0
@@ -1320,7 +1320,7 @@ PrefabInstance:
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4622802251312470920, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}

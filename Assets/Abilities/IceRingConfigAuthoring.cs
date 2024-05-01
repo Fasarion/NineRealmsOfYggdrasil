@@ -18,6 +18,7 @@ public class IceRingConfigAuthoring : MonoBehaviour
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
 
+    [HideInInspector] public float ogCachedDamageValue;
     [HideInInspector] public bool isInitialized;
     [HideInInspector] public bool isAbilityReleased;
     
@@ -42,6 +43,7 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     vfxScale = authoring.vfxScale,
                     chargeAreaVfxHeightOffset = authoring.chargeAreaVfxHeightOffset,
                     abilityVfxHeightOffset = authoring.abilityVfxHeightOffset,
+                    ogCachedDamageValue = authoring.ogCachedDamageValue,
                 });
             
             var buffer = AddBuffer<IceRingStageElement>(entity);
@@ -73,6 +75,7 @@ public struct IceRingConfig : IComponentData
     public float vfxScale;
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
+    public float ogCachedDamageValue;
 }
 
 public struct IceRingStageElement : IBufferElementData

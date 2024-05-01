@@ -43,7 +43,7 @@ public partial struct IceRingSystem : ISystem
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var stageBuffer = SystemAPI.GetSingletonBuffer<IceRingStageElement>(false);
-        
+        var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
         
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
@@ -55,6 +55,8 @@ public partial struct IceRingSystem : ISystem
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
                 ability.ValueRW.isInitialized = true;
                 transform.ValueRW.Rotation = Quaternion.Euler(0, config.ValueRO.chargeAreaVfxHeightOffset, 0f);
+                var damageComponent = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+                config.ValueRW.ogCachedDamageValue = damageComponent.Value.DamageValue;
             }
 
             //Charge behaviour
@@ -68,10 +70,11 @@ public partial struct IceRingSystem : ISystem
                 {
                     ability.ValueRW.currentAbilityStage = stageBuffer.Length - 1;
                 }
-                
-                var damageComponent = state.EntityManager.GetComponentData<CachedDamageComponent>(entity);
-                damageComponent.Value.DamageValue *= stageBuffer[ability.ValueRO.currentAbilityStage].damageModifier;
-                ecb.SetComponent(entity, damageComponent);
+
+                var damageComponent = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+                damageComponent.Value.DamageValue = stageBuffer[ability.ValueRO.currentAbilityStage].damageModifier *
+                                                    config.ValueRO.ogCachedDamageValue;
+                ecb.SetComponent(configEntity, damageComponent);
             }
             //TODO: Factor in player base stats into area calculation
             // var tValue = chargeTimer.ValueRO.currentChargeTime / config.ValueRO.maxChargeTime;

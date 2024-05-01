@@ -1414,6 +1414,21 @@ PrefabInstance:
       propertyPath: abilityStages.Array.data[2].maxChargeTime
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].damageModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[1].damageModifier
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[2].damageModifier
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive

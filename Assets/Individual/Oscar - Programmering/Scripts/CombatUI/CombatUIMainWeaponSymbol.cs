@@ -19,7 +19,7 @@ public class CombatUIMainWeaponSymbol : CombatUIWeaponSymbol
     // Start is called before the first frame update
     private bool shouldExpand;
     
-    public Sprite spriteToUpdateTo;
+    private Sprite debugSpriteToUpdateTo;
 
     //public Image image;
 
@@ -53,7 +53,7 @@ public class CombatUIMainWeaponSymbol : CombatUIWeaponSymbol
     //For debugging purposes
     public void OnCurrentWeaponUpdatedButton()
     {
-        currentlySelectedUltSymbol = spriteToUpdateTo;
+        //currentlySelectedUltSymbol = spriteToUpdateTo;
         ultImage.sprite = currentlySelectedUltSymbol;
         //var rect = image.sprite.rect;
         ultImage.SetNativeSize();

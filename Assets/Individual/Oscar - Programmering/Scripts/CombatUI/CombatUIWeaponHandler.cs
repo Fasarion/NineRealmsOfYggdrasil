@@ -18,9 +18,9 @@ public class CombatUIWeaponHandler : MonoBehaviour
 
     public static Action<WeaponType, WeaponType, WeaponType> onCurrentWeaponUpdated;
     //Placeholder for debugging purposes;
-    private WeaponType hammerWeapon = WeaponType.Hammer;
-    private WeaponType swordWeapon = WeaponType.Sword;
-    private WeaponType birdWeapon = WeaponType.Birds;
+    //private WeaponType hammerWeapon = WeaponType.Hammer;
+    //private WeaponType swordWeapon = WeaponType.Sword;
+    //private WeaponType birdWeapon = WeaponType.Birds;
     
     //private WeaponType meadWeapon = WeaponType.Mead;
     //I am missing a class to reference to get the current types of weapons from the player

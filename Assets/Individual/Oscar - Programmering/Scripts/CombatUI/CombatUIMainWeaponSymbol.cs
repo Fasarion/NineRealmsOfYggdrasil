@@ -5,7 +5,7 @@ using Patrik;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CombatUIMainWeaponSymbol : MonoBehaviour
+public class CombatUIMainWeaponSymbol : CombatUIWeaponSymbol
 {
     public float baseScale;
 
@@ -18,35 +18,28 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
     //private float startTime;
     // Start is called before the first frame update
     private bool shouldExpand;
+    
+    private Sprite debugSpriteToUpdateTo;
 
-    public Sprite hammerActiveSymbol;
-    public Sprite swordActiveSymbol;
-    public Sprite meadActiveSymbol;
-    public Sprite birdActiveSymbol;
-
-    private Sprite currentlySelectedWeaponSymbol;
-    public Sprite spriteToUpdateTo;
-
-    public Image image;
+    //public Image image;
 
     private RectTransform imageTransform;
     //public Button debugButtonToSwapSelectedWeapon;
     
     
-    void Start()
+    public override void Start()
     {
+        base.Start();
         mainWeaponSymbolTransform = GetComponent<RectTransform>();
         mainWeaponSymbolTransform.localScale = new Vector3(baseScale, baseScale, baseScale);
         animatedScale = baseScale;
-        currentlySelectedWeaponSymbol = hammerActiveSymbol;
-        image.sprite = currentlySelectedWeaponSymbol;
-        var rect = image.sprite.rect;
-        imageTransform = image.GetComponent<RectTransform>();
-        image.SetNativeSize();
+       
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
     }
+    
+    
 
-    public void OnEnable()
+    /*public void OnEnable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
     }
@@ -54,19 +47,20 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
     public void OnDisable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
-    }
-
+    }*/
+    
+    
     //For debugging purposes
     public void OnCurrentWeaponUpdatedButton()
     {
-        currentlySelectedWeaponSymbol = spriteToUpdateTo;
-        image.sprite = currentlySelectedWeaponSymbol;
+        //currentlySelectedUltSymbol = spriteToUpdateTo;
+        ultImage.sprite = currentlySelectedUltSymbol;
         //var rect = image.sprite.rect;
-        image.SetNativeSize();
+        ultImage.SetNativeSize();
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
     }
     
-    public void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
+    /*public void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
     {
         //We won't use the left and right inactives here.
         switch (weaponType)
@@ -76,16 +70,17 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
                 currentlySelectedWeaponSymbol = hammerActiveSymbol;
                 break;
             }
-            case WeaponType.Mead:
-            {
-                currentlySelectedWeaponSymbol = meadActiveSymbol;
-                break;
-            }
             case WeaponType.Sword:
             {
                 currentlySelectedWeaponSymbol = swordActiveSymbol;
                 break;
             }
+            case WeaponType.Mead:
+            {
+                currentlySelectedWeaponSymbol = meadActiveSymbol;
+                break;
+            }
+            
             case WeaponType.Birds:
             {
                 currentlySelectedWeaponSymbol = birdActiveSymbol;
@@ -106,7 +101,7 @@ public class CombatUIMainWeaponSymbol : MonoBehaviour
         //var rect = image.sprite.rect;
         image.SetNativeSize();
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
-    }
+    }*/
 
     // Update is called once per frame
     void Update()

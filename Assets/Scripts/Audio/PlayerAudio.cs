@@ -77,28 +77,4 @@ public class PlayerAudio : ScriptableObject
     }
 
 
-    /*public void stepAudio()
-    {
-        RuntimeManager.PlayOneshot(footsteps);
-    }*/
-
-    /*   
-       [Header("Movement/VO")] 
-       public EventReference footsteps;
-   
-       public EventReference takingDamage;
-   
-       public EventReference playerDeath;
-       //[FMODUnity.EventRef] public string footsteps = null;
-   
-       public EventReference dash;
-   
-       [Header("Enemy")] 
-       public EventReference wetDeath;
-   
-   
-       [Header("Boss")] 
-       public EventReference death;
-   
-   */
 }

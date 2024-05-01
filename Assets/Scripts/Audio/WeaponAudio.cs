@@ -64,7 +64,7 @@ public class WeaponAudio : ScriptableObject
         }
         
     }
-
+    //Kallar på ljud när vapen träffar något
     public void WeaponAudioCaller(int weapon)
     {
         switch (weapon)
@@ -72,7 +72,7 @@ public class WeaponAudio : ScriptableObject
             case 1:
             {
                 RuntimeManager.PlayOneShot(swordImpact);
-                Debug.Log("hur många?");
+                //Debug.Log("hur många?");
                 break;
             }
             case 2:

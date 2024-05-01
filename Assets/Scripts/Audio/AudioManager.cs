@@ -31,7 +31,7 @@ public class AudioManager : MonoBehaviour
         {
             case 0: //No category
             {
-                Debug.Log("No Category Type Set");
+                //Debug.Log("No Category Type Set");
                 break;
             }
             case 1: //PlayerCategory

@@ -64,7 +64,7 @@ public class WeaponAudio : ScriptableObject
         }
         
     }
-
+    //Kallar på ljud när vapen träffar något
     public void WeaponAudioCaller(int weapon)
     {
         switch (weapon)

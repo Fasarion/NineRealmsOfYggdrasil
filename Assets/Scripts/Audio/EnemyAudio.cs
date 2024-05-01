@@ -59,6 +59,7 @@ public class EnemyAudio : ScriptableObject
         
     }
 
+    //Spelar Ljud med rätt vapen när träffad. OBS JUST NU BROKEN
     public void gruntOnHit()
     {
         switch (PlayerAudioBehaviour.GetWeaponTypeAudio())

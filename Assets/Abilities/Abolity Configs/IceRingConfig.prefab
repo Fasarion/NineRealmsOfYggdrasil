@@ -54,10 +54,21 @@ MonoBehaviour:
   chargeAreaPrefab: {fileID: 3054128452994836860, guid: 3296f554ce86fa64e90a6efcfdbbc810,
     type: 3}
   maxDisplayTime: 1
-  damageDelayTime: 1
+  damageDelayTime: 0.2
   maxChargeTime: 3
   maxArea: 50
   chargeSpeed: 1
+  abilityStages:
+  - damageModifier: 1
+    maxArea: 2.5
+    maxChargeTime: 1.2
+  - damageModifier: 1.5
+    maxArea: 4.5
+    maxChargeTime: 1.2
+  - damageModifier: 2
+    maxArea: 6
+    maxChargeTime: 1.2
+  vfxScale: 0.5
   isInitialized: 0
   isAbilityReleased: 0
 --- !u!114 &613255897913659809
@@ -108,7 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 50
+  knockBackForce: 5
   KnockDirection: 0
 --- !u!114 &7389693164875771184
 MonoBehaviour:

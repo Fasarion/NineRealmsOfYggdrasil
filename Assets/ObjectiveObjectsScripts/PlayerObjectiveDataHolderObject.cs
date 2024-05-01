@@ -6,8 +6,8 @@ using UnityEngine;
 [CreateAssetMenu]
 public class PlayerObjectiveDataHolderObject : ScriptableObject
 {
-    public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
-    public Dictionary<ObjectiveObjectType, int> objectiveObjectsNeededDictionary;
+    [HideInInspector] public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
+    [HideInInspector] public Dictionary<ObjectiveObjectType, int> objectiveObjectsNeededDictionary;
     
     public void AddObjectiveObject(ObjectiveObjectType type, int count)
     {
@@ -46,6 +46,8 @@ public class PlayerObjectiveDataHolderObject : ScriptableObject
 
     public bool CheckIfObjectiveReached()
     {
+        if (objectiveObjectsDictionary.Count <= 0) return false;
+        
         foreach (var pair in objectiveObjectsNeededDictionary)
         {
             if (objectiveObjectsDictionary.ContainsKey(pair.Key))

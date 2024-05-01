@@ -1069,6 +1069,54 @@ PrefabInstance:
       propertyPath: uiElements.Array.data[5]
       value: 
       objectReference: {fileID: 1966524851}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[1].type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[2].type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[0].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6221e6da18435d8458f1177d867d58a5,
+        type: 3}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[1].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c0c13889e1edf7b4ca1191fdf37637b9,
+        type: 3}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[2].sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 98fb38a5413fd86478669964e6c03726,
+        type: 3}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[0].neededAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[1].neededAmount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6446108799359810587, guid: 70c8af16573824146b66970a4db775d7,
+        type: 3}
+      propertyPath: objectiveObjectDataReferences.Array.data[2].neededAmount
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8648172130289102669, guid: 70c8af16573824146b66970a4db775d7,
         type: 3}
       propertyPath: m_LocalPosition.x

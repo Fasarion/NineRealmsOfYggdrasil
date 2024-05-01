@@ -377,6 +377,31 @@ PrefabInstance:
       propertyPath: knockBackForce
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_Name
@@ -511,6 +536,16 @@ PrefabInstance:
         type: 3}
       propertyPath: abilityStages.Array.data[2].damageModifier
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: mainEffectHeightOffset
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: shockwaveEffectHeightOffset
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}

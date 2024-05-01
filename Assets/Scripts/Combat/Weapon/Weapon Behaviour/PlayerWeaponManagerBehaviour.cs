@@ -429,6 +429,8 @@ namespace Patrik
         {
             currentAttackType = AttackType.Ultimate;
             OnUltimatePrepare?.Invoke(GetActiveAttackData());
+
+            playerAnimator.SetBool("attackUltimate", true);
         }
 
         public void ResetActiveWeapon()

@@ -7,6 +7,7 @@ using UnityEngine;
 public class PlayerObjectiveDataHolderObject : ScriptableObject
 {
     public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
+    public Dictionary<ObjectiveObjectType, int> objectiveObjectsNeededDictionary;
     
     public void AddObjectiveObject(ObjectiveObjectType type, int count)
     {
@@ -33,6 +34,30 @@ public class PlayerObjectiveDataHolderObject : ScriptableObject
         result = objectiveObjectsDictionary[type];
         
         return result;
+    }
+
+    public void SetUpObjectiveObjectDictionary(ObjectiveObjectDataReference[] dataReferences)
+    {
+        foreach (var data in dataReferences)
+        {
+            objectiveObjectsNeededDictionary.Add(data.type, data.neededAmount);
+        }
+    }
+
+    public bool CheckIfObjectiveReached()
+    {
+        foreach (var pair in objectiveObjectsNeededDictionary)
+        {
+            if (objectiveObjectsDictionary.ContainsKey(pair.Key))
+            {
+                if (objectiveObjectsDictionary[pair.Key] >= objectiveObjectsNeededDictionary[pair.Key])
+                {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 
     public void ClearPlayerInventory()

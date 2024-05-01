@@ -66,6 +66,17 @@ public partial class UpgradeApplierSystem : SystemBase
                 EntityManager.SetComponentData(entity, damageComponent);
                 return;
             
+            case UpgradeValueTypes.baseAtk:
+                if (!EntityManager.HasComponent<DamageComponent>(entity))
+                {
+                    EntityManager.AddComponent<DamageComponent>(entity);
+                }
+
+                var damageComponent2 = EntityManager.GetComponentData<DamageComponent>(entity);
+                damageComponent2.Value.DamageValue += valueAmount;
+                EntityManager.SetComponentData(entity, damageComponent2);
+                return;
+            
             case UpgradeValueTypes.crit:
                 if (!EntityManager.HasComponent<DamageComponent>(entity))
                 {

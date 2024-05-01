@@ -151,7 +151,6 @@ namespace Patrik
         private void OnSpecialCharge(AttackData data)
         {
             TryWriteOverActiveAttackData(data);
-            Debug.Log("On special charge");
         }
 
         private void TryWriteOverActiveAttackData(AttackData data)
@@ -469,8 +468,6 @@ namespace Patrik
                     };
                 
                     canAttack = false;
-                    
-                    Debug.Log("Start charge");
                 }
             }
             

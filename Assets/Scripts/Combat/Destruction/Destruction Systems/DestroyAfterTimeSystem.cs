@@ -24,6 +24,11 @@ namespace Destruction
                 // destroy it
                 if (destroyObject.ValueRO.CurrentLifeTime > destroyObject.ValueRO.TimeToDestroy)
                 {
+                    if (!state.EntityManager.HasComponent<ShouldBeDestroyed>(entity))
+                    {
+                        ecb.AddComponent<ShouldBeDestroyed>(entity);
+                    }
+                    
                     ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
                 }
             }

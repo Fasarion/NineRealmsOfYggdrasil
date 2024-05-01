@@ -62,6 +62,7 @@ public struct HammerSpecialConfig : IComponentData
     
     public float MinTimeBetweenZaps;
     public float MaxTimeBetweenZaps;
+    public float TimeOfLastZap;
     public float Timer;
 
     public float ResolutionsPerSecond;

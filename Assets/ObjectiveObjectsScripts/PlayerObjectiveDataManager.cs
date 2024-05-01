@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum ObjectiveObjectType
 {
@@ -24,7 +25,7 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public PlayerObjectiveDataHolderObject dataHolder;
     public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
     public List<ObjectiveObjectUIElementBehaviour> uiElements;
-    public List<ObjectiveObjectDataReference> ObjectiveObjectSpriteReferences;
+    public List<ObjectiveObjectDataReference> objectiveObjectDataReferences;
     public Sprite defaultSprite;
 
     private void OnEnable()
@@ -53,6 +54,7 @@ public class PlayerObjectiveDataManager : MonoBehaviour
         dataHolder.ClearPlayerInventory();
         objectiveObjectsDictionary = dataHolder.objectiveObjectsDictionary;
         ClearUI();
+        //dataHolder.SetUpObjectiveObjectDictionary(objectiveObjectDataReferences.ToArray());
     }
 
     private void Update()
@@ -69,15 +71,15 @@ public class PlayerObjectiveDataManager : MonoBehaviour
             }
         }
 
-        if (dataHolder.CheckIfObjectiveReached())
-        {
-            DisplayWinScreen();
-        }
+        // if (dataHolder.CheckIfObjectiveReached())
+        // {
+        //     DisplayWinScreen();
+        // }
     }
 
     private void DisplayWinScreen()
     {
-        
+        Debug.Log("you win");
     }
 
     public void ClearUI()
@@ -91,7 +93,7 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public Sprite GetObjectiveObjectSprite(ObjectiveObjectType type)
     {
         Sprite result = defaultSprite;
-        foreach (var obj in ObjectiveObjectSpriteReferences)
+        foreach (var obj in objectiveObjectDataReferences)
         {
             if (obj.type == type)
             {

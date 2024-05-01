@@ -39,7 +39,7 @@ public partial struct AddSoundOnHitSystem : ISystem
             bool hasHit = false;
             foreach (var hit in hitBuffer)
             {
-                if (hit.IsHandled)
+                if (!hit.IsHandled)
                 {
                     hasHit = true;
                     break;
@@ -48,7 +48,7 @@ public partial struct AddSoundOnHitSystem : ISystem
             
             if (!hasHit)
                 continue;
-
+            
             // add sound on hit
             soundCaller.Add(new AudioBufferData {AudioData = soundOnHitting.Value});
         }

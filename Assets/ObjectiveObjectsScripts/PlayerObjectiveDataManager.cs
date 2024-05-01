@@ -12,10 +12,11 @@ public enum ObjectiveObjectType
 }
 
 [System.Serializable]
-public struct ObjectiveObjectSpriteReference
+public struct ObjectiveObjectDataReference
 {
     public ObjectiveObjectType type;
     public Sprite sprite;
+    public int neededAmount;
 }
 
 public class PlayerObjectiveDataManager : MonoBehaviour
@@ -23,7 +24,7 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public PlayerObjectiveDataHolderObject dataHolder;
     public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
     public List<ObjectiveObjectUIElementBehaviour> uiElements;
-    public List<ObjectiveObjectSpriteReference> ObjectiveObjectSpriteReferences;
+    public List<ObjectiveObjectDataReference> ObjectiveObjectSpriteReferences;
     public Sprite defaultSprite;
 
     private void OnEnable()
@@ -67,6 +68,16 @@ public class PlayerObjectiveDataManager : MonoBehaviour
                 counter++;
             }
         }
+
+        if (dataHolder.CheckIfObjectiveReached())
+        {
+            DisplayWinScreen();
+        }
+    }
+
+    private void DisplayWinScreen()
+    {
+        
     }
 
     public void ClearUI()

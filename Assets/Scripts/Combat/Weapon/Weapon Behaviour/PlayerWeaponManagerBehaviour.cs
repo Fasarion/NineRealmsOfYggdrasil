@@ -436,8 +436,6 @@ namespace Patrik
         public void ResetActiveWeapon()
         {
             activeWeapon.SetParent(activeSlot);
-            FinishActiveAttackAnimationEvent();
-            
             playerAnimator.SetTrigger("hammerReturn");
         }
     }

@@ -13,6 +13,7 @@ public class UpgradePoolManager : MonoBehaviour
     public HashSet<int> unlockedUpgradeSet;
     public HashSet<int> pickedUpgradeSet;
     
+    
     private static UpgradePoolManager _instance;
     
     public static UpgradePoolManager Instance

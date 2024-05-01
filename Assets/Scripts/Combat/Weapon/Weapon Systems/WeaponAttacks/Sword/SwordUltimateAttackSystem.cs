@@ -10,47 +10,49 @@ using UnityEngine;
 [UpdateAfter(typeof(HandleAnimationSystem))]
 public partial struct SwordUltimateAttackSystem : ISystem
 {
-    private int _attackCount;
-    private bool _isActive;
+    // private int _attackCount;
+    // private bool _isActive;
 
-    private float scaleChangeFactor;
-    private float numberOfScaledAttacks;
+    //private float scaleChangeFactor;
+    //private float numberOfScaledAttacks;
     
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<SwordComponent>();
+        state.RequireForUpdate<SwordUltimateConfig>();
         state.RequireForUpdate<AudioBufferData>();
 
-        // TODO: put in config
-        scaleChangeFactor = 2;
-        numberOfScaledAttacks = 3;
+        // // TODO: put in config
+        // scaleChangeFactor = 2;
+        // numberOfScaledAttacks = 3;
     }
 
 
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+        var ultConfig = SystemAPI.GetSingletonRW<SwordUltimateConfig>();
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         
-        if (_isActive)
+        if (ultConfig.ValueRO.IsActive)
         {
             bool stoppedSwordAttack = attackCaller.ValueRO.ActiveAttackData.ShouldStopAttack(WeaponType.Sword) ||
                                       attackCaller.ValueRO.PassiveAttackData.ShouldStopAttack(WeaponType.Sword);
             if (stoppedSwordAttack)
             {
-                _attackCount++;
+                ultConfig.ValueRW.CurrentAttackCount++;
                 
-                if (_attackCount > numberOfScaledAttacks)
+                if (ultConfig.ValueRO.CurrentAttackCount > ultConfig.ValueRO.NumberOfScaledAttacks)
                 {
                     var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
-                    scaleComp.Value -= scaleChangeFactor;
+                    scaleComp.Value -= ultConfig.ValueRO.ScaleIncrease;
                     state.EntityManager.SetComponentData(swordEntity, scaleComp);
 
                     var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
                     statHandler.ValueRW.ShouldUpdateStats = true;
                 
-                    _isActive = false;
+                    ultConfig.ValueRW.IsActive = false;
                 }
             }
         }
@@ -62,11 +64,11 @@ public partial struct SwordUltimateAttackSystem : ISystem
         attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
         
         // Initialize attack
-        if (!_isActive)
+        if (!ultConfig.ValueRO.IsActive)
         {
             var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
 
-            float newSize = scaleComp.Value += scaleChangeFactor;
+            float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
             
             scaleComp.Value = newSize;
             state.EntityManager.SetComponentData(swordEntity, scaleComp);
@@ -74,8 +76,8 @@ public partial struct SwordUltimateAttackSystem : ISystem
             var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
             statHandler.ValueRW.ShouldUpdateStats = true;
 
-            _isActive = true;
-            _attackCount = 0;
+            ultConfig.ValueRW.IsActive = true;
+            ultConfig.ValueRW.CurrentAttackCount = 0;
         }
     }
 }

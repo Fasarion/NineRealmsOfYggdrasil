@@ -14,6 +14,9 @@ public class IceRingConfigAuthoring : MonoBehaviour
     [HideInInspector] public float maxArea;
     [HideInInspector] public float chargeSpeed;
     public List<IceRingStage> abilityStages;
+    public float vfxScale = 0.5f;
+    public float chargeAreaVfxHeightOffset;
+    public float abilityVfxHeightOffset;
 
     [HideInInspector] public bool isInitialized;
     [HideInInspector] public bool isAbilityReleased;
@@ -36,6 +39,9 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     isAbilityReleased = authoring.isAbilityReleased,
                     chargeSpeed = authoring.chargeSpeed,
                     isInitialized = authoring.isInitialized,
+                    vfxScale = authoring.vfxScale,
+                    chargeAreaVfxHeightOffset = authoring.chargeAreaVfxHeightOffset,
+                    abilityVfxHeightOffset = authoring.abilityVfxHeightOffset,
                 });
             
             var buffer = AddBuffer<IceRingStageElement>(entity);
@@ -64,6 +70,9 @@ public struct IceRingConfig : IComponentData
     public bool isAbilityReleased;
     public float chargeSpeed;
     public bool isInitialized;
+    public float vfxScale;
+    public float chargeAreaVfxHeightOffset;
+    public float abilityVfxHeightOffset;
 }
 
 public struct IceRingStageElement : IBufferElementData

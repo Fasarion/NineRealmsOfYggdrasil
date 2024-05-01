@@ -151,6 +151,7 @@ namespace Patrik
         private void OnSpecialCharge(AttackData data)
         {
             TryWriteOverActiveAttackData(data);
+            Debug.Log("On special charge");
         }
 
         private void TryWriteOverActiveAttackData(AttackData data)
@@ -413,7 +414,7 @@ namespace Patrik
                 // No weapon manager found, can't read weapon inputs.
                 return;
             }
-
+            
             if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
                 return;
 
@@ -426,6 +427,8 @@ namespace Patrik
 
             bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
             bool canAttack = !isPreparingAttack;
+
+           // if (_weaponManager.isAttacking) canAttack = false;
 
             // Handle ultimate attack
             if (attackCaller.ValueRO.PrepareUltimateInfo.Perform && canAttack)
@@ -452,20 +455,26 @@ namespace Patrik
                 canAttack = false;
             }
             
-            // Handle special attack
+            // Handle special charge
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             if (specialAttack.KeyDown && canAttack)
             {
-                _weaponManager.StartChargingSpecial();
-                attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
+                bool TryCharge = _weaponManager.StartChargingSpecial();
+                if (TryCharge)
                 {
-                    ChargingWeapon = _weaponManager.CurrentWeaponType,
-                    IsCharging = true
-                };
+                    attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
+                    {
+                        ChargingWeapon = _weaponManager.CurrentWeaponType,
+                        IsCharging = true
+                    };
                 
-                canAttack = false;
+                    canAttack = false;
+                    
+                    Debug.Log("Start charge");
+                }
             }
             
+            // Special release
             if (specialAttack.KeyUp)
             {
                 _weaponManager.ReleaseSpecial();

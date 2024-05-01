@@ -2,6 +2,7 @@ using Destruction;
 using Health;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace Damage
@@ -22,12 +23,14 @@ namespace Damage
         {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
+            var damageNumberBuffer = SystemAPI.GetSingletonBuffer<DamageNumberBufferElement>();
 
-            foreach (var (currentHP, damageBuffer, damageReduction, damageReceivingEntity) in SystemAPI
-                .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>, DamageReductionComponent>()
+            foreach (var (currentHP, damageBuffer, damageReduction, damageReceivingTransform, damageReceivingEntity) in SystemAPI
+                .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>, DamageReductionComponent, LocalTransform>()
                 .WithEntityAccess())
             {
                 float totalDamageToDeal = 0;
+                bool hasCrit = false;
 
                 // Add damage from all damage elements in Damage Element Buffer
                 foreach (var damageElement in damageBuffer)
@@ -39,6 +42,7 @@ namespace Damage
                     if (damageElement.DamageContents.CriticalRate > randomFloat)
                     {
                         damageToDeal *= CRITICAL_MODIFIER; //damageElement.DamageContents.CriticalModifier;
+                        hasCrit = true;
                     }
                     
                     totalDamageToDeal += damageToDeal;
@@ -65,6 +69,16 @@ namespace Damage
 
                 // Deal damage
                 currentHP.ValueRW.Value -= totalDamageToDeal;
+                
+                // Add damage info to damage number buffer
+                var damageNumberElement = new DamageNumberBufferElement
+                {
+                    damage = totalDamageToDeal,
+                    isCritical = hasCrit,
+                    position = damageReceivingTransform.Position,
+                };
+                damageNumberBuffer.Add(damageNumberElement);
+                
 
                 // If zero health, mark entity with Destroy Tag so it is destroyed in a later system
                 if (currentHP.ValueRO.Value <= 0)

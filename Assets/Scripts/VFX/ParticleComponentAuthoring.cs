@@ -89,15 +89,15 @@ public partial struct HandleParticleSystem : ISystem
             if (particleObject.FollowEntity)
             {
                 particleSystemTransform.position = transform.ValueRO.Position;
-                //particleSystemTransform.rotation = transform.ValueRO.Rotation;
+                particleSystemTransform.rotation = transform.ValueRO.Rotation;
                 float scaleValue = transform.ValueRO.Scale;
                 particleSystemTransform.localScale = new float3(scaleValue, scaleValue, scaleValue);
             }
             else
             {
-                // transform.ValueRW.Position = particleSystemTransform.position;
-                // transform.ValueRW.Rotation = particleSystemTransform.rotation;
-                // transform.ValueRW.Scale = particleSystemTransform.localScale.x;
+                transform.ValueRW.Position = particleSystemTransform.position;
+                transform.ValueRW.Rotation = particleSystemTransform.rotation;
+                transform.ValueRW.Scale = particleSystemTransform.localScale.x;
             }
         }
         

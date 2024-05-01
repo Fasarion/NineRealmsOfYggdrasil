@@ -1191,7 +1191,28 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].maxArea
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].maxChargeTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: abilityStages.Array.data[0].damageModifier
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 4622802251312470920, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1954,6 +1975,11 @@ PrefabInstance:
         type: 3}
       propertyPath: attackDamage
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017022476760349507, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: energyToFill
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -29,7 +29,11 @@ public partial struct HammerSpecialIndicationSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
-        if (!attackCaller.ValueRO.SpecialChargeInfo.IsChargingWithWeapon(WeaponType.Hammer))
+        var config = SystemAPI.GetSingleton<HammerSpecialConfig>();
+        //if (config.HasStarted) return;
+
+        bool isCharging = attackCaller.ValueRO.SpecialChargeInfo.IsChargingWithWeapon(WeaponType.Hammer);
+        if (!isCharging)
         {
             if (hasInitialized)
             {
@@ -54,27 +58,26 @@ public partial struct HammerSpecialIndicationSystem : ISystem
         // initialize indicator
         if (!hasInitialized)
         {
-            var config = SystemAPI.GetSingleton<HammerSpecialConfig>();
-            
             var ability = state.EntityManager.Instantiate(config.IndicatorPrefab);
             state.EntityManager.SetComponentData(ability, new ChargeTimer
             {
                 maxChargeTime = 3
             });
-
+            
             hasInitialized = true;
         }
 
         // make indicator follow player
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
-        foreach (var (indicator, transform, chargeTimer, entity) in
-            SystemAPI.Query<RefRW<HammerChargeComponent>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
+        foreach (var (indicator, transform, chargeTimer, particleRef, entity) in
+            SystemAPI.Query<RefRW<HammerChargeComponent>, RefRW<LocalTransform>, RefRW<ChargeTimer>, ParticleReference>()
                 .WithEntityAccess())
         {
             transform.ValueRW.Position = playerPos.Value;
             transform.ValueRW.Rotation = playerRot.Value;
+            
+            // TODO: Update particle rotation and time
         }
-
     }
 }

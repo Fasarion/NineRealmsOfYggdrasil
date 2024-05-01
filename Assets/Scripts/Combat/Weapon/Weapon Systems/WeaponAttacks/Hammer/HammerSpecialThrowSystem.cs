@@ -33,7 +33,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
-
+        
         bool shouldAttack = attackCaller.ShouldStartActiveAttack(WeaponType.Hammer, AttackType.Special);
         if (!shouldAttack) return;
 

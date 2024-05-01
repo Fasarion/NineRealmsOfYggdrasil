@@ -319,8 +319,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
+      propertyPath: skillModifier.Normal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: skillModifier.Passive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: skillModifier.Special
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
       propertyPath: skillModifier.Ultimate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

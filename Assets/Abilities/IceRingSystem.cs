@@ -54,7 +54,7 @@ public partial struct IceRingSystem : ISystem
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
                 ability.ValueRW.isInitialized = true;
-                transform.ValueRW.Rotation = Quaternion.Euler(-90f, 0f, 0f);
+                transform.ValueRW.Rotation = Quaternion.Euler(0, 0f, 0f);
             }
 
             //Charge behaviour
@@ -76,7 +76,7 @@ public partial struct IceRingSystem : ISystem
             var area = stageBuffer[ability.ValueRO.currentAbilityStage].maxArea;
 
             transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
-            transform.ValueRW.Scale = area * 50;
+            transform.ValueRW.Scale = area * .5f;
 
             //On button release
             if (!input.IsHeld)
@@ -88,7 +88,7 @@ public partial struct IceRingSystem : ISystem
                 {
                     Position = playerPos.Value + new float3(0, 0, 0),
                     Rotation = Quaternion.Euler(-90f, 0f, 0f),
-                    Scale = area * 50
+                    Scale = area * .5f
                 });
                 state.EntityManager.SetComponentData(effect, new IceRingAbility
                 {

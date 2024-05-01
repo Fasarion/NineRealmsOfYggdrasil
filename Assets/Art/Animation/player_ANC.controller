@@ -1929,7 +1929,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 1.3
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 3
@@ -3033,12 +3033,12 @@ MonoBehaviour:
   Contents:
     combo: 0
     OnEnter:
-      Begin: 0
+      Begin: 1
       Stop: 0
       TurnOff: 0
     OnExit:
       Begin: 0
-      Stop: 0
+      Stop: 1
       TurnOff: 1
 --- !u!114 &3180643650403180425
 MonoBehaviour:
@@ -4170,7 +4170,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 1.3
   m_TransitionOffset: 0
-  m_ExitTime: 1
+  m_ExitTime: 0.9
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 3

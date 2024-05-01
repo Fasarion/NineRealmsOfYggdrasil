@@ -33,6 +33,7 @@ Transform:
   - {fileID: 3078825569984362288}
   - {fileID: 1937655448655544808}
   - {fileID: 4294680337505951737}
+  - {fileID: 6530173408723941330}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1405497440268140215
@@ -256,6 +257,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1297572974666953383, guid: f663ced44f82fa9449c9fe6293732df1,
     type: 3}
   m_PrefabInstance: {fileID: 4088081220106519959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6997949332021722501
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8318567447131895795}
+    m_Modifications:
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5130377291682013088, guid: 1545fa78994a20843adffabe55adccad,
+        type: 3}
+      propertyPath: m_Name
+      value: Sword Ultimate Config
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1545fa78994a20843adffabe55adccad, type: 3}
+--- !u!4 &6530173408723941330 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4288099518066920023, guid: 1545fa78994a20843adffabe55adccad,
+    type: 3}
+  m_PrefabInstance: {fileID: 6997949332021722501}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7150243300530347059
 PrefabInstance:

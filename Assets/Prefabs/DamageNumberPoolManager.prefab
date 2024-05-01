@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2431307124715019113
+--- !u!1 &7650025303346678892
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 578325456359844409}
-  - component: {fileID: 8245300890973439803}
+  - component: {fileID: 7073481395952662682}
+  - component: {fileID: 8308808171197823723}
   m_Layer: 0
-  m_Name: Hammer Special Config
+  m_Name: DamageNumberPoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &578325456359844409
+--- !u!4 &7073481395952662682
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2431307124715019113}
+  m_GameObject: {fileID: 7650025303346678892}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,25 +32,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8245300890973439803
+--- !u!114 &8308808171197823723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2431307124715019113}
+  m_GameObject: {fileID: 7650025303346678892}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df4acc583b2d2a648a61f34fba0e05e4, type: 3}
+  m_Script: {fileID: 11500000, guid: addd78381de11404783c7acd2d9adea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  indicatorPrefab: {fileID: 3054128452994836860, guid: 3fc5d8f156d574a4cbcf87c013aff39b,
+  popupPrefab: {fileID: 2805068308535423127, guid: 1cb4af7931b5908438bec2ed18332f3f,
     type: 3}
-  electricChargePrefab: {fileID: 0}
-  minTimeBetweenZaps: 0.5
-  maxTimeBetweenZaps: 1.5
-  distanceToTravel: 40
-  timeToTurnBack: 0.7
-  timeToReturnAfterTurning: 0.35
-  resolutionsPerSecond: 50
-  distanceFromPlayerToGrab: 0.5
+  inactiveCount: 0
+  activeCount: 0
+  allocationCount: 500

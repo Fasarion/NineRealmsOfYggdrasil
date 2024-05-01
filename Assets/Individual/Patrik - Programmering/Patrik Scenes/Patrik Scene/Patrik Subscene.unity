@@ -1211,6 +1211,37 @@ PrefabInstance:
       propertyPath: abilityStages.Array.data[0].damageModifier
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: timeToTurnBack
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: distanceToTravel
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxTimeBetweenZaps
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: minTimeBetweenZaps
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: electricChargePrefab
+      value: 
+      objectReference: {fileID: 9208164397709987185, guid: a9bff427717fc5f4e8a5acb0731932b9,
+        type: 3}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: timeToReturnAfterTurning
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4622802251312470920, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
     m_RemovedGameObjects: []

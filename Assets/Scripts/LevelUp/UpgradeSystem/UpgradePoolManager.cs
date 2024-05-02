@@ -12,7 +12,7 @@ public class UpgradePoolManager : MonoBehaviour
     public Dictionary<int, UpgradeObject> upgradePool;
     public HashSet<int> unlockedUpgradeSet;
     public HashSet<int> pickedUpgradeSet;
-    
+    public UpgradeObject[] upgradeObjects;
     
     private static UpgradePoolManager _instance;
     
@@ -54,15 +54,15 @@ public class UpgradePoolManager : MonoBehaviour
 
     public void GenerateUpgradePool()
     {
-        string[] filePaths = Directory.GetFiles(folderPath, "*.asset");
+        //string[] filePaths = Directory.GetFiles(folderPath, "*.asset");
 
         int generationIndex = 0;
 
         upgradePool = new Dictionary<int, UpgradeObject>();
 
-        foreach (string filePath in filePaths)
+        foreach (UpgradeObject upgradeObject in upgradeObjects)
         {
-            UpgradeObject upgradeObject = AssetDatabase.LoadAssetAtPath<UpgradeObject>(filePath);
+            //UpgradeObject upgradeObject = AssetDatabase.LoadAssetAtPath<UpgradeObject>(filePath);
             if (upgradeObject != null)
             {
                 upgradeObject.upgradeIndex = generationIndex;

@@ -1,18 +1,17 @@
 ﻿using Destruction;
 using Patrik;
 using Player;
-using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Transforms;
-using UnityEngine;
+
 
 [UpdateAfter(typeof(PlayerRotationSystem))]
 public partial struct HammerSpecialIndicationSystem : ISystem
 {
     private bool hasInitialized;
     
-    [BurstCompile]
+
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<PlayerTag>();
@@ -24,7 +23,7 @@ public partial struct HammerSpecialIndicationSystem : ISystem
         state.RequireForUpdate<HammerSpecialConfig>();
     }
     
-    [BurstCompile]
+
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();

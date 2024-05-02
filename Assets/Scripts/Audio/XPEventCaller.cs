@@ -22,9 +22,9 @@ public partial class XPEventCaller : SystemBase
             _audioManager = AudioManager.Instance;
         }
 
-        if (_cachedXP != xp.Value && _audioManager)
+        if (_cachedXP != xp.XPValue && _audioManager)
         {
-            _cachedXP = xp.Value;
+            _cachedXP = xp.XPValue;
             _audioManager.playerAudio.XpAudio();
         }
     }

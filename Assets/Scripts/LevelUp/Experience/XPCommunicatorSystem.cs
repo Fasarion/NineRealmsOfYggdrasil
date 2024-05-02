@@ -11,7 +11,7 @@ public partial class XPCommunicatorSystem : SystemBase
         var level = SystemAPI.GetSingleton<PlayerLevel>();
         var xp = SystemAPI.GetSingleton<PlayerXP>();
 
-        if (_cachedXP == xp.XPValue) return;
+        if (_cachedXP == xp.XPValue && _cachedXP != 0) return;
 
         _cachedXP = xp.XPValue;
 

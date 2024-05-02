@@ -38,6 +38,7 @@ public class PlayerObjectiveDataHolderObject : ScriptableObject
 
     public void SetUpObjectiveObjectDictionary(ObjectiveObjectDataReference[] dataReferences)
     {
+        objectiveObjectsNeededDictionary = new Dictionary<ObjectiveObjectType, int>();
         foreach (var data in dataReferences)
         {
             objectiveObjectsNeededDictionary.Add(data.type, data.neededAmount);
@@ -46,7 +47,7 @@ public class PlayerObjectiveDataHolderObject : ScriptableObject
 
     public bool CheckIfObjectiveReached()
     {
-        if (objectiveObjectsDictionary.Count <= 0) return false;
+        if (objectiveObjectsDictionary == null) return false;
         
         foreach (var pair in objectiveObjectsNeededDictionary)
         {

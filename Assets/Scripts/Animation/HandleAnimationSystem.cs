@@ -48,8 +48,20 @@ public partial struct HandleAnimationSystem : ISystem
             }
             else
             {
-                transform.ValueRW.Position = animatorTransform.position;
-                transform.ValueRW.Rotation = animatorTransform.rotation;
+                Transform followTransform;
+                    
+                
+                if (animatorObject.FollowChild)
+                {
+                    followTransform = animatorTransform.GetChild(0).transform;
+                }
+                else
+                {
+                    followTransform = animatorTransform;
+                }
+                
+                transform.ValueRW.Position = followTransform.position;
+                transform.ValueRW.Rotation = followTransform.rotation;
             }
         }
         

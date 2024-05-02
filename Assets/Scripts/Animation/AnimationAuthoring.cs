@@ -12,7 +12,10 @@ public class AnimationAuthoring : MonoBehaviour
     [Tooltip("This will force the game object to match its position and rotation with this entity." +
              "Otherwise, the entity will follow the game object. When an object's position is determined by " +
              "logic on the game object side (like an animator), this should be marked as False.")]
-    [SerializeField] private bool followsEntity; 
+    [SerializeField] private bool followsEntity;
+
+    [Tooltip("If the entity is supposed to follow the child of the prefab, mark this as true.")]
+    [SerializeField] private bool followsChild;
     
     class Baker : Baker<AnimationAuthoring>
     {
@@ -22,7 +25,8 @@ public class AnimationAuthoring : MonoBehaviour
             AddComponentObject(entity, new GameObjectAnimatorPrefab
             {
                 Value = authoring.gameObjectPrefab,
-                FollowEntity = authoring.followsEntity
+                FollowEntity = authoring.followsEntity,
+                FollowChild = authoring.followsChild
             });
         }
     }
@@ -32,6 +36,7 @@ public class GameObjectAnimatorPrefab : IComponentData
 {
     public GameObject Value;
     public bool FollowEntity;
+    public bool FollowChild;
 }
 
 public class AnimatorReference : ICleanupComponentData

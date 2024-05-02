@@ -5,7 +5,7 @@ using UnityEditor.Rendering;
 using UnityEngine;
 
 
-[CustomEditor(typeof(DialogueTrigger))]
+/*[CustomEditor(typeof(DialogueTrigger))]
 public class DialogueTriggerEditor : Editor
 {
     
@@ -83,4 +83,4 @@ public class DialogueTriggerEditor : Editor
                 break;
         }
     }
-}
+}*/

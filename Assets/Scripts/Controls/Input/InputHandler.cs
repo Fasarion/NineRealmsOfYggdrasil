@@ -26,7 +26,7 @@ public class InputHandler : MonoBehaviour
     void Awake()
     {
         playerInputObject = FindObjectOfType<PlayerBehaviour>().gameObject;
-        if (FindObjectOfType<DialogueManager>() != null)
+        /*if (FindObjectOfType<DialogueManager>() != null)
         {
             dialogueInputObject = FindObjectOfType<DialogueManager>().gameObject;
         }
@@ -37,7 +37,7 @@ public class InputHandler : MonoBehaviour
             
             
             
-        }
+        }*/
 
         BindCommand(new MovementCommand(playerInputObject), out inputAxis);
 

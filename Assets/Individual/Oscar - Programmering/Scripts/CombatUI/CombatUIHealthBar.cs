@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,18 +20,26 @@ public class CombatUIHealthBar : MonoBehaviour
     private List<float> levels;
 
     //private Sprite currentSprite;
-
+    private bool maxHealthSet = false;
   
 
     public void Awake()
     {
-        
+      LevelsSet();
     }
     void Start()
     {
     }
 
-   
+    public void OnEnable()
+    {
+        EventManager.OnPlayerHealthSet += OnHealthSet;
+    }
+    public void OnDisable()
+    {
+        EventManager.OnPlayerHealthSet -= OnHealthSet;
+    }
+    
 
     // Update is called once per frame
     void Update()
@@ -58,20 +67,20 @@ public class CombatUIHealthBar : MonoBehaviour
     }
 
     //Callback for when the current health of the player is set.
-    public void OnHealthUpdated(int currentNewHealth)
+    private void OnHealthSet(PlayerHealthData healthData)
     {
-        currentHealth = currentNewHealth;
+        currentHealth = (int)healthData.currentHealth;
+        maxHealth = (int) healthData.maxHealth;
+        SetCurrentSprite();
     }
     
     //Callback for when the maxHealth of the player has been set at game start. 
-    public void OnMaxHealthSet()
+    private void LevelsSet()
     {
         levels = new List<float>();
         for (int i = 0; i < sprites.Count; i++)
         {
             levels.Add((float)i / (sprites.Count-1));
         }
-
-        SetCurrentSprite();
     }
 }

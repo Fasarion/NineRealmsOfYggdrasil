@@ -4874,6 +4874,7 @@ GameObject:
   - component: {fileID: 7040411611416339881}
   - component: {fileID: 7815919856550777491}
   - component: {fileID: 4024064268175052446}
+  - component: {fileID: 4179995601898677649}
   m_Layer: 5
   m_Name: XPText
   m_TagString: Untagged
@@ -4997,6 +4998,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4179995601898677649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7832454009527887553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29ac5edb1fa326c448c6fb6c1bbdc27a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpText: {fileID: 4024064268175052446}
 --- !u!1 &8080147547967937051
 GameObject:
   m_ObjectHideFlags: 0

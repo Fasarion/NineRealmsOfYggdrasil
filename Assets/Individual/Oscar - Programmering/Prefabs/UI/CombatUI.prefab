@@ -311,10 +311,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentWeapon: 2
-  debugWeaponToUpdateTo: 1
+  debugWeaponToUpdateTo: 4
   combatUIMainWeaponSymbol: {fileID: 2254418545055782144}
-  currentLeftInactiveWeapon: 1
-  currentRightInactiveWeapon: 4
+  currentLeftInactiveWeapon: 4
+  currentRightInactiveWeapon: 1
   currentPlayerWeapons: 010000000200000004000000
 --- !u!1 &987530310355376187
 GameObject:
@@ -582,6 +582,9 @@ MonoBehaviour:
   - {fileID: 21300000, guid: ef8016fc088c98248815d8b56bbe4518, type: 3}
   - {fileID: 21300000, guid: d9956b1907793764a8a9af9fa7b3a262, type: 3}
   - {fileID: 21300000, guid: d9676d6c4720ccf4a91442aab69796f3, type: 3}
+  keyTexts:
+  - 1
+  - 2
 --- !u!1 &1640819593348837159
 GameObject:
   m_ObjectHideFlags: 0
@@ -2941,6 +2944,7 @@ MonoBehaviour:
   ultImage: {fileID: 0}
   specialImage: {fileID: 0}
   passiveImage: {fileID: 1011919569653425809}
+  selectedKeySymbolNumber: {fileID: 6729304107482787173}
   symbolType: 1
 --- !u!1 &6501221497620671235
 GameObject:
@@ -2969,7 +2973,7 @@ RectTransform:
   m_GameObject: {fileID: 6501221497620671235}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3380396058409900380}
@@ -2977,7 +2981,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 109, y: 92}
+  m_SizeDelta: {x: 48, y: 27}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7473757199226022228
 CanvasRenderer:
@@ -3007,7 +3011,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 521a5db943538cd4c840f407fce38bca, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d9676d6c4720ccf4a91442aab69796f3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3072,6 +3076,7 @@ MonoBehaviour:
   ultImage: {fileID: 0}
   specialImage: {fileID: 0}
   passiveImage: {fileID: 3661167418187313513}
+  selectedKeySymbolNumber: {fileID: 1334151039380494463}
   symbolType: 2
 --- !u!1 &6801536599025045085
 GameObject:
@@ -3453,7 +3458,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 41, y: 48}
+  m_SizeDelta: {x: 34, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6774536340185449768
 CanvasRenderer:
@@ -3483,7 +3488,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 434baab92afcdc64d8371d0517ebf24b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8700a8f49de8a834dac63afa03554756, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3692,10 +3697,11 @@ MonoBehaviour:
   ultImage: {fileID: 6349982038898086747}
   specialImage: {fileID: 7024819419951450325}
   passiveImage: {fileID: 0}
+  selectedKeySymbolNumber: {fileID: 6625699711919991577}
   symbolType: 0
   baseScale: 1
   maxAnimatedScale: 1.2
-  duration: 5
+  duration: 1
 --- !u!114 &1647841991120625395
 MonoBehaviour:
   m_ObjectHideFlags: 0

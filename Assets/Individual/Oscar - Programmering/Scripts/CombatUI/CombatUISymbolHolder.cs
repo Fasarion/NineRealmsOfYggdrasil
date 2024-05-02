@@ -9,4 +9,6 @@ public class CombatUISymbolHolder : MonoBehaviour
     public List<Sprite> swordSymbols;
     public List<Sprite> meadSymbols;
     public List<Sprite> birdSymbols;
+
+    public List<string> keyTexts;
 }

@@ -10,9 +10,9 @@ public class ObjectiveObjectUIElementBehaviour : MonoBehaviour
     public Image image;
     public TextMeshProUGUI text;
 
-    public void PopulateUI(Sprite sprite, int count)
+    public void PopulateUI(Sprite sprite, string count)
     {
-        image.sprite = sprite;
-        text.text = count.ToString();
+        if(sprite != null) image.sprite = sprite;
+        text.text = count;
     }
 }

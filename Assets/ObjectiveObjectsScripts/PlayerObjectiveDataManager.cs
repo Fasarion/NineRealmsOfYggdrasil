@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum ObjectiveObjectType
 {
@@ -12,10 +13,11 @@ public enum ObjectiveObjectType
 }
 
 [System.Serializable]
-public struct ObjectiveObjectSpriteReference
+public struct ObjectiveObjectDataReference
 {
     public ObjectiveObjectType type;
     public Sprite sprite;
+    public int neededAmount;
 }
 
 public class PlayerObjectiveDataManager : MonoBehaviour
@@ -23,8 +25,11 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public PlayerObjectiveDataHolderObject dataHolder;
     public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
     public List<ObjectiveObjectUIElementBehaviour> uiElements;
-    public List<ObjectiveObjectSpriteReference> ObjectiveObjectSpriteReferences;
+    public ObjectiveObjectUIElementBehaviour neededObjectsText;
+    public GameObject victoryUI;
+    public List<ObjectiveObjectDataReference> objectiveObjectDataReferences;
     public Sprite defaultSprite;
+    private bool winState = false;
 
     private void OnEnable()
     {
@@ -52,6 +57,9 @@ public class PlayerObjectiveDataManager : MonoBehaviour
         dataHolder.ClearPlayerInventory();
         objectiveObjectsDictionary = dataHolder.objectiveObjectsDictionary;
         ClearUI();
+        dataHolder.SetUpObjectiveObjectDictionary(objectiveObjectDataReferences.ToArray());
+        victoryUI.gameObject.SetActive(false);
+        neededObjectsText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -63,10 +71,26 @@ public class PlayerObjectiveDataManager : MonoBehaviour
             {
                 uiElements[counter].gameObject.SetActive(true);
                 Sprite sprite = GetObjectiveObjectSprite(pair.Key);
-                uiElements[counter].PopulateUI(sprite, pair.Value);
+                uiElements[counter].PopulateUI(sprite, pair.Value.ToString());
                 counter++;
+
+                neededObjectsText.gameObject.SetActive(true);
+                neededObjectsText.PopulateUI(null, "/ " + objectiveObjectDataReferences[0].neededAmount.ToString());
             }
+            
         }
+
+        if (dataHolder.CheckIfObjectiveReached() && !winState)
+        {
+            DisplayWinScreen();
+            this.winState = true;
+        }
+    }
+
+    private void DisplayWinScreen()
+    {
+        victoryUI.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ClearUI()
@@ -80,7 +104,7 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public Sprite GetObjectiveObjectSprite(ObjectiveObjectType type)
     {
         Sprite result = defaultSprite;
-        foreach (var obj in ObjectiveObjectSpriteReferences)
+        foreach (var obj in objectiveObjectDataReferences)
         {
             if (obj.type == type)
             {

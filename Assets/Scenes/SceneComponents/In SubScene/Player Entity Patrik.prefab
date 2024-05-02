@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 8574011558162687106}
   - component: {fileID: 3599724072978458201}
   - component: {fileID: 7258435272100316143}
+  - component: {fileID: 5121167936928888032}
   m_Layer: 0
   m_Name: Player Entity Patrik
   m_TagString: Untagged
@@ -449,7 +450,7 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 0
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 0
     audioEventType: 0
 --- !u!114 &3282528094519435972
@@ -476,7 +477,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60b2ad9c40e34442af250232bd26c107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageModifier: 1
+  damageModifier: 0
 --- !u!114 &3609844279876431546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -489,8 +490,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  criticalChance: 0.1
+  attackDamage: 0
+  criticalChance: 0
 --- !u!114 &8574011558162687106
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -504,10 +505,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skillModifier:
-    Normal: 1
-    Special: 1
-    Ultimate: 1
-    Passive: 1
+    Normal: 0
+    Special: 0
+    Ultimate: 0
+    Passive: 0
 --- !u!114 &3599724072978458201
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -534,3 +535,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+--- !u!114 &5121167936928888032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353328540331355661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

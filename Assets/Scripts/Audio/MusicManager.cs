@@ -14,15 +14,15 @@ public class MusicManager : MonoBehaviour
     public StudioEventEmitter menuMusic;
     public StudioEventEmitter levelMusic;
 
-    public int countParameterOne;
-    public int countParameterTwo;
-    public int countParameterThree;
+	private int currentStage = 0;
+    public int enemyCountStageOne;
+    /*public int enemyCountStageTwo;
+    public int enemyCountStageThree;*/
     // Start is called before the first frame update
     void Start()
     {
         levelMusic.Play();
     }
-    //FRÅGA PATRIK OM VAR FAN LÄGGA METOD AAAAAA
 
     private void OnEnable()
     {
@@ -41,6 +41,14 @@ public class MusicManager : MonoBehaviour
     private void RecieveEnemyCountData(int count)
     {
         _enemyCount = count;
+        if (_enemyCount > enemyCountStageOne)
+        {
+            levelMusic.SetParameter("EnemyCountStage", 1);
+        }
+        else if (_enemyCount < enemyCountStageOne)
+        {
+            levelMusic.SetParameter("EnemyCountStage", 0);
+        }
     }
 
     // Update is called once per frame

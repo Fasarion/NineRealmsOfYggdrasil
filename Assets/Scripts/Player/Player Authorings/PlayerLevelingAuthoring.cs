@@ -38,7 +38,7 @@ public class PlayerLevelingAuthoring : MonoBehaviour
                     });
             AddComponent(entity, new PlayerXP
             {
-                Value = authoring.playerStartingXP
+                XPValue = authoring.playerStartingXP
             });
             AddComponent(entity, new PlayerLevel
             {
@@ -64,7 +64,8 @@ public struct PlayerLevelingConfig : IComponentData
 
 public struct PlayerXP : IComponentData
 {
-    public int Value;
+    public int XPValue;
+    public int XPNeededToLevelUp;
 }
 
 public struct PlayerLevel : IComponentData

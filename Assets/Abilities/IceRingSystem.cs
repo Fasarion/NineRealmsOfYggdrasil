@@ -43,7 +43,7 @@ public partial struct IceRingSystem : ISystem
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var stageBuffer = SystemAPI.GetSingletonBuffer<IceRingStageElement>(false);
-        
+        var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
         
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
@@ -54,7 +54,9 @@ public partial struct IceRingSystem : ISystem
             {
                 chargeTimer.ValueRW.maxChargeTime = config.ValueRO.maxChargeTime;
                 ability.ValueRW.isInitialized = true;
-                transform.ValueRW.Rotation = Quaternion.Euler(0, 0f, 0f);
+                transform.ValueRW.Rotation = Quaternion.Euler(0, config.ValueRO.chargeAreaVfxHeightOffset, 0f);
+                var damageComponent = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+                config.ValueRW.ogCachedDamageValue = damageComponent.Value.DamageValue;
             }
 
             //Charge behaviour
@@ -63,10 +65,16 @@ public partial struct IceRingSystem : ISystem
             {
                 chargeTimer.ValueRW.currentChargeTime = 0;
                 ability.ValueRW.currentAbilityStage++;
+                
                 if (ability.ValueRO.currentAbilityStage >= stageBuffer.Length)
                 {
                     ability.ValueRW.currentAbilityStage = stageBuffer.Length - 1;
                 }
+
+                var damageComponent = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+                damageComponent.Value.DamageValue = stageBuffer[ability.ValueRO.currentAbilityStage].damageModifier *
+                                                    config.ValueRO.ogCachedDamageValue;
+                ecb.SetComponent(configEntity, damageComponent);
             }
             //TODO: Factor in player base stats into area calculation
             // var tValue = chargeTimer.ValueRO.currentChargeTime / config.ValueRO.maxChargeTime;
@@ -86,7 +94,7 @@ public partial struct IceRingSystem : ISystem
 
                 state.EntityManager.SetComponentData(effect, new LocalTransform
                 {
-                    Position = playerPos.Value + new float3(0, 0, 0),
+                    Position = playerPos.Value + new float3(0, config.ValueRO.abilityVfxHeightOffset, 0),
                     Rotation = Quaternion.Euler(-90f, 0f, 0f),
                     Scale = area * .5f
                 });

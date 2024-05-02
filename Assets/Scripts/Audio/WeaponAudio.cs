@@ -11,8 +11,8 @@ public class WeaponAudio : ScriptableObject
 {
     private int value = 0;
     [Header("Weapons")] 
-    public EventReference swordAudio;
-    public EventReference hammerAudio;
+    public EventReference swordSwing;
+    public EventReference hammerSwing;
     public EventReference meadAudio;
     public EventReference crowAudio;
     public EventReference swordImpact;
@@ -31,18 +31,12 @@ public class WeaponAudio : ScriptableObject
             
             case 1:
             {
-                _swordInstance = RuntimeManager.CreateInstance(swordAudio);
-                _swordInstance.setParameterByName("AttackType", attackType);
-                _swordInstance.start();
-                _swordInstance.release();
+                RuntimeManager.PlayOneShot(swordSwing);
                 break;
             }
             case 2:
             {
-                _hammerInstance = RuntimeManager.CreateInstance(hammerAudio);
-                _hammerInstance.setParameterByName("AttackType", attackType);
-                _hammerInstance.start();
-                _hammerInstance.release();
+                RuntimeManager.PlayOneShot(hammerSwing);
                 break;
             }
             case 3:
@@ -64,7 +58,7 @@ public class WeaponAudio : ScriptableObject
         }
         
     }
-
+    //Kallar på ljud när vapen träffar något
     public void WeaponAudioCaller(int weapon)
     {
         switch (weapon)
@@ -72,7 +66,7 @@ public class WeaponAudio : ScriptableObject
             case 1:
             {
                 RuntimeManager.PlayOneShot(swordImpact);
-                Debug.Log("hur många?");
+                //Debug.Log("hur många?");
                 break;
             }
             case 2:

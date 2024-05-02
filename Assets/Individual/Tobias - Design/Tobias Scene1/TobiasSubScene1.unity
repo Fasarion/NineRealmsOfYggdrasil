@@ -237,21 +237,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3609844279876431546, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: attackDamage
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3609844279876431546, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: criticalChance
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5457081741902125940, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: damageModifier
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5488732460988299552, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -307,63 +292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player Entity
       objectReference: {fileID: 0}
-    - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: maxHP
-      value: 50
-      objectReference: {fileID: 0}
-    - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: damageReductionValue
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: skillModifier.Normal
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: skillModifier.Passive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: skillModifier.Special
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      propertyPath: skillModifier.Ultimate
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6353328540331355661, guid: 167eb942ef45ef24f88317949ed379d6,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1562499972}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 167eb942ef45ef24f88317949ed379d6, type: 3}
---- !u!1 &1562499971 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6353328540331355661, guid: 167eb942ef45ef24f88317949ed379d6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1562499970}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1562499972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1562499971}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1650605478
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,26 +305,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1178434585940269983, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: baseXPNeeded
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1178434585940269983, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: addedXPNeededPerLevel
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2623615028845185692, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: knockBackForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 2826854435034433488, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: knockBackForce
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalRotation.w
@@ -421,16 +334,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Config Manager
-      objectReference: {fileID: 0}
-    - target: {fileID: 5436305752502215806, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: knockBackForce
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5796034013704642493, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: damage
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -482,85 +385,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6668331784878520972, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: knockBackForce
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 6702840696670580388, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6762351246152799829, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxEnemySpawnPercent
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: maxArea
       value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxDisplayTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: damageDelayTime
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[0].maxArea
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[1].maxArea
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[2].maxArea
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[0].maxChargeTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[1].maxChargeTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[2].maxChargeTime
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[0].damageModifier
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[1].damageModifier
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: abilityStages.Array.data[2].damageModifier
-      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -572,30 +405,10 @@ PrefabInstance:
       propertyPath: shockwaveEffectHeightOffset
       value: 0.001
       objectReference: {fileID: 0}
-    - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxArea
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8396824266348004795, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: damageContents.DamageValue
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8679604310254679132, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: damage
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -610,16 +423,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: KnockDirection
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: knockBackForce
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 1573172003656105017, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: m_Name
@@ -675,11 +478,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3372213329053059802, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: skillModifier.Special
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7364503994779296283, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: skillModifier.Ultimate
@@ -689,11 +487,6 @@ PrefabInstance:
         type: 3}
       propertyPath: attackDamage
       value: 30
-      objectReference: {fileID: 0}
-    - target: {fileID: 8379516016871174216, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: OverallStats.Damage.BaseValue
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 9017022476760349507, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}

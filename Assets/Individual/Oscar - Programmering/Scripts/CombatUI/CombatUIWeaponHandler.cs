@@ -17,6 +17,8 @@ public class CombatUIWeaponHandler : MonoBehaviour
     public WeaponType currentRightInactiveWeapon;
 
     public static Action<WeaponType, WeaponType, WeaponType> onCurrentWeaponUpdated;
+
+    public static Action<WeaponType, WeaponType, WeaponType> onStartingWeaponSet;
     //Placeholder for debugging purposes;
     //private WeaponType hammerWeapon = WeaponType.Hammer;
     //private WeaponType swordWeapon = WeaponType.Sword;
@@ -26,19 +28,75 @@ public class CombatUIWeaponHandler : MonoBehaviour
     //I am missing a class to reference to get the current types of weapons from the player
     public List<WeaponType> currentPlayerWeapons;
 
+    private bool currentWeaponSet;
+    private bool currentLeftWeaponSet;
+
+    public void Awake()
+    {
+        currentWeaponSet = false;
+        currentLeftWeaponSet = false;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
-        
+ 
         //currentPlayerWeapons.Add(hammerWeapon);
         //currentPlayerWeapons.Add(swordWeapon);
         //currentPlayerWeapons.Add(birdWeapon);
+    }
+
+    public void OnEnable()
+    {
+        EventManager.OnWeaponSwitch += OnWeaponSwitched;
+        EventManager.OnSetupWeapon += OnSetupWeapon;
+    }
+
+   
+
+    public void OnDisable()
+    {
+        EventManager.OnWeaponSwitch -= OnWeaponSwitched;
+        EventManager.OnSetupWeapon -= OnSetupWeapon;
+    }
+
+    private void OnSetupWeapon(WeaponBehaviour weaponBehaviour, bool isActiveWeapon)
+    {
+        
+        
+        if (isActiveWeapon)
+        {
+            currentWeapon = weaponBehaviour.WeaponType;
+            currentWeaponSet = true;
+        }
+        else
+        {
+            currentLeftInactiveWeapon = weaponBehaviour.WeaponType;
+            currentLeftWeaponSet = true;
+        }
+
+        if (currentWeaponSet && currentLeftWeaponSet)
+        {
+            SetStartingWeapons();
+        }
+    }
+    
+    private void SetStartingWeapons()
+    {
+        onStartingWeaponSet?.Invoke(currentWeapon, currentLeftInactiveWeapon, currentRightInactiveWeapon);
+    }
+
+    private void OnWeaponSwitched(WeaponBehaviour weaponBehaviour)
+    {
+        UpdateCurrentWeapon(weaponBehaviour.WeaponType);
     }
 
     public void DebugButtonPressed()
     {
         UpdateCurrentWeapon(debugWeaponToUpdateTo);
     }
+
+  
     //We're going to need a list of the players current weapons here.
     public void UpdateCurrentWeapon(WeaponType weaponType)
     {

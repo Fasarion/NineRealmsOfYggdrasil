@@ -18,6 +18,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
     {
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerSpecialConfig>();
+        state.RequireForUpdate<RandomComponent>();
     }
 
     [BurstCompile]
@@ -39,6 +40,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
 
         config.ValueRW.HasStarted = true;
         config.ValueRW.HasReturned = false;
+        config.ValueRW.TimeOfLastZap = 0;
 
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         var playerDirection = state.EntityManager.GetComponentData<LocalTransform>(playerEntity).Forward();
@@ -68,9 +70,23 @@ public partial struct HammerSpecialThrowSystem : ISystem
         if (!config.ValueRO.HasStarted || config.ValueRO.HasReturned)
             return;
         
+        var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
+
         // Update timer
         float deltaTime = SystemAPI.Time.DeltaTime;
         config.ValueRW.Timer += deltaTime;
+        
+        // spawn zaps
+        bool shouldSpawnZap = config.ValueRO.Timer > config.ValueRO.TimeOfLastZap + config.ValueRO.NextTimeBetweenZaps;
+        if (shouldSpawnZap)
+        {
+            var ability = state.EntityManager.Instantiate(config.ValueRO.ElectricChargePrefab);
+
+            Debug.Log("Zap!");
+            config.ValueRW.TimeOfLastZap = config.ValueRO.Timer;
+            config.ValueRW.NextTimeBetweenZaps = randomComponent.ValueRW.random
+                .NextFloat(config.ValueRO.MinTimeBetweenZaps, config.ValueRW.MaxTimeBetweenZaps);
+        }
         
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
 
@@ -126,11 +142,23 @@ public partial struct HammerSpecialThrowSystem : ISystem
             }
         }
         
+        LocalTransform hammerTrans = LocalTransform.Identity;
+        
         // Rotate Hammer
         foreach (var transform in SystemAPI
             .Query<RefRW<LocalTransform>>().WithAll<HammerComponent>())
         {
-            transform.ValueRW = transform.ValueRO.RotateY(deltaTime * config.ValueRO.ResolutionsPerSecond);
+            //transform.ValueRW = transform.ValueRO.RotateY(deltaTime * config.ValueRO.ResolutionsPerSecond);
+            transform.ValueRW = transform.ValueRO.
+                Rotate(quaternion.AxisAngle(config.ValueRO.RotationVector, deltaTime * config.ValueRO.RotationDegreesPerSecond));
+            hammerTrans = transform.ValueRO;
+        }
+        
+        // Make zaps follow hammer
+        foreach (var transform in SystemAPI
+            .Query<RefRW<LocalTransform>>().WithAll<HammerZapComponent>())
+        {
+            transform.ValueRW.Position = hammerTrans.Position;
         }
     }
     

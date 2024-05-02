@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Damage;
@@ -8,20 +9,33 @@ using UnityEngine;
 public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
 {
     [Header("Indicator")]
+    [Tooltip("Indicator that spawns when hammer starts to charge")]
     [SerializeField] private GameObject indicatorPrefab;
     
-    [Header("Charge")]
-    [SerializeField] private GameObject electricChargePrefab;
+    [Header("Zap")]
+    [Tooltip("Zap object that spawns when the hammer travels.")]
+    [SerializeField] private GameObject electricZapPrefab;
+    [Tooltip("Minimum time between zaps.")]
     [SerializeField] private float minTimeBetweenZaps = 0.5f;
+    [Tooltip("Maximum time between zaps.")]
     [SerializeField] private float maxTimeBetweenZaps = 1.5f;
     
-    [Header("Travel ")]
+    [Header("Travel")]
+    [Tooltip("How far the hammer travels.")]
     [SerializeField] private float distanceToTravel = 20;
+    [Tooltip("After how many seconds should the hammer turn back?")]
     [SerializeField] private float timeToTurnBack = 2f;
+    [Tooltip("After how many seconds should the hammer return to the player after it has turned around?")]
     [SerializeField] private float timeToReturnAfterTurning = 2f;
-    [SerializeField] private float resolutionsPerSecond = 2f;
+    
+    [Header("Rotation")]
+    [Tooltip("How fast the hammer spins.")]
+    [SerializeField] private float revolutionsPerSecond = 2f;
+    [Tooltip("In what direction does the hammer rotate? ([0,1,0] means it rotates along its y-axis.)")]
+    [SerializeField] private float3 rotationAxis = new float3(0,0,1);
     
     [Header("Catching")]
+    [Tooltip("How far from the player should the hammer be grabbed?")]
     [SerializeField] private float distanceFromPlayerToGrab = 1f;
 
     class Baker : Baker<HammerSpecialAttackConfigAuthoring>
@@ -32,7 +46,7 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
             AddComponent(entity, new HammerSpecialConfig
             {
                 IndicatorPrefab = GetEntity(authoring.indicatorPrefab),
-                ElectricChargePrefab = GetEntity(authoring.electricChargePrefab),
+                ElectricChargePrefab = GetEntity(authoring.electricZapPrefab),
                 
                 DistanceToTravel = authoring.distanceToTravel,
                 
@@ -45,7 +59,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack,
                 DistanceFromPlayerToGrab = authoring.distanceFromPlayerToGrab,
                 
-                ResolutionsPerSecond = authoring.resolutionsPerSecond,
+                RotationDegreesPerSecond = math.radians(authoring.revolutionsPerSecond) * 360f,
+                RotationVector = math.normalizesafe(authoring.rotationAxis),
                 
                 CurrentDistanceFromPlayer = float.MaxValue
             });
@@ -62,9 +77,13 @@ public struct HammerSpecialConfig : IComponentData
     
     public float MinTimeBetweenZaps;
     public float MaxTimeBetweenZaps;
+    public float NextTimeBetweenZaps;
+    
+    public float TimeOfLastZap;
     public float Timer;
 
-    public float ResolutionsPerSecond;
+    public float RotationDegreesPerSecond;
+    public float3 RotationVector;
 
     public bool HasSwitchedBack;
     public bool HasReturned;

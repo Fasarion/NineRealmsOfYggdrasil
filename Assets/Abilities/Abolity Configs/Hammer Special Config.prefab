@@ -46,11 +46,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   indicatorPrefab: {fileID: 3054128452994836860, guid: 3fc5d8f156d574a4cbcf87c013aff39b,
     type: 3}
-  electricChargePrefab: {fileID: 0}
-  minTimeBetweenZaps: 0.5
-  maxTimeBetweenZaps: 1.5
-  distanceToTravel: 40
-  timeToTurnBack: 0.7
-  timeToReturnAfterTurning: 0.35
-  resolutionsPerSecond: 50
+  electricZapPrefab: {fileID: 9208164397709987185, guid: a9bff427717fc5f4e8a5acb0731932b9,
+    type: 3}
+  minTimeBetweenZaps: 0.4
+  maxTimeBetweenZaps: 0.8
+  distanceToTravel: 20
+  timeToTurnBack: 3
+  timeToReturnAfterTurning: 1
+  revolutionsPerSecond: 4
+  rotationVector:
+    x: 0
+    y: 1
+    z: 0
   distanceFromPlayerToGrab: 0.5

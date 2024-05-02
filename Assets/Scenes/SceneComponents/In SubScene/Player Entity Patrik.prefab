@@ -124,7 +124,6 @@ GameObject:
   - component: {fileID: 7139840582480737796}
   - component: {fileID: 3470256506313007981}
   - component: {fileID: 7518404381628642642}
-  - component: {fileID: 4031803512305907226}
   - component: {fileID: 8439146205512849683}
   - component: {fileID: 4376167777974654248}
   - component: {fileID: -3072027634817329104}
@@ -378,21 +377,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedValue: 5
---- !u!114 &4031803512305907226
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6353328540331355661}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f42118303ddc8441892911443139265, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 4250531472372243314, guid: 3e0f5dd863fe23d4cbe77b5ec80ad9c2,
-    type: 3}
-  healthBarOffset: {x: 0, y: 1.5, z: 0}
 --- !u!114 &8439146205512849683
 MonoBehaviour:
   m_ObjectHideFlags: 0

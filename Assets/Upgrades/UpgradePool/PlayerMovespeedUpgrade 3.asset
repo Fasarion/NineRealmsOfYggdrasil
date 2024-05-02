@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: PlayerMovespeedUpgrade 3
   m_EditorClassIdentifier: 
-  upgradeTitle: Movement speed upgrade
+  upgradeTitle: +Movement speed 4
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: You will move faster with this upgrade
+  upgradeDescription: +10% movement speed
   upgrades:
   - thingToUpgrade: 10
     valueToUpgrade: 7
-    valueAmount: 1
+    valueAmount: 0.5
   startUnlocked: 0
   upgradeIndex: 19
   isUnlocked: 0

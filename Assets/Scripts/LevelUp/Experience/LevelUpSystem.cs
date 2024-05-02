@@ -26,7 +26,7 @@ public partial struct LevelUpSystem : ISystem
         var skillpoints = SystemAPI.GetSingletonRW<PlayerSkillpoints>();
 
         int currentLevel = level.ValueRO.Value;
-        int currentXP = xp.ValueRO.Value;
+        int currentXP = xp.ValueRO.XPValue;
         int xpNeededToLevel = 0;
         int baseXPNeeded = config.BaseXPNeeded;
         int addedXPNeeded = config.AddedXPNeededPerLevel;
@@ -47,10 +47,12 @@ public partial struct LevelUpSystem : ISystem
             }
         }
 
+        xp.ValueRW.XPNeededToLevelUp = xpNeededToLevel;
+
         if (currentXP >= xpNeededToLevel)
         {
             level.ValueRW.Value = currentLevel + 1;
-            xp.ValueRW.Value = currentXP - xpNeededToLevel;
+            xp.ValueRW.XPValue = currentXP - xpNeededToLevel;
             skillpoints.ValueRW.Value++;
         }
     }

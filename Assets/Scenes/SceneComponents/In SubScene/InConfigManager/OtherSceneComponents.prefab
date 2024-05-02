@@ -1,51 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &18589435543149670
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2689254491887154781}
-  - component: {fileID: 2936860567810604551}
-  m_Layer: 0
-  m_Name: ObjectivePickupsConfig
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2689254491887154781
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18589435543149670}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.138168, y: 0.30418053, z: 1.797398}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 4419224348173018825}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2936860567810604551
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 18589435543149670}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea6943f5954a1c45bc99683614b07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  baseDistance: 5
-  moveSpeed: 10
 --- !u!1 &231378185890710069
 GameObject:
   m_ObjectHideFlags: 0
@@ -287,4 +241,78 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5903853674306763534, guid: 1544ac05e096c2744aa33046ebe6e3f0,
     type: 3}
   m_PrefabInstance: {fileID: 504843584221978904}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2864338914892016359
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4419224348173018825}
+    m_Modifications:
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.138168
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.30418053
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.797398
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2846881822110430849, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+        type: 3}
+      propertyPath: m_Name
+      value: ObjectivePickupsConfig
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def, type: 3}
+--- !u!4 &2689254491887154781 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 185223348609473722, guid: 42e0b9fb8de7c7a40bbd85ffc3df5def,
+    type: 3}
+  m_PrefabInstance: {fileID: 2864338914892016359}
   m_PrefabAsset: {fileID: 0}

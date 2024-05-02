@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
-[CustomEditor(typeof(DialogueContainer))]
+/*[CustomEditor(typeof(DialogueContainer))]
 public class DialogueContainerEditor : Editor
 {
 
@@ -38,7 +38,7 @@ public class DialogueContainerEditor : Editor
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("dialogueStateSwapper"));
             }
             
-            if (selectContainerType.enumValueFlag == (int)ContainerType.BranchingDialogue/*myScript.useBranches*/)
+            if (selectContainerType.enumValueFlag == (int)ContainerType.BranchingDialogue/*myScript.useBranches)
             {
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("branches"));
             }
@@ -56,4 +56,4 @@ public class DialogueContainerEditor : Editor
         
         
     }
-}
+}*/

@@ -10,6 +10,7 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
     public float damageDelayTime;
     public float damage;
     public float maxArea;
+    public int maxCount;
 
     public class ThunderBoltConfigAuthoringBaker : Baker<ThunderBoltConfigAuthoring>
     {
@@ -19,11 +20,12 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
             AddComponent(entity,
                 new ThunderBoltConfig
                 {
-                    abilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
-                    maxDisplayTime = authoring.maxDisplayTime,
-                    damageDelayTime = authoring.damageDelayTime,
-                    damage = authoring.damage,
-                    maxArea = authoring.maxArea
+                    AbilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
+                    MaxDisplayTime = authoring.maxDisplayTime,
+                    DamageDelayTime = authoring.damageDelayTime,
+                    Damage = authoring.damage,
+                    MaxArea = authoring.maxArea,
+                    MaxCount = authoring.maxCount
                 });
         }
     }
@@ -31,9 +33,10 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
 
 public struct ThunderBoltConfig : IComponentData
 {
-    public Entity abilityPrefab;
-    public float maxDisplayTime;
-    public float damageDelayTime;
-    public float damage;
-    public float maxArea;
+    public Entity AbilityPrefab;
+    public float MaxDisplayTime;
+    public float DamageDelayTime;
+    public float Damage;
+    public float MaxArea;
+    public int MaxCount;
 }

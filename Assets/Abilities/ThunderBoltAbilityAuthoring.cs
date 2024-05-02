@@ -5,19 +5,19 @@ using UnityEngine;
 
 public class ThunderBoltAbilityAuthoring : MonoBehaviour
 {
-    public bool hasFired;
+    public int currentCount;
 
     public class ThunderBoltAbilityAuthoringBaker : Baker<ThunderBoltAbilityAuthoring>
     {
         public override void Bake(ThunderBoltAbilityAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new ThunderBoltAbility { hasFired = authoring.hasFired });
+            AddComponent(entity, new ThunderBoltAbility { CurrentCount = authoring.currentCount });
         }
     }
 }
 
 public struct ThunderBoltAbility : IComponentData
 {
-    public bool hasFired;
+    public int CurrentCount;
 }

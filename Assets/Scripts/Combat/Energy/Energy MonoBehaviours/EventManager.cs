@@ -8,6 +8,7 @@ public static class EventManager
     public static UnityAction<WeaponType, float, float> OnEnergyChange;
     public static UnityAction<AttackType> OnAttackInput;
     public static UnityAction<PlayerHealthData> OnPlayerHealthSet;
+    public static UnityAction<ExperienceInfo> OnPlayerExperienceChange;
 }
 
 public struct PlayerHealthData

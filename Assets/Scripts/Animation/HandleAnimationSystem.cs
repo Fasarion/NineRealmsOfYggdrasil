@@ -23,7 +23,7 @@ public partial struct HandleAnimationSystem : ISystem
                      .WithNone<AnimatorReference>()
                      .WithEntityAccess())
         {
-            var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value);
+            var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value, new Vector3(0, 1000, 0), Quaternion.identity);
             var animatorReference = new AnimatorReference()
             {
                 Animator = gameObjectInstance.GetComponent<Animator>()

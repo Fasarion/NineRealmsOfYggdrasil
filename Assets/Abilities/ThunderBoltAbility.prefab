@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 3994125606949409801}
   - component: {fileID: 9011591504567956545}
   - component: {fileID: 172990978833262777}
-  - component: {fileID: 8354078488860280159}
   m_Layer: 0
   m_Name: ThunderBoltAbility
   m_TagString: Untagged
@@ -60,19 +59,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41fbfad6fb91b2245b4e89989dbc935d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasFired: 0
---- !u!114 &8354078488860280159
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 320877796225084080}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afa493f1eebb75941af3bd96d0c5d8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8429109643877031971, guid: db5b16282aafe304f92608a807dffcda,
-    type: 3}
-  followsEntity: 1
+  currentCount: 0
+  isInitialized: 0

@@ -25,8 +25,11 @@ public class PlayerObjectiveDataManager : MonoBehaviour
     public PlayerObjectiveDataHolderObject dataHolder;
     public Dictionary<ObjectiveObjectType, int> objectiveObjectsDictionary;
     public List<ObjectiveObjectUIElementBehaviour> uiElements;
+    public ObjectiveObjectUIElementBehaviour neededObjectsText;
+    public GameObject victoryUI;
     public List<ObjectiveObjectDataReference> objectiveObjectDataReferences;
     public Sprite defaultSprite;
+    private bool winState = false;
 
     private void OnEnable()
     {
@@ -54,7 +57,9 @@ public class PlayerObjectiveDataManager : MonoBehaviour
         dataHolder.ClearPlayerInventory();
         objectiveObjectsDictionary = dataHolder.objectiveObjectsDictionary;
         ClearUI();
-        //dataHolder.SetUpObjectiveObjectDictionary(objectiveObjectDataReferences.ToArray());
+        dataHolder.SetUpObjectiveObjectDictionary(objectiveObjectDataReferences.ToArray());
+        victoryUI.gameObject.SetActive(false);
+        neededObjectsText.gameObject.SetActive(false);
     }
 
     private void Update()
@@ -66,20 +71,26 @@ public class PlayerObjectiveDataManager : MonoBehaviour
             {
                 uiElements[counter].gameObject.SetActive(true);
                 Sprite sprite = GetObjectiveObjectSprite(pair.Key);
-                uiElements[counter].PopulateUI(sprite, pair.Value);
+                uiElements[counter].PopulateUI(sprite, pair.Value.ToString());
                 counter++;
+
+                neededObjectsText.gameObject.SetActive(true);
+                neededObjectsText.PopulateUI(null, "/ " + objectiveObjectDataReferences[0].neededAmount.ToString());
             }
+            
         }
 
-        // if (dataHolder.CheckIfObjectiveReached())
-        // {
-        //     DisplayWinScreen();
-        // }
+        if (dataHolder.CheckIfObjectiveReached() && !winState)
+        {
+            DisplayWinScreen();
+            this.winState = true;
+        }
     }
 
     private void DisplayWinScreen()
     {
-        Debug.Log("you win");
+        victoryUI.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void ClearUI()

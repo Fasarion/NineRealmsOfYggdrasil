@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Patrik;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,6 +23,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
     public Image specialImage;
     public Image passiveImage;
 
+    public TMP_Text selectedKeySymbolNumber;
     [SerializeField]private SymbolType symbolType;
     
     protected Sprite currentlySelectedUltSymbol;
@@ -29,6 +31,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
     protected Sprite currentlySelectedSpecialSymbol;
     protected Sprite currentlySelectedPassiveSymbol;
     
+
     // Make sure to update so it get the current weapon from the actual current weapon
     public virtual void Start()
     {
@@ -41,7 +44,6 @@ public class CombatUIWeaponSymbol : MonoBehaviour
         currentlySelectedUltSymbol = symbolHolder.hammerSymbols[1];
         currentlySelectedSpecialSymbol = symbolHolder.hammerSymbols[2];
         currentlySelectedPassiveSymbol = symbolHolder.hammerSymbols[3];
-        
         SetSymbol(normalImage, currentlySelectedNormalSymbol);
         SetSymbol(ultImage, currentlySelectedUltSymbol);
        
@@ -94,6 +96,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 currentlySelectedNormalSymbol = symbolHolder.hammerSymbols[0];
                 currentlySelectedUltSymbol = symbolHolder.hammerSymbols[1];
                 currentlySelectedSpecialSymbol = symbolHolder.hammerSymbols[2];
+                selectedKeySymbolNumber.text = symbolHolder.keyTexts[0];
                 break;
             }
             case WeaponType.Sword:
@@ -101,6 +104,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 currentlySelectedNormalSymbol = symbolHolder.swordSymbols[0];
                 currentlySelectedUltSymbol = symbolHolder.swordSymbols[1];
                 currentlySelectedSpecialSymbol = symbolHolder.swordSymbols[2];
+                selectedKeySymbolNumber.text = symbolHolder.keyTexts[1];
                 break;
             }
             case WeaponType.Mead:
@@ -147,12 +151,14 @@ public class CombatUIWeaponSymbol : MonoBehaviour
             case WeaponType.Hammer:
             {
                 currentlySelectedPassiveSymbol = symbolHolder.hammerSymbols[3];
+                selectedKeySymbolNumber.text = symbolHolder.keyTexts[0];
                 
                 break;
             }
             case WeaponType.Sword:
             {
                 currentlySelectedPassiveSymbol = symbolHolder.swordSymbols[3];
+                selectedKeySymbolNumber.text = symbolHolder.keyTexts[1];
                 break;
             }
             case WeaponType.Mead:

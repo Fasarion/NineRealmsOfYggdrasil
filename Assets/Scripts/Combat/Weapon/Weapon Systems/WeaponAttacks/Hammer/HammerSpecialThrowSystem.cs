@@ -15,6 +15,8 @@ public partial struct HammerSpecialThrowSystem : ISystem
 
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerPositionSingleton>();
+        state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerSpecialConfig>();
         state.RequireForUpdate<RandomComponent>();

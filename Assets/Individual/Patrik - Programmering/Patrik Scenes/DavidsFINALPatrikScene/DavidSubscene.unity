@@ -1241,33 +1241,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Config Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: spawnRate
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: baseDistance
-      value: 2.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: objectiveObjectPrefab
-      value: 
-      objectReference: {fileID: 5345650359192567939, guid: 3deda1e17b78f9b47a59d9df33ed5984,
-        type: 3}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: objectiveObjectMarkerPrefab
-      value: 
-      objectReference: {fileID: 8792430960988757269, guid: f1935c636b721204d978ed89cf066b38,
-        type: 3}
     - target: {fileID: 5991482223618236709, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: freezeDuration
@@ -1387,32 +1360,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxStrikes
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: strikeSpacing
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: vfxHeightOffset
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 7227252102786388703, guid: 506757bee9a209d45913eb92b1f7b28f,
-        type: 3}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeBetweenStrikes
-      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4622802251312470920, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}

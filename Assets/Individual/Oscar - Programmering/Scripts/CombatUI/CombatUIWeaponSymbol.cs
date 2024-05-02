@@ -32,6 +32,11 @@ public class CombatUIWeaponSymbol : MonoBehaviour
     // Make sure to update so it get the current weapon from the actual current weapon
     public virtual void Start()
     {
+        
+    }
+
+    public void OnCurrentWeaponUpdated()
+    {
         currentlySelectedNormalSymbol = symbolHolder.hammerSymbols[0];
         currentlySelectedUltSymbol = symbolHolder.hammerSymbols[1];
         currentlySelectedSpecialSymbol = symbolHolder.hammerSymbols[2];
@@ -47,13 +52,14 @@ public class CombatUIWeaponSymbol : MonoBehaviour
     public void OnEnable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandler.onStartingWeaponSet += OnCurrentWeaponUpdated;
     }
     
     public void OnDisable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
+        CombatUIWeaponHandler.onStartingWeaponSet -= OnCurrentWeaponUpdated;
     }
-    
     private void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
     {
         switch (symbolType)

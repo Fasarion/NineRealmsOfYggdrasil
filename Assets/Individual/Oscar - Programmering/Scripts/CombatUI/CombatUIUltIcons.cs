@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Patrik;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,15 +12,23 @@ public class CombatUIUltIcons : MonoBehaviour
     public List<CombatUIUltWeaponReadyHolder> ultWeaponReadyHolders;
     private List<WeaponType> weaponTypes;
     public CombatUISymbolHolder SymbolHolder;
+    public int activeUltCounter;
+    public TMP_Text ultimateActiveText;
+
+    private int symbolCounter;
     private void Awake()
     {
         weaponTypes = new List<WeaponType>();
+        symbolCounter = 0;
+        activeUltCounter = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         weaponTypes.Clear();
+        ultimateActiveText.gameObject.SetActive(false);
+       
     }
 
     public void OnEnable()
@@ -37,33 +46,32 @@ public class CombatUIUltIcons : MonoBehaviour
     public void OnWeaponSetup(WeaponBehaviour weaponBehaviour, bool activeWeapon)
     {
         weaponTypes.Add(weaponBehaviour.WeaponType); 
-        if (weaponTypes.Count == 2) 
-        {
-            for (int i = 0; i < weaponTypes.Count; i++)
-            {
+        //if (weaponTypes.Count == 2) 
+        //{
+            //for (int i = 0; i < weaponTypes.Count; i++)
+            //{
                 switch (weaponBehaviour.WeaponType)
                 {
                     case WeaponType.Hammer:
                     {
-                        ultWeaponReadyHolders[i].imageTarget.sprite = SymbolHolder.hammerSymbols[1];
+                        ultWeaponReadyHolders[symbolCounter].imageTarget.sprite = SymbolHolder.hammerSymbols[1];
                         break;
                     }
                     case WeaponType.Sword:
                     {
                 
-                        ultWeaponReadyHolders[i].imageTarget.sprite= SymbolHolder.swordSymbols[1];
+                        ultWeaponReadyHolders[symbolCounter].imageTarget.sprite= SymbolHolder.swordSymbols[1];
                         break;
                     }
                     case WeaponType.Birds:
                     {
-                
-                        ultWeaponReadyHolders[i].imageTarget.sprite = SymbolHolder.birdSymbols[1];
+                        ultWeaponReadyHolders[symbolCounter].imageTarget.sprite = SymbolHolder.birdSymbols[1];
                         break;
                     }
                     case WeaponType.Mead:
                     {
-                        ultWeaponReadyHolders[i].imageTarget.sprite = SymbolHolder.meadSymbols[1];
-                       
+                        ultWeaponReadyHolders[symbolCounter].imageTarget.sprite = SymbolHolder.meadSymbols[1];
+                        
                         break;
                     }
                     default:
@@ -72,10 +80,14 @@ public class CombatUIUltIcons : MonoBehaviour
                         break;
                     }
                 }
-                ultWeaponReadyHolders[i].imageTarget.SetNativeSize();
-            }
-        }
-        
+                ultWeaponReadyHolders[symbolCounter].currentWeaponType = weaponBehaviour.WeaponType;
+                ultWeaponReadyHolders[symbolCounter].imageTarget.SetNativeSize();
+                ultWeaponReadyHolders[symbolCounter].objectToSet.SetActive(false);
+                symbolCounter++;
+                
+                //}
+                //}
+
 
     }
 
@@ -102,6 +114,7 @@ public class CombatUIUltIcons : MonoBehaviour
                 if (ultWeaponReadyHolders[i].currentWeaponType == weaponType)
                 {
                     ultWeaponReadyHolders[i].objectToSet.SetActive(false);
+                    activeUltCounter--;
                 }
             
             }
@@ -115,8 +128,18 @@ public class CombatUIUltIcons : MonoBehaviour
                 if (ultWeaponReadyHolders[i].currentWeaponType == weaponType)
                 {
                     ultWeaponReadyHolders[i].objectToSet.SetActive(true);
+                    activeUltCounter++;
                 }
             }
+        }
+
+        if (activeUltCounter > 0)
+        {
+            ultimateActiveText.gameObject.SetActive(true);
+        }
+        else
+        {
+            ultimateActiveText.gameObject.SetActive(false);
         }
         
     }

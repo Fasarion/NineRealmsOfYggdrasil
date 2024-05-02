@@ -18,7 +18,6 @@ public partial struct HammerUltimateAttackSystem : ISystem
     {
         state.RequireForUpdate<ThunderStrikeConfig>();
         state.RequireForUpdate<ThunderBoltConfig>();
-        state.RequireForUpdate<HammerStatsTag>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<PhysicsWorldSingleton>();

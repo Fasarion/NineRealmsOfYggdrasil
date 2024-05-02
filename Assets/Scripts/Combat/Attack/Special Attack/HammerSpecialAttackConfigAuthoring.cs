@@ -32,7 +32,7 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [Tooltip("How fast the hammer spins.")]
     [SerializeField] private float revolutionsPerSecond = 2f;
     [Tooltip("In what direction does the hammer rotate? ([0,1,0] means it rotates along its y-axis.)")]
-    [SerializeField] private float3 rotationVector = new float3(0,0,1);
+    [SerializeField] private float3 rotationAxis = new float3(0,0,1);
     
     [Header("Catching")]
     [Tooltip("How far from the player should the hammer be grabbed?")]
@@ -60,7 +60,7 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 DistanceFromPlayerToGrab = authoring.distanceFromPlayerToGrab,
                 
                 RotationDegreesPerSecond = math.radians(authoring.revolutionsPerSecond) * 360f,
-                RotationVector = math.normalizesafe(authoring.rotationVector),
+                RotationVector = math.normalizesafe(authoring.rotationAxis),
                 
                 CurrentDistanceFromPlayer = float.MaxValue
             });

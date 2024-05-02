@@ -12,6 +12,7 @@ public class CombatUIObjectiveCounter : MonoBehaviour
     
     void Update()
     {
-        text.text = objectiveObjectUIElementBehaviour.text.text;
+        string newText = objectiveObjectUIElementBehaviour.text.text + "/ 20";
+        text.text = newText;
     }
 }

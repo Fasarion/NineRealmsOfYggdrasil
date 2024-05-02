@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Damage;
 using Patrik;
 using Player;
-using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
@@ -13,7 +12,7 @@ using UnityEngine;
 
 public partial struct HammerSpecialThrowSystem : ISystem
 {
-    [BurstCompile]
+
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<WeaponAttackCaller>();
@@ -21,7 +20,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
         state.RequireForUpdate<RandomComponent>();
     }
 
-    [BurstCompile]
+
     public void OnUpdate(ref SystemState state)
     {
         HandleSpecialStart(ref state);
@@ -29,7 +28,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
         HandleSpecialStop(ref state);
     }
     
-    [BurstCompile]
+ 
     void HandleSpecialStart(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
@@ -63,7 +62,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
         //TODO: Don't call on attack stop until hammer is back and player has played its catch hammer animation
     }
     
-    [BurstCompile]
+   
     void HandleSpecialOnGoing(ref SystemState state)
     {
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
@@ -162,7 +161,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
         }
     }
     
-    [BurstCompile]
+
     void HandleSpecialStop(ref SystemState state)
     {
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();

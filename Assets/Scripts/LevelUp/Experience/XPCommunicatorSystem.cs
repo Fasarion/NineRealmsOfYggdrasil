@@ -5,11 +5,14 @@ using UnityEngine;
 
 public partial class XPCommunicatorSystem : SystemBase
 {
-    private int _cachedXP = int.MaxValue;
+    private int _cachedXP;
+    private bool isInitialized;
     protected override void OnUpdate()
     {
         var level = SystemAPI.GetSingleton<PlayerLevel>();
         var xp = SystemAPI.GetSingleton<PlayerXP>();
+
+        if (!isInitialized) _cachedXP = int.MaxValue;
 
         if (_cachedXP == xp.XPValue && _cachedXP != 0) return;
 

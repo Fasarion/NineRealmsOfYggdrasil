@@ -8,6 +8,12 @@ namespace Patrik.Special_Attack
     public partial struct HammerNormalAttackComboSystem : ISystem
     {
         [BurstCompile]
+        public void OnCreate(ref SystemState state)
+        {
+            state.RequireForUpdate<ThunderBoltConfig>();
+        }
+
+        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var abilityConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
@@ -18,10 +24,11 @@ namespace Patrik.Special_Attack
                 return;
 
             int combo = attackCaller.ValueRO.ActiveAttackData.Combo;
+            
 
             if (combo != 2) return;
 
-            //state.EntityManager.Instantiate(abilityConfig.abilityPrefab);
+            state.EntityManager.Instantiate(abilityConfig.AbilityPrefab);
         }
     }
 }

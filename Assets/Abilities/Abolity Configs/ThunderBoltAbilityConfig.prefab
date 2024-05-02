@@ -50,10 +50,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityPrefab: {fileID: 320877796225084080, guid: 91f0693c4daf7c64489679106a607d9a,
     type: 3}
+  projectilePrefab: {fileID: 7227252102786388703, guid: 506757bee9a209d45913eb92b1f7b28f,
+    type: 3}
   maxDisplayTime: 1
   damageDelayTime: 0.3
-  damage: 5
   maxArea: 5
+  maxStrikes: 3
+  strikeSpacing: 5
+  timeBetweenStrikes: 0.5
+  vfxHeightOffset: 0
 --- !u!114 &6620056151203127005
 MonoBehaviour:
   m_ObjectHideFlags: 0

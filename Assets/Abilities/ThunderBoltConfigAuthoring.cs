@@ -1,16 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ThunderBoltConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
+    public GameObject projectilePrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
-    public float damage;
-    public float maxArea;
-    public int maxCount;
+    public float maxArea; 
+    public int maxStrikes;
+    public float strikeSpacing;
+    public float timeBetweenStrikes;
+    public float vfxHeightOffset;
 
     public class ThunderBoltConfigAuthoringBaker : Baker<ThunderBoltConfigAuthoring>
     {
@@ -21,12 +26,16 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
                 new ThunderBoltConfig
                 {
                     AbilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
+                    ProjectilePrefab = GetEntity(authoring.projectilePrefab, TransformUsageFlags.Dynamic),
                     MaxDisplayTime = authoring.maxDisplayTime,
                     DamageDelayTime = authoring.damageDelayTime,
-                    Damage = authoring.damage,
                     MaxArea = authoring.maxArea,
-                    MaxCount = authoring.maxCount
+                    MaxStrikes = authoring.maxStrikes,
+                    StrikeSpacing = authoring.strikeSpacing,
+                    TimeBetweenStrikes = authoring.timeBetweenStrikes,
+                    VfxHeightOffset = authoring.vfxHeightOffset,
                 });
+
         }
     }
 }
@@ -34,9 +43,17 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
 public struct ThunderBoltConfig : IComponentData
 {
     public Entity AbilityPrefab;
+    public Entity ProjectilePrefab;
     public float MaxDisplayTime;
     public float DamageDelayTime;
-    public float Damage;
     public float MaxArea;
-    public int MaxCount;
+    public int MaxStrikes;
+    public float StrikeSpacing;
+    public float TimeBetweenStrikes;
+    public float VfxHeightOffset;
+}
+
+public struct TargetBufferElement : IBufferElementData
+{
+    public float3 Position;
 }

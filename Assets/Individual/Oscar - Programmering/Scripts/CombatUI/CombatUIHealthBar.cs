@@ -71,6 +71,7 @@ public class CombatUIHealthBar : MonoBehaviour
     {
         currentHealth = (int)healthData.currentHealth;
         maxHealth = (int) healthData.maxHealth;
+        healthText.text = currentHealth.ToString();
         SetCurrentSprite();
     }
     

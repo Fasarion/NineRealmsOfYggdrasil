@@ -309,13 +309,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
+      propertyPath: maxHP
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8439146205512849683, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
       propertyPath: damageReductionValue
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
         type: 3}
+      propertyPath: skillModifier.Normal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: skillModifier.Passive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
+      propertyPath: skillModifier.Special
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8574011558162687106, guid: 167eb942ef45ef24f88317949ed379d6,
+        type: 3}
       propertyPath: skillModifier.Ultimate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -352,11 +372,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 17792950140372445, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: attackDamage
-      value: 15
-      objectReference: {fileID: 0}
     - target: {fileID: 1178434585940269983, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: baseXPNeeded
@@ -367,11 +382,6 @@ PrefabInstance:
       propertyPath: addedXPNeededPerLevel
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1394797947579899170, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: knockBackForce
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2623615028845185692, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: knockBackForce
@@ -381,6 +391,31 @@ PrefabInstance:
         type: 3}
       propertyPath: knockBackForce
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3088746766615510155, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -447,10 +482,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6668331784878520972, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 6702840696670580388, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: knockBackForce
-      value: 5
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6762351246152799829, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -462,10 +497,15 @@ PrefabInstance:
       propertyPath: maxArea
       value: 0.1
       objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: maxDisplayTime
-      value: 1
+      propertyPath: mainEffectHeightOffset
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: shockwaveEffectHeightOffset
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 7414300244194485026, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -505,6 +545,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: KnockDirection
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: knockBackForce
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1573172003656105017, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: m_Name
@@ -560,6 +610,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3372213329053059802, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: skillModifier.Special
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7364503994779296283, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: skillModifier.Ultimate
@@ -574,6 +629,11 @@ PrefabInstance:
         type: 3}
       propertyPath: OverallStats.Damage.BaseValue
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 9017022476760349507, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: energyToFill
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

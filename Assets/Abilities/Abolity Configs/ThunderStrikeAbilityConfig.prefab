@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 628954878932991273}
   - component: {fileID: 4266693040271554691}
   - component: {fileID: 2008069897101419990}
+  - component: {fileID: 2596202326436399737}
   m_Layer: 0
   m_Name: ThunderStrikeAbilityConfig
   m_TagString: Untagged
@@ -58,9 +59,9 @@ MonoBehaviour:
   shockwaveAbilityPrefab: {fileID: 3383446916815051859, guid: 57fc5cf891427aa41ba63479f6aa85f5,
     type: 3}
   maxAftermathDisplayTime: 1
-  damageDelayTime: 0.3
-  damageArea: 8
-  shockwaveEffectHeightOffset: 5
+  damageDelayTime: 0.2
+  damageArea: 7
+  shockwaveEffectHeightOffset: 0.1
 --- !u!114 &1358274090480011263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 1
+  attackDamage: 15
   criticalChance: 0
 --- !u!114 &4266693040271554691
 MonoBehaviour:
@@ -123,5 +124,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 0.2
+  knockBackForce: 0.5
   KnockDirection: 0
+--- !u!114 &2596202326436399737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2722267077998208678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd77be6ab74fbb845ae1c858a79ef71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.3

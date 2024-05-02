@@ -61,12 +61,12 @@ MonoBehaviour:
   m_ShapeType: 0
   m_PrimitiveCenter:
     x: 0
-    y: 0
-    z: 0
-  m_PrimitiveSize:
-    x: 0.8
-    y: 0.8
+    y: 0.3
     z: 0.8
+  m_PrimitiveSize:
+    x: 0.3
+    y: 0.3
+    z: 1
   m_PrimitiveOrientation:
     Value:
       x: 0
@@ -74,15 +74,15 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 0.8
-    Radius: 0.4
-    Axis: 1
+    Height: 1
+    Radius: 0.15
+    Axis: 2
   m_Cylinder:
-    Height: 0.8
-    Radius: 0.4
+    Height: 1
+    Radius: 0.15
     Axis: 2
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.4
+  m_SphereRadius: 0.5
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015
@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  damageReductionValue: 1
 --- !u!114 &2372089618107141578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 10
-  knockAwayFromPlayer: 1
+  KnockDirection: 0
 --- !u!114 &2331193951588233712
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -400,7 +401,7 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 0
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 0
     audioEventType: 0
 --- !u!114 &4066208094940666673

@@ -40,7 +40,7 @@ public partial struct ObjectiveObjectSystem : ISystem
         {
             PlayerPosition = playerPosition.Value,
             ECB = ecb.AsParallelWriter(),
-            DistanceRadiusSQ = config.baseDistance * config.baseDistance
+            DistanceRadiusSQ = config.BaseDistance * config.BaseDistance
         }.ScheduleParallel(new JobHandle());
         
         _checkDistanceJob.Complete();
@@ -53,7 +53,7 @@ public partial struct ObjectiveObjectSystem : ISystem
         {
             PlayerPosition = playerPosition.Value,
             ECB = ecb2.AsParallelWriter(),
-            MoveSpeed = config.moveSpeed,
+            MoveSpeed = config.MoveSpeed,
             DeltaTime = SystemAPI.Time.DeltaTime
             
         }.ScheduleParallel(_checkDistanceJob);

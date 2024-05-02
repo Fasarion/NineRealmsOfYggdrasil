@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 932639874526130987}
   - component: {fileID: 6446108799359810587}
   m_Layer: 0
-  m_Name: ObjectiveUIManager
+  m_Name: ObjectiveManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,13 +52,17 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  ObjectiveObjectSpriteReferences:
+  victoryUI: {fileID: 0}
+  objectiveObjectDataReferences:
   - type: 0
-    sprite: {fileID: 21300000, guid: b847d59e3c2d0ed4abe9450901539eb3, type: 3}
+    sprite: {fileID: 21300000, guid: 6221e6da18435d8458f1177d867d58a5, type: 3}
+    neededAmount: 20
   - type: 1
-    sprite: {fileID: 21300000, guid: 246e5709c31305c4482720bc696959c8, type: 3}
+    sprite: {fileID: 21300000, guid: c0c13889e1edf7b4ca1191fdf37637b9, type: 3}
+    neededAmount: 2
   - type: 2
-    sprite: {fileID: 21300000, guid: 693cb0a91c993f54faab1f5a44222af1, type: 3}
+    sprite: {fileID: 21300000, guid: 98fb38a5413fd86478669964e6c03726, type: 3}
+    neededAmount: 3
   defaultSprite: {fileID: 21300000, guid: 9a3bd2609545a2a4a94092b5b5e97d59, type: 3}
 --- !u!1 &4509144780917976783
 GameObject:

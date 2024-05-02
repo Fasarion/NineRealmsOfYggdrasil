@@ -52,6 +52,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  neededObjectsText: {fileID: 0}
   victoryUI: {fileID: 0}
   objectiveObjectDataReferences:
   - type: 0
@@ -316,11 +317,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: DamageNumberPoolManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 8308808171197823723, guid: b414dc65adfca0d419f9a0a77776632a,
-        type: 3}
-      propertyPath: allocationCount
-      value: 1000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

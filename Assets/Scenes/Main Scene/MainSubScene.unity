@@ -186,6 +186,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6574651918539299363, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: audioData.weaponType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574651918539299363, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: audioData.audioEventType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574651918539299363, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: audioData.eventCategoryType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105628515060602184, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: audioData.weaponType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105628515060602184, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: audioData.audioEventType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7105628515060602184, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: audioData.eventCategoryType
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -203,6 +233,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Config Manager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: markerOffset
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -353,7 +388,7 @@ PrefabInstance:
     - target: {fileID: 2665473978249003220, guid: c8c8d6f60326c464cad13526cf546669,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 2665473978249003220, guid: c8c8d6f60326c464cad13526cf546669,
         type: 3}

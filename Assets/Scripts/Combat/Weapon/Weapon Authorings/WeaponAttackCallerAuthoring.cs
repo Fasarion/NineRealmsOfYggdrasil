@@ -21,7 +21,7 @@ public struct WeaponAttackCaller : IComponentData
     public WeaponCallData ActiveAttackData;
     public WeaponCallData PassiveAttackData;
 
-    public SpecialChargeInfo SpecialChargeInfo;
+    public SpecialChargeInfo SpecialChargeInfo; 
     public PrepareUltimateInfo PrepareUltimateInfo;
 
     // tempo variable, TODO: make general

@@ -32,7 +32,7 @@ public class CameraBehaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Invoke("FindPlayer", 0.1f);
+        Invoke("FindPlayer", 1f);
       //  FindPlayer();
     }
 

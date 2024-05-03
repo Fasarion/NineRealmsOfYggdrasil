@@ -6,10 +6,10 @@ using UnityEngine.Serialization;
 
 public class SpawningController : MonoBehaviour
 {
-    [Tooltip("The time (in seconds) after which different checkpoints become active (time based on a global timer).")]
-    public List<int> spawningCheckpointTimes;
-    [Tooltip("Specialized data for each checkpoint to use. Corresponds to the index in the SpawningCheckpointTimes list!")]
-    public List<SpawningTimerCheckpointObject> checkpointData;
+    // [Tooltip("The time (in seconds) after which different checkpoints become active (time based on a global timer).")]
+    // public List<int> spawningCheckpointTimes;
+    // [Tooltip("Specialized data for each checkpoint to use. Corresponds to the index in the SpawningCheckpointTimes list!")]
+    // public List<SpawningTimerCheckpointObject> checkpointData;
 
     [Tooltip("The shortest possible time between enemy spawns.")]
     public float minTimerTime;
@@ -120,4 +120,17 @@ public struct EnemyTypesInformation
              "If one enemytype A has a weight of 2 and another enemytype B has a weight of 1 then type A will spawn 66% of the time and type B 33%, and so on." +
              "")]
     public float enemyWeight;
+}
+
+[System.Serializable]
+public struct SpawningTimerCheckpointStruct
+{
+    [Tooltip("The amount of enemies that ideally should exist during the checkpoint")]
+    public int targetEnemyCount;
+
+    [Tooltip("Information about which enemy types are allowed to spawn during this checkpoint" +
+             "and their weights. You can add as many items as you wish to this list!")]
+    public EnemyType enemyType;
+
+    public int timerCutoffTime;
 }

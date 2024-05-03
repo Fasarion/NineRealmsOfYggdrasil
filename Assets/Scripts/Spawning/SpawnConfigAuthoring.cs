@@ -39,6 +39,9 @@ public class SpawnConfigAuthoring : MonoBehaviour
 
     public List<EnemyPrefabData> enemyPrefabs;
 
+    public List<SpawningTimerCheckpointStruct> spawningCheckpoints;
+    
+
     public class NewSpawnConfigBaker : Baker<SpawnConfigAuthoring>
     {
         public override void Bake(SpawnConfigAuthoring authoring)
@@ -62,6 +65,7 @@ public class SpawnConfigAuthoring : MonoBehaviour
                 });
 
             var buffer = AddBuffer<EnemyEntityPrefabElement>(entity);
+            var buffer2 = AddBuffer<SpawningCheckpointElement>(entity);
             
             foreach (var enemyPrefab in authoring.enemyPrefabs)
             {
@@ -70,6 +74,17 @@ public class SpawnConfigAuthoring : MonoBehaviour
                    PrefabValue = GetEntity(enemyPrefab.prefab, TransformUsageFlags.Dynamic), 
                    TypeValue = enemyPrefab.enemyType
                 });
+            }
+            
+            foreach (var enemyPrefab in authoring.spawningCheckpoints)
+            {
+                buffer2.Add(new SpawningCheckpointElement
+                {
+                    TargetEnemyCount = enemyPrefab.targetEnemyCount,
+                    timerCutoff = enemyPrefab.timerCutoffTime,
+                    TypeOfEnemy = enemyPrefab.enemyType,
+                });
+
             }
         }
     }
@@ -97,6 +112,14 @@ public struct EnemyEntityPrefabElement : IBufferElementData
     public EnemyType TypeValue;
     public float SpawnPercentValue;
 }
+
+public struct SpawningCheckpointElement : IBufferElementData
+{
+    public int TargetEnemyCount;
+    public EnemyType TypeOfEnemy;
+    public float timerCutoff;
+}
+
 
 [System.Serializable]
 public struct EnemyPrefabData 

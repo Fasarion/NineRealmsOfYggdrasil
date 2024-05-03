@@ -51,6 +51,7 @@ public class UpgradePoolManager : MonoBehaviour
         pickedUpgradeSet = new HashSet<int>();
         unlockedUpgradeSet = new HashSet<int>();
     }
+    
 
     public void GenerateUpgradePool()
     {

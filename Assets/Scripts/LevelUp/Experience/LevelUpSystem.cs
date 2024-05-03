@@ -4,6 +4,7 @@ using Unity.Burst;
 using Unity.Entities;
 using UnityEngine;
 
+[UpdateInGroup(typeof(SimulationSystemGroup))]
 [UpdateAfter(typeof(XPObjectSystem))]
 [BurstCompile]
 public partial struct LevelUpSystem : ISystem

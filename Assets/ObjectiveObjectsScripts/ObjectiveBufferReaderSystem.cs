@@ -10,23 +10,36 @@ public partial class ObjectiveBufferReaderSystem : SystemBase
     public Action<List<ObjectiveObjectType>> OnObjectiveObjectPickedUp;
     private List<ObjectiveObjectType> _objectiveObjects = new List<ObjectiveObjectType>();
     private bool isInitialized;
+    private float startUpTimer;
     
     protected override void OnUpdate()
     {
-        var buffer = SystemAPI.GetSingletonBuffer<ObjectivePickupBufferElement>();
-        
-        if (!buffer.IsEmpty)
+        if (!isInitialized)
         {
-            _objectiveObjects.Clear();
-            
-            foreach (var element in buffer)
+            if (startUpTimer < 1)
             {
-                _objectiveObjects.Add(element.Value);
+                startUpTimer += SystemAPI.Time.DeltaTime;
+                return;
             }
 
-            buffer.Clear();
-            
-            OnObjectiveObjectPickedUp?.Invoke(_objectiveObjects);
+            isInitialized = true;
+            return;
+        }
+        
+        var buffer = SystemAPI.GetSingletonBuffer<ObjectivePickupBufferElement>();
+        
+         if (!buffer.IsEmpty)
+         {
+             _objectiveObjects.Clear();
+             
+             foreach (var element in buffer)
+             {
+                 _objectiveObjects.Add(element.Value);
+             }
+        
+             buffer.Clear();
+             
+             OnObjectiveObjectPickedUp?.Invoke(_objectiveObjects);
         }
     }
 }

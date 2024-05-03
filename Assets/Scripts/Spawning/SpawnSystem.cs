@@ -25,6 +25,7 @@ public partial struct SpawnSystem : ISystem
         state.RequireForUpdate<PlayerPositionSingleton>();
         state.RequireForUpdate<SpawnConfig>();
         state.RequireForUpdate<RandomComponent>();
+        state.RequireForUpdate<SpawningEnabledComponent>();
     }
 
     [BurstCompile]
@@ -77,8 +78,6 @@ public partial struct SpawnSystem : ISystem
         GenerateEnemyTypesArray(random, config, spawnCount, ref enemySpawnTypes);
         
         SpawnEnemies(random, spawnCount, ref enemySpawnTypes, config, state);
-
-        enemySpawnTypes.Dispose();
     }
 
     public void OnDestroy(ref SystemState state)

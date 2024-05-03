@@ -26,7 +26,7 @@ public class PlayerLevelingAuthoring : MonoBehaviour
     {
         public override void Bake(PlayerLevelingAuthoring authoring)
         {
-            var entity = GetEntity(TransformUsageFlags.None);
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
                 new PlayerLevelingConfig
                     {

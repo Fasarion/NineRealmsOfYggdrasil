@@ -11,35 +11,50 @@ using UnityEngine.Pool;
 public partial class DamageNumberSystem : SystemBase
 {
     private ObjectPool<DamagePopup> _pool;
+    private bool _isInitialized;
+    private float startUpTimer;
     
     protected override void OnUpdate()
     {
+        if (!_isInitialized)
+        {
+            if (startUpTimer < 1)
+            {
+                startUpTimer += SystemAPI.Time.DeltaTime;
+                return;
+            }
+            
+            _isInitialized = true;
+            return;
+        }
+        
+        
         //initialize config
         if (_pool == null)
         {
             _pool = GameObject.FindObjectOfType<DamageNumberPool>().Pool;
-
+        
             if (_pool == null)
             {
                 // No spawner exists
                 return;
             }
         }
-
+        
         var buffer = SystemAPI.GetSingletonBuffer<DamageNumberBufferElement>();
-
+        
         if (buffer.IsEmpty)
         {
             return;
         }
-
+        
         foreach (var element in buffer)
         {
             var damageNumber = _pool.Get();
             damageNumber.Setup((int)element.damage, element.position, element.isCritical);
         }
-
-
+        
+        
         buffer.Clear();
     }
 }

@@ -216,26 +216,6 @@ PrefabInstance:
       propertyPath: audioData.eventCategoryType
       value: 4
       objectReference: {fileID: 0}
-    - target: {fileID: 7364503994779296283, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: skillModifier.Passive
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7364503994779296283, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: skillModifier.Ultimate
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7390462214705800887, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: attackDamage
-      value: 22
-      objectReference: {fileID: 0}
-    - target: {fileID: 7390462214705800887, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: criticalChance
-      value: 0.05
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -249,43 +229,91 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 551753558167719541, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: duration
-      value: 100
+      propertyPath: spawningCheckpoints.Array.size
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 4625235940087417636, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: KnockDirection
+      propertyPath: spawningCheckpoints.Array.data[0].enemyType
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4625235940087417636, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: knockBackForce
+      propertyPath: spawningCheckpoints.Array.data[1].enemyType
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[2].enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[3].enemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[4].enemyType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[0].timerCutoffTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[1].timerCutoffTime
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[2].timerCutoffTime
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[3].timerCutoffTime
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[4].timerCutoffTime
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[0].targetEnemyCount
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[1].targetEnemyCount
+      value: 24
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[2].targetEnemyCount
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[3].targetEnemyCount
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: spawningCheckpoints.Array.data[4].targetEnemyCount
+      value: 85
       objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_Name
       value: Config Manager
       objectReference: {fileID: 0}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: markerOffset
-      value: 1.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: objectiveObjectPrefab
-      value: 
-      objectReference: {fileID: 7635009148316473858, guid: e3c8084862ed8604eb789e33074b2645,
-        type: 3}
-    - target: {fileID: 5383670924653943581, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: objectiveObjectMarkerPrefab
-      value: 
-      objectReference: {fileID: 5216400006481588719, guid: 1aba6dc18427cce48be543f247a889a7,
-        type: 3}
     - target: {fileID: 6481230346474377608, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -336,28 +364,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8117142245473946466, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: attackDamage
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxArea
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: strikeSpacing
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeBetweenStrikes
-      value: 0.2
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 4622802251312470920, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

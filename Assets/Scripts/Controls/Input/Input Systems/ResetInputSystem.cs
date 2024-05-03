@@ -30,12 +30,14 @@ public partial struct ResetInputSystem : ISystem
 
         // Reset fire input
         var normalAttackInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
-        normalAttackInput.ValueRW.KeyPressed = false;
+        normalAttackInput.ValueRW.KeyDown = false;
+        normalAttackInput.ValueRW.KeyUp = false;
         var specialAttackInput = SystemAPI.GetSingletonRW<PlayerSpecialAttackInput>();
         specialAttackInput.ValueRW.KeyDown = false;
         specialAttackInput.ValueRW.KeyUp = false;
         var ultimateAttackInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
-        ultimateAttackInput.ValueRW.KeyPressed = false;
+        ultimateAttackInput.ValueRW.KeyDown = false;
+        ultimateAttackInput.ValueRW.KeyUp = false;
         
         // Reset weapon input
         var weapon1 = SystemAPI.GetSingletonRW<WeaponOneInput>();

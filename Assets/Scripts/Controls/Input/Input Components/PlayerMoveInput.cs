@@ -15,9 +15,7 @@ public struct MousePositionInput : IComponentData
 
 public struct PlayerNormalAttackInput : IComponentData
 {
-    public bool KeyDown;
-    public bool KeyUp;
-    public bool IsHeld;
+    public bool KeyPressed;
 }
 
 public struct CanPerformNormalAttack : IComponentData
@@ -34,9 +32,7 @@ public struct PlayerSpecialAttackInput : IComponentData
 
 public struct PlayerUltimateAttackInput : IComponentData
 {
-    public bool KeyDown;
-    public bool KeyUp;
-    public bool IsHeld;
+    public bool KeyPressed;
 }
 
 public struct WeaponOneInput : IComponentData

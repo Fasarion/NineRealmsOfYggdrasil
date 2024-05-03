@@ -44,7 +44,6 @@ public partial struct IceRingSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var stageBuffer = SystemAPI.GetSingletonBuffer<IceRingStageElement>(false);
         var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
-        var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
         
         foreach (var (ability, transform, chargeTimer, entity) in
                  SystemAPI.Query<RefRW<IceRingAbility>, RefRW<LocalTransform>, RefRW<ChargeTimer>>()
@@ -88,8 +87,7 @@ public partial struct IceRingSystem : ISystem
             transform.ValueRW.Scale = area * .5f;
 
             //On button release
-            //if (!input.IsHeld)
-            if (attackCaller.SpecialChargeInfo.chargeState == ChargeState.Stop)
+            if (!input.IsHeld)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
                 var effect = state.EntityManager.Instantiate(config.ValueRO.abilityPrefab);

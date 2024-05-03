@@ -81,7 +81,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         }
 
         // handle ultimate weapon that doesn't use targeting
-        var ultimateAttackKeyPressed = SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyDown;
+        var ultimateAttackKeyPressed = SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyPressed;
         bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
         
         if (!weaponUsesTargeting)
@@ -123,9 +123,9 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         }
 
         // handle activating ultimate
-        bool activationKeyPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyDown 
+        bool activationKeyPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyPressed 
                                     || SystemAPI.GetSingleton<PlayerSpecialAttackInput>().KeyDown
-                                    || SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyDown;
+                                    || SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyPressed;
         //bool ultKeyPressedAfterActivation = SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyPressed && 
         
         if (activationKeyPressed && hasPreparedUltimate)

@@ -21,10 +21,6 @@ namespace Patrik
         [Header("Transforms")]
         [SerializeField] private Transform attackPoint;
         [SerializeField] private Transform model;
-        [SerializeField] private Transform handle;
-        
-        [SerializeField] private Vector3 defaultRotation = Vector3.zero;
-        
         public Transform AttackPoint => attackPoint;
         private bool activeState;
         
@@ -51,13 +47,9 @@ namespace Patrik
             var thisTransform = transform;
             
             thisTransform.parent = parent;
-            thisTransform.position = parent.position - handle.localPosition;
+            thisTransform.position = parent.position;
             thisTransform.rotation = parent.rotation;
             
-            if (activeState) thisTransform.Rotate(defaultRotation);
-            
-            // model.position = parent.position;
-            // model.rotation = parent.rotation;
             
             model.position = thisTransform.position;
             model.rotation = thisTransform.rotation;

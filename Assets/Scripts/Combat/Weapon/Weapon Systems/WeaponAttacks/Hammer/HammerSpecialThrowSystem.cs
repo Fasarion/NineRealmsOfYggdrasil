@@ -35,14 +35,9 @@ public partial struct HammerSpecialThrowSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
-
-        ChargeState currentChargeState = attackCaller.SpecialChargeInfo.chargeState;
         
-        if (currentChargeState != ChargeState.Stop) return;
-
-        if (attackCaller.ActiveAttackData.WeaponType != WeaponType.Hammer) return;
-        
-        if (attackCaller.ActiveAttackData.AttackType != AttackType.Special) return;
+        bool shouldAttack = attackCaller.ShouldStartActiveAttack(WeaponType.Hammer, AttackType.Special);
+        if (!shouldAttack) return;
 
         config.ValueRW.HasStarted = true;
         config.ValueRW.HasReturned = false;
@@ -88,6 +83,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
         {
             var ability = state.EntityManager.Instantiate(config.ValueRO.ElectricChargePrefab);
 
+            Debug.Log("Zap!");
             config.ValueRW.TimeOfLastZap = config.ValueRO.Timer;
             config.ValueRW.NextTimeBetweenZaps = randomComponent.ValueRW.random
                 .NextFloat(config.ValueRO.MinTimeBetweenZaps, config.ValueRW.MaxTimeBetweenZaps);

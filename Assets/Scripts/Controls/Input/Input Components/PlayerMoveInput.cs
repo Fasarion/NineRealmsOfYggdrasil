@@ -15,7 +15,7 @@ public struct MousePositionInput : IComponentData
 
 public struct PlayerNormalAttackInput : IComponentData
 {
-    public bool KeyDown;
+    public bool KeyDown; 
     public bool KeyUp;
     public bool IsHeld;
 }

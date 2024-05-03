@@ -29,7 +29,7 @@ namespace Patrik
         [SerializeField] float attackBufferTime = 0.2f;
 
         
-        public ChargeState chargeState = ChargeState.None;
+        [HideInInspector] public ChargeState chargeState = ChargeState.None;
 
         
         // Weapons

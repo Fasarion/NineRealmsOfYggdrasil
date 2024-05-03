@@ -29,7 +29,7 @@ public struct WeaponAttackCaller : IComponentData
     
     public readonly bool IsPreparingAttack()
     {
-        return SpecialChargeInfo.IsCharging || PrepareUltimateInfo.IsPreparing;
+        return SpecialChargeInfo.chargeState == ChargeState.Start || PrepareUltimateInfo.IsPreparing;
     }
 
     public readonly bool ShouldStartActiveAttack(WeaponType weaponType, AttackType attackType)
@@ -55,12 +55,14 @@ public struct WeaponAttackCaller : IComponentData
 
 public partial struct SpecialChargeInfo
 {
-    public bool IsCharging;
+
+    public ChargeState chargeState;
+   // public bool IsCharging;
     public WeaponType ChargingWeapon;
 
     public readonly bool IsChargingWithWeapon(WeaponType weaponType)
     {
-        if (!IsCharging) return false;
+        if (chargeState != ChargeState.Ongoing) return false;
 
         return weaponType == ChargingWeapon;
     }

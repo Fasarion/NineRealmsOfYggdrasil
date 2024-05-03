@@ -25,6 +25,9 @@ namespace Patrik
         [SerializeField] private Transform activeSlot;
         [SerializeField] private List<Transform> passiveSlots = new ();
         
+        public ChargeState chargeState = ChargeState.None;
+
+        
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
@@ -35,7 +38,7 @@ namespace Patrik
         private AttackType currentAttackType { get;  set; }
         private int currentCombo = 0;
 
-        public bool isAttacking;
+       // public bool isAttacking;
         
         // Animator parameters
       //  private string movingParameterName = "Moving";
@@ -60,6 +63,12 @@ namespace Patrik
         
         public UnityAction<AttackData> OnSpecialCharge;
         public UnityAction<AttackData> OnUltimatePrepare;
+        
+        public void UpdateAttackAnimation(AttackType type, bool setTrue)
+        {
+           if (setTrue) currentAttackType = type;
+           playerAnimator.SetBool(GetActiveAttackAnimationName(type), setTrue);
+        }
 
         
         // New Events
@@ -78,11 +87,12 @@ namespace Patrik
         public void TurnOff()
         {
             string attackParam = GetActiveAttackAnimationName(currentAttackType);
+            if (attackParam == "") return;
             
             playerAnimator.SetBool(attackParam, false);
             
-            isAttacking = false;
-            StartCoroutine(ResetBufferNextFrame());
+          //  isAttacking = false;
+          //  StartCoroutine(ResetBufferNextFrame());
         }
 
         // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
@@ -100,19 +110,19 @@ namespace Patrik
 
         public void SetIsAttackingEvent()
         {
-            isAttacking = true;
+           // isAttacking = true;
         }
 
         public void SetCurrentCombo(int combo)
         {
-            isAttacking = true;
+          //  isAttacking = true;
             currentCombo = combo;
         }
 
         public void FinishActiveAttackAnimationEvent()
         {
-            isAttacking = false;
-            StartCoroutine(ResetBufferNextFrame());
+        //    isAttacking = false;
+         //   StartCoroutine(ResetBufferNextFrame());
         }
 
         private IEnumerator ResetBufferNextFrame()
@@ -317,17 +327,6 @@ namespace Patrik
                 return false;
             }
             
-            if (isAttacking)
-            {
-                // set attack buffer
-               // playerAnimator.SetBool(bufferAttackParameterName, true);
-                
-                playerAnimator.SetInteger(bufferAttackParameterName, (int)type);
-                
-                return false;
-            }
-
-            isAttacking = true;
             currentAttackType = type;
             UpdateAnimatorAttackParameters();
             playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
@@ -342,14 +341,10 @@ namespace Patrik
                 string attackAnimationName = GetActiveAttackAnimationName(currentAttackType);
                 
                 playerAnimator.SetBool(attackAnimationName, true);
-                
-                //playerAnimator.Play(name);
-                //playerAnimator.SetInteger(currentAttackParameterName, (int)currentAttackType);
-                //playerAnimator.SetInteger(currentWeaponParameterName, (int)CurrentWeaponType);
             }
             else
             {
-                isAttacking = false;
+               // isAttacking = false;
                 Debug.Log($"No animation found for weapon attack pair {CurrentWeaponType}, {currentAttackType}");
             }
         }
@@ -419,7 +414,7 @@ namespace Patrik
 
         public void ReleaseSpecial()
         {
-            playerAnimator.SetBool(attackReleasedParameterName, true);
+//            playerAnimator.SetBool(attackReleasedParameterName, true);
 
             string specialAtk = GetActiveAttackAnimationName(AttackType.Special);
             playerAnimator.SetBool(specialAtk, false);
@@ -438,5 +433,18 @@ namespace Patrik
             activeWeapon.SetParent(activeSlot);
             playerAnimator.SetTrigger("hammerReturn");
         }
+
+        public void SetCharge(ChargeState state)
+        {
+            chargeState = state;
+        }
     }
+}
+
+public enum ChargeState
+{
+    None,
+    Start,
+    Ongoing,
+    Stop
 }

@@ -23,10 +23,14 @@ public partial class GetPlayerInputSystem : SystemBase
         
         // Attack
         playerInputActions.InputMap.PlayerNormalAttack.performed += OnNormalAttack;
+        playerInputActions.InputMap.PlayerNormalAttack.canceled += OnNormalAttackUp;
+        
         playerInputActions.InputMap.PlayerSpecialAttack.performed += OnSpecialAttackDown;
         playerInputActions.InputMap.PlayerSpecialAttack.canceled += OnSpecialAttackUp;
-        playerInputActions.InputMap.PlayerUltimateAttack.performed += OnUltimateAttack;
         
+        playerInputActions.InputMap.PlayerUltimateAttack.performed += OnUltimateAttack;
+        playerInputActions.InputMap.PlayerUltimateAttack.canceled -= OnUltimateAttackUp;
+
         // Weapon switch
         playerInputActions.WeaponMap.SwitchWeapon1.performed += OnWeapon1;
         playerInputActions.WeaponMap.SwitchWeapon2.performed += OnWeapon2;
@@ -39,7 +43,24 @@ public partial class GetPlayerInputSystem : SystemBase
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
     }
-    
+
+    private void OnUltimateAttackUp(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
+        fireInput.ValueRW.KeyUp = true;
+        fireInput.ValueRW.IsHeld = false;
+    }
+
+    private void OnNormalAttackUp(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+
+        var fireInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
+        fireInput.ValueRW.KeyUp = true;
+        fireInput.ValueRW.IsHeld = false;
+    }
 
 
     protected override void OnUpdate()
@@ -56,9 +77,13 @@ public partial class GetPlayerInputSystem : SystemBase
         playerInputActions.Disable();
         
         playerInputActions.InputMap.PlayerNormalAttack.performed -= OnNormalAttack;
+        playerInputActions.InputMap.PlayerNormalAttack.canceled -= OnNormalAttackUp;
+
         playerInputActions.InputMap.PlayerSpecialAttack.performed -= OnSpecialAttackDown;
         playerInputActions.InputMap.PlayerSpecialAttack.canceled -= OnSpecialAttackUp;
+        
         playerInputActions.InputMap.PlayerUltimateAttack.performed -= OnUltimateAttack;
+        playerInputActions.InputMap.PlayerUltimateAttack.canceled -= OnUltimateAttackUp;
         
         // Weapon switch
         playerInputActions.WeaponMap.SwitchWeapon1.performed -= OnWeapon1;
@@ -107,7 +132,8 @@ public partial class GetPlayerInputSystem : SystemBase
         if (!SystemAPI.Exists(playerEntity)) return;
 
         var fireInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
-        fireInput.ValueRW.KeyPressed = true;
+        fireInput.ValueRW.KeyDown = true;
+        fireInput.ValueRW.IsHeld = true;
     }
     
     private void OnSpecialAttackDown(InputAction.CallbackContext obj)
@@ -124,7 +150,7 @@ public partial class GetPlayerInputSystem : SystemBase
         if (!SystemAPI.Exists(playerEntity)) return;
 
         var fireInput = SystemAPI.GetSingletonRW<PlayerUltimateAttackInput>();
-        fireInput.ValueRW.KeyPressed = true;
+        fireInput.ValueRW.KeyDown = true;
     }
 
     private void OnUpgradeUIButtonPressed(InputAction.CallbackContext obj)

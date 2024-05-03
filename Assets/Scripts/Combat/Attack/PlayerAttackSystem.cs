@@ -1,8 +1,10 @@
 ﻿using System;
 using Damage;
 using Health;
+using Player;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
@@ -25,6 +27,7 @@ namespace Patrik
             BelongsTo = 1, // Projectile
             CollidesWith = 1 << 1 // Enemy
         };
+        
 
         protected override void OnUpdate()
         {
@@ -78,11 +81,12 @@ namespace Patrik
                 return;
             }
 
-            // don't switch mid attack
-            if (_weaponManager && _weaponManager.isAttacking)
-                return;
-            
-            
+            // // don't switch mid attack
+            // if (_weaponManager && _weaponManager.isAttacking)
+            //     return;
+
+            if (attackCaller.ValueRO.ActiveAttackData.IsAttacking) return;
+
             if (SystemAPI.TryGetSingleton(out WeaponOneInput weapon1) && weapon1.KeyPressed)
             {
                 _weaponManager.SwitchWeapon(1);
@@ -188,6 +192,7 @@ namespace Patrik
                 WeaponType = data.WeaponType,
                 Combo = data.ComboCounter
             };
+            
             
             WriteOverAttackData(data);
         }
@@ -427,13 +432,15 @@ namespace Patrik
             bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
             bool canAttack = !isPreparingAttack;
 
-           // if (_weaponManager.isAttacking) canAttack = false;
+           // reset ult flag
+           _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, false);
 
-            // Handle ultimate attack
+           // Handle ultimate attack
             if (attackCaller.ValueRO.PrepareUltimateInfo.Perform && canAttack)
             {
-                _weaponManager.PerformUltimateAttack();
                 canAttack = false;
+                _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, true);
+                _weaponManager.PerformUltimateAttack();
             }
             else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame && canAttack)
             {
@@ -448,41 +455,25 @@ namespace Patrik
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            if (normalAttackInput.KeyPressed && canAttack)
-            {
-                _weaponManager.PerformNormalAttack();
-                canAttack = false;
-            }
-            
+            _weaponManager.UpdateAttackAnimation(AttackType.Normal, normalAttackInput.IsHeld);
+
             // Handle special charge
             var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            if (specialAttack.KeyDown && canAttack)
-            {
-                bool TryCharge = _weaponManager.StartChargingSpecial();
-                if (TryCharge)
-                {
-                    attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
-                    {
-                        ChargingWeapon = _weaponManager.CurrentWeaponType,
-                        IsCharging = true
-                    };
-                
-                    canAttack = false;
-                }
-            }
+            _weaponManager.UpdateAttackAnimation(AttackType.Special, specialAttack.IsHeld);
             
-            // Special release
-            if (specialAttack.KeyUp)
-            {
-                _weaponManager.ReleaseSpecial();
-                attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
-                {
-                    ChargingWeapon = _weaponManager.CurrentWeaponType,
-                    IsCharging = false
-                };
-                
-                canAttack = false;
-            }
+            var specialAttackInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
+
+            // set charge info 
+            attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
+           {
+               ChargingWeapon = _weaponManager.CurrentWeaponType, 
+               chargeState = _weaponManager.chargeState
+           };
+            
+           if (specialAttackInput.KeyUp)
+           {
+               _weaponManager.ReleaseSpecial();
+           }
         }
         
         protected override void OnStopRunning()

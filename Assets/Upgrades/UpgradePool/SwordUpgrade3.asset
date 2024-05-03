@@ -12,13 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: SwordUpgrade3
   m_EditorClassIdentifier: 
-  upgradeTitle: Sword upgrade
+  upgradeTitle: Sword lvl 5
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: 'The sword gains a critical hit stat.
+  upgradeDescription: '
 
 
-    Crit 5% -> Crit
-    20%'
+    +20% crit chance'
   upgrades:
   - thingToUpgrade: 0
     valueToUpgrade: 9

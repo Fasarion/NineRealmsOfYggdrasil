@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2846881822110430849
+--- !u!1 &2897785998307589648
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 185223348609473722}
-  - component: {fileID: 1081424873584366816}
+  - component: {fileID: 1601117924259357885}
+  - component: {fileID: 5643671657889949532}
   m_Layer: 0
-  m_Name: ObjectivePickupsConfig
+  m_Name: EMERGENCYSPAWNER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &185223348609473722
+--- !u!4 &1601117924259357885
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846881822110430849}
+  m_GameObject: {fileID: 2897785998307589648}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -4.138168, y: 0.30418053, z: 1.797398}
+  m_LocalPosition: {x: 4.138168, y: -0.30418053, z: -1.797398}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1081424873584366816
+--- !u!114 &5643671657889949532
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2846881822110430849}
+  m_GameObject: {fileID: 2897785998307589648}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ea6943f5954a1c45bc99683614b07ff, type: 3}
+  m_Script: {fileID: 11500000, guid: e399e7200a8ba1648a4fa6e4f92217cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseDistance: 2.2
-  moveSpeed: 7
-  spawnRate: 10
-  objectiveObjectPrefab: {fileID: 7635009148316473858, guid: e3c8084862ed8604eb789e33074b2645,
-    type: 3}
-  objectiveObjectMarkerPrefab: {fileID: 5216400006481588719, guid: 1aba6dc18427cce48be543f247a889a7,
-    type: 3}
-  markerOffset: 1.6
+  minTimerTime: 1
+  maxTimerTime: 5
+  minEnemySpawnCount: 1
+  maxEnemySpawnCount: 3
+  innerSpawningRadius: 18.6
+  outerSpawningRadius: 26.4
+  startingCheckpointIndex: 0
+  spawningCenterPoint: {fileID: 1601117924259357885}
+  VisualizationThickness: 0.23

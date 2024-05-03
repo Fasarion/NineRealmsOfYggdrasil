@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: HammerUpgrade
   m_EditorClassIdentifier: 
-  upgradeTitle: Hammer upgrade
+  upgradeTitle: Hammer lvl 2
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: +5 ATK
+  upgradeDescription: '
+
+
+    +10 ATK'
   upgrades:
   - thingToUpgrade: 4
     valueToUpgrade: 0
-    valueAmount: 5
+    valueAmount: 10
   startUnlocked: 1
   upgradeIndex: 4
-  isUnlocked: 0
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: f9e23fc5c72474c4bbad8816caab0412, type: 2}

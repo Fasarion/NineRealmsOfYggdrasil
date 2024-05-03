@@ -12,16 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: PlayerAtkSpeedUpgrade
   m_EditorClassIdentifier: 
-  upgradeTitle: Attack speed upgrade
+  upgradeTitle: +ATK speed 1
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: "Your Attack speed will increas with this upgrade. \n\n"
+  upgradeDescription: '
+
+
+    +10% ATK speed'
   upgrades:
   - thingToUpgrade: 10
     valueToUpgrade: 2
     valueAmount: 0.1
   startUnlocked: 1
   upgradeIndex: 8
-  isUnlocked: 0
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 367d90e60f139864094b5bad6506fc71, type: 2}

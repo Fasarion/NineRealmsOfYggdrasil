@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: PlayerCritUpgrade 2
   m_EditorClassIdentifier: 
-  upgradeTitle: crit upgrade
+  upgradeTitle: +Crit 3
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: Your chanche to land a critical hit will increas
+  upgradeDescription: '
+
+
+    +8% Crit chance'
   upgrades:
   - thingToUpgrade: 10
     valueToUpgrade: 9
-    valueAmount: 0.2
+    valueAmount: 0.08
   startUnlocked: 0
   upgradeIndex: 14
   isUnlocked: 0

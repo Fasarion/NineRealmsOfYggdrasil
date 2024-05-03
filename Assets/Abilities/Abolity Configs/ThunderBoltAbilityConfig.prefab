@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 2359938273778655496}
   - component: {fileID: 4752092874110356121}
   - component: {fileID: 1383843674739944052}
+  - component: {fileID: 6101389143335071525}
+  - component: {fileID: 2567513809548143154}
   m_Layer: 0
   m_Name: ThunderBoltAbilityConfig
   m_TagString: Untagged
@@ -58,7 +60,7 @@ MonoBehaviour:
   maxStrikes: 3
   strikeSpacing: 5
   timeBetweenStrikes: 0.5
-  vfxHeightOffset: 0
+  vfxHeightOffset: 7
 --- !u!114 &6620056151203127005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,5 +109,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 5
+  knockBackForce: 0.5
   KnockDirection: 0
+--- !u!114 &6101389143335071525
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001855596906891852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd77be6ab74fbb845ae1c858a79ef71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.3
+--- !u!114 &2567513809548143154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001855596906891852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  criticalChance: 0

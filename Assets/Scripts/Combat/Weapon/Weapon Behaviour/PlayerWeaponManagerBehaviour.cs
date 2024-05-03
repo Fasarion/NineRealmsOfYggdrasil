@@ -25,6 +25,10 @@ namespace Patrik
         [SerializeField] private Transform activeSlot;
         [SerializeField] private List<Transform> passiveSlots = new ();
         
+        [Header("Attack Buffer")]
+        [SerializeField] float attackBufferTime = 0.2f;
+
+        
         public ChargeState chargeState = ChargeState.None;
 
         
@@ -63,11 +67,26 @@ namespace Patrik
         
         public UnityAction<AttackData> OnSpecialCharge;
         public UnityAction<AttackData> OnUltimatePrepare;
+
+        float timeOfLastAttackHold;
+        float timeSinceLastAttackHold;
         
-        public void UpdateAttackAnimation(AttackType type, bool setTrue)
+        public void UpdateAttackAnimation(AttackType type, bool setBool)
         {
-           if (setTrue) currentAttackType = type;
-           playerAnimator.SetBool(GetActiveAttackAnimationName(type), setTrue);
+           if (setBool) currentAttackType = type;
+           
+           playerAnimator.SetBool(GetActiveAttackAnimationName(type), setBool);
+
+           if (setBool)
+           {
+               timeOfLastAttackHold = Time.time;
+           }
+
+           timeSinceLastAttackHold = Time.time - timeOfLastAttackHold;
+           if (timeSinceLastAttackHold < attackBufferTime && type == currentAttackType)
+           {
+               playerAnimator.SetBool(GetActiveAttackAnimationName(type), true);
+           }
         }
 
         

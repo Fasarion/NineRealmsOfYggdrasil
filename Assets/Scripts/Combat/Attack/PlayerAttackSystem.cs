@@ -83,7 +83,7 @@ namespace Patrik
 
             // // don't switch mid attack
             // if (_weaponManager && _weaponManager.isAttacking)
-            //     return;
+            //     return; 
 
             if (attackCaller.ValueRO.ActiveAttackData.IsAttacking) return;
 

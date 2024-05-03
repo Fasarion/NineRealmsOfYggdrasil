@@ -50,12 +50,12 @@ MonoBehaviour:
     type: 3}
   minTimeBetweenZaps: 0.4
   maxTimeBetweenZaps: 0.8
-  distanceToTravel: 20
-  timeToTurnBack: 3
-  timeToReturnAfterTurning: 1
+  distanceToTravel: 9
+  timeToTurnBack: 1
+  timeToReturnAfterTurning: 1.5
   revolutionsPerSecond: 4
-  rotationVector:
+  rotationAxis:
     x: 0
-    y: 1
-    z: 0
+    y: 0
+    z: 1
   distanceFromPlayerToGrab: 0.5

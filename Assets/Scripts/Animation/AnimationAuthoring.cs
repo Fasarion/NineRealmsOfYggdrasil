@@ -1,5 +1,6 @@
 
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -16,6 +17,8 @@ public class AnimationAuthoring : MonoBehaviour
 
     [Tooltip("If the entity is supposed to follow the child of the prefab, mark this as true.")]
     [SerializeField] private bool followsChild;
+
+    [SerializeField] private float3 spawnPosition;
     
     class Baker : Baker<AnimationAuthoring>
     {
@@ -26,7 +29,8 @@ public class AnimationAuthoring : MonoBehaviour
             {
                 Value = authoring.gameObjectPrefab,
                 FollowEntity = authoring.followsEntity,
-                FollowChild = authoring.followsChild
+                FollowChild = authoring.followsChild,
+                spawnPosition = authoring.spawnPosition
             });
         }
     }
@@ -37,6 +41,7 @@ public class GameObjectAnimatorPrefab : IComponentData
     public GameObject Value;
     public bool FollowEntity;
     public bool FollowChild;
+    public float3 spawnPosition;
 }
 
 public class AnimatorReference : ICleanupComponentData

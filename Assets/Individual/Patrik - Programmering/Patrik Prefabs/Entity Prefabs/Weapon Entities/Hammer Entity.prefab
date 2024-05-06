@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1241454776382192550}
   - component: {fileID: 4163681344479688090}
   - component: {fileID: 2457381261264463122}
-  - component: {fileID: 4043427351486798972}
   - component: {fileID: 2372089618107141578}
   - component: {fileID: 5186246801072734339}
   - component: {fileID: 3293464244464329062}
@@ -23,6 +22,12 @@ GameObject:
   - component: {fileID: 6980750288525973889}
   - component: {fileID: 5855346060607729036}
   - component: {fileID: 9177841472888272778}
+  - component: {fileID: 137017837829733646}
+  - component: {fileID: 4874117118460616560}
+  - component: {fileID: 8886252389946147957}
+  - component: {fileID: 851364982739974534}
+  - component: {fileID: 8931064742681460953}
+  - component: {fileID: 4133225118689222593}
   - component: {fileID: 4066208094940666673}
   m_Layer: 0
   m_Name: Hammer Entity
@@ -61,12 +66,12 @@ MonoBehaviour:
   m_ShapeType: 0
   m_PrimitiveCenter:
     x: 0
-    y: 0.3
-    z: 0.8
+    y: 0
+    z: 4
   m_PrimitiveSize:
-    x: 0.3
-    y: 0.3
-    z: 1
+    x: 5
+    y: 3
+    z: 4
   m_PrimitiveOrientation:
     Value:
       x: 0
@@ -74,15 +79,15 @@ MonoBehaviour:
       z: 0
     RotationOrder: 4
   m_Capsule:
-    Height: 1
-    Radius: 0.15
-    Axis: 2
+    Height: 5
+    Radius: 2
+    Axis: 0
   m_Cylinder:
-    Height: 1
-    Radius: 0.15
-    Axis: 2
+    Height: 3
+    Radius: 2.5
+    Axis: 1
   m_CylinderSideCount: 20
-  m_SphereRadius: 0.5
+  m_SphereRadius: 2.5
   m_MinimumSkinnedVertexWeight: 0.1
   m_ConvexHullGenerationParameters:
     m_SimplificationTolerance: 0.015
@@ -240,20 +245,6 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
---- !u!114 &4043427351486798972
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8745109184148579111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 5
-  damageReductionValue: 1
 --- !u!114 &2372089618107141578
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 3
+  knockBackForce: 4
   KnockDirection: 2
 --- !u!114 &2331193951588233712
 MonoBehaviour:
@@ -405,6 +396,89 @@ MonoBehaviour:
     weaponType: 0
     enemyTyping: 0
     audioEventType: 0
+--- !u!114 &137017837829733646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cdfcb9b0f0bb884aa980d414ab996cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+--- !u!114 &4874117118460616560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f434742775d14086a439086b7f0710e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
+--- !u!114 &8886252389946147957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 30
+  criticalChance: 0.05
+--- !u!114 &851364982739974534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60b2ad9c40e34442af250232bd26c107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageModifier: 0
+--- !u!114 &8931064742681460953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947779016d2c49e79d7e948ef6670b45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillModifier:
+    Normal: 1
+    Special: 1
+    Ultimate: 1
+    Passive: 1
+--- !u!114 &4133225118689222593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41f3b71ad01aa8f4cab8cd178a8b6c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
 --- !u!114 &4066208094940666673
 MonoBehaviour:
   m_ObjectHideFlags: 0

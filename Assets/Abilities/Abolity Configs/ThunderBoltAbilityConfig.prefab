@@ -56,10 +56,10 @@ MonoBehaviour:
     type: 3}
   maxDisplayTime: 1
   damageDelayTime: 0.3
-  maxArea: 5
+  maxArea: 1
   maxStrikes: 3
-  strikeSpacing: 5
-  timeBetweenStrikes: 0.5
+  strikeSpacing: 2.1
+  timeBetweenStrikes: 0.2
   vfxHeightOffset: 7
 --- !u!114 &6620056151203127005
 MonoBehaviour:
@@ -109,8 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 0.5
-  KnockDirection: 0
+  knockBackForce: 0.8
+  KnockDirection: 2
 --- !u!114 &6101389143335071525
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,5 +136,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 0
-  criticalChance: 0
+  attackDamage: 15
+  criticalChance: 0.1

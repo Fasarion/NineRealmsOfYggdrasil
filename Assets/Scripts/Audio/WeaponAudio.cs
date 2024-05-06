@@ -14,12 +14,14 @@ public class WeaponAudio : ScriptableObject
     public EventReference swordSwing;
     public EventReference swordImpact;
     public EventReference iceChargeAttack;
+    public EventReference swordUltimate;
     private EventInstance _swordInstance;
     private EventInstance _chargeInstance;
     
     [Header("Hammer")]
     public EventReference hammerSwing;
     public EventReference hammerImpact;
+    public EventReference hammerThrow;
     public EventReference lightningStrike;
     private EventInstance _hammerInstance;
     

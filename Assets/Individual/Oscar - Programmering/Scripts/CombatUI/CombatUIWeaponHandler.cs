@@ -108,12 +108,12 @@ public class CombatUIWeaponHandler : MonoBehaviour
         if(currentLeftInactiveWeapon == weaponType)
         {
             currentLeftInactiveWeapon = currentWeapon;
-            Debug.Log("Swapped to left weapon");
+            //Debug.Log("Swapped to left weapon");
         }
         else if (currentRightInactiveWeapon == weaponType)
         {
             currentRightInactiveWeapon = currentWeapon;
-            Debug.Log("Swapped to right weapon");
+            //Debug.Log("Swapped to right weapon");
         }
         else
         {

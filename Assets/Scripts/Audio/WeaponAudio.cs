@@ -10,20 +10,29 @@ using Unity.VisualScripting;
 public class WeaponAudio : ScriptableObject
 {
     private int value = 0;
-    [Header("Weapons")] 
+    [Header("Sword")] 
     public EventReference swordSwing;
-    public EventReference hammerSwing;
-    public EventReference meadAudio;
-    public EventReference crowAudio;
     public EventReference swordImpact;
-    public EventReference hammerImpact;
-    public EventReference chargeAttack;
-
+    public EventReference iceChargeAttack;
     private EventInstance _swordInstance;
-    private EventInstance _hammerInstance;
-    private EventInstance _meadInstance;
-    private EventInstance _crowInstance;
     private EventInstance _chargeInstance;
+    
+    [Header("Hammer")]
+    public EventReference hammerSwing;
+    public EventReference hammerImpact;
+    public EventReference lightningStrike;
+    private EventInstance _hammerInstance;
+    
+    [Header("Mead")]
+    public EventReference meadAudio;
+    private EventInstance _meadInstance;
+    
+    [Header("Crow")]
+    public EventReference crowAudio;
+    private EventInstance _crowInstance;
+    
+    
+    
     public void WeaponSwingAudio(int weapon, int attackType)
     {
         switch (weapon)
@@ -56,7 +65,11 @@ public class WeaponAudio : ScriptableObject
                 break;
             }
         }
-        
+    }
+
+    public void LightningStrikeAudio()
+    {
+        RuntimeManager.PlayOneShot(lightningStrike);
     }
     //Kallar på ljud när vapen träffar något
     public void WeaponAudioCaller(int weapon)
@@ -78,7 +91,7 @@ public class WeaponAudio : ScriptableObject
     }
     public void ChargeAttackAudio(int chargeLevel)
     {
-        _chargeInstance = RuntimeManager.CreateInstance(chargeAttack);
+        _chargeInstance = RuntimeManager.CreateInstance(iceChargeAttack);
         _chargeInstance.setParameterByName("ChargeLevel", chargeLevel);
         _chargeInstance.start();
         _chargeInstance.release();

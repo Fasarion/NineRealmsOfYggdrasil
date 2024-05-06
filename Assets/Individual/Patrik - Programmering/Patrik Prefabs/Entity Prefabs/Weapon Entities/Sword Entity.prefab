@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 3
+  knockBackForce: 2.5
   KnockDirection: 2
 --- !u!114 &1783253063006554779
 MonoBehaviour:
@@ -317,6 +317,7 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 297790463905931553, guid: 8c99d21eecc452349a0646a7579c5def,
     type: 3}
   followsEntity: 0
+  followsChild: 0
 --- !u!114 &8785231685900876182
 MonoBehaviour:
   m_ObjectHideFlags: 0

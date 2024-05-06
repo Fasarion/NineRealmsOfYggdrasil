@@ -69,7 +69,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hammer Normal 02 - Recover (Blend)
-  m_Speed: 0.3
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -6557269448845728533}
@@ -204,7 +204,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: 1405744564204629934}
   - {fileID: -1969800121922907416}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 9066887006752998585}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -758,7 +759,7 @@ AnimatorStateTransition:
   serializedVersion: 3
   m_TransitionDuration: 0.1
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 1
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -864,6 +865,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 2
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
 --- !u!1102 &-6108829804261616305
 AnimatorState:
   serializedVersion: 6
@@ -971,6 +976,7 @@ AnimatorState:
   - {fileID: 3625889003607546137}
   m_StateMachineBehaviours:
   - {fileID: 960826222254902797}
+  - {fileID: -2652547487312243215}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1043,6 +1049,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5410336390838201796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 2
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
 --- !u!1101 &-5281859173526259389
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1160,11 +1183,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1204,11 +1227,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 1
   m_HasExitTime: 1
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -1329,7 +1352,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hammer Normal 03 - Attack (Blend)
-  m_Speed: 1.2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 6362911644911280499}
@@ -1521,6 +1544,23 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: attackSpeed
+--- !u!114 &-3253161867971542714
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 0
+  InitializeChargeOnStart: 1
+  EndChargeOnEnd: 0
+  SetOngoing: 1
+  SetNone: 0
 --- !u!1102 &-2876217631099946986
 AnimatorState:
   serializedVersion: 6
@@ -1549,6 +1589,23 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-2652547487312243215
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 0
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 1
 --- !u!1101 &-2612259608182016069
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1629,7 +1686,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hammer Normal 03 - Recover (Blend)
-  m_Speed: 0.65
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 8474041132031230678}
@@ -1664,6 +1721,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 3
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
+--- !u!114 &-1992994100357463867
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 0
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
 --- !u!206 &-1977290991297696202
 BlendTree:
   m_ObjectHideFlags: 1
@@ -1860,6 +1938,23 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-428001406545012849
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 1
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
 --- !u!1101 &-414673136897783429
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1948,6 +2043,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charge: 1
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
 --- !u!206 &-67626493629174962
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2001,61 +2100,61 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: movementSpeedX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: weaponID
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: attackSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: chargeSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: attackNormal
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: attackSpecial
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: attackUltimate
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: holdChargeUntilRelease
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: hammerReturn
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -2077,7 +2176,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hammer Normal 01 - Recover (Blend)
-  m_Speed: 0.8
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5039330904504128150}
@@ -2147,9 +2246,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0.25
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 0.59
   m_HasExitTime: 1
   m_HasFixedDuration: 0
   m_InterruptionSource: 0
@@ -2263,7 +2362,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -5154822295052695705}
   - {fileID: 3457553149186301548}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -5410336390838201796}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2518,7 +2618,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 3295771272045454769}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -3253161867971542714}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2663,7 +2764,7 @@ AnimatorStateMachine:
     m_Position: {x: 800, y: -320, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8713347931597042095}
-    m_Position: {x: 940, y: -180, z: 0}
+    m_Position: {x: 880, y: -100, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5695829769660276577}
     m_Position: {x: 1120, y: -430, z: 0}
@@ -3399,6 +3500,7 @@ AnimatorState:
   - {fileID: 7341947230348147828}
   m_StateMachineBehaviours:
   - {fileID: 2680837064072103179}
+  - {fileID: -1992994100357463867}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3889,11 +3991,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
-  m_ExitTime: 0.9
+  m_ExitTime: 1
   m_HasExitTime: 1
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -4130,7 +4232,8 @@ AnimatorState:
   m_Transitions:
   - {fileID: -5029640031524501743}
   - {fileID: -8275017233406267815}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: -428001406545012849}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4153,7 +4256,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Hammer Normal 02 - Attack (Blend)
-  m_Speed: 0.95
+  m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5011648536651376017}
@@ -4318,11 +4421,11 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.1
+  m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_ExitTime: 1
   m_HasExitTime: 1
-  m_HasFixedDuration: 0
+  m_HasFixedDuration: 1
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
@@ -4385,7 +4488,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8598054728908979091}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 8773275008057811331}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4400,6 +4504,23 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &8773275008057811331
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 0
+  InitializeChargeOnStart: 1
+  EndChargeOnEnd: 0
+  SetOngoing: 1
+  SetNone: 0
 --- !u!1101 &8781693462292616521
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4454,3 +4575,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &9066887006752998585
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  charge: 3
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0

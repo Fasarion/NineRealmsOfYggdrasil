@@ -71,6 +71,7 @@ namespace Patrik
         float timeOfLastAttackHold;
         float timeSinceLastAttackHold;
         
+
         public void UpdateAttackAnimation(AttackType type, bool setBool)
         {
            if (setBool) currentAttackType = type;

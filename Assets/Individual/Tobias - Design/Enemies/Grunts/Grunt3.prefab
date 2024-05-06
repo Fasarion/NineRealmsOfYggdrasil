@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 110
+  maxHP: 70
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -374,6 +374,7 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 8870220498742206646, guid: 317f2c35b5f2bf14aae4df7356b51c63,
     type: 3}
   followsEntity: 1
+  followsChild: 0
 --- !u!114 &6445979045985948300
 MonoBehaviour:
   m_ObjectHideFlags: 0

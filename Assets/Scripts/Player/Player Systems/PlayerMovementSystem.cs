@@ -27,13 +27,23 @@ namespace Player
             var playerPosSingleton = SystemAPI.GetSingletonRW<PlayerPositionSingleton>();
             var moveInput = SystemAPI.GetSingleton<PlayerMoveInput>();
 
-            foreach (var (playerTransform, speedComp) 
-                in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>>().WithAll<PlayerTag>())
+            foreach (var (playerTransform, speedComp, animatorReference) 
+                in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, AnimatorReference>().WithAll<PlayerTag>())
             {
                 float speed = speedComp.ValueRO.Value;
-                var newPos = playerTransform.ValueRO.Position.xz +  moveInput.Value * speed * SystemAPI.Time.DeltaTime;
-                playerTransform.ValueRW.Position.xz = newPos;
+
+                Vector3 moveInputVec3 = new Vector3(moveInput.Value.x, 0, moveInput.Value.y);
+
+                Vector3 step = moveInputVec3 * speed * SystemAPI.Time.DeltaTime;
+
+                animatorReference.Animator.transform.position += step;
+
+                //var newPos = playerTransform.ValueRO.Position.xz +  moveInput.Value * speed * SystemAPI.Time.DeltaTime;
+                //  playerTransform.ValueRW.Position.xz = newPos;
+                //  playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
                 playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
+
+
                 
                 if (PlayerWeaponManagerBehaviour.Instance != null)
                 {

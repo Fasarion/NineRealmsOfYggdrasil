@@ -175,7 +175,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 5570816b55b1a094f9c986e1d31b21b9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
   m_WarningMessage: 
@@ -202,6 +202,8 @@ MonoBehaviour:
   passiveSlots:
   - {fileID: 301345862621219868}
   - {fileID: 1195977342432116209}
+  attackBufferTime: 0.2
+  chargeState: 0
 --- !u!114 &5338198015688568915
 MonoBehaviour:
   m_ObjectHideFlags: 0

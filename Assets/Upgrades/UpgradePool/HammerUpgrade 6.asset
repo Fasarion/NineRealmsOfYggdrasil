@@ -10,20 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: PlayerAtkSpeedUpgrade 3
+  m_Name: HammerUpgrade 6
   m_EditorClassIdentifier: 
-  upgradeTitle: +ATK speed 4
+  upgradeTitle: Hammer lvl 8
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
   upgradeDescription: '
 
 
-    +5% ATK speed'
+    Lightning chains will increas their number of hits.
+
+
+    5
+    hits -> 7 hits'
   upgrades:
-  - thingToUpgrade: 10
-    valueToUpgrade: 2
-    valueAmount: 0.05
+  - thingToUpgrade: 4
+    valueToUpgrade: 13
+    valueAmount: 2
   startUnlocked: 0
-  upgradeIndex: 7
+  upgradeIndex: 3
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock: []

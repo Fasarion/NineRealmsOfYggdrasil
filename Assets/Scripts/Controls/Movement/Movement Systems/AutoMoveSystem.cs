@@ -20,7 +20,7 @@ namespace Movement
                 
                 var targetRotation = quaternion.LookRotationSafe(direction, math.up());
 
-                float t = 0.1f;
+                float t = autoMove.ValueRO.rotationSpeed;
                 transform.ValueRW.Rotation = math.slerp(transform.ValueRO.Rotation, targetRotation, t);
                 
                 transform.ValueRW.Position += transform.ValueRO.Forward() * speed.ValueRO.Value * deltaTime;

@@ -51,8 +51,8 @@ MonoBehaviour:
   currentTimerTime: 0
   enemyCount: 0
   targetEnemyCount: 0
-  minEnemySpawnPercent: 0
-  maxEnemySpawnPercent: 0
+  minEnemySpawnCount: 0
+  maxEnemySpawnCount: 0
   innerSpawningRadius: 0
   outerSpawningRadius: 0
   currentActiveCheckpoint: 0
@@ -74,3 +74,4 @@ MonoBehaviour:
     enemyType: 6
   - prefab: {fileID: 89125744733743645, guid: 88b5d28f137fe204ea6f00683fae5712, type: 3}
     enemyType: 7
+  spawningCheckpoints: []

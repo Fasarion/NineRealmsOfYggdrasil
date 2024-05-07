@@ -456,8 +456,6 @@ namespace Patrik
             {
                 _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, true);
                 _weaponManager.PrepareUltimateAttack();
-
-               // _weaponManager.PerformUltimateAttack();
                 canAttack = false;
             }
             // Handle ultimate prepare
@@ -465,7 +463,6 @@ namespace Patrik
                      && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
                      && canAttack)// canAttack)
             {
-                //_weaponManager.UpdateAttackAnimation(AttackType.Ultimate, true);
                 _weaponManager.PrepareUltimateAttack();
                 canAttack = false;
             }

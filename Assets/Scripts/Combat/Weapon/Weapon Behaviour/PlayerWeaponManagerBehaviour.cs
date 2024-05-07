@@ -40,15 +40,9 @@ namespace Patrik
         // Attack Data
         private AttackType currentAttackType { get;  set; }
         private int currentCombo = 0;
-
-       // public bool isAttacking;
         
         // Animator parameters
-      //  private string movingParameterName = "Moving";
         private string movingParameterName = "movementSpeed";
-        private string bufferAttackParameterName = "BufferedAttack";
-        private string isAttackingParameterName = "IsAttacking";
-        private string attackReleasedParameterName = "AttackReleased";
         private string currentWeaponParameterName = "CurrentWeapon";
         private string currentAttackParameterName = "CurrentAttack";
         private string weaponIdParameterName = "weaponID";
@@ -109,46 +103,41 @@ namespace Patrik
             if (attackParam == "") return;
             
             playerAnimator.SetBool(attackParam, false);
-            
-          //  isAttacking = false;
-          //  StartCoroutine(ResetBufferNextFrame());
         }
 
-        // Events called from animator. NOTE: DO NOT REMOVE BECAUSE THEY ARE GREYED OUT IN EDITOR
         public void StartActiveAttackEvent(int combo = 0)
         {
+            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+
             currentCombo = combo;
             OnActiveAttackStart?.Invoke(GetActiveAttackData());
         } 
         
         public void StopActiveAttackEvent(int combo = 0)
         {
+            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+
             currentCombo = combo;
             OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
         }
 
         public void SetIsAttackingEvent()
         {
-           // isAttacking = true;
+            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
         }
 
         public void SetCurrentCombo(int combo)
         {
-          //  isAttacking = true;
+            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+
             currentCombo = combo;
         }
 
         public void FinishActiveAttackAnimationEvent()
         {
-        //    isAttacking = false;
-         //   StartCoroutine(ResetBufferNextFrame());
+            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
         }
-
-        private IEnumerator ResetBufferNextFrame()
-        {
-            yield return new WaitForEndOfFrame();
-            playerAnimator.SetInteger(bufferAttackParameterName, -1);
-        }
+        
         
         public void SetNotBusy()
         {
@@ -178,25 +167,7 @@ namespace Patrik
             WeaponType Weapon;
             AttackType Attack;
         }
-        
-        /// <summary>
-        /// Dictionary containing the names for the attack animations. Retrieved using weapon name and attack name.
-        /// </summary>
-        private static Dictionary<WeaponAttackPair, string> weaponAttackAnimationNames = new ()
-        {
-            // Sword Animations
-            { new WeaponAttackPair(WeaponType.Sword, AttackType.Normal), "SwordNormal" },
-            { new WeaponAttackPair(WeaponType.Sword, AttackType.Special), "SwordSpecialWindup" },
-            { new WeaponAttackPair(WeaponType.Sword, AttackType.Ultimate), "SwordUltimate" },
-            
-            // Hammer Animations
-            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Normal), "HammerNormal" },
-            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Special), "HammerSpecialWindUp" },
-            { new WeaponAttackPair(WeaponType.Hammer, AttackType.Ultimate), "HammerUltimate" },
-            
-            // TODO: Add animation names for other attacks
-        };
-        
+
 
         /// <summary>
         /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
@@ -328,24 +299,7 @@ namespace Patrik
         {
             return TryPerformAttack(AttackType.Normal);
         }
-        
-        /// <summary>
-        /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
-        /// is registered.
-        /// </summary>
-        public bool StartChargingSpecial()
-        {
-            bool canAttack = TryPerformAttack(AttackType.Special);
 
-            if (canAttack)
-            {
-                playerAnimator.SetBool(attackReleasedParameterName, false);
-                OnSpecialCharge?.Invoke(GetActiveAttackData());
-            }
-
-            return canAttack;
-        }
-        
         /// <summary>
         /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
         /// is registered.
@@ -371,33 +325,10 @@ namespace Patrik
 
         private void UpdateAnimatorAttackParameters()
         {
-            bool animationNameExists = GetActiveAttackAnimationName(out string name);
-            if (animationNameExists)
-            {
-                string attackAnimationName = GetActiveAttackAnimationName(currentAttackType);
-                
-                playerAnimator.SetBool(attackAnimationName, true);
-            }
-            else
-            {
-               // isAttacking = false;
-                Debug.Log($"No animation found for weapon attack pair {CurrentWeaponType}, {currentAttackType}");
-            }
+            string attackAnimationName = GetActiveAttackAnimationName(currentAttackType);
+            playerAnimator.SetBool(attackAnimationName, true);
         }
-
-        private bool GetActiveAttackAnimationName(out string animationName)
-        {
-            animationName = "";
-            
-            WeaponAttackPair pair = new WeaponAttackPair(CurrentWeaponType, currentAttackType);
-            if (weaponAttackAnimationNames.ContainsKey(pair))
-            {
-                animationName = weaponAttackAnimationNames[pair];
-                return true;
-            }
-
-            return false;
-        }
+        
         
         private string GetActiveAttackAnimationName(AttackType attackType)
         {
@@ -450,8 +381,6 @@ namespace Patrik
 
         public void ReleaseSpecial()
         {
-//            playerAnimator.SetBool(attackReleasedParameterName, true);
-
             string specialAtk = GetActiveAttackAnimationName(AttackType.Special);
             playerAnimator.SetBool(specialAtk, false);
         }

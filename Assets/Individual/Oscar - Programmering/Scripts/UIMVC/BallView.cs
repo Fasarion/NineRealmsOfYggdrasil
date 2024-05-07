@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallView : BounceElement
+public class BallView : ElementMVC
 {
     private void OnCollisionEnter()
     {

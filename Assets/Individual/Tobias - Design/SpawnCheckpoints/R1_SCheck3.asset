@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: R1_SCheck3
   m_EditorClassIdentifier: Assembly-CSharp::SpawningTimerCheckpointObject
-  targetEnemyCount: 0
-  enemyTypesInformation: []
+  targetEnemyCount: 50
+  enemyTypesInformation:
+  - enemyType: 2
+    enemyWeight: 3
+  - enemyType: 3
+    enemyWeight: 1

@@ -9,8 +9,11 @@ namespace Player
     {
         [Header("Aiming")]
         [SerializeField] private bool autoAim;
+
+        [Tooltip("This will cause a smooth rotation towards the mouse.")] 
+        [SerializeField] private bool slerpRotation = true;
         
-        [Tooltip("How fast will the player rotate?")]
+        [Tooltip("How fast will the player rotate? (only used with Slerp Rotation.)")]
         [SerializeField] private float rotationSpeed = 5;
     
         [Header("Firing")]
@@ -24,6 +27,7 @@ namespace Player
                 AddComponent(entity, new AimSettingsData()
                 {
                     autoAim = authoring.autoAim,
+                    slerpRotation = authoring.slerpRotation,
                     rotationSpeed = authoring.rotationSpeed
                 });
             
@@ -38,6 +42,7 @@ namespace Player
     public struct AimSettingsData : IComponentData
     {
         public bool autoAim;
+        public bool slerpRotation;
         public float rotationSpeed;
     }
 

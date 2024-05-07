@@ -130,6 +130,8 @@ namespace Patrik
 
             _weaponManager.OnWeaponActive += SetWeaponActive;
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
+
+            EventManager.OnBusyUpdate += OnBusyUpdate;
         }
 
         private void UnsubscribeFromAttackEvents()
@@ -145,8 +147,16 @@ namespace Patrik
 
             _weaponManager.OnWeaponActive -= SetWeaponActive;
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
+            
+            EventManager.OnBusyUpdate -= OnBusyUpdate;
         }
 
+        private void OnBusyUpdate(BusyAttackInfo info)
+        {
+            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+            attackCaller.ValueRW.BusyAttackInfo = info;
+        }
+        
         private void OnUltimatePrepare(AttackData data)
         {
             TryWriteOverActiveAttackData(data);
@@ -429,39 +439,68 @@ namespace Patrik
             if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
                 return;
 
-            bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
-            bool canAttack = !isPreparingAttack;
+            WeaponType currentWeapon = attackCaller.ValueRO.ActiveAttackData.WeaponType;
+
+           // bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
+           // bool canAttack = !isPreparingAttack;
+           
+           bool canAttack = true;
 
            // reset ult flag
            _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, false);
-
-           // Handle ultimate attack
-            if (attackCaller.ValueRO.PrepareUltimateInfo.Perform && canAttack)
+           
+           // Handle ultimate perform
+            if (attackCaller.ValueRO.PrepareUltimateInfo.Perform 
+                && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
+                && canAttack)
             {
-                canAttack = false;
                 _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, true);
-                _weaponManager.PerformUltimateAttack();
-            }
-            else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame && canAttack)
-            {
                 _weaponManager.PrepareUltimateAttack();
-                attackCaller.ValueRW.PrepareUltimateInfo.ValidPrepareInputPressed = true;
+
+               // _weaponManager.PerformUltimateAttack();
                 canAttack = false;
+            }
+            // Handle ultimate prepare
+            else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame 
+                     && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
+                     && canAttack)// canAttack)
+            {
+                //_weaponManager.UpdateAttackAnimation(AttackType.Ultimate, true);
+                _weaponManager.PrepareUltimateAttack();
+                canAttack = false;
+            }
+
+            if (canAttack == false)
+            {
+                Debug.Log("Ult activasio");
             }
             
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
             if (!normalCombat)
                 return;
+            
+            // Handle special charge
+            var specialAttackInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
+            bool specIsHeld = specialAttackInput.IsHeld;
+
+            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon);//canAttack;
+            _weaponManager.UpdateAttackAnimation(AttackType.Special, canSpecialAttack);
+
+            if (canSpecialAttack)
+            {
+                canAttack = false;
+            }
            
             // Handle normal attack
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
-            _weaponManager.UpdateAttackAnimation(AttackType.Normal, normalAttackInput.IsHeld);
+            bool normIsHeld = normalAttackInput.IsHeld;
 
-            // Handle special charge
-            var specialAttack = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
-            _weaponManager.UpdateAttackAnimation(AttackType.Special, specialAttack.IsHeld);
-            
-            var specialAttackInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
+            bool canNormalAttack = normIsHeld && canAttack && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Normal, currentWeapon);//canAttack;
+            _weaponManager.UpdateAttackAnimation(AttackType.Normal, canNormalAttack);
+            if (canNormalAttack)
+            {
+                canAttack = false;
+            }
 
             // set charge info 
             attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo

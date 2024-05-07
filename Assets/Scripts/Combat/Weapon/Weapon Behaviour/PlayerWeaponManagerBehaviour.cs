@@ -28,10 +28,9 @@ namespace Patrik
         [Header("Attack Buffer")]
         [SerializeField] float attackBufferTime = 0.2f;
 
-        
-        [HideInInspector] public ChargeState chargeState = ChargeState.None; 
+        public BusyAttackInfo busyAttackInfo;
+        public ChargeState chargeState = ChargeState.None;
 
-        
         // Weapons
         private List<WeaponBehaviour> weapons;
         private WeaponBehaviour activeWeapon;
@@ -149,6 +148,23 @@ namespace Patrik
         {
             yield return new WaitForEndOfFrame();
             playerAnimator.SetInteger(bufferAttackParameterName, -1);
+        }
+        
+        public void SetNotBusy()
+        {
+            busyAttackInfo = new BusyAttackInfo(false, WeaponType.None, AttackType.None);
+            CallUpdateBusyEvent();
+        }
+        
+        public void SetBusy(AttackType attackType, WeaponType weaponType)
+        {
+            busyAttackInfo = new BusyAttackInfo(true, weaponType, attackType);
+            CallUpdateBusyEvent();
+        }
+
+        private void CallUpdateBusyEvent()
+        {
+            EventManager.OnBusyUpdate?.Invoke(busyAttackInfo);
         }
 
         struct WeaponAttackPair
@@ -445,7 +461,8 @@ namespace Patrik
             currentAttackType = AttackType.Ultimate;
             OnUltimatePrepare?.Invoke(GetActiveAttackData());
 
-            playerAnimator.SetBool("attackUltimate", true);
+            //playerAnimator.SetBool("startUltimate", true);
+            playerAnimator.SetTrigger("startUltimateTrigger");
         }
 
         public void ResetActiveWeapon()
@@ -457,6 +474,12 @@ namespace Patrik
         public void SetCharge(ChargeState state)
         {
             chargeState = state;
+        }
+
+        public void ResetUltimatePrepare()
+        {
+            playerAnimator.SetBool("startUltimate", false);
+            playerAnimator.ResetTrigger("startUltimateTrigger");
         }
     }
 }

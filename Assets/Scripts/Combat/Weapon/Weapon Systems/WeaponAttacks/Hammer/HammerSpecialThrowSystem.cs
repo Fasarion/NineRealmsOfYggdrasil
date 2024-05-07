@@ -39,10 +39,11 @@ public partial struct HammerSpecialThrowSystem : ISystem
         ChargeState currentChargeState = attackCaller.SpecialChargeInfo.chargeState;
         
         if (currentChargeState != ChargeState.Stop) return;
-
-        if (attackCaller.ActiveAttackData.WeaponType != WeaponType.Hammer) return;
         
-        if (attackCaller.ActiveAttackData.AttackType != AttackType.Special) return;
+        if (attackCaller.ActiveAttackData.WeaponType != WeaponType.Hammer) return;
+        //if (attackCaller.ActiveAttackData.AttackType != AttackType.Special) return;
+
+        if (config.ValueRW.HasStarted) return;
 
         config.ValueRW.HasStarted = true;
         config.ValueRW.HasReturned = false;

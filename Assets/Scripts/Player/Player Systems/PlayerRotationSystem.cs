@@ -52,9 +52,11 @@ namespace Player
 
             
             float rotationSpeed = 1f;
+            bool slerp = false;
             if (SystemAPI.TryGetSingleton(out AimSettingsData aimSettings))
             {
                 rotationSpeed = aimSettings.rotationSpeed * SystemAPI.Time.DeltaTime;
+                slerp = aimSettings.slerpRotation;
             }
             
             
@@ -66,8 +68,10 @@ namespace Player
                 var directionToMouse = mousePosition - playerTransform.ValueRO.Position;
                 directionToMouse.y = 0;
                 quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(directionToMouse, math.up()));
-                
-                var newRotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
+
+                var newRotation = slerp
+                    ? math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed)
+                    : lookRotation;
                 
                 if (animObject.FollowEntity)
                 {

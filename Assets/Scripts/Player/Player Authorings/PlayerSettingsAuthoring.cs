@@ -10,10 +10,8 @@ namespace Player
         [Header("Aiming")]
         [SerializeField] private bool autoAim;
         
-        [Range(0,1)]
-        [Tooltip("How fast will the player rotate? (0 means player always stands still, 1 means the players rotation is always " +
-                 "synced with the mouse")]
-        [SerializeField] private float rotationSpeed = 1;
+        [Tooltip("How fast will the player rotate?")]
+        [SerializeField] private float rotationSpeed = 5;
     
         [Header("Firing")]
         [SerializeField] private bool autoFire;

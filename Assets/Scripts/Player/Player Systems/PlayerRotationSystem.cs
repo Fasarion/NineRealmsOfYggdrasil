@@ -48,26 +48,17 @@ namespace Player
             if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
                 return;
 
+            if (Time.timeScale <= 0) return;
+
             
             float rotationSpeed = 1f;
             if (SystemAPI.TryGetSingleton(out AimSettingsData aimSettings))
             {
-                rotationSpeed = aimSettings.rotationSpeed;
+                rotationSpeed = aimSettings.rotationSpeed * SystemAPI.Time.DeltaTime;
             }
             
             
             float3 mousePosition = mousePositionInput.WorldPosition;
-
-            //foreach (var playerTransform in 
-            //    SystemAPI.Query<RefRW<LocalTransform>>().WithAll<PlayerTag>())
-            //{
-            //    var directionToMouse = mousePosition - playerTransform.ValueRO.Position;
-            //    directionToMouse.y = 0;
-            //    quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(directionToMouse, math.up()));
-            //    playerTransform.ValueRW.Rotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
-            //    playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
-            //}
-
 
             foreach (var (playerTransform, animReference, animObject) in
                 SystemAPI.Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab>().WithAll<PlayerTag>())
@@ -76,13 +67,15 @@ namespace Player
                 directionToMouse.y = 0;
                 quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(directionToMouse, math.up()));
                 
+                var newRotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
+                
                 if (animObject.FollowEntity)
                 {
-                    playerTransform.ValueRW.Rotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
+                    playerTransform.ValueRW.Rotation = newRotation;
                 }
                 else
                 {
-                    animReference.Animator.transform.rotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
+                    animReference.Animator.transform.rotation = newRotation;
                 }
 
                 playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;

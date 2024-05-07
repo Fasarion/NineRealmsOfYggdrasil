@@ -9,6 +9,8 @@ public static class EventManager
     public static UnityAction<AttackType> OnAttackInput;
     public static UnityAction<PlayerHealthData> OnPlayerHealthSet;
     public static UnityAction<ExperienceInfo> OnPlayerExperienceChange;
+
+    public static UnityAction<BusyAttackInfo> OnBusyUpdate;
 }
 
 public struct PlayerHealthData

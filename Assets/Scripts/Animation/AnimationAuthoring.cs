@@ -18,7 +18,10 @@ public class AnimationAuthoring : MonoBehaviour
     [Tooltip("If the entity is supposed to follow the child of the prefab, mark this as true.")]
     [SerializeField] private bool followsChild;
 
-    [SerializeField] private float3 spawnPosition;
+    [Tooltip("The position in which the animator spawns. Has a high default value to avoid objects spawning in the middle of the screen.")]
+    [SerializeField] private float3 animatorSpawnPosition = DEFAULT_SPAWN_POSITION;
+
+    private static readonly float3 DEFAULT_SPAWN_POSITION =  new float3(0, 1000, 0);
     
     class Baker : Baker<AnimationAuthoring>
     {
@@ -30,7 +33,7 @@ public class AnimationAuthoring : MonoBehaviour
                 Value = authoring.gameObjectPrefab,
                 FollowEntity = authoring.followsEntity,
                 FollowChild = authoring.followsChild,
-                spawnPosition = authoring.spawnPosition
+                spawnPosition = authoring.animatorSpawnPosition
             });
         }
     }

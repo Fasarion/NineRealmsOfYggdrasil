@@ -24,6 +24,8 @@ public struct WeaponAttackCaller : IComponentData
     public SpecialChargeInfo SpecialChargeInfo; 
     public PrepareUltimateInfo PrepareUltimateInfo;
 
+    public BusyAttackInfo BusyAttackInfo;
+
     // tempo variable, TODO: make general
     public bool ResetWeaponCurrentWeaponTransform;
     
@@ -55,9 +57,7 @@ public struct WeaponAttackCaller : IComponentData
 
 public partial struct SpecialChargeInfo
 {
-
     public ChargeState chargeState;
-   // public bool IsCharging;
     public WeaponType ChargingWeapon;
 
     public readonly bool IsChargingWithWeapon(WeaponType weaponType)
@@ -73,8 +73,6 @@ public partial struct PrepareUltimateInfo
     public bool Perform;
     public bool HasPreparedThisFrame;
     public bool IsPreparing;
-
-    public bool ValidPrepareInputPressed;
 }
 
 public struct WeaponCallData

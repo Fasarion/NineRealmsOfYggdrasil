@@ -17,9 +17,9 @@ public partial class SpawningInitializerSystem : SystemBase
     private int _maxCheckpointIndex;
     private int _currentCheckpointTimerCutoff;
     private int[] _checkpointTimerCutoffs;
-    private SpawningTimerCheckpointStruct[] _checkpointDataObjects;
     private bool _isInitialized;
     private float startUpTimer;
+    private SpawningTimerCheckpointStruct[] _checkpointDataList;
     
     protected override void OnUpdate()
     {
@@ -55,21 +55,14 @@ public partial class SpawningInitializerSystem : SystemBase
                 _isInitialized = true;
                 var entity = SystemAPI.GetSingletonEntity<SpawnConfig>();
                 EntityManager.AddComponent<SpawningEnabledComponent>(entity);
-                Debug.Log("init");
+                _checkpointDataList = _controller.SpawningCheckpoints.ToArray();
             }
-            var buffer = EntityManager.GetBuffer<SpawningCheckpointElement>(SystemAPI.GetSingletonEntity<SpawnConfig>());
             
             _currentCheckpointIndex = _controller.startingCheckpointIndex;
-            var array = new int[buffer.Length];
-            var array2 = new SpawningTimerCheckpointStruct[buffer.Length];
-            for (int i = 0; i < buffer.Length; i++)
+            var array = new int[_checkpointDataList.Length];
+            for (int i = 0; i < _checkpointDataList.Length; i++)
             {
-                array[i] = (int)buffer[i].timerCutoff;
-                array2[i] = new SpawningTimerCheckpointStruct
-                {
-                    targetEnemyCount = buffer[i].TargetEnemyCount,
-                    enemyType = buffer[i].TypeOfEnemy,
-                };
+                array[i] = _checkpointDataList[i].timerCutoffTime;
             }
 
             _checkpointTimerCutoffs = array;
@@ -84,18 +77,16 @@ public partial class SpawningInitializerSystem : SystemBase
             {
                 _currentCheckpointTimerCutoff = _checkpointTimerCutoffs[_currentCheckpointIndex + 1];
             }
-
-            _checkpointDataObjects = array2;
+            
             config.ValueRW.maxTimerTime = _controller.maxTimerTime;
             config.ValueRW.minTimerTime = _controller.minTimerTime;
             config.ValueRW.minEnemySpawnCount = _controller.minEnemySpawnCount;
             config.ValueRW.maxEnemySpawnCount = _controller.maxEnemySpawnCount;
             config.ValueRW.innerSpawningRadius = _controller.innerSpawningRadius;
             config.ValueRW.outerSpawningRadius = _controller.outerSpawningRadius;
-            _maxCheckpointIndex = _checkpointDataObjects.Length - 1;
+            _maxCheckpointIndex = _checkpointDataList.Length - 1;
             
-            UpdateCheckpointValues(config, _checkpointDataObjects);
-            
+            UpdateCheckpointValues(config, _checkpointDataList);
         }
 
         if (config.ValueRO.timerTime >= _currentCheckpointTimerCutoff && _currentCheckpointIndex < _maxCheckpointIndex) _currentCheckpointIndex++;
@@ -113,39 +104,29 @@ public partial class SpawningInitializerSystem : SystemBase
             _currentCheckpointTimerCutoff = _checkpointTimerCutoffs[_currentCheckpointIndex + 1];
         }
         
-        UpdateCheckpointValues(config, _checkpointDataObjects);
+        UpdateCheckpointValues(config, _checkpointDataList);
         
     }
 
-    private void UpdateCheckpointValues(RefRW<SpawnConfig> config, SpawningTimerCheckpointStruct[] checkpointData)
+    private void UpdateCheckpointValues(RefRW<SpawnConfig> config, SpawningTimerCheckpointStruct[] checkpointDataList)
     {
-        var controlObject = checkpointData[_currentCheckpointIndex];
-        config.ValueRW.targetEnemyCount = controlObject.targetEnemyCount;
+        var checkpointData = checkpointDataList[_currentCheckpointIndex];
+        config.ValueRW.targetEnemyCount = checkpointData.targetEnemyCount;
         config.ValueRW.isInitialized = false;
-        //EnemyType[] enemyInfo = controlObject.enemyType.ToArray();
+        CheckpointDataStruct[] enemyInfo = checkpointData.CheckpointEnemyData.ToArray();
         var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
         
         //reset values
         float totalWeight = 0;
 
         var enemyWeights = new float[enemyPrefabsBuffer.Length];
-        // if (enemyInfo.Length > enemyPrefabsBuffer.Length)
-        // {
-        //     Debug.LogError("Error with the spawning setup! Double check that all enemy types are represented as " +
-        //                    "prefabs in the SpawnConfig and/or ask David for help.");
-        //     return;
-        // }
 
-        // foreach (var info in enemyInfo)
-        // {
-        //     enemyWeights[(int)info.enemyType] += info.enemyWeight;
-        //     totalWeight += info.enemyWeight;
-        // }
-
-        enemyWeights[(int)controlObject.enemyType] = 1;
-
-        totalWeight = 1;
-
+        foreach (var info in enemyInfo)
+        {
+            enemyWeights[(int)info.EnemyType] += info.Weight;
+            totalWeight += info.Weight;
+        }
+        
         for (int i = 0; i < enemyPrefabsBuffer.Length; i++)
         {
             enemyPrefabsBuffer.ElementAt(i).SpawnPercentValue = enemyWeights[i] / totalWeight;

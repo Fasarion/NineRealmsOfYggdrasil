@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -38,8 +40,6 @@ public class SpawnConfigAuthoring : MonoBehaviour
     [HideInInspector] public bool isInitialized;
 
     public List<EnemyPrefabData> enemyPrefabs;
-
-    public List<SpawningTimerCheckpointStruct> spawningCheckpoints;
     
 
     public class NewSpawnConfigBaker : Baker<SpawnConfigAuthoring>
@@ -65,7 +65,6 @@ public class SpawnConfigAuthoring : MonoBehaviour
                 });
 
             var buffer = AddBuffer<EnemyEntityPrefabElement>(entity);
-            var buffer2 = AddBuffer<SpawningCheckpointElement>(entity);
             
             foreach (var enemyPrefab in authoring.enemyPrefabs)
             {
@@ -76,16 +75,6 @@ public class SpawnConfigAuthoring : MonoBehaviour
                 });
             }
             
-            foreach (var enemyPrefab in authoring.spawningCheckpoints)
-            {
-                buffer2.Add(new SpawningCheckpointElement
-                {
-                    TargetEnemyCount = enemyPrefab.targetEnemyCount,
-                    timerCutoff = enemyPrefab.timerCutoffTime,
-                    TypeOfEnemy = enemyPrefab.enemyType,
-                });
-
-            }
         }
     }
 }
@@ -111,13 +100,6 @@ public struct EnemyEntityPrefabElement : IBufferElementData
     public Entity PrefabValue;
     public EnemyType TypeValue;
     public float SpawnPercentValue;
-}
-
-public struct SpawningCheckpointElement : IBufferElementData
-{
-    public int TargetEnemyCount;
-    public EnemyType TypeOfEnemy;
-    public float timerCutoff;
 }
 
 

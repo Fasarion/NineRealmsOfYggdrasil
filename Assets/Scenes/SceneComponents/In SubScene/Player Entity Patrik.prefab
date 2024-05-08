@@ -404,7 +404,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameObjectPrefab: {fileID: 7682055927376984470, guid: 734d03c222e02954c9b1eb6c360902bc,
     type: 3}
-  followsEntity: 1
+  followsEntity: 0
+  followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 0
+    z: 0
 --- !u!114 &-3072027634817329104
 MonoBehaviour:
   m_ObjectHideFlags: 0

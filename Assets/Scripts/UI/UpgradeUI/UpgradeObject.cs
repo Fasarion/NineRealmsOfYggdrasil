@@ -40,7 +40,9 @@ public enum UpgradeValueTypes
     ultimateModifier,
     passiveModifier,
     
-    Unlock
+    Unlock,
+    knockbackForce,
+    hitStopDuration,
 }
 
 public enum UpgradeBaseType

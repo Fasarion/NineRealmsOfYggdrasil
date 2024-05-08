@@ -27,6 +27,9 @@ public class SpawningController : MonoBehaviour
     [Tooltip("The inner ring of the spawning area. Place a Transform in the spawningCenterPoint field to see\" +\n             \"a visualization of the area.")]
     public float outerSpawningRadius;
 
+    [Header("Spawning Checkpoints")]
+    public List<SpawningTimerCheckpointStruct> SpawningCheckpoints;
+    
     [Header("--Debug Values--")] 
     [Tooltip("The checkpoint (based on index in the CheckpointData list) that should be active on game start. " +
              "Only change from 0 for debug purposes!")]
@@ -40,6 +43,10 @@ public class SpawningController : MonoBehaviour
              "is set.")]
     [Range(0, 3f)]
     public float VisualizationThickness = 0.05f;
+
+    public SpawningTimerCheckpointObject spawningCheckpointObject;
+
+
     
     // Static variable to hold the instance
     private static SpawningController _instance;
@@ -97,17 +104,11 @@ public class SpawningController : MonoBehaviour
             Destroy(gameObject);
         }
     }
-}
 
-[CreateAssetMenu]
-public class SpawningTimerCheckpointObject : ScriptableObject
-{
-    [Tooltip("The amount of enemies that ideally should exist during the checkpoint")]
-    public int targetEnemyCount;
-
-    [Tooltip("Information about which enemy types are allowed to spawn during this checkpoint" +
-             "and their weights. You can add as many items as you wish to this list!")]
-    public List<EnemyTypesInformation> enemyTypesInformation;
+    public void UpdateSpawningCheckpoints()
+    {
+        SpawningCheckpoints = spawningCheckpointObject.spawningCheckpoints;
+    }
 }
 
 [System.Serializable]
@@ -127,10 +128,17 @@ public struct SpawningTimerCheckpointStruct
 {
     [Tooltip("The amount of enemies that ideally should exist during the checkpoint")]
     public int targetEnemyCount;
-
+    
     [Tooltip("Information about which enemy types are allowed to spawn during this checkpoint" +
              "and their weights. You can add as many items as you wish to this list!")]
-    public EnemyType enemyType;
+    public List<CheckpointDataStruct> CheckpointEnemyData;
 
     public int timerCutoffTime;
+}
+
+[System.Serializable]
+public struct CheckpointDataStruct
+{
+    public EnemyType EnemyType;
+    public float Weight;
 }

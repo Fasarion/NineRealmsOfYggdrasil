@@ -48,27 +48,41 @@ namespace Player
             if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
                 return;
 
+            if (Time.timeScale <= 0) return;
+
             
             float rotationSpeed = 1f;
+            bool slerp = false;
             if (SystemAPI.TryGetSingleton(out AimSettingsData aimSettings))
             {
-                rotationSpeed = aimSettings.rotationSpeed;
+                rotationSpeed = aimSettings.rotationSpeed * SystemAPI.Time.DeltaTime;
+                slerp = aimSettings.slerpRotation;
             }
             
             
             float3 mousePosition = mousePositionInput.WorldPosition;
-            
-            foreach (var playerTransform in 
-                SystemAPI.Query<RefRW<LocalTransform>>().WithAll<PlayerTag>())
+
+            foreach (var (playerTransform, animReference, animObject) in
+                SystemAPI.Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab>().WithAll<PlayerTag>())
             {
                 var directionToMouse = mousePosition - playerTransform.ValueRO.Position;
                 directionToMouse.y = 0;
                 quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(directionToMouse, math.up()));
-                playerTransform.ValueRW.Rotation = math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed);
-                playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
-                
-                
 
+                var newRotation = slerp
+                    ? math.slerp(playerTransform.ValueRO.Rotation, lookRotation, rotationSpeed)
+                    : lookRotation;
+                
+                if (animObject.FollowEntity)
+                {
+                    playerTransform.ValueRW.Rotation = newRotation;
+                }
+                else
+                {
+                    animReference.Animator.transform.rotation = newRotation;
+                }
+
+                playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
             }
         }
     }

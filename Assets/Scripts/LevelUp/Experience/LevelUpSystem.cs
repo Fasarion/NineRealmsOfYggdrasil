@@ -38,14 +38,16 @@ public partial struct LevelUpSystem : ISystem
         }
         else
         {
-            int cumulativeValue = 0;
-            xpNeededToLevel = baseXPNeeded;
-            
-            for (int i = 0; i < currentLevel; i++)
-            {
-                cumulativeValue += addedXPNeeded;
-                xpNeededToLevel += cumulativeValue;
-            }
+            xpNeededToLevel = currentLevel * addedXPNeeded;
+
+            // int cumulativeValue = 0;
+            // xpNeededToLevel = baseXPNeeded;
+            //
+            // for (int i = 0; i < currentLevel; i++)
+            // {
+            //     cumulativeValue += addedXPNeeded;
+            //     xpNeededToLevel += cumulativeValue;
+            // }
         }
 
         xp.ValueRW.XPNeededToLevelUp = xpNeededToLevel;
@@ -58,3 +60,4 @@ public partial struct LevelUpSystem : ISystem
         }
     }
 }
+

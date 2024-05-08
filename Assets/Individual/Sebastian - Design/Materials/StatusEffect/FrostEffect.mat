@@ -61,23 +61,23 @@ Material:
     - _Cull: 2
     - _DstBlend: 1
     - _Float_Power: 0
-    - _FresnelPower: 1.17
-    - _Fresnel_Float_Power: 0.91
+    - _FresnelPower: 0.41
+    - _Fresnel_Float_Power: 1.02
     - _NoiseScale: 15.42
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
-    - _Step_Amount: 0.35
+    - _Step_Amount: 0.4
     - _Step_Noise: 1
-    - _Stepped_Fresnel_Power: 0.55
+    - _Stepped_Fresnel_Power: 0.39
     - _Surface: 1
     - _ZTest: 4
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _BaseColor: {r: 0.13923514, g: 1.4713622, b: 2.2706027, a: 0}
-    - _FresnelColor1: {r: 0.28459975, g: 0.84372216, b: 0.98833734, a: 0}
-    - _FresnelColor2: {r: 0.2980114, g: 0.7137866, b: 1.1920456, a: 0}
-    - _NoiseScroll: {r: 0.11, g: 0.3, b: 0, a: 0}
-    - _NoiseTiling: {r: 2.8, g: 3.08, b: 0, a: 0}
+    - _BaseColor: {r: 0.1351971, g: 0.7422801, b: 0.9883374, a: 0}
+    - _FresnelColor1: {r: 0.1877658, g: 0.556649, b: 0.65205944, a: 0}
+    - _FresnelColor2: {r: 0.2305, g: 0.6847245, b: 0.922, a: 0}
+    - _NoiseScroll: {r: -0.05, g: -0.32, b: 0, a: 0}
+    - _NoiseTiling: {r: 11.91, g: 4.26, b: 0, a: 0}
   m_BuildTextureStacks: []

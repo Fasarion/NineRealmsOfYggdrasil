@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
-public class BounceController : ControllerMVC
+public class BounceController : BaseControllerMVC
 {
 
     public override void OnNotification(string p_event_path, Object p_target, params object[] p_data)
     {
-        switch (p_event_path)
+        /*switch (p_event_path)
         {
             case BounceNotification.BallHitGround:
             {
-                app.bounceModel.bounces++;
-                Debug.Log("Bounce" + app.bounceModel.bounces);
-                if (app.bounceModel.bounces >= app.bounceModel.winCondition)
+                app.model.bounceModel.bounces++;
+                Debug.Log("Bounce" + app.model.bounceModel.bounces);
+                if (app.model.bounceModel.bounces >= app.model.bounceModel.winCondition)
                 {
-                    app.bounceView.ball.enabled = false;
-                    app.bounceView.ball.GetComponent<Rigidbody>().isKinematic = true;
+                    app.model.bounceModel.enabled = false;
+                    app.view.ballView.GetComponent<Rigidbody>().isKinematic = true;
                     app.Notify(BounceNotification.GameComplete, this);
                 }
                 break;
@@ -27,18 +27,16 @@ public class BounceController : ControllerMVC
                 Debug.Log("Victory!");
                 break;
             }
-        }
+        }*/
     }
     public void OnBallGroundHit()
     {
-        
-
-        if (app.bounceModel.bounces >= app.bounceModel.winCondition)
+        /*if (app.model.bounceModel.bounces >= app.model.bounceModel.winCondition)
         {
-            app.bounceView.ball.enabled = false;
-            app.bounceView.ball.GetComponent<Rigidbody>().isKinematic = true;
+            app.view.ballView.enabled = false;
+            app.view.ballView.GetComponent<Rigidbody>().isKinematic = true;
           
-        }
+        }*/
     }
 
   

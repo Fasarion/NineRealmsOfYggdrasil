@@ -73,6 +73,7 @@ MonoBehaviour:
   attackPoint: {fileID: 5782618168067196543}
   model: {fileID: 8113339432433075058}
   handle: {fileID: 3322444688437743766}
+  defaultRotation: {x: 0, y: 0, z: 0}
 --- !u!1 &2478580708996640626
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +99,7 @@ Transform:
   m_GameObject: {fileID: 2478580708996640626}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.133}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

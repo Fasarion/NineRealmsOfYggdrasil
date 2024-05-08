@@ -30,7 +30,7 @@ MonoBehaviour:
     - EnemyType: 3
       Weight: 1
     timerCutoffTime: 60
-  - targetEnemyCount: 80
+  - targetEnemyCount: 90
     CheckpointEnemyData:
     - EnemyType: 2
       Weight: 10
@@ -39,8 +39,15 @@ MonoBehaviour:
     - EnemyType: 5
       Weight: 1
     timerCutoffTime: 90
-  - targetEnemyCount: 600
+  - targetEnemyCount: 1000
     CheckpointEnemyData:
     - EnemyType: 2
+      Weight: 2
+    timerCutoffTime: 120
+  - targetEnemyCount: 300
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 1
+    - EnemyType: 3
       Weight: 2
     timerCutoffTime: 120

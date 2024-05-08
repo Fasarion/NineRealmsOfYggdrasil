@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -105,38 +106,38 @@ namespace Patrik
             playerAnimator.SetBool(attackParam, false);
         }
 
-        public void StartActiveAttackEvent(int combo = 0)
-        {
-            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-
-            currentCombo = combo;
-            OnActiveAttackStart?.Invoke(GetActiveAttackData());
-        } 
-        
-        public void StopActiveAttackEvent(int combo = 0)
-        {
-            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-
-            currentCombo = combo;
-            OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
-        }
-
-        public void SetIsAttackingEvent()
-        {
-            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        }
-
-        public void SetCurrentCombo(int combo)
-        {
-            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-
-            currentCombo = combo;
-        }
-
-        public void FinishActiveAttackAnimationEvent()
-        {
-            Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        }
+        // public void StartActiveAttackEvent(int combo = 0)
+        // {
+        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+        //
+        //     currentCombo = combo;
+        //     OnActiveAttackStart?.Invoke(GetActiveAttackData());
+        // } 
+        //
+        // public void StopActiveAttackEvent(int combo = 0)
+        // {
+        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+        //
+        //     currentCombo = combo;
+        //     OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
+        // }
+        //
+        // public void SetIsAttackingEvent()
+        // {
+        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+        // }
+        //
+        // public void SetCurrentCombo(int combo)
+        // {
+        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+        //
+        //     currentCombo = combo;
+        // }
+        //
+        // public void FinishActiveAttackAnimationEvent()
+        // {
+        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
+        // }
         
         
         public void SetNotBusy()
@@ -156,17 +157,17 @@ namespace Patrik
             EventManager.OnBusyUpdate?.Invoke(busyAttackInfo);
         }
 
-        struct WeaponAttackPair
-        {
-            public WeaponAttackPair(WeaponType weapon, AttackType attack)
-            {
-                Weapon = weapon;
-                Attack = attack;
-            }
-            
-            WeaponType Weapon;
-            AttackType Attack;
-        }
+        // struct WeaponAttackPair
+        // {
+        //     public WeaponAttackPair(WeaponType weapon, AttackType attack)
+        //     {
+        //         Weapon = weapon;
+        //         Attack = attack;
+        //     }
+        //     
+        //     WeaponType Weapon;
+        //     AttackType Attack;
+        // }
 
 
         /// <summary>
@@ -291,44 +292,44 @@ namespace Patrik
             return attackData;
         }
 
-        /// <summary>
-        /// Function to be called when a normal attack is about to be performed. Called from DOTS after the correct input
-        /// is registered.
-        /// </summary>
-        public bool PerformNormalAttack()
-        {
-            return TryPerformAttack(AttackType.Normal);
-        }
+        // /// <summary>
+        // /// Function to be called when a normal attack is about to be performed. Called from DOTS after the correct input
+        // /// is registered.
+        // /// </summary>
+        // public bool PerformNormalAttack()
+        // {
+        //     return TryPerformAttack(AttackType.Normal);
+        // }
+        //
+        // /// <summary>
+        // /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
+        // /// is registered.
+        // /// </summary>
+        // public bool PerformUltimateAttack()
+        // {
+        //     return TryPerformAttack(AttackType.Ultimate);
+        // }
 
-        /// <summary>
-        /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
-        /// is registered.
-        /// </summary>
-        public bool PerformUltimateAttack()
-        {
-            return TryPerformAttack(AttackType.Ultimate);
-        }
+        // private bool TryPerformAttack(AttackType type)
+        // {
+        //     if (!activeWeapon)
+        //     {
+        //         Debug.LogWarning("No active weapon, can't perform attack.");
+        //         return false;
+        //     }
+        //     
+        //     currentAttackType = type;
+        //     UpdateAnimatorAttackParameters();
+        //     playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
+        //     return true;
+        // }
 
-        private bool TryPerformAttack(AttackType type)
-        {
-            if (!activeWeapon)
-            {
-                Debug.LogWarning("No active weapon, can't perform attack.");
-                return false;
-            }
-            
-            currentAttackType = type;
-            UpdateAnimatorAttackParameters();
-            playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
-            return true;
-        }
-
-        private void UpdateAnimatorAttackParameters()
-        {
-            string attackAnimationName = GetActiveAttackAnimationName(currentAttackType);
-            playerAnimator.SetBool(attackAnimationName, true);
-        }
-        
+        // private void UpdateAnimatorAttackParameters()
+        // {
+        //     string attackAnimationName = GetActiveAttackAnimationName(currentAttackType);
+        //     playerAnimator.SetBool(attackAnimationName, true);
+        // }
+        //
         
         private string GetActiveAttackAnimationName(AttackType attackType)
         {
@@ -347,13 +348,13 @@ namespace Patrik
             return "";
         }
 
-        public void UpdateMovementParameter(float movementT)
-        {
-            if (!playerAnimator) return;
-            
-            //playerAnimator.SetBool(movingParameterName, playerIsMoving);
-            playerAnimator.SetFloat(movingParameterName, movementT);
-        }
+        // public void UpdateMovementParameter(float movementT)
+        // {
+        //     if (!playerAnimator) return;
+        //     
+        //     //playerAnimator.SetBool(movingParameterName, playerIsMoving);
+        //     playerAnimator.SetFloat(movingParameterName, movementT);
+        // }
 
         public void SwitchWeapon(int weaponNumber)
         {
@@ -409,6 +410,12 @@ namespace Patrik
         {
             playerAnimator.SetBool("startUltimate", false);
             playerAnimator.ResetTrigger("startUltimateTrigger");
+        }
+
+        public void SetMovementXY(float2 localMovementVector)
+        {
+            playerAnimator.SetFloat("movementSpeedX", localMovementVector.x);
+            playerAnimator.SetFloat("movementSpeed", localMovementVector.y);
         }
     }
 }

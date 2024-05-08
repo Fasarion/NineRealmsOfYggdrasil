@@ -20,6 +20,13 @@ public struct PlayerNormalAttackInput : IComponentData
     public bool IsHeld;
 }
 
+public struct PlayerDashInput : IComponentData
+{
+    public bool KeyDown;
+    public bool KeyUp;
+    public bool IsHeld;
+}
+
 public struct CanPerformNormalAttack : IComponentData
 {
     public bool Value;

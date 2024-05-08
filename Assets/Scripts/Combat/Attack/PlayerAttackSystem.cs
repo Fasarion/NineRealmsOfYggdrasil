@@ -440,10 +440,7 @@ namespace Patrik
                 return;
 
             WeaponType currentWeapon = attackCaller.ValueRO.ActiveAttackData.WeaponType;
-
-           // bool isPreparingAttack = attackCaller.ValueRO.IsPreparingAttack();
-           // bool canAttack = !isPreparingAttack;
-           
+            
            bool canAttack = true;
 
            // reset ult flag
@@ -461,17 +458,12 @@ namespace Patrik
             // Handle ultimate prepare
             else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame 
                      && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
-                     && canAttack)// canAttack)
+                     && canAttack)
             {
                 _weaponManager.PrepareUltimateAttack();
                 canAttack = false;
             }
 
-            if (canAttack == false)
-            {
-                Debug.Log("Ult activasio");
-            }
-            
             bool normalCombat = gameManager.CombatState == CombatState.Normal;
             if (!normalCombat)
                 return;

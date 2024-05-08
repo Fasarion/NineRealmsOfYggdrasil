@@ -1,26 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using Damage;
 using Movement;
 using Unity.Burst;
 using Unity.Entities;
-using UnityEngine;
+
 
 [UpdateBefore(typeof(ApplyDamageSystem))]
 [UpdateAfter(typeof(AddElementalEffectSystem))]
 [UpdateInGroup(typeof(CombatSystemGroup))]
-public partial struct ApplyElementalEffectSystem : ISystem
+public partial struct ElementalApplyFreezeEffectSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<ElementalReactionsConfig>();
+        state.RequireForUpdate<ElementalFreezeEffectConfig>();
     }
 
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var config = SystemAPI.GetSingleton<ElementalReactionsConfig>();
+        var config = SystemAPI.GetSingleton<ElementalFreezeEffectConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
         foreach (var (freezeComponent, moveSpeedComponent, affectedEntity)

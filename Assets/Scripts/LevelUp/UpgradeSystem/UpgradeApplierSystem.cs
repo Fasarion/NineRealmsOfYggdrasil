@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Damage;
 using Movement;
 using Player;
 using Unity.Entities;
@@ -164,6 +165,29 @@ public partial class UpgradeApplierSystem : SystemBase
                 moveSpeed.Value += valueAmount;
                 EntityManager.SetComponentData(entity, moveSpeed);
                 return;
+            
+            case UpgradeValueTypes.knockbackForce:
+                if (!EntityManager.HasComponent<KnockBackOnHitComponent>(entity))
+                {
+                    EntityManager.AddComponent<KnockBackOnHitComponent>(entity);
+                }
+
+                var knockbackForce = EntityManager.GetComponentData<KnockBackOnHitComponent>(entity);
+                knockbackForce.Value += valueAmount;
+                EntityManager.SetComponentData(entity, knockbackForce);
+                return;
+            
+            case UpgradeValueTypes.hitStopDuration:
+                if (!EntityManager.HasComponent<ShouldApplyHitStopOnHit>(entity))
+                {
+                    EntityManager.AddComponent<ShouldApplyHitStopOnHit>(entity);
+                }
+
+                var hitStopDuration = EntityManager.GetComponentData<ShouldApplyHitStopOnHit>(entity);
+                hitStopDuration.Duration += valueAmount;
+                EntityManager.SetComponentData(entity, hitStopDuration);
+                return;
+            
         }
     }
 

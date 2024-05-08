@@ -28,6 +28,7 @@ public partial struct IceRingSystem : ISystem
         state.RequireForUpdate<IceRingConfig>();
         state.RequireForUpdate<PlayerPositionSingleton>();
         state.RequireForUpdate<PlayerSpecialAttackInput>();
+        state.RequireForUpdate<AudioBufferData>();
         
         _detectionFilter = new CollisionFilter
         {
@@ -53,6 +54,8 @@ public partial struct IceRingSystem : ISystem
         var stageBuffer = SystemAPI.GetBuffer<ChargeBuffElement>(iceRingEntity);
         var cachedStageBuffer = SystemAPI.GetComponentRW<CachedChargeBuff>(iceRingEntity);
 
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+
         int chargeLevel = attackCaller.SpecialChargeInfo.Level;
         
         foreach (var (ability, transform, chargeTimer, entity) in
@@ -70,6 +73,10 @@ public partial struct IceRingSystem : ISystem
               //  config.ValueRW.ogCachedDamageValue = damageComponent.Value.DamageValue;
 
                 cachedStageBuffer.ValueRW.Value.DamageModifier = damageComponent.Value.DamageValue;
+                
+                // play charging audio
+                var audioElement = new AudioBufferData() {AudioData = config.ValueRO.chargeAudioData};
+                audioBuffer.Add(audioElement);
             }
 
             float damageMod = 1;
@@ -136,6 +143,10 @@ public partial struct IceRingSystem : ISystem
                 {
                     area = area
                 });
+                
+                // play impact audio
+                var audioElement = new AudioBufferData() {AudioData = config.ValueRO.impactAudioData};
+                audioBuffer.Add(audioElement);
             }
         }
 

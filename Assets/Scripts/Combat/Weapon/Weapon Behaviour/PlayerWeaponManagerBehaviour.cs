@@ -91,6 +91,8 @@ namespace Patrik
         {
             currentCombo = combo;
             OnActiveAttackStart?.Invoke(GetActiveAttackData());
+            
+            playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
         }
         
         public void Stop(int combo)

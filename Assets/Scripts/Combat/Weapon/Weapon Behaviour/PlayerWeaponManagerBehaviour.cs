@@ -31,6 +31,7 @@ namespace Patrik
 
         public BusyAttackInfo busyAttackInfo;
         public ChargeState chargeState = ChargeState.None;
+        public int chargeLevel = 0;
 
         // Weapons
         private List<WeaponBehaviour> weapons;
@@ -90,6 +91,8 @@ namespace Patrik
         {
             currentCombo = combo;
             OnActiveAttackStart?.Invoke(GetActiveAttackData());
+            
+            playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
         }
         
         public void Stop(int combo)
@@ -404,6 +407,13 @@ namespace Patrik
         public void SetCharge(ChargeState state)
         {
             chargeState = state;
+        }
+
+        public void SetChargeLevel(int newLevel)
+        {
+            chargeLevel = newLevel;
+
+            EventManager.OnChargeLevelChange?.Invoke(newLevel);
         }
 
         public void ResetUltimatePrepare()

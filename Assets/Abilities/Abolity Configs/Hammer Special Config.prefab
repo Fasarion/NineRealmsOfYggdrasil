@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 578325456359844409}
   - component: {fileID: 8245300890973439803}
+  - component: {fileID: 1969944077194731774}
   m_Layer: 0
   m_Name: Hammer Special Config
   m_TagString: Untagged
@@ -50,7 +51,7 @@ MonoBehaviour:
     type: 3}
   minTimeBetweenZaps: 0.4
   maxTimeBetweenZaps: 0.8
-  distanceToTravel: 9
+  baseDistanceToTravel: 5
   timeToTurnBack: 1
   timeToReturnAfterTurning: 1.5
   revolutionsPerSecond: 4
@@ -59,3 +60,34 @@ MonoBehaviour:
     y: 0
     z: 1
   distanceFromPlayerToGrab: 0.5
+  throwImpactAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 4
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 1
+  throwingAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 4
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 1
+--- !u!114 &1969944077194731774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2431307124715019113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458b2f73b0eb46a1815b9f2a54f66bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeStageBuffs:
+  - DamageModifier: 1
+    RangeModifier: 1
+  - DamageModifier: 1.1
+    RangeModifier: 2
+  - DamageModifier: 1.2
+    RangeModifier: 3

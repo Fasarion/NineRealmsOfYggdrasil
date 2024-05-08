@@ -21,8 +21,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [SerializeField] private float maxTimeBetweenZaps = 1.5f;
     
     [Header("Travel")]
-    [Tooltip("How far the hammer travels.")]
-    [SerializeField] private float distanceToTravel = 20;
+    [Tooltip("How far the hammer travels. Can be modified by charge stages (see component below).")]
+    [SerializeField] private float baseDistanceToTravel = 20;
     [Tooltip("After how many seconds should the hammer turn back?")]
     [SerializeField] private float timeToTurnBack = 2f;
     [Tooltip("After how many seconds should the hammer return to the player after it has turned around?")]
@@ -38,6 +38,10 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [Tooltip("How far from the player should the hammer be grabbed?")]
     [SerializeField] private float distanceFromPlayerToGrab = 1f;
 
+    [Header("Audio")] 
+    [SerializeField] private AudioData throwImpactAudioData;
+    [SerializeField] private AudioData throwingAudioData; 
+
     class Baker : Baker<HammerSpecialAttackConfigAuthoring>
     {
         public override void Bake(HammerSpecialAttackConfigAuthoring authoring)
@@ -48,7 +52,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 IndicatorPrefab = GetEntity(authoring.indicatorPrefab),
                 ElectricChargePrefab = GetEntity(authoring.electricZapPrefab),
                 
-                DistanceToTravel = authoring.distanceToTravel,
+                BaseDistanceToTravel = authoring.baseDistanceToTravel,
+                DistanceToTravel = authoring.baseDistanceToTravel,
                 
                 MinTimeBetweenZaps = authoring.minTimeBetweenZaps,
                 MaxTimeBetweenZaps = authoring.maxTimeBetweenZaps,
@@ -56,13 +61,16 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TimeToSwitchBack = authoring.timeToTurnBack,
                 TimeToReturnAfterTurning = authoring.timeToReturnAfterTurning,
                 
-                TravelForwardSpeed = authoring.distanceToTravel / authoring.timeToTurnBack,
+                // TravelForwardSpeed = authoring.baseDistanceToTravel / authoring.timeToTurnBack,
                 DistanceFromPlayerToGrab = authoring.distanceFromPlayerToGrab,
                 
                 RotationDegreesPerSecond = math.radians(authoring.revolutionsPerSecond) * 360f,
                 RotationVector = math.normalizesafe(authoring.rotationAxis),
                 
-                CurrentDistanceFromPlayer = float.MaxValue
+                CurrentDistanceFromPlayer = float.MaxValue,
+                
+                throwImpactAudioData = authoring.throwImpactAudioData,
+                throwingAudioData = authoring.throwingAudioData
             });
         }
     }
@@ -73,6 +81,7 @@ public struct HammerSpecialConfig : IComponentData
     public Entity IndicatorPrefab;
     public Entity ElectricChargePrefab;
     
+    public float BaseDistanceToTravel;
     public float DistanceToTravel;
     
     public float MinTimeBetweenZaps;
@@ -91,7 +100,9 @@ public struct HammerSpecialConfig : IComponentData
     public float TimeToSwitchBack;
     public float TimeToReturnAfterTurning;
 
-    public float TravelForwardSpeed;
+  //  public float TravelForwardSpeed;
+    public float TravelForwardSpeed => DistanceToTravel / TimeToSwitchBack;
+
 
     public bool HasStarted;
     public float3 DirectionOfTravel;
@@ -100,4 +111,9 @@ public struct HammerSpecialConfig : IComponentData
     public float CurrentDistanceFromPlayer;
 
     public KnockDirectionType KnockBackBeforeSpecial;
+
+    public AudioData throwImpactAudioData;
+    public AudioData throwingAudioData;
+    
+    public AudioData originalImpactAudio;
 }

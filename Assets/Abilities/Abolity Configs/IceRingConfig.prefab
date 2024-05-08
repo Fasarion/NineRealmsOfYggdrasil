@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 1134719449283240467}
   - component: {fileID: 9166366313322412376}
   - component: {fileID: 7389693164875771184}
+  - component: {fileID: 2550664023516249279}
   m_Layer: 0
   m_Name: IceRingConfig
   m_TagString: Untagged
@@ -58,19 +59,24 @@ MonoBehaviour:
   maxChargeTime: 3
   maxArea: 50
   chargeSpeed: 1
-  abilityStages:
-  - damageModifier: 1
-    maxArea: 2.5
-    maxChargeTime: 1.2
-  - damageModifier: 1.5
-    maxArea: 4.5
-    maxChargeTime: 1.2
-  - damageModifier: 2
-    maxArea: 6
-    maxChargeTime: 1.2
   vfxScale: 0.5
+  chargeAreaVfxHeightOffset: 0
+  abilityVfxHeightOffset: 0
+  ogCachedDamageValue: 0
   isInitialized: 0
   isAbilityReleased: 0
+  chargeAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 4
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 1
+  impactAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 4
+    weaponType: 2
+    enemyTyping: 0
+    audioEventType: 1
 --- !u!114 &613255897913659809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,3 +141,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 0
   criticalChance: 0
+--- !u!114 &2550664023516249279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205468960478450745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458b2f73b0eb46a1815b9f2a54f66bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeStageBuffs:
+  - DamageModifier: 1
+    RangeModifier: 2.5
+  - DamageModifier: 1.5
+    RangeModifier: 4.5
+  - DamageModifier: 2
+    RangeModifier: 6

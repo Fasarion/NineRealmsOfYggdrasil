@@ -59,6 +59,7 @@ public partial struct SpecialChargeInfo
 {
     public ChargeState chargeState;
     public WeaponType ChargingWeapon;
+    public int Level;
 
     public readonly bool IsChargingWithWeapon(WeaponType weaponType)
     {

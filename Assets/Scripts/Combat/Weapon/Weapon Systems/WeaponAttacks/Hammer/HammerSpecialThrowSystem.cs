@@ -47,6 +47,9 @@ public partial struct HammerSpecialThrowSystem : ISystem
         // //if (attackCaller.ActiveAttackData.AttackType != AttackType.Special) return;
 
         if (config.ValueRW.HasStarted) return;
+        
+        var hammerSpecialConfigEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
+        var cachedStageBuffer = SystemAPI.GetComponentRW<CachedChargeBuff>(hammerSpecialConfigEntity);
 
         config.ValueRW.HasStarted = true;
         config.ValueRW.HasReturned = false;
@@ -60,16 +63,27 @@ public partial struct HammerSpecialThrowSystem : ISystem
         // Reset timer
         config.ValueRW.Timer = 0;
         
-        // make hammer GO follow entity
-        foreach (var (animatorGO, knockBack) in SystemAPI
-            .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>>().WithAll<HammerComponent>())
+        foreach (var (animatorGO, knockBack, cachedDamage, hitSoundComponent) in SystemAPI
+            .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>, CachedDamageComponent, RefRW<PlaySoundOnHittingComponent>>().WithAll<HammerComponent>())
         {
+            // make hammer GO follow entity
             animatorGO.FollowEntity = true;
 
             config.ValueRW.KnockBackBeforeSpecial = knockBack.ValueRO.KnockDirection;
             knockBack.ValueRW.KnockDirection = KnockDirectionType.PerpendicularToPlayer;
+
+            // cache damage
+            cachedStageBuffer.ValueRW.Value.DamageModifier = cachedDamage.Value.DamageValue;
+            
+            // cache audio
+            config.ValueRW.originalImpactAudio = hitSoundComponent.ValueRO.Value;
+            hitSoundComponent.ValueRW.Value = config.ValueRO.throwImpactAudioData;
         }
         
+        // Handle Throwing audio
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+        audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.throwingAudioData});
+
         //TODO: Don't call on attack stop until hammer is back and player has played its catch hammer animation
     }
     
@@ -79,6 +93,18 @@ public partial struct HammerSpecialThrowSystem : ISystem
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
         if (!config.ValueRO.HasStarted || config.ValueRO.HasReturned)
             return;
+        
+        var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
+        int chargeLevel = attackCaller.SpecialChargeInfo.Level;
+
+        var hammerSpecialConfigEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
+        var chargeBuffer = SystemAPI.GetBuffer<ChargeBuffElement>(hammerSpecialConfigEntity);
+        var cachedStageBuffer = SystemAPI.GetComponentRW<CachedChargeBuff>(hammerSpecialConfigEntity);
+
+        float rangeModifier = chargeLevel < chargeBuffer.Length ? chargeBuffer[chargeLevel].Value.RangeModifier : 1f;
+        float damageMod = chargeLevel < chargeBuffer.Length ? chargeBuffer[chargeLevel].Value.DamageModifier : 1f;
+
+        config.ValueRW.DistanceToTravel = config.ValueRO.BaseDistanceToTravel * rangeModifier;
         
         var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
 
@@ -153,14 +179,16 @@ public partial struct HammerSpecialThrowSystem : ISystem
         
         LocalTransform hammerTrans = LocalTransform.Identity;
         
-        // Rotate Hammer
-        foreach (var transform in SystemAPI
-            .Query<RefRW<LocalTransform>>().WithAll<HammerComponent>())
+        foreach (var (transform, damageComponent) in SystemAPI
+            .Query<RefRW<LocalTransform>, RefRW<CachedDamageComponent>>().WithAll<HammerComponent>())
         {
-            //transform.ValueRW = transform.ValueRO.RotateY(deltaTime * config.ValueRO.ResolutionsPerSecond);
+            // rotate hammer
             transform.ValueRW = transform.ValueRO.
                 Rotate(quaternion.AxisAngle(config.ValueRO.RotationVector, deltaTime * config.ValueRO.RotationDegreesPerSecond));
             hammerTrans = transform.ValueRO;
+            
+            // set damage
+            damageComponent.ValueRW.Value.DamageValue = damageMod * cachedStageBuffer.ValueRO.Value.DamageModifier;
         }
         
         // Make zaps follow hammer
@@ -177,14 +205,22 @@ public partial struct HammerSpecialThrowSystem : ISystem
         var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
         if (!config.ValueRO.HasStarted || !config.ValueRO.HasReturned)
             return;
+        
+        var hammerSpecialConfigEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
+        var cachedStageBuffer = SystemAPI.GetComponentRW<CachedChargeBuff>(hammerSpecialConfigEntity);
 
-        // make hammer entity follow GO again
-        foreach (var (animatorGO, knockBack) in SystemAPI
-            .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>>().WithAll<HammerComponent>())
+        foreach (var (animatorGO, knockBack, cachedDamage, hitSoundComponent) in SystemAPI
+            .Query< GameObjectAnimatorPrefab, RefRW<KnockBackOnHitComponent>, RefRW<CachedDamageComponent>, RefRW<PlaySoundOnHittingComponent>>().WithAll<HammerComponent>())
         {
+            // make hammer entity follow GO again
             animatorGO.FollowEntity = false;
-            
             knockBack.ValueRW.KnockDirection = config.ValueRO.KnockBackBeforeSpecial;
+            
+            // reset cached damage
+            cachedDamage.ValueRW.Value.DamageValue = cachedStageBuffer.ValueRO.Value.DamageModifier;
+            
+            // reset hit sound
+            hitSoundComponent.ValueRW.Value = config.ValueRO.originalImpactAudio;
         }
 
         // reset config

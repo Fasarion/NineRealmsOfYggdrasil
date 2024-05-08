@@ -75,7 +75,7 @@ public class CombatUIHealthBar : MonoBehaviour
         SetCurrentSprite();
     }
     
-    //Callback for when the maxHealth of the player has been set at game start. 
+    
     private void LevelsSet()
     {
         levels = new List<float>();

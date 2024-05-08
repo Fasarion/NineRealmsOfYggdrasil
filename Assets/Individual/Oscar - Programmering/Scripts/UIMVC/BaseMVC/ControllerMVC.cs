@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ControllerMVC : MonoBehaviour
 {
-    public BounceController bounceController;
     public FlashingBoxController flashingBoxController;
+    public HealthBarController healthBarController;
     
 }

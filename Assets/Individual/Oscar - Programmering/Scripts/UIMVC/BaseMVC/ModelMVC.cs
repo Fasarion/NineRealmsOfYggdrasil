@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ModelMVC : MonoBehaviour
 {
-    public BounceModel bounceModel;
     public FlashingBoxModel boxModel;
+    public HealthBarModel healthBarModel;
 }

@@ -13,10 +13,10 @@ public class FlashingBoxController : BaseControllerMVC
             case NotificationMVC.SetFlashingBoxColor:
             {
                 
-                app.flashingBoxModel.boxColor = (Color)p_data[0];
+                app.model.boxModel.boxColor = (Color)p_data[0];
                 var image = (Image)p_data[1];
-                image.color = app.flashingBoxModel.boxColor;
-                Debug.Log("ColorSwapped" + app.flashingBoxModel.boxColor);
+                image.color = app.model.boxModel.boxColor;
+                Debug.Log("ColorSwapped" + app.model.boxModel.boxColor);
                 break;
             }
         }

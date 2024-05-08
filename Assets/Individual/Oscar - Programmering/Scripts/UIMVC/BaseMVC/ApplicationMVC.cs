@@ -6,16 +6,9 @@ public class ApplicationMVC : MonoBehaviour
 {
     public ModelMVC model;
     public ViewMVC view;
-    public BaseControllerMVC controllerMvc;
-    public BounceView bounceView;
-    public BounceController bounceController;
-    public BounceModel bounceModel;
+    public ControllerMVC controller;
 
-    public FlashingBoxView flashingBoxView;
-    public FlashingBoxController flashingBoxController;
-    public FlashingBoxModel flashingBoxModel;
-    
-    
+
     [SerializeField]private BaseControllerMVC[] cachedControllers;
 
     public void Notify(string p_event_path, Object p_target, params object[] p_data)

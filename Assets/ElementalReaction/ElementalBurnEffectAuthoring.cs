@@ -8,6 +8,7 @@ public class ElementalBurnEffectAuthoring : MonoBehaviour
     public float currentDurationTime;
     public bool hasBeenApplied;
     public int stacks;
+    public int currentDamageCheckpoint;
 
     public class ElementalBurnEffectAuthoringBaker : Baker<ElementalBurnEffectAuthoring>
     {
@@ -19,7 +20,8 @@ public class ElementalBurnEffectAuthoring : MonoBehaviour
                 {
                     CurrentDurationTime = authoring.currentDurationTime,
                     HasBeenApplied = authoring.hasBeenApplied,
-                    Stacks = authoring.stacks
+                    Stacks = authoring.stacks,
+                    CurrentDamageCheckpoint = authoring.currentDamageCheckpoint,
                 });
         }
     }
@@ -29,5 +31,6 @@ public struct ElementalBurnEffectComponent : IComponentData
 {
     public float CurrentDurationTime;
     public bool HasBeenApplied;
+    public int CurrentDamageCheckpoint;
     public int Stacks;
 }

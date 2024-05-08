@@ -784,8 +784,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3178fa29b7bedac4eb0f9f4f1c51372d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  model: {fileID: 0}
-  view: {fileID: 0}
+  model: {fileID: 1325277426}
+  view: {fileID: 1639860149}
+  controller: {fileID: 1905525970}
   cachedControllers: []
 --- !u!1 &1325277422
 GameObject:
@@ -848,8 +849,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0b336a2cdcb2fa48808583a29b90b3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  boxModel: {fileID: 0}
-  healthBarModel: {fileID: 0}
+  boxModel: {fileID: 1325277425}
+  healthBarModel: {fileID: 1325277427}
 --- !u!114 &1325277427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -935,8 +936,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00761ecc6a4c82d46ab6217b2afdd40e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashingBoxView: {fileID: 0}
-  healthBarView: {fileID: 0}
+  flashingBoxView: {fileID: 562090856}
+  healthBarView: {fileID: 1639860150}
 --- !u!114 &1639860150
 MonoBehaviour:
   m_ObjectHideFlags: 0

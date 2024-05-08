@@ -80,6 +80,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""dca0c156-1699-4445-a778-a7f87e65f62a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -302,6 +311,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""UpgradeUIButton"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09f86b82-5d29-400e-a428-9ab41a319bcd"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -384,6 +404,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_InputMap_PlayerSpecialAttack = m_InputMap.FindAction("PlayerSpecialAttack", throwIfNotFound: true);
         m_InputMap_PlayerUltimateAttack = m_InputMap.FindAction("PlayerUltimateAttack", throwIfNotFound: true);
         m_InputMap_MousePosition = m_InputMap.FindAction("MousePosition", throwIfNotFound: true);
+        m_InputMap_Dash = m_InputMap.FindAction("Dash", throwIfNotFound: true);
         // WeaponMap
         m_WeaponMap = asset.FindActionMap("WeaponMap", throwIfNotFound: true);
         m_WeaponMap_SwitchWeapon1 = m_WeaponMap.FindAction("SwitchWeapon1", throwIfNotFound: true);
@@ -456,6 +477,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_InputMap_PlayerSpecialAttack;
     private readonly InputAction m_InputMap_PlayerUltimateAttack;
     private readonly InputAction m_InputMap_MousePosition;
+    private readonly InputAction m_InputMap_Dash;
     public struct InputMapActions
     {
         private @InputActions m_Wrapper;
@@ -466,6 +488,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @PlayerSpecialAttack => m_Wrapper.m_InputMap_PlayerSpecialAttack;
         public InputAction @PlayerUltimateAttack => m_Wrapper.m_InputMap_PlayerUltimateAttack;
         public InputAction @MousePosition => m_Wrapper.m_InputMap_MousePosition;
+        public InputAction @Dash => m_Wrapper.m_InputMap_Dash;
         public InputActionMap Get() { return m_Wrapper.m_InputMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -493,6 +516,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePosition.started += instance.OnMousePosition;
             @MousePosition.performed += instance.OnMousePosition;
             @MousePosition.canceled += instance.OnMousePosition;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IInputMapActions instance)
@@ -515,6 +541,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @MousePosition.started -= instance.OnMousePosition;
             @MousePosition.performed -= instance.OnMousePosition;
             @MousePosition.canceled -= instance.OnMousePosition;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IInputMapActions instance)
@@ -602,6 +631,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnPlayerSpecialAttack(InputAction.CallbackContext context);
         void OnPlayerUltimateAttack(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IWeaponMapActions
     {

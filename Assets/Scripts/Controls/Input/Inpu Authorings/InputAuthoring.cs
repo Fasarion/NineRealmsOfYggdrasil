@@ -13,6 +13,7 @@ public class InputAuthoring : MonoBehaviour
                 
             // Move Inputs
             AddComponent<PlayerMoveInput>();
+            AddComponent<PlayerDashInput>();
             
             // Mouse Inputs
             AddComponent<MousePositionInput>();

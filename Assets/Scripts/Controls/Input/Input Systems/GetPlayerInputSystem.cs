@@ -40,6 +40,9 @@ public partial class GetPlayerInputSystem : SystemBase
         // UI
         playerInputActions.InputMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
         
+        // Movement
+        playerInputActions.InputMap.Dash.performed += OnDashPressed;
+        playerInputActions.InputMap.Dash.canceled += OnDashReleased;
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
     }
@@ -60,6 +63,22 @@ public partial class GetPlayerInputSystem : SystemBase
         var fireInput = SystemAPI.GetSingletonRW<PlayerNormalAttackInput>();
         fireInput.ValueRW.KeyUp = true;
         fireInput.ValueRW.IsHeld = false;
+    }
+
+    private void OnDashPressed(InputAction.CallbackContext obj)
+    {
+        var dashInput = SystemAPI.GetSingletonRW<PlayerDashInput>();
+        dashInput.ValueRW.KeyDown = true;
+        dashInput.ValueRW.IsHeld = true;
+        dashInput.ValueRW.KeyUp = false;
+    }
+
+    private void OnDashReleased(InputAction.CallbackContext obj)
+    {
+        var dashInput = SystemAPI.GetSingletonRW<PlayerDashInput>();
+        dashInput.ValueRW.KeyDown = false;
+        dashInput.ValueRW.IsHeld = false;
+        dashInput.ValueRW.KeyUp = true;
     }
 
 

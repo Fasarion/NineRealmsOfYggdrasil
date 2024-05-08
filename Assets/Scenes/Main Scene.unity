@@ -251,6 +251,86 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpawningController
       objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: CheckpointEnemyLists.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].timerCutoffTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].targetEnemyCount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].targetEnemyCount
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: CheckpointEnemyLists.Array.data[0].CheckpointData.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[0].Weight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[1].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[0].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[1].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[0].EnemyType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[1].EnemyType
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[0].EnemyType
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[1].EnemyType
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

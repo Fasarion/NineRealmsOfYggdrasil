@@ -60,3 +60,4 @@ public partial struct LevelUpSystem : ISystem
         }
     }
 }
+

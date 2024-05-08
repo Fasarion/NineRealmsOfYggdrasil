@@ -43,9 +43,14 @@ public partial struct UltimateAttackActivasionSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
+        bool targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
+        
         attackCaller.ValueRW.PrepareUltimateInfo.Perform = false;
         attackCaller.ValueRW.PrepareUltimateInfo.HasPreparedThisFrame = false;
         attackCaller.ValueRW.PrepareUltimateInfo.IsPreparing = false;
+        
+        bool isBusy = attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate,
+            attackCaller.ValueRO.ActiveAttackData.WeaponType);
 
         var gameManager = SystemAPI.GetSingletonRW<GameManagerSingleton>();
         gameManager.ValueRW.CombatState = hasPreparedUltimate ? CombatState.ActivatingUltimate : CombatState.Normal;
@@ -70,7 +75,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         if (!activeWeaponHasFullEnergy)
         {
             // removing existing target 
-            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
+          //  var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);
@@ -86,14 +91,16 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         
         if (!weaponUsesTargeting)
         {
-            if (ultimateAttackKeyPressed && !isPreparingAttack)
+            if (ultimateAttackKeyPressed && !isPreparingAttack && !isBusy)
             {
                 state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
                 attackCaller.ValueRW.PrepareUltimateInfo.Perform = true;
+                
+                Debug.Log("Perform ult");
             }
             
             // removing existing target 
-            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
+          //  var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);
@@ -104,7 +111,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         }
         
         // Instantiate target
-        if (ultimateAttackKeyPressed && !hasPreparedUltimate && !isPreparingAttack)
+        if (ultimateAttackKeyPressed && !hasPreparedUltimate && !isPreparingAttack && !isBusy)
         {
             var playerTargetPrefab = SystemAPI.GetSingleton<PlayerTargetingPrefab>();
             state.EntityManager.Instantiate(playerTargetPrefab.Value);
@@ -126,14 +133,13 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         bool activationKeyPressed = SystemAPI.GetSingleton<PlayerNormalAttackInput>().KeyDown 
                                     || SystemAPI.GetSingleton<PlayerSpecialAttackInput>().KeyDown
                                     || SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyDown;
-        //bool ultKeyPressedAfterActivation = SystemAPI.GetSingleton<PlayerUltimateAttackInput>().KeyPressed && 
         
-        if (activationKeyPressed && hasPreparedUltimate)
+        if (activationKeyPressed && hasPreparedUltimate && !isBusy)
         {
             state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
             attackCaller.ValueRW.PrepareUltimateInfo.Perform = true;
             
-            var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
+           // var targetExists = SystemAPI.TryGetSingletonEntity<PlayerTargetingComponent>(out Entity targeter);
             if (targetExists)
             {
                 state.EntityManager.AddComponent<ShouldBeDestroyed>(targeter);

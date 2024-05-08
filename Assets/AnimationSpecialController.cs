@@ -5,8 +5,11 @@ using UnityEngine;
 
 public class AnimationSpecialController : StateMachineBehaviour
 {
-    public int charge;
+    [Header("Charge Level")]
+    public bool setChargeLevel;
+    public int chargeLevel;
 
+    [Header("Charge State")]
     public bool InitializeChargeOnStart;
     public bool EndChargeOnEnd;
 
@@ -20,8 +23,11 @@ public class AnimationSpecialController : StateMachineBehaviour
         {
             PlayerWeaponManagerBehaviour.Instance.SetCharge(ChargeState.Start);
         }
-        
-        
+
+        if (setChargeLevel)
+        {
+            PlayerWeaponManagerBehaviour.Instance.SetChargeLevel(chargeLevel);
+        }
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

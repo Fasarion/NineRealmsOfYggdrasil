@@ -11,6 +11,7 @@ public static class EventManager
     public static UnityAction<ExperienceInfo> OnPlayerExperienceChange;
 
     public static UnityAction<BusyAttackInfo> OnBusyUpdate;
+    public static UnityAction<int> OnChargeLevelChange;
 }
 
 public struct PlayerHealthData

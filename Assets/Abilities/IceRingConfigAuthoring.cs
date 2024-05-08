@@ -13,7 +13,7 @@ public class IceRingConfigAuthoring : MonoBehaviour
     [HideInInspector] public float maxChargeTime;
     [HideInInspector] public float maxArea;
     [HideInInspector] public float chargeSpeed;
-    public List<IceRingStage> abilityStages;
+   // public List<IceRingStage> abilityStages;
     public float vfxScale = 0.5f;
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
@@ -43,20 +43,20 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     vfxScale = authoring.vfxScale,
                     chargeAreaVfxHeightOffset = authoring.chargeAreaVfxHeightOffset,
                     abilityVfxHeightOffset = authoring.abilityVfxHeightOffset,
-                    ogCachedDamageValue = authoring.ogCachedDamageValue,
+                  //  ogCachedDamageValue = authoring.ogCachedDamageValue,
                 });
             
-            var buffer = AddBuffer<IceRingStageElement>(entity);
-            
-            foreach (var stage in authoring.abilityStages)
-            {
-                buffer.Add(new IceRingStageElement
-                {
-                    damageModifier = stage.damageModifier,
-                    maxArea = stage.maxArea,
-                    maxChargeTime = stage.maxChargeTime,
-                });
-            }
+            // var buffer = AddBuffer<IceRingStageElement>(entity);
+            //
+            // foreach (var stage in authoring.abilityStages)
+            // {
+            //     buffer.Add(new IceRingStageElement
+            //     {
+            //         damageModifier = stage.damageModifier,
+            //         maxArea = stage.maxArea,
+            //         maxChargeTime = stage.maxChargeTime,
+            //     });
+            // }
         }
     }
 }
@@ -75,20 +75,20 @@ public struct IceRingConfig : IComponentData
     public float vfxScale;
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
-    public float ogCachedDamageValue;
+   // public float ogCachedDamageValue;
 }
 
-public struct IceRingStageElement : IBufferElementData
-{
-    public float damageModifier;
-    public float maxArea;
-    public float maxChargeTime;
-}
-
-[System.Serializable]
-public struct IceRingStage
-{
-    public float damageModifier;
-    public float maxArea;
-    public float maxChargeTime;
-}
+// public struct IceRingStageElement : IBufferElementData
+// {
+//     public float damageModifier;
+//     public float maxArea;
+//     public float maxChargeTime;
+// }
+//
+// [System.Serializable]
+// public struct IceRingStage
+// {
+//     public float damageModifier;
+//     public float maxArea;
+//     public float maxChargeTime;
+// }

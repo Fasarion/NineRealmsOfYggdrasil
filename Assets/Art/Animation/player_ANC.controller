@@ -1019,7 +1019,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 2
+  setChargeLevel: 1
+  chargeLevel: 1
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -1219,7 +1220,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 2
+  setChargeLevel: 1
+  chargeLevel: 1
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -1794,7 +1796,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 0
+  setChargeLevel: 0
+  chargeLevel: 0
   InitializeChargeOnStart: 1
   EndChargeOnEnd: 0
   SetOngoing: 1
@@ -1868,7 +1871,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 0
+  setChargeLevel: 0
+  chargeLevel: 0
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -1994,7 +1998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 3
+  setChargeLevel: 1
+  chargeLevel: 2
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -2031,7 +2036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 0
+  setChargeLevel: 0
+  chargeLevel: 0
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 1
   SetOngoing: 0
@@ -2131,7 +2137,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 0
+  setChargeLevel: 0
+  chargeLevel: 0
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -2316,7 +2323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 1
+  setChargeLevel: 1
+  chargeLevel: 0
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -2408,7 +2416,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 1
+  setChargeLevel: 1
+  chargeLevel: 0
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -2655,6 +2664,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &203786731294792332
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 1
+  chargeLevel: 0
+  InitializeChargeOnStart: 0
+  EndChargeOnEnd: 0
+  SetOngoing: 0
+  SetNone: 0
 --- !u!114 &563458380572461410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3347,7 +3374,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 0
+  setChargeLevel: 0
+  chargeLevel: 0
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0
@@ -4931,6 +4959,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -7641525271733653074}
   - {fileID: -2088736477309611289}
+  - {fileID: 203786731294792332}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -5178,7 +5207,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 0
+  setChargeLevel: 1
+  chargeLevel: 0
   InitializeChargeOnStart: 1
   EndChargeOnEnd: 0
   SetOngoing: 1
@@ -5250,7 +5280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  charge: 3
+  setChargeLevel: 1
+  chargeLevel: 2
   InitializeChargeOnStart: 0
   EndChargeOnEnd: 0
   SetOngoing: 0

@@ -81,9 +81,9 @@ namespace Patrik
                 return;
             }
 
-            // // don't switch mid attack
-            // if (_weaponManager && _weaponManager.isAttacking)
-            //     return; 
+            // don't switch mid attack
+            if (attackCaller.ValueRO.BusyAttackInfo.Busy)
+                return; 
 
             if (attackCaller.ValueRO.ActiveAttackData.IsAttacking) return;
 
@@ -132,6 +132,7 @@ namespace Patrik
             _weaponManager.OnWeaponPassive += SetWeaponPassive;
 
             EventManager.OnBusyUpdate += OnBusyUpdate;
+            EventManager.OnChargeLevelChange += OnChargeLevelChange;
         }
 
         private void UnsubscribeFromAttackEvents()
@@ -149,6 +150,13 @@ namespace Patrik
             _weaponManager.OnWeaponPassive -= SetWeaponPassive;
             
             EventManager.OnBusyUpdate -= OnBusyUpdate;
+            EventManager.OnChargeLevelChange -= OnChargeLevelChange;
+        }
+
+        private void OnChargeLevelChange(int level)
+        {
+            var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+            attackCaller.ValueRW.SpecialChargeInfo.Level = level;
         }
 
         private void OnBusyUpdate(BusyAttackInfo info)
@@ -491,11 +499,14 @@ namespace Patrik
                 canAttack = false;
             }
 
+            var oldChargeInfo = attackCaller.ValueRO.SpecialChargeInfo;
+
             // set charge info 
             attackCaller.ValueRW.SpecialChargeInfo = new SpecialChargeInfo
            {
                ChargingWeapon = _weaponManager.CurrentWeaponType, 
-               chargeState = _weaponManager.chargeState
+               chargeState = _weaponManager.chargeState,
+               Level = oldChargeInfo.Level
            };
             
            if (specialAttackInput.KeyUp)

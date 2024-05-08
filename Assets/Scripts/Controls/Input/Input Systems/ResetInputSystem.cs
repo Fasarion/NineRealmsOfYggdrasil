@@ -46,6 +46,11 @@ public partial struct ResetInputSystem : ISystem
         weapon2.ValueRW.KeyPressed = false;
         var weapon3 = SystemAPI.GetSingletonRW<WeaponThreeInput>();
         weapon3.ValueRW.KeyPressed = false;
+        
+        // Reset dash input
+        var dash = SystemAPI.GetSingletonRW<PlayerDashInput>();
+        dash.ValueRW.KeyDown = false;
+        dash.ValueRW.KeyUp = false;
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

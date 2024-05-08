@@ -182,160 +182,76 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7307923143516728856}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &809519932 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-    type: 3}
-  m_PrefabInstance: {fileID: 6295236539208504069}
-  m_PrefabAsset: {fileID: 0}
---- !u!1001 &6295236539208504069
-PrefabInstance:
+--- !u!114 &1805790892497138777
+MonoBehaviour:
   m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181200561648463125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e399e7200a8ba1648a4fa6e4f92217cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minTimerTime: 1
+  maxTimerTime: 5
+  minEnemySpawnCount: 1
+  maxEnemySpawnCount: 3
+  innerSpawningRadius: 18.6
+  outerSpawningRadius: 26.4
+  SpawningCheckpoints:
+  - targetEnemyCount: 20
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 2
+    timerCutoffTime: 0
+  - targetEnemyCount: 40
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 2
+    timerCutoffTime: 30
+  - targetEnemyCount: 50
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 3
+    - EnemyType: 3
+      Weight: 1
+    timerCutoffTime: 60
+  - targetEnemyCount: 80
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 10
+    - EnemyType: 3
+      Weight: 3
+    - EnemyType: 5
+      Weight: 1
+    timerCutoffTime: 90
+  - targetEnemyCount: 600
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 2
+    timerCutoffTime: 120
+  startingCheckpointIndex: 0
+  spawningCenterPoint: {fileID: 4712308940634355640}
+  VisualizationThickness: 0.23
+  spawningCheckpointObject: {fileID: 11400000, guid: 9b8b5fe361065a7488a6ed05798c35ac,
+    type: 2}
+--- !u!4 &4712308940634355640
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9181200561648463125}
   serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 748732697}
-    m_Modifications:
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.138168
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.30418053
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1.797398
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1601117924259357885, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2897785998307589648, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: m_Name
-      value: SpawningController
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: CheckpointEnemyLists.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].timerCutoffTime
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[0].targetEnemyCount
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].targetEnemyCount
-      value: 500
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: CheckpointEnemyLists.Array.data[0].CheckpointData.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[0].Weight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[1].Weight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[0].Weight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[1].Weight
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[0].EnemyType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[1].EnemyType
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[0].EnemyType
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 5643671657889949532, guid: 2400f635163a6314faf677c7f4757ebe,
-        type: 3}
-      propertyPath: SpawningCheckpoints.Array.data[1].CheckpointEnemyData.Array.data[1].EnemyType
-      value: 7
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 2400f635163a6314faf677c7f4757ebe, type: 3}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.138168, y: -0.30418053, z: -1.797398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 748732697}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &7307923143516728856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -684,9 +600,26 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8418202495739083897, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 809519932}
+      addedObject: {fileID: 4712308940634355640}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19bc8b518d1199e4299c877952c35106, type: 3}
+--- !u!1 &9181200561648463125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4712308940634355640}
+  - component: {fileID: 1805790892497138777}
+  m_Layer: 0
+  m_Name: SpawningController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

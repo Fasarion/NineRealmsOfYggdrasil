@@ -59,22 +59,24 @@ MonoBehaviour:
   maxChargeTime: 3
   maxArea: 50
   chargeSpeed: 1
-  abilityStages:
-  - damageModifier: 1
-    maxArea: 2.5
-    maxChargeTime: 1.2
-  - damageModifier: 1.5
-    maxArea: 4.5
-    maxChargeTime: 1.2
-  - damageModifier: 2
-    maxArea: 6
-    maxChargeTime: 1.2
   vfxScale: 0.5
   chargeAreaVfxHeightOffset: 0
   abilityVfxHeightOffset: 0
   ogCachedDamageValue: 0
   isInitialized: 0
   isAbilityReleased: 0
+  chargeAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 4
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 1
+  impactAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 4
+    weaponType: 2
+    enemyTyping: 0
+    audioEventType: 1
 --- !u!114 &613255897913659809
 MonoBehaviour:
   m_ObjectHideFlags: 0

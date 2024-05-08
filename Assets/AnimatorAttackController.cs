@@ -26,10 +26,6 @@ public class AnimatorAttackController : StateMachineBehaviour
     
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // if (Contents.OnEnter.Begin) PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
-        // if (Contents.OnEnter.Stop) PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
-        // if (Contents.OnEnter.TurnOff) PlayerWeaponManagerBehaviour.Instance.TurnOff();
-        
         HandleStateActions(Contents.OnEnter);
     }
 
@@ -38,16 +34,25 @@ public class AnimatorAttackController : StateMachineBehaviour
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        HandleStateActions(Contents.OnExit);
-        
-        // if (Contents.OnExit.Begin) PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
-        // if (Contents.OnExit.Stop) PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
-        // if (Contents.OnExit.TurnOff) PlayerWeaponManagerBehaviour.Instance.TurnOff();
     }
 
     void HandleStateActions(EventFunctions eventFunctions)
     {
-        if (eventFunctions.Begin) PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
-        if (eventFunctions.Stop) PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
-        if (eventFunctions.TurnOff) PlayerWeaponManagerBehaviour.Instance.TurnOff();
+        // TODO: turn off player controller, lägg till tag
+        
+        if (eventFunctions.Begin)
+        {
+            PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
+        }
+
+        if (eventFunctions.Stop)
+        {
+            PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
+        }
+
+        if (eventFunctions.TurnOff)
+        {
+            PlayerWeaponManagerBehaviour.Instance.TurnOff();
+        }
     }
 }

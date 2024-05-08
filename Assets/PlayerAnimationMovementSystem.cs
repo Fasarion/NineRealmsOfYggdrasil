@@ -11,7 +11,9 @@ public partial struct PlayerAnimationMovementSystem : ISystem
 {
     public void OnUpdate(ref SystemState state)
     {
-        // var tracker = SystemAPI.GetSingletonRW<PlayerMovementTrackerSingletonComponent>();
+        var weaponManager = PlayerWeaponManagerBehaviour.Instance;
+        if (!weaponManager) return;
+    
 
         if (!SystemAPI.TryGetSingleton(out PlayerMoveInput input)) return;
         if (!SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity playerEntity)) return;
@@ -22,7 +24,8 @@ public partial struct PlayerAnimationMovementSystem : ISystem
         Vector3 lookDirection = playerForward;
 
         float2 stackOverFlowMethod = GetMoveInputSO(movement, lookDirection);
-        PlayerWeaponManagerBehaviour.Instance.SetMovementXY(stackOverFlowMethod);
+
+        weaponManager.SetMovementXY(stackOverFlowMethod);
     }
 
     private float2 GetMoveInputTrig(ref SystemState state, float2 moveInput, float2 playerForward)

@@ -21,6 +21,10 @@ public class IceRingConfigAuthoring : MonoBehaviour
     [HideInInspector] public float ogCachedDamageValue;
     [HideInInspector] public bool isInitialized;
     [HideInInspector] public bool isAbilityReleased;
+
+    [Header("Audio")] 
+    [SerializeField] private AudioData chargeAudioData;
+    [SerializeField] private AudioData impactAudioData;
     
 
     public class IceRingConfigAuthoringBaker : Baker<IceRingConfigAuthoring>
@@ -44,6 +48,10 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     chargeAreaVfxHeightOffset = authoring.chargeAreaVfxHeightOffset,
                     abilityVfxHeightOffset = authoring.abilityVfxHeightOffset,
                   //  ogCachedDamageValue = authoring.ogCachedDamageValue,
+                  
+                  
+                  chargeAudioData = authoring.chargeAudioData,
+                  impactAudioData = authoring.impactAudioData
                 });
             
             // var buffer = AddBuffer<IceRingStageElement>(entity);
@@ -76,6 +84,9 @@ public struct IceRingConfig : IComponentData
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
    // public float ogCachedDamageValue;
+   
+   public AudioData chargeAudioData;
+   public AudioData impactAudioData;
 }
 
 // public struct IceRingStageElement : IBufferElementData

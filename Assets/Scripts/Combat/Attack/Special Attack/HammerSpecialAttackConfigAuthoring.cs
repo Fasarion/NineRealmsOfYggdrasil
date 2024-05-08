@@ -38,6 +38,10 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [Tooltip("How far from the player should the hammer be grabbed?")]
     [SerializeField] private float distanceFromPlayerToGrab = 1f;
 
+    [Header("Audio")] 
+    [SerializeField] private AudioData throwImpactAudioData;
+    [SerializeField] private AudioData throwingAudioData; 
+
     class Baker : Baker<HammerSpecialAttackConfigAuthoring>
     {
         public override void Bake(HammerSpecialAttackConfigAuthoring authoring)
@@ -63,7 +67,10 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 RotationDegreesPerSecond = math.radians(authoring.revolutionsPerSecond) * 360f,
                 RotationVector = math.normalizesafe(authoring.rotationAxis),
                 
-                CurrentDistanceFromPlayer = float.MaxValue
+                CurrentDistanceFromPlayer = float.MaxValue,
+                
+                throwImpactAudioData = authoring.throwImpactAudioData,
+                throwingAudioData = authoring.throwingAudioData
             });
         }
     }
@@ -104,4 +111,9 @@ public struct HammerSpecialConfig : IComponentData
     public float CurrentDistanceFromPlayer;
 
     public KnockDirectionType KnockBackBeforeSpecial;
+
+    public AudioData throwImpactAudioData;
+    public AudioData throwingAudioData;
+    
+    public AudioData originalImpactAudio;
 }

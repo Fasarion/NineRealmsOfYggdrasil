@@ -48,8 +48,8 @@ namespace Player
             if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
                 return;
 
-            if (Time.timeScale <= 0) return;
-
+            bool gameIsPaused = Time.timeScale <= 0;
+            if (gameIsPaused) return;
             
             float rotationSpeed = 1f;
             bool slerp = false;
@@ -58,8 +58,7 @@ namespace Player
                 rotationSpeed = aimSettings.rotationSpeed * SystemAPI.Time.DeltaTime;
                 slerp = aimSettings.slerpRotation;
             }
-            
-            
+
             float3 mousePosition = mousePositionInput.WorldPosition;
 
             foreach (var (playerTransform, animReference, animObject) in
@@ -86,5 +85,4 @@ namespace Player
             }
         }
     }
-     
 }

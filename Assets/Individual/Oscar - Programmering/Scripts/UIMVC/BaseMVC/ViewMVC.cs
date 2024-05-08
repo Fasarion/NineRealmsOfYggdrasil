@@ -4,6 +4,6 @@ using UnityEngine;
 
 public class ViewMVC : ElementMVC
 {
-    public BallView ball;
-    public FlashingBoxView flashingBox;
+    public FlashingBoxView flashingBoxView;
+    public HealthBarView healthBarView;
 }

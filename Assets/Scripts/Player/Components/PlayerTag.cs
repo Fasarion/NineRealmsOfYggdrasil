@@ -6,5 +6,4 @@ using UnityEngine;
 namespace Player
 {
 
-    public struct PlayerTag : IComponentData { }
 }

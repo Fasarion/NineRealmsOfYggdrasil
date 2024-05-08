@@ -12,6 +12,8 @@ public static class EventManager
 
     public static UnityAction<BusyAttackInfo> OnBusyUpdate;
     public static UnityAction<int> OnChargeLevelChange;
+    
+    public static UnityAction<bool> OnEnableMovementInput;
 }
 
 public struct PlayerHealthData

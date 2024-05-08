@@ -133,6 +133,7 @@ namespace Patrik
 
             EventManager.OnBusyUpdate += OnBusyUpdate;
             EventManager.OnChargeLevelChange += OnChargeLevelChange;
+            EventManager.OnEnableMovementInput += OnEnableMovementInput;
         }
 
         private void UnsubscribeFromAttackEvents()
@@ -151,6 +152,17 @@ namespace Patrik
             
             EventManager.OnBusyUpdate -= OnBusyUpdate;
             EventManager.OnChargeLevelChange -= OnChargeLevelChange;
+            EventManager.OnEnableMovementInput -= OnEnableMovementInput;
+        }
+
+        private void OnEnableMovementInput(bool enable)
+        {
+            // TODO: move to different system?
+            
+            if (!SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity playerEntity))
+                return;
+
+            EntityManager.SetComponentEnabled<CanMoveFromInput>(playerEntity, enable);
         }
 
         private void OnChargeLevelChange(int level)

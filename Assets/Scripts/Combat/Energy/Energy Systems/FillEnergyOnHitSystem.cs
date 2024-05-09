@@ -50,13 +50,13 @@ public partial struct FillEnergyOnHitSystem : ISystem
     [BurstCompile]
     private void HandleEnergyFill(ref SystemState state)
     {
-        // direct hit
+        // direct hits
         FillEnergyFromDirectActiveHits(ref state);
         FillEnergyFromDirectPassiveHits(ref state);
         
-        // projectile hits
-        FillEnergyFromPassiveProjectiles(ref state);
-        // TODO: Active projectiles
+        // ability hits
+        FillEnergyFromActiveAbilities(ref state);
+        FillEnergyFromPassiveAbilities(ref state);
     }
 
     [BurstCompile]
@@ -109,24 +109,79 @@ public partial struct FillEnergyOnHitSystem : ISystem
     }
     
     [BurstCompile]
-    private void FillEnergyFromPassiveProjectiles(ref SystemState state)
+    private void FillEnergyFromActiveAbilities(ref SystemState state)
     {
-        foreach (var (ownerWeapon, projectileHitBuffer) in
-            SystemAPI.Query<OwnerWeapon, DynamicBuffer<HitBufferElement>>().WithAll<HasChangedHP>())
+        foreach (var (ownerWeapon, abilityHitBuffer, fillMod) in
+            SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>())//.WithAll<HasChangedHP>())
         {
-            // only fill when owner is passive
-            if (ownerWeapon.OwnerWasActive) continue;
+            Entity ownerEntity = ownerWeapon.OwnerEntity;
             
-            Entity ownerEntity = ownerWeapon.Value;
+            // exit if owner is not assigned
+            if (ownerEntity == Entity.Null) continue;
+            
+            bool ownerIsActive = ownerWeapon.OwnerWasActive;
+            
+            // exit if owner was not passive. 
+            if (!ownerIsActive) continue;
+
             EnergyBarComponent energyBar = state.EntityManager.GetComponentData<EnergyBarComponent>(ownerEntity);
 
             // exit early if the bar already has reached its max energy
             if (energyBar.IsFull) continue;
 
-            if (!HasHit(projectileHitBuffer, out int hitCount)) continue;
+            if (!HasHit(abilityHitBuffer, out int hitCount)) continue;
 
-            EnergyFillComponent energyFill = state.EntityManager.GetComponentData<EnergyFillComponent>(ownerEntity);
-            float totalEnergyChange = hitCount * energyFill.PassiveFillPerHit;
+            // calculate energy fill amount based on owners fill per hit and ability's fill per hit
+            EnergyFillComponent ownerEnergyFill = state.EntityManager.GetComponentData<EnergyFillComponent>(ownerEntity);
+            float abilityFillModifier = fillMod.ActiveFillPerHit;
+            float ownerFillPerHit = ownerEnergyFill.ActiveFillPerHit;
+            float totalEnergyChange = hitCount * ownerFillPerHit * abilityFillModifier;
+            
+            // go through all passive weapons to fill their bars
+            foreach (var ( barToFill, weaponComponent, passiveEntity) in SystemAPI
+                .Query<RefRW<EnergyBarComponent>, WeaponComponent>()
+                .WithNone<ActiveWeapon>()
+                .WithEntityAccess())
+            {
+                // exit out if energy bar is already full
+                if (barToFill.ValueRO.IsFull) continue;
+                
+                var  bar = barToFill;
+                FillEnergyBarWithRef(ref state, bar, ref totalEnergyChange, passiveEntity);
+            } 
+        }
+    }
+    
+    [BurstCompile]
+    private void FillEnergyFromPassiveAbilities(ref SystemState state)
+    {
+        foreach (var (ownerWeapon, abilityHitBuffer, fillMod) in
+            SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>())//.WithAll<HasChangedHP>())
+        {
+            Entity ownerEntity = ownerWeapon.OwnerEntity;
+            
+            // exit if owner is not assigned
+            if (ownerEntity == Entity.Null) continue;
+            
+            bool ownerIsPassive = !ownerWeapon.OwnerWasActive;
+            
+            // exit if owner was not passive. 
+            if (!ownerIsPassive) continue;
+
+            EnergyBarComponent energyBar = state.EntityManager.GetComponentData<EnergyBarComponent>(ownerEntity);
+
+            // exit early if the bar already has reached its max energy
+            if (energyBar.IsFull) continue;
+
+            if (!HasHit(abilityHitBuffer, out int hitCount)) continue;
+
+            // calculate energy fill amount based on owners fill per hit and ability's fill per hit
+            EnergyFillComponent ownerEnergyFill = state.EntityManager.GetComponentData<EnergyFillComponent>(ownerEntity);
+            float abilityFillModifier = fillMod.PassiveFillPerHit;
+            float ownerFillPerHit = ownerEnergyFill.PassiveFillPerHit;
+            
+            // fill bar
+            float totalEnergyChange = hitCount * ownerFillPerHit * abilityFillModifier;
             FillEnergyBarWithEM(ref state, ref energyBar, ref totalEnergyChange, ref ownerEntity);
         }
     }

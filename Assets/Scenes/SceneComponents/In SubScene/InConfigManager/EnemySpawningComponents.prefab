@@ -44,22 +44,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e399e7200a8ba1648a4fa6e4f92217cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningCheckpointTimes: 000000001e0000003c0000005a0000007800000096000000
-  checkpointData:
-  - {fileID: 11400000, guid: e4bd19c17073aa046912339b533c2066, type: 2}
-  - {fileID: 11400000, guid: 6ab14844730ce314a83ab03b947a8ed6, type: 2}
-  - {fileID: 11400000, guid: 44203f0456083724bbf33f608d209b8b, type: 2}
-  - {fileID: 11400000, guid: da4ddc1231bdc7f4ab46dfbb567d5be1, type: 2}
-  - {fileID: 11400000, guid: 42bb4b65bd313ee42ac73f7de43ed856, type: 2}
   minTimerTime: 1
   maxTimerTime: 5
   minEnemySpawnCount: 1
   maxEnemySpawnCount: 3
   innerSpawningRadius: 18.6
   outerSpawningRadius: 26.4
+  SpawningCheckpoints: []
   startingCheckpointIndex: 0
   spawningCenterPoint: {fileID: 7044774573363040409}
   VisualizationThickness: 0.23
+  spawningCheckpointObject: {fileID: 0}
 --- !u!1 &2226567707528292345
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3840092859030819794}
   - component: {fileID: 5100349878195847536}
+  - component: {fileID: 3889772218966478435}
   m_Layer: 0
   m_Name: SpawnConfig
   m_TagString: Untagged
@@ -150,6 +146,7 @@ MonoBehaviour:
   outerSpawningRadius: 0
   currentActiveCheckpoint: 0
   isInitialized: 0
+  maxEnemyDistanceFromPlayer: 50
   enemyPrefabs:
   - prefab: {fileID: 89125744733743645, guid: 5ccd93032e3467c45a462381c5677cb3, type: 3}
     enemyType: 0
@@ -167,3 +164,17 @@ MonoBehaviour:
     enemyType: 6
   - prefab: {fileID: 89125744733743645, guid: 88b5d28f137fe204ea6f00683fae5712, type: 3}
     enemyType: 7
+--- !u!114 &3889772218966478435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2911192208498932101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5019ed362c0ee6e418da32d17e888ca3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentTime: 0
+  maxTime: 0

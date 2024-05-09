@@ -13,3 +13,5 @@ public class HammerAuthoring : MonoBehaviour
         }
     }
 }
+
+public struct HammerComponent :  IComponentData{}

@@ -8,6 +8,7 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
+using Weapon;
 
 
 public partial struct HammerSpecialThrowSystem : ISystem
@@ -116,8 +117,21 @@ public partial struct HammerSpecialThrowSystem : ISystem
         bool shouldSpawnZap = config.ValueRO.Timer > config.ValueRO.TimeOfLastZap + config.ValueRO.NextTimeBetweenZaps;
         if (shouldSpawnZap)
         {
-            state.EntityManager.Instantiate(config.ValueRO.ElectricChargePrefab);
+            // instantiate
+            var zap = state.EntityManager.Instantiate(config.ValueRO.ElectricChargePrefab);
+
+            // fetch owner data
+            Entity hammerEntity = SystemAPI.GetSingletonEntity<HammerComponent>();
+            var weapon = state.EntityManager.GetComponentData<WeaponComponent>(hammerEntity);
             
+            // set owner data
+            state.EntityManager.SetComponentData(zap, new HasOwnerWeapon
+            {
+                OwnerEntity = hammerEntity,
+                OwnerWasActive = weapon.InActiveState
+            });
+            
+            // update when next zap should spawn
             config.ValueRW.TimeOfLastZap = config.ValueRO.Timer;
             config.ValueRW.NextTimeBetweenZaps = randomComponent.ValueRW.random
                 .NextFloat(config.ValueRO.MinTimeBetweenZaps, config.ValueRW.MaxTimeBetweenZaps);

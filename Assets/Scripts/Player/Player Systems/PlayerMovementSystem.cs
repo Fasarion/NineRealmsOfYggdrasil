@@ -32,12 +32,10 @@ namespace Player
             var dashConfig = SystemAPI.GetSingletonRW<PlayerDashConfig>();
             var dashTimer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<PlayerDashConfig>());
             
-
             foreach (var (playerTransform, speedComp, animatorReference, gameObjectAnimator, velocity) 
-                in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, AnimatorReference, GameObjectAnimatorPrefab, RefRW<PhysicsVelocity>>().WithAll<PlayerTag>())
+                in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, AnimatorReference, GameObjectAnimatorPrefab, RefRW<PhysicsVelocity>>()
+                    .WithAll<PlayerTag, CanMoveFromInput>())
             {
-
-
                 float speed = speedComp.ValueRO.Value;
 
                 Vector3 moveInputVec3 = new Vector3(moveInput.Value.x, 0, moveInput.Value.y);

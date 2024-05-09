@@ -29,7 +29,7 @@ public class SeekTargetAuthoring : MonoBehaviour
             
             AddComponent(entity, new SeekTargetComponent
             {
-                HalfMinDistance = authoring.minDistance * 0.5f,
+                MinDistance = authoring.minDistance,
                 HalfMaxDistance = authoring.maxDistance * 0.5f,
                    
                 FovInRadians = math.radians(authoring.fov) * 0.5f
@@ -42,7 +42,7 @@ public struct SeekTargetComponent : IComponentData
 {
     public Entity TargetEntity;
     
-    public float HalfMinDistance;
+    public float MinDistance;
     public float HalfMaxDistance;
 
     public float FovInRadians;

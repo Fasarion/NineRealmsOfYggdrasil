@@ -40,6 +40,11 @@ public partial struct DetectTargetSystem : ISystem
 
                 foreach (var hit in hits)
                 {
+                    float distance = hit.Distance;
+                    
+                    // target is to close
+                    if (distance < targetSeeker.ValueRO.MinDistance) continue;
+                    
                     float3 directionToHit = hit.Position - transform.Position;
                     float3 lookRotation = transform.Forward();
 
@@ -49,10 +54,10 @@ public partial struct DetectTargetSystem : ISystem
                     
                     // outside FOV
                     if (angle > maxAngle) continue;
-                    
-                    if (hit.Distance < closestDistance)
+
+                    if (distance < closestDistance)
                     {
-                        closestDistance = hit.Distance;
+                        closestDistance = distance;
                         closestEntity = hit.Entity;
                     }
                 }

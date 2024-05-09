@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 8116207207063421910}
   - component: {fileID: 4093539533502221201}
   - component: {fileID: 8608429267351938146}
+  - component: {fileID: 1698868910996974481}
+  - component: {fileID: 792893502916385277}
   m_Layer: 0
   m_Name: Lightning Projectile Patrik
   m_TagString: Untagged
@@ -316,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysMoveForward: 0
+  rotationLerpSpeed: 0.5
 --- !u!114 &4896915462185973973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,7 +331,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 3
   damageReductionValue: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
@@ -392,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 0
+  knockBackForce: 2
   KnockDirection: 0
 --- !u!114 &8116207207063421910
 MonoBehaviour:
@@ -418,7 +421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 0
+  minDistance: 0.5
   maxDistance: 10
   fov: 135
 --- !u!114 &8608429267351938146
@@ -433,3 +436,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c745165577242df4896c6ba3358149f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1698868910996974481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0926d93b98014cec9db2721b9133e149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveFillPerHit: 1
+  activeFillPerHit: 1
+--- !u!114 &792893502916385277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 2
+  criticalChance: 0

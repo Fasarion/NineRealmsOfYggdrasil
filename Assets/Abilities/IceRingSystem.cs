@@ -74,6 +74,18 @@ public partial struct IceRingSystem : ISystem
 
                 cachedStageBuffer.ValueRW.Value.DamageModifier = damageComponent.Value.DamageValue;
                 
+                
+                // fetch owner data
+                Entity swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
+                var weapon = state.EntityManager.GetComponentData<WeaponComponent>(swordEntity);
+            
+                // set owner data
+                state.EntityManager.SetComponentData(iceRingEntity, new HasOwnerWeapon
+                {
+                    OwnerEntity = swordEntity,
+                    OwnerWasActive = weapon.InActiveState
+                });
+                
                 // play charging audio
                 var audioElement = new AudioBufferData() {AudioData = config.ValueRO.chargeAudioData};
                 audioBuffer.Add(audioElement);
@@ -126,8 +138,7 @@ public partial struct IceRingSystem : ISystem
             transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
             transform.ValueRW.Scale = area * .5f;
 
-            //On button release
-            //if (!input.IsHeld)
+            // spawn ability
             if (attackCaller.SpecialChargeInfo.chargeState == ChargeState.Stop)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
@@ -143,7 +154,7 @@ public partial struct IceRingSystem : ISystem
                 {
                     area = area
                 });
-                
+
                 // play impact audio
                 var audioElement = new AudioBufferData() {AudioData = config.ValueRO.impactAudioData};
                 audioBuffer.Add(audioElement);

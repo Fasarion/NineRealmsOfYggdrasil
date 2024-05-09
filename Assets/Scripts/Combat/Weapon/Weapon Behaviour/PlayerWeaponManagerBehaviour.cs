@@ -66,6 +66,22 @@ namespace Patrik
         float timeOfLastAttackHold;
         float timeSinceLastAttackHold;
         
+        
+        private void Awake()
+        {
+            Instance = this;
+
+            playerAudio = gameObject.GetComponent<PlayerAudioBehaviour>();
+            playerAnimator = gameObject.GetComponent<Animator>();
+        }
+
+        private void OnDisable()
+        {
+            foreach (var weapon in weapons)
+            {
+                UnsubscribeFromPassiveEvents(weapon);
+            }
+        }
 
         public void UpdateAttackAnimation(AttackType type, bool setBool)
         {
@@ -85,8 +101,6 @@ namespace Patrik
            }
         }
 
-        
-        // New Events
         public void Begin(int combo)
         {
             currentCombo = combo;
@@ -109,40 +123,6 @@ namespace Patrik
             playerAnimator.SetBool(attackParam, false);
         }
 
-        // public void StartActiveAttackEvent(int combo = 0)
-        // {
-        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        //
-        //     currentCombo = combo;
-        //     OnActiveAttackStart?.Invoke(GetActiveAttackData());
-        // } 
-        //
-        // public void StopActiveAttackEvent(int combo = 0)
-        // {
-        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        //
-        //     currentCombo = combo;
-        //     OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
-        // }
-        //
-        // public void SetIsAttackingEvent()
-        // {
-        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        // }
-        //
-        // public void SetCurrentCombo(int combo)
-        // {
-        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        //
-        //     currentCombo = combo;
-        // }
-        //
-        // public void FinishActiveAttackAnimationEvent()
-        // {
-        //     Debug.LogError("OLD METHOD CALLED VIA ANIMATION EVENT, DELETE EVENT.");
-        // }
-        
-        
         public void SetNotBusy()
         {
             busyAttackInfo = new BusyAttackInfo(false, WeaponType.None, AttackType.None);
@@ -160,19 +140,6 @@ namespace Patrik
             EventManager.OnBusyUpdate?.Invoke(busyAttackInfo);
         }
 
-        // struct WeaponAttackPair
-        // {
-        //     public WeaponAttackPair(WeaponType weapon, AttackType attack)
-        //     {
-        //         Weapon = weapon;
-        //         Attack = attack;
-        //     }
-        //     
-        //     WeaponType Weapon;
-        //     AttackType Attack;
-        // }
-
-
         /// <summary>
         /// Attack Data from current attack. Informs DOTS which weapon was attacking, which attack type was used and
         /// at which point the attack occured.
@@ -189,22 +156,6 @@ namespace Patrik
             };
 
             return attackData;
-        }
-
-        private void Awake()
-        {
-            Instance = this;
-
-            playerAudio = gameObject.GetComponent<PlayerAudioBehaviour>();
-            playerAnimator = gameObject.GetComponent<Animator>();
-        }
-
-        private void OnDisable()
-        {
-            foreach (var weapon in weapons)
-            {
-                UnsubscribeFromPassiveEvents(weapon);
-            }
         }
 
         public void SetupWeapons()
@@ -295,45 +246,6 @@ namespace Patrik
             return attackData;
         }
 
-        // /// <summary>
-        // /// Function to be called when a normal attack is about to be performed. Called from DOTS after the correct input
-        // /// is registered.
-        // /// </summary>
-        // public bool PerformNormalAttack()
-        // {
-        //     return TryPerformAttack(AttackType.Normal);
-        // }
-        //
-        // /// <summary>
-        // /// Function to be called when a special attack is about to be performed. Called from DOTS after the correct input
-        // /// is registered.
-        // /// </summary>
-        // public bool PerformUltimateAttack()
-        // {
-        //     return TryPerformAttack(AttackType.Ultimate);
-        // }
-
-        // private bool TryPerformAttack(AttackType type)
-        // {
-        //     if (!activeWeapon)
-        //     {
-        //         Debug.LogWarning("No active weapon, can't perform attack.");
-        //         return false;
-        //     }
-        //     
-        //     currentAttackType = type;
-        //     UpdateAnimatorAttackParameters();
-        //     playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
-        //     return true;
-        // }
-
-        // private void UpdateAnimatorAttackParameters()
-        // {
-        //     string attackAnimationName = GetActiveAttackAnimationName(currentAttackType);
-        //     playerAnimator.SetBool(attackAnimationName, true);
-        // }
-        //
-        
         private string GetActiveAttackAnimationName(AttackType attackType)
         {
             switch (attackType)
@@ -350,14 +262,6 @@ namespace Patrik
 
             return "";
         }
-
-        // public void UpdateMovementParameter(float movementT)
-        // {
-        //     if (!playerAnimator) return;
-        //     
-        //     //playerAnimator.SetBool(movingParameterName, playerIsMoving);
-        //     playerAnimator.SetFloat(movingParameterName, movementT);
-        // }
 
         public void SwitchWeapon(int weaponNumber)
         {

@@ -75,8 +75,8 @@ public partial struct HammerPassiveAttackSystem : ISystem
         var entityManager = state.EntityManager;
 
         // Spawn projectile
-        foreach (var (  _, entity) 
-            in SystemAPI.Query<HammerComponent>()
+        foreach (var (  _, entity) in SystemAPI
+                .Query<HammerComponent>()
                 .WithAll<WeaponComponent, ProjectileSpawnerComponent>()
                 .WithNone<ShouldSpawnProjectile>()
                 .WithEntityAccess())

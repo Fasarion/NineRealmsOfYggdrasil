@@ -15,8 +15,15 @@ namespace Player
                 AddComponent<PlayerTag>();
                 AddComponent<PlayerPositionSingleton>();
                 AddComponent<PlayerRotationSingleton>();
+                
+                AddComponent<CanMoveFromInput>();
             }
         }
     }
+    
+    public struct CanMoveFromInput : IComponentData, IEnableableComponent { }
+    
+    public struct PlayerTag : IComponentData { }
+
 }
 

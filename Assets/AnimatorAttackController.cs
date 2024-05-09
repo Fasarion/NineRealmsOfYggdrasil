@@ -6,9 +6,20 @@ using UnityEngine;
 [System.Serializable]
 public struct EventFunctions
 {
+    [Header("Weapon Events")]
     public bool Begin;
     public bool Stop;
     public bool TurnOff;
+
+    [Header("Movement Events")] 
+    public MovementInputState movementInputState;
+
+    public enum MovementInputState
+    {
+        None,
+        EnableMovementInput,
+        DisableMovementInput
+    }
 }
 
 [System.Serializable]
@@ -26,28 +37,42 @@ public class AnimatorAttackController : StateMachineBehaviour
     
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        // if (Contents.OnEnter.Begin) PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
-        // if (Contents.OnEnter.Stop) PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
-        // if (Contents.OnEnter.TurnOff) PlayerWeaponManagerBehaviour.Instance.TurnOff();
-        
         HandleStateActions(Contents.OnEnter);
     }
-
     
-
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
        HandleStateActions(Contents.OnExit);
-        
-        // if (Contents.OnExit.Begin) PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
-        // if (Contents.OnExit.Stop) PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
-        // if (Contents.OnExit.TurnOff) PlayerWeaponManagerBehaviour.Instance.TurnOff();
     }
 
     void HandleStateActions(EventFunctions eventFunctions)
     {
-        if (eventFunctions.Begin) PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
-        if (eventFunctions.Stop) PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
-        if (eventFunctions.TurnOff) PlayerWeaponManagerBehaviour.Instance.TurnOff();
+        // TODO: turn off player controller, lägg till tag
+        
+        if (eventFunctions.Begin)
+        {
+            PlayerWeaponManagerBehaviour.Instance.Begin(Contents.combo);
+        }
+
+        switch (eventFunctions.movementInputState)
+        {
+            case EventFunctions.MovementInputState.DisableMovementInput:
+                EventManager.OnEnableMovementInput?.Invoke(false);
+                break;
+            
+            case EventFunctions.MovementInputState.EnableMovementInput:
+                EventManager.OnEnableMovementInput?.Invoke(true);
+                break;
+        }
+
+        if (eventFunctions.Stop)
+        {
+            PlayerWeaponManagerBehaviour.Instance.Stop(Contents.combo);
+        }
+
+        if (eventFunctions.TurnOff)
+        {
+            PlayerWeaponManagerBehaviour.Instance.TurnOff();
+        }
     }
 }

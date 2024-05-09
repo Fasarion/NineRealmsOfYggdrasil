@@ -28,7 +28,6 @@ GameObject:
   - component: {fileID: 851364982739974534}
   - component: {fileID: 8931064742681460953}
   - component: {fileID: 4133225118689222593}
-  - component: {fileID: 4066208094940666673}
   m_Layer: 0
   m_Name: Hammer Entity
   m_TagString: Untagged
@@ -299,6 +298,10 @@ MonoBehaviour:
     type: 3}
   followsEntity: 0
   followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &7507593938102929566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -479,15 +482,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
---- !u!114 &4066208094940666673
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8745109184148579111}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa22a4f92c784c3ab1a74c429d3c59d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

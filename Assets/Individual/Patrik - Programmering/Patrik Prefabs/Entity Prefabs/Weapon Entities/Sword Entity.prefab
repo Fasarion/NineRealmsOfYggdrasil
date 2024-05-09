@@ -21,7 +21,6 @@ GameObject:
   - component: {fileID: 8099106034715878466}
   - component: {fileID: 4031505932382415400}
   - component: {fileID: 9206287725747069478}
-  - component: {fileID: 9077788839747236107}
   m_Layer: 0
   m_Name: Sword Entity
   m_TagString: Untagged
@@ -318,6 +317,10 @@ MonoBehaviour:
     type: 3}
   followsEntity: 0
   followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &8785231685900876182
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -377,15 +380,3 @@ MonoBehaviour:
     weaponType: 1
     enemyTyping: 0
     audioEventType: 1
---- !u!114 &9077788839747236107
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261443476895494700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ac40d39d6dc4c3984cb86065f020b03, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

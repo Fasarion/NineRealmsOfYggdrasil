@@ -52,6 +52,19 @@ public partial struct ThunderStrikeSystem : ISystem
                 originTransform.ValueRW.Position = targetPos + new float3(0, thunderConfig.mainEffectHeightOffset, 0);
                 originTransform.ValueRW.Rotation = Quaternion.Euler(0f, 0f, 0f);
                 originTransform.ValueRW.Scale = 1;
+                
+                // fetch owner data
+                Entity hammerComponent = SystemAPI.GetSingletonEntity<HammerComponent>();
+                var weapon = state.EntityManager.GetComponentData<WeaponComponent>(hammerComponent);
+
+                var thunderEntityConfig = SystemAPI.GetSingletonEntity<ThunderStrikeConfig>();
+                
+                // set owner data
+                state.EntityManager.SetComponentData(thunderEntityConfig, new HasOwnerWeapon
+                {
+                    OwnerEntity = hammerComponent,
+                    OwnerWasActive = weapon.InActiveState
+                });
             }
 
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;

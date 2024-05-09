@@ -16,6 +16,8 @@ GameObject:
   - component: {fileID: 9166366313322412376}
   - component: {fileID: 7389693164875771184}
   - component: {fileID: 2550664023516249279}
+  - component: {fileID: 4894214247397636823}
+  - component: {fileID: 9157112284757801587}
   m_Layer: 0
   m_Name: IceRingConfig
   m_TagString: Untagged
@@ -160,3 +162,29 @@ MonoBehaviour:
     RangeModifier: 4.5
   - DamageModifier: 2
     RangeModifier: 6
+--- !u!114 &4894214247397636823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205468960478450745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0926d93b98014cec9db2721b9133e149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveFillPerHit: 0
+  activeFillPerHit: 0.15
+--- !u!114 &9157112284757801587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205468960478450745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c745165577242df4896c6ba3358149f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

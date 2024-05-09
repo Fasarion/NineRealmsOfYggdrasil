@@ -299,6 +299,10 @@ MonoBehaviour:
     type: 3}
   followsEntity: 0
   followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &7507593938102929566
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -392,10 +396,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventCategoryType: 0
-    weaponType: 0
+    eventCategoryType: 1
+    weaponType: 2
     enemyTyping: 0
-    audioEventType: 0
+    audioEventType: 2
+    attackType: 1
 --- !u!114 &137017837829733646
 MonoBehaviour:
   m_ObjectHideFlags: 0

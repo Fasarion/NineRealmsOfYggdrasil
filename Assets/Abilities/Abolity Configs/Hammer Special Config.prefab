@@ -62,16 +62,18 @@ MonoBehaviour:
   distanceFromPlayerToGrab: 0.5
   throwImpactAudioData:
     AudioEnumValue: 0
-    eventCategoryType: 4
-    weaponType: 1
+    eventCategoryType: 1
+    weaponType: 2
     enemyTyping: 0
-    audioEventType: 1
+    audioEventType: 2
+    attackType: 2
   throwingAudioData:
     AudioEnumValue: 0
-    eventCategoryType: 4
-    weaponType: 1
+    eventCategoryType: 1
+    weaponType: 2
     enemyTyping: 0
     audioEventType: 1
+    attackType: 2
 --- !u!114 &1969944077194731774
 MonoBehaviour:
   m_ObjectHideFlags: 0

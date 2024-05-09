@@ -321,13 +321,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4600464888170940368, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
-      propertyPath: m_GravityFactor
-      value: 0
+      propertyPath: m_MotionType
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6096564352182590535, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: energyToFill
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6221755797999946281, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
@@ -372,14 +372,8 @@ PrefabInstance:
     - target: {fileID: 9017022476760349507, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: energyToFill
-      value: 1
+      value: 50
       objectReference: {fileID: 0}
-    - target: {fileID: 9148320740039193329, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
-        type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 7824363987953266496, guid: 00a46bfd6213f1d438cbe2fe38f1fe45,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -942,10 +936,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2498903212905155995, guid: d62cf5fe2d10757458ac3f6445d26fdf,
+        type: 3}
+      propertyPath: activeFillPerHit
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4259606365192864958, guid: d62cf5fe2d10757458ac3f6445d26fdf,
+        type: 3}
+      propertyPath: energyToFill
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 7968933164686976673, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8896407907922882422, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}
@@ -960,7 +964,7 @@ PrefabInstance:
     - target: {fileID: 9058226766176258591, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

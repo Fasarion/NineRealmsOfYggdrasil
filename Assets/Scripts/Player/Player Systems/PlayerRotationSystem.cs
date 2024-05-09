@@ -82,6 +82,7 @@ namespace Player
                 }
 
                 playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
+                playerRotationSingleton.ValueRW.Forward = playerTransform.ValueRO.Forward();
             }
         }
     }

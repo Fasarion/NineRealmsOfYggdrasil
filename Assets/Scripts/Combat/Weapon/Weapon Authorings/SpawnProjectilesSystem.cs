@@ -21,7 +21,7 @@ public partial struct SpawnProjectilesSystem : ISystem
         var entityManager = state.EntityManager;
 
         // Spawn projectile
-        foreach (var (  spawnerTransform, projectileSpawner, entity) 
+        foreach (var (  spawnerTransform, projectileSpawner, spawnerEntity) 
             in SystemAPI.Query< LocalTransform, ProjectileSpawnerComponent>()
                 .WithAll<ShouldSpawnProjectile>()
                 .WithEntityAccess())
@@ -29,10 +29,10 @@ public partial struct SpawnProjectilesSystem : ISystem
             Entity projectileEntity = entityManager.Instantiate(projectileSpawner.Projectile);
             var projectileTransform = entityManager.GetComponentData<LocalTransform>(projectileEntity);
 
-            bool hasWeapon = entityManager.HasComponent<WeaponComponent>(entity);
-            if (hasWeapon)
+            bool isWeapon = entityManager.HasComponent<WeaponComponent>(spawnerEntity);
+            if (isWeapon)
             {
-                var weapon = entityManager.GetComponentData<WeaponComponent>(entity);
+                var weapon = entityManager.GetComponentData<WeaponComponent>(spawnerEntity);
                 
                 projectileTransform.Position = weapon.AttackPoint.Position;
                 projectileTransform.Rotation = math.mul(weapon.AttackPoint.Rotation, projectileTransform.Rotation);
@@ -42,7 +42,7 @@ public partial struct SpawnProjectilesSystem : ISystem
                     // set owner data
                     entityManager.SetComponentData(projectileEntity, new HasOwnerWeapon
                     {
-                        OwnerEntity = entity,
+                        OwnerEntity = spawnerEntity,
                         OwnerWasActive = weapon.InActiveState
                     });
                 }
@@ -57,7 +57,7 @@ public partial struct SpawnProjectilesSystem : ISystem
             entityManager.SetComponentData(projectileEntity, projectileTransform);
             entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(projectileTransform.Forward())));
             
-            state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, false);
+            state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(spawnerEntity, false);
         }
     }
 }

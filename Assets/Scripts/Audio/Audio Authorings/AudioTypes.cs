@@ -7,6 +7,7 @@ public struct AudioData
     public WeaponTyping weaponType;
     public EnemyTyping enemyTyping;
     public AudioEventType audioEventType;
+    public AttackTypeAudio attackType;
 }
 [System.Serializable]
 public enum WeaponTyping
@@ -18,14 +19,24 @@ public enum WeaponTyping
     Birds = 4,
 }
 
+public enum AttackTypeAudio
+{
+    None = 0,
+    Normal = 1,
+    Special = 2,
+    Ultimate = 3,
+    
+}
+
 [System.Serializable]
 public enum EventCategoryType
 {
     None = 0,
-    Player = 1,
-    Enemy = 2,
-    Environment = 3,
-    Weapon = 4,
+    Weapon = 1,
+    Player = 2,
+    Enemy = 3,
+    Environment = 4,
+    
 }
 
 [System.Serializable]
@@ -42,5 +53,7 @@ public enum EnemyTyping
 public enum AudioEventType
 {
     None = 0,
-    HitAudio = 1
+    OnUse = 1,
+    OnImpact = 2,
+    OnCharge = 3,
 }

@@ -13,7 +13,7 @@ public class WeaponAudio : ScriptableObject
     [Header("Sword")] 
     public EventReference swordSwing;
     public EventReference swordImpact;
-    public EventReference iceChargeAttack;
+    public EventReference iceChargeImpact;
     public EventReference swordUltimate;
     private EventInstance _swordInstance;
     private EventInstance _chargeInstance;
@@ -22,6 +22,7 @@ public class WeaponAudio : ScriptableObject
     public EventReference hammerSwing;
     public EventReference hammerImpact;
     public EventReference hammerThrow;
+    public EventReference hammerThrowImpact;
     public EventReference lightningStrike;
     private EventInstance _hammerInstance;
     
@@ -73,29 +74,119 @@ public class WeaponAudio : ScriptableObject
     {
         RuntimeManager.PlayOneShot(lightningStrike);
     }
-    //Kallar på ljud när vapen träffar något
-    public void WeaponAudioCaller(int weapon)
+    
+    //Directs data to correct attack type (normal, special, ultimate)
+    public void WeaponAudioCaller(int attackType, AudioData audioData)
     {
-        switch (weapon)
+        switch (attackType)
         {
-            case 1:
+            case 1: //Normal Attacks
             {
-                RuntimeManager.PlayOneShot(swordImpact);
-                //Debug.Log("hur många?");
+                NormalAttackAudio((int)audioData.audioEventType, audioData);
+                break;
+            }
+            case 2: //Special Attacks (rightclick)
+            {
+                SpecialAttackAudio((int)audioData.audioEventType, audioData);
+                break;
+            }
+        }
+    }
+    
+    //Directs Normal data to correct event (use, impact, charge)
+    private void NormalAttackAudio(int audioEvent, AudioData audioData)
+    {
+        switch (audioEvent)
+        {
+            case 1: 
+            {
+                //NotInUse
                 break;
             }
             case 2:
             {
+                PlayNormalImpactAudio((int)audioData.weaponType);
+                break;
+            }
+        }
+    }
+
+    private void SpecialAttackAudio(int audioEvent, AudioData audioData)
+    {
+        Debug.Log("Hey");
+        switch (audioEvent)
+        {
+            case 1: 
+            {
+                PlaySpecialUseAudio((int)audioData.weaponType);
+                break;
+            }
+            case 2:
+            {
+                PlaySpecialImpactAudio((int)audioData.weaponType);
+                break;
+            }
+        }
+    }
+    
+    //plays impact audio for correct weapon
+    private void PlayNormalImpactAudio(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1: //Svärd
+            {
+                RuntimeManager.PlayOneShot(swordImpact);
+                break;
+            }
+            case 2: //Hammare
+            {
+                Debug.Log("HammarLjud");
                 RuntimeManager.PlayOneShot(hammerImpact);
                 break;
             }
         }
     }
-    public void ChargeAttackAudio(int chargeLevel)
+
+    private void PlaySpecialUseAudio(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1: //Svärd
+            {
+                //NotInUse
+                break;
+            }
+            case 2: //Hammare
+            {
+                RuntimeManager.PlayOneShot(hammerThrow);
+                break;
+            }
+        }
+    }
+    
+    //Plays special impact audio for correct weapon
+    private void PlaySpecialImpactAudio(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1: //Svärd
+            {
+                RuntimeManager.PlayOneShot(iceChargeImpact);
+                break;
+            }
+            case 2: //Hammare
+            {
+                RuntimeManager.PlayOneShot(hammerThrowImpact);
+                break;
+            }
+        }
+    }
+    /*public void ChargeAttackAudio(int chargeLevel)
     {
         _chargeInstance = RuntimeManager.CreateInstance(iceChargeAttack);
         _chargeInstance.setParameterByName("ChargeLevel", chargeLevel);
         _chargeInstance.start();
         _chargeInstance.release();
-    }
+    }*/
 }

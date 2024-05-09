@@ -330,7 +330,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 1
+  maxHP: 3
   damageReductionValue: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
@@ -420,7 +420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 0
+  minDistance: 0.5
   maxDistance: 10
   fov: 135
 --- !u!114 &8608429267351938146

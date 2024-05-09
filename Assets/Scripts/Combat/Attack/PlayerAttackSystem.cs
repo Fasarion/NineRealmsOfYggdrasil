@@ -410,6 +410,14 @@ namespace Patrik
                         return entity;
                     }
                     break;
+                
+                case WeaponType.Birds:
+                    foreach (var (hammer, entity) in SystemAPI.Query<BirdsComponent>()
+                        .WithEntityAccess())
+                    {
+                        return entity;
+                    }
+                    break;
             }
 
             return default;

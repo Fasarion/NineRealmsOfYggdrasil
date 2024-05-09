@@ -18,4 +18,3 @@ public class SwordAuthoring : MonoBehaviour
 
 public struct SwordComponent :  IComponentData{}
 
-public struct HammerComponent :  IComponentData{}

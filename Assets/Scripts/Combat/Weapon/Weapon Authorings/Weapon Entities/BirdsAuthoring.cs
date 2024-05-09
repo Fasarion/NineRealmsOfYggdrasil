@@ -1,7 +1,7 @@
 ﻿using Unity.Entities;
 using UnityEngine;
 
-public class HammerAuthoring : MonoBehaviour
+public class BirdsAuthoring : MonoBehaviour
 {
     class Baker : Baker<HammerAuthoring>
     {
@@ -9,9 +9,9 @@ public class HammerAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
-            AddComponent(entity, new HammerComponent());
+            AddComponent(entity, new BirdsComponent());
         }
     }
 }
 
-public struct HammerComponent :  IComponentData{}
+public struct BirdsComponent :  IComponentData{}

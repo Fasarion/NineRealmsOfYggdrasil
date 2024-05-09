@@ -37,12 +37,12 @@ public partial struct SpawnProjectilesSystem : ISystem
                 projectileTransform.Position = weapon.AttackPoint.Position;
                 projectileTransform.Rotation = math.mul(weapon.AttackPoint.Rotation, projectileTransform.Rotation);
                 
-                if (entityManager.HasComponent<OwnerWeapon>(projectileEntity))
+                if (entityManager.HasComponent<HasOwnerWeapon>(projectileEntity))
                 {
                     // set owner data
-                    entityManager.SetComponentData(projectileEntity, new OwnerWeapon
+                    entityManager.SetComponentData(projectileEntity, new HasOwnerWeapon
                     {
-                        Value = entity,
+                        OwnerEntity = entity,
                         OwnerWasActive = weapon.InActiveState
                     });
                 }
@@ -56,9 +56,7 @@ public partial struct SpawnProjectilesSystem : ISystem
             // set new transform values and direction
             entityManager.SetComponentData(projectileEntity, projectileTransform);
             entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(projectileTransform.Forward())));
-
             
-
             state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, false);
         }
     }

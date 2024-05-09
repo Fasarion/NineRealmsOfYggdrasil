@@ -439,6 +439,7 @@ namespace Patrik
             }
             
             ecb.Playback(EntityManager);
+            ecb.Dispose();
         }
 
         private void HandleWeaponInput()

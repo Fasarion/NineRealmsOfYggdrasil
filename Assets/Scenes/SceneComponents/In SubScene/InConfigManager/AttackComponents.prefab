@@ -89,7 +89,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651922056175955718}
-  - component: {fileID: 6039976060502021421}
   m_Layer: 0
   m_Name: ElementalReactionsConfig
   m_TagString: Untagged
@@ -112,35 +111,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3325858196796821600}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6039976060502021421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4097225998759415741}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86bd721c44493464eb013298dc71aca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  burnDamage: 0
-  burnDuration: 99
-  maxBurnStacks: 99
-  shockDamage: 0
-  shockDelay: 0
-  maxShockStacks: 99
-  freezeMovementSlowPercentage: 0
-  freezeDuration: 99
-  maxFreezeStacks: 99
-  combustionDamage: 0
-  combustionArea: 0
-  vulnerableAdditionalDamagePercentage: 0
-  vulnerableDuration: 0
-  maxVulnurableStacks: 99
-  conductSpreadAddition: 0
-  conductDuration: 0
-  maxConductStacks: 99
 --- !u!1 &5343299139329601341
 GameObject:
   m_ObjectHideFlags: 0

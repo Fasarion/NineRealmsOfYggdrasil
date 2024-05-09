@@ -6,4 +6,6 @@ public class ViewMVC : ElementMVC
 {
     public FlashingBoxView flashingBoxView;
     public HealthBarView healthBarView;
+    public LevelProgressBarView progressBarView;
+    public CombatUIUltIconsView ultIconsView;
 }

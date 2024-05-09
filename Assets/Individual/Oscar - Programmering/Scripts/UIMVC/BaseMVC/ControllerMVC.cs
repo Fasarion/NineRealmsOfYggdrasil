@@ -6,5 +6,7 @@ public class ControllerMVC : MonoBehaviour
 {
     public FlashingBoxController flashingBoxController;
     public HealthBarController healthBarController;
-    
+    public LevelProgressBarController levelProgressBarController;
+    public CombatUIUltIconsController ultIconsController;
+
 }

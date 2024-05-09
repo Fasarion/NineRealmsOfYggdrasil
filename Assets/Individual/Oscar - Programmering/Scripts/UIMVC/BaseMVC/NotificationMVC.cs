@@ -9,5 +9,14 @@ public class NotificationMVC : MonoBehaviour
     public const string GameStart = "game.start";
     public const string SceneLoad = "scene.load";
     public const string SetFlashingBoxColor = "flashingBox.setColor";
-    public const string SetHealth = "healthBar.setHealth";
+    
+    public const string SetHealthModel = "healthBar.setHealth";
+    public const string HealthBarLevelsSetView = "healthBar.healthBarLevelsSet";
+    
+    public const string ExperienceInfoChanged = "levelProgressBar.experienceInfoChanged";
+
+    public const string UltimateUsed = "gameplay.ultimateUsed";
+    public const string WeaponSetup = "gameplay.weaponSetup";
+
+
 }

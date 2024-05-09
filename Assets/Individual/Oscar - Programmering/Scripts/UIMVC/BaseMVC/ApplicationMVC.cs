@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class ApplicationMVC : MonoBehaviour
 {
+    //I think I made the collection classes obsolete by creating a base class of all controllers and then accessing those through the notification system.
+    [Header("These ones have to be accessible")]
     public ModelMVC model;
     public ViewMVC view;
+    [Header("All controllers are already accessed automatically")]
     public ControllerMVC controller;
 
 
@@ -14,9 +17,9 @@ public class ApplicationMVC : MonoBehaviour
     public void Notify(string p_event_path, Object p_target, params object[] p_data)
     {
         BaseControllerMVC[] controller_list = GetAllControllers();
-        foreach (BaseControllerMVC controller in controller_list)
+        foreach (BaseControllerMVC currentController in controller_list)
         {
-            controller.OnNotification(p_event_path, p_target, p_data);
+            currentController.OnNotification(p_event_path, p_target, p_data);
         }
     }
 

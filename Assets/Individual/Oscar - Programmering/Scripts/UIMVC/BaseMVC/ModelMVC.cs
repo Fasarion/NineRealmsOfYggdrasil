@@ -6,4 +6,6 @@ public class ModelMVC : MonoBehaviour
 {
     public FlashingBoxModel boxModel;
     public HealthBarModel healthBarModel;
+    public LevelProgressBarModel progressBarModel;
+    public CombatUIUltIconsModel ultIconsModel;
 }

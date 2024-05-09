@@ -28,7 +28,7 @@ public class CombatUIUltIcons : MonoBehaviour
     {
         weaponTypes.Clear();
         ultimateActiveText.gameObject.SetActive(false);
-       
+            
     }
 
     public void OnEnable()

@@ -573,12 +573,12 @@ PrefabInstance:
     - target: {fileID: 89125744733743645, guid: fbce19803621980458a0e425f1081fc3,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8071667428324845191, guid: fbce19803621980458a0e425f1081fc3,
         type: 3}
       propertyPath: speedValue
-      value: 0.8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8248458485825962027, guid: fbce19803621980458a0e425f1081fc3,
         type: 3}
@@ -1261,6 +1261,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6702840696670580388, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: abilityStages.Array.size
@@ -1680,7 +1685,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1936878933
 Transform:
   m_ObjectHideFlags: 0

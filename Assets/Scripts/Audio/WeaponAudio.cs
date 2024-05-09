@@ -113,7 +113,6 @@ public class WeaponAudio : ScriptableObject
 
     private void SpecialAttackAudio(int audioEvent, AudioData audioData)
     {
-        Debug.Log("Hey");
         switch (audioEvent)
         {
             case 1: 

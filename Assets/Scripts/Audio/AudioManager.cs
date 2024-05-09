@@ -36,7 +36,7 @@ public class AudioManager : MonoBehaviour
             }
             case 1: //WeaponCategory
             {
-                weaponAudio.WeaponAudioCaller((int)audioData.audioEventType, audioData);
+                weaponAudio.WeaponAudioCaller((int)audioData.attackType, audioData);
                 break;
                 
             }

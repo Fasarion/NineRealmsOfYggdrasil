@@ -5,9 +5,13 @@ using UnityEngine;
 
 public class HammerPassiveAbilityConfigAuthoring : MonoBehaviour
 {
+    [Tooltip("The distance from the player that the first lightning bolt is allowed to strike")]
     public float initialRadius;
+    [Tooltip("The distance from the first enemy struck that subsequent lightning bolts are allowed to strike")]
     public float chainRadius;
+    [Tooltip("The number of lightning strikes per passive trigger")]
     public int strikeCount;
+    [Tooltip("The time between lightning bolt spawns in seconds")]
     public float timeBetweenStrikes;
     public GameObject abilityPrefab;
     public float vfxHeightOffset;

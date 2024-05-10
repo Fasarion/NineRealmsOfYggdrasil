@@ -38,7 +38,10 @@ public class SpawnConfigAuthoring : MonoBehaviour
     [HideInInspector] public int currentActiveCheckpoint;
 
     [HideInInspector] public bool isInitialized;
+    
 
+    public float maxEnemyDistanceFromPlayer = 1000;
+    
     public List<EnemyPrefabData> enemyPrefabs;
     
 
@@ -62,6 +65,7 @@ public class SpawnConfigAuthoring : MonoBehaviour
                     innerSpawningRadius = authoring.innerSpawningRadius,
                     outerSpawningRadius = authoring.outerSpawningRadius,
                     isInitialized = authoring.isInitialized,
+                    maxDistanceFromPlayer = authoring.maxEnemyDistanceFromPlayer,
                 });
 
             var buffer = AddBuffer<EnemyEntityPrefabElement>(entity);
@@ -93,6 +97,7 @@ public struct SpawnConfig : IComponentData
     public float innerSpawningRadius;
     public float outerSpawningRadius;
     public bool isInitialized;
+    public float maxDistanceFromPlayer;
 }
 
 public struct EnemyEntityPrefabElement : IBufferElementData

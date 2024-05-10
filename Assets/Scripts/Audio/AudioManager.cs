@@ -34,25 +34,27 @@ public class AudioManager : MonoBehaviour
                 //Debug.Log("No Category Type Set");
                 break;
             }
-            case 1: //PlayerCategory
+            case 1: //WeaponCategory
+            {
+                weaponAudio.WeaponAudioCaller((int)audioData.attackType, audioData);
+                break;
+                
+            }
+            case 2:  //PlayerCategory
             {
                 playerAudio.PlayerAudioCaller((int) audioData.audioEventType);
                 break;
+                
             }
-            case 2:  //EnemyCategory
+
+            case 3: //EnemyCategory
             {
                 enemyAudio.EnemyAudioCaller((int)audioData.enemyTyping);
                 break;
             }
-
-            case 3: //EnvironmentCategory
-            {
-                //ENVIRONMENTAUDIO
-                break;
-            }
             case 4:
             {
-                weaponAudio.WeaponAudioCaller((int)audioData.weaponType);
+                //EnvironmentCategory
                 break;
             }
         }

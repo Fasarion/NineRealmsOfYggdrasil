@@ -34,7 +34,21 @@ public partial struct SpawnSystem : ISystem
         var config = SystemAPI.GetSingletonRW<SpawnConfig>();
         RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
         var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
+        var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+        var timer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<SpawnConfig>());
 
+        
+        timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
+        
+        //Debug.Log($"timer time {timer.ValueRO.currentTime}");
+
+        if (timer.ValueRO.currentTime >= 1)
+        {
+            timer.ValueRW.currentTime = 0;
+            CheckForOutOfBoundsEnemies(ref state, config.ValueRO.maxDistanceFromPlayer, playerPos.Value, config.ValueRO.outerSpawningRadius);
+            Debug.Log("check");
+        }
+        
 
         if (!config.ValueRO.isInitialized)
         {
@@ -70,14 +84,19 @@ public partial struct SpawnSystem : ISystem
         config.ValueRW.currentTimerTime = 0f;
         _timerCutoffPoint = GetTimerCutoff(config, currentEnemyCount);
 
+
         
         int spawnCount = GetSpawnCount(config, currentEnemyCount);
-        
+
+        if (spawnCount <= 0) return;
+            
         var enemySpawnTypes = new NativeArray<int>(spawnCount, Allocator.TempJob);
         
         GenerateEnemyTypesArray(random, config, spawnCount, ref enemySpawnTypes);
         
         SpawnEnemies(random, spawnCount, ref enemySpawnTypes, config, state);
+
+
     }
 
     public void OnDestroy(ref SystemState state)
@@ -160,6 +179,22 @@ public partial struct SpawnSystem : ISystem
                     enemySpawnTypes[i] = j;
                     break;
                 }
+            }
+        }
+    }
+
+    [BurstCompile]
+    private void CheckForOutOfBoundsEnemies(ref SystemState state, float maxDistance, float3 playerPos, float outerRadius)
+    {
+        foreach (var transform in
+                 SystemAPI.Query<RefRW<LocalTransform>>()
+                     .WithAll<EnemyTypeComponent>())
+        {
+            float distance = ((Vector3)transform.ValueRO.Position - (Vector3)playerPos).magnitude;
+            if (distance > maxDistance)
+            {
+                transform.ValueRW.Position = (math.normalizesafe(playerPos, transform.ValueRO.Position) * outerRadius) + playerPos;
+                Debug.Log("moved enemy");
             }
         }
     }

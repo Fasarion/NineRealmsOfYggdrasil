@@ -5,13 +5,17 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HealthBarModel : MonoBehaviour
+public class HealthBarView : ElementMVC
 {
+    
+
     public Image imageRenderer;
     public TMP_Text healthText;
     public List<Sprite> sprites;
     
-    public int currentHealth;
-    public int maxHealth;
-    [NonSerialized]public List<float> levels;
+
+    public void Awake()
+    {
+        app.Notify(NotificationMVC.HealthBarLevelsSetView, this, sprites);
+    }
 }

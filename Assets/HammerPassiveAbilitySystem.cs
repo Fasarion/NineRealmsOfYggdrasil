@@ -70,7 +70,7 @@ public partial struct HammerPassiveAbilitySystem : ISystem
 
                 hits.Clear();
                 
-                ability.ValueRW.CurrentStrikeCheckpoint++;
+                
                 
                 if (collisionWorld.OverlapSphere(originPosition, totalArea,
                         ref hits, _detectionFilter))
@@ -95,6 +95,7 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                     }
                 }
 
+                ability.ValueRW.CurrentStrikeCheckpoint++;
                 ability.ValueRW.HasFired = true;
             }
 

@@ -11,5 +11,6 @@ namespace Player
     public struct PlayerRotationSingleton : IComponentData
     {
         public quaternion Value;
+        public float3 Forward;
     }
 }

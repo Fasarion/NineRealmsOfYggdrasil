@@ -10,24 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: HammerUpgrade 5
+  m_Name: HammerUpgrade 7
   m_EditorClassIdentifier: 
-  upgradeTitle: Hammer lvl 7
+  upgradeTitle: Hammer lvl 9
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: '
-
-
-    +5 ATK, +30% area'
+  upgradeDescription: +5 base atk
   upgrades:
   - thingToUpgrade: 4
     valueToUpgrade: 0
     valueAmount: 5
-  - thingToUpgrade: 4
-    valueToUpgrade: 4
-    valueAmount: 0.3
   startUnlocked: 0
   upgradeIndex: 3
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: de9601210c72f8e4db1190d2751adf17, type: 2}
+  - {fileID: 11400000, guid: e12355a119c4fc949a28527039e74cec, type: 2}

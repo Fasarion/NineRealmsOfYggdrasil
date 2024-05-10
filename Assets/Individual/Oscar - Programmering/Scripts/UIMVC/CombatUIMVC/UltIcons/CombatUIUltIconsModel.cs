@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class CombatUIUltIconsModel : ElementMVC
 {
-    public List<CombatUIUltWeaponReadyHolder> ultWeaponReadyHolders;
+    
     [NonSerialized]public List<WeaponType> weaponTypes;
-    public CombatUISymbolHolder SymbolHolder;
+   
     public int activeUltCounter;
     [NonSerialized]public int symbolCounter;
     

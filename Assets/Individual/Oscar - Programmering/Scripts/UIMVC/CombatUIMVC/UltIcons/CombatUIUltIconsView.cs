@@ -6,6 +6,9 @@ using UnityEngine;
 public class CombatUIUltIconsView : ElementMVC
 {
     public TMP_Text ultimateActiveText;
+    public CombatUISymbolHolder SymbolHolder;
+    public List<CombatUIUltWeaponReadyHolderView> ultWeaponReadyHolderViews;
+    
     // Start is called before the first frame update
     void Start()
     {

@@ -9,7 +9,7 @@ public class CombatUIUltIconsController : BaseControllerMVC
    {
 
       var ultIconsModel = app.model.ultIconsModel; 
-      var ultIconsView = app.view.ultIconsView; 
+      var ultIconsView = app.view.ultIconsView;
       switch (p_event_path)
       {
          case NotificationMVC.UltimateUsed:
@@ -19,11 +19,11 @@ public class CombatUIUltIconsController : BaseControllerMVC
             float maxEnergy = (float)p_data[2];
             if (currentEnergy == 0)
             {
-               for (int i = 0; i < ultIconsModel.ultWeaponReadyHolders.Count; i++)
+               for (int i = 0; i < ultIconsView.ultWeaponReadyHolderViews.Count; i++)
                {
-                  if (ultIconsModel.ultWeaponReadyHolders[i].currentWeaponType == weaponType)
+                  if (ultIconsView.ultWeaponReadyHolderViews[i].currentWeaponType == weaponType)
                   {
-                     ultIconsModel.ultWeaponReadyHolders[i].objectToSet.SetActive(false);
+                     ultIconsView.ultWeaponReadyHolderViews[i].objectToSet.SetActive(false);
                      ultIconsModel.activeUltCounter--;
                   }
             
@@ -33,11 +33,11 @@ public class CombatUIUltIconsController : BaseControllerMVC
             //UltimateReady
             if (currentEnergy >= maxEnergy)
             {
-               for (int i = 0; i < ultIconsModel.ultWeaponReadyHolders.Count; i++)
+               for (int i = 0; i < ultIconsView.ultWeaponReadyHolderViews.Count; i++)
                {
-                  if (ultIconsModel.ultWeaponReadyHolders[i].currentWeaponType == weaponType)
+                  if (ultIconsView.ultWeaponReadyHolderViews[i].currentWeaponType == weaponType)
                   {
-                     ultIconsModel.ultWeaponReadyHolders[i].objectToSet.SetActive(true);
+                     ultIconsView.ultWeaponReadyHolderViews[i].objectToSet.SetActive(true);
                      ultIconsModel.activeUltCounter++;
                   }
                }
@@ -66,24 +66,23 @@ public class CombatUIUltIconsController : BaseControllerMVC
             {
                case WeaponType.Hammer:
                {
-                  ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsModel.SymbolHolder.hammerSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.hammerSymbols[1];
                   break;
                }
                case WeaponType.Sword:
                {
                 
-                  ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsModel.SymbolHolder.swordSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.swordSymbols[1];
                   break;
                }
                case WeaponType.Birds:
                {
-                  ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsModel.SymbolHolder.birdSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.birdSymbols[1];
                   break;
                }
                case WeaponType.Mead:
                {
-                  ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsModel.SymbolHolder.meadSymbols[1];
-                        
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.meadSymbols[1];
                   break;
                }
                default:
@@ -92,9 +91,9 @@ public class CombatUIUltIconsController : BaseControllerMVC
                   break;
                }
             }
-            ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].currentWeaponType = weaponBehaviour.WeaponType;
-            ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].imageTarget.SetNativeSize();
-            ultIconsModel.ultWeaponReadyHolders[ultIconsModel.symbolCounter].objectToSet.SetActive(false);
+            ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].currentWeaponType = weaponBehaviour.WeaponType;
+            ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.SetNativeSize();
+            ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].objectToSet.SetActive(false);
             ultIconsModel.symbolCounter++;
             break;
          }

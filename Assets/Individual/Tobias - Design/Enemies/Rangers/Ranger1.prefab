@@ -332,7 +332,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 6
+  minimumDistanceForMoving: 8
+  awayFromPlayerMoveSpeed: 0
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 1
+  speedValue: 4
 --- !u!114 &-4807361175094672489
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,7 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingCooldown: 4
-  shootDistance: 7
+  shootDistance: 9
 --- !u!114 &922261842375008278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +405,11 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 8870220498742206646, guid: 5b6570f0dd7d66f45a0085c37820403d,
     type: 3}
   followsEntity: 1
+  followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &6445979045985948300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +450,7 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 0
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 1
     audioEventType: 0
+    attackType: 0

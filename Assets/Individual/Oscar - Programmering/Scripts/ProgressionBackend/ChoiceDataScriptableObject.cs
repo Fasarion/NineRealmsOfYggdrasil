@@ -15,7 +15,7 @@ public class ChoiceDataScriptableObject : ScriptableObject
     public SerializableDictionary<Vector2Int, RoomNode> roomNodeGridMapSO;
 
     public List<Vector2Int> roomNodeCoordinates;
-
+    
     public void Awake()
     {
         

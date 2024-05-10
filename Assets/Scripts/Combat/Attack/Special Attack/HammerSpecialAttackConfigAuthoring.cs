@@ -49,8 +49,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.None);
             AddComponent(entity, new HammerSpecialConfig
             {
-                IndicatorPrefab = GetEntity(authoring.indicatorPrefab),
-                ElectricChargePrefab = GetEntity(authoring.electricZapPrefab),
+                IndicatorPrefab = GetEntity(authoring.indicatorPrefab, TransformUsageFlags.None),
+                ElectricChargePrefab = GetEntity(authoring.electricZapPrefab, TransformUsageFlags.None),
                 
                 BaseDistanceToTravel = authoring.baseDistanceToTravel,
                 DistanceToTravel = authoring.baseDistanceToTravel,
@@ -61,7 +61,6 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TimeToSwitchBack = authoring.timeToTurnBack,
                 TimeToReturnAfterTurning = authoring.timeToReturnAfterTurning,
                 
-                // TravelForwardSpeed = authoring.baseDistanceToTravel / authoring.timeToTurnBack,
                 DistanceFromPlayerToGrab = authoring.distanceFromPlayerToGrab,
                 
                 RotationDegreesPerSecond = math.radians(authoring.revolutionsPerSecond) * 360f,
@@ -100,7 +99,6 @@ public struct HammerSpecialConfig : IComponentData
     public float TimeToSwitchBack;
     public float TimeToReturnAfterTurning;
 
-  //  public float TravelForwardSpeed;
     public float TravelForwardSpeed => DistanceToTravel / TimeToSwitchBack;
 
 

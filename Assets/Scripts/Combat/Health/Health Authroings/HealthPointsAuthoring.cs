@@ -32,7 +32,7 @@ namespace Health
                 
                 // Objects with health are assumed to be destroyed
                 AddComponent(entity, new ShouldBeDestroyed());
-                SetComponentEnabled<ShouldBeDestroyed>(false);
+                SetComponentEnabled<ShouldBeDestroyed>(entity, false);
             }
         }
     }

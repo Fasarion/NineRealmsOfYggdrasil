@@ -7,8 +7,15 @@ using Unity.Transforms;
 using UnityEngine;
 using Weapon;
 
-public partial struct BezierMovementSystem : ISystem
+public partial struct BirdMovementSystem : ISystem
 {
+    [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<PlayerPositionSingleton>();
+        state.RequireForUpdate<BirdMovementComponent>();
+    }
+    
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
@@ -29,7 +36,7 @@ public partial struct BezierMovementSystem : ISystem
                 continue;
             }
             
-            birdMovement.ValueRW.CurrentTValue += deltaTime;
+            birdMovement.ValueRW.CurrentTValue += deltaTime / birdMovement.ValueRO.TimeToComplete;
             
             float2 start = birdMovement.ValueRO.startPoint;
             float2 control1 = birdMovement.ValueRO.controlPoint1;

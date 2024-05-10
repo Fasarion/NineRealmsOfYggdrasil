@@ -44,11 +44,7 @@ namespace Patrik
         private int currentCombo = 0;
         
         // Animator parameters
-        private string movingParameterName = "movementSpeed";
-        private string currentWeaponParameterName = "CurrentWeapon";
-        private string currentAttackParameterName = "CurrentAttack";
         private string weaponIdParameterName = "weaponID";
-
         
         // Animation Events
         public UnityAction<AttackData> OnActiveAttackStart;

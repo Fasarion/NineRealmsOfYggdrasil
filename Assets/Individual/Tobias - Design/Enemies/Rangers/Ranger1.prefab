@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumDistanceForMoving: 6
+  awayFromPlayerMoveSpeed: 0
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -404,6 +405,11 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 8870220498742206646, guid: 5b6570f0dd7d66f45a0085c37820403d,
     type: 3}
   followsEntity: 1
+  followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &6445979045985948300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +450,7 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 0
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 1
     audioEventType: 0
+    attackType: 0

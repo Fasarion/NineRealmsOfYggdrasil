@@ -12,7 +12,7 @@ public class CombatUIUltIconsController : BaseControllerMVC
       var ultIconsView = app.view.ultIconsView;
       switch (p_event_path)
       {
-         case NotificationMVC.UltimateUsed:
+         case NotificationMVC.UltimateUsedUltIcons:
          {
             WeaponType weaponType = (WeaponType)p_data[0];
             float currentEnergy = (float)p_data[1];
@@ -53,9 +53,9 @@ public class CombatUIUltIconsController : BaseControllerMVC
             }
             break;
          }
-
-         case NotificationMVC.WeaponSetup:
+         case NotificationMVC.WeaponSetupUltIcons:
          {
+            
             var weaponBehaviour = (WeaponBehaviour)p_data[0];
             ultIconsModel.weaponTypes.Add(weaponBehaviour.WeaponType); 
             //if (weaponTypes.Count == 2) 
@@ -66,23 +66,23 @@ public class CombatUIUltIconsController : BaseControllerMVC
             {
                case WeaponType.Hammer:
                {
-                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.hammerSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolderView.hammerSymbols[1];
                   break;
                }
                case WeaponType.Sword:
                {
                 
-                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.swordSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolderView.swordSymbols[1];
                   break;
                }
                case WeaponType.Birds:
                {
-                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.birdSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolderView.birdSymbols[1];
                   break;
                }
                case WeaponType.Mead:
                {
-                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolder.meadSymbols[1];
+                  ultIconsView.ultWeaponReadyHolderViews[ultIconsModel.symbolCounter].imageTarget.sprite = ultIconsView.SymbolHolderView.meadSymbols[1];
                   break;
                }
                default:

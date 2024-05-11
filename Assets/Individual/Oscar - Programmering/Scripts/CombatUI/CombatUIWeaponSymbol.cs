@@ -7,12 +7,7 @@ using UnityEngine.UI;
 
 public class CombatUIWeaponSymbol : MonoBehaviour
 {
-    private enum SymbolType
-    {
-        Main,
-        LeftInactive,
-        RightInactive
-    }
+    
 
     public CombatUISymbolHolder symbolHolder;
     
@@ -24,7 +19,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
     public Image passiveImage;
 
     public TMP_Text selectedKeySymbolNumber;
-    [SerializeField]private SymbolType symbolType;
+    [SerializeField]private WeaponSymbolType weaponSymbolType;
     
     protected Sprite currentlySelectedUltSymbol;
     protected Sprite currentlySelectedNormalSymbol;
@@ -62,21 +57,21 @@ public class CombatUIWeaponSymbol : MonoBehaviour
         CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
         CombatUIWeaponHandler.onStartingWeaponSet -= OnCurrentWeaponUpdated;
     }
-    private void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
+    private void OnCurrentWeaponUpdated(WeaponType mainWeaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
     {
-        switch (symbolType)
+        switch (weaponSymbolType)
         {
-            case SymbolType.Main:
+            case WeaponSymbolType.Main:
             {
-                SetMainWeaponType(weaponType);
+                SetMainWeaponType(mainWeaponType);
                 break;
             }    
-            case SymbolType.LeftInactive:
+            case WeaponSymbolType.LeftInactive:
             {
                 SetInactiveWeaponType(currentLeftInactiveWeapon);
                 break;
             } 
-            case SymbolType.RightInactive:
+            case WeaponSymbolType.RightInactive:
             {
                 SetInactiveWeaponType(currentRightInactiveWeapon);
                 break;

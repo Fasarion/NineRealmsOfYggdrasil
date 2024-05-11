@@ -15,8 +15,15 @@ public class NotificationMVC : MonoBehaviour
     
     public const string ExperienceInfoChanged = "levelProgressBar.experienceInfoChanged";
 
-    public const string UltimateUsed = "gameplay.ultimateUsed";
-    public const string WeaponSetup = "gameplay.weaponSetup";
+    public const string UltimateUsedUltIcons = "ultIconds.ultimateUsed";
+    public const string WeaponSetupUltIcons= "ultIcons.weaponSetup";
+    public const string WeaponSetupWeaponHandler = "weaponHandler.weaponSetup";
+    public const string WeaponSwitchedWeaponHandler = "weaponHandler.weaponSwitched";
+    
+    public const string WeaponSymbolCurrentWeaponUpdated = "weaponSymbol.weaponUpdated";
+    //public const string WeaponSymbolStartingWeaponSet = "weaponSymbol.startingWeaponSet";
+    
+    
 
 
 }

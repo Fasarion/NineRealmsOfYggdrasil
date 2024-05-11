@@ -18,12 +18,10 @@ public class BirdMovementAuthoring : MonoBehaviour
 public struct BirdMovementComponent : IComponentData
 {
     public float CurrentTValue;
-    public float3 initialDirection;
 
     public float TimeToComplete;
 
     public float2 startPoint;
     public float2 controlPoint1;
     public float2 controlPoint2;
-    public float2 endPoint;
 }

@@ -25,7 +25,7 @@ public partial struct BirdNormalAttackSystem : ISystem
         
         state.RequireForUpdate<PlayerTag>();
         
-        state.RequireForUpdate<BirdsMovementSettingsComponent>();
+        state.RequireForUpdate<BirdNormalAttackConfig>();
     }
 
     [BurstCompile]
@@ -43,10 +43,13 @@ public partial struct BirdNormalAttackSystem : ISystem
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         var playerLTW = SystemAPI.GetComponent<LocalToWorld>(playerEntity);
         var ltwMatrix = playerLTW.Value;
+        
+        var birdSettings = SystemAPI.GetSingleton<BirdNormalAttackConfig>(); 
 
         // Spawn projectiles
-        foreach (var (birdSettings, transform, spawner, entity) in SystemAPI
-            .Query<BirdsMovementSettingsComponent, LocalTransform, ProjectileSpawnerComponent>()
+        foreach (var (transform, spawner, weapon, entity) in SystemAPI
+            .Query<LocalTransform, ProjectileSpawnerComponent, WeaponComponent>()
+            .WithAll<BirdsComponent>()
             .WithEntityAccess())
         {
             // bool that is used to decide which point that the bird should go to first
@@ -77,8 +80,6 @@ public partial struct BirdNormalAttackSystem : ISystem
             // set control points for bird
             BirdMovementComponent birdMovement = new BirdMovementComponent
             {
-                initialDirection = direction,
-
                 startPoint = playerPos2d,
                 controlPoint1 = startWithPoint1 ? controlPoint1 : controlPoint2,
                 controlPoint2 = startWithPoint1 ? controlPoint2 : controlPoint1,
@@ -86,10 +87,7 @@ public partial struct BirdNormalAttackSystem : ISystem
                 TimeToComplete = birdSettings.timeToCompleteMovement,
             };
             state.EntityManager.SetComponentData(birdProjectile, birdMovement);
-
-            // fetch owner data
-            var weapon = state.EntityManager.GetComponentData<WeaponComponent>(entity);
-
+            
             // set owner data
             state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
             {

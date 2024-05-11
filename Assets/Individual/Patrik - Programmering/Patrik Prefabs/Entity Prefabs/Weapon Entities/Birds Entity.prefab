@@ -11,14 +11,12 @@ GameObject:
   - component: {fileID: 2023467383046642818}
   - component: {fileID: 9058226766176258591}
   - component: {fileID: 7968933164686976673}
-  - component: {fileID: 2330487836709808048}
   - component: {fileID: 6378360401926587234}
   - component: {fileID: 1874418875601952184}
   - component: {fileID: 5666488964864685074}
   - component: {fileID: 8276797358757782502}
   - component: {fileID: 4259606365192864958}
   - component: {fileID: 2498903212905155995}
-  - component: {fileID: 3445083464943055323}
   - component: {fileID: 6375175589878924650}
   - component: {fileID: 3119685610685938515}
   - component: {fileID: 3088979196697891026}
@@ -98,7 +96,7 @@ MonoBehaviour:
     m_Template: {fileID: 0}
     m_CollisionResponse:
       m_Override: 0
-      m_Value: 3
+      m_Value: 254
     m_Friction:
       m_Override: 0
       m_Value:
@@ -115,7 +113,7 @@ MonoBehaviour:
         Category00: 0
         Category01: 0
         Category02: 0
-        Category03: 1
+        Category03: 0
         Category04: 0
         Category05: 0
         Category06: 0
@@ -148,7 +146,7 @@ MonoBehaviour:
       m_Override: 0
       m_Value:
         Category00: 0
-        Category01: 1
+        Category01: 0
         Category02: 0
         Category03: 0
         Category04: 0
@@ -243,18 +241,6 @@ MonoBehaviour:
     Tag05: 0
     Tag06: 0
     Tag07: 0
---- !u!114 &2330487836709808048
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8896407907922882422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6378360401926587234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,25 +328,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveFillPerHit: 2
   activeFillPerHit: 5
---- !u!114 &3445083464943055323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8896407907922882422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ef0078a01094115add37040593be669, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  audioData:
-    AudioEnumValue: 0
-    eventCategoryType: 4
-    weaponType: 1
-    enemyTyping: 0
-    audioEventType: 1
-    attackType: 0
 --- !u!114 &6375175589878924650
 MonoBehaviour:
   m_ObjectHideFlags: 0

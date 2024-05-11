@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 2.5
-  KnockDirection: 2
+  KnockDirection: 0
 --- !u!114 &5666488964864685074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,13 +423,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda46782265b4e099f2b3c7cad71feba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToCompleteMotion: 1
-  controlPoint1:
-    x: 20
-    y: 15
-  controlPoint2:
-    x: -20
-    y: 15
 --- !u!114 &6368701291099728357
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -10,4 +10,5 @@ public class ModelMVC : MonoBehaviour
     public CombatUIUltIconsModel ultIconsModel;
     public CombatUIWeaponHandlerModel weaponHandlerModel;
     public List<CombatUIWeaponSymbolModel> combatUIWeaponSymbolModels;
+    public CombatUIMainWeaponSymbolModel mainWeaponSymbolModel;
 }

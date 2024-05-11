@@ -16,7 +16,7 @@ public class CombatUIWeaponSymbolController : BaseControllerMVC
                 var weaponSymbolModel = (CombatUIWeaponSymbolModel)p_target;
                 foreach (var combatUIWeaponSymbolView in app.view.combatUIWeaponSymbolViews)
                 {
-                    var modelIdentifier = (string) p_data[0];
+                    var modelIdentifier = (string)p_data[0];
                    
                     var viewIdentifier = combatUIWeaponSymbolView.identifier;
                     if (modelIdentifier == viewIdentifier)

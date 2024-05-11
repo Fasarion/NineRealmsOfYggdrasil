@@ -13,4 +13,5 @@ public class ViewMVC : ElementMVC
     public CombatUISymbolHolderView symbolHolderView;
     public CombatUIObjectiveCounterView objectiveCounterView;
     public List<CombatUIWeaponSymbolView> combatUIWeaponSymbolViews;
+    public CombatUIMainWeaponSymbolView combatUIMainWeaponSymbolView;
 }

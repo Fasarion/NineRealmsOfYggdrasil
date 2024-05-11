@@ -22,8 +22,10 @@ public class NotificationMVC : MonoBehaviour
     
     public const string WeaponSymbolCurrentWeaponUpdated = "weaponSymbol.weaponUpdated";
     //public const string WeaponSymbolStartingWeaponSet = "weaponSymbol.startingWeaponSet";
-    
-    
+
+    public const string MainWeaponSetup = "mainWeaponSymbol.setup";
+
+
 
 
 }

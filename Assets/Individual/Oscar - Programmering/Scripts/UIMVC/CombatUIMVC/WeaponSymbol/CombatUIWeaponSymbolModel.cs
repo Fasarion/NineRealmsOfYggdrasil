@@ -21,13 +21,13 @@ public class CombatUIWeaponSymbolModel : ElementMVC
     public Sprite currentlySelectedPassiveSymbol;
     public void OnEnable()
     {
-        CombatUIWeaponHandler.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onStartingWeaponSet += OnCurrentWeaponUpdated;
     }
 
     private void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
     {
-        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this, weaponType, currentLeftInactiveWeapon, currentRightInactiveWeapon);
+        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,weaponType, currentLeftInactiveWeapon, currentRightInactiveWeapon);
     }
 
     public void OnDisable()

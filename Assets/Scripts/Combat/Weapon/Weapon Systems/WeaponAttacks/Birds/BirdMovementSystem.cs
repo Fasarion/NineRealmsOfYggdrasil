@@ -13,7 +13,7 @@ public partial struct BirdMovementSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<PlayerPositionSingleton>();
-        state.RequireForUpdate<BirdMovementComponent>();
+        state.RequireForUpdate<BirdNormalMovementComponent>();
     }
     
     [BurstCompile]
@@ -23,7 +23,7 @@ public partial struct BirdMovementSystem : ISystem
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value.xz;
         
         foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+            .Query<RefRW<BirdNormalMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             if (birdMovement.ValueRO.CurrentTValue <= 0)

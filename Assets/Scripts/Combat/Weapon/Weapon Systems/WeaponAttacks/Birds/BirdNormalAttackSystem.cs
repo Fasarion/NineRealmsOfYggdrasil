@@ -78,7 +78,7 @@ public partial struct BirdNormalAttackSystem : ISystem
             var controlPoint2 = math.mul(ltwMatrix, localControlPoint2).xz;
 
             // set control points for bird
-            BirdMovementComponent birdMovement = new BirdMovementComponent
+            BirdNormalMovementComponent birdNormalMovement = new BirdNormalMovementComponent
             {
                 startPoint = playerPos2d,
                 controlPoint1 = startWithPoint1 ? controlPoint1 : controlPoint2,
@@ -86,7 +86,7 @@ public partial struct BirdNormalAttackSystem : ISystem
                 
                 TimeToComplete = birdSettings.timeToCompleteMovement,
             };
-            state.EntityManager.SetComponentData(birdProjectile, birdMovement);
+            state.EntityManager.SetComponentData(birdProjectile, birdNormalMovement);
             
             // set owner data
             state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon

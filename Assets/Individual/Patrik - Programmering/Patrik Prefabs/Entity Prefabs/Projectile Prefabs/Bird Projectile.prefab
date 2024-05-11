@@ -20,13 +20,11 @@ GameObject:
   - component: {fileID: 4045521414853887161}
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
-  - component: {fileID: 4093539533502221201}
   - component: {fileID: 8608429267351938146}
   - component: {fileID: 1698868910996974481}
   - component: {fileID: 7606487378320408976}
   - component: {fileID: 4541722141291179754}
   - component: {fileID: 8674425715204942967}
-  - component: {fileID: 3713363055240044725}
   m_Layer: 0
   m_Name: Bird Projectile
   m_TagString: Untagged
@@ -361,21 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4093539533502221201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDistance: 1
-  maxDistance: 0
-  fov: 180
 --- !u!114 &8608429267351938146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -438,18 +421,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6ed8db80dfba6149b0f4d46f54e8fc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &3713363055240044725
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a87ec59bbbf448c9331496c24c3e1ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &9154957868230197866

@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class NotificationMVC : MonoBehaviour
 {
-    public const string BallHitGround = "ball.hit.ground";
-    public const string GameComplete = "game.complete";
-    public const string GameStart = "game.start";
-    public const string SceneLoad = "scene.load";
+
     public const string SetFlashingBoxColor = "flashingBox.setColor";
     
     public const string SetHealthModel = "healthBar.setHealth";
@@ -25,6 +22,10 @@ public class NotificationMVC : MonoBehaviour
 
     public const string MainWeaponSetup = "mainWeaponSymbol.setup";
 
+
+    public const string UltimateProgressBarWeaponSetup = "ultimateProgressBar.weaponSetup";
+    public const string UltimateProgressBarWeaponUpdated = "ultmateProgressBar.weaponUpdated";
+    public const string UltimateProgressBarEnergyChanged = "ultmateProgressBar.energyChanged";
 
 
 

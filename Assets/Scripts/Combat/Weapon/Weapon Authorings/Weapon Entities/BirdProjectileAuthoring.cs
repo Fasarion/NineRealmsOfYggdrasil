@@ -12,16 +12,21 @@ public class BirdProjectileAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
+            // bird projectile tag
             AddComponent(entity, new BirdProjectileComponent());
+            
+            // movement components
             AddComponent(entity, new BirdNormalMovementComponent());
+            SetComponentEnabled<BirdNormalMovementComponent>(entity, false);
         }
     }
 }
 
 public struct BirdProjectileComponent : IComponentData{}
 
-public struct BirdNormalMovementComponent : IComponentData
+public struct BirdNormalMovementComponent : IComponentData, IEnableableComponent
 {
+    public bool HasResetHitBuffer;
     public float CurrentTValue;
 
     public float TimeToComplete;

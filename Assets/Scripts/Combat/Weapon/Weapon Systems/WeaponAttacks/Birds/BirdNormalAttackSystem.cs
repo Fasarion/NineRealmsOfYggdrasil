@@ -87,7 +87,11 @@ public partial struct BirdNormalAttackSystem : ISystem
                 TimeToComplete = birdSettings.timeToCompleteMovement,
             };
             state.EntityManager.SetComponentData(birdProjectile, birdNormalMovement);
+            state.EntityManager.SetComponentEnabled<BirdNormalMovementComponent>(birdProjectile, true);
             
+            // disable auto move
+            state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
+
             // set owner data
             state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
             {

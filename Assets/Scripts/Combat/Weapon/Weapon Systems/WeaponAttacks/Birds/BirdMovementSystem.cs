@@ -1,4 +1,5 @@
-﻿using Movement;
+﻿using Damage;
+using Movement;
 using Player;
 using Unity.Burst;
 using Unity.Entities;
@@ -24,16 +25,22 @@ public partial struct BirdMovementSystem : ISystem
         
         foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
             .Query<RefRW<BirdNormalMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+            .WithNone<AutoMoveComponent>()
             .WithEntityAccess())
         {
-            if (birdMovement.ValueRO.CurrentTValue <= 0)
-            {
-                state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, false);
-            }
-            else if (birdMovement.ValueRO.CurrentTValue > 1)
+            // disable this move behaviour when bird has completed its curve
+            if (birdMovement.ValueRO.CurrentTValue > 1)
             {
                 state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, true);
                 continue;
+            }
+            
+            // reset hit buffer halfway through motion so bird can damage enemies on the way back
+            if (!birdMovement.ValueRO.HasResetHitBuffer && birdMovement.ValueRO.CurrentTValue > 0.5f)
+            {
+                var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
+                hitBuffer.Clear();
+                birdMovement.ValueRW.HasResetHitBuffer = true;
             }
             
             birdMovement.ValueRW.CurrentTValue += deltaTime / birdMovement.ValueRO.TimeToComplete;

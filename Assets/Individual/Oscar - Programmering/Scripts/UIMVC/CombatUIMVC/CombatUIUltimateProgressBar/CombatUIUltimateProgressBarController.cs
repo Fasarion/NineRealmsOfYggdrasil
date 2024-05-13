@@ -89,22 +89,22 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
         {
             case WeaponType.Hammer:
             {
-                ultimateProgressBarModel.currentEnergy = ultimateProgressBarView.energyData.hammerCurrentEnergy;
-                ultimateProgressBarModel.maxEnergy =  ultimateProgressBarView.energyData.hammerMaxEnergy;
+                ultimateProgressBarModel.currentEnergy = ultimateProgressBarModel.energyData.hammerCurrentEnergy;
+                ultimateProgressBarModel.maxEnergy =  ultimateProgressBarModel.energyData.hammerMaxEnergy;
                         
                 break;
             }
             case WeaponType.Sword:
             {
-                ultimateProgressBarModel.currentEnergy =  ultimateProgressBarView.energyData.swordCurrentEnergy;
-                ultimateProgressBarModel.maxEnergy =  ultimateProgressBarView.energyData.swordMaxEnergy;
+                ultimateProgressBarModel.currentEnergy =  ultimateProgressBarModel.energyData.swordCurrentEnergy;
+                ultimateProgressBarModel.maxEnergy =  ultimateProgressBarModel.energyData.swordMaxEnergy;
 
                 break;
             }
             case WeaponType.Birds:
             {
-                ultimateProgressBarModel.currentEnergy =  ultimateProgressBarView.energyData.birdCurrentEnergy;
-                ultimateProgressBarModel.maxEnergy =  ultimateProgressBarView.energyData.birdMaxEnergy;
+                ultimateProgressBarModel.currentEnergy =  ultimateProgressBarModel.energyData.birdCurrentEnergy;
+                ultimateProgressBarModel.maxEnergy =  ultimateProgressBarModel.energyData.birdMaxEnergy;
 
                 break;
             }

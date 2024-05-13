@@ -9,5 +9,5 @@ public class CombatUIUltimateProgressBarView : ElementMVC
 
     public WeaponSymbolType symbolType;
     
-    public CombatUIEnergyData energyData;
+    
 }

@@ -287,6 +287,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 61382021038800747, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: chargeStageBuffs.Array.data[0].RangeModifier
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61382021038800747, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: chargeStageBuffs.Array.data[1].RangeModifier
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 61382021038800747, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: chargeStageBuffs.Array.data[2].RangeModifier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: spawningCheckpoints.Array.size

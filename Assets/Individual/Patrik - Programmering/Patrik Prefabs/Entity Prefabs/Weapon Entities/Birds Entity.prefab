@@ -25,8 +25,8 @@ GameObject:
   - component: {fileID: 7514640210241842317}
   - component: {fileID: 2505072333343794121}
   - component: {fileID: 7466375490567166985}
-  - component: {fileID: 504190414280214143}
   - component: {fileID: 7111714050978543598}
+  - component: {fileID: 6368701291099728357}
   m_Layer: 0
   m_Name: Birds Entity
   m_TagString: Untagged
@@ -443,19 +443,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
---- !u!114 &504190414280214143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8896407907922882422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc49a81778dbbe48af695aa9d18f362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stacksPerHit: 1
 --- !u!114 &7111714050978543598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -468,3 +455,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bda46782265b4e099f2b3c7cad71feba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6368701291099728357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8896407907922882422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f9a11865114d5c8b91b2ee672d192e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7824363987953266496, guid: 3a00998723f2fe948a3de14e20caed47,
+    type: 3}

@@ -28,7 +28,7 @@ namespace Damage
             var hitTriggerJob = new DetectHitTriggerJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
-                HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
+                TriggerComponentLookup = SystemAPI.GetComponentLookup<TriggerComponent>(),
                 TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
             };
 
@@ -40,23 +40,24 @@ namespace Damage
     public struct DetectHitTriggerJob : ITriggerEventsJob
     {
         public BufferLookup<HitBufferElement> HitBufferLookup;
-        [ReadOnly] public ComponentLookup<CurrentHpComponent> HitPointsLookup;
+        [ReadOnly] public ComponentLookup<TriggerComponent> TriggerComponentLookup;
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         
         public void Execute(TriggerEvent triggerEvent)
         {
             Entity triggerEntity;
             Entity hitEntity;
+
+            // Debug.Log("Trigger event");
             
             // Figure out which entity is the trigger and which entity is the hit entity
             // If there are not exactly 1 of each, this is not a valid trigger event for this case, return from job
-            if (HitBufferLookup.HasBuffer(triggerEvent.EntityA) && HitPointsLookup.HasComponent(triggerEvent.EntityB))
+            if (HitBufferLookup.HasBuffer(triggerEvent.EntityA) && !TriggerComponentLookup.HasComponent(triggerEvent.EntityB))
             {
                 triggerEntity = triggerEvent.EntityA;
                 hitEntity = triggerEvent.EntityB;
             }
-            else if (HitBufferLookup.HasBuffer(triggerEvent.EntityB) &&
-                     HitPointsLookup.HasComponent(triggerEvent.EntityA))
+            else if (HitBufferLookup.HasBuffer(triggerEvent.EntityB) && !TriggerComponentLookup.HasComponent(triggerEvent.EntityA))
             {
                 triggerEntity = triggerEvent.EntityB;
                 hitEntity = triggerEvent.EntityA;

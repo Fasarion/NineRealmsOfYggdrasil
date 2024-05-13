@@ -164,7 +164,7 @@ MonoBehaviour:
         Category00: 0
         Category01: 0
         Category02: 1
-        Category03: 0
+        Category03: 1
         Category04: 0
         Category05: 0
         Category06: 0
@@ -266,7 +266,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  m_GravityFactor: 1
+  m_GravityFactor: 0
   m_OverrideDefaultMassDistribution: 0
   m_CenterOfMass:
     x: 0
@@ -462,5 +462,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2
-  criticalChance: 0
+  attackDamage: 5
+  criticalChance: 0.1

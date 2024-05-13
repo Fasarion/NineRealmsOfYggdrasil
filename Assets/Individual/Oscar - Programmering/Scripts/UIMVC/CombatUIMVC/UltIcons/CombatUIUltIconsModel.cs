@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class CombatUIUltIconsModel : ElementMVC
 {
-    public List<CombatUIUltWeaponReadyHolder> ultWeaponReadyHolders;
+    
     [NonSerialized]public List<WeaponType> weaponTypes;
-    public CombatUISymbolHolder SymbolHolder;
+   
     public int activeUltCounter;
     [NonSerialized]public int symbolCounter;
     
@@ -38,11 +38,11 @@ public class CombatUIUltIconsModel : ElementMVC
 
     private void OnUltimate(WeaponType weaponType, float currentEnergy, float maxEnergy)
     {
-        app.Notify(NotificationMVC.UltimateUsed, this,  weaponType, currentEnergy, maxEnergy);
+        app.Notify(NotificationMVC.UltimateUsedUltIcons, this,  weaponType, currentEnergy, maxEnergy);
     }
     private void OnWeaponSetup(WeaponBehaviour weaponBehaviour, bool activeWeapon)
     {
-        app.Notify(NotificationMVC.WeaponSetup, this,  weaponBehaviour, activeWeapon);
+        app.Notify(NotificationMVC.WeaponSetupUltIcons, this,  weaponBehaviour, activeWeapon);
     }
 
     

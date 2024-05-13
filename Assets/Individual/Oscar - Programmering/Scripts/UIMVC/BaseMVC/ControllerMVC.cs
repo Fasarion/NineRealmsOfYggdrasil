@@ -8,5 +8,10 @@ public class ControllerMVC : MonoBehaviour
     public HealthBarController healthBarController;
     public LevelProgressBarController levelProgressBarController;
     public CombatUIUltIconsController ultIconsController;
+    public CombatUIWeaponHandlerController weaponHandlerController;
+    public CombatUIWeaponSymbolController weaponSymbolController;
+    public CombatUIMainWeaponSymbolController mainWeaponSymbolController;
+    public CombatUIUltimateProgressBarController combatUIUltimateProgressBarController;
+
 
 }

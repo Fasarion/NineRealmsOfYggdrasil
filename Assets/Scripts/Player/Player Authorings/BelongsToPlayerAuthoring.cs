@@ -10,7 +10,7 @@ namespace Player
             public override void Bake(BelongsToPlayerAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent<BelongsToPlayerTag>();
+                AddComponent<BelongsToPlayerTag>(entity);
             }
         }
     }

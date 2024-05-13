@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-public class CombatUIObjectiveCounter : MonoBehaviour
+public class CombatUIObjectiveCounterView : ElementMVC
 {
     //This is so very hacky.
     public ObjectiveObjectUIElementBehaviour objectiveObjectUIElementBehaviour;

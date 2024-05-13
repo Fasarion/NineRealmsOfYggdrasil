@@ -11,6 +11,8 @@ using Weapon;
 
 public partial struct BirdSpecialAttackSystem : ISystem
 {
+    private int cachedChargeLevel;
+    
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -22,6 +24,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
         state.RequireForUpdate<PlayerTag>();
         
         state.RequireForUpdate<BirdsSpecialAttackConfig>();
+
+        cachedChargeLevel = -1;
     }
 
     [BurstCompile]
@@ -53,16 +57,15 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     // instantiate bird
                     var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
                     
-                    // get spawn position
+                    // // get spawn position
                     float angle = math.radians(config.ValueRO.AngleStep * i);
                     float x = playerPos.x + config.ValueRO.Radius * math.cos(angle);
                     float z = playerPos.z + config.ValueRO.Radius * math.sin(angle);
                     float3 spawnPosition = new float3(x, playerPos.y, z);
                     
                     // get rotation
-                    float tangentAngle = angle + math.PI / 2f; // Adding PI/2 to get perpendicular tangent angle
-                    quaternion rotation = quaternion.RotateY(tangentAngle); // Calculate the rotation quaternion based on the tangent angle
-
+                    quaternion rotation = quaternion.RotateY(-angle); 
+                    
                     // update transform
                     var birdTransform = transform;
                     birdTransform.Rotation = rotation;
@@ -81,22 +84,50 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     
                     // set special movement
                     state.EntityManager.SetComponentEnabled<BirdSpecialMovementComponent>(birdProjectile, true);
+                    state.EntityManager.SetComponentData(birdProjectile, new BirdSpecialMovementComponent
+                    {
+                        CurrentTValue = angle,
+                        CurrentAngle = angle,
+                        Radius = config.ValueRO.Radius,
+                        AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
+                        BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge
+                    });
                 }
             }
         }
         
-        if (currentChargeState == ChargeState.Ongoing)
+        if (currentChargeState == ChargeState.Ongoing && chargeInfo.Level > cachedChargeLevel)
         {
-           // Debug.Log("Spin slowly...");
+            cachedChargeLevel = chargeInfo.Level;
+
+            var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
+            var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
+
+            float speedModifier = speedBuffer[cachedChargeLevel].Value.DuringChargeBuff;
             
-            // TODO: check for new charge level, increase speed
+            foreach (var (birdMovement,  entity) in SystemAPI
+                .Query<RefRW<BirdSpecialMovementComponent>>()
+                .WithEntityAccess())
+            {
+                birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+            }
         }
         
         if (currentChargeState == ChargeState.Stop)
         {
-            //Debug.Log("Release special!");
+            cachedChargeLevel = chargeInfo.Level;
+
+            var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
+            var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
+
+            float speedModifier = speedBuffer[cachedChargeLevel].Value.AfterReleaseBuff;
             
-            // TODO: increase stats depending on released charge level
+            foreach (var (birdMovement,  entity) in SystemAPI
+                .Query<RefRW<BirdSpecialMovementComponent>>()
+                .WithEntityAccess())
+            {
+                birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+            }
         }
     }
 }

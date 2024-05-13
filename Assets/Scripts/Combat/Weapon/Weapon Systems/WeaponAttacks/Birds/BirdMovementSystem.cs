@@ -21,8 +21,10 @@ public partial struct BirdMovementSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var deltaTime = SystemAPI.Time.DeltaTime;
-        var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value.xz;
+        var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
+        var playerPos2D = playerPos.xz;
         
+        // normal attack movement
         foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
             .Query<RefRW<BirdNormalMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithNone<AutoMoveComponent>()
@@ -48,7 +50,7 @@ public partial struct BirdMovementSystem : ISystem
             float2 start = birdMovement.ValueRO.startPoint;
             float2 control1 = birdMovement.ValueRO.controlPoint1;
             float2 control2 = birdMovement.ValueRO.controlPoint2;
-            float2 end = playerPos;
+            float2 end = playerPos2D;
             
             float2 cubicPos = EvaluateCubicBezier(ref state, start, control1, control2, end, birdMovement.ValueRO.CurrentTValue);
             float2 tangent = EvaluateCubicBezierDerivative(ref state, start, control1, control2, end, birdMovement.ValueRO.CurrentTValue);
@@ -62,6 +64,27 @@ public partial struct BirdMovementSystem : ISystem
             float t = 0.5f;
             transform.ValueRW.Rotation = math.slerp(transform.ValueRO.Rotation, targetRotation, t);
             direction.ValueRW.Value = directionValue;
+        }
+
+        // special attack movement
+        foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
+            .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+            .WithNone<AutoMoveComponent>()
+            .WithEntityAccess())
+        {
+            // move transform in circle
+            float angle = birdMovement.ValueRO.CurrentAngle;
+            float x = playerPos.x + birdMovement.ValueRO.Radius * math.cos(angle);
+            float z = playerPos.z + birdMovement.ValueRO.Radius * math.sin(angle);
+            float3 targetPosition = new float3(x, playerPos.y, z);
+            transform.ValueRW.Position = targetPosition;
+            
+            // rotate transform
+            quaternion rotation = quaternion.RotateY(-angle);
+            transform.ValueRW.Rotation = rotation;
+            
+            // set new angle
+            birdMovement.ValueRW.CurrentAngle += deltaTime * birdMovement.ValueRO.AngularSpeed;
         }
     }
     

@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Hammer lvl 13
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: +5 base atk
+  upgradeDescription: +30% Area Effect
   upgrades:
   - thingToUpgrade: 4
-    valueToUpgrade: 0
-    valueAmount: 5
+    valueToUpgrade: 4
+    valueAmount: 0.3
   startUnlocked: 0
   upgradeIndex: 3
   isUnlocked: 0

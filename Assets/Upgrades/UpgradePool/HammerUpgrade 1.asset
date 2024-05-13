@@ -14,11 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Hammer lvl 3
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: Hammer ult will stunn enemies for longer
+  upgradeDescription: 'Hammer ult will stunn enemies for longer
+
+
+    +5 Atk'
   upgrades:
   - thingToUpgrade: 6
-    valueToUpgrade: 21
+    valueToUpgrade: 24
     valueAmount: 0.2
+  - thingToUpgrade: 4
+    valueToUpgrade: 0
+    valueAmount: 5
   startUnlocked: 0
   upgradeIndex: 1
   isUnlocked: 0

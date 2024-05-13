@@ -14,8 +14,6 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
         {
             animatorReference.Animator.SetInteger("enemyTypeID", (int)enemyAnimatorController.EnemyType);
             state.EntityManager.SetComponentEnabled<HasSetupEnemyAnimator>(entity, true);
-            
-            Debug.Log("Setup animator");
         }
         
         // fire animation
@@ -25,7 +23,6 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
             .WithAll<HasSetupEnemyAnimator, ShouldSpawnProjectile>())
         {
             animatorReference.Animator.SetTrigger("enemyAttack");
-            Debug.Log("attack");
         }
     }
 }

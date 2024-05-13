@@ -12,7 +12,6 @@ public partial struct SpawnProjectilesSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<HammerComponent>();
     }
     
     [BurstCompile]

@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 40
+  damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumDistanceForMoving: 0
+  awayFromPlayerMoveSpeed: 0.5
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,7 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 2
+  speedValue: 2.3
 --- !u!114 &5432305332946967007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -357,9 +359,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damageContents:
     DamageValue: 2
-    DamageType: 0
     CriticalRate: 0
-    CriticalModifier: 0
 --- !u!114 &4663337924807953367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,6 +375,11 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 8870220498742206646, guid: 0b664a3c25f353f428c79d4b91a5ff2a,
     type: 3}
   followsEntity: 1
+  followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &6445979045985948300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,6 +420,7 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 0
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 1
     audioEventType: 0
+    attackType: 0

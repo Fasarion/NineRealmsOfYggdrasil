@@ -18,6 +18,10 @@ public partial struct SteerToTargetSystem : ISystem
             if (transformLookup.TryGetComponent(moveToTarget.TargetEntity, out var targetPosition))
             {
                 direction.ValueRW.Value = math.normalizesafe(targetPosition.Position - transform.Position);
+                
+                // var directionValue = math.normalizesafe(targetPosition.Position - transform.Position);
+                // directionValue.y = 0;
+                // direction.ValueRW.Value = math.normalizesafe(directionValue);
             }
         }
     }

@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 8608429267351938146}
   - component: {fileID: 1698868910996974481}
   - component: {fileID: 7606487378320408976}
+  - component: {fileID: 4541722141291179754}
+  - component: {fileID: 8674425715204942967}
   m_Layer: 0
   m_Name: Bird Projectile
   m_TagString: Untagged
@@ -41,7 +43,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3022543917206607091}
@@ -113,7 +115,7 @@ MonoBehaviour:
         Category00: 0
         Category01: 0
         Category02: 1
-        Category03: 0
+        Category03: 1
         Category04: 0
         Category05: 0
         Category06: 0
@@ -215,7 +217,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  m_GravityFactor: 1
+  m_GravityFactor: 0
   m_OverrideDefaultMassDistribution: 0
   m_CenterOfMass:
     x: 0
@@ -280,7 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 3
+  maxHP: 10
   damageReductionValue: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
@@ -344,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 2
+  knockBackForce: 3
   KnockDirection: 0
 --- !u!114 &8116207207063421910
 MonoBehaviour:
@@ -370,9 +372,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minDistance: 0.5
-  maxDistance: 10
-  fov: 135
+  minDistance: 1
+  maxDistance: 5
+  fov: 180
 --- !u!114 &8608429267351938146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +415,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 5
   criticalChance: 0.1
+--- !u!114 &4541722141291179754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdf8663a06bbce049964ae5c460759b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8674425715204942967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7824363987953266496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6ed8db80dfba6149b0f4d46f54e8fc3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &9154957868230197866
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -474,6 +500,16 @@ PrefabInstance:
     - target: {fileID: 6268669835423078041, guid: 0086763608893b147843bf970d846536,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626476421094103901, guid: 0086763608893b147843bf970d846536,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8054760036015489491, guid: 0086763608893b147843bf970d846536,
+        type: 3}
+      propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

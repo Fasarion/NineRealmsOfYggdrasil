@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BirdsAuthoring : MonoBehaviour
 {
-    class Baker : Baker<HammerAuthoring>
+    class Baker : Baker<BirdsAuthoring>
     {
-        public override void Bake(HammerAuthoring authoring)
+        public override void Bake(BirdsAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             

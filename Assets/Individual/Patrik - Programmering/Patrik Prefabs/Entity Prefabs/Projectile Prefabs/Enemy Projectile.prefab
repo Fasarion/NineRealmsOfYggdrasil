@@ -250,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccea9ea98e38942e0b0938c27ed1903e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MotionType: 1
+  m_MotionType: 0
   m_Smoothing: 0
   m_Mass: 1
   m_LinearDamping: 0.01
@@ -263,7 +263,7 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
-  m_GravityFactor: 1
+  m_GravityFactor: 0
   m_OverrideDefaultMassDistribution: 0
   m_CenterOfMass:
     x: 0
@@ -315,6 +315,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alwaysMoveForward: 1
+  rotationLerpSpeed: 0.5
 --- !u!114 &4896915462185973973
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -328,6 +329,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 1
+  damageReductionValue: 1
 --- !u!114 &2200917143035241133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -353,9 +355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageContents:
-    DamageValue: 1
-    CriticalRate: 0
 --- !u!114 &7899796359273220732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -394,7 +393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 0
-  knockAwayFromPlayer: 0
+  KnockDirection: 0
 --- !u!114 &8116207207063421910
 MonoBehaviour:
   m_ObjectHideFlags: 0

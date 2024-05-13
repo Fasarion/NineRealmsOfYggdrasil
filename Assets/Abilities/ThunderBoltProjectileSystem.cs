@@ -13,6 +13,8 @@ using UnityEngine;
 [BurstCompile]
 [UpdateAfter(typeof(ThunderBoltAbilitySystem))]
 [UpdateBefore(typeof(HitStopSystem))]
+[UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
+[UpdateInGroup(typeof(CombatSystemGroup))]
 public partial struct ThunderBoltProjectileSystem : ISystem
 {
     private CollisionFilter _detectionFilter;

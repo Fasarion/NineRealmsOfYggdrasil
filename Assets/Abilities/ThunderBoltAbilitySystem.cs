@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Damage;
 using Destruction;
 using Player;
 using Unity.Burst;
@@ -9,6 +10,8 @@ using Unity.Transforms;
 using UnityEngine;
 
 [BurstCompile]
+[UpdateInGroup(typeof(CombatSystemGroup))]
+[UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
 public partial struct ThunderBoltAbilitySystem : ISystem
 {
     [BurstCompile]

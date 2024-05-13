@@ -134,6 +134,9 @@ public struct SpawningTimerCheckpointStruct
     public List<CheckpointDataStruct> CheckpointEnemyData;
 
     public int timerCutoffTime;
+
+    public int minSpawnCount;
+    public int maxSpawnCount;
 }
 
 [System.Serializable]

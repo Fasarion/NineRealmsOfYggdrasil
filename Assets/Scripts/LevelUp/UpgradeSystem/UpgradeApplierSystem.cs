@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Damage;
 using Movement;
 using Player;
 using Unity.Entities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]

@@ -77,6 +77,10 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                 {
                     foreach (var hit in hits)
                     {
+                        if (state.EntityManager.HasComponent<HasBeenThunderStruckComponent>(hit.Entity)) continue;
+                        
+                        ecb.AddComponent<HasBeenThunderStruckComponent>(hit.Entity);
+                        
                         if (ability.ValueRO.CurrentStrikeCheckpoint == 0)
                         {
                             ability.ValueRW.OgStrikePosition = hit.Position;

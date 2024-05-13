@@ -12,6 +12,7 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateInGroup(typeof(CombatSystemGroup))]
 [UpdateBefore(typeof(HitStopSystem))]
 [UpdateBefore(typeof(HandleHitBufferSystem))]
 [BurstCompile]

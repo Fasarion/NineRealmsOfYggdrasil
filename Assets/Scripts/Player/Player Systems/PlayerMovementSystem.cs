@@ -22,6 +22,7 @@ namespace Player
             state.RequireForUpdate<PlayerTag>(); 
             state.RequireForUpdate<PlayerPositionSingleton>(); 
             state.RequireForUpdate<PlayerMoveInput>();
+            state.RequireForUpdate<WeaponAttackCaller>();
         }
     
         public void OnUpdate(ref SystemState state)
@@ -31,6 +32,7 @@ namespace Player
             var dashInput = SystemAPI.GetSingleton<PlayerDashInput>();
             var dashConfig = SystemAPI.GetSingletonRW<PlayerDashConfig>();
             var dashTimer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<PlayerDashConfig>());
+            var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
             
             foreach (var (playerTransform, speedComp, animatorReference, gameObjectAnimator, velocity) 
                 in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, AnimatorReference, GameObjectAnimatorPrefab, RefRW<PhysicsVelocity>>()
@@ -52,6 +54,17 @@ namespace Player
                 
                 playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
                 
+                // don't dash if busy
+                if (attackCaller.BusyAttackInfo.Busy) continue;
+
+                if (dashInput.KeyDown)
+                {
+                    PlayerWeaponManagerBehaviour.Instance.transform.forward = moveInputVec3;
+                    PlayerWeaponManagerBehaviour.Instance.Dash();
+                }
+
+                return;
+                
                 // Check for dash input - and apply dash force
                 if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
                 {
@@ -63,6 +76,8 @@ namespace Player
                     velocity.ValueRW.Linear += (float3)moveInputVec3 * dashConfig.ValueRO.DashForce;
                     
                     gameObjectAnimator.FollowEntity = true;
+                    
+                    
                 }
                 
                 dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;

@@ -408,8 +408,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 2
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!206 &-8073332817160045575
 BlendTree:
@@ -465,8 +466,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-7938902471973135437
 AnimatorStateTransition:
@@ -578,8 +580,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 1
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-7658689600377118451
 AnimatorStateTransition:
@@ -1242,8 +1245,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 1
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-6160543981302225793
 AnimatorStateTransition:
@@ -1468,8 +1472,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 1
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-5281859173526259389
 AnimatorStateTransition:
@@ -2095,8 +2100,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 1
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-3363469656619445860
 AnimatorStateTransition:
@@ -2184,8 +2190,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 1
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 1
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-3183677775682878041
 AnimatorStateTransition:
@@ -2259,8 +2266,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 1
 --- !u!1101 &-2612998681584883193
 AnimatorStateTransition:
@@ -2411,8 +2419,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 2
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!114 &-2088736477309611289
 MonoBehaviour:
@@ -2449,8 +2458,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 1
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 1
   SetNone: 0
 --- !u!1102 &-1991024926579543574
 AnimatorState:
@@ -2578,8 +2588,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 1
 --- !u!114 &-1368754071134552831
 MonoBehaviour:
@@ -2815,8 +2826,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-414673136897783429
 AnimatorStateTransition:
@@ -2937,8 +2949,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!206 &-67626493629174962
 BlendTree:
@@ -3217,8 +3230,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!114 &563458380572461410
 MonoBehaviour:
@@ -4028,8 +4042,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &2194048212276282114
 AnimatorStateTransition:
@@ -5089,8 +5104,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 1
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 1
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!206 &5720019784403115605
 BlendTree:
@@ -5570,8 +5586,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 1
 --- !u!1101 &7066006546077778245
 AnimatorStateTransition:
@@ -6098,8 +6115,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 1
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 1
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &8781693462292616521
 AnimatorStateTransition:
@@ -6171,8 +6189,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 2
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!114 &9097188883659741230
 MonoBehaviour:

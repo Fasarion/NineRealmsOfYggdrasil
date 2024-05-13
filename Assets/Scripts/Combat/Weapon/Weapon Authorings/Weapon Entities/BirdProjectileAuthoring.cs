@@ -18,6 +18,9 @@ public class BirdProjectileAuthoring : MonoBehaviour
             // movement components
             AddComponent(entity, new BirdNormalMovementComponent());
             SetComponentEnabled<BirdNormalMovementComponent>(entity, false);
+            
+            AddComponent(entity, new BirdSpecialMovementComponent());
+            SetComponentEnabled<BirdSpecialMovementComponent>(entity, false);
         }
     }
 }
@@ -34,4 +37,8 @@ public struct BirdNormalMovementComponent : IComponentData, IEnableableComponent
     public float2 startPoint;
     public float2 controlPoint1;
     public float2 controlPoint2;
+}
+
+public struct BirdSpecialMovementComponent : IComponentData, IEnableableComponent
+{
 }

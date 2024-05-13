@@ -46,28 +46,30 @@ public partial struct BirdNormalAttackSystem : ISystem
         
         var birdSettings = SystemAPI.GetSingleton<BirdNormalAttackConfig>(); 
 
-        // Spawn projectiles
+        // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
         foreach (var (transform, spawner, weapon, entity) in SystemAPI
             .Query<LocalTransform, ProjectileSpawnerComponent, WeaponComponent>()
             .WithAll<BirdsComponent>()
             .WithEntityAccess())
         {
-            // bool that is used to decide which point that the bird should go to first
-            bool startWithPoint1 = lastIndex % 2 == 0;
-            
             // instantiate bird
             var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
 
-            // update direction
-            var direction = playerRot.Forward;
-            state.EntityManager.SetComponentData(birdProjectile,
-                new DirectionComponent(math.normalizesafe(direction)));
-            
             // update transform
             var birdTransform = transform;
             birdTransform.Rotation = playerRot.Value;
             birdTransform.Position = playerPos;
             state.EntityManager.SetComponentData(birdProjectile, birdTransform);
+            
+            // set owner data
+            state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
+            {
+                OwnerEntity = entity,
+                OwnerWasActive = weapon.InActiveState
+            });
+            
+            // disable auto move
+            state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
             
             // get movement control points
             float4 localControlPoint1 = birdSettings.controlPoint1;
@@ -76,6 +78,9 @@ public partial struct BirdNormalAttackSystem : ISystem
             // transform controls points to world space
             var controlPoint1 = math.mul(ltwMatrix, localControlPoint1).xz; 
             var controlPoint2 = math.mul(ltwMatrix, localControlPoint2).xz;
+            
+            // bool that is used to decide which point that the bird should go to first
+            bool startWithPoint1 = lastIndex % 2 == 0;
 
             // set control points for bird
             BirdNormalMovementComponent birdNormalMovement = new BirdNormalMovementComponent
@@ -89,16 +94,6 @@ public partial struct BirdNormalAttackSystem : ISystem
             state.EntityManager.SetComponentData(birdProjectile, birdNormalMovement);
             state.EntityManager.SetComponentEnabled<BirdNormalMovementComponent>(birdProjectile, true);
             
-            // disable auto move
-            state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
-
-            // set owner data
-            state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
-            {
-                OwnerEntity = entity,
-                OwnerWasActive = weapon.InActiveState
-            });
-
             // update last index
             lastIndex = (lastIndex + 1) % 2;
         }

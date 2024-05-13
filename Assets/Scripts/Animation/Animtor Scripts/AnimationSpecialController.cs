@@ -5,15 +5,21 @@ using UnityEngine;
 
 public class AnimationSpecialController : StateMachineBehaviour
 {
+   // TODO: refactor, make more general
+    
     [Header("Charge Level")]
     public bool setChargeLevel;
     public int chargeLevel;
 
-    [Header("Charge State")]
+    [Header("Charge State - On Start")]
     public bool InitializeChargeOnStart;
-    public bool EndChargeOnEnd;
+    public bool EndChargeOnStart;
 
+    [Header("Charge State - On Update")]
     public bool SetOngoing;
+    
+    [Header("Charge State - On Exit")]
+    public bool EndChargeOnEnd;
     public bool SetNone;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
@@ -22,6 +28,11 @@ public class AnimationSpecialController : StateMachineBehaviour
         if (InitializeChargeOnStart)
         {
             PlayerWeaponManagerBehaviour.Instance.SetCharge(ChargeState.Start);
+        }
+        
+        if (EndChargeOnStart)
+        {
+            PlayerWeaponManagerBehaviour.Instance.SetCharge(ChargeState.Stop);
         }
 
         if (setChargeLevel)

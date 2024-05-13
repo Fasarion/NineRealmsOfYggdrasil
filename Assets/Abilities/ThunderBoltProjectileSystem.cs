@@ -14,6 +14,7 @@ using UnityEngine;
 [UpdateAfter(typeof(ThunderBoltAbilitySystem))]
 [UpdateBefore(typeof(HitStopSystem))]
 [UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
+[UpdateBefore(typeof(ApplyDamageSystem))]
 [UpdateInGroup(typeof(CombatSystemGroup))]
 public partial struct ThunderBoltProjectileSystem : ISystem
 {

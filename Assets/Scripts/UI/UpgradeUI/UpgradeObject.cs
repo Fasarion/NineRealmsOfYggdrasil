@@ -40,6 +40,11 @@ public enum UpgradeValueTypes
     ultimateModifier,
     passiveModifier,
     
+    //elemental 
+    applyFire,
+    applyLightning,
+    applyIce,
+    
     Unlock,
     knockbackForce,
     hitStopDuration,

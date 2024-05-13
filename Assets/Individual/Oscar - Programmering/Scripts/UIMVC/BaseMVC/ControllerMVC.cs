@@ -11,6 +11,7 @@ public class ControllerMVC : MonoBehaviour
     public CombatUIWeaponHandlerController weaponHandlerController;
     public CombatUIWeaponSymbolController weaponSymbolController;
     public CombatUIMainWeaponSymbolController mainWeaponSymbolController;
+    public CombatUIUltimateProgressBarController combatUIUltimateProgressBarController;
 
 
 }

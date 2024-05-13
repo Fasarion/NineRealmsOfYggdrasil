@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Patrik;
@@ -10,20 +11,26 @@ public class CombatUIUltimateProgressBarModel : ElementMVC
   
     public float currentEnergy;
     public float maxEnergy;
-    
+    public CombatUIEnergyData energyData;
+
+    public void Start()
+    {
+        energyData = FindObjectOfType<CombatUIEnergyData>();
+    }
+
     public void OnEnable()
     {
         EventManager.OnEnergyChange += OnEnergyChange;
-        CombatUIWeaponHandler.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet += OnStartingWeaponsSet;
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onStartingWeaponSet += OnStartingWeaponsSet;
 
     }
     
     public void OnDisable()
     {
         EventManager.OnEnergyChange -= OnEnergyChange;
-        CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet -= OnStartingWeaponsSet;
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onStartingWeaponSet -= OnStartingWeaponsSet;
     }
 
     private void OnStartingWeaponsSet(WeaponType mainWeapon, WeaponType leftWeapon, WeaponType rightWeapon)

@@ -1,11 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Damage;
 using Movement;
 using Player;
 using Unity.Entities;
-using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]
@@ -186,6 +182,30 @@ public partial class UpgradeApplierSystem : SystemBase
                 var hitStopDuration = EntityManager.GetComponentData<ShouldApplyHitStopOnHit>(entity);
                 hitStopDuration.Duration += valueAmount;
                 EntityManager.SetComponentData(entity, hitStopDuration);
+                return;
+            
+            case UpgradeValueTypes.applyFire:
+                if (!EntityManager.HasComponent<ElementalShouldApplyFireComponent>(entity))
+                {
+                    EntityManager.AddComponent<ElementalShouldApplyFireComponent>(entity);
+                }
+
+                return;
+            
+            case UpgradeValueTypes.applyLightning:
+                if (!EntityManager.HasComponent<ElementalShouldApplyLightningComponent>(entity))
+                {
+                    EntityManager.AddComponent<ElementalShouldApplyLightningComponent>(entity);
+                }
+
+                return;
+            
+            case UpgradeValueTypes.applyIce:
+                if (!EntityManager.HasComponent<ElementalShouldApplyIceComponent>(entity))
+                {
+                    EntityManager.AddComponent<ElementalShouldApplyIceComponent>(entity);
+                }
+
                 return;
             
         }

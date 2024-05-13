@@ -31,7 +31,18 @@ public partial struct HammerPassiveAttackSystem : ISystem
             return;
         }
 
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var config = SystemAPI.GetSingleton<HammerPassiveAbilityConfig>();
         state.EntityManager.Instantiate(config.AbilityPrefab);
+
+        foreach (var (_, entity) in
+                 SystemAPI.Query<HasBeenThunderStruckComponent>()
+                     .WithEntityAccess())
+        {
+            ecb.RemoveComponent<HasBeenThunderStruckComponent>(entity);
+        }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

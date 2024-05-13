@@ -94,7 +94,6 @@ public partial struct IceRingSystem : ISystem
             float damageMod = 1;
             float rangeMod = 1;
             
-            
             // set correct charge values if in range
             if (chargeLevel < stageBuffer.Length)
             {
@@ -109,7 +108,6 @@ public partial struct IceRingSystem : ISystem
             var area = rangeMod;
 
             prevChargeLevel = chargeLevel;
-
 
             // //Charge behaviour
             // chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime * config.ValueRO.chargeSpeed;

@@ -393,6 +393,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResetPrepareOnEnter: 1
   ResetPrepareOnExit: 0
+--- !u!114 &-8080056816776269944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 1
+  chargeLevel: 2
+  InitializeChargeOnStart: 0
+  EndChargeOnStart: 0
+  SetOngoing: 0
+  EndChargeOnEnd: 0
+  SetNone: 0
 --- !u!206 &-8073332817160045575
 BlendTree:
   m_ObjectHideFlags: 1
@@ -432,6 +451,25 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!114 &-7997680482155254613
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 1
+  chargeLevel: 0
+  InitializeChargeOnStart: 0
+  EndChargeOnStart: 0
+  SetOngoing: 0
+  EndChargeOnEnd: 0
+  SetNone: 0
 --- !u!1101 &-7938902471973135437
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -527,6 +565,25 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!114 &-7674132799963554435
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 1
+  chargeLevel: 1
+  InitializeChargeOnStart: 0
+  EndChargeOnStart: 0
+  SetOngoing: 0
+  EndChargeOnEnd: 0
+  SetNone: 0
 --- !u!1101 &-7658689600377118451
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -555,6 +612,35 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-7652000384643475158
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Special - Charge 03
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -3587445536703984655}
+  - {fileID: -2612998681584883193}
+  m_StateMachineBehaviours:
+  - {fileID: -8080056816776269944}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-7641525271733653074
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -579,6 +665,35 @@ MonoBehaviour:
       Stop: 0
       TurnOff: 1
       movementInputState: 0
+--- !u!1102 &-7562744366014378172
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Special - Charge 01
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -6552810712259513792}
+  - {fileID: 5103667784951955967}
+  m_StateMachineBehaviours:
+  - {fileID: -7997680482155254613}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!206 &-7538224258711525732
 BlendTree:
   m_ObjectHideFlags: 1
@@ -951,6 +1066,59 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-6553129467889149313
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: attackSpecial
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: weaponID
+    m_EventTreshold: 2
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1007328128256860516}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.806701
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!1101 &-6552810712259513792
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: attackSpecial
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1991024926579543574}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!114 &-6513505197803499689
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1077,8 +1245,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 1
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-6160543981302225793
 AnimatorStateTransition:
@@ -1303,8 +1472,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 1
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-5281859173526259389
 AnimatorStateTransition:
@@ -1375,6 +1545,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5088062047854955633
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80064eb4b5cdc542a10ff83dc8e90a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 3
+  AttackType: 2
+  OnEnter:
+    TurnOn: 1
+    TurnOff: 0
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!1101 &-5056519389018304087
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1522,6 +1712,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &-4782926253179975622
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -7652000384643475158}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-4724958551997089180
 AnimatorState:
   serializedVersion: 6
@@ -1571,6 +1783,7 @@ AnimatorState:
   - {fileID: 4896131471848549954}
   - {fileID: 4201245769329687406}
   - {fileID: 2194048212276282114}
+  - {fileID: -6553129467889149313}
   m_StateMachineBehaviours:
   - {fileID: 776779298609342961}
   - {fileID: -3931597474496307145}
@@ -1755,6 +1968,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: movementSpeed
+--- !u!1101 &-3587445536703984655
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: attackSpecial
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1991024926579543574}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-3554939951369357926
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1822,6 +2060,50 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1101 &-3463689312827403762
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: attackSpecial
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1991024926579543574}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!114 &-3415191311191938055
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 0
+  chargeLevel: 0
+  InitializeChargeOnStart: 0
+  EndChargeOnStart: 1
+  SetOngoing: 0
+  EndChargeOnEnd: 0
+  SetNone: 0
 --- !u!1101 &-3363469656619445860
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1908,8 +2190,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 1
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 1
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-3183677775682878041
 AnimatorStateTransition:
@@ -1983,9 +2266,35 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 1
+--- !u!1101 &-2612998681584883193
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: holdChargeUntilRelease
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -1991024926579543574}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-2612259608182016069
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2110,8 +2419,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 2
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!114 &-2088736477309611289
 MonoBehaviour:
@@ -2148,9 +2458,38 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 1
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 1
   SetNone: 0
+--- !u!1102 &-1991024926579543574
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Special - Spin
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 2051922035768896685}
+  m_StateMachineBehaviours:
+  - {fileID: -3415191311191938055}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!206 &-1977290991297696202
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2249,8 +2588,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 1
 --- !u!114 &-1368754071134552831
 MonoBehaviour:
@@ -2398,6 +2738,35 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-1007328128256860516
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Special - Start
+  m_Speed: 100
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 8448345928244115160}
+  m_StateMachineBehaviours:
+  - {fileID: 5519237250280886169}
+  - {fileID: -5088062047854955633}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-748806717827877871
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2457,8 +2826,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &-414673136897783429
 AnimatorStateTransition:
@@ -2488,6 +2858,35 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-131442311968747450
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Special - Charge 02
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -3463689312827403762}
+  - {fileID: -4782926253179975622}
+  m_StateMachineBehaviours:
+  - {fileID: -7674132799963554435}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &-104809835182958714
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2550,8 +2949,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!206 &-67626493629174962
 BlendTree:
@@ -2830,8 +3230,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!114 &563458380572461410
 MonoBehaviour:
@@ -3400,16 +3801,34 @@ AnimatorStateMachine:
     m_Position: {x: -180, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1732618541862276972}
-    m_Position: {x: 960, y: 70, z: 0}
+    m_Position: {x: 1040, y: 150, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 4582951594367273246}
-    m_Position: {x: 1200, y: 70, z: 0}
+    m_Position: {x: 1280, y: 150, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1007328128256860516}
+    m_Position: {x: 1460, y: -60, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7562744366014378172}
+    m_Position: {x: 1470, y: -170, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -131442311968747450}
+    m_Position: {x: 1470, y: -250, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -7652000384643475158}
+    m_Position: {x: 1470, y: -320, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -1991024926579543574}
+    m_Position: {x: 1780, y: -250, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 8179129245653950406}
+    m_Position: {x: 1780, y: -20, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
-  m_AnyStatePosition: {x: 1400, y: -90, z: 0}
+  m_AnyStatePosition: {x: -160, y: 130, z: 0}
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 1650, y: 310, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
@@ -3558,6 +3977,28 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1101 &2051922035768896685
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 8179129245653950406}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &2091219570955458570
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3601,8 +4042,9 @@ MonoBehaviour:
   setChargeLevel: 0
   chargeLevel: 0
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &2194048212276282114
 AnimatorStateTransition:
@@ -4371,7 +4813,7 @@ BlendTree:
     m_DirectBlendParameter: attackSpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 986c40ebe16ac5c43bf765e238f20495, type: 2}
+    m_Motion: {fileID: 7400000, guid: 95a53f019a52817489b9671f3350ecb6, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -4625,6 +5067,47 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &5103667784951955967
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -131442311968747450}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
+--- !u!114 &5519237250280886169
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 1
+  chargeLevel: 0
+  InitializeChargeOnStart: 1
+  EndChargeOnStart: 0
+  SetOngoing: 1
+  EndChargeOnEnd: 0
+  SetNone: 0
 --- !u!206 &5720019784403115605
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4770,6 +5253,28 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!1101 &6190957529719488209
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4604101698856809079}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!206 &6206947633606461143
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4957,6 +5462,26 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6734513091711878890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80064eb4b5cdc542a10ff83dc8e90a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 0
+  AttackType: 0
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 1
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!206 &6790774014444331111
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4974,7 +5499,7 @@ BlendTree:
     m_DirectBlendParameter: attackSpeed
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: b6cab90db272fc141bc6ef5833b50787, type: 2}
+    m_Motion: {fileID: 7400000, guid: 5fea96718b77c324a919d5b248229ac2, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -4996,6 +5521,28 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1101 &6870421383741452677
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4604101698856809079}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0.4
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 2
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &6874867824497047270
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5024,6 +5571,25 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &7014087183317899602
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 992644b45755c5a45b856d17661f4679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  setChargeLevel: 0
+  chargeLevel: 0
+  InitializeChargeOnStart: 0
+  EndChargeOnStart: 0
+  SetOngoing: 0
+  EndChargeOnEnd: 0
+  SetNone: 1
 --- !u!1101 &7066006546077778245
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5429,6 +5995,57 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!1102 &8179129245653950406
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Special Recover
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 6190957529719488209}
+  m_StateMachineBehaviours:
+  - {fileID: 7014087183317899602}
+  - {fileID: 6734513091711878890}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
+--- !u!1101 &8448345928244115160
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -7562744366014378172}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.25
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &8474041132031230678
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5498,8 +6115,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 0
   InitializeChargeOnStart: 1
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 1
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!1101 &8781693462292616521
 AnimatorStateTransition:
@@ -5571,8 +6189,9 @@ MonoBehaviour:
   setChargeLevel: 1
   chargeLevel: 2
   InitializeChargeOnStart: 0
-  EndChargeOnEnd: 0
+  EndChargeOnStart: 0
   SetOngoing: 0
+  EndChargeOnEnd: 0
   SetNone: 0
 --- !u!114 &9097188883659741230
 MonoBehaviour:

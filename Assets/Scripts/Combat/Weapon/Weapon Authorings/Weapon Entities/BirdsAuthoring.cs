@@ -1,4 +1,6 @@
-﻿using Unity.Entities;
+﻿using System;
+using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BirdsAuthoring : MonoBehaviour
@@ -8,8 +10,7 @@ public class BirdsAuthoring : MonoBehaviour
         public override void Bake(BirdsAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            
-            AddComponent(entity, new BirdsComponent());
+            AddComponent(entity, new BirdsComponent{});
         }
     }
 }

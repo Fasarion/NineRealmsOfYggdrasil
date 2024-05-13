@@ -12,11 +12,11 @@ namespace Player
             public override void Bake(PlayerAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent<PlayerTag>();
-                AddComponent<PlayerPositionSingleton>();
-                AddComponent<PlayerRotationSingleton>();
+                AddComponent<PlayerTag>(entity);
+                AddComponent<PlayerPositionSingleton>(entity);
+                AddComponent<PlayerRotationSingleton>(entity);
                 
-                AddComponent<CanMoveFromInput>();
+                AddComponent<CanMoveFromInput>(entity);
             }
         }
     }

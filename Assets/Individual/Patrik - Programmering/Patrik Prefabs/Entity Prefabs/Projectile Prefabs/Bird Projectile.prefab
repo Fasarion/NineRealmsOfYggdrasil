@@ -20,7 +20,6 @@ GameObject:
   - component: {fileID: 4045521414853887161}
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
-  - component: {fileID: 4093539533502221201}
   - component: {fileID: 8608429267351938146}
   - component: {fileID: 1698868910996974481}
   - component: {fileID: 7606487378320408976}
@@ -255,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 20
+  speedValue: 30
 --- !u!114 &1404811906918814333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -296,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57b0fc3a8116264439a1093e275390a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeTime: 5
+  lifeTime: 3
 --- !u!114 &7135853917643872561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -347,7 +346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knockBackForce: 3
-  KnockDirection: 0
+  KnockDirection: 1
 --- !u!114 &8116207207063421910
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,21 +359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4093539533502221201
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minDistance: 1
-  maxDistance: 5
-  fov: 180
 --- !u!114 &8608429267351938146
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ using UnityEngine;
 
 [BurstCompile]
 [UpdateInGroup(typeof(CombatSystemGroup))]
+[UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
 public partial struct ThunderBoltAbilitySystem : ISystem
 {
     [BurstCompile]

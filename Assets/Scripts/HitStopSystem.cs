@@ -9,6 +9,7 @@ using UnityEngine;
 [BurstCompile]
 [UpdateBefore(typeof(HandleHitBufferSystem))]
 [UpdateInGroup(typeof(CombatSystemGroup))]
+[UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
 public partial struct HitStopSystem : ISystem
 {
     [BurstCompile]

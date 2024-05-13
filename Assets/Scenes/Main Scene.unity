@@ -226,6 +226,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 964053897892969286, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].minSpawnCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 964053897892969286, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
       propertyPath: SpawningCheckpoints.Array.data[1].maxSpawnCount
       value: 1
       objectReference: {fileID: 0}

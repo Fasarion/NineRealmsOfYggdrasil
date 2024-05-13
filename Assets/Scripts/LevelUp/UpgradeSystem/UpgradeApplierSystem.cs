@@ -184,6 +184,30 @@ public partial class UpgradeApplierSystem : SystemBase
                 EntityManager.SetComponentData(entity, hitStopDuration);
                 return;
             
+            case UpgradeValueTypes.applyFire:
+                if (!EntityManager.HasComponent<ElementalShouldApplyFireComponent>(entity))
+                {
+                    EntityManager.AddComponent<ElementalShouldApplyFireComponent>(entity);
+                }
+
+                return;
+            
+            case UpgradeValueTypes.applyLightning:
+                if (!EntityManager.HasComponent<ElementalShouldApplyLightningComponent>(entity))
+                {
+                    EntityManager.AddComponent<ElementalShouldApplyLightningComponent>(entity);
+                }
+
+                return;
+            
+            case UpgradeValueTypes.applyIce:
+                if (!EntityManager.HasComponent<ElementalShouldApplyIceComponent>(entity))
+                {
+                    EntityManager.AddComponent<ElementalShouldApplyIceComponent>(entity);
+                }
+
+                return;
+            
         }
     }
 

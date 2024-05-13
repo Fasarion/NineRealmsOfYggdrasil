@@ -115,12 +115,9 @@ public partial class SpawningInitializerSystem : SystemBase
         config.ValueRW.isInitialized = false;
         CheckpointDataStruct[] enemyInfo = checkpointData.CheckpointEnemyData.ToArray();
         var enemyPrefabsBuffer = SystemAPI.GetSingletonBuffer<EnemyEntityPrefabElement>(false);
-
-        if (checkpointData.maxSpawnCount != 0)
-        {
-            config.ValueRW.minEnemySpawnCount = checkpointData.minSpawnCount;
-            config.ValueRW.maxEnemySpawnCount = checkpointData.maxSpawnCount;
-        }
+        
+        config.ValueRW.minEnemySpawnCount = checkpointData.minSpawnCount;
+        config.ValueRW.maxEnemySpawnCount = checkpointData.maxSpawnCount;
 
         
         //reset values

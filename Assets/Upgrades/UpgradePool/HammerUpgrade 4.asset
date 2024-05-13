@@ -26,7 +26,8 @@ MonoBehaviour:
     valueToUpgrade: 4
     valueAmount: 0.3
   startUnlocked: 0
-  upgradeIndex: 3
+  upgradeIndex: 4
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 73db065b03e55a64a8a06dee4c03a514, type: 2}

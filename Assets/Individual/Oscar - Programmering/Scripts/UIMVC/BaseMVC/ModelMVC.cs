@@ -8,4 +8,8 @@ public class ModelMVC : MonoBehaviour
     public HealthBarModel healthBarModel;
     public LevelProgressBarModel progressBarModel;
     public CombatUIUltIconsModel ultIconsModel;
+    public CombatUIWeaponHandlerModel weaponHandlerModel;
+    public List<CombatUIWeaponSymbolModel> combatUIWeaponSymbolModels;
+    public CombatUIMainWeaponSymbolModel mainWeaponSymbolModel;
+    public List<CombatUIUltimateProgressBarModel> combatUIUltimateProgressBarModel;
 }

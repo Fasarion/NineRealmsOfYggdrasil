@@ -6,16 +6,10 @@ using UnityEngine.UI;
 
 public class CombatUIUltimateProgressBar : MonoBehaviour
 {
-    private enum SymbolType
-    {
-        Main,
-        LeftInactive,
-        RightInactive
-    }
-    
+
     public Slider slider;
 
-    [SerializeField]private SymbolType symbolType;
+    [SerializeField]private WeaponSymbolType symbolType;
     private WeaponType currentWeaponType;
 
   
@@ -36,17 +30,17 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
     {
         switch (symbolType)
         {
-            case SymbolType.Main:
+            case WeaponSymbolType.Main:
             {
                 currentWeaponType = mainWeapon;
                 break;
             }    
-            case SymbolType.LeftInactive:
+            case WeaponSymbolType.LeftInactive:
             {
                 currentWeaponType = leftWeapon;
                 break;
             } 
-            case SymbolType.RightInactive:
+            case WeaponSymbolType.RightInactive:
             {
                 currentWeaponType = rightWeapon;
                 break;
@@ -68,18 +62,18 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
         switch (symbolType)
         {
             
-            case SymbolType.Main:
+            case WeaponSymbolType.Main:
             {
                 
                 currentWeaponType = mainWeapon;
                 break;
             }    
-            case SymbolType.LeftInactive:
+            case WeaponSymbolType.LeftInactive:
             {
                 currentWeaponType = leftWeapon;
                 break;
             } 
-            case SymbolType.RightInactive:
+            case WeaponSymbolType.RightInactive:
             {
                 currentWeaponType = rightWeapon;
                 break;

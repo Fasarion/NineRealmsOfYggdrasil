@@ -4,11 +4,10 @@ using System.Collections.Generic;
 using Patrik;
 using UnityEngine;
 
-public class CombatUIWeaponHandler : MonoBehaviour
+public class CombatUIWeaponHandler : ElementMVC
 {
 
     public WeaponType currentWeapon;
-
     public WeaponType debugWeaponToUpdateTo;
     //WeaponType currentWeaponType;
     public CombatUIMainWeaponSymbol combatUIMainWeaponSymbol;
@@ -17,7 +16,6 @@ public class CombatUIWeaponHandler : MonoBehaviour
     public WeaponType currentRightInactiveWeapon;
 
     public static Action<WeaponType, WeaponType, WeaponType> onCurrentWeaponUpdated;
-
     public static Action<WeaponType, WeaponType, WeaponType> onStartingWeaponSet;
     //Placeholder for debugging purposes;
     //private WeaponType hammerWeapon = WeaponType.Hammer;

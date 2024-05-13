@@ -8,4 +8,11 @@ public class ViewMVC : ElementMVC
     public HealthBarView healthBarView;
     public LevelProgressBarView progressBarView;
     public CombatUIUltIconsView ultIconsView;
+    public List<CombatUIUltWeaponReadyHolderView> ultWeaponReadyHolderView;
+    public CombatUIWeaponHandlerView weaponHandlerView;
+    public CombatUISymbolHolderView symbolHolderView;
+    public CombatUIObjectiveCounterView objectiveCounterView;
+    public List<CombatUIWeaponSymbolView> combatUIWeaponSymbolViews;
+    public CombatUIMainWeaponSymbolView combatUIMainWeaponSymbolView;
+    public List<CombatUIUltimateProgressBarView> combatUIUltimateProgressBarViews;
 }

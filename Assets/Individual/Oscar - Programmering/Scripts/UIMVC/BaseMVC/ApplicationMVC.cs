@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class ApplicationMVC : MonoBehaviour
@@ -37,6 +38,7 @@ public class ApplicationMVC : MonoBehaviour
 }
 public class ElementMVC : MonoBehaviour
 {
+    public string identifier;
     public ApplicationMVC app => FindObjectOfType<ApplicationMVC>();
 }
 

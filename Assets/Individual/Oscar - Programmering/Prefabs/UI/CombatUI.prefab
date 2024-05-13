@@ -299,6 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8215a3c7202487d47ad2dae2913456c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identifier: 
   objectiveObjectUIElementBehaviour: {fileID: 0}
   text: {fileID: 1483550253810267081}
 --- !u!1 &845881367008346690
@@ -365,6 +366,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6054a0341df2bc45be92461f3a64fe5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  identifier: 
   currentWeapon: 2
   debugWeaponToUpdateTo: 4
   combatUIMainWeaponSymbol: {fileID: 2254418545055782144}
@@ -4312,7 +4314,7 @@ MonoBehaviour:
   specialImage: {fileID: 0}
   passiveImage: {fileID: 1011919569653425809}
   selectedKeySymbolNumber: {fileID: 6729304107482787173}
-  symbolType: 1
+  weaponSymbolType: 1
 --- !u!1 &6295502759047026530
 GameObject:
   m_ObjectHideFlags: 0
@@ -4739,7 +4741,7 @@ MonoBehaviour:
   specialImage: {fileID: 0}
   passiveImage: {fileID: 3661167418187313513}
   selectedKeySymbolNumber: {fileID: 1334151039380494463}
-  symbolType: 2
+  weaponSymbolType: 2
 --- !u!1 &6703584871799937905
 GameObject:
   m_ObjectHideFlags: 0
@@ -5755,7 +5757,7 @@ MonoBehaviour:
   specialImage: {fileID: 7024819419951450325}
   passiveImage: {fileID: 0}
   selectedKeySymbolNumber: {fileID: 6625699711919991577}
-  symbolType: 0
+  weaponSymbolType: 0
   baseScale: 1
   maxAnimatedScale: 1.2
   duration: 1

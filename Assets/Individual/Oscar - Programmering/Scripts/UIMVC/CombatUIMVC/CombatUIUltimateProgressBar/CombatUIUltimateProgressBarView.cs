@@ -8,6 +8,4 @@ public class CombatUIUltimateProgressBarView : ElementMVC
     public Slider slider;
 
     public WeaponSymbolType symbolType;
-    
-    
 }

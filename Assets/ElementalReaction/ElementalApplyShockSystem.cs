@@ -34,6 +34,11 @@ public partial struct ElementalApplyShockSystem : ISystem
             if (shockComponent.ValueRO.HasBeenApplied)
             {
                 ecb.RemoveComponent<ElementalShockEffectComponent>(affectedEntity);
+                ecb.AddComponent<ShouldChangeMaterialComponent>(affectedEntity);
+                ecb.SetComponent(affectedEntity, new ShouldChangeMaterialComponent
+                {
+                    MaterialType = MaterialType.BASEMATERIAL,
+                });
                 continue;
             }
 

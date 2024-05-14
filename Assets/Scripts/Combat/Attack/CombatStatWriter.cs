@@ -64,33 +64,7 @@ public partial struct CombatStatHandleSystem : ISystem
 
             currDamageComp.ValueRW.Value = damageContents;
         }
-        //
-        // // update knockback data [OLD]
-        // float totalKnockBack = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.KnockBack, combo);
-        //
-        // KnockBackForce knockBackComp = state.EntityManager.GetComponentData<KnockBackForce>(weaponEntity);
-        // knockBackComp.Value = totalKnockBack;
-        // state.EntityManager.SetComponentData(weaponEntity, knockBackComp);
-        //
-        // // update energy data  [OLD]
-        // float totalEnergyFill = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent,
-        //     attackType, CombatStatType.EnergyFillPerHit, combo);
-        // EnergyFillComponent energyFillComp =  state.EntityManager.GetComponentData<EnergyFillComponent>(weaponEntity);
-        // if (attackType == AttackType.Passive)
-        // {
-        //     energyFillComp.PassiveFillPerHit = totalEnergyFill;
-        // }
-        // else
-        // {
-        //     energyFillComp.ActiveFillPerHit = totalEnergyFill;
-        // }
-        // state.EntityManager.SetComponentData(weaponEntity, energyFillComp);
-        //
-        // // update area data  [OLD]
-        // float area = CombatStats.GetCombinedStatValue(playerStatsComponent, weaponStatsComponent, attackType, CombatStatType.Area, combo);
-        // AreaComponentData areaComponent = state.EntityManager.GetComponentData<AreaComponentData>(weaponEntity);
-        // areaComponent.Value = area;
-        // state.EntityManager.SetComponentData(weaponEntity, areaComponent);
+        
 
         statHandler.ValueRW.ShouldUpdateStats = false;
     }

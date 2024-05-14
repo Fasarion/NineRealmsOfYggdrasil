@@ -29,6 +29,12 @@ public partial struct HandleAnimationSystem : ISystem
                 Animator = gameObjectInstance.GetComponent<Animator>()
             };
             ecb.AddComponent(entity, animatorReference);
+
+            var rendererReference = new SkinnedMeshRendererReference()
+            {
+                Renderer = gameObjectInstance.GetComponentInChildren<SkinnedMeshRenderer>()
+            };
+            ecb.AddComponent(entity, rendererReference);
         }
         
         // sync animator transform with corresponding entity transform

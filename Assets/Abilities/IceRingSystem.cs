@@ -12,6 +12,7 @@ using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateBefore(typeof(AddKnockBackOnHitSystem))]
 [UpdateBefore(typeof(HitStopSystem))]
 [BurstCompile]
 public partial struct IceRingSystem : ISystem
@@ -22,6 +23,8 @@ public partial struct IceRingSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<SwordComponent>();
+        state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<IceRingAbility>();

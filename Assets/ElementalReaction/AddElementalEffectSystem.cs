@@ -67,12 +67,17 @@ public partial struct AddElementalEffectSystem : ISystem
                     {
                         ecb.AddComponent<ElementalFreezeEffectComponent>(hit.HitEntity);
                         stacks = 1;
+                        ecb.AddComponent<ShouldChangeMaterialComponent>(hit.HitEntity);
+                        ecb.SetComponent(hit.HitEntity, new ShouldChangeMaterialComponent
+                        {
+                            MaterialType = MaterialType.FrozenMaterial,
+                        });
                     }
                     else
                     {
                         stacks = state.EntityManager.GetComponentData<ElementalFreezeEffectComponent>(hit.HitEntity).Stacks +
                                  1;
-                        if (stacks > freezeConfig.MaxFreezeStacks) stacks = (int)freezeConfig.MaxFreezeStacks;
+                        if (stacks >= freezeConfig.MaxFreezeStacks) stacks = (int)freezeConfig.MaxFreezeStacks;
                     }
                     
                     ecb.SetComponent(hit.HitEntity, new ElementalFreezeEffectComponent
@@ -122,6 +127,11 @@ public partial struct AddElementalEffectSystem : ISystem
                     {
                         ecb.AddComponent<ElementalShockEffectComponent>(hit.HitEntity);
                         stacks = 1;
+                        ecb.AddComponent<ShouldChangeMaterialComponent>(hit.HitEntity);
+                        ecb.SetComponent(hit.HitEntity, new ShouldChangeMaterialComponent
+                        {
+                            MaterialType = MaterialType.ShockMaterial,
+                        });
                     }
                     else
                     {
@@ -177,6 +187,11 @@ public partial struct AddElementalEffectSystem : ISystem
                     {
                         ecb.AddComponent<ElementalBurnEffectComponent>(hit.HitEntity);
                         stacks = 1;
+                        ecb.AddComponent<ShouldChangeMaterialComponent>(hit.HitEntity);
+                        ecb.SetComponent(hit.HitEntity, new ShouldChangeMaterialComponent
+                        {
+                            MaterialType = MaterialType.BurnMaterial,
+                        });
                     }
                     else
                     {

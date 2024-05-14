@@ -115,8 +115,10 @@ public partial struct BirdSpecialAttackSystem : ISystem
             }
         }
         
+        // During Charge Up
         if (currentChargeState == ChargeState.Ongoing)
         {
+            // 
             float nextRadius = config.ValueRO.CurrentRadius +
                                config.ValueRO.RadiusIncreaseSpeed * SystemAPI.Time.DeltaTime;
             

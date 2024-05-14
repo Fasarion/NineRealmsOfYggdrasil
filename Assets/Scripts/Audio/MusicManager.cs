@@ -14,14 +14,17 @@ public class MusicManager : MonoBehaviour
     public StudioEventEmitter menuMusic;
     public StudioEventEmitter levelMusic;
 
-	private int currentStage = 0;
+    private int nextStage = 1;
     public int enemyCountStageOne;
-    /*public int enemyCountStageTwo;
-    public int enemyCountStageThree;*/
+    public int enemyCountStageTwo;
+    public int enemyCountStageThree;
+    private int nextStageCount;
+    
     // Start is called before the first frame update
     void Start()
     {
         levelMusic.Play();
+        SetNextStageCount(nextStage);
     }
 
     private void OnEnable()
@@ -41,16 +44,43 @@ public class MusicManager : MonoBehaviour
     private void RecieveEnemyCountData(int count)
     {
         _enemyCount = count;
-        if (_enemyCount > enemyCountStageOne)
+        if (_enemyCount > nextStageCount)
         {
-            levelMusic.SetParameter("EnemyCountStage", 1);
+            levelMusic.SetParameter("EnemyCountStage", nextStage);
+            nextStage++;
+            SetNextStageCount(nextStage++);
         }
-        else if (_enemyCount < enemyCountStageOne)
+      
+    }
+
+    private void SetNextStageCount(int nextStage)
+    {
+        switch (nextStage)
         {
-            levelMusic.SetParameter("EnemyCountStage", 0);
+            case 1:
+            {
+                nextStageCount = enemyCountStageOne;
+                break;
+            }
+            case 2:
+            {
+                nextStageCount = enemyCountStageTwo;
+                break;
+            }
+            case 3:
+            {
+                nextStageCount = enemyCountStageThree;
+                break;
+            }
         }
     }
 
+    public void ResetEnemyCountStage()
+    {
+        nextStage = 1;
+        SetNextStageCount(nextStage);
+        levelMusic.SetParameter("EnemyCountStage", 0);
+    }
     // Update is called once per frame
     public void Play(StudioEventEmitter emitter)
     {

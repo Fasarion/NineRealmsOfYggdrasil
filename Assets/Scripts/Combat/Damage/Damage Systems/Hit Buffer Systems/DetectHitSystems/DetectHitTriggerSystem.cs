@@ -28,7 +28,8 @@ namespace Damage
             var hitTriggerJob = new DetectHitTriggerJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
-                TriggerComponentLookup = SystemAPI.GetComponentLookup<TriggerComponent>(),
+                TriggerComponentLookup = SystemAPI.GetComponentLookup<HitTriggerComponent>(),
+                TriggerTargetLookup = SystemAPI.GetComponentLookup<HitTriggerTargetComponent>(),
                 TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
             };
 
@@ -40,7 +41,10 @@ namespace Damage
     public struct DetectHitTriggerJob : ITriggerEventsJob
     {
         public BufferLookup<HitBufferElement> HitBufferLookup;
-        [ReadOnly] public ComponentLookup<TriggerComponent> TriggerComponentLookup;
+        
+        [ReadOnly] public ComponentLookup<HitTriggerComponent> TriggerComponentLookup;
+        [ReadOnly] public ComponentLookup<HitTriggerTargetComponent> TriggerTargetLookup;
+        
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         
         public void Execute(TriggerEvent triggerEvent)
@@ -52,12 +56,14 @@ namespace Damage
             
             // Figure out which entity is the trigger and which entity is the hit entity
             // If there are not exactly 1 of each, this is not a valid trigger event for this case, return from job
-            if (HitBufferLookup.HasBuffer(triggerEvent.EntityA) && !TriggerComponentLookup.HasComponent(triggerEvent.EntityB))
+            if (TriggerComponentLookup.HasComponent(triggerEvent.EntityA) && HitBufferLookup.HasBuffer(triggerEvent.EntityA) &&
+                TriggerTargetLookup.HasComponent(triggerEvent.EntityB))
             {
                 triggerEntity = triggerEvent.EntityA;
                 hitEntity = triggerEvent.EntityB;
             }
-            else if (HitBufferLookup.HasBuffer(triggerEvent.EntityB) && !TriggerComponentLookup.HasComponent(triggerEvent.EntityA))
+            else if (TriggerComponentLookup.HasComponent(triggerEvent.EntityB) && HitBufferLookup.HasBuffer(triggerEvent.EntityB) &&
+                     TriggerTargetLookup.HasComponent(triggerEvent.EntityA))
             {
                 triggerEntity = triggerEvent.EntityB;
                 hitEntity = triggerEvent.EntityA;

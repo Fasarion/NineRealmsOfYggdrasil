@@ -44,3 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cd1400654251bc45b320293ae11fed1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  angularSpeedBuffs:
+  - DuringChargeBuff: 1
+    AfterReleaseBuff: 1
+  - DuringChargeBuff: 1.5
+    AfterReleaseBuff: 1.5
+  - DuringChargeBuff: 2
+    AfterReleaseBuff: 2
+  baseAngularSpeedDuringCharge: 2
+  baseAngularSpeedAfterRelease: 5
+  birdCount: 2
+  radius: 5

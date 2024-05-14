@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 8574011558162687106}
   - component: {fileID: 3599724072978458201}
   - component: {fileID: 7258435272100316143}
+  - component: {fileID: 210615204525852091}
   m_Layer: 0
   m_Name: Player Entity Patrik
   m_TagString: Untagged
@@ -441,6 +442,7 @@ MonoBehaviour:
     weaponType: 0
     enemyTyping: 0
     audioEventType: 0
+    attackType: 0
 --- !u!114 &3282528094519435972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -523,3 +525,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+--- !u!114 &210615204525852091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6353328540331355661}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasHitBuffer: 1
+  isHitTrigger: 0
+  isHitTriggerTarget: 1
+  isHitCollider: 1
+  isHitColliderTarget: 1

@@ -253,6 +253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 5
+  damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,6 +266,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasHitBuffer: 1
+  isHitTrigger: 0
+  isHitTriggerTarget: 1
+  isHitCollider: 1
+  isHitColliderTarget: 0
 --- !u!114 &1570689716404177242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -330,6 +336,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumDistanceForMoving: 0
+  awayFromPlayerMoveSpeed: 0.5
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +380,11 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 8870220498742206646, guid: 85f8ae73d3e8c414abb63eb724883f6b,
     type: 3}
   followsEntity: 1
+  followsChild: 0
+  animatorSpawnPosition:
+    x: 0
+    y: 1000
+    z: 0
 --- !u!114 &6445979045985948300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,6 +425,7 @@ MonoBehaviour:
   audioData:
     AudioEnumValue: 0
     eventCategoryType: 2
-    environmentType: 0
+    weaponType: 0
     enemyTyping: 1
     audioEventType: 1
+    attackType: 0

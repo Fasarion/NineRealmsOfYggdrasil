@@ -7,14 +7,14 @@ using UnityEngine;
 public class TriggerComponentAuthoring : MonoBehaviour
 {
     
-     class Baker : Baker<TriggerComponentAuthoring>
-    {
-        public override void Bake(TriggerComponentAuthoring authoring)
-        {
-            var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new TriggerComponent());
-        }
-    }
+    //  class Baker : Baker<TriggerComponentAuthoring>
+    // {
+    //     public override void Bake(TriggerComponentAuthoring authoring)
+    //     {
+    //         var entity = GetEntity(TransformUsageFlags.Dynamic);
+    //         AddComponent(entity, new TriggerComponent());
+    //     }
+    // }
 }
 
-public struct TriggerComponent : IComponentData{}
+// public struct TriggerComponent : IComponentData{}

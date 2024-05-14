@@ -327,6 +327,11 @@ namespace Patrik
             playerAnimator.SetFloat("movementSpeedX", localMovementVector.x);
             playerAnimator.SetFloat("movementSpeed", localMovementVector.y);
         }
+
+        public void Dash()
+        {
+            playerAnimator.SetTrigger("dashTrigger");
+        }
     }
 }
 

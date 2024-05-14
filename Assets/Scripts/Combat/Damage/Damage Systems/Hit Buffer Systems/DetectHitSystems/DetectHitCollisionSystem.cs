@@ -27,7 +27,9 @@ namespace Damage
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
                 HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
                 TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(),
-                InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityComponent>()
+                InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityComponent>(),
+                HitColliderLookup = SystemAPI.GetComponentLookup<HitColliderComponent>(),
+                HitColliderTargetLookup = SystemAPI.GetComponentLookup<HitColliderTargetComponent>(),
             };
 
             var simSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
@@ -43,6 +45,9 @@ namespace Damage
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         [ReadOnly] public ComponentLookup<InvincibilityComponent> InvincibilityLookup;
         
+        [ReadOnly] public ComponentLookup<HitColliderComponent> HitColliderLookup;
+        [ReadOnly] public ComponentLookup<HitColliderTargetComponent> HitColliderTargetLookup;
+        
         public void Execute(CollisionEvent collisionEvent)
         {
             Entity entityA = collisionEvent.EntityA;
@@ -53,12 +58,12 @@ namespace Damage
             
             // Figure out which entity is the trigger and which entity is the hit entity
             // If there are not exactly 1 of each, this is not a valid trigger event for this case, return from job
-            if (HitBufferLookup.HasBuffer(entityA) && HitPointsLookup.HasComponent(entityB))
+            if (HitBufferLookup.HasBuffer(entityA) && HitColliderLookup.HasComponent(entityA) && HitColliderTargetLookup.HasComponent(entityB))
             {
                 colliderEntity = entityA;
                 hitEntity = entityB;
             }
-            else if (HitBufferLookup.HasBuffer(entityB) && HitPointsLookup.HasComponent(entityA))
+            else if (HitBufferLookup.HasBuffer(entityB) && HitColliderLookup.HasComponent(entityB) && HitColliderTargetLookup.HasComponent(entityA))
             {
                 colliderEntity = entityB;
                 hitEntity = entityA;

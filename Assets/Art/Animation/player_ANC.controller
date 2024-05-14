@@ -2402,7 +2402,7 @@ MonoBehaviour:
   Contents:
     combo: 0
     OnEnter:
-      Begin: 0
+      Begin: 1
       Stop: 0
       TurnOff: 1
       movementInputState: 0
@@ -4568,9 +4568,9 @@ MonoBehaviour:
   Contents:
     combo: 0
     OnEnter:
-      Begin: 1
-      Stop: 0
-      TurnOff: 0
+      Begin: 0
+      Stop: 1
+      TurnOff: 1
       movementInputState: 0
     OnExit:
       Begin: 0

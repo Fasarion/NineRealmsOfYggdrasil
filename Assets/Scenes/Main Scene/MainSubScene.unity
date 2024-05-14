@@ -452,6 +452,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: initialStrikeDelay
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: timeBetweenStrikes
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive

@@ -17,7 +17,9 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
     [SerializeField] private float lifeTimeAfterRelease = 2f;
     
     [Header("Radius")]
-    [SerializeField] private float radius = 2f;
+    [SerializeField] private float initialRadius = 2f;
+    [SerializeField] private float targetRadius = 2f;
+    [SerializeField] private float radiusIncreaseSpeed;
     
 
     private void OnValidate()
@@ -37,7 +39,12 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
             AddComponent(entity, new BirdsSpecialAttackConfig
             {
                 BirdCount = authoring.birdCount,
-                Radius = authoring.radius,
+                
+                TargetRadius = authoring.targetRadius,
+                InitialRadius = authoring.initialRadius,
+                CurrentRadius = authoring.initialRadius,
+                RadiusIncreaseSpeed = authoring.radiusIncreaseSpeed,
+                
                 AngleStep = 360f / authoring.birdCount,
                 AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge,
                 AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease,
@@ -57,7 +64,12 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
 public struct BirdsSpecialAttackConfig : IComponentData
 {
     public int BirdCount;
-    public float Radius;
+    
+    public float CurrentRadius;
+    public float InitialRadius;
+    public float TargetRadius;
+    public float RadiusIncreaseSpeed;
+    
     public float AngleStep;
     public float AngularSpeedDuringCharge;
     public float AngularSpeedAfterRelease;

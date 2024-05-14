@@ -50,6 +50,6 @@ public struct BirdSpecialMovementComponent : IComponentData, IEnableableComponen
     public float AngularSpeed;
 
     public float AngleOfLastReset;
-    
-    //public bool On
+
+    public bool InUpperHalfCircle;
 }

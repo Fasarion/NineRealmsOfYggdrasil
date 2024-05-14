@@ -11,8 +11,6 @@ using Weapon;
 
 public partial struct BirdMovementSystem : ISystem
 {
-    private static readonly float HalfCircleDegrees = 180f;
-    
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -78,10 +76,13 @@ public partial struct BirdMovementSystem : ISystem
         {
             float angleLastFrame = birdSpecialMovement.ValueRO.CurrentAngle;
             
+            
             // move transform in circle
             float angle = birdSpecialMovement.ValueRO.CurrentAngle;
+            float sinY = math.sin(angle);
+            
             float x = playerPos.x + birdSpecialMovement.ValueRO.Radius * math.cos(angle);
-            float z = playerPos.z + birdSpecialMovement.ValueRO.Radius * math.sin(angle);
+            float z = playerPos.z + birdSpecialMovement.ValueRO.Radius * sinY;
             float3 targetPosition = new float3(x, playerPos.y, z);
             transform.ValueRW.Position = targetPosition;
             
@@ -92,13 +93,16 @@ public partial struct BirdMovementSystem : ISystem
             // set new angle
             var nextAngle = angleLastFrame + deltaTime * birdSpecialMovement.ValueRO.AngularSpeed;
             birdSpecialMovement.ValueRW.CurrentAngle = nextAngle;
+
+            bool wasInUpperCircle = birdSpecialMovement.ValueRO.InUpperHalfCircle;
+            bool nowInUpperCircle = sinY >= 0;
             
             // Reset hit buffer after every half lap
-            if (nextAngle < angleLastFrame)
+            if (nowInUpperCircle != wasInUpperCircle)
             {
                 var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
                 hitBuffer.Clear();
-                Debug.Log("Reset");
+                birdSpecialMovement.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
             }
             
             birdSpecialMovement.ValueRW.PreviousAngle = birdSpecialMovement.ValueRO.CurrentAngle;

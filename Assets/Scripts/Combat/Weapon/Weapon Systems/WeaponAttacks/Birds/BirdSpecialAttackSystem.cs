@@ -44,15 +44,14 @@ public partial struct BirdSpecialAttackSystem : ISystem
         {
             config.ValueRW.lifeTimeTimer += SystemAPI.Time.DeltaTime;
             
-
             if (config.ValueRO.lifeTimeTimer > config.ValueRO.LifeTimeAfterRelease)
             {
                 config.ValueRW.lifeTimeTimer = 0;
-                
                 config.ValueRW.InReleaseState = false;
-                
                 var attackCallerRW = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
                 attackCallerRW.ValueRW.ReturnWeapon = true;
+
+                config.ValueRW.CurrentRadius = config.ValueRO.InitialRadius;
             }
 
             return;
@@ -63,7 +62,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
         // Start charge up
         if (currentChargeState == ChargeState.Start)
         {
-            // Spawn birds evenly space around player
+            // Spawn birds evenly spaced around player
             for (int i = 0; i < config.ValueRO.BirdCount; i++)
             {
                 // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
@@ -77,8 +76,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     
                     // // get spawn position
                     float angle = math.radians(config.ValueRO.AngleStep * i);
-                    float x = playerPos.x + config.ValueRO.Radius * math.cos(angle);
-                    float z = playerPos.z + config.ValueRO.Radius * math.sin(angle);
+                    float x = playerPos.x + config.ValueRO.InitialRadius * math.cos(angle);
+                    float z = playerPos.z + config.ValueRO.InitialRadius * math.sin(angle);
                     float3 spawnPosition = new float3(x, playerPos.y, z);
                     
                     // get rotation
@@ -105,7 +104,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     state.EntityManager.SetComponentData(birdProjectile, new BirdSpecialMovementComponent
                     {
                         CurrentAngle = angle,
-                        Radius = config.ValueRO.Radius,
+                        Radius = config.ValueRO.InitialRadius,
                         AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
                         BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge
                     });
@@ -116,21 +115,37 @@ public partial struct BirdSpecialAttackSystem : ISystem
             }
         }
         
-        // On New Charge Level
-        if (currentChargeState == ChargeState.Ongoing && chargeInfo.Level > cachedChargeLevel)
+        if (currentChargeState == ChargeState.Ongoing)
         {
-            cachedChargeLevel = chargeInfo.Level;
-
-            var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
-            var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
-
-            float speedModifier = speedBuffer[cachedChargeLevel].Value.DuringChargeBuff;
+            float nextRadius = config.ValueRO.CurrentRadius +
+                               config.ValueRO.RadiusIncreaseSpeed * SystemAPI.Time.DeltaTime;
+            
+            var currentRadius = math.min(nextRadius, config.ValueRO.TargetRadius);
+            config.ValueRW.CurrentRadius = currentRadius;
             
             foreach (var (birdMovement,  entity) in SystemAPI
                 .Query<RefRW<BirdSpecialMovementComponent>>()
                 .WithEntityAccess())
             {
-                birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+                birdMovement.ValueRW.Radius = currentRadius;
+            }
+
+            // On New Charge Level
+            if (chargeInfo.Level > cachedChargeLevel)
+            {
+                cachedChargeLevel = chargeInfo.Level;
+
+                var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
+                var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
+
+                float speedModifier = speedBuffer[cachedChargeLevel].Value.DuringChargeBuff;
+            
+                foreach (var (birdMovement,  entity) in SystemAPI
+                    .Query<RefRW<BirdSpecialMovementComponent>>()
+                    .WithEntityAccess())
+                {
+                    birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+                }
             }
         }
         

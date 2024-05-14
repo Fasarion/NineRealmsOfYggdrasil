@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class CombatUIUltimateProgressBarModel : ElementMVC
 {
+    
     public WeaponType currentWeaponType;
     public float currentEnergy;
     public float maxEnergy;

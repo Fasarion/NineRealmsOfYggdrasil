@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
 using Patrik;
-using UnityEngine;
+using Object = UnityEngine.Object;
 
 public class CombatUIUltimateProgressBarController : BaseControllerMVC
 {
-    
+    public Action<float> onEnergyChanged;
+    public Action<float> onMaxEnergyChanged;
     public void OnEnable()
     {
         EventManager.OnEnergyChange += OnEnergyChange;
@@ -17,7 +18,7 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
 
     private void OnStartingWeaponsSet(WeaponType mainWeapon, WeaponType leftWeapon, WeaponType rightWeapon)
     {
-        for(int i = 0; i<app.view.combatUIUltimateProgressBarViews.Count; i++) 
+        for(int i = 0; i< app.view.combatUIUltimateProgressBarViews.Count; i++) 
         {
             var ultimateProgressBarView = app.view.combatUIUltimateProgressBarViews[i];
             for (int j = 0; j < app.model.combatUIUltimateProgressBarModel.Count; j++)

@@ -51,3 +51,8 @@ public class AnimatorReference : ICleanupComponentData
 {
     public Animator Animator;
 }
+
+public class SkinnedMeshRendererReference : ICleanupComponentData
+{
+    public SkinnedMeshRenderer Renderer;
+}

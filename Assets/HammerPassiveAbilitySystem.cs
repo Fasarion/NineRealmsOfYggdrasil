@@ -38,7 +38,7 @@ public partial struct HammerPassiveAbilitySystem : ISystem
     {   var config = SystemAPI.GetSingleton<HammerPassiveAbilityConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
-        var targetPositions = new NativeArray<float3>(config.StrikeCount, Allocator.Persistent);
+        //var targetPositions = new NativeArray<float3>(config.StrikeCount, Allocator.Persistent);
         var boltConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
 
         foreach (var (ability, timer, entity) in
@@ -53,7 +53,6 @@ public partial struct HammerPassiveAbilitySystem : ISystem
 
             if (!ability.ValueRO.HasFired)
             {
-                Debug.Log("Ability fire");
 
                 timer.ValueRW.currentTime = 0;
                 
@@ -70,8 +69,6 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                 else originPosition = ability.ValueRO.OgStrikePosition;
 
                 hits.Clear();
-                
-                
                 
                 if (collisionWorld.OverlapSphere(originPosition, totalArea,
                         ref hits, _detectionFilter))

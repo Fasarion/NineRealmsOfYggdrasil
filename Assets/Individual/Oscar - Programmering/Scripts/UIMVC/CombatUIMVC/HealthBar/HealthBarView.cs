@@ -13,7 +13,7 @@ public class HealthBarView : ElementMVC
     public TMP_Text healthText;
     public List<Sprite> sprites;
     
-
+    
     public void Awake()
     {
         app.Notify(NotificationMVC.HealthBarLevelsSetView, this, sprites);

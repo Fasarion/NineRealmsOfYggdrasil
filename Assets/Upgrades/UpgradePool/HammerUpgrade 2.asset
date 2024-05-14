@@ -19,11 +19,14 @@ MonoBehaviour:
     More lightnings strikes
 
 
-    3 hits -> 5 hits'
+    Faster Attacks'
   upgrades:
   - thingToUpgrade: 4
     valueToUpgrade: 13
     valueAmount: 2
+  - thingToUpgrade: 4
+    valueToUpgrade: 2
+    valueAmount: 0.1
   startUnlocked: 0
   upgradeIndex: 1
   isUnlocked: 0

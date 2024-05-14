@@ -20,12 +20,15 @@ MonoBehaviour:
     Lightning chains will increas their number of hits.
 
 
-    5
-    hits -> 7 hits'
+    AoE
+    +20%'
   upgrades:
   - thingToUpgrade: 4
     valueToUpgrade: 13
     valueAmount: 2
+  - thingToUpgrade: 4
+    valueToUpgrade: 4
+    valueAmount: 0.2
   startUnlocked: 0
   upgradeIndex: 3
   isUnlocked: 0

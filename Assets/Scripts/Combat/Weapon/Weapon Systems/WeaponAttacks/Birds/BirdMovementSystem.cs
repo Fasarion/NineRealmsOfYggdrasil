@@ -11,6 +11,8 @@ using Weapon;
 
 public partial struct BirdMovementSystem : ISystem
 {
+    private static readonly float HalfCircleDegrees = 180f;
+    
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -70,14 +72,14 @@ public partial struct BirdMovementSystem : ISystem
         }
 
         // special attack movement
-        foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
+        foreach (var (birdSpecialMovement, moveSpeed, transform, direction, entity) in SystemAPI
             .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             // move transform in circle
-            float angle = birdMovement.ValueRO.CurrentAngle;
-            float x = playerPos.x + birdMovement.ValueRO.Radius * math.cos(angle);
-            float z = playerPos.z + birdMovement.ValueRO.Radius * math.sin(angle);
+            float angle = birdSpecialMovement.ValueRO.CurrentAngle;
+            float x = playerPos.x + birdSpecialMovement.ValueRO.Radius * math.cos(angle);
+            float z = playerPos.z + birdSpecialMovement.ValueRO.Radius * math.sin(angle);
             float3 targetPosition = new float3(x, playerPos.y, z);
             transform.ValueRW.Position = targetPosition;
             
@@ -86,7 +88,15 @@ public partial struct BirdMovementSystem : ISystem
             transform.ValueRW.Rotation = rotation;
             
             // set new angle
-            birdMovement.ValueRW.CurrentAngle += deltaTime * birdMovement.ValueRO.AngularSpeed;
+            birdSpecialMovement.ValueRW.CurrentAngle += deltaTime * birdSpecialMovement.ValueRO.AngularSpeed;
+
+            // Reset hit buffer after every half lap
+            if (angle > birdSpecialMovement.ValueRO.AngleOfLastReset + HalfCircleDegrees)
+            {
+                var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
+                hitBuffer.Clear();
+                birdSpecialMovement.ValueRW.AngleOfLastReset = angle < HalfCircleDegrees ? angle : angle-HalfCircleDegrees;
+            }
         }
         
         ecb.Playback(state.EntityManager);

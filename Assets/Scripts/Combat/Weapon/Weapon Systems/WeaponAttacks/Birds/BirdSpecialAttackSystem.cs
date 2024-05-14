@@ -104,7 +104,6 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     state.EntityManager.SetComponentEnabled<BirdSpecialMovementComponent>(birdProjectile, true);
                     state.EntityManager.SetComponentData(birdProjectile, new BirdSpecialMovementComponent
                     {
-                        CurrentTValue = angle,
                         CurrentAngle = angle,
                         Radius = config.ValueRO.Radius,
                         AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,

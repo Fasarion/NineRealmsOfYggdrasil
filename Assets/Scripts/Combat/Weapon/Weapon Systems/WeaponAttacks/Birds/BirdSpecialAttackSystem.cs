@@ -100,13 +100,14 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
                     
                     // set special movement
-                    state.EntityManager.SetComponentEnabled<BirdSpecialMovementComponent>(birdProjectile, true);
-                    state.EntityManager.SetComponentData(birdProjectile, new BirdSpecialMovementComponent
+                    state.EntityManager.SetComponentEnabled<CircularMovementComponent>(birdProjectile, true);
+                    state.EntityManager.SetComponentData(birdProjectile, new CircularMovementComponent
                     {
                         CurrentAngle = angle,
                         Radius = config.ValueRO.InitialRadius,
                         AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
-                        BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge
+                        BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
+                        moveAroundType = CircularMovementComponent.MoveAroundType.Player
                     });
                 }
                 
@@ -118,7 +119,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
         // During Charge Up
         if (currentChargeState == ChargeState.Ongoing)
         {
-            // 
+            // update radius
             float nextRadius = config.ValueRO.CurrentRadius +
                                config.ValueRO.RadiusIncreaseSpeed * SystemAPI.Time.DeltaTime;
             
@@ -126,7 +127,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
             config.ValueRW.CurrentRadius = currentRadius;
             
             foreach (var (birdMovement,  entity) in SystemAPI
-                .Query<RefRW<BirdSpecialMovementComponent>>()
+                .Query<RefRW<CircularMovementComponent>>()
                 .WithEntityAccess())
             {
                 birdMovement.ValueRW.Radius = currentRadius;
@@ -143,7 +144,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
                 float speedModifier = speedBuffer[cachedChargeLevel].Value.DuringChargeBuff;
             
                 foreach (var (birdMovement,  entity) in SystemAPI
-                    .Query<RefRW<BirdSpecialMovementComponent>>()
+                    .Query<RefRW<CircularMovementComponent>>()
                     .WithEntityAccess())
                 {
                     birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
@@ -164,7 +165,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
             float speedModifier = speedBuffer[cachedChargeLevel].Value.AfterReleaseBuff;
             
             foreach (var (birdMovement,  entity) in SystemAPI
-                .Query<RefRW<BirdSpecialMovementComponent>>()
+                .Query<RefRW<CircularMovementComponent>>()
                 .WithEntityAccess())
             {
                 birdMovement.ValueRW.BaseAngularSpeed = config.ValueRO.AngularSpeedAfterRelease;

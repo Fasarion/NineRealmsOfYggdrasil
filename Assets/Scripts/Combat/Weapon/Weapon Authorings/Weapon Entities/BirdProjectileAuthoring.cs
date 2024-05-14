@@ -16,18 +16,18 @@ public class BirdProjectileAuthoring : MonoBehaviour
             AddComponent(entity, new BirdProjectileComponent());
             
             // movement components
-            AddComponent(entity, new BirdNormalMovementComponent());
-            SetComponentEnabled<BirdNormalMovementComponent>(entity, false);
+            AddComponent(entity, new BezierMovementComponent());
+            SetComponentEnabled<BezierMovementComponent>(entity, false);
             
-            AddComponent(entity, new BirdSpecialMovementComponent());
-            SetComponentEnabled<BirdSpecialMovementComponent>(entity, false);
+            AddComponent(entity, new CircularMovementComponent());
+            SetComponentEnabled<CircularMovementComponent>(entity, false);
         }
     }
 }
 
 public struct BirdProjectileComponent : IComponentData{}
 
-public struct BirdNormalMovementComponent : IComponentData, IEnableableComponent
+public struct BezierMovementComponent : IComponentData, IEnableableComponent
 {
     public bool HasResetHitBuffer;
     public float CurrentTValue;
@@ -39,17 +39,23 @@ public struct BirdNormalMovementComponent : IComponentData, IEnableableComponent
     public float2 controlPoint2;
 }
 
-public struct BirdSpecialMovementComponent : IComponentData, IEnableableComponent
+public struct CircularMovementComponent : IComponentData, IEnableableComponent
 {
     public float Radius;
+
+    public MoveAroundType moveAroundType;
     
     public float CurrentAngle;
-    public float PreviousAngle;
 
     public float BaseAngularSpeed;
     public float AngularSpeed;
-
-    public float AngleOfLastReset;
-
+    
     public bool InUpperHalfCircle;
+
+    public enum MoveAroundType
+    {
+        None,
+        Player,
+        Mouse
+    }
 }

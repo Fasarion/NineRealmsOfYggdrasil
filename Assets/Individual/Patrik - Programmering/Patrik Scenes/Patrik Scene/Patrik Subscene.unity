@@ -494,6 +494,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7092756478536628210, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: radiusIncreaseSpeed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7747805933802500312, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_IsActive
@@ -1287,7 +1292,7 @@ PrefabInstance:
     - target: {fileID: 4259606365192864958, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}
       propertyPath: energyToFill
-      value: 50
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6378360401926587234, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}

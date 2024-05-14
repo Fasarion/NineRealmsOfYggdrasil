@@ -63,10 +63,10 @@ namespace Patrik
             if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
                 return;
             
-            if (attackCaller.ValueRO.ResetWeaponCurrentWeaponTransform)
+            if (attackCaller.ValueRO.ReturnWeapon)
             {
-                _weaponManager.ResetActiveWeapon();
-                attackCaller.ValueRW.ResetWeaponCurrentWeaponTransform = false;
+                _weaponManager.ReturnActiveWeapon();
+                attackCaller.ValueRW.ReturnWeapon = false;
             }
         }
 

@@ -298,7 +298,7 @@ namespace Patrik
             playerAnimator.SetTrigger("startUltimateTrigger");
         }
 
-        public void ResetActiveWeapon()
+        public void ReturnActiveWeapon()
         {
             activeWeapon.SetParent(activeSlot);
             playerAnimator.SetTrigger("hammerReturn");

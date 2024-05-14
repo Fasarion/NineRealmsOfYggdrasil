@@ -1,4 +1,5 @@
 ﻿using Damage;
+using Destruction;
 using Movement;
 using Player;
 using Unity.Burst;
@@ -23,17 +24,19 @@ public partial struct BirdMovementSystem : ISystem
         var deltaTime = SystemAPI.Time.DeltaTime;
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         var playerPos2D = playerPos.xz;
+
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
         // normal attack movement
-        foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdNormalMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
-            .WithNone<AutoMoveComponent>()
+        foreach (var (birdMovement, transform, direction, entity) in SystemAPI
+            .Query<RefRW<BirdNormalMovementComponent>, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             // disable this move behaviour when bird has completed its curve
             if (birdMovement.ValueRO.CurrentTValue > 1)
             {
-                state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, true);
+               // state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, true);
+                ecb.AddComponent<ShouldBeDestroyed>(entity);
                 continue;
             }
             
@@ -67,15 +70,19 @@ public partial struct BirdMovementSystem : ISystem
         }
 
         // special attack movement
-        foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
+        foreach (var (birdSpecialMovement, moveSpeed, transform, direction, entity) in SystemAPI
             .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
-            .WithNone<AutoMoveComponent>()
             .WithEntityAccess())
         {
+            float angleLastFrame = birdSpecialMovement.ValueRO.CurrentAngle;
+            
+            
             // move transform in circle
-            float angle = birdMovement.ValueRO.CurrentAngle;
-            float x = playerPos.x + birdMovement.ValueRO.Radius * math.cos(angle);
-            float z = playerPos.z + birdMovement.ValueRO.Radius * math.sin(angle);
+            float angle = birdSpecialMovement.ValueRO.CurrentAngle;
+            float sinY = math.sin(angle);
+            
+            float x = playerPos.x + birdSpecialMovement.ValueRO.Radius * math.cos(angle);
+            float z = playerPos.z + birdSpecialMovement.ValueRO.Radius * sinY;
             float3 targetPosition = new float3(x, playerPos.y, z);
             transform.ValueRW.Position = targetPosition;
             
@@ -84,8 +91,25 @@ public partial struct BirdMovementSystem : ISystem
             transform.ValueRW.Rotation = rotation;
             
             // set new angle
-            birdMovement.ValueRW.CurrentAngle += deltaTime * birdMovement.ValueRO.AngularSpeed;
+            var nextAngle = angleLastFrame + deltaTime * birdSpecialMovement.ValueRO.AngularSpeed;
+            birdSpecialMovement.ValueRW.CurrentAngle = nextAngle;
+
+            bool wasInUpperCircle = birdSpecialMovement.ValueRO.InUpperHalfCircle;
+            bool nowInUpperCircle = sinY >= 0;
+            
+            // Reset hit buffer after every half lap
+            if (nowInUpperCircle != wasInUpperCircle)
+            {
+                var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
+                hitBuffer.Clear();
+                birdSpecialMovement.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
+            }
+            
+            birdSpecialMovement.ValueRW.PreviousAngle = birdSpecialMovement.ValueRO.CurrentAngle;
         }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
     
     [BurstCompile]

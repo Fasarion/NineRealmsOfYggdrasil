@@ -16,12 +16,19 @@ public class PlayerAudioBehaviour : MonoBehaviour
     private void OnEnable()
     {
         EventManager.OnWeaponSwitch += OnWeaponSwitch;
+        EventManager.OnPlayerHealthSet += OnPlayerHealthSet;
         
     }
     
     private void OnDisable()
     {
         EventManager.OnWeaponSwitch -= OnWeaponSwitch;
+        EventManager.OnPlayerHealthSet -= OnPlayerHealthSet;
+    }
+
+    private void OnPlayerHealthSet(PlayerHealthData healthData)
+    {
+        // $"Spelarn har {healthData.currentHealth} hp just nu");
     }
 
     private void OnWeaponSwitch(WeaponBehaviour currentWeapon)

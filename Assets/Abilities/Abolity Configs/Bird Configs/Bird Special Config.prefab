@@ -54,4 +54,7 @@ MonoBehaviour:
   baseAngularSpeedDuringCharge: 2
   baseAngularSpeedAfterRelease: 5
   birdCount: 2
-  radius: 5
+  lifeTimeAfterRelease: 2
+  initialRadius: 1
+  targetRadius: 5
+  radiusIncreaseSpeed: 10

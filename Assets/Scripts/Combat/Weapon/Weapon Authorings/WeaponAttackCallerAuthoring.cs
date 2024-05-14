@@ -26,8 +26,7 @@ public struct WeaponAttackCaller : IComponentData
 
     public BusyAttackInfo BusyAttackInfo;
 
-    // tempo variable, TODO: make general
-    public bool ResetWeaponCurrentWeaponTransform;
+    public bool ReturnWeapon;
     
     public readonly bool IsPreparingAttack()
     {

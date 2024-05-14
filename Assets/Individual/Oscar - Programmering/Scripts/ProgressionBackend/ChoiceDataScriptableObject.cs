@@ -16,6 +16,8 @@ public class ChoiceDataScriptableObject : ScriptableObject
 
     public List<Vector2Int> roomNodeCoordinates;
     
+    
+    
     public void Awake()
     {
         

@@ -9,8 +9,6 @@ using UnityEngine.UI;
 
 public class RoomChoiceUIBehaviour : ChoiceUIBehaviour
 {
-    
-    
     [SerializeField]private SceneReference roomSceneReference;
 
     public RoomNode roomNode;

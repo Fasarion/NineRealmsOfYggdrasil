@@ -8,7 +8,7 @@ using Random = System.Random;
 
 public class RoomTreeGenerator : MonoBehaviour
 {
-    
+    public ProgressionScene progressionScene;
     public List<RoomChoiceObject> possibleRoomChoiceObjects;
     public GameObject roomSelectionUIPrefab;
     public GameObject connectionUIPrefab;
@@ -47,14 +47,25 @@ public class RoomTreeGenerator : MonoBehaviour
     
     public void Awake()
     {
+        if (progressionScene == null)
+        {
+            return;
+        }
+
+        if (!progressionScene.isProgressionScene)
+        {
+            return;
+        }
+        
         //roomNodeGridMap = choiceDataScriptableObject.roomNodeGridMap;
         canvas = FindObjectOfType<Canvas>();
+    
 
         if (choiceDataScriptableObject.roomNodeGridMapSO != null)
         {
             Debug.Log(choiceDataScriptableObject.roomNodeGridMapSO.Count);
         }
-        
+    
 
         //levelNodeTree = new Dictionary<int, List<GameObject>>();
         //roomNodeGridMap = new Dictionary<Vector2Int, RoomNode>();
@@ -62,13 +73,15 @@ public class RoomTreeGenerator : MonoBehaviour
         if (!choiceDataScriptableObject.saveGeneratedGridMap)
         {
             roomNodeGridMapCached = false;
-            
-        }
         
+        }
+    
         if (!roomNodeGridMapCached)
         {
             ClearCachedRoomNode();
         }
+        
+       
 
       
         

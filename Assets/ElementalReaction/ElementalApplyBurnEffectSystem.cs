@@ -35,6 +35,11 @@ public partial struct ElementalApplyBurnEffectSystem : ISystem
             if (burnComponent.ValueRO.CurrentDurationTime > config.BurnDuration && burnComponent.ValueRO.HasBeenApplied)
             {
                 ecb.RemoveComponent<ElementalBurnEffectComponent>(affectedEntity);
+                ecb.AddComponent<ShouldChangeMaterialComponent>(affectedEntity);
+                ecb.SetComponent(affectedEntity, new ShouldChangeMaterialComponent
+                {
+                    MaterialType = MaterialType.BASEMATERIAL,
+                });
                 continue;
             }
 

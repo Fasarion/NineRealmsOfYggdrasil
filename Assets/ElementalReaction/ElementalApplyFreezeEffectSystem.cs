@@ -2,6 +2,8 @@ using Damage;
 using Movement;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
+using UnityEngine;
 
 
 [UpdateBefore(typeof(ApplyDamageSystem))]
@@ -28,16 +30,28 @@ public partial struct ElementalApplyFreezeEffectSystem : ISystem
             
             if (freezeComponent.ValueRO.CurrentDurationTime > config.FreezeDuration && freezeComponent.ValueRO.HasBeenApplied)
             {
+                var stacks = freezeComponent.ValueRO.Stacks;
+                if (stacks >= config.MaxFreezeStacks) stacks -= 1;
+                var num = (math.pow(config.FreezeMovementSlowPercentage, stacks));
+                
                 moveSpeedComponent.ValueRW.Value /=
-                    (config.FreezeMovementSlowPercentage * freezeComponent.ValueRO.Stacks);
+                    num;
                 ecb.RemoveComponent<ElementalFreezeEffectComponent>(affectedEntity);
+                
+                ecb.AddComponent<ShouldChangeMaterialComponent>(affectedEntity);
+                ecb.SetComponent(affectedEntity, new ShouldChangeMaterialComponent
+                {
+                    MaterialType = MaterialType.BASEMATERIAL,
+                });
                 continue;
             }
                 
             if (freezeComponent.ValueRO.HasBeenApplied) continue;
-            
-            moveSpeedComponent.ValueRW.Value *= (config.FreezeMovementSlowPercentage * freezeComponent.ValueRO.Stacks);
+
             freezeComponent.ValueRW.HasBeenApplied = true;
+            if (freezeComponent.ValueRO.Stacks >= config.MaxFreezeStacks) continue;
+            moveSpeedComponent.ValueRW.Value *= (config.FreezeMovementSlowPercentage);
+            
 
         }
         

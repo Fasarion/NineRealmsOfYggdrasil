@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 2596202326436399737}
   - component: {fileID: 1500968112417054212}
   - component: {fileID: 3075553293707270806}
+  - component: {fileID: 4732356342660905071}
   m_Layer: 0
   m_Name: ThunderStrikeAbilityConfig
   m_TagString: Untagged
@@ -167,3 +168,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   passiveFillPerHit: 0
   activeFillPerHit: 0.1
+--- !u!114 &4732356342660905071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2722267077998208678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c5986fe2e9a8446a1e23dda0fafc6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

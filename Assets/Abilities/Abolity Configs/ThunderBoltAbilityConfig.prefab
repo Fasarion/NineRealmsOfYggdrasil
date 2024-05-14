@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1383843674739944052}
   - component: {fileID: 6101389143335071525}
   - component: {fileID: 2567513809548143154}
+  - component: {fileID: 4755415746645081275}
   m_Layer: 0
   m_Name: ThunderBoltAbilityConfig
   m_TagString: Untagged
@@ -138,3 +139,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 15
   criticalChance: 0.1
+--- !u!114 &4755415746645081275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7001855596906891852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4c5986fe2e9a8446a1e23dda0fafc6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

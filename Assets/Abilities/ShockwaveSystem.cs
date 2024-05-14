@@ -33,6 +33,7 @@ public partial struct ShockwaveSystem : ISystem
     {
         var thunderConfig = SystemAPI.GetSingleton<ThunderStrikeConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
         
                 foreach (var (ability, timer, transform, entity) in
                  SystemAPI.Query<RefRW<ShockwaveAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
@@ -81,6 +82,9 @@ public partial struct ShockwaveSystem : ISystem
                                 Normal = directionToHit
                             };
                             hitBuffer.Add(element);
+                            
+                            var audioElement = new AudioBufferData() {AudioData = thunderConfig.impactAudioData};
+                            audioBuffer.Add(audioElement);
                         }
                     }
 
@@ -89,5 +93,6 @@ public partial struct ShockwaveSystem : ISystem
             }
         }
         ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

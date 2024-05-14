@@ -6,82 +6,89 @@ using UnityEngine;
 
 public class CombatUIUltimateProgressBarController : BaseControllerMVC
 {
-    public override void OnNotification(string p_event_path, Object p_target, params object[] p_data)
+    
+    public void OnEnable()
     {
+        EventManager.OnEnergyChange += OnEnergyChange;
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onStartingWeaponSet += OnStartingWeaponsSet;
 
-        switch (p_event_path)
+    }
+
+    private void OnStartingWeaponsSet(WeaponType mainWeapon, WeaponType leftWeapon, WeaponType rightWeapon)
+    {
+        for(int i = 0; i<app.view.combatUIUltimateProgressBarViews.Count; i++) 
         {
-            case NotificationMVC.UltimateProgressBarWeaponSetup:
+            var ultimateProgressBarView = app.view.combatUIUltimateProgressBarViews[i];
+            for (int j = 0; j < app.model.combatUIUltimateProgressBarModel.Count; j++)
             {
-                foreach (var ultimateProgressBarView in app.view.combatUIUltimateProgressBarViews)
+                var ultimateProgressBarModel = app.model.combatUIUltimateProgressBarModel[j];
+                if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
                 {
-                    var ultimateProgressBarModel = (CombatUIUltimateProgressBarModel)p_target;
-                    if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
-                    {
-                        var weaponSymbolType = ultimateProgressBarView.symbolType;
-                        WeaponType mainWeapon = (WeaponType)p_data[0];
-                        WeaponType leftWeapon = (WeaponType)p_data[1];
-                        WeaponType rightWeapon= (WeaponType)p_data[2];
-                   
-                        ultimateProgressBarModel.currentWeaponType = SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
-                    }
-                   
                     
+                    var weaponSymbolType = ultimateProgressBarView.symbolType;
+                    ultimateProgressBarModel.currentWeaponType =
+                        SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
                 }
-                
-                
-                break;
             }
-            case NotificationMVC.UltimateProgressBarWeaponUpdated:
+
+
+        }
+    }
+
+    private void OnCurrentWeaponUpdated(WeaponType mainWeapon, WeaponType leftWeapon, WeaponType rightWeapon)
+    {
+        for(int i = 0; i<app.view.combatUIUltimateProgressBarViews.Count; i++) 
+        {
+            var ultimateProgressBarView = app.view.combatUIUltimateProgressBarViews[i];
+            for (int j = 0; j < app.model.combatUIUltimateProgressBarModel.Count; j++)
             {
-                
-                
-                foreach (var ultimateProgressBarView in app.view.combatUIUltimateProgressBarViews)
+                var ultimateProgressBarModel = app.model.combatUIUltimateProgressBarModel[j];
+                if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
                 {
-                    var ultimateProgressBarModel = (CombatUIUltimateProgressBarModel)p_target;
-                    if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
-                    {
-                        var weaponSymbolType = ultimateProgressBarView.symbolType;
-                        WeaponType mainWeapon = (WeaponType)p_data[0];
-                        WeaponType leftWeapon = (WeaponType)p_data[1];
-                        WeaponType rightWeapon= (WeaponType)p_data[2];
-                   
-                        ultimateProgressBarModel.currentWeaponType = SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
-                        LoadCurrentEnergy(ultimateProgressBarModel, ultimateProgressBarView);
-                    }
-                   
-                    
+                    var weaponSymbolType = ultimateProgressBarView.symbolType;
+
+                    ultimateProgressBarModel.currentWeaponType =
+                        SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
+                    LoadCurrentEnergy(ultimateProgressBarModel, ultimateProgressBarView);
                 }
-                
-                break;
             }
-            case NotificationMVC.UltimateProgressBarEnergyChanged:
+        }
+    }
+
+    private void OnEnergyChange(WeaponType weaponTypeEnergyChanged, float currentEnergy, float maxEnergy)
+    {
+        for(int i = 0; i<app.view.combatUIUltimateProgressBarViews.Count; i++) 
+        {
+            var ultimateProgressBarView = app.view.combatUIUltimateProgressBarViews[i];
+            for (int j = 0; j < app.model.combatUIUltimateProgressBarModel.Count; j++)
             {
-                foreach (var ultimateProgressBarView in app.view.combatUIUltimateProgressBarViews)
+                var ultimateProgressBarModel = app.model.combatUIUltimateProgressBarModel[j];
+                if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
                 {
-                    var ultimateProgressBarModel = (CombatUIUltimateProgressBarModel) p_target;
-                    WeaponType weaponTypeEnergyChanged = (WeaponType)p_data[0];
-                    float currentEnergy = (float)p_data[1];
-                    float maxEnergy = (float)p_data[2];
-                    if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
+                    if (ultimateProgressBarModel.currentWeaponType == weaponTypeEnergyChanged)
                     {
-                        if (ultimateProgressBarModel.currentWeaponType == weaponTypeEnergyChanged)
-                        {
-                            ultimateProgressBarView.slider.maxValue = maxEnergy;
-                            ultimateProgressBarView.slider.value = currentEnergy;
+                        ultimateProgressBarView.slider.maxValue = maxEnergy;
+                        ultimateProgressBarView.slider.value = currentEnergy;
 
-                            ultimateProgressBarModel.currentEnergy = currentEnergy;
-                            ultimateProgressBarModel.maxEnergy = maxEnergy;
+                        ultimateProgressBarModel.currentEnergy = currentEnergy;
+                        ultimateProgressBarModel.maxEnergy = maxEnergy;
 
-                        }
                     }
                 }
-
-                break;
             }
             
         }
     }
+
+    public void OnDisable()
+    {
+        EventManager.OnEnergyChange -= OnEnergyChange;
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onStartingWeaponSet -= OnStartingWeaponsSet;
+    }
+    
+   
 
     private void LoadCurrentEnergy(CombatUIUltimateProgressBarModel ultimateProgressBarModel, CombatUIUltimateProgressBarView ultimateProgressBarView)
     {
@@ -138,4 +145,84 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
 
         return currentWeaponType;
     }
+    public override void OnNotification(string p_event_path, Object p_target, params object[] p_data)
+   {
+       //Not used because all events are external, but must exist as the base class is abstract.
+   }   
+    /*public override void OnNotification(string p_event_path, Object p_target, params object[] p_data)
+   {
+
+       switch (p_event_path)
+       {
+           case NotificationMVC.UltimateProgressBarWeaponSetup:
+           {
+               foreach (var ultimateProgressBarView in app.view.combatUIUltimateProgressBarViews)
+               {
+                   var ultimateProgressBarModel = (CombatUIUltimateProgressBarModel)p_target;
+                   if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
+                   {
+                       var weaponSymbolType = ultimateProgressBarView.symbolType;
+                       WeaponType mainWeapon = (WeaponType)p_data[0];
+                       WeaponType leftWeapon = (WeaponType)p_data[1];
+                       WeaponType rightWeapon= (WeaponType)p_data[2];
+                  
+                       ultimateProgressBarModel.currentWeaponType = SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
+                   }
+                  
+                   
+               }
+               
+               
+               break;
+           }
+           case NotificationMVC.UltimateProgressBarWeaponUpdated:
+           {
+               
+               
+               foreach (var ultimateProgressBarView in app.view.combatUIUltimateProgressBarViews)
+               {
+                   var ultimateProgressBarModel = (CombatUIUltimateProgressBarModel)p_target;
+                   if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
+                   {
+                       var weaponSymbolType = ultimateProgressBarView.symbolType;
+                       WeaponType mainWeapon = (WeaponType)p_data[0];
+                       WeaponType leftWeapon = (WeaponType)p_data[1];
+                       WeaponType rightWeapon= (WeaponType)p_data[2];
+                  
+                       ultimateProgressBarModel.currentWeaponType = SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
+                       LoadCurrentEnergy(ultimateProgressBarModel, ultimateProgressBarView);
+                   }
+                  
+                   
+               }
+               
+               break;
+           }
+           case NotificationMVC.UltimateProgressBarEnergyChanged:
+           {
+               foreach (var ultimateProgressBarView in app.view.combatUIUltimateProgressBarViews)
+               {
+                   var ultimateProgressBarModel = (CombatUIUltimateProgressBarModel) p_target;
+                   WeaponType weaponTypeEnergyChanged = (WeaponType)p_data[0];
+                   float currentEnergy = (float)p_data[1];
+                   float maxEnergy = (float)p_data[2];
+                   if (ultimateProgressBarModel.identifier == ultimateProgressBarView.identifier)
+                   {
+                       if (ultimateProgressBarModel.currentWeaponType == weaponTypeEnergyChanged)
+                       {
+                           ultimateProgressBarView.slider.maxValue = maxEnergy;
+                           ultimateProgressBarView.slider.value = currentEnergy;
+
+                           ultimateProgressBarModel.currentEnergy = currentEnergy;
+                           ultimateProgressBarModel.maxEnergy = maxEnergy;
+
+                       }
+                   }
+               }
+
+               break;
+           }
+           
+       }
+   }*/
 }

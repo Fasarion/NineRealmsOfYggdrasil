@@ -7,8 +7,6 @@ using UnityEngine;
 public class CombatUIUltimateProgressBarModel : ElementMVC
 {
     public WeaponType currentWeaponType;
-
-  
     public float currentEnergy;
     public float maxEnergy;
     public CombatUIEnergyData energyData;
@@ -18,7 +16,7 @@ public class CombatUIUltimateProgressBarModel : ElementMVC
         energyData = FindObjectOfType<CombatUIEnergyData>();
     }
 
-    public void OnEnable()
+    /*public void OnEnable()
     {
         EventManager.OnEnergyChange += OnEnergyChange;
         CombatUIWeaponHandlerModel.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
@@ -46,6 +44,6 @@ public class CombatUIUltimateProgressBarModel : ElementMVC
     private void OnEnergyChange(WeaponType weaponTypeEnergyChanged, float currentEnergy, float maxEnergy)
     {
         app.Notify(NotificationMVC.UltimateProgressBarEnergyChanged, this, weaponTypeEnergyChanged,currentEnergy, maxEnergy);
-    }
+    }*/
     
 }

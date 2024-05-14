@@ -1052,8 +1052,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 658113433794898788}
-        m_TargetAssemblyTypeName: MapProgressBarScroller, Assembly-CSharp
-        m_MethodName: ScrollLeft
+        m_TargetAssemblyTypeName: MapProgressionBarScroller, Assembly-CSharp
+        m_MethodName: OnClickLeft
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2097,8 +2097,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 658113433794898788}
-        m_TargetAssemblyTypeName: MapProgressBarScroller, Assembly-CSharp
-        m_MethodName: ScrollRight
+        m_TargetAssemblyTypeName: MapProgressionBarScroller, Assembly-CSharp
+        m_MethodName: OnClickRight
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -31,8 +31,6 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
                         SetWeapons(weaponSymbolType, mainWeapon, leftWeapon, rightWeapon);
                 }
             }
-
-
         }
     }
 
@@ -116,7 +114,6 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
                 break;
             }
         }
-        //Max Energy has to be set first for the slider to display correctly
         ultimateProgressBarView.slider.maxValue = ultimateProgressBarModel.maxEnergy;
         ultimateProgressBarView.slider.value = ultimateProgressBarModel.currentEnergy;
     }

@@ -21,6 +21,7 @@ public class MapProgressionBarScroller : MonoBehaviour
     void Start()
     {
         
+        
     }
 
     // Update is called once per frame
@@ -35,6 +36,17 @@ public class MapProgressionBarScroller : MonoBehaviour
         
     }
 
+    public void OnClickRight()
+    {
+        
+        ScrollLeft();
+    }
+
+    public void OnClickLeft()
+    {
+        
+        ScrollRight();
+    }
     //Used by 
     public void ScrollRight()
     {

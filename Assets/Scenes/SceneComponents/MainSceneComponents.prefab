@@ -1,108 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1800137220256342761
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4405163178760228377}
-  - component: {fileID: 964053897892969286}
-  m_Layer: 0
-  m_Name: SpawningController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4405163178760228377
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800137220256342761}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6557228231617862268}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &964053897892969286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1800137220256342761}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e399e7200a8ba1648a4fa6e4f92217cf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minTimerTime: 1
-  maxTimerTime: 2
-  minEnemySpawnCount: 1
-  maxEnemySpawnCount: 3
-  innerSpawningRadius: 15
-  outerSpawningRadius: 22
-  SpawningCheckpoints:
-  - targetEnemyCount: 10
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 2
-    timerCutoffTime: 0
-  - targetEnemyCount: 40
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 2
-    timerCutoffTime: 30
-  - targetEnemyCount: 50
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 3
-    - EnemyType: 3
-      Weight: 1
-    timerCutoffTime: 60
-  - targetEnemyCount: 90
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 10
-    - EnemyType: 3
-      Weight: 3
-    - EnemyType: 5
-      Weight: 1
-    timerCutoffTime: 90
-  - targetEnemyCount: 1500
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 2
-    timerCutoffTime: 120
-  - targetEnemyCount: 300
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 1
-    - EnemyType: 3
-      Weight: 2
-    timerCutoffTime: 150
-  - targetEnemyCount: 350
-    CheckpointEnemyData:
-    - EnemyType: 2
-      Weight: 2
-    - EnemyType: 3
-      Weight: 1
-    - EnemyType: 5
-      Weight: 1
-    timerCutoffTime: 180
-  startingCheckpointIndex: 0
-  spawningCenterPoint: {fileID: 4405163178760228377}
-  VisualizationThickness: 0.23
-  spawningCheckpointObject: {fileID: 11400000, guid: 9b8b5fe361065a7488a6ed05798c35ac,
-    type: 2}
 --- !u!1 &7036218326750385608
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,6 +321,80 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8648172130289102669, guid: 70c8af16573824146b66970a4db775d7,
     type: 3}
   m_PrefabInstance: {fileID: 925221627195888436}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1772359044140581423
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 6557228231617862268}
+    m_Modifications:
+    - target: {fileID: 28130363438391494, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_Name
+      value: SpawningController
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b34812c01e9edd74e8d231ab62461d1c, type: 3}
+--- !u!4 &4405163178760228377 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2718740116621298742, guid: b34812c01e9edd74e8d231ab62461d1c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1772359044140581423}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6366425828821960346
 PrefabInstance:

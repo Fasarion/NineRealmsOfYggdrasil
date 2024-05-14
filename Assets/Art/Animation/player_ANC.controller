@@ -232,31 +232,6 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
---- !u!1101 &-8681760455820006217
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: attackNormal
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -4604101698856809079}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &-8617140444807090619
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1446,31 +1421,6 @@ MonoBehaviour:
   SetOngoing: 0
   EndChargeOnEnd: 0
   SetNone: 0
---- !u!1101 &-6160543981302225793
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 7
-    m_ConditionEvent: weaponID
-    m_EventTreshold: 2
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: -4604101698856809079}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!114 &-6119415984623685458
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1618,6 +1568,31 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1101 &-5872267154302480965
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: hammerReturn
+    m_EventTreshold: 0
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -3556327046058533881}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0.01
+  m_TransitionOffset: 0
+  m_ExitTime: 0.5
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &-5695829769660276577
 AnimatorState:
   serializedVersion: 6
@@ -1805,6 +1780,33 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-5119016912233342906
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Ultimate - Loop
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -5872267154302480965}
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: a4a42128da4f4e046b70ead77cfc5756, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &-5088062047854955633
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2071,7 +2073,7 @@ AnimatorState:
   - {fileID: 8811950233151934814}
   - {fileID: 5101547029125408492}
   - {fileID: -6553129467889149313}
-  - {fileID: 2194048212276282114}
+  - {fileID: 7161485226766916714}
   m_StateMachineBehaviours:
   - {fileID: 776779298609342961}
   - {fileID: -3931597474496307145}
@@ -2174,6 +2176,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ResetPrepareOnEnter: 1
   ResetPrepareOnExit: 0
+--- !u!1101 &-4221120459165954037
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4604101698856809079}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 1
+  m_TransitionOffset: 0.047916
+  m_ExitTime: 0.25000006
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-4182464781371751528
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2202,6 +2226,36 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &-4105492633978542477
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Ultimate - Start
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -3507187591647350931}
+  m_StateMachineBehaviours:
+  - {fileID: -3808153182384051613}
+  - {fileID: 7615928565370930753}
+  - {fileID: 8684129588317268551}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 18f467c4db6887844b9d96f4f0ef3261, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!206 &-4059396762086543034
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2261,6 +2315,28 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!1101 &-3930560815599761305
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 1170013349443759391}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-3930210575110904893
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2311,6 +2387,30 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-3808153182384051613
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86dcca46c07868d4ea70a4892e9edf36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Contents:
+    combo: 0
+    OnEnter:
+      Begin: 0
+      Stop: 0
+      TurnOff: 1
+      movementInputState: 0
+    OnExit:
+      Begin: 0
+      Stop: 0
+      TurnOff: 0
+      movementInputState: 0
 --- !u!1102 &-3654658794089405462
 AnimatorState:
   serializedVersion: 6
@@ -2367,34 +2467,35 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1101 &-3554939951369357926
-AnimatorStateTransition:
+--- !u!1102 &-3556327046058533881
+AnimatorState:
+  serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 6
-    m_ConditionEvent: weaponID
-    m_EventTreshold: 2
-  - m_ConditionMode: 1
-    m_ConditionEvent: attackNormal
-    m_EventTreshold: 0
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 4582951594367273246}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
+  m_Name: Bird Ultimate - Land
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: -3930560815599761305}
+  m_StateMachineBehaviours:
+  - {fileID: 1478671285781199333}
+  - {fileID: 1590237938361047728}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: 547e79eb971a7674894bb00d9e9186a9, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!206 &-3536960009476091259
 BlendTree:
   m_ObjectHideFlags: 1
@@ -2434,6 +2535,28 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!1101 &-3507187591647350931
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -5119016912233342906}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 1
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &-3463689312827403762
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3013,6 +3136,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-1945584826119911993
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80064eb4b5cdc542a10ff83dc8e90a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 3
+  AttackType: 3
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 0
+  OnExit:
+    TurnOn: 0
+    TurnOff: 1
 --- !u!1107 &-1743120285115692064
 AnimatorStateMachine:
   serializedVersion: 6
@@ -3312,28 +3455,6 @@ AnimatorStateTransition:
   m_TransitionDuration: 0.25
   m_TransitionOffset: 0
   m_ExitTime: 0
-  m_HasExitTime: 1
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
---- !u!1101 &-660460943446849768
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions: []
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1732618541862276972}
-  m_Solo: 0
-  m_Mute: 0
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0.25
-  m_TransitionOffset: 0
-  m_ExitTime: 0.75
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -3824,26 +3945,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &187410837352530668
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e80064eb4b5cdc542a10ff83dc8e90a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  WeaponType: 3
-  AttackType: 1
-  OnEnter:
-    TurnOn: 1
-    TurnOff: 0
-  OnExit:
-    TurnOn: 0
-    TurnOff: 1
 --- !u!114 &203786731294792332
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3926,30 +4027,6 @@ MonoBehaviour:
       Begin: 0
       Stop: 1
       TurnOff: 1
-      movementInputState: 0
---- !u!114 &705467121475809981
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86dcca46c07868d4ea70a4892e9edf36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Contents:
-    combo: 0
-    OnEnter:
-      Begin: 1
-      Stop: 0
-      TurnOff: 0
-      movementInputState: 0
-    OnExit:
-      Begin: 0
-      Stop: 1
-      TurnOff: 0
       movementInputState: 0
 --- !u!114 &776779298609342961
 MonoBehaviour:
@@ -4298,6 +4375,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1102 &1170013349443759391
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird Ultimate - Recover
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions:
+  - {fileID: 4938777758725446446}
+  m_StateMachineBehaviours:
+  - {fileID: -1945584826119911993}
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 7400000, guid: dd183ef3185172840877f0f87ca3de4a, type: 2}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!114 &1264911545449778730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4448,6 +4553,30 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 1
+--- !u!114 &1478671285781199333
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86dcca46c07868d4ea70a4892e9edf36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Contents:
+    combo: 0
+    OnEnter:
+      Begin: 1
+      Stop: 0
+      TurnOff: 0
+      movementInputState: 0
+    OnExit:
+      Begin: 0
+      Stop: 1
+      TurnOff: 1
+      movementInputState: 0
 --- !u!1107 &1517375475704881316
 AnimatorStateMachine:
   serializedVersion: 6
@@ -4551,12 +4680,6 @@ AnimatorStateMachine:
     m_State: {fileID: 4660287397053730185}
     m_Position: {x: -180, y: 250, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 1732618541862276972}
-    m_Position: {x: 1340, y: 120, z: 0}
-  - serializedVersion: 1
-    m_State: {fileID: 4582951594367273246}
-    m_Position: {x: 1590, y: 120, z: 0}
-  - serializedVersion: 1
     m_State: {fileID: -1007328128256860516}
     m_Position: {x: 1460, y: -60, z: 0}
   - serializedVersion: 1
@@ -4591,7 +4714,19 @@ AnimatorStateMachine:
     m_Position: {x: 1330, y: 410, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1009732372892977085}
-    m_Position: {x: 1760, y: 0, z: 0}
+    m_Position: {x: 1740, y: -10, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -4105492633978542477}
+    m_Position: {x: 1570, y: 230, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -5119016912233342906}
+    m_Position: {x: 1870, y: 220, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: -3556327046058533881}
+    m_Position: {x: 1870, y: 90, z: 0}
+  - serializedVersion: 1
+    m_State: {fileID: 1170013349443759391}
+    m_Position: {x: 1560, y: 100, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -4626,6 +4761,20 @@ MonoBehaviour:
       Stop: 1
       TurnOff: 0
       movementInputState: 0
+--- !u!114 &1590237938361047728
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bb600416252df4285d05fd809de28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResetPrepareOnEnter: 1
+  ResetPrepareOnExit: 0
 --- !u!1101 &1636442055598577526
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4676,37 +4825,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &1732618541862276972
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Birb Normal
-  m_Speed: 2
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -8681760455820006217}
-  - {fileID: -6160543981302225793}
-  - {fileID: -3554939951369357926}
-  m_StateMachineBehaviours:
-  - {fileID: 705467121475809981}
-  - {fileID: 187410837352530668}
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!206 &1983615459242061978
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4793,34 +4911,6 @@ MonoBehaviour:
   SetOngoing: 0
   EndChargeOnEnd: 0
   SetNone: 0
---- !u!1101 &2194048212276282114
-AnimatorStateTransition:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: attackNormal
-    m_EventTreshold: 0
-  - m_ConditionMode: 6
-    m_ConditionEvent: weaponID
-    m_EventTreshold: 2
-  m_DstStateMachine: {fileID: 0}
-  m_DstState: {fileID: 1732618541862276972}
-  m_Solo: 0
-  m_Mute: 1
-  m_IsExit: 0
-  serializedVersion: 3
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_ExitTime: 0.806701
-  m_HasExitTime: 0
-  m_HasFixedDuration: 1
-  m_InterruptionSource: 0
-  m_OrderedInterruption: 1
-  m_CanTransitionToSelf: 1
 --- !u!1102 &2196732594716703909
 AnimatorState:
   serializedVersion: 6
@@ -4941,6 +5031,34 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &2906484257214994731
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: startUltimateTrigger
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: weaponID
+    m_EventTreshold: 2
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4105492633978542477}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.806701
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &2960082429863283907
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5028,6 +5146,7 @@ AnimatorState:
   - {fileID: 1309286578823226213}
   - {fileID: -560762665247954818}
   - {fileID: -146326086245204138}
+  - {fileID: 9126086985785363319}
   m_StateMachineBehaviours:
   - {fileID: -7526502152070960976}
   m_Position: {x: 50, y: 50, z: 0}
@@ -5571,33 +5690,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!1102 &4582951594367273246
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: New State
-  m_Speed: 100
-  m_CycleOffset: 0
-  m_Transitions:
-  - {fileID: -660460943446849768}
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!206 &4598601477640885891
 BlendTree:
   m_ObjectHideFlags: 1
@@ -5838,6 +5930,28 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!1101 &4938777758725446446
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions: []
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4604101698856809079}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 1
+  m_TransitionOffset: 0.047916
+  m_ExitTime: 0.25000006
+  m_HasExitTime: 1
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &5042852862348724940
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5851,10 +5965,13 @@ AnimatorStateTransition:
     m_EventTreshold: 0
   - m_ConditionMode: 7
     m_ConditionEvent: weaponID
+    m_EventTreshold: 0
+  - m_ConditionMode: 7
+    m_ConditionEvent: weaponID
     m_EventTreshold: 1
   - m_ConditionMode: 7
     m_ConditionEvent: weaponID
-    m_EventTreshold: 0
+    m_EventTreshold: 2
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -8713347931597042095}
   m_Solo: 0
@@ -5976,6 +6093,7 @@ AnimatorState:
   - {fileID: 1007070126409294818}
   - {fileID: 6465247541373373804}
   - {fileID: -814019696858217243}
+  - {fileID: 2906484257214994731}
   m_StateMachineBehaviours:
   - {fileID: 308569861926980642}
   m_Position: {x: 50, y: 50, z: 0}
@@ -6544,6 +6662,34 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!1101 &7161485226766916714
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: startUltimateTrigger
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: weaponID
+    m_EventTreshold: 2
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4105492633978542477}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.806701
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1102 &7276895647344913255
 AnimatorState:
   serializedVersion: 6
@@ -6727,6 +6873,26 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &7615928565370930753
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e80064eb4b5cdc542a10ff83dc8e90a4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 3
+  AttackType: 3
+  OnEnter:
+    TurnOn: 1
+    TurnOff: 0
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!1102 &7619297934916297646
 AnimatorState:
   serializedVersion: 6
@@ -7136,6 +7302,20 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &8684129588317268551
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32bb600416252df4285d05fd809de28b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ResetPrepareOnEnter: 1
+  ResetPrepareOnExit: 0
 --- !u!206 &8745813021119159294
 BlendTree:
   m_ObjectHideFlags: 1
@@ -7361,3 +7541,31 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 1
+--- !u!1101 &9126086985785363319
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: startUltimateTrigger
+    m_EventTreshold: 0
+  - m_ConditionMode: 6
+    m_ConditionEvent: weaponID
+    m_EventTreshold: 2
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: -4105492633978542477}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.806701
+  m_HasExitTime: 0
+  m_HasFixedDuration: 0
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1

@@ -13,18 +13,14 @@ GameObject:
   - component: {fileID: 322555035832615877}
   - component: {fileID: 7049356156851729629}
   - component: {fileID: 1404811906918814333}
-  - component: {fileID: 4896915462185973973}
-  - component: {fileID: 2200917143035241133}
   - component: {fileID: 7135853917643872561}
   - component: {fileID: 7899796359273220732}
-  - component: {fileID: 4045521414853887161}
   - component: {fileID: 9141337140125238061}
   - component: {fileID: 8116207207063421910}
   - component: {fileID: 8608429267351938146}
   - component: {fileID: 1698868910996974481}
   - component: {fileID: 7606487378320408976}
   - component: {fileID: 4541722141291179754}
-  - component: {fileID: 8674425715204942967}
   m_Layer: 0
   m_Name: Bird Projectile
   m_TagString: Untagged
@@ -269,33 +265,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   alwaysMoveForward: 0
   rotationLerpSpeed: 0.5
---- !u!114 &4896915462185973973
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHP: 10
-  damageReductionValue: 1
---- !u!114 &2200917143035241133
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 57b0fc3a8116264439a1093e275390a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifeTime: 3
 --- !u!114 &7135853917643872561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,19 +294,6 @@ MonoBehaviour:
   isHitTriggerTarget: 0
   isHitCollider: 0
   isHitColliderTarget: 0
---- !u!114 &4045521414853887161
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d624dce546514415a7316aacbd262703, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpChange: -1
 --- !u!114 &9141337140125238061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,18 +370,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fdf8663a06bbce049964ae5c460759b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &8674425715204942967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7824363987953266496}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ed8db80dfba6149b0f4d46f54e8fc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &9154957868230197866

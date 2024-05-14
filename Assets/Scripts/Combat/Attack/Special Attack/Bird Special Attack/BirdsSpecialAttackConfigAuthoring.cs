@@ -14,6 +14,7 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
     
     [Header("Bird Settings")]
     [SerializeField] private int birdCount = 2;
+    [SerializeField] private float lifeTimeAfterRelease = 2f;
     
     [Header("Radius")]
     [SerializeField] private float radius = 2f;
@@ -39,6 +40,8 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
                 Radius = authoring.radius,
                 AngleStep = 360f / authoring.birdCount,
                 AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge,
+                AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease,
+                LifeTimeAfterRelease = authoring.lifeTimeAfterRelease
             });
 
             var angularSpeedBuffer = AddBuffer<AngularSpeedChargeStageBuffElement>(entity);
@@ -61,6 +64,12 @@ public struct BirdsSpecialAttackConfig : IComponentData
     
     public bool HasStartedInitialChargePhase;
     public bool HasStartedReleasedChargePhase;
+
+    public float lifeTimeTimer;
+    public float LifeTimeAfterRelease;
+    
+    public bool InReleaseState;
+    public bool HasReleased;
 }
 
 [Serializable]

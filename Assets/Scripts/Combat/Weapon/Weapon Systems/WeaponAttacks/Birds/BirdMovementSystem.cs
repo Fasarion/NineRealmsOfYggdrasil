@@ -1,4 +1,5 @@
 ﻿using Damage;
+using Destruction;
 using Movement;
 using Player;
 using Unity.Burst;
@@ -23,17 +24,19 @@ public partial struct BirdMovementSystem : ISystem
         var deltaTime = SystemAPI.Time.DeltaTime;
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         var playerPos2D = playerPos.xz;
+
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
         // normal attack movement
-        foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdNormalMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
-            .WithNone<AutoMoveComponent>()
+        foreach (var (birdMovement, transform, direction, entity) in SystemAPI
+            .Query<RefRW<BirdNormalMovementComponent>, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             // disable this move behaviour when bird has completed its curve
             if (birdMovement.ValueRO.CurrentTValue > 1)
             {
-                state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, true);
+               // state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, true);
+                ecb.AddComponent<ShouldBeDestroyed>(entity);
                 continue;
             }
             
@@ -69,7 +72,6 @@ public partial struct BirdMovementSystem : ISystem
         // special attack movement
         foreach (var (birdMovement, moveSpeed, transform, direction, entity) in SystemAPI
             .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
-            .WithNone<AutoMoveComponent>()
             .WithEntityAccess())
         {
             // move transform in circle
@@ -86,6 +88,9 @@ public partial struct BirdMovementSystem : ISystem
             // set new angle
             birdMovement.ValueRW.CurrentAngle += deltaTime * birdMovement.ValueRO.AngularSpeed;
         }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
     
     [BurstCompile]

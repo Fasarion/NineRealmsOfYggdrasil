@@ -243,6 +243,6 @@ public partial struct HammerSpecialThrowSystem : ISystem
         config.ValueRW.HasSwitchedBack = false;
 
         var weaponCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-        weaponCaller.ValueRW.ResetWeaponCurrentWeaponTransform = true;
+        weaponCaller.ValueRW.ReturnWeapon = true;
     }
 }

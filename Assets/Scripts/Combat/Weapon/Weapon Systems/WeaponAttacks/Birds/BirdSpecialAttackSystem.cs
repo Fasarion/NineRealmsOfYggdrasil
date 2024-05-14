@@ -1,4 +1,5 @@
 ﻿
+using Destruction;
 using Movement;
 using Patrik;
 using Player;
@@ -24,7 +25,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
         state.RequireForUpdate<PlayerTag>();
         
         state.RequireForUpdate<BirdsSpecialAttackConfig>();
-
+        
         cachedChargeLevel = -1;
     }
 
@@ -37,12 +38,29 @@ public partial struct BirdSpecialAttackSystem : ISystem
         var chargeInfo = attackCaller.SpecialChargeInfo;
         if (chargeInfo.ChargingWeapon != WeaponType.Birds) return;
         
-        var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
-        var playerPos2d = playerPos.xz;
-        
+
+        if (config.ValueRO.InReleaseState)
+        {
+            config.ValueRW.lifeTimeTimer += SystemAPI.Time.DeltaTime;
+            
+
+            if (config.ValueRO.lifeTimeTimer > config.ValueRO.LifeTimeAfterRelease)
+            {
+                config.ValueRW.lifeTimeTimer = 0;
+                
+                config.ValueRW.InReleaseState = false;
+                
+                var attackCallerRW = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
+                attackCallerRW.ValueRW.ReturnWeapon = true;
+            }
+
+            return;
+        }
+
         ChargeState currentChargeState = chargeInfo.chargeState;
 
+        // Start charge up
         if (currentChargeState == ChargeState.Start)
         {
             // Spawn birds evenly space around player
@@ -93,9 +111,13 @@ public partial struct BirdSpecialAttackSystem : ISystem
                         BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge
                     });
                 }
+                
+                config.ValueRW.HasReleased = false;
+                config.ValueRW.InReleaseState = false;
             }
         }
         
+        // On New Charge Level
         if (currentChargeState == ChargeState.Ongoing && chargeInfo.Level > cachedChargeLevel)
         {
             cachedChargeLevel = chargeInfo.Level;
@@ -113,9 +135,12 @@ public partial struct BirdSpecialAttackSystem : ISystem
             }
         }
         
-        if (currentChargeState == ChargeState.Stop)
+        // Release Birds
+        if (currentChargeState == ChargeState.Stop && !config.ValueRO.HasReleased)
         {
             cachedChargeLevel = chargeInfo.Level;
+
+            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
             var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
             var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
@@ -126,8 +151,22 @@ public partial struct BirdSpecialAttackSystem : ISystem
                 .Query<RefRW<BirdSpecialMovementComponent>>()
                 .WithEntityAccess())
             {
+                birdMovement.ValueRW.BaseAngularSpeed = config.ValueRO.AngularSpeedAfterRelease;
+                
                 birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+                
+                ecb.AddComponent(entity, new DestroyAfterSecondsComponent
+                {
+                    TimeToDestroy = config.ValueRO.LifeTimeAfterRelease
+                });
             }
+            
+            ecb.Playback(state.EntityManager);
+            ecb.Dispose();
+
+            config = SystemAPI.GetSingletonRW<BirdsSpecialAttackConfig>();
+            config.ValueRW.HasReleased = true;
+            config.ValueRW.InReleaseState = true;
         }
     }
 }

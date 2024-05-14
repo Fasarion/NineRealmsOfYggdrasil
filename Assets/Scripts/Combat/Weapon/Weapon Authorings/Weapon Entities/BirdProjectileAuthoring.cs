@@ -42,10 +42,14 @@ public struct BirdNormalMovementComponent : IComponentData, IEnableableComponent
 public struct BirdSpecialMovementComponent : IComponentData, IEnableableComponent
 {
     public float Radius;
+    
     public float CurrentAngle;
+    public float PreviousAngle;
 
     public float BaseAngularSpeed;
     public float AngularSpeed;
 
     public float AngleOfLastReset;
+    
+    //public bool On
 }

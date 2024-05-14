@@ -76,6 +76,8 @@ public partial struct BirdMovementSystem : ISystem
             .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
+            float angleLastFrame = birdSpecialMovement.ValueRO.CurrentAngle;
+            
             // move transform in circle
             float angle = birdSpecialMovement.ValueRO.CurrentAngle;
             float x = playerPos.x + birdSpecialMovement.ValueRO.Radius * math.cos(angle);
@@ -88,15 +90,18 @@ public partial struct BirdMovementSystem : ISystem
             transform.ValueRW.Rotation = rotation;
             
             // set new angle
-            birdSpecialMovement.ValueRW.CurrentAngle += deltaTime * birdSpecialMovement.ValueRO.AngularSpeed;
-
+            var nextAngle = angleLastFrame + deltaTime * birdSpecialMovement.ValueRO.AngularSpeed;
+            birdSpecialMovement.ValueRW.CurrentAngle = nextAngle;
+            
             // Reset hit buffer after every half lap
-            if (angle > birdSpecialMovement.ValueRO.AngleOfLastReset + HalfCircleDegrees)
+            if (nextAngle < angleLastFrame)
             {
                 var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
                 hitBuffer.Clear();
-                birdSpecialMovement.ValueRW.AngleOfLastReset = angle < HalfCircleDegrees ? angle : angle-HalfCircleDegrees;
+                Debug.Log("Reset");
             }
+            
+            birdSpecialMovement.ValueRW.PreviousAngle = birdSpecialMovement.ValueRO.CurrentAngle;
         }
         
         ecb.Playback(state.EntityManager);

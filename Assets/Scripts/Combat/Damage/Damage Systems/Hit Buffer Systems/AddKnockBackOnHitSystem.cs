@@ -32,6 +32,15 @@ namespace Damage
                 foreach (var hit in hitBuffer)
                 {
                     if (hit.IsHandled) continue;
+                    
+                    // if (!SystemAPI.HasBuffer<KnockBackBufferElement>(hit.HitEntity))
+                    // {
+                    //     Debug.Log("Entity misses knock back element buffer!");
+                    //
+                    //     var transform = SystemAPI.GetComponent<LocalTransform>(hit.HitEntity);
+                    //     Debug.Log($"Hit position: {transform.Position}");
+                    // }
+                    
                     var knockBackBufferElements = knockBackBufferLookup[hit.HitEntity];
 
                     float2 forceDirection = float2.zero;

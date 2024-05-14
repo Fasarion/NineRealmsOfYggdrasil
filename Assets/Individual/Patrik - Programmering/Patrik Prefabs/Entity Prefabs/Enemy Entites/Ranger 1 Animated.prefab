@@ -19,15 +19,16 @@ GameObject:
   - component: {fileID: 8796295642388451722}
   - component: {fileID: 9062196686115931803}
   - component: {fileID: 8071667428324845191}
-  - component: {fileID: -7775856522873016308}
-  - component: {fileID: -5364092481966609310}
+  - component: {fileID: -4807361175094672489}
+  - component: {fileID: 922261842375008278}
   - component: {fileID: 5432305332946967007}
   - component: {fileID: 4663337924807953367}
   - component: {fileID: 6445979045985948300}
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
+  - component: {fileID: -200509008157379024}
   m_Layer: 0
-  m_Name: Ranger3
+  m_Name: Ranger 1 Animated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -254,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 90
+  maxHP: 40
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -285,7 +286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d92a0f33fd05c4bbe2707605dbf9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 7
+  enemyType: 5
 --- !u!114 &3581742490104402230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -324,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObjects:
-  - {fileID: 5345650359192567939, guid: d49b4f8ea3373074986815d09ff9cc18, type: 3}
+  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 12
+  minimumDistanceForMoving: 8
   awayFromPlayerMoveSpeed: 0
 --- !u!114 &8071667428324845191
 MonoBehaviour:
@@ -352,7 +353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedValue: 4
---- !u!114 &-7775856522873016308
+--- !u!114 &-4807361175094672489
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -365,8 +366,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingCooldown: 4
-  shootDistance: 13
---- !u!114 &-5364092481966609310
+  shootDistance: 9
+--- !u!114 &922261842375008278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -407,7 +408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5186fce7de95e4d49948125afabc1d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8870220498742206646, guid: 2b9401bb44e0e6740a99ef7eaa0ddf3b,
+  gameObjectPrefab: {fileID: 8870220498742206646, guid: 5b6570f0dd7d66f45a0085c37820403d,
     type: 3}
   followsEntity: 1
   followsChild: 0
@@ -459,3 +460,16 @@ MonoBehaviour:
     enemyTyping: 1
     audioEventType: 0
     attackType: 0
+--- !u!114 &-200509008157379024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d033f01e5e00b4ca72fc56a2690069, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyAnimationType: 1

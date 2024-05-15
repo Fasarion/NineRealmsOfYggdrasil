@@ -31,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2642518667999840917}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1877677660695127521
@@ -47,16 +48,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   selectionType: 0
-  roomSelects:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   roomSelectionCardsInstantiator: {fileID: 0}
   weaponSelectionCardsInstantiator: {fileID: 0}
   relicSelectionCardsInstantiator: {fileID: 0}
   currentSelectionIndex: 0
   choiceDataScriptableObject: {fileID: 11400000, guid: 73c68f66ba6eace4abc3020789d330aa,
     type: 2}
+  arrowIndicator: {fileID: 0}
+  progressBackgroundIndicator: {fileID: 0}
 --- !u!114 &4332727090398157555
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acdaa934bae2f14088b3b8317f7849d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  progressionScene: {fileID: 0}
   possibleRoomChoiceObjects:
   - {fileID: 11400000, guid: 5fc33115404bb1444b2d35e442ba376e, type: 2}
   - {fileID: 11400000, guid: e17e402113f63bc48b338fb4599f9c52, type: 2}
@@ -99,3 +99,48 @@ MonoBehaviour:
   currentRoomLevel: 0
   contentContainer: {fileID: 0}
   currentTargetObject: {fileID: 0}
+--- !u!1 &1357183703703336680
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2642518667999840917}
+  - component: {fileID: 5354062585609001502}
+  m_Layer: 0
+  m_Name: ProgressionSceneChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2642518667999840917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357183703703336680}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8624504167211068729}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5354062585609001502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1357183703703336680}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9d540bb2c48874d94aed4512f52fd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isProgressionScene: 0

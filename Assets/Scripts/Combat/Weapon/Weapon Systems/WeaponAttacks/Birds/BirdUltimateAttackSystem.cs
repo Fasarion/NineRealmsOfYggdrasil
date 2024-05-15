@@ -105,6 +105,9 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var tornadoTransform = state.EntityManager.GetComponentData<LocalTransform>(tornado);
             tornadoTransform.Scale = config.ValueRO.Radius * 2;
             state.EntityManager.SetComponentData(tornado, tornadoTransform);
+            
+            // set tornado suction rate
+            state.EntityManager.SetComponentData(tornado, new TimerObject{maxTime = config.ValueRO.TimeBetweenSuctions});
 
             // Spawn birds evenly spaced around player
             for (int i = 0; i < configRO.BirdCount; i++)

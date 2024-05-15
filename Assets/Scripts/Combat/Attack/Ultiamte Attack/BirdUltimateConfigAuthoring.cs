@@ -7,7 +7,9 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
 {
     [Header("Tornado")]
     [Tooltip("Prefab of the tornado entity.")]
-    [SerializeField] private GameObject tornadoEntityPrefab; 
+    [SerializeField] private GameObject tornadoEntityPrefab;
+    [Tooltip("How much delay between each suction towards the tornado mid point.")]
+    [SerializeField] private float timeBetweenSuctions = 0.3f; 
     
     [Header("Angular speed")]
     [Tooltip("How fast the birds spin.")]
@@ -40,6 +42,7 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
             AddComponent(entity, new BirdsUltimateAttackConfig
             {
                 TornadoPrefab = GetEntity(authoring.tornadoEntityPrefab, TransformUsageFlags.Dynamic),
+                TimeBetweenSuctions = authoring.timeBetweenSuctions,
                 
                 BirdCount = authoring.birdCount,
                 
@@ -56,6 +59,8 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
 public struct BirdsUltimateAttackConfig : IComponentData
 {
     public Entity TornadoPrefab;
+    public float TimeBetweenSuctions;
+    
     public Entity CenterPointEntity;
     
     public int BirdCount;

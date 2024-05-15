@@ -25,9 +25,10 @@ namespace Damage
             var hitCollisionJob = new DetectHitCollisionJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
-                HitPointsLookup = SystemAPI.GetComponentLookup<CurrentHpComponent>(),
+                
                 TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(),
                 InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityComponent>(),
+                
                 HitColliderLookup = SystemAPI.GetComponentLookup<HitColliderComponent>(),
                 HitColliderTargetLookup = SystemAPI.GetComponentLookup<HitColliderTargetComponent>(),
             };
@@ -41,7 +42,6 @@ namespace Damage
     public struct DetectHitCollisionJob : ICollisionEventsJob
     {
         public BufferLookup<HitBufferElement> HitBufferLookup;
-        [ReadOnly] public ComponentLookup<CurrentHpComponent> HitPointsLookup;
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         [ReadOnly] public ComponentLookup<InvincibilityComponent> InvincibilityLookup;
         

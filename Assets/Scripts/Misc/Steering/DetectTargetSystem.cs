@@ -67,6 +67,7 @@ public partial struct DetectTargetSystem : ISystem
                     }
                 }
 
+                // set seek target entity
                 if (closestEntity != Entity.Null)
                 {
                     state.EntityManager.SetComponentEnabled<HasSeekTargetEntity>(entity, true);

@@ -9,6 +9,7 @@ using Unity.Transforms;
 using UnityEngine;
 using Weapon;
 
+// TODO: add comments, remove magic variables
 public partial struct BirdPassiveAttackSystem : ISystem
 {
     [BurstCompile]
@@ -20,7 +21,6 @@ public partial struct BirdPassiveAttackSystem : ISystem
         state.RequireForUpdate<PlayerPositionSingleton>();
 
         state.RequireForUpdate<PlayerTag>();
-
         state.RequireForUpdate<BirdPassiveAttackConfig>();
     }
 
@@ -30,16 +30,16 @@ public partial struct BirdPassiveAttackSystem : ISystem
         var config = SystemAPI.GetSingletonRW<BirdPassiveAttackConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-        foreach (var (projectile, timer, entity) in SystemAPI
-            .Query<BirdProjectileComponent, RefRW<TimerObject>>()
-            .WithAll<DiveMovementComponent>()
+        // go through active diving (passive) bird projectiles. 
+        foreach (var (timer, entity) in SystemAPI
+            .Query<RefRW<TimerObject>>()
+            .WithAll<DiveMovementComponent, BirdProjectileComponent>()
             .WithNone<SeekTargetComponent>()
             .WithEntityAccess())
         {
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
             if (timer.ValueRO.currentTime > timer.ValueRO.maxTime)
             {
-                
                 // add seeking behaviour
                 SeekTargetComponent seekTargetComponent = new SeekTargetComponent
                 {

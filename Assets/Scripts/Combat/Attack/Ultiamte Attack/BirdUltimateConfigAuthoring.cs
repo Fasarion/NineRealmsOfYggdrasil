@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BirdUltimateConfigAuthoring : MonoBehaviour
@@ -8,6 +9,8 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [Header("Tornado")]
     [Tooltip("Prefab of the tornado entity.")]
     [SerializeField] private GameObject tornadoEntityPrefab;
+    [Tooltip("How the mid point of the tornado is offset from the bird circle. Will have an effect on suction direction.")]
+    [SerializeField] private float3 tornadoOffset = new float3(0, 3, 0);
     [Tooltip("How much delay between each suction towards the tornado mid point.")]
     [SerializeField] private float timeBetweenSuctions = 0.3f; 
     
@@ -42,6 +45,7 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
             AddComponent(entity, new BirdsUltimateAttackConfig
             {
                 TornadoPrefab = GetEntity(authoring.tornadoEntityPrefab, TransformUsageFlags.Dynamic),
+                TornadoOffset = authoring.tornadoOffset,
                 TimeBetweenSuctions = authoring.timeBetweenSuctions,
                 
                 BirdCount = authoring.birdCount,
@@ -59,6 +63,7 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
 public struct BirdsUltimateAttackConfig : IComponentData
 {
     public Entity TornadoPrefab;
+    public float3 TornadoOffset;
     public float TimeBetweenSuctions;
     
     public Entity CenterPointEntity;

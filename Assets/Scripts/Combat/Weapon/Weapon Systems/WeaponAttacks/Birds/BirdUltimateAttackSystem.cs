@@ -29,7 +29,8 @@ public partial struct BirdUltimateAttackSystem : ISystem
         // if active
         if (config.ValueRO.IsActive)
         {
-            var targetPos = SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position;
+            var targetPos = SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position +
+                            config.ValueRO.TornadoOffset;
             
             foreach (var (transform, timer, hitBuffer) in SystemAPI
                 .Query<RefRW<LocalTransform>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>>()

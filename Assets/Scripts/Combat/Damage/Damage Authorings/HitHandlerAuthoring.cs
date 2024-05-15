@@ -40,7 +40,7 @@ namespace Damage
     {
         public bool IsHandled;
         public float3 Position;
-        public float2 Normal;
+        public float3 Normal;
         public Entity HitEntity;
     }
 

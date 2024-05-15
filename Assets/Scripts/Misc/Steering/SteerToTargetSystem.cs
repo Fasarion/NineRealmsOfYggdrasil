@@ -3,6 +3,7 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 
 public partial struct SteerToTargetSystem : ISystem
 {
@@ -10,18 +11,31 @@ public partial struct SteerToTargetSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
-        var deltaTime = SystemAPI.Time.DeltaTime;
             
-        foreach (var (transform, direction, moveToTarget) in 
-            SystemAPI.Query<LocalTransform, RefRW<DirectionComponent>, SeekTargetComponent>())
+        foreach (var (transform, direction, moveToTarget, hasTarget, entity) in 
+            SystemAPI.Query<LocalTransform, RefRW<DirectionComponent>, RefRW<SeekTargetComponent>, HasSeekTargetEntity>()
+                .WithEntityAccess())
         {
-            if (transformLookup.TryGetComponent(moveToTarget.TargetEntity, out var targetPosition))
+            // get entity transform - might not need the check
+            if (transformLookup.TryGetComponent(hasTarget.TargetEntity, out var targetPosition))
             {
-                //direction.ValueRW.Value = math.normalizesafe(targetPosition.Position - transform.Position);
+                var directionToTarget = targetPosition.Position - transform.Position;
+                var distanceToTarget = math.distance(targetPosition.Position, transform.Position);
                 
-                var directionValue = math.normalizesafe(targetPosition.Position - transform.Position);
-                directionValue.y = 0;
-                direction.ValueRW.Value = math.normalizesafe(directionValue);
+                float3 directionValue = math.normalizesafe(directionToTarget);
+
+                // stop steering to entity if too close
+                if (distanceToTarget < moveToTarget.ValueRO.MinDistanceAfterTargetFound)
+                {
+                    moveToTarget.ValueRW.LastTargetEntity = hasTarget.TargetEntity;
+                    state.EntityManager.SetComponentEnabled<HasSeekTargetEntity>(entity, false);
+
+                    // set y to 0 to remove entity going through the ground
+                    directionValue.y = 0;
+                    directionValue = math.normalizesafe(directionToTarget);
+                }
+
+                direction.ValueRW.Value = directionValue;
             }
         }
     }

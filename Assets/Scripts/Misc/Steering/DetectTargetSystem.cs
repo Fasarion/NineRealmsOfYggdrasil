@@ -30,7 +30,9 @@ public partial struct DetectTargetSystem : ISystem
         var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
         var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
         
-        foreach (var (targetSeeker, transform, entity) in SystemAPI.Query<RefRW<SeekTargetComponent>, LocalTransform>().WithEntityAccess())
+        foreach (var (targetSeeker, transform, entity) in SystemAPI.Query<RefRW<SeekTargetComponent>, LocalTransform>()
+            .WithNone<HasSeekTargetEntity>()
+            .WithEntityAccess())
         {
             hits.Clear();
             if (collisionWorld.OverlapSphere(transform.Position, targetSeeker.ValueRO.HalfMaxDistance, ref hits, _detectionFilter))
@@ -40,10 +42,13 @@ public partial struct DetectTargetSystem : ISystem
 
                 foreach (var hit in hits)
                 {
+                    // skip last sought target
+                    if (hit.Entity == targetSeeker.ValueRO.LastTargetEntity) continue;
+                    
                     float distance = hit.Distance;
                     
                     // target is to close
-                    if (distance < targetSeeker.ValueRO.MinDistance) continue;
+                    if (distance < targetSeeker.ValueRO.MinDistanceForSeek) continue;
                     
                     float3 directionToHit = hit.Position - transform.Position;
                     float3 lookRotation = transform.Forward();
@@ -62,7 +67,12 @@ public partial struct DetectTargetSystem : ISystem
                     }
                 }
 
-                targetSeeker.ValueRW.TargetEntity = closestEntity;
+                // set seek target entity
+                if (closestEntity != Entity.Null)
+                {
+                    state.EntityManager.SetComponentEnabled<HasSeekTargetEntity>(entity, true);
+                    state.EntityManager.SetComponentData(entity, new HasSeekTargetEntity{TargetEntity = closestEntity});
+                }
             }
         }
     }

@@ -56,7 +56,4 @@ public struct CircularMovementComponent : IComponentData, IEnableableComponent
     public bool InUpperHalfCircle;
 }
 
-public struct DiveMovementComponent : IComponentData, IEnableableComponent
-{
-    public Entity TargetEntity;
-}
+public struct DiveMovementComponent : IComponentData, IEnableableComponent { }

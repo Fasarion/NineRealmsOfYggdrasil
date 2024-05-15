@@ -16,7 +16,9 @@ public enum EnemyType
     Grunt3,
     Ranged1,
     Ranged2,
-    Ranged3
+    Ranged3,
+    EliteGront,
+    EliteRangest    
 }
 
 public class SpawnConfigAuthoring : MonoBehaviour

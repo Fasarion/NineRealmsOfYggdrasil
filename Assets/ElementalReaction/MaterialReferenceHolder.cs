@@ -8,7 +8,17 @@ public enum MaterialType
     FrozenMaterial,
     ShockMaterial,
     BurnMaterial,
-    GruntMaterial,
+
+    Grunt1Material,
+    Grunt2Material,
+    Grunt3Material,
+
+    Ranger1Material,
+    Ranger2Material,
+    Ranger3Material,
+
+    EliteGrontMaterial,
+    EliteRangestMaterial
 }
 
 public class MaterialReferenceHolder : MonoBehaviour

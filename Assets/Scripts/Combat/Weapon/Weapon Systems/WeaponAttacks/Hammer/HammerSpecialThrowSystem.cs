@@ -158,8 +158,7 @@ public partial struct HammerSpecialThrowSystem : ISystem
             }
             else
             {
-                config.ValueRW.HasSwitchedBack = true;
-                config.ValueRW.Timer = 0;
+                StartGoingBack(ref state, config);
             }
         }
         else
@@ -212,7 +211,13 @@ public partial struct HammerSpecialThrowSystem : ISystem
             transform.ValueRW.Position = hammerTrans.Position;
         }
     }
-    
+
+    private static void StartGoingBack(ref SystemState state, RefRW<HammerSpecialConfig> config)
+    {
+        config.ValueRW.HasSwitchedBack = true;
+        config.ValueRW.Timer = 0;
+    }
+
 
     void HandleSpecialStop(ref SystemState state)
     {

@@ -22,7 +22,7 @@ public class ChoiceUIManager : MonoBehaviour
     
     private static ChoiceUIManager _instance;
     
-    [SerializeField] private List<RoomChoiceUIBehaviour> roomSelects;
+    //[SerializeField] private List<RoomChoiceUIBehaviour> roomSelects;
     //This is probably very ineffective, fix.
     
     
@@ -242,11 +242,11 @@ public class ChoiceUIManager : MonoBehaviour
     {
         ShowUI(roomChoiceObjects.Count);
         
-        for (int i = 0; i < roomChoiceObjects.Count; i++)
+        /*for (int i = 0; i < roomChoiceObjects.Count; i++)
         {
             RoomChoiceObject roomChoice = roomChoiceObjects[i];
             roomSelects[i].UpdateSelectionDisplay(roomChoice);
-        }
+        }*/
     }
     
     
@@ -284,10 +284,10 @@ public class ChoiceUIManager : MonoBehaviour
 
     private void ShowUI(int roomCount)
     {
-        for (int i = 0; i < roomCount; i++)
+        /*for (int i = 0; i < roomCount; i++)
         {
             roomSelects[i].gameObject.SetActive(true);
-        }
+        }*/
 
         _isUIDisplayed = true;
         Time.timeScale = 0f;
@@ -295,10 +295,10 @@ public class ChoiceUIManager : MonoBehaviour
 
     private void HideUI()
     {
-        foreach (var room in roomSelects)
+        /*foreach (var room in roomSelects)
         {
             room.gameObject.SetActive(false);
-        }
+        }*/
 
         _isUIDisplayed = false;
         Time.timeScale = 1f;

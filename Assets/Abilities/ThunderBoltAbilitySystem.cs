@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Damage;
 using Destruction;
+using Patrik;
 using Player;
 using Unity.Burst;
 using Unity.Entities;
@@ -77,6 +78,11 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                                + new float3(0, config.VfxHeightOffset, 0),
                     Rotation = quaternion.identity,
                     Scale = 1,
+                });
+                state.EntityManager.SetComponentData(projectile, new ShouldSetDamageValuesComponent
+                {
+                    AttackType = AttackType.Normal,
+                    WeaponType = WeaponType.Hammer,
                 });
 
                 ability.ValueRW.CurrentCount++;

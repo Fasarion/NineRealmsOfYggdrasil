@@ -58,38 +58,35 @@ public partial struct ShockwaveSystem : ISystem
                 float totalArea = thunderConfig.damageArea;
 
                 hits.Clear();
+
+                var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
                 
-                //TODO: fixa smidigare...
-                foreach (var (configEntity, hitBuffer) in
-                         SystemAPI.Query<RefRW<ThunderStrikeConfig>, DynamicBuffer<HitBufferElement>>())
+
+                if (collisionWorld.OverlapSphere(transform.ValueRO.Position + new float3(0, -thunderConfig.shockwaveEffectHeightOffset, 0), totalArea,
+                        ref hits, _detectionFilter))
                 {
-
-                    if (collisionWorld.OverlapSphere(transform.ValueRO.Position + new float3(0, -thunderConfig.shockwaveEffectHeightOffset, 0), totalArea,
-                            ref hits, _detectionFilter))
+                    foreach (var hit in hits)
                     {
-                        foreach (var hit in hits)
+                        var enemyPos = transformLookup[hit.Entity].Position;
+                        var colPos = hit.Position;
+                        float3 directionToHit = math.normalizesafe((enemyPos - transform.ValueRO.Position));
+
+                        //Maybe TODO: kolla om hit redan finns i buffer
+                        HitBufferElement element = new HitBufferElement
                         {
-                            var enemyPos = transformLookup[hit.Entity].Position;
-                            var colPos = hit.Position;
-                            float3 directionToHit = math.normalizesafe((enemyPos - transform.ValueRO.Position));
-
-                            //Maybe TODO: kolla om hit redan finns i buffer
-                            HitBufferElement element = new HitBufferElement
-                            {
-                                IsHandled = false,
-                                HitEntity = hit.Entity,
-                                Position = colPos,
-                                Normal = directionToHit
-                            };
-                            hitBuffer.Add(element);
-                            
-                            var audioElement = new AudioBufferData() {AudioData = thunderConfig.impactAudioData};
-                            audioBuffer.Add(audioElement);
-                        }
+                            IsHandled = false,
+                            HitEntity = hit.Entity,
+                            Position = colPos,
+                            Normal = directionToHit
+                        };
+                        hitBuffer.Add(element);
+                        
+                        var audioElement = new AudioBufferData() {AudioData = thunderConfig.impactAudioData};
+                        audioBuffer.Add(audioElement);
                     }
-
-                    ability.ValueRW.HasFired = true;
                 }
+
+                ability.ValueRW.HasFired = true;
             }
         }
         ecb.Playback(state.EntityManager);

@@ -92,6 +92,11 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                             Rotation = quaternion.identity,
                             Scale = 1,
                         });
+                        state.EntityManager.SetComponentData(bolt, new ShouldSetDamageValuesComponent
+                        {
+                            AttackType = AttackType.Passive,
+                            WeaponType = WeaponType.Hammer,
+                        });
 
                         break;
                     }

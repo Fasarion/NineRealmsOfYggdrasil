@@ -19,15 +19,17 @@ GameObject:
   - component: {fileID: 8796295642388451722}
   - component: {fileID: 9062196686115931803}
   - component: {fileID: 8071667428324845191}
+  - component: {fileID: -4807361175094672489}
+  - component: {fileID: 922261842375008278}
   - component: {fileID: 5432305332946967007}
   - component: {fileID: 4663337924807953367}
   - component: {fileID: 6445979045985948300}
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
-  - component: {fileID: 2876683596753378015}
-  - component: {fileID: 8269505085597687999}
+  - component: {fileID: -200509008157379024}
+  - component: {fileID: -7229400663601753330}
   m_Layer: 0
-  m_Name: E_Grunt2
+  m_Name: E_Ranger4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,7 +46,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.27, y: 0, z: -2.45}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 1
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -254,7 +256,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 40
+  maxHP: 140
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -285,7 +287,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d92a0f33fd05c4bbe2707605dbf9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 3
+  enemyType: 7
 --- !u!114 &3581742490104402230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,8 +339,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 0
-  awayFromPlayerMoveSpeed: 0.5
+  minimumDistanceForMoving: 11
+  awayFromPlayerMoveSpeed: 0
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +353,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 2.2
+  speedValue: 4
+--- !u!114 &-4807361175094672489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingCooldown: 4
+  shootDistance: 12
+--- !u!114 &922261842375008278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f9a11865114d5c8b91b2ee672d192e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7824363987953266496, guid: 5e68954400681ba47a60c4f7f560c74b,
+    type: 3}
 --- !u!114 &5432305332946967007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5186fce7de95e4d49948125afabc1d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8870220498742206646, guid: 6b6c1bb40799b294f9304aa7b68f507b,
+  gameObjectPrefab: {fileID: 8870220498742206646, guid: 5b6570f0dd7d66f45a0085c37820403d,
     type: 3}
   followsEntity: 1
   followsChild: 0
@@ -426,12 +456,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   audioData:
     AudioEnumValue: 0
-    eventCategoryType: 2
+    eventCategoryType: 0
     weaponType: 0
     enemyTyping: 1
-    audioEventType: 1
+    audioEventType: 0
     attackType: 0
---- !u!114 &2876683596753378015
+--- !u!114 &-200509008157379024
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -443,8 +473,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d033f01e5e00b4ca72fc56a2690069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyAnimationType: 0
---- !u!114 &8269505085597687999
+  EnemyAnimationType: 1
+--- !u!114 &-7229400663601753330
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -456,4 +486,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4268fb16f4c6a43bbe1098509330c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 12

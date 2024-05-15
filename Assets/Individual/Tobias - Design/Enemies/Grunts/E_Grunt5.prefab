@@ -27,7 +27,7 @@ GameObject:
   - component: {fileID: 2876683596753378015}
   - component: {fileID: 8269505085597687999}
   m_Layer: 0
-  m_Name: E_Grunt2
+  m_Name: E_Grunt5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,7 +43,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.27, y: 0, z: -2.45}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1.15}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -254,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 40
+  maxHP: 90
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -285,7 +285,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50d92a0f33fd05c4bbe2707605dbf9c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 3
+  enemyType: 4
 --- !u!114 &3581742490104402230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -351,7 +351,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c60a5090172a418fb4f42337ed59b09d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedValue: 2.2
+  speedValue: 2
 --- !u!114 &5432305332946967007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -379,7 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5186fce7de95e4d49948125afabc1d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8870220498742206646, guid: 6b6c1bb40799b294f9304aa7b68f507b,
+  gameObjectPrefab: {fileID: 8870220498742206646, guid: c5d3eb54bca59bb42b95052122d6bab1,
     type: 3}
   followsEntity: 1
   followsChild: 0
@@ -456,4 +456,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e4268fb16f4c6a43bbe1098509330c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 5
+  type: 6

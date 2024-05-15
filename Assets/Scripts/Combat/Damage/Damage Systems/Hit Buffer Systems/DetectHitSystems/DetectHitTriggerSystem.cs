@@ -97,7 +97,7 @@ namespace Damage
             var hitEntityPosition = TransformLookup[hitEntity].Position;
             
             var hitPosition = math.lerp(triggerEntityPosition, hitEntityPosition, 0.5f);
-            var hitNormal = math.normalizesafe(hitEntityPosition.xz - triggerEntityPosition.xz);
+            var hitNormal = math.normalizesafe(hitEntityPosition - triggerEntityPosition);
             
             var newHitElement = new HitBufferElement
             {

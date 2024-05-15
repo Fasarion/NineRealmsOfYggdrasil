@@ -224,6 +224,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 1153202058674358415, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: attackDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1220610072799146677, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: knockBackForce
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1573172003656105017, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: m_Name
@@ -319,6 +329,11 @@ PrefabInstance:
       propertyPath: m_Cylinder.Radius
       value: 2.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3492190810403210148, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: knockBackForce
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4600464888170940368, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: m_MotionType
@@ -377,6 +392,16 @@ PrefabInstance:
     - target: {fileID: 7250411902124556773, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7390462214705800887, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: attackDamage
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8791241131598760225, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      propertyPath: attackDamage
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9017022476760349507, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,

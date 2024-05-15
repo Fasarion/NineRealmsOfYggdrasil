@@ -58,7 +58,6 @@ public partial struct BirdPassiveAttackSystem : ISystem
 
                 float3 forwardInLocalSpace = playerRot.Forward;//new float3(0, 0, 1);
                 float3 forwardInGlobalSpace = math.rotate(rotation, forwardInLocalSpace); 
-
                 
                 // instantiate bird
                 var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
@@ -66,7 +65,7 @@ public partial struct BirdPassiveAttackSystem : ISystem
                 // update transform
                 var birdTransform = transform;
                 birdTransform.Rotation = rotation;
-                birdTransform.Position = playerPos;
+                birdTransform.Position = playerPos + config.ValueRO.SpawnHeight;
                 state.EntityManager.SetComponentData(birdProjectile, birdTransform);
             
                 // set owner data

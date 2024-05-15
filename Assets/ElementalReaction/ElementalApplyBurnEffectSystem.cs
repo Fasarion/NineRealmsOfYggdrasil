@@ -52,7 +52,7 @@ public partial struct ElementalApplyBurnEffectSystem : ISystem
                 {
                     HitEntity = affectedEntity,
                     IsHandled = false,
-                    Normal = new float2(1, 0),
+                    Normal = new float3(1, 0, 0),
                     Position = affectedTransform.Position,
                 };
                 buffer.Add(element);

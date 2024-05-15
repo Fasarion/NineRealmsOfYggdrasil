@@ -18,6 +18,6 @@ namespace Damage
     
     public struct KnockBackBufferElement : IBufferElementData
     {
-        public float2 KnockBackForce;
+        public float3 KnockBackForce;
     }
 }

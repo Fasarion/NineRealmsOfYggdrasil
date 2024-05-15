@@ -46,8 +46,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tornadoEntityPrefab: {fileID: 2985631337868830301, guid: 310d609e1e1e17a4692829bba05db4f9,
     type: 3}
+  tornadoOffset:
+    x: 0
+    y: 3
+    z: 0
   timeBetweenSuctions: 0.2
   angularSpeed: 10
   birdCount: 2
   lifeTime: 4
-  circleRadius: 5
+  circleRadius: 8

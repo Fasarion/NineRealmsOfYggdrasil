@@ -1,4 +1,5 @@
-﻿using Movement;
+﻿using Destruction;
+using Movement;
 using Patrik;
 using Player;
 using Unity.Burst;
@@ -42,6 +43,8 @@ public partial struct BirdPassiveAttackSystem : ISystem
         int birdCount = config.ValueRO.BirdCount;
         
         // get targets
+
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
         // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
         foreach (var (transform, spawner, weapon, entity) in SystemAPI
@@ -80,7 +83,33 @@ public partial struct BirdPassiveAttackSystem : ISystem
                 {
                     Value = forwardInGlobalSpace
                 });
+
+                // add seeking behaviour
+                SeekTargetComponent seekTargetComponent = new SeekTargetComponent
+                {
+                    FovInRadians = math.PI * 0.5f,
+                    HalfMaxDistance = config.ValueRO.SpawnHeight + 1,
+                    MinDistanceForSeek = 1f,
+                    MinDistanceAfterTargetFound = 0.4f,
+                };
+                
+                ecb.AddComponent<SeekTargetComponent>(birdProjectile);
+                ecb.SetComponent(birdProjectile, seekTargetComponent);
+
+                HasSeekTargetEntity hasSeekTargetEntity = new HasSeekTargetEntity();
+                
+                // add has seek target component
+                ecb.AddComponent<HasSeekTargetEntity>(birdProjectile);
+                ecb.SetComponent(birdProjectile, hasSeekTargetEntity);
+                ecb.SetComponentEnabled<HasSeekTargetEntity>(birdProjectile, false);
+                
+                // add self destruct after seconds
+                ecb.AddComponent<DestroyAfterSecondsComponent>(birdProjectile);
+                ecb.SetComponent(birdProjectile, new DestroyAfterSecondsComponent{TimeToDestroy = 2f});
             }
         }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

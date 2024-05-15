@@ -57,6 +57,4 @@ public struct HasSeekTargetEntity : IComponentData, IEnableableComponent
     public Entity TargetEntity;
 }
 
-public struct DoNextFrame : IComponentData
-{
-}
+public struct DoNextFrame : IComponentData { }

@@ -38,6 +38,10 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [Tooltip("How far from the player should the hammer be grabbed?")]
     [SerializeField] private float distanceFromPlayerToGrab = 1f;
 
+    [Header("Canceling")] 
+    [Tooltip("How many seconds after throwing the hammer can the attack be canceled?")]
+    [SerializeField] private float cancelDelayTime = 0.5f;
+
     [Header("Audio")] 
     [SerializeField] private AudioData throwImpactAudioData;
     [SerializeField] private AudioData throwingAudioData; 
@@ -67,6 +71,8 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 RotationVector = math.normalizesafe(authoring.rotationAxis),
                 
                 CurrentDistanceFromPlayer = float.MaxValue,
+                
+                CancelDelayTime = authoring.cancelDelayTime,
                 
                 throwImpactAudioData = authoring.throwImpactAudioData,
                 throwingAudioData = authoring.throwingAudioData
@@ -98,6 +104,7 @@ public struct HammerSpecialConfig : IComponentData
     
     public float TimeToSwitchBack;
     public float TimeToReturnAfterTurning;
+    public float CancelDelayTime;
 
     public float TravelForwardSpeed => DistanceToTravel / TimeToSwitchBack;
 

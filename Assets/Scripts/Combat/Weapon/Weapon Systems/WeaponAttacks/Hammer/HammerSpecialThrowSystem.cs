@@ -142,23 +142,33 @@ public partial struct HammerSpecialThrowSystem : ISystem
         // Handle moving forwards
         if (!config.ValueRO.HasSwitchedBack)
         {
-            // go forwards
-            if (config.ValueRO.Timer < config.ValueRO.TimeToSwitchBack)
+            var specialInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
+            var normalInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
+
+            bool timerElapsed = config.ValueRO.Timer > config.ValueRO.TimeToSwitchBack;
+
+            bool cancelInoutPressed = specialInput.KeyDown || normalInput.KeyDown;
+            bool cancelInput = cancelInoutPressed && config.ValueRO.Timer > config.ValueRO.CancelDelayTime;
+            
+            // switch back when pressing input button to cancel or if timer has elapsed
+            bool shouldSwitchBack = timerElapsed || cancelInput;
+            if (shouldSwitchBack)
+            {
+                StartGoingBack(ref state, config);
+            }
+            // otherwise, hammer move forwards
+            else
             {
                 foreach (var (transform, animatorReference, animatorGO, hammer) in SystemAPI
                     .Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab, HammerComponent>())
                 {
                     transform.ValueRW.Position += config.ValueRO.DirectionOfTravel * config.ValueRO.TravelForwardSpeed * SystemAPI.Time.DeltaTime;
-                    
+                
                     var directionToPlayer = playerPos - transform.ValueRO.Position;
-                    
+                
                     var distance = math.length(directionToPlayer);
                     config.ValueRW.CurrentDistanceFromPlayer = distance;
                 }
-            }
-            else
-            {
-                StartGoingBack(ref state, config);
             }
         }
         else

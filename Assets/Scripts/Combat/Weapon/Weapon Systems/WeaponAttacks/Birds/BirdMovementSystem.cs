@@ -117,54 +117,7 @@ public partial struct BirdMovementSystem : ISystem
                 circleMover.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
             }
         }
-        
-        // // circular movement
-        // foreach (var (diveMover, moveSpeed, transform, direction, entity) in SystemAPI
-        //     .Query<RefRW<DiveMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
-        //     .WithEntityAccess())
-        // {
-        //     float angleLastFrame = diveMover.ValueRO.CurrentAngle;
-        //     
-        //     // move transform in circle
-        //     float angle = diveMover.ValueRO.CurrentAngle;
-        //     float sinY = math.sin(angle);
-        //     float cosY = math.cos(angle);
-        //
-        //     float3 targetPosition = new float3
-        //     {
-        //         x = diveMover.ValueRO.Radius * cosY,
-        //         y = 0,
-        //         z = diveMover.ValueRO.Radius * sinY,
-        //     };
-        //
-        //     if (diveMover.ValueRO.CenterPointEntity != Entity.Null)
-        //     {
-        //         var centerPointTransform = SystemAPI.GetComponent<LocalTransform>(diveMover.ValueRO.CenterPointEntity);
-        //         targetPosition += centerPointTransform.Position;
-        //     }
-        //
-        //     transform.ValueRW.Position = targetPosition;
-        //     
-        //     // rotate transform
-        //     quaternion rotation = quaternion.RotateY(-angle);
-        //     transform.ValueRW.Rotation = rotation;
-        //     
-        //     // set new angle
-        //     var nextAngle = angleLastFrame + deltaTime * diveMover.ValueRO.AngularSpeed;
-        //     diveMover.ValueRW.CurrentAngle = nextAngle;
-        //
-        //     bool wasInUpperCircle = diveMover.ValueRO.InUpperHalfCircle;
-        //     bool nowInUpperCircle = sinY >= 0;
-        //     
-        //     // Reset hit buffer after every half lap
-        //     if (nowInUpperCircle != wasInUpperCircle)
-        //     {
-        //         var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
-        //         hitBuffer.Clear();
-        //         diveMover.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
-        //     }
-        // }
-        
+
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

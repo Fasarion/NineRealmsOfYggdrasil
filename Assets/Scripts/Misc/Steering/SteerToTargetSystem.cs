@@ -29,9 +29,9 @@ public partial struct SteerToTargetSystem : ISystem
                 {
                     moveToTarget.ValueRW.LastTargetEntity = hasTarget.TargetEntity;
                     state.EntityManager.SetComponentEnabled<HasSeekTargetEntity>(entity, false);
-                    Debug.Log("Loose target");
 
                     directionValue.y = 0;
+                    directionValue = math.normalizesafe(directionToTarget);
                 }
 
                 direction.ValueRW.Value = directionValue;

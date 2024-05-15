@@ -69,6 +69,8 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
             var configRO = SystemAPI.GetSingleton<BirdsUltimateAttackConfig>();
 
+            config.ValueRW.CenterPointEntity = SystemAPI.GetSingletonEntity<MousePositionComponent>();
+
             // Spawn birds evenly spaced around player
             for (int i = 0; i < configRO.BirdCount; i++)
             {
@@ -111,12 +113,12 @@ public partial struct BirdUltimateAttackSystem : ISystem
                         Radius = configRO.Radius,
                         AngularSpeed = configRO.AngularSpeed,
                         BaseAngularSpeed = configRO.AngularSpeed,
-                        moveAroundType = CircularMovementComponent.MoveAroundType.Mouse
+                        CenterPointEntity = config.ValueRO.CenterPointEntity,
+                       // CenterPointEntity = SystemAPI.GetSingletonEntity<MousePositionComponent>(),
+                       // moveAroundType = CircularMovementComponent.MoveAroundType.Mouse
                     });
                 }
             }
         }
-
-        //attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
     }
 }

@@ -58,10 +58,13 @@ public partial struct BirdSpecialAttackSystem : ISystem
         }
 
         ChargeState currentChargeState = chargeInfo.chargeState;
+        var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
 
         // Start charge up
         if (currentChargeState == ChargeState.Start)
         {
+            config.ValueRW.CenterPointEntity = playerEntity;
+            
             // Spawn birds evenly spaced around player
             for (int i = 0; i < config.ValueRO.BirdCount; i++)
             {
@@ -107,7 +110,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
                         Radius = config.ValueRO.InitialRadius,
                         AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
                         BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
-                        moveAroundType = CircularMovementComponent.MoveAroundType.Player
+                        CenterPointEntity = config.ValueRO.CenterPointEntity
+                      //  moveAroundType = CircularMovementComponent.MoveAroundType.Player
                     });
                 }
                 

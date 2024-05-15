@@ -90,17 +90,23 @@ public partial struct BirdMovementSystem : ISystem
                 z = birdSpecialMovement.ValueRO.Radius * sinY,
             };
 
-            switch (birdSpecialMovement.ValueRO.moveAroundType)
+            if (birdSpecialMovement.ValueRO.CenterPointEntity != Entity.Null)
             {
-                case CircularMovementComponent.MoveAroundType.Player:
-                    targetPosition += playerPos;
-                    break;
-                
-                case CircularMovementComponent.MoveAroundType.Mouse:
-                    targetPosition += mousePos;
-                    break;
-                    
+                var centerPointTransform = SystemAPI.GetComponent<LocalTransform>(birdSpecialMovement.ValueRO.CenterPointEntity);
+                targetPosition += centerPointTransform.Position;
             }
+
+            // switch (birdSpecialMovement.ValueRO.moveAroundType)
+            // {
+            //     case CircularMovementComponent.MoveAroundType.Player:
+            //         targetPosition += playerPos;
+            //         break;
+            //     
+            //     case CircularMovementComponent.MoveAroundType.Mouse:
+            //         targetPosition += mousePos;
+            //         break;
+            //         
+            // }
            
             
             

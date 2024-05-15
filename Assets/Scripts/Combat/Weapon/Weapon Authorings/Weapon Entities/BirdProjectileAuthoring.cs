@@ -43,7 +43,9 @@ public struct CircularMovementComponent : IComponentData, IEnableableComponent
 {
     public float Radius;
 
-    public MoveAroundType moveAroundType;
+    public Entity CenterPointEntity;
+
+   // public MoveAroundType moveAroundType;
     
     public float CurrentAngle;
 

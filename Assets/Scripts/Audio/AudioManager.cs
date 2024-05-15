@@ -10,6 +10,7 @@ public class AudioManager : MonoBehaviour
     public WeaponAudio weaponAudio;
     public EnemyAudio enemyAudio;
     public PlayerAudio playerAudio;
+    public UIAudio uiAudio;
 
     private void Awake()
     {

@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
   m_Layer: 0
-  m_Name: Grunt3
+  m_Name: EliteGront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.27, y: 0, z: -2.45}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 70
+  maxHP: 140
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -377,7 +377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5186fce7de95e4d49948125afabc1d64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 8870220498742206646, guid: 317f2c35b5f2bf14aae4df7356b51c63,
+  gameObjectPrefab: {fileID: 8870220498742206646, guid: 7bc3bc13047d504468ab8cde0dad472a,
     type: 3}
   followsEntity: 1
   followsChild: 0

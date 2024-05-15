@@ -95,8 +95,6 @@ public partial struct UltimateAttackActivasionSystem : ISystem
             {
                 state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
                 attackCaller.ValueRW.PrepareUltimateInfo.Perform = true;
-                
-                Debug.Log("Perform ult");
             }
             
             // removing existing target 

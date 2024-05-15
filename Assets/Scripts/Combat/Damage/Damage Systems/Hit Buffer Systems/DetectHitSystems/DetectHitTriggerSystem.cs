@@ -28,9 +28,13 @@ namespace Damage
             var hitTriggerJob = new DetectHitTriggerJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
+                
+                TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(),
+                InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityComponent>(),
+
                 TriggerComponentLookup = SystemAPI.GetComponentLookup<HitTriggerComponent>(),
                 TriggerTargetLookup = SystemAPI.GetComponentLookup<HitTriggerTargetComponent>(),
-                TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
+                
             };
 
             var simSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
@@ -45,6 +49,8 @@ namespace Damage
         [ReadOnly] public ComponentLookup<HitTriggerComponent> TriggerComponentLookup;
         [ReadOnly] public ComponentLookup<HitTriggerTargetComponent> TriggerTargetLookup;
         
+        [ReadOnly] public ComponentLookup<InvincibilityComponent> InvincibilityLookup;
+
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         
         public void Execute(TriggerEvent triggerEvent)
@@ -69,6 +75,12 @@ namespace Damage
                 hitEntity = triggerEvent.EntityA;
             }
             else
+            {
+                return;
+            }
+            
+            // ignore collisions if entity has invincibility
+            if (InvincibilityLookup.HasComponent(hitEntity) && InvincibilityLookup.IsComponentEnabled(hitEntity))
             {
                 return;
             }

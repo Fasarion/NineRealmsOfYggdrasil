@@ -50,6 +50,10 @@ namespace Damage
                             forceDirection = hit.Normal;
                             break;
                         
+                        case KnockDirectionType.TowardsHitNormal:
+                            forceDirection = -hit.Normal;
+                            break;
+                        
                         case KnockDirectionType.AwayFromPlayer:
                             forceDirection = math.normalize(hit.Position.xz - playerPos.Value.xz);
                             break;
@@ -64,6 +68,7 @@ namespace Damage
                                 forceDirection *= -1;
                             }
                             break;
+                        
                     }
 
                     knockBackBufferElements.Add(new KnockBackBufferElement

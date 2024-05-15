@@ -29,6 +29,7 @@ public enum GameState
 {
     None,
     Combat,
+    Paused,
 }
 
 public enum CombatState

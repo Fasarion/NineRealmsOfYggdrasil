@@ -9,13 +9,14 @@ using Unity.Transforms;
 using UnityEngine;
 using Weapon;
 
+[UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
 public partial struct BirdMovementSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<PlayerPositionSingleton>();
-        state.RequireForUpdate<BirdNormalMovementComponent>();
+        state.RequireForUpdate<PlayerPositionSingleton>();        
+        state.RequireForUpdate<MousePositionInput>();
     }
     
     [BurstCompile]
@@ -23,13 +24,14 @@ public partial struct BirdMovementSystem : ISystem
     {
         var deltaTime = SystemAPI.Time.DeltaTime;
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
+        var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
         var playerPos2D = playerPos.xz;
 
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
-        // normal attack movement
+        // bezier movement
         foreach (var (birdMovement, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdNormalMovementComponent>, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+            .Query<RefRW<BezierMovementComponent>, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             // disable this move behaviour when bird has completed its curve
@@ -69,21 +71,45 @@ public partial struct BirdMovementSystem : ISystem
             direction.ValueRW.Value = directionValue;
         }
 
-        // special attack movement
+        // circular movement
         foreach (var (birdSpecialMovement, moveSpeed, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+            .Query<RefRW<CircularMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             float angleLastFrame = birdSpecialMovement.ValueRO.CurrentAngle;
             
-            
             // move transform in circle
             float angle = birdSpecialMovement.ValueRO.CurrentAngle;
             float sinY = math.sin(angle);
+            float cosY = math.cos(angle);
+
+            float3 targetPosition = new float3
+            {
+                x = birdSpecialMovement.ValueRO.Radius * cosY,
+                y = 0,
+                z = birdSpecialMovement.ValueRO.Radius * sinY,
+            };
+
+            if (birdSpecialMovement.ValueRO.CenterPointEntity != Entity.Null)
+            {
+                var centerPointTransform = SystemAPI.GetComponent<LocalTransform>(birdSpecialMovement.ValueRO.CenterPointEntity);
+                targetPosition += centerPointTransform.Position;
+            }
+
+            // switch (birdSpecialMovement.ValueRO.moveAroundType)
+            // {
+            //     case CircularMovementComponent.MoveAroundType.Player:
+            //         targetPosition += playerPos;
+            //         break;
+            //     
+            //     case CircularMovementComponent.MoveAroundType.Mouse:
+            //         targetPosition += mousePos;
+            //         break;
+            //         
+            // }
+           
             
-            float x = playerPos.x + birdSpecialMovement.ValueRO.Radius * math.cos(angle);
-            float z = playerPos.z + birdSpecialMovement.ValueRO.Radius * sinY;
-            float3 targetPosition = new float3(x, playerPos.y, z);
+            
             transform.ValueRW.Position = targetPosition;
             
             // rotate transform
@@ -104,8 +130,6 @@ public partial struct BirdMovementSystem : ISystem
                 hitBuffer.Clear();
                 birdSpecialMovement.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
             }
-            
-            birdSpecialMovement.ValueRW.PreviousAngle = birdSpecialMovement.ValueRO.CurrentAngle;
         }
         
         ecb.Playback(state.EntityManager);

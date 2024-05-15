@@ -1,21 +1,15 @@
 ﻿using Destruction;
-using Movement;
 using Patrik;
 using Player;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 using Weapon;
 
-//[UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
-//[UpdateAfter(typeof(PlayerAttackSystem))]
-//[UpdateAfter(typeof(HandleAnimationSystem))]
 
 public partial struct BirdUltimateAttackSystem : ISystem
 {
-    
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -30,16 +24,38 @@ public partial struct BirdUltimateAttackSystem : ISystem
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<BirdsUltimateAttackConfig>();
 
+        // if active
         if (config.ValueRO.IsActive)
         {
             config.ValueRW.LifeTimeTimer += SystemAPI.Time.DeltaTime;
             
-            if (config.ValueRO.LifeTimeTimer > config.ValueRO.LifeTime)
+            var specialInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
+            var normalInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
+            
+            bool cancelInoutPressed = specialInput.KeyDown || normalInput.KeyDown;
+            bool lifeTimeComplete = config.ValueRO.LifeTimeTimer > config.ValueRO.LifeTime;
+
+            bool shouldReturn = cancelInoutPressed || lifeTimeComplete;
+            
+            if (shouldReturn)
             {
+                var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+                
+                // destroy all birds on return
+                foreach (var (_, entity) in SystemAPI
+                    .Query<BirdProjectileComponent>()
+                    .WithEntityAccess())
+                {
+                    ecb.AddComponent<ShouldBeDestroyed>(entity);
+                }
+                
                 config.ValueRW.LifeTimeTimer = 0;
                 config.ValueRW.IsActive = false;
                 var attackCallerRW = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
                 attackCallerRW.ValueRW.ReturnWeapon = true;
+                
+                ecb.Playback(state.EntityManager);
+                ecb.Dispose();
             }
 
             return;
@@ -49,8 +65,6 @@ public partial struct BirdUltimateAttackSystem : ISystem
         if (startAttack)
         {
             config.ValueRW.IsActive = true;
-
-            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             
             var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
             var configRO = SystemAPI.GetSingleton<BirdsUltimateAttackConfig>();
@@ -99,19 +113,10 @@ public partial struct BirdUltimateAttackSystem : ISystem
                         BaseAngularSpeed = configRO.AngularSpeed,
                         moveAroundType = CircularMovementComponent.MoveAroundType.Mouse
                     });
-                    
-                    ecb.AddComponent(birdProjectile, new DestroyAfterSecondsComponent
-                    {
-                        TimeToDestroy = configRO.LifeTime
-                    });
                 }
             }
-            
-            ecb.Playback(state.EntityManager);
-            ecb.Dispose();
         }
 
-        attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-        attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
+        //attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
     }
 }

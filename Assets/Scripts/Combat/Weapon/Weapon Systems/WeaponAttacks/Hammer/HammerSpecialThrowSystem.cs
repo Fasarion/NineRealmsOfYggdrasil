@@ -21,6 +21,9 @@ public partial struct HammerSpecialThrowSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerSpecialConfig>();
         state.RequireForUpdate<RandomComponent>();
+        
+        state.RequireForUpdate<PlayerSpecialAttackInput>();
+        state.RequireForUpdate<PlayerNormalAttackInput>();
     }
 
 

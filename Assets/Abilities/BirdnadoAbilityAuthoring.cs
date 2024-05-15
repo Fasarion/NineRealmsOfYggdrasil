@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 public class BirdnadoAbilityAuthoring : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    class Baker : Baker<BirdnadoAbilityAuthoring>
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public override void Bake(BirdnadoAbilityAuthoring authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponent(entity, new BirdnadoComponent());
+        }
     }
 }
+
+public struct BirdnadoComponent : IComponentData{}

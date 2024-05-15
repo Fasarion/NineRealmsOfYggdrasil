@@ -27,7 +27,8 @@ public partial class UpdateMouseWorldPositionSystem : SystemBase
                 return;
             }
         }
-            
+
+        // update mouse world pos
         Vector3 screenPosVector3 = new Vector3(mousePositionInScreenSpace.x, mousePositionInScreenSpace.y, 0);
         Ray ray = _camera.ScreenPointToRay(screenPosVector3);
         if (Physics.Raycast(ray, out RaycastHit hit))

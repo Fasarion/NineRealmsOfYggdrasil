@@ -4,13 +4,11 @@ using Movement;
 using Patrik;
 using Player;
 using Unity.Burst;
-using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using Weapon;
 
-//[UpdateAfter(typeof(PlayerRotationSystem))]
 public partial struct BirdNormalAttackSystem : ISystem
 {
     private int lastIndex;
@@ -89,6 +87,9 @@ public partial struct BirdNormalAttackSystem : ISystem
             };
             state.EntityManager.SetComponentData(birdProjectile, bezierMovementComponent);
             state.EntityManager.SetComponentEnabled<BezierMovementComponent>(birdProjectile, true);
+            
+            // disable auto move
+            state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
             
             // update last index
             lastIndex = (lastIndex + 1) % 2;

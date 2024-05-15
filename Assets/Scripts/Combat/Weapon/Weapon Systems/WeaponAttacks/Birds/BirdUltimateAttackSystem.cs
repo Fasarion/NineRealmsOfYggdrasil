@@ -1,5 +1,6 @@
 ﻿using Damage;
 using Destruction;
+using Movement;
 using Patrik;
 using Player;
 using Unity.Burst;
@@ -28,12 +29,17 @@ public partial struct BirdUltimateAttackSystem : ISystem
         // if active
         if (config.ValueRO.IsActive)
         {
+            var targetPos = SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position;
+            
             foreach (var (transform, timer, hitBuffer) in SystemAPI
                 .Query<RefRW<LocalTransform>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>>()
                 .WithAll<BirdnadoComponent>())
             {
-                transform.ValueRW.Position =
-                    SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position;
+                var distanceToTarget = math.length(targetPos - transform.ValueRW.Position);
+                float maxTimeStep = 1f;
+
+
+                transform.ValueRW.Position = targetPos;
 
                 timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
                 
@@ -153,6 +159,9 @@ public partial struct BirdUltimateAttackSystem : ISystem
                         BaseAngularSpeed = configRO.AngularSpeed,
                         CenterPointEntity = config.ValueRO.CenterPointEntity,
                     });
+                    
+                    // disable auto move
+                    state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
                 }
             }
         }

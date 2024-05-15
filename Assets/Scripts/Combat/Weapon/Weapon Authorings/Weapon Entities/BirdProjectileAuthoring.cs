@@ -21,6 +21,9 @@ public class BirdProjectileAuthoring : MonoBehaviour
             
             AddComponent(entity, new CircularMovementComponent());
             SetComponentEnabled<CircularMovementComponent>(entity, false);
+            
+            AddComponent(entity, new DiveMovementComponent());
+            SetComponentEnabled<DiveMovementComponent>(entity, false);
         }
     }
 }
@@ -44,8 +47,6 @@ public struct CircularMovementComponent : IComponentData, IEnableableComponent
     public float Radius;
 
     public Entity CenterPointEntity;
-
-   // public MoveAroundType moveAroundType;
     
     public float CurrentAngle;
 
@@ -53,11 +54,9 @@ public struct CircularMovementComponent : IComponentData, IEnableableComponent
     public float AngularSpeed;
     
     public bool InUpperHalfCircle;
+}
 
-    public enum MoveAroundType
-    {
-        None,
-        Player,
-        Mouse
-    }
+public struct DiveMovementComponent : IComponentData, IEnableableComponent
+{
+    public Entity TargetEntity;
 }

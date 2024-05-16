@@ -5,13 +5,8 @@ using UnityEngine;
 using Destruction;
 
 public class XPObjectConfigAuthoring : MonoBehaviour
-{
-    public GameObject xPObjectPrefab;
-
-    [Header("--Tweakable Values--")] 
-    [Tooltip("The experience gained when the object is picked up by the player.")]
-    public int experience = 1;
-
+{ 
+    [Header("--Tweakable Values--")]
     [Tooltip("The base distance the player must be from the object for it to be picked up.")]
     public float baseDistance = 1;
 
@@ -26,8 +21,6 @@ public class XPObjectConfigAuthoring : MonoBehaviour
             AddComponent(entity,
                 new XPObjectConfig
                     {
-                        xPObjectPrefab = GetEntity(authoring.xPObjectPrefab, TransformUsageFlags.Dynamic),
-                        experience = authoring.experience,
                         baseDistance = authoring.baseDistance,
                         moveSpeed = authoring.moveSpeed
                     });
@@ -37,8 +30,6 @@ public class XPObjectConfigAuthoring : MonoBehaviour
 
 public struct XPObjectConfig : IComponentData
 {
-    public Entity xPObjectPrefab;
-    public int experience;
     public float baseDistance;
     public float moveSpeed;
 }

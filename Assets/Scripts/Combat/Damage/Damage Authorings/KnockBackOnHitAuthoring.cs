@@ -37,5 +37,6 @@ namespace Damage
         AlongHitNormal,
         PerpendicularToPlayer,
         AwayFromPlayer,
+        TowardsHitNormal, 
     }
 }

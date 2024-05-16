@@ -4,13 +4,11 @@ using Movement;
 using Patrik;
 using Player;
 using Unity.Burst;
-using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using Weapon;
 
-[UpdateAfter(typeof(PlayerRotationSystem))]
 public partial struct BirdNormalAttackSystem : ISystem
 {
     private int lastIndex;
@@ -32,10 +30,9 @@ public partial struct BirdNormalAttackSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
-
         bool shouldStartAttack = attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Birds, AttackType.Normal);
         if (!shouldStartAttack) return;
-
+        
         var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         var playerPos2d = playerPos.xz;
@@ -68,9 +65,6 @@ public partial struct BirdNormalAttackSystem : ISystem
                 OwnerWasActive = weapon.InActiveState
             });
             
-            // disable auto move
-            state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
-            
             // get movement control points
             float4 localControlPoint1 = birdSettings.controlPoint1;
             float4 localControlPoint2 = birdSettings.controlPoint2;
@@ -83,7 +77,7 @@ public partial struct BirdNormalAttackSystem : ISystem
             bool startWithPoint1 = lastIndex % 2 == 0;
 
             // set control points for bird
-            BirdNormalMovementComponent birdNormalMovement = new BirdNormalMovementComponent
+            BezierMovementComponent bezierMovementComponent = new BezierMovementComponent
             {
                 startPoint = playerPos2d,
                 controlPoint1 = startWithPoint1 ? controlPoint1 : controlPoint2,
@@ -91,8 +85,11 @@ public partial struct BirdNormalAttackSystem : ISystem
                 
                 TimeToComplete = birdSettings.timeToCompleteMovement,
             };
-            state.EntityManager.SetComponentData(birdProjectile, birdNormalMovement);
-            state.EntityManager.SetComponentEnabled<BirdNormalMovementComponent>(birdProjectile, true);
+            state.EntityManager.SetComponentData(birdProjectile, bezierMovementComponent);
+            state.EntityManager.SetComponentEnabled<BezierMovementComponent>(birdProjectile, true);
+            
+            // disable auto move
+            state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
             
             // update last index
             lastIndex = (lastIndex + 1) % 2;

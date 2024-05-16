@@ -29,25 +29,32 @@ public class SeekTargetAuthoring : MonoBehaviour
             
             AddComponent(entity, new SeekTargetComponent
             {
-                MinDistance = authoring.minDistance,
+                MinDistanceForSeek = authoring.minDistance,
                 HalfMaxDistance = authoring.maxDistance * 0.5f,
                    
                 FovInRadians = math.radians(authoring.fov) * 0.5f
             });
+            
+            AddComponent(entity, new HasSeekTargetEntity());
+            SetComponentEnabled<HasSeekTargetEntity>(entity, false);
         }
     }
 }
 
 public struct SeekTargetComponent : IComponentData
 {
-    public Entity TargetEntity;
+    public Entity LastTargetEntity;
     
-    public float MinDistance;
+    public float MinDistanceAfterTargetFound;
+    public float MinDistanceForSeek;
     public float HalfMaxDistance;
 
     public float FovInRadians;
 }
 
-public struct DoNextFrame : IComponentData
+public struct HasSeekTargetEntity : IComponentData, IEnableableComponent
 {
+    public Entity TargetEntity;
 }
+
+public struct DoNextFrame : IComponentData { }

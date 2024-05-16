@@ -28,9 +28,13 @@ namespace Damage
             var hitTriggerJob = new DetectHitTriggerJob
             {
                 HitBufferLookup = SystemAPI.GetBufferLookup<HitBufferElement>(),
+                
+                TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(),
+                InvincibilityLookup = SystemAPI.GetComponentLookup<InvincibilityComponent>(),
+
                 TriggerComponentLookup = SystemAPI.GetComponentLookup<HitTriggerComponent>(),
                 TriggerTargetLookup = SystemAPI.GetComponentLookup<HitTriggerTargetComponent>(),
-                TransformLookup = SystemAPI.GetComponentLookup<LocalTransform>()
+                
             };
 
             var simSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
@@ -45,6 +49,8 @@ namespace Damage
         [ReadOnly] public ComponentLookup<HitTriggerComponent> TriggerComponentLookup;
         [ReadOnly] public ComponentLookup<HitTriggerTargetComponent> TriggerTargetLookup;
         
+        [ReadOnly] public ComponentLookup<InvincibilityComponent> InvincibilityLookup;
+
         [ReadOnly] public ComponentLookup<LocalTransform> TransformLookup;
         
         public void Execute(TriggerEvent triggerEvent)
@@ -73,6 +79,12 @@ namespace Damage
                 return;
             }
             
+            // ignore collisions if entity has invincibility
+            if (InvincibilityLookup.HasComponent(hitEntity) && InvincibilityLookup.IsComponentEnabled(hitEntity))
+            {
+                return;
+            }
+            
             // Determine if the hit entity is already added to the trigger entity's hit buffer 
             var hitBuffer = HitBufferLookup[triggerEntity];
             foreach (var hit in hitBuffer)
@@ -85,7 +97,7 @@ namespace Damage
             var hitEntityPosition = TransformLookup[hitEntity].Position;
             
             var hitPosition = math.lerp(triggerEntityPosition, hitEntityPosition, 0.5f);
-            var hitNormal = math.normalizesafe(hitEntityPosition.xz - triggerEntityPosition.xz);
+            var hitNormal = math.normalizesafe(hitEntityPosition - triggerEntityPosition);
             
             var newHitElement = new HitBufferElement
             {

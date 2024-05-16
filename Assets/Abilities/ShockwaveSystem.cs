@@ -71,7 +71,7 @@ public partial struct ShockwaveSystem : ISystem
                         {
                             var enemyPos = transformLookup[hit.Entity].Position;
                             var colPos = hit.Position;
-                            float2 directionToHit = math.normalizesafe((enemyPos.xz - transform.ValueRO.Position.xz));
+                            float3 directionToHit = math.normalizesafe((enemyPos - transform.ValueRO.Position));
 
                             //Maybe TODO: kolla om hit redan finns i buffer
                             HitBufferElement element = new HitBufferElement

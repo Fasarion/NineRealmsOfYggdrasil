@@ -43,27 +43,32 @@ namespace Damage
                     
                     var knockBackBufferElements = knockBackBufferLookup[hit.HitEntity];
 
-                    float2 forceDirection = float2.zero;
+                    float3 forceDirection = float3.zero;
                     switch (knockBackComponent.KnockDirection)
                     {
                         case KnockDirectionType.AlongHitNormal:
                             forceDirection = hit.Normal;
                             break;
                         
+                        case KnockDirectionType.TowardsHitNormal:
+                            forceDirection = -hit.Normal;
+                            break;
+                        
                         case KnockDirectionType.AwayFromPlayer:
-                            forceDirection = math.normalize(hit.Position.xz - playerPos.Value.xz);
+                            forceDirection = math.normalize(hit.Position - playerPos.Value);
                             break;
                         
                         case KnockDirectionType.PerpendicularToPlayer:
-                            var toPlayer = math.normalize(hit.Position.xz - playerPos.Value.xz);
+                            var toPlayer = math.normalize(hit.Position - playerPos.Value);
                             
                             // half of the time knocks to the right, half the time knocks to the left
-                            forceDirection = new float2(-toPlayer.y, toPlayer.x);
+                            forceDirection = new float3(-toPlayer.y, 0, toPlayer.x);
                             if (random.ValueRW.random.NextFloat() > 0.5f)
                             {
                                 forceDirection *= -1;
                             }
                             break;
+                        
                     }
 
                     knockBackBufferElements.Add(new KnockBackBufferElement

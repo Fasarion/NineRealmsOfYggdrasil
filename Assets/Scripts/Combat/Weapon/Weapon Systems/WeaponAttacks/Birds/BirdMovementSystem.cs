@@ -9,13 +9,14 @@ using Unity.Transforms;
 using UnityEngine;
 using Weapon;
 
+[UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
 public partial struct BirdMovementSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-        state.RequireForUpdate<PlayerPositionSingleton>();
-        state.RequireForUpdate<BirdNormalMovementComponent>();
+        state.RequireForUpdate<PlayerPositionSingleton>();        
+        state.RequireForUpdate<MousePositionInput>();
     }
     
     [BurstCompile]
@@ -23,17 +24,18 @@ public partial struct BirdMovementSystem : ISystem
     {
         var deltaTime = SystemAPI.Time.DeltaTime;
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
+        var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
         var playerPos2D = playerPos.xz;
 
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
-        // normal attack movement
-        foreach (var (birdMovement, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdNormalMovementComponent>, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+        // bezier movement
+        foreach (var (bezierMover, transform, direction, entity) in SystemAPI
+            .Query<RefRW<BezierMovementComponent>, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
             // disable this move behaviour when bird has completed its curve
-            if (birdMovement.ValueRO.CurrentTValue > 1)
+            if (bezierMover.ValueRO.CurrentTValue > 1)
             {
                // state.EntityManager.SetComponentEnabled<AutoMoveComponent>(entity, true);
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
@@ -41,22 +43,22 @@ public partial struct BirdMovementSystem : ISystem
             }
             
             // reset hit buffer halfway through motion so bird can damage enemies on the way back
-            if (!birdMovement.ValueRO.HasResetHitBuffer && birdMovement.ValueRO.CurrentTValue > 0.5f)
+            if (!bezierMover.ValueRO.HasResetHitBuffer && bezierMover.ValueRO.CurrentTValue > 0.5f)
             {
                 var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
                 hitBuffer.Clear();
-                birdMovement.ValueRW.HasResetHitBuffer = true;
+                bezierMover.ValueRW.HasResetHitBuffer = true;
             }
             
-            birdMovement.ValueRW.CurrentTValue += deltaTime / birdMovement.ValueRO.TimeToComplete;
+            bezierMover.ValueRW.CurrentTValue += deltaTime / bezierMover.ValueRO.TimeToComplete;
             
-            float2 start = birdMovement.ValueRO.startPoint;
-            float2 control1 = birdMovement.ValueRO.controlPoint1;
-            float2 control2 = birdMovement.ValueRO.controlPoint2;
+            float2 start = bezierMover.ValueRO.startPoint;
+            float2 control1 = bezierMover.ValueRO.controlPoint1;
+            float2 control2 = bezierMover.ValueRO.controlPoint2;
             float2 end = playerPos2D;
             
-            float2 cubicPos = EvaluateCubicBezier(ref state, start, control1, control2, end, birdMovement.ValueRO.CurrentTValue);
-            float2 tangent = EvaluateCubicBezierDerivative(ref state, start, control1, control2, end, birdMovement.ValueRO.CurrentTValue);
+            float2 cubicPos = EvaluateCubicBezier(ref state, start, control1, control2, end, bezierMover.ValueRO.CurrentTValue);
+            float2 tangent = EvaluateCubicBezierDerivative(ref state, start, control1, control2, end, bezierMover.ValueRO.CurrentTValue);
 
             transform.ValueRW.Position = new float3(cubicPos.x, 0, cubicPos.y);
             var directionValue = new float3(tangent.x, 0, tangent.y);
@@ -69,21 +71,31 @@ public partial struct BirdMovementSystem : ISystem
             direction.ValueRW.Value = directionValue;
         }
 
-        // special attack movement
-        foreach (var (birdSpecialMovement, moveSpeed, transform, direction, entity) in SystemAPI
-            .Query<RefRW<BirdSpecialMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
+        // circular movement
+        foreach (var (circleMover, moveSpeed, transform, direction, entity) in SystemAPI
+            .Query<RefRW<CircularMovementComponent>, MoveSpeedComponent, RefRW<LocalTransform>, RefRW<DirectionComponent>>()
             .WithEntityAccess())
         {
-            float angleLastFrame = birdSpecialMovement.ValueRO.CurrentAngle;
-            
+            float angleLastFrame = circleMover.ValueRO.CurrentAngle;
             
             // move transform in circle
-            float angle = birdSpecialMovement.ValueRO.CurrentAngle;
+            float angle = circleMover.ValueRO.CurrentAngle;
             float sinY = math.sin(angle);
-            
-            float x = playerPos.x + birdSpecialMovement.ValueRO.Radius * math.cos(angle);
-            float z = playerPos.z + birdSpecialMovement.ValueRO.Radius * sinY;
-            float3 targetPosition = new float3(x, playerPos.y, z);
+            float cosY = math.cos(angle);
+
+            float3 targetPosition = new float3
+            {
+                x = circleMover.ValueRO.Radius * cosY,
+                y = 0,
+                z = circleMover.ValueRO.Radius * sinY,
+            };
+
+            if (circleMover.ValueRO.CenterPointEntity != Entity.Null)
+            {
+                var centerPointTransform = SystemAPI.GetComponent<LocalTransform>(circleMover.ValueRO.CenterPointEntity);
+                targetPosition += centerPointTransform.Position;
+            }
+
             transform.ValueRW.Position = targetPosition;
             
             // rotate transform
@@ -91,10 +103,10 @@ public partial struct BirdMovementSystem : ISystem
             transform.ValueRW.Rotation = rotation;
             
             // set new angle
-            var nextAngle = angleLastFrame + deltaTime * birdSpecialMovement.ValueRO.AngularSpeed;
-            birdSpecialMovement.ValueRW.CurrentAngle = nextAngle;
+            var nextAngle = angleLastFrame + deltaTime * circleMover.ValueRO.AngularSpeed;
+            circleMover.ValueRW.CurrentAngle = nextAngle;
 
-            bool wasInUpperCircle = birdSpecialMovement.ValueRO.InUpperHalfCircle;
+            bool wasInUpperCircle = circleMover.ValueRO.InUpperHalfCircle;
             bool nowInUpperCircle = sinY >= 0;
             
             // Reset hit buffer after every half lap
@@ -102,12 +114,10 @@ public partial struct BirdMovementSystem : ISystem
             {
                 var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
                 hitBuffer.Clear();
-                birdSpecialMovement.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
+                circleMover.ValueRW.InUpperHalfCircle = !wasInUpperCircle;
             }
-            
-            birdSpecialMovement.ValueRW.PreviousAngle = birdSpecialMovement.ValueRO.CurrentAngle;
         }
-        
+
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

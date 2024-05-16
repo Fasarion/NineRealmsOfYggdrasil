@@ -25,7 +25,7 @@ public partial struct AbilityStatWriter : ISystem
         var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
         var playerDamageMod = state.EntityManager.GetComponentData<DamageModifierComponent>(playerEntity);
         var playerSkillMod = state.EntityManager.GetComponentData<SkillModifierComponent>(playerEntity);
-        var playerDamageComp = state.EntityManager.GetComponentData<DamageComponent>(playerEntity);
+        var playerDamageComponent = state.EntityManager.GetComponentData<DamageComponent>(playerEntity);
         
         foreach (var (cachedDamage, shouldSetDamageComponent, entity) in SystemAPI
                      .Query<RefRW<CachedDamageComponent>, ShouldSetDamageValuesComponent>().WithEntityAccess())
@@ -39,11 +39,11 @@ public partial struct AbilityStatWriter : ISystem
             var damageModifier = GetDamageModifierComponent(ref state, weaponEntity);
             var skillModifier = GetSkillModifier(ref state, weaponEntity, abilityType);
             
-            float totalDamage = (playerDamageComp.Value.DamageValue + baseWeaponDmgComponent.Value.DamageValue)
+            float totalDamage = (playerDamageComponent.Value.DamageValue + baseWeaponDmgComponent.Value.DamageValue)
                                 * (1 + playerDamageMod.Value + damageModifier.Value)
                                 * (playerSkillMod.Value.GetModifier(abilityType) + skillModifier.Value.GetModifier(abilityType));
             
-            float totalCritRate = playerDamageComp.Value.CriticalRate + baseWeaponDmgComponent.Value.CriticalRate;
+            float totalCritRate = playerDamageComponent.Value.CriticalRate + baseWeaponDmgComponent.Value.CriticalRate;
 
             DamageContents damageContents = new DamageContents()
             {

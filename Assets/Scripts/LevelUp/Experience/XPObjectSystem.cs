@@ -1,16 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using Destruction;
 using Movement;
 using Player;
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 [UpdateAfter(typeof(PlayerMovement))]
 [BurstCompile]
@@ -62,42 +57,24 @@ public partial struct XPObjectSystem : ISystem
         _moveObjectJob.Complete();
         
         ecb2.Playback(state.EntityManager);
-
-
-        var query = SystemAPI.QueryBuilder().WithAll<ShouldBeDestroyed, XpObject>().Build();
         
-        var queryCount = query.CalculateEntityCount();
-
-        var destroyArray = query.ToEntityArray(Allocator.Temp);
-        
-        state.EntityManager.DestroyEntity(destroyArray);
-        
-        state.Dependency.Complete();
-        
-        
-        
-         var xp = SystemAPI.GetSingletonRW<PlayerXP>();
-        
-        var xpToAddPerObject = config.experience;
         var totalXpToAdd = 0;
 
-        if (queryCount > 0)
-        {
-            for (int i = 0; i < queryCount; i++)
-            {
-                totalXpToAdd += xpToAddPerObject;
-            }
-
-            totalXpToAdd += xp.ValueRO.XPValue;
-            xp.ValueRW.XPValue = totalXpToAdd;
         
-            //Debug.Log($"{xp.ValueRO.Value}");
+        foreach (var xpObject in
+                 SystemAPI.Query<XpObject>()
+                     .WithAll<ShouldBeDestroyed>())
+        {
+            totalXpToAdd += xpObject.XpAwardedOnPickup;
         }
         
+        var xp = SystemAPI.GetSingletonRW<PlayerXP>();
+        xp.ValueRW.XPValue += totalXpToAdd;
+        
+        //state.Dependency.Complete();
         
         ecb.Dispose();
         ecb2.Dispose();
-        //state.Dependency.Complete();
     }
 }
 

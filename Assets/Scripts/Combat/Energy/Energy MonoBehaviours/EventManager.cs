@@ -30,6 +30,7 @@ public static class EventManager
     public static UnityAction<int> OnChargeLevelChange;
     
     public static UnityAction<bool> OnEnableMovementInput;
+    public static UnityAction<bool> OnEnableRotationInput;
 }
 
 public struct PlayerHealthData

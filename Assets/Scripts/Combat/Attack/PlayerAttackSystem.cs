@@ -148,7 +148,9 @@ namespace Patrik
 
             EventManager.OnBusyUpdate += OnBusyUpdate;
             EventManager.OnChargeLevelChange += OnChargeLevelChange;
+            
             EventManager.OnEnableMovementInput += OnEnableMovementInput;
+            EventManager.OnEnableRotationInput += OnEnableRotationInput;
         }
 
         private void UnsubscribeFromAttackEvents()
@@ -179,7 +181,19 @@ namespace Patrik
             
             EventManager.OnBusyUpdate -= OnBusyUpdate;
             EventManager.OnChargeLevelChange -= OnChargeLevelChange;
+            
             EventManager.OnEnableMovementInput -= OnEnableMovementInput;
+            EventManager.OnEnableRotationInput -= OnEnableRotationInput;
+        }
+
+        private void OnEnableRotationInput(bool enable)
+        {
+            // TODO: move to different system?
+            
+            if (!SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity playerEntity))
+                return;
+
+            EntityManager.SetComponentEnabled<CanRotateFromInput>(playerEntity, enable);
         }
 
         private void OnEnableMovementInput(bool enable)

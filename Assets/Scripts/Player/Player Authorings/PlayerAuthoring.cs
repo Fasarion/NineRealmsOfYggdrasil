@@ -17,11 +17,16 @@ namespace Player
                 AddComponent<PlayerRotationSingleton>(entity);
                 
                 AddComponent<CanMoveFromInput>(entity);
+                SetComponentEnabled<CanMoveFromInput>(entity, true);
+                
+                AddComponent<CanRotateFromInput>(entity);
+                SetComponentEnabled<CanRotateFromInput>(entity, true);
             }
         }
     }
     
     public struct CanMoveFromInput : IComponentData, IEnableableComponent { }
+    public struct CanRotateFromInput : IComponentData, IEnableableComponent { }
     
     public struct PlayerTag : IComponentData { }
 

@@ -374,6 +374,8 @@ namespace Patrik
             
             var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
             collider.ValueRW.Value.Value.SetCollisionFilter(collisionFilter);
+            
+            EntityManager.SetComponentEnabled<WeaponIsAttacking>(entity, true);
         }
 
         private void DisableWeapon(WeaponType dataWeaponType)
@@ -382,6 +384,8 @@ namespace Patrik
             
             var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
             collider.ValueRW.Value.Value.SetCollisionFilter(CollisionFilter.Zero);
+            
+            EntityManager.SetComponentEnabled<WeaponIsAttacking>(entity, false);
 
             // clear its hit buffer
             if (EntityManager.HasBuffer<HitBufferElement>(entity))

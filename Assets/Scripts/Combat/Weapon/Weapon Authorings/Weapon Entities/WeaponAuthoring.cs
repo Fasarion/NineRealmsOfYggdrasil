@@ -28,6 +28,9 @@ public class WeaponAuthoring : MonoBehaviour
             
             AddComponent(entity, new ActiveWeapon());
             SetComponentEnabled<ActiveWeapon>(entity, false);
+            
+            AddComponent(entity, new WeaponIsAttacking());
+            SetComponentEnabled<WeaponIsAttacking>(entity, false);
         }
     }
 }
@@ -45,3 +48,5 @@ public struct WeaponComponent : IComponentData
 }
 
 public struct ActiveWeapon : IComponentData, IEnableableComponent { }
+
+public struct WeaponIsAttacking : IComponentData, IEnableableComponent { }

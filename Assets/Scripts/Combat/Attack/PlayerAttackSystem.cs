@@ -51,6 +51,9 @@ namespace Patrik
                 }
             }
 
+            bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
+            if (gameIsPaused) return;
+
             if (!_weaponManager) return;
             
             HandleWeaponStates();

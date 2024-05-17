@@ -20,6 +20,7 @@ public partial struct HammerPassiveAttackSystem : ISystem
         state.RequireForUpdate<HammerPassiveAbilityConfig>();
         state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<WeaponAttackCaller>();
+        state.RequireForUpdate<GameUnpaused>();
     }
     
     [BurstCompile]

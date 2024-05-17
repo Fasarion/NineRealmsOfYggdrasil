@@ -5,6 +5,9 @@ public static class EventManager
 {
     public static UnityAction<WeaponBehaviour, bool> OnSetupWeapon;
     public static UnityAction<WeaponBehaviour> OnWeaponSwitch;
+
+    public static UnityAction OnPause;
+    public static UnityAction OnUnpause;
     
     public static UnityAction<AttackData> OnActiveAttackStart;
     public static UnityAction<AttackData> OnActiveAttackStop;

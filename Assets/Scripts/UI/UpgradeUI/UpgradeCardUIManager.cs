@@ -89,7 +89,8 @@ public class UpgradeCardUIManager : MonoBehaviour
         }
 
         _isUIDisplayed = true;
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        EventManager.OnPause?.Invoke();
     }
 
     private void HideUI()
@@ -100,7 +101,8 @@ public class UpgradeCardUIManager : MonoBehaviour
         }
 
         _isUIDisplayed = false;
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
+        EventManager.OnUnpause?.Invoke();
     }
 
     public RectTransform[] GetUpgradeCardDimensions(UpgradeObject[] upgradeObjects)

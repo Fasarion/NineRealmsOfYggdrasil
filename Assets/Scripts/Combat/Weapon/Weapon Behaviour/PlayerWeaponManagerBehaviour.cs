@@ -29,9 +29,8 @@ namespace Patrik
         [Header("Attack Buffer")]
         [SerializeField] float attackBufferTime = 0.2f;
 
-        public BusyAttackInfo busyAttackInfo;
-        public ChargeState chargeState = ChargeState.None;
-        public int chargeLevel = 0;
+        BusyAttackInfo busyAttackInfo;
+        public ChargeState chargeState { get; private set; }= ChargeState.None;
 
         // Weapons
         private List<WeaponBehaviour> weapons;
@@ -318,8 +317,6 @@ namespace Patrik
 
         public void SetChargeLevel(int newLevel)
         {
-            chargeLevel = newLevel;
-
             EventManager.OnChargeLevelChange?.Invoke(newLevel);
         }
 

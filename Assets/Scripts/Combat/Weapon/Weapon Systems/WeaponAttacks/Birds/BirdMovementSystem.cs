@@ -17,6 +17,7 @@ public partial struct BirdMovementSystem : ISystem
     {
         state.RequireForUpdate<PlayerPositionSingleton>();        
         state.RequireForUpdate<MousePositionInput>();
+        state.RequireForUpdate<GameUnpaused>();
     }
     
     [BurstCompile]
@@ -24,7 +25,6 @@ public partial struct BirdMovementSystem : ISystem
     {
         var deltaTime = SystemAPI.Time.DeltaTime;
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
-        var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
         var playerPos2D = playerPos.xz;
 
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);

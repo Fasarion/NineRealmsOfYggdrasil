@@ -57,6 +57,8 @@ MonoBehaviour:
   cardImage: {fileID: 2150927398129151841}
   cardTitleText: {fileID: 8534962992292680376}
   cardDescriptionText: {fileID: 7074552751035098020}
+  standardScale: 0.5
+  hoverScale: 0.75
 --- !u!222 &2414513670388286457
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1221,6 +1223,8 @@ MonoBehaviour:
   cardImage: {fileID: 9111236389253048824}
   cardTitleText: {fileID: 112468404259580685}
   cardDescriptionText: {fileID: 4602295780841475172}
+  standardScale: 0.5
+  hoverScale: 0.75
 --- !u!222 &5644414438889306798
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1417,6 +1421,8 @@ MonoBehaviour:
   cardImage: {fileID: 7935480308014125857}
   cardTitleText: {fileID: 7401581753492223444}
   cardDescriptionText: {fileID: 7486163810381011872}
+  standardScale: 0.5
+  hoverScale: 0.75
 --- !u!222 &8366950341061005023
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2986,11 +2992,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SelectionScreen
-      objectReference: {fileID: 0}
-    - target: {fileID: 2919712923391508630, guid: b9605c22f46facd4792fd147be349cc3,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4208560306933001062, guid: b9605c22f46facd4792fd147be349cc3,
         type: 3}

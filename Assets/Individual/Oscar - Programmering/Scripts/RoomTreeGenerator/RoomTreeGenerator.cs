@@ -45,8 +45,32 @@ public class RoomTreeGenerator : MonoBehaviour
     
     private List<Vector2Int> keys;
     
+   
     public void Awake()
     {
+        //Remember that ProgressionBarContentContainer is initialized before this script!
+    }
+
+    private void ClearCachedRoomNode()
+    {
+        roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>();
+        keys = new List<Vector2Int>();
+        choiceDataScriptableObject.ClearCachedData();
+    }
+
+    public void OnEnable()
+    {
+        ProgressionBarContentContainer.onProgressionContentSet += OnMapProgressionContentSet;
+    }
+
+    public void OnDisable()
+    {
+        ProgressionBarContentContainer.onProgressionContentSet -= OnMapProgressionContentSet;
+    }
+
+    public void OnMapProgressionContentSet(ProgressionBarLevelContainer[] levelContainers)
+    {
+        progressionScene = FindObjectOfType<ProgressionScene>();
         if (progressionScene == null)
         {
             return;
@@ -80,39 +104,7 @@ public class RoomTreeGenerator : MonoBehaviour
         {
             ClearCachedRoomNode();
         }
-        
-       
 
-      
-        
-
-
-    }
-
-    private void ClearCachedRoomNode()
-    {
-        roomNodeGridMapBehaviour = new Dictionary<Vector2Int, RoomNode>();
-        keys = new List<Vector2Int>();
-        choiceDataScriptableObject.ClearCachedData();
-    }
-
-    public void OnEnable()
-    {
-        ProgressionBarContentContainer.onProgressionContentSet += OnMapProgressionContentSet;
-    }
-
-    public void OnDisable()
-    {
-        ProgressionBarContentContainer.onProgressionContentSet -= OnMapProgressionContentSet;
-    }
-
-    public void Start()
-    {
-       
-    }
-    
-    public void OnMapProgressionContentSet(ProgressionBarLevelContainer[] levelContainers)
-    {
         var levelsInUI = levelContainers.Length;
         if (!roomNodeGridMapCached)
         {
@@ -130,7 +122,7 @@ public class RoomTreeGenerator : MonoBehaviour
             //If it doesn't exist, we generate a new one.
             if (roomNodeGridMapBehaviour == null|| roomNodeGridMapBehaviour.Count == 0)
             {
-                gridHeight = levelsInUI;
+                gridHeight = levelsInUI - 1;
                 Random random = new Random(roomSeed);
                 GenerateRoomGrid(random);
                 GenerateStartingRoomNode();

@@ -77,7 +77,8 @@ public class ChoiceUIManager : MonoBehaviour
     }
     private void Awake()
     {
-       
+        arrowIndicator = FindObjectOfType<ArrowIndicatorUI>();
+        progressBackgroundIndicator = FindObjectOfType<ProgressIndicatorBackgroundUI>();
         //ChoiceSO.loadChoiceData;
         roomTreeGenerator = GetComponent<RoomTreeGenerator>();
         //allSelectionCardsHidden = true;
@@ -94,6 +95,10 @@ public class ChoiceUIManager : MonoBehaviour
 
     public void Update()
     {
+        if (currentSymbols != null)
+        {
+            
+        }
         arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); //-126 + currentSymbols[currentSelectionIndex].symbolXpos);
         progressBackgroundIndicator.UpdateProgressBackgroundXPosition();
     }

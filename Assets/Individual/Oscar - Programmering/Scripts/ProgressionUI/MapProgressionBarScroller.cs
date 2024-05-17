@@ -40,33 +40,33 @@ public class MapProgressionBarScroller : MonoBehaviour
         
     }
 
-    public void OnClickRight()
+    public void OnClickLeft()
     {
         
         ScrollLeft();
         audioManager.uiAudio.MenuClickAudio();
     }
 
-    public void OnClickLeft()
+    public void OnClickRight()
     {
         
         ScrollRight();
         audioManager.uiAudio.MenuClickAudio();
     }
     //Used by 
-    public void ScrollRight()
+    public void ScrollLeft()
     {
         
         scrollStart = scrollRect.horizontalNormalizedPosition;
-        scrollFinished = scrollRect.horizontalNormalizedPosition + scrollRate;
+        scrollFinished = scrollRect.horizontalNormalizedPosition - scrollRate;
         currentTime = 0;
 
     }
 
-    public void ScrollLeft()
+    public void ScrollRight()
     {
         scrollStart = scrollRect.horizontalNormalizedPosition;
-        scrollFinished = scrollRect.horizontalNormalizedPosition - scrollRate;
+        scrollFinished = scrollRect.horizontalNormalizedPosition + scrollRate;
         currentTime = 0;
     }
 }

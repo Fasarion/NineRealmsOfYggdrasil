@@ -9,7 +9,7 @@ using Unity.Entities;
 public class MusicManager : MonoBehaviour
 {
     private int _enemyCount;
-    
+    public static MusicManager Instance;
     //
     public StudioEventEmitter menuMusic;
     public StudioEventEmitter levelMusic;
@@ -19,6 +19,19 @@ public class MusicManager : MonoBehaviour
     public int enemyCountStageTwo;
     public int enemyCountStageThree;
     private int nextStageCount;
+    
+    private void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+        }
+        DontDestroyOnLoad(gameObject);
+    }
     
     // Start is called before the first frame update
     void Start()
@@ -95,7 +108,12 @@ public class MusicManager : MonoBehaviour
     {
         emitter.SetParameter(parameter, value, false);
     }
-    
+
+    public void OnDestroy()
+    {
+        levelMusic.Stop();
+        menuMusic.Stop();
+    }
     //TODO: Menu -> Battle musik event? separat script för caller av parametrar
     //detta skript kan ha metoder np
 }

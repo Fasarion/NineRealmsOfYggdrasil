@@ -47,17 +47,17 @@ namespace Patrik
         private string weaponIdParameterName = "weaponID";
         
         // Animation Events
-        public UnityAction<AttackData> OnActiveAttackStart;
-        public UnityAction<AttackData> OnActiveAttackStop;
+        //public UnityAction<AttackData> OnActiveAttackStart;
+        //public UnityAction<AttackData> OnActiveAttackStop;
         
-        public UnityAction<AttackData> OnPassiveAttackStart;
-        public UnityAction<AttackData> OnPassiveAttackStop;
+        //public UnityAction<AttackData> OnPassiveAttackStart;
+        //public UnityAction<AttackData> OnPassiveAttackStop;
         
-        public UnityAction<WeaponType> OnWeaponActive;
-        public UnityAction<WeaponType> OnWeaponPassive;
+        // public UnityAction<WeaponType> OnWeaponActive;
+        // public UnityAction<WeaponType> OnWeaponPassive;
         
-        public UnityAction<AttackData> OnSpecialCharge;
-        public UnityAction<AttackData> OnUltimatePrepare;
+        // public UnityAction<AttackData> OnSpecialCharge;
+        // public UnityAction<AttackData> OnUltimatePrepare;
 
         float timeOfLastAttackHold;
         float timeSinceLastAttackHold;
@@ -100,7 +100,8 @@ namespace Patrik
         public void Begin(int combo)
         {
             currentCombo = combo;
-            OnActiveAttackStart?.Invoke(GetActiveAttackData());
+            //OnActiveAttackStart?.Invoke(GetActiveAttackData());
+            EventManager.OnActiveAttackStart?.Invoke(GetActiveAttackData());
             
             playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
         }
@@ -108,7 +109,8 @@ namespace Patrik
         public void Stop(int combo)
         {
             currentCombo = combo;
-            OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
+          //  OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
+            EventManager.OnActiveAttackStop?.Invoke(GetActiveAttackData());
         }
         
         public void TurnOff()
@@ -197,7 +199,8 @@ namespace Patrik
             int weaponID = (int) CurrentWeaponType - 1;
             playerAnimator.SetInteger(weaponIdParameterName, weaponID);
             
-            OnWeaponActive?.Invoke(weapon.WeaponType);
+            //OnWeaponActive?.Invoke(weapon.WeaponType);
+            EventManager.OnWeaponActive?.Invoke(weapon.WeaponType);
         }
         
         private void MakeWeaponPassive(WeaponBehaviour weapon, Transform passiveParent)
@@ -205,7 +208,8 @@ namespace Patrik
             weapon.MakePassive(passiveParent);
             weaponParents[weapon] = passiveParent;
             
-            OnWeaponPassive?.Invoke(weapon.WeaponType);
+            //OnWeaponPassive?.Invoke(weapon.WeaponType);
+            EventManager.OnWeaponPassive?.Invoke(weapon.WeaponType);
         }
         
         private void SubscribeToPassiveEvents(WeaponBehaviour weapon)
@@ -222,12 +226,14 @@ namespace Patrik
 
         private void StartPassiveAttack(WeaponBehaviour weapon)
         {
-            OnPassiveAttackStart?.Invoke(GetPassiveAttackData(weapon));
+            //OnPassiveAttackStart?.Invoke(GetPassiveAttackData(weapon));
+            EventManager.OnPassiveAttackStart?.Invoke(GetPassiveAttackData(weapon));
         }
         
         private void StopPassiveAttack(WeaponBehaviour weapon)
         {
-            OnPassiveAttackStop?.Invoke(GetPassiveAttackData(weapon));
+            //OnPassiveAttackStop?.Invoke(GetPassiveAttackData(weapon));
+            EventManager.OnPassiveAttackStop?.Invoke(GetPassiveAttackData(weapon));
         }
 
         private static AttackData GetPassiveAttackData(WeaponBehaviour weapon)
@@ -292,7 +298,8 @@ namespace Patrik
         public void PrepareUltimateAttack()
         {
             currentAttackType = AttackType.Ultimate;
-            OnUltimatePrepare?.Invoke(GetActiveAttackData());
+            //OnUltimatePrepare?.Invoke(GetActiveAttackData());
+            EventManager.OnUltimatePrepare?.Invoke(GetActiveAttackData());
 
             //playerAnimator.SetBool("startUltimate", true);
             playerAnimator.SetTrigger("startUltimateTrigger");

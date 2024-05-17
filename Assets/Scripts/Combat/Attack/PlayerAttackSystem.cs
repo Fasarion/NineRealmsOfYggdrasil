@@ -119,17 +119,29 @@ namespace Patrik
 
         private void SubscribeToEvents()
         {
-            _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
-            _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
+            EventManager.OnActiveAttackStart += OnActiveAttackStart;
+            EventManager.OnActiveAttackStop += OnActiveAttackStop;
             
-            _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
-            _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            // _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
+            // _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
             
-            _weaponManager.OnSpecialCharge += OnSpecialCharge;
-            _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
+            EventManager.OnPassiveAttackStart += OnPassiveAttackStart;
+            EventManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            
+            // _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
+            // _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            
+            EventManager.OnSpecialCharge += OnSpecialCharge;
+            EventManager.OnUltimatePrepare += OnUltimatePrepare;
+            
+            // _weaponManager.OnSpecialCharge += OnSpecialCharge;
+            // _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
+            
+            EventManager.OnWeaponActive += SetWeaponActive;
+            EventManager.OnWeaponPassive += SetWeaponPassive;
 
-            _weaponManager.OnWeaponActive += SetWeaponActive;
-            _weaponManager.OnWeaponPassive += SetWeaponPassive;
+            // _weaponManager.OnWeaponActive += SetWeaponActive;
+            // _weaponManager.OnWeaponPassive += SetWeaponPassive;
 
             EventManager.OnBusyUpdate += OnBusyUpdate;
             EventManager.OnChargeLevelChange += OnChargeLevelChange;
@@ -138,17 +150,29 @@ namespace Patrik
 
         private void UnsubscribeFromAttackEvents()
         {
-            _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
-            _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
+            EventManager.OnActiveAttackStart -= OnActiveAttackStart;
+            EventManager.OnActiveAttackStop -= OnActiveAttackStop;
             
-            _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
-            _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+            // _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
+            // _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
             
-            _weaponManager.OnSpecialCharge -= OnSpecialCharge;
-            _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
+            EventManager.OnPassiveAttackStart -= OnPassiveAttackStart;
+            EventManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+            
+            // _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
+            // _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+            
+            EventManager.OnSpecialCharge -= OnSpecialCharge;
+            EventManager.OnUltimatePrepare -= OnUltimatePrepare;
+            
+            // _weaponManager.OnSpecialCharge -= OnSpecialCharge;
+            // _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
+            
+            EventManager.OnWeaponActive -= SetWeaponActive;
+            EventManager.OnWeaponPassive -= SetWeaponPassive;
 
-            _weaponManager.OnWeaponActive -= SetWeaponActive;
-            _weaponManager.OnWeaponPassive -= SetWeaponPassive;
+            // _weaponManager.OnWeaponActive -= SetWeaponActive;
+            // _weaponManager.OnWeaponPassive -= SetWeaponPassive;
             
             EventManager.OnBusyUpdate -= OnBusyUpdate;
             EventManager.OnChargeLevelChange -= OnChargeLevelChange;

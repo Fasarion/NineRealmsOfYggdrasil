@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class UpdateInputState : StateMachineBehaviour
 {
+    [Tooltip("How the input state is updated when entering this animation.")]
     public InputUpdateInformation OnEnter;
+    
+    [Tooltip("How the input state is updated when exiting this animation.")]
     public InputUpdateInformation OnExit;
 
     public enum InputState
@@ -18,7 +21,10 @@ public class UpdateInputState : StateMachineBehaviour
     [Serializable]
     public struct InputUpdateInformation
     {
+        [Tooltip("Determines whether or not the player can move (from input) during this attack.")]
         public InputState MovementStateChange;
+        
+        [Tooltip("Determines whether or not the player can rotate (from input) during this attack.")]
         public InputState RotationStateChange;
     }
     

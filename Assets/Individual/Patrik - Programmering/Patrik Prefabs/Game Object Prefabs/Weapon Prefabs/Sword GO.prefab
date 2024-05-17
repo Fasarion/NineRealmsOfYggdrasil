@@ -88,6 +88,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
+  _particleSystem: {fileID: 6357023847662026105}
+  attacksToActivateParticles: 0400000003000000
 --- !u!1 &2478580708996640626
 GameObject:
   m_ObjectHideFlags: 0
@@ -273,6 +275,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a70bba4fa42ed534ba8e1c2fc51aee36, type: 3}
+--- !u!198 &6357023847662026105 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 891361079507371273, guid: a70bba4fa42ed534ba8e1c2fc51aee36,
+    type: 3}
+  m_PrefabInstance: {fileID: 6081671148283738224}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8297197934570198296 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2829384405705354600, guid: a70bba4fa42ed534ba8e1c2fc51aee36,

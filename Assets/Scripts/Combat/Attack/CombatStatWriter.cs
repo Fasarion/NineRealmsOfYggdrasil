@@ -10,7 +10,8 @@ public partial struct CombatStatHandleSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
-      //  state.RequireForUpdate<BasePlayerStatsTag>();
+        state.RequireForUpdate<PlayerTag>();
+        //  state.RequireForUpdate<BasePlayerStatsTag>();
         state.RequireForUpdate<StatHandlerComponent>();
     }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using AI;
 using Damage;
 using Destruction;
+using Patrik;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
@@ -89,6 +90,11 @@ public partial struct ThunderStrikeSystem : ISystem
                     Position = targetPos + new float3(0, thunderConfig.shockwaveEffectHeightOffset, 0),
                     Rotation = Quaternion.Euler(-90f, 0f, 0f),
                     Scale = 1
+                });
+                state.EntityManager.SetComponentData(effect, new ShouldSetDamageValuesComponent
+                {
+                    WeaponType = WeaponType.Hammer,
+                    AttackType = AttackType.Ultimate,
                 });
 
                 timer.ValueRW.currentTime = 0;

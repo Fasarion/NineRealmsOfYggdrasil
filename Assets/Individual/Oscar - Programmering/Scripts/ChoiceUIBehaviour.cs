@@ -19,11 +19,17 @@ public class ChoiceUIBehaviour : MonoBehaviour
     protected Sprite choiceItemSprite;
 
     public static Action onCardMouseClick;
+    
+    private AudioManager audioManager;
     // Start is called before the first frame update
     
     private void Awake()
     {
         //manager = ChoiceUIManager.Instance;
+        if (!audioManager)
+        {
+            audioManager = AudioManager.Instance;
+        }
        
     }
     protected virtual void PopulateDisplayValues(ChoiceObject newChoiceObject)
@@ -50,7 +56,7 @@ public class ChoiceUIBehaviour : MonoBehaviour
     public virtual void RegisterMouseClick()
     {
         onCardMouseClick.Invoke();
-        
+        audioManager.uiAudio.MenuClickAudio();
         //manager.SwapScreenRight();
     }
 }

@@ -17,10 +17,14 @@ public class MapProgressionBarScroller : MonoBehaviour
     private float scrollStart;
     private float scrollFinished;
     private float currentTime;
+    private AudioManager audioManager;
   
     void Start()
     {
-        
+        if (!audioManager)
+        {
+            audioManager = AudioManager.Instance;
+        }
         
     }
 
@@ -40,12 +44,14 @@ public class MapProgressionBarScroller : MonoBehaviour
     {
         
         ScrollLeft();
+        audioManager.uiAudio.MenuClickAudio();
     }
 
     public void OnClickLeft()
     {
         
         ScrollRight();
+        audioManager.uiAudio.MenuClickAudio();
     }
     //Used by 
     public void ScrollRight()

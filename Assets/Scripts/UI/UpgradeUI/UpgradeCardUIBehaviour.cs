@@ -18,13 +18,17 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     private int _upgradeObjectIndex;
     private RectTransform _transform;
     private UpgradeCardUIManager _manager;
-    
+    private AudioManager _audioManager;
     
 
     private void Awake()
     {
         _transform = this.GetComponent<RectTransform>();
         _manager = UpgradeCardUIManager.Instance;
+        if (!_audioManager)
+        {
+            _audioManager = AudioManager.Instance;
+        }
     }
 
     private void PopulateDisplayValues(UpgradeObject upgradeObject)
@@ -59,6 +63,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     {
 
         _manager.RegisterUpgradeCardClick(_upgradeObjectIndex);
+        _audioManager.uiAudio.MenuClickAudio();
 
     }
 }

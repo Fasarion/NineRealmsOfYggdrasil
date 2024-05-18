@@ -125,7 +125,7 @@ public partial struct BirdMovementSystem : ISystem
     }
     
     [BurstCompile]
-    static float2 EvaluateCubicBezier(ref SystemState state, ref float2 startPoint, ref float2 controlPoint1, ref float2 controlPoint2, ref float2 endPoint, ref float t)
+    float2 EvaluateCubicBezier(ref SystemState state, ref float2 startPoint, ref float2 controlPoint1, ref float2 controlPoint2, ref float2 endPoint, ref float t)
     {
         float oneMinusT = 1.0f - t;
         float2 p0 = startPoint;
@@ -143,7 +143,7 @@ public partial struct BirdMovementSystem : ISystem
     }
     
     [BurstCompile]
-    static float2 EvaluateCubicBezierDerivative(ref SystemState state, ref float2 startPoint, ref float2 controlPoint1, ref float2 controlPoint2, ref float2 endPoint, ref float t)
+    float2 EvaluateCubicBezierDerivative(ref SystemState state, ref float2 startPoint, ref float2 controlPoint1, ref float2 controlPoint2, ref float2 endPoint, ref float t)
     {
         float oneMinusT = 1.0f - t;
         float2 p0 = startPoint;
@@ -159,7 +159,7 @@ public partial struct BirdMovementSystem : ISystem
         return derivative;
     }
     
-    static float2 EvaluateCubicBezierSecondDerivative(ref SystemState state, float2 startPoint, float2 controlPoint1, float2 controlPoint2, float2 endPoint, float t)
+    float2 EvaluateCubicBezierSecondDerivative(ref SystemState state, float2 startPoint, float2 controlPoint1, float2 controlPoint2, float2 endPoint, float t)
     {
         float oneMinusT = 1.0f - t;
         float2 p0 = startPoint;

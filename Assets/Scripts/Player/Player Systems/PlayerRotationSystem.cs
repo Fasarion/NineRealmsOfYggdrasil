@@ -9,7 +9,6 @@ namespace Player
     [UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
     public partial struct PlayerRotationSystem : ISystem
     {
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             bool hasAimSettings = SystemAPI.TryGetSingleton(out AimSettingsData aimSettings);
@@ -24,18 +23,16 @@ namespace Player
             }
         }
 
-        [BurstCompile]
         private void HandleAutoAim(ref SystemState state)
         {
             // TODO: check if player is firing. otherwise, return
             
             // TODO: find nearest enemy, rotate to that enemy
 
-            // TODO: Find Closest "Target" System, i.e. enemy or breakable object in range
+            // TODO: Find Closest "Target" System, i.e. enemy or breakable object in range 
 
         }
 
-        [BurstCompile]
         private void HandleManualAim(ref SystemState state)
         {
             var hasMouseInput = SystemAPI.TryGetSingleton(out MousePositionInput mousePositionInput);
@@ -50,8 +47,6 @@ namespace Player
 
             bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
             if (gameIsPaused) return;
-            
-            
             
             float rotationSpeed = 1f;
             bool slerp = false;

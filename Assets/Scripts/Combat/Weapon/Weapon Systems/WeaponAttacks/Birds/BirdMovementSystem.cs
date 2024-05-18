@@ -56,9 +56,11 @@ public partial struct BirdMovementSystem : ISystem
             float2 control1 = bezierMover.ValueRO.controlPoint1;
             float2 control2 = bezierMover.ValueRO.controlPoint2;
             float2 end = playerPos2D;
+
+            float currentTValue = bezierMover.ValueRO.CurrentTValue; 
             
-            float2 cubicPos = EvaluateCubicBezier(ref state, start, control1, control2, end, bezierMover.ValueRO.CurrentTValue);
-            float2 tangent = EvaluateCubicBezierDerivative(ref state, start, control1, control2, end, bezierMover.ValueRO.CurrentTValue);
+            float2 cubicPos = EvaluateCubicBezier(ref state, ref start, ref control1, ref control2, ref end, ref currentTValue);
+            float2 tangent = EvaluateCubicBezierDerivative(ref state, ref start, ref control1, ref control2, ref end, ref currentTValue);
 
             transform.ValueRW.Position = new float3(cubicPos.x, 0, cubicPos.y);
             var directionValue = new float3(tangent.x, 0, tangent.y);
@@ -123,7 +125,7 @@ public partial struct BirdMovementSystem : ISystem
     }
     
     [BurstCompile]
-    static float2 EvaluateCubicBezier(ref SystemState state, float2 startPoint, float2 controlPoint1, float2 controlPoint2, float2 endPoint, float t)
+    static float2 EvaluateCubicBezier(ref SystemState state, ref float2 startPoint, ref float2 controlPoint1, ref float2 controlPoint2, ref float2 endPoint, ref float t)
     {
         float oneMinusT = 1.0f - t;
         float2 p0 = startPoint;
@@ -141,7 +143,7 @@ public partial struct BirdMovementSystem : ISystem
     }
     
     [BurstCompile]
-    static float2 EvaluateCubicBezierDerivative(ref SystemState state, float2 startPoint, float2 controlPoint1, float2 controlPoint2, float2 endPoint, float t)
+    static float2 EvaluateCubicBezierDerivative(ref SystemState state, ref float2 startPoint, ref float2 controlPoint1, ref float2 controlPoint2, ref float2 endPoint, ref float t)
     {
         float oneMinusT = 1.0f - t;
         float2 p0 = startPoint;

@@ -9,12 +9,17 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5876000284817838875}
+  - component: {fileID: 3933382767474934065}
+  - component: {fileID: 1657524448812367612}
+  - component: {fileID: -2723255718283487551}
+  - component: {fileID: -7810992260240429371}
+  - component: {fileID: -3552091299110081049}
   m_Layer: 0
   m_Name: Tree02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5876000284817838875
 Transform:
@@ -32,6 +37,235 @@ Transform:
   - {fileID: 6870475264329563078}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3933382767474934065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805626051316816799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b275e5f92732148048d7b77e264ac30e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ShapeType: 1
+  m_PrimitiveCenter:
+    x: 0.07852554
+    y: 2.1554105
+    z: -0.1068449
+  m_PrimitiveSize:
+    x: 3.4866142
+    y: 3.4866142
+    z: 5.2475586
+  m_PrimitiveOrientation:
+    Value:
+      x: -90
+      y: 0
+      z: -90
+    RotationOrder: 4
+  m_Capsule:
+    Height: 5.2475586
+    Radius: 1.7433071
+    Axis: 2
+  m_Cylinder:
+    Height: 5.2475586
+    Radius: 1.7433071
+    Axis: 2
+  m_CylinderSideCount: 20
+  m_SphereRadius: 2.6237793
+  m_MinimumSkinnedVertexWeight: 0.1
+  m_ConvexHullGenerationParameters:
+    m_SimplificationTolerance: 0.07871339
+    m_BevelRadius: 0.05
+    m_MinimumAngle: 2.5000002
+  m_CustomMesh: {fileID: 0}
+  m_ForceUnique: 0
+  m_Material:
+    m_SupportsTemplate: 1
+    m_Template: {fileID: 0}
+    m_CollisionResponse:
+      m_Override: 0
+      m_Value: 3
+    m_Friction:
+      m_Override: 0
+      m_Value:
+        Value: 0.5
+        CombineMode: 0
+    m_Restitution:
+      m_Override: 0
+      m_Value:
+        Value: 0
+        CombineMode: 2
+    m_BelongsToCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 0
+        Category01: 1
+        Category02: 0
+        Category03: 0
+        Category04: 0
+        Category05: 1
+        Category06: 0
+        Category07: 0
+        Category08: 0
+        Category09: 0
+        Category10: 0
+        Category11: 0
+        Category12: 0
+        Category13: 0
+        Category14: 0
+        Category15: 0
+        Category16: 0
+        Category17: 0
+        Category18: 0
+        Category19: 0
+        Category20: 0
+        Category21: 0
+        Category22: 0
+        Category23: 0
+        Category24: 0
+        Category25: 0
+        Category26: 0
+        Category27: 0
+        Category28: 0
+        Category29: 0
+        Category30: 0
+        Category31: 0
+    m_CollidesWithCategories:
+      m_Override: 0
+      m_Value:
+        Category00: 1
+        Category01: 0
+        Category02: 1
+        Category03: 1
+        Category04: 0
+        Category05: 0
+        Category06: 0
+        Category07: 0
+        Category08: 0
+        Category09: 0
+        Category10: 0
+        Category11: 0
+        Category12: 0
+        Category13: 0
+        Category14: 0
+        Category15: 0
+        Category16: 0
+        Category17: 0
+        Category18: 0
+        Category19: 0
+        Category20: 0
+        Category21: 0
+        Category22: 0
+        Category23: 0
+        Category24: 0
+        Category25: 0
+        Category26: 0
+        Category27: 0
+        Category28: 0
+        Category29: 0
+        Category30: 0
+        Category31: 0
+    m_CustomMaterialTags:
+      m_Override: 0
+      m_Value:
+        Tag00: 0
+        Tag01: 0
+        Tag02: 0
+        Tag03: 0
+        Tag04: 0
+        Tag05: 0
+        Tag06: 0
+        Tag07: 0
+    m_SerializedVersion: 1
+  m_SerializedVersion: 1
+--- !u!114 &1657524448812367612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805626051316816799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasHitBuffer: 1
+  isHitTrigger: 0
+  isHitTriggerTarget: 1
+  isHitCollider: 0
+  isHitColliderTarget: 0
+--- !u!114 &-2723255718283487551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805626051316816799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHP: 10
+  damageReductionValue: 1
+--- !u!114 &-7810992260240429371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805626051316816799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3552091299110081049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805626051316816799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spawnObjects:
+  - {fileID: 5315364873892614633, guid: 696e33466e7c36f45a8e9283f72bd42d, type: 3}
+  - {fileID: 6521612545912807165, guid: 2e8c628138f479f49bbc1281f053fc75, type: 3}
+  - {fileID: 4808010874145025043, guid: 9c6cb95b106d40c4a908a21873f3d7cf, type: 3}
+  - {fileID: 8899283607199755210, guid: b65909ccc7886e7489ca5c82d00b4e0a, type: 3}
+  - {fileID: 7634632293840873076, guid: f0c2723de3080684a84a1c6a44a2b74e, type: 3}
+  - {fileID: 2616461009339700760, guid: c5c6e7708ac458d43a6fc193e009de6f, type: 3}
+  - {fileID: 9185212555926212064, guid: f62fcdae5ea13594a9d4772db8baee99, type: 3}
+  - {fileID: 8201370267992864018, guid: 60f90ce97c9618e44a4fa418df596ca8, type: 3}
+  - {fileID: 8428883807057114538, guid: 37f7607fabbefce44970719b529ac184, type: 3}
+  - {fileID: 7746923142490281714, guid: b043440a47f0a04418a80c9391f09e80, type: 3}
+  - {fileID: 3684994600589340443, guid: dd0ab5feea22e4b48b90670e02b805ce, type: 3}
+  - {fileID: 169513320748671988, guid: df7a90c17c6c89c4785789a5bdf9d910, type: 3}
+  - {fileID: 8868406784066859531, guid: cc4bdbc70e1259f47b7f0b858dfb7509, type: 3}
+  - {fileID: 1746485154169263269, guid: 1ff845b9634607b4891a22a48169ae4d, type: 3}
+  - {fileID: 1913443487507154417, guid: 2533517fd3d9a5948be83f2e9d196cc8, type: 3}
+  - {fileID: 7158680385558749421, guid: 4d4430b11a9ce624fbbbc5ddfae44699, type: 3}
+  - {fileID: 7989345673827936693, guid: e825cbbc6b3b43c45a443a4ef63abf2a, type: 3}
+  - {fileID: 4845161820967939014, guid: 5d7f64822032f2d46a22157867eedb92, type: 3}
+  - {fileID: 2424347284093032481, guid: 406de38c787badd4f99f31dce5e09880, type: 3}
+  - {fileID: 995387392438133007, guid: 3a3495262098e324aa0b01ec09ec5f73, type: 3}
+  - {fileID: 6203092732146825376, guid: a23737d9dd8a1614d8086a60b46a1dce, type: 3}
+  - {fileID: 1458149698182454529, guid: 4da06ee3ca3a2a1499b026a86a062828, type: 3}
+  - {fileID: 5165294008996006094, guid: 03c56253083f727408fada61ddc43bcd, type: 3}
+  - {fileID: 594480312216529168, guid: ffdf722dc97138c4fab7fd67134aa7df, type: 3}
+  - {fileID: 1824189145877048322, guid: d3f1b2e6f38894346b49756367f05944, type: 3}
+  - {fileID: 4338532103819927556, guid: 5d608382e1391df4aaa463ddc9a2bfa3, type: 3}
+  - {fileID: 7258850672083671192, guid: 4911eb5d5513e1444a0d9e9655f999e5, type: 3}
+  - {fileID: 5175929870393226209, guid: 9daaab83f34e4c7409e82cedadf8d072, type: 3}
+  - {fileID: 8329668815161760967, guid: d6c7ac1561def00458cabb541e0ef184, type: 3}
+  - {fileID: 5578769001279391115, guid: fb5b96c30d0a7d14eba2e53b9e365493, type: 3}
 --- !u!1001 &6400298586600758317
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -94,6 +328,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tree02
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 5b4013c76c5dd7840bc71643024cfb22,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

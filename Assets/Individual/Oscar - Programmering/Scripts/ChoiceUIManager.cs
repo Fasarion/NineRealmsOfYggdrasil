@@ -97,10 +97,10 @@ public class ChoiceUIManager : MonoBehaviour
     {
         if (currentSymbols != null)
         {
-            
+             arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); //-126 + currentSymbols[currentSelectionIndex].symbolXpos);
+             progressBackgroundIndicator.UpdateProgressBackgroundXPosition();
         }
-        arrowIndicator.AddSymbolXPosition(currentSymbols[currentSelectionIndex].symbolXpos); //-126 + currentSymbols[currentSelectionIndex].symbolXpos);
-        progressBackgroundIndicator.UpdateProgressBackgroundXPosition();
+       
     }
 
     private void OnCardClicked()

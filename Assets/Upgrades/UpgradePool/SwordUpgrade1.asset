@@ -17,10 +17,16 @@ MonoBehaviour:
   upgradeDescription: '
 
 
-    +20% ATK speed'
+    +20% ATK speed
+
+
+    +20% Stun time from charge ATK'
   upgrades:
   - thingToUpgrade: 0
     valueToUpgrade: 2
+    valueAmount: 0.2
+  - thingToUpgrade: 1
+    valueToUpgrade: 24
     valueAmount: 0.2
   startUnlocked: 0
   upgradeIndex: 22

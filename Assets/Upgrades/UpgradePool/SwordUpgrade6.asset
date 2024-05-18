@@ -17,13 +17,17 @@ MonoBehaviour:
   upgradeDescription: 'The swords attacks deals damage in a bigger area
 
 
-'
+    The
+    sword ult will stun enemies longer'
   upgrades:
   - thingToUpgrade: 0
     valueToUpgrade: 4
     valueAmount: 0.25
+  - thingToUpgrade: 2
+    valueToUpgrade: 24
+    valueAmount: 0.1
   startUnlocked: 0
-  upgradeIndex: 0
+  upgradeIndex: 27
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:

@@ -24,6 +24,8 @@ public partial struct HammerSpecialThrowSystem : ISystem
         
         state.RequireForUpdate<PlayerSpecialAttackInput>();
         state.RequireForUpdate<PlayerNormalAttackInput>();
+        
+        state.RequireForUpdate<GameUnpaused>();
     }
 
 

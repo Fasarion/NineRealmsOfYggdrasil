@@ -21,6 +21,8 @@ public partial struct HammerSpecialIndicationSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<HammerSpecialConfig>();
+        
+        state.RequireForUpdate<GameUnpaused>();
     }
     
 

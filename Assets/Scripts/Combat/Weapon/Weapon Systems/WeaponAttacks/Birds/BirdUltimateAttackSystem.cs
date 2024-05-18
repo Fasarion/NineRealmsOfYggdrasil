@@ -18,6 +18,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<BirdsUltimateAttackConfig>();
+        state.RequireForUpdate<GameUnpaused>();
     }
 
     [BurstCompile]

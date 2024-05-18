@@ -25,6 +25,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
         state.RequireForUpdate<PlayerTag>();
         
         state.RequireForUpdate<BirdsSpecialAttackConfig>();
+        state.RequireForUpdate<GameUnpaused>();
+
         
         cachedChargeLevel = -1;
     }

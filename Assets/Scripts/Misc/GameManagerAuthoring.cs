@@ -15,9 +15,13 @@ public class GameManagerAuthoring : MonoBehaviour
                 GameState = GameState.Combat,
                 CombatState = CombatState.Normal
             });
+            
+            AddComponent<GameUnpaused>(entity);
         }
     }
 }
+
+public struct GameUnpaused : IComponentData {}
 
 public partial struct GameManagerSingleton : IComponentData
 {

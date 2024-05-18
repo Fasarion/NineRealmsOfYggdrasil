@@ -23,6 +23,8 @@ public partial struct BirdNormalAttackSystem : ISystem
         
         state.RequireForUpdate<PlayerTag>();
         
+        state.RequireForUpdate<GameUnpaused>();
+
         state.RequireForUpdate<BirdNormalAttackConfig>();
     }
 

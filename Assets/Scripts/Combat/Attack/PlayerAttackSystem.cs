@@ -51,6 +51,9 @@ namespace Patrik
                 }
             }
 
+            bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
+            if (gameIsPaused) return;
+
             if (!_weaponManager) return;
             
             HandleWeaponStates();
@@ -119,40 +122,78 @@ namespace Patrik
 
         private void SubscribeToEvents()
         {
-            _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
-            _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
+            EventManager.OnActiveAttackStart += OnActiveAttackStart;
+            EventManager.OnActiveAttackStop += OnActiveAttackStop;
             
-            _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
-            _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            // _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
+            // _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
             
-            _weaponManager.OnSpecialCharge += OnSpecialCharge;
-            _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
+            EventManager.OnPassiveAttackStart += OnPassiveAttackStart;
+            EventManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            
+            // _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
+            // _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
+            
+            EventManager.OnSpecialCharge += OnSpecialCharge;
+            EventManager.OnUltimatePrepare += OnUltimatePrepare;
+            
+            // _weaponManager.OnSpecialCharge += OnSpecialCharge;
+            // _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
+            
+            EventManager.OnWeaponActive += SetWeaponActive;
+            EventManager.OnWeaponPassive += SetWeaponPassive;
 
-            _weaponManager.OnWeaponActive += SetWeaponActive;
-            _weaponManager.OnWeaponPassive += SetWeaponPassive;
+            // _weaponManager.OnWeaponActive += SetWeaponActive;
+            // _weaponManager.OnWeaponPassive += SetWeaponPassive;
 
             EventManager.OnBusyUpdate += OnBusyUpdate;
             EventManager.OnChargeLevelChange += OnChargeLevelChange;
+            
             EventManager.OnEnableMovementInput += OnEnableMovementInput;
+            EventManager.OnEnableRotationInput += OnEnableRotationInput;
         }
 
         private void UnsubscribeFromAttackEvents()
         {
-            _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
-            _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
+            EventManager.OnActiveAttackStart -= OnActiveAttackStart;
+            EventManager.OnActiveAttackStop -= OnActiveAttackStop;
             
-            _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
-            _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+            // _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
+            // _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
             
-            _weaponManager.OnSpecialCharge -= OnSpecialCharge;
-            _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
+            EventManager.OnPassiveAttackStart -= OnPassiveAttackStart;
+            EventManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+            
+            // _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
+            // _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
+            
+            EventManager.OnSpecialCharge -= OnSpecialCharge;
+            EventManager.OnUltimatePrepare -= OnUltimatePrepare;
+            
+            // _weaponManager.OnSpecialCharge -= OnSpecialCharge;
+            // _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
+            
+            EventManager.OnWeaponActive -= SetWeaponActive;
+            EventManager.OnWeaponPassive -= SetWeaponPassive;
 
-            _weaponManager.OnWeaponActive -= SetWeaponActive;
-            _weaponManager.OnWeaponPassive -= SetWeaponPassive;
+            // _weaponManager.OnWeaponActive -= SetWeaponActive;
+            // _weaponManager.OnWeaponPassive -= SetWeaponPassive;
             
             EventManager.OnBusyUpdate -= OnBusyUpdate;
             EventManager.OnChargeLevelChange -= OnChargeLevelChange;
+            
             EventManager.OnEnableMovementInput -= OnEnableMovementInput;
+            EventManager.OnEnableRotationInput -= OnEnableRotationInput;
+        }
+
+        private void OnEnableRotationInput(bool enable)
+        {
+            // TODO: move to different system?
+            
+            if (!SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity playerEntity))
+                return;
+
+            EntityManager.SetComponentEnabled<CanRotateFromInput>(playerEntity, enable);
         }
 
         private void OnEnableMovementInput(bool enable)
@@ -374,6 +415,8 @@ namespace Patrik
             
             var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
             collider.ValueRW.Value.Value.SetCollisionFilter(collisionFilter);
+            
+            EntityManager.SetComponentEnabled<WeaponIsAttacking>(entity, true);
         }
 
         private void DisableWeapon(WeaponType dataWeaponType)
@@ -382,6 +425,8 @@ namespace Patrik
             
             var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
             collider.ValueRW.Value.Value.SetCollisionFilter(CollisionFilter.Zero);
+            
+            EntityManager.SetComponentEnabled<WeaponIsAttacking>(entity, false);
 
             // clear its hit buffer
             if (EntityManager.HasBuffer<HitBufferElement>(entity))

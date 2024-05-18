@@ -48,8 +48,10 @@ namespace Player
             if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
                 return;
 
-            bool gameIsPaused = Time.timeScale <= 0;
+            bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
             if (gameIsPaused) return;
+            
+            
             
             float rotationSpeed = 1f;
             bool slerp = false;
@@ -62,7 +64,8 @@ namespace Player
             float3 mousePosition = mousePositionInput.WorldPosition;
 
             foreach (var (playerTransform, animReference, animObject) in
-                SystemAPI.Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab>().WithAll<PlayerTag>())
+                SystemAPI.Query<RefRW<LocalTransform>, AnimatorReference, GameObjectAnimatorPrefab>()
+                    .WithAll<PlayerTag, CanRotateFromInput>())
             {
                 var directionToMouse = mousePosition - playerTransform.ValueRO.Position;
                 directionToMouse.y = 0;

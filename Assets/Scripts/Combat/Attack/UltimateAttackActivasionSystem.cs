@@ -28,6 +28,8 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<GameManagerSingleton>();
         state.RequireForUpdate<PlayerTargetInfoSingleton>();
+        
+        state.RequireForUpdate<GameUnpaused>();
     }
 
     [BurstCompile]

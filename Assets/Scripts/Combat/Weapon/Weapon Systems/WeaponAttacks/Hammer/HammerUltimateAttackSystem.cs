@@ -21,6 +21,8 @@ public partial struct HammerUltimateAttackSystem : ISystem
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
+        state.RequireForUpdate<GameUnpaused>();
+        
         _detectionFilter = new CollisionFilter
         {
             BelongsTo = 1, // Projectile

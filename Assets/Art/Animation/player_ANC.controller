@@ -250,12 +250,10 @@ MonoBehaviour:
       Begin: 0
       Stop: 0
       TurnOff: 1
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
 --- !u!1101 &-8598054728908979091
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -743,12 +741,10 @@ MonoBehaviour:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 1
-      movementInputState: 0
 --- !u!1102 &-7562744366014378172
 AnimatorState:
   serializedVersion: 6
@@ -877,12 +873,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 2
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 1
 --- !u!114 &-7350789966307507791
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1267,30 +1261,6 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!114 &-6513505197803499689
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86dcca46c07868d4ea70a4892e9edf36, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Contents:
-    combo: 0
-    OnEnter:
-      Begin: 0
-      Stop: 0
-      TurnOff: 0
-      movementInputState: 2
-    OnExit:
-      Begin: 0
-      Stop: 0
-      TurnOff: 0
-      movementInputState: 1
 --- !u!114 &-6487416360537267491
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1309,12 +1279,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
 --- !u!206 &-6234215164518854774
 BlendTree:
   m_ObjectHideFlags: 1
@@ -1439,12 +1407,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
 --- !u!1102 &-6108829804261616305
 AnimatorState:
   serializedVersion: 6
@@ -1736,6 +1702,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 4
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5171025306876752878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 2
+    RotationStateChange: 2
+  OnExit:
+    MovementStateChange: 1
+    RotationStateChange: 1
 --- !u!1101 &-5154822295052695705
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2405,12 +2389,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 1
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
 --- !u!1102 &-3654658794089405462
 AnimatorState:
   serializedVersion: 6
@@ -4022,12 +4004,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 1
-      movementInputState: 0
 --- !u!114 &776779298609342961
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4046,12 +4026,10 @@ MonoBehaviour:
       Begin: 0
       Stop: 0
       TurnOff: 1
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
 --- !u!1102 &779125008932010738
 AnimatorState:
   serializedVersion: 6
@@ -4152,6 +4130,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 3558832729515142302}
   - {fileID: -4430391781244453524}
+  - {fileID: 4320564640967345090}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4209,12 +4188,10 @@ MonoBehaviour:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 1
-      movementInputState: 0
 --- !u!206 &969443929136051220
 BlendTree:
   m_ObjectHideFlags: 1
@@ -4421,12 +4398,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
 --- !u!1102 &1273642273512268021
 AnimatorState:
   serializedVersion: 6
@@ -4502,12 +4477,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
 --- !u!1101 &1405744564204629934
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4571,12 +4544,10 @@ MonoBehaviour:
       Begin: 0
       Stop: 1
       TurnOff: 1
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 1
-      movementInputState: 0
 --- !u!1107 &1517375475704881316
 AnimatorStateMachine:
   serializedVersion: 6
@@ -4755,12 +4726,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
 --- !u!114 &1590237938361047728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4997,12 +4966,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
 --- !u!1101 &2748969495722512334
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5206,12 +5173,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 1
-      movementInputState: 0
 --- !u!1101 &3287878199891039665
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5330,12 +5295,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 2
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 1
 --- !u!114 &3592314725919585641
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5354,12 +5317,10 @@ MonoBehaviour:
       Begin: 1
       Stop: 0
       TurnOff: 0
-      movementInputState: 0
     OnExit:
       Begin: 0
       Stop: 1
       TurnOff: 0
-      movementInputState: 0
 --- !u!1101 &3625889003607546137
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5382,6 +5343,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &3642793940382167782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 2
+    RotationStateChange: 2
+  OnExit:
+    MovementStateChange: 1
+    RotationStateChange: 1
 --- !u!1101 &3731082386237454664
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5467,12 +5446,10 @@ MonoBehaviour:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 2
     OnExit:
       Begin: 0
       Stop: 0
       TurnOff: 0
-      movementInputState: 1
 --- !u!1101 &3934531782127830499
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5593,6 +5570,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &4320564640967345090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 2
+    RotationStateChange: 2
+  OnExit:
+    MovementStateChange: 1
+    RotationStateChange: 1
 --- !u!114 &4329032536126882818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5786,7 +5781,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -8429565713757195825}
   - {fileID: -4256982369511625571}
-  - {fileID: -6513505197803499689}
+  - {fileID: -5171025306876752878}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -6705,6 +6700,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -7433714140933105598}
   - {fileID: 9097188883659741230}
+  - {fileID: 3642793940382167782}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

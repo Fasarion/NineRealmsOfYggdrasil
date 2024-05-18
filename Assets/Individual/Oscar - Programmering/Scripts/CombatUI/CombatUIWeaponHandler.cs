@@ -28,11 +28,13 @@ public class CombatUIWeaponHandler : ElementMVC
 
     private bool currentWeaponSet;
     private bool currentLeftWeaponSet;
+    private bool currentRightWeaponSet;
 
     public void Awake()
     {
         currentWeaponSet = false;
         currentLeftWeaponSet = false;
+        currentRightWeaponSet = false;
     }
 
     // Start is called before the first frame update
@@ -61,7 +63,7 @@ public class CombatUIWeaponHandler : ElementMVC
     private void OnSetupWeapon(WeaponBehaviour weaponBehaviour, bool isActiveWeapon)
     {
         
-        
+        //This does not account for the right inactive weapon
         if (isActiveWeapon)
         {
             currentWeapon = weaponBehaviour.WeaponType;
@@ -69,11 +71,19 @@ public class CombatUIWeaponHandler : ElementMVC
         }
         else
         {
-            currentLeftInactiveWeapon = weaponBehaviour.WeaponType;
-            currentLeftWeaponSet = true;
+            if (currentLeftWeaponSet != true)
+            {
+                currentLeftInactiveWeapon = weaponBehaviour.WeaponType;
+                currentLeftWeaponSet = true;
+            }
+            else
+            {
+                currentRightInactiveWeapon = weaponBehaviour.WeaponType;
+                currentRightWeaponSet = true;
+            }
         }
 
-        if (currentWeaponSet && currentLeftWeaponSet)
+        if (currentWeaponSet && currentLeftWeaponSet && currentRightWeaponSet)
         {
             SetStartingWeapons();
         }

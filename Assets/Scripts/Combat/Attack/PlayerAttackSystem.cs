@@ -518,14 +518,14 @@ namespace Patrik
            bool canAttack = true;
 
            // reset ult flag
-           _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, false);
+           EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, false);
            
            // Handle ultimate perform
             if (attackCaller.ValueRO.PrepareUltimateInfo.Perform 
                 && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
                 && canAttack)
             {
-                _weaponManager.UpdateAttackAnimation(AttackType.Ultimate, true);
+                EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, true);
                 _weaponManager.PrepareUltimateAttack();
                 canAttack = false;
             }
@@ -547,7 +547,7 @@ namespace Patrik
             bool specIsHeld = specialAttackInput.IsHeld;
 
             bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon);//canAttack;
-            _weaponManager.UpdateAttackAnimation(AttackType.Special, canSpecialAttack);
+            EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Special, canSpecialAttack);
 
             if (canSpecialAttack)
             {
@@ -559,7 +559,7 @@ namespace Patrik
             bool normIsHeld = normalAttackInput.IsHeld;
 
             bool canNormalAttack = normIsHeld && canAttack && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Normal, currentWeapon);//canAttack;
-            _weaponManager.UpdateAttackAnimation(AttackType.Normal, canNormalAttack);
+            EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Normal, canNormalAttack);
             if (canNormalAttack)
             {
                 canAttack = false;

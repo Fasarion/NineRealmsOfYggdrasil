@@ -17,6 +17,8 @@ public static class EventManager
     
     public static UnityAction<WeaponType> OnWeaponActive;
     public static UnityAction<WeaponType> OnWeaponPassive;
+
+    public static UnityAction<AttackType, bool> OnUpdateAttackAnimation;
     
     public static UnityAction<AttackData> OnSpecialCharge;
     public static UnityAction<AttackData> OnUltimatePrepare;

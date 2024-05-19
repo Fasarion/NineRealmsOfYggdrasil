@@ -17,13 +17,19 @@ public class PlayerAudioBehaviour : MonoBehaviour
     {
         EventManager.OnWeaponSwitch += OnWeaponSwitch;
         EventManager.OnPlayerHealthSet += OnPlayerHealthSet;
-        
+        EventManager.OnActiveAttackStart += OnActiveAttackStart;
     }
     
     private void OnDisable()
     {
         EventManager.OnWeaponSwitch -= OnWeaponSwitch;
         EventManager.OnPlayerHealthSet -= OnPlayerHealthSet;
+        EventManager.OnActiveAttackStart -= OnActiveAttackStart;
+    }
+
+    private void OnActiveAttackStart(AttackData data)
+    {
+        PlayWeaponSwingAudio((int)data.WeaponType, (int)data.AttackType);
     }
 
     private void OnPlayerHealthSet(PlayerHealthData healthData)

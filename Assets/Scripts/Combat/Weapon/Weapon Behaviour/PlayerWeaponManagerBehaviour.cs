@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Patrik
 {
@@ -19,9 +17,6 @@ namespace Patrik
         [Header("Animation")]
         [SerializeField] private Animator playerAnimator;
         
-        [Header("Audio")]
-        [SerializeField] private PlayerAudioBehaviour playerAudio;
-
         [Header("Weapon Slots")]
         [SerializeField] private Transform activeSlot;
         [SerializeField] private List<Transform> passiveSlots = new ();
@@ -44,19 +39,6 @@ namespace Patrik
         
         // Animator parameters
         private string weaponIdParameterName = "weaponID";
-        
-        // Animation Events
-        //public UnityAction<AttackData> OnActiveAttackStart;
-        //public UnityAction<AttackData> OnActiveAttackStop;
-        
-        //public UnityAction<AttackData> OnPassiveAttackStart;
-        //public UnityAction<AttackData> OnPassiveAttackStop;
-        
-        // public UnityAction<WeaponType> OnWeaponActive;
-        // public UnityAction<WeaponType> OnWeaponPassive;
-        
-        // public UnityAction<AttackData> OnSpecialCharge;
-        // public UnityAction<AttackData> OnUltimatePrepare;
 
         float timeOfLastAttackHold;
         float timeSinceLastAttackHold;
@@ -65,9 +47,12 @@ namespace Patrik
         private void Awake()
         {
             Instance = this;
-
-            playerAudio = gameObject.GetComponent<PlayerAudioBehaviour>();
             playerAnimator = gameObject.GetComponent<Animator>();
+        }
+
+        private void OnEnable()
+        {
+            EventManager.OnUpdateAttackAnimation += UpdateAttackAnimation;
         }
 
         private void OnDisable()
@@ -76,39 +61,42 @@ namespace Patrik
             {
                 UnsubscribeFromPassiveEvents(weapon);
             }
+            
+            EventManager.OnUpdateAttackAnimation -= UpdateAttackAnimation;
         }
 
-        public void UpdateAttackAnimation(AttackType type, bool setBool)
+        private void UpdateAttackAnimation(AttackType attackType, bool shouldAttack)
         {
-           if (setBool) currentAttackType = type;
+           if (shouldAttack) currentAttackType = attackType;
            
-           playerAnimator.SetBool(GetActiveAttackAnimationName(type), setBool);
+           playerAnimator.SetBool(GetActiveAttackAnimationName(attackType), shouldAttack);
+           
+           HandleAttackBuffer(attackType, shouldAttack);
+        }
 
-           if (setBool)
-           {
-               timeOfLastAttackHold = Time.time;
-           }
+        private void HandleAttackBuffer(AttackType type, bool setBool)
+        {
+            if (setBool)
+            {
+                timeOfLastAttackHold = Time.time;
+            }
 
-           timeSinceLastAttackHold = Time.time - timeOfLastAttackHold;
-           if (timeSinceLastAttackHold < attackBufferTime && type == currentAttackType)
-           {
-               playerAnimator.SetBool(GetActiveAttackAnimationName(type), true);
-           }
+            timeSinceLastAttackHold = Time.time - timeOfLastAttackHold;
+            if (timeSinceLastAttackHold < attackBufferTime && type == currentAttackType)
+            {
+                playerAnimator.SetBool(GetActiveAttackAnimationName(type), true);
+            }
         }
 
         public void Begin(int combo)
         {
             currentCombo = combo;
-            //OnActiveAttackStart?.Invoke(GetActiveAttackData());
             EventManager.OnActiveAttackStart?.Invoke(GetActiveAttackData());
-            
-            playerAudio.PlayWeaponSwingAudio((int)CurrentWeaponType, (int)currentAttackType);
         }
         
         public void Stop(int combo)
         {
             currentCombo = combo;
-          //  OnActiveAttackStop?.Invoke(GetActiveAttackData()); 
             EventManager.OnActiveAttackStop?.Invoke(GetActiveAttackData());
         }
         
@@ -207,7 +195,6 @@ namespace Patrik
             weapon.MakePassive(passiveParent);
             weaponParents[weapon] = passiveParent;
             
-            //OnWeaponPassive?.Invoke(weapon.WeaponType);
             EventManager.OnWeaponPassive?.Invoke(weapon.WeaponType);
         }
         
@@ -225,13 +212,11 @@ namespace Patrik
 
         private void StartPassiveAttack(WeaponBehaviour weapon)
         {
-            //OnPassiveAttackStart?.Invoke(GetPassiveAttackData(weapon));
             EventManager.OnPassiveAttackStart?.Invoke(GetPassiveAttackData(weapon));
         }
         
         private void StopPassiveAttack(WeaponBehaviour weapon)
         {
-            //OnPassiveAttackStop?.Invoke(GetPassiveAttackData(weapon));
             EventManager.OnPassiveAttackStop?.Invoke(GetPassiveAttackData(weapon));
         }
 
@@ -297,10 +282,7 @@ namespace Patrik
         public void PrepareUltimateAttack()
         {
             currentAttackType = AttackType.Ultimate;
-            //OnUltimatePrepare?.Invoke(GetActiveAttackData());
             EventManager.OnUltimatePrepare?.Invoke(GetActiveAttackData());
-
-            //playerAnimator.SetBool("startUltimate", true);
             playerAnimator.SetTrigger("startUltimateTrigger");
         }
 

@@ -25,6 +25,11 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     {
         _transform = this.GetComponent<RectTransform>();
         _manager = UpgradeCardUIManager.Instance;
+        
+    }
+
+    private void Start()
+    {
         if (!_audioManager)
         {
             _audioManager = AudioManager.Instance;

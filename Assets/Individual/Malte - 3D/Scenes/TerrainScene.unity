@@ -301,6 +301,11 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 733497293958173675, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2747678806823177205, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -395,6 +400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainSceneComponents
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: playLevelMusic
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -19,6 +19,8 @@ public class MusicManager : MonoBehaviour
     public int enemyCountStageTwo;
     public int enemyCountStageThree;
     private int nextStageCount;
+
+    [SerializeField]private bool playLevelMusic;
     
     private void Awake()
     {
@@ -36,7 +38,11 @@ public class MusicManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        levelMusic.Play();
+        if (playLevelMusic)
+        {
+            levelMusic.Play();
+        }
+      
         SetNextStageCount(nextStage);
     }
 

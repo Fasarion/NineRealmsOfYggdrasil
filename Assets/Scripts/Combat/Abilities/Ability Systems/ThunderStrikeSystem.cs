@@ -25,6 +25,7 @@ public partial struct ThunderStrikeSystem : ISystem
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<ThunderStrikeAbility>();
         state.RequireForUpdate<ThunderStrikeConfig>();
+        state.RequireForUpdate<AudioBufferData>();
     }
 
     [BurstCompile]
@@ -34,6 +35,8 @@ public partial struct ThunderStrikeSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var target = SystemAPI.GetSingleton<PlayerTargetInfoSingleton>();
         var targetPos = target.LastPosition;
+        
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
 
         foreach (var (ability, timer, originTransform, entity) in
                  SystemAPI.Query<RefRW<ThunderStrikeAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
@@ -66,6 +69,7 @@ public partial struct ThunderStrikeSystem : ISystem
                     OwnerEntity = hammerComponent,
                     OwnerWasActive = weapon.InActiveState
                 });
+                
             }
 
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
@@ -82,6 +86,9 @@ public partial struct ThunderStrikeSystem : ISystem
             if (timer.ValueRO.currentTime > currentCheckpointTime)
             {
                 ability.ValueRW.strikeCounter++;
+                
+                var audioElement = new AudioBufferData() {AudioData = thunderConfig.impactAudioData};
+                audioBuffer.Add(audioElement);
                 
                 var effect = state.EntityManager.Instantiate(thunderConfig.projectileAbilityPrefab);
                 

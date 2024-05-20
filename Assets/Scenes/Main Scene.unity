@@ -189,6 +189,31 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Musik/MainTitle
+      objectReference: {fileID: 0}
+    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: 1219563285
+      objectReference: {fileID: 0}
+    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1128224744
+      objectReference: {fileID: 0}
+    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -1077628007
+      objectReference: {fileID: 0}
+    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 731635143
+      objectReference: {fileID: 0}
     - target: {fileID: 2747678806823177205, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -258,6 +283,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MainSceneComponents
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: playLevelMusic
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: enemyCountStageTwo
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: enemyCountStageThree
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

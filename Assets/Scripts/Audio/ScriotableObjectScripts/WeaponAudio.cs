@@ -58,10 +58,7 @@ public class WeaponAudio : ScriptableObject
             }
             case 4:
             {
-                _meadInstance = RuntimeManager.CreateInstance(meadAudio);
-                _meadInstance.setParameterByName("AttackType", attackType);
-                _meadInstance.start();
-                _meadInstance.release();
+                RuntimeManager.PlayOneShot(meadAudio);
                 break;
             }
         }

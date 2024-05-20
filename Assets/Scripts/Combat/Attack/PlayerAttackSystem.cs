@@ -546,7 +546,7 @@ namespace Patrik
             var specialAttackInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             bool specIsHeld = specialAttackInput.IsHeld;
 
-            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon);//canAttack;
+            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon);
             EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Special, canSpecialAttack);
 
             if (canSpecialAttack)
@@ -558,7 +558,7 @@ namespace Patrik
             var normalAttackInput = SystemAPI.GetSingleton<PlayerNormalAttackInput>();
             bool normIsHeld = normalAttackInput.IsHeld;
 
-            bool canNormalAttack = normIsHeld && canAttack && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Normal, currentWeapon);//canAttack;
+            bool canNormalAttack = normIsHeld && canAttack && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Normal, currentWeapon);
             EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Normal, canNormalAttack);
             if (canNormalAttack)
             {

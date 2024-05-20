@@ -46,7 +46,7 @@ public partial struct SpawnSystem : ISystem
         {
             timer.ValueRW.currentTime = 0;
             CheckForOutOfBoundsEnemies(ref state, config.ValueRO.maxDistanceFromPlayer, playerPos.Value, config.ValueRO.outerSpawningRadius);
-            Debug.Log("check");
+            //Debug.Log("check");
         }
         
 

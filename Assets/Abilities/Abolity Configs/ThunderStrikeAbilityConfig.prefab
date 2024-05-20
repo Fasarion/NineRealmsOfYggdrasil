@@ -65,6 +65,13 @@ MonoBehaviour:
   damageDelayTime: 0.2
   damageArea: 7
   shockwaveEffectHeightOffset: 0.001
+  impactAudioData:
+    AudioEnumValue: 0
+    eventCategoryType: 1
+    weaponType: 2
+    enemyTyping: 0
+    audioEventType: 2
+    attackType: 3
 --- !u!114 &1358274090480011263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77,6 +84,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasHitBuffer: 1
+  isHitTrigger: 0
+  isHitTriggerTarget: 0
+  isHitCollider: 0
+  isHitColliderTarget: 0
 --- !u!114 &2220004305027966963
 MonoBehaviour:
   m_ObjectHideFlags: 0

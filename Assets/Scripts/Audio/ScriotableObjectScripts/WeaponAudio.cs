@@ -53,18 +53,15 @@ public class WeaponAudio : ScriptableObject
             }
             case 3:
             {
-                _meadInstance = RuntimeManager.CreateInstance(meadAudio);
-                _meadInstance.setParameterByName("AttackType", attackType);
-                _meadInstance.start();
-                _meadInstance.release();
+                RuntimeManager.PlayOneShot(crowAudio);
                 break;
             }
             case 4:
             {
-                _crowInstance = RuntimeManager.CreateInstance(crowAudio);
-                _crowInstance.setParameterByName("AttackType", attackType);
-                _crowInstance.start();
-                _crowInstance.release();
+                _meadInstance = RuntimeManager.CreateInstance(meadAudio);
+                _meadInstance.setParameterByName("AttackType", attackType);
+                _meadInstance.start();
+                _meadInstance.release();
                 break;
             }
         }
@@ -90,6 +87,11 @@ public class WeaponAudio : ScriptableObject
                 SpecialAttackAudio((int)audioData.audioEventType, audioData);
                 break;
             }
+            case 3: //Ultimate Attacks (R)
+            {
+                UltimateAttackAudio((int)audioData.audioEventType, audioData);
+                break;
+            }
         }
     }
     
@@ -100,7 +102,7 @@ public class WeaponAudio : ScriptableObject
         {
             case 1: 
             {
-                //NotInUse
+                //NotInUse, handled elsewhere
                 break;
             }
             case 2:
@@ -123,6 +125,23 @@ public class WeaponAudio : ScriptableObject
             case 2:
             {
                 PlaySpecialImpactAudio((int)audioData.weaponType);
+                break;
+            }
+        }
+    }
+
+    private void UltimateAttackAudio(int audioEvent, AudioData audioData)
+    {
+        switch (audioEvent)
+        {
+            case 1:
+            {
+                //PlayUltimateUseAudio((int)audioData.weaponType);
+                break;
+            }
+            case 2:
+            {
+                PlayUltimateImpactAudio((int)audioData.weaponType);
                 break;
             }
         }
@@ -161,6 +180,16 @@ public class WeaponAudio : ScriptableObject
                 RuntimeManager.PlayOneShot(hammerThrow);
                 break;
             }
+            case 3: //Bird
+            {
+                //bird special use
+                break;
+            }
+            case 4: //Mead
+            {
+                //mead special use
+                break;
+            }
         }
     }
     
@@ -177,6 +206,69 @@ public class WeaponAudio : ScriptableObject
             case 2: //Hammare
             {
                 RuntimeManager.PlayOneShot(hammerThrowImpact);
+                break;
+            }
+            case 3: //Bird
+            {
+                //bird special impact
+                break;
+            }
+            case 4:
+            {
+                //mead special impact
+                break;
+            }
+        }
+    }
+
+    private void PlayUltimateUseAudio(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1:
+            {
+                //SvärdUltimateUse
+                break;
+            }
+            case 2:
+            {
+                //hammerUltimate
+                break;
+            }
+            case 3: //Bird
+            {
+                //birdultimateuse
+                break;
+            }
+            case 4:
+            {
+                //meadultimateuse
+                break;
+            }
+        }
+    }
+    private void PlayUltimateImpactAudio(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1: //Svärd BIGSWORD
+            {
+                //RuntimeManager.PlayOneShot(iceChargeImpact);
+                break;
+            }
+            case 2: //Hammare Lightning
+            {
+                RuntimeManager.PlayOneShot(lightningStrike);
+                break;
+            }
+            case 3: //Bird
+            {
+                //birdultimateimpact
+                break;
+            }
+            case 4:
+            {
+                //meadultimateimpact
                 break;
             }
         }

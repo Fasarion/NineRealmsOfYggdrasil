@@ -28,6 +28,7 @@ public class PlayerAudioBehaviour : MonoBehaviour
 
     private void OnPlayerHealthSet(PlayerHealthData healthData)
     {
+        FMODUnity.RuntimeManager.StudioSystem.setParameterByName("GlobalHealth", healthData.currentHealth);
         // $"Spelarn har {healthData.currentHealth} hp just nu");
     }
 

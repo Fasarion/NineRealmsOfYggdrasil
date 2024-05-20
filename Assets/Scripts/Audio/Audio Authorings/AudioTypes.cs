@@ -15,8 +15,8 @@ public enum WeaponTyping
     None = 0,
     Sword = 1,
     Hammer = 2,
-    Mead = 3,
-    Birds = 4,
+    Birds = 3,
+    Mead = 4,
 }
 
 public enum AttackTypeAudio

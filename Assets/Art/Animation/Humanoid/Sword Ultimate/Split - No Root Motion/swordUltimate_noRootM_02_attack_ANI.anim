@@ -22350,7 +22350,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.24
-        value: 2
+        value: 4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -101697,7 +101697,7 @@ AnimationClip:
         outWeight: 0.33333334
       - serializedVersion: 3
         time: 0.24
-        value: 2
+        value: 4
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -124440,4 +124440,18 @@ AnimationClip:
     flags: 0
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 1
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: Begin
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.24
+    functionName: Stop
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

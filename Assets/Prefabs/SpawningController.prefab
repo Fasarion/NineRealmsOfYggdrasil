@@ -99,14 +99,14 @@ MonoBehaviour:
     timerCutoffTime: 120
     minSpawnCount: 1
     maxSpawnCount: 1
-  - targetEnemyCount: 500
+  - targetEnemyCount: 600
     CheckpointEnemyData:
     - EnemyType: 2
       Weight: 2
     timerCutoffTime: 121
     minSpawnCount: 1
     maxSpawnCount: 5
-  - targetEnemyCount: 300
+  - targetEnemyCount: 200
     CheckpointEnemyData:
     - EnemyType: 2
       Weight: 1
@@ -114,16 +114,82 @@ MonoBehaviour:
       Weight: 2
     timerCutoffTime: 150
     minSpawnCount: 1
-    maxSpawnCount: 2
-  - targetEnemyCount: 350
+    maxSpawnCount: 3
+  - targetEnemyCount: 250
     CheckpointEnemyData:
     - EnemyType: 2
+      Weight: 6
+    - EnemyType: 3
+      Weight: 3
+    - EnemyType: 5
       Weight: 2
+    timerCutoffTime: 180
+    minSpawnCount: 2
+    maxSpawnCount: 3
+  - targetEnemyCount: 270
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 1
+    - EnemyType: 3
+      Weight: 5
+    - EnemyType: 5
+      Weight: 2
+    timerCutoffTime: 210
+    minSpawnCount: 2
+    maxSpawnCount: 3
+  - targetEnemyCount: 900
+    CheckpointEnemyData:
+    - EnemyType: 2
+      Weight: 1
     - EnemyType: 3
       Weight: 1
+    - EnemyType: 4
+      Weight: 1
+    timerCutoffTime: 240
+    minSpawnCount: 1
+    maxSpawnCount: 5
+  - targetEnemyCount: 300
+    CheckpointEnemyData:
+    - EnemyType: 3
+      Weight: 8
+    - EnemyType: 4
+      Weight: 2
     - EnemyType: 5
       Weight: 1
-    timerCutoffTime: 180
+    timerCutoffTime: 270
+    minSpawnCount: 2
+    maxSpawnCount: 3
+  - targetEnemyCount: 330
+    CheckpointEnemyData:
+    - EnemyType: 3
+      Weight: 4
+    - EnemyType: 4
+      Weight: 2
+    - EnemyType: 5
+      Weight: 1
+    timerCutoffTime: 300
+    minSpawnCount: 2
+    maxSpawnCount: 3
+  - targetEnemyCount: 250
+    CheckpointEnemyData:
+    - EnemyType: 3
+      Weight: 3
+    - EnemyType: 4
+      Weight: 3
+    - EnemyType: 5
+      Weight: 1
+    - EnemyType: 6
+      Weight: 1
+    timerCutoffTime: 330
+    minSpawnCount: 2
+    maxSpawnCount: 3
+  - targetEnemyCount: 600
+    CheckpointEnemyData:
+    - EnemyType: 4
+      Weight: 4
+    - EnemyType: 7
+      Weight: 1
+    timerCutoffTime: 360
     minSpawnCount: 2
     maxSpawnCount: 3
   startingCheckpointIndex: 0

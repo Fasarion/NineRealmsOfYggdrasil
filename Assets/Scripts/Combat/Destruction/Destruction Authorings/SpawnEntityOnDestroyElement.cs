@@ -1,15 +1,15 @@
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public struct SpawnEntityOnDestroyElement : IBufferElementData
 {
     public Entity Entity;
     public SpawnSettings Settings;
-
 }
 
 [System.Serializable]
-public struct SpawnSettings
+public struct SpawnSettings 
 {
     [Tooltip("Mark this if the scale should be set to the value \"New Scale\". " +
              "Otherwise, the value defaults to that of the prefab.")]
@@ -17,14 +17,12 @@ public struct SpawnSettings
     
     [Tooltip("New scale set to the spawned entity.")]
     public float NewScale;
-
-    public SpawnSettings(bool setScale, float newScale)
-    {
-        SetScale = setScale;
-        NewScale = newScale;
-    }
-
-    public static SpawnSettings Default => new SpawnSettings(false, 1);
+    
+    [Tooltip("Adds an offset to the spawn position.")]
+    public bool AddOffset;
+    
+    [Tooltip("Offset added to spawn position.")]
+    public float3 Offset;
 }
 
 [System.Serializable]
@@ -35,12 +33,4 @@ public struct SpawnObjectContents
 
     [Tooltip("Settings to modify the spawned object.")]
     public SpawnSettings SpawnSettings;
-    
-    public SpawnObjectContents(GameObject prefab)
-    {
-        SpawnPrefab = prefab;
-        SpawnSettings = SpawnSettings.Default;
-    }
-
-    public static SpawnObjectContents Default => new SpawnObjectContents(default);
 }

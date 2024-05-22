@@ -26,7 +26,6 @@ public partial struct BirdSpecialAttackSystem : ISystem
         
         state.RequireForUpdate<BirdsSpecialAttackConfig>();
         state.RequireForUpdate<GameUnpaused>();
-
         
         cachedChargeLevel = -1;
     }
@@ -71,29 +70,16 @@ public partial struct BirdSpecialAttackSystem : ISystem
             for (int i = 0; i < config.ValueRO.BirdCount; i++)
             {
                 // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
-                foreach (var (transform, spawner, weapon, entity) in SystemAPI
-                    .Query<LocalTransform, ProjectileSpawnerComponent, WeaponComponent>()
+                foreach (var (spawner, weapon, entity) in SystemAPI
+                    .Query<ProjectileSpawnerComponent, WeaponComponent>()
                     .WithAll<BirdsComponent>()
                     .WithEntityAccess())
                 {
                     // instantiate bird
                     var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
                     
-                    // // get spawn position
                     float angle = math.radians(config.ValueRO.AngleStep * i);
-                    float x = playerPos.x + config.ValueRO.InitialRadius * math.cos(angle);
-                    float z = playerPos.z + config.ValueRO.InitialRadius * math.sin(angle);
-                    float3 spawnPosition = new float3(x, playerPos.y, z);
                     
-                    // get rotation
-                    quaternion rotation = quaternion.RotateY(-angle); 
-                    
-                    // update transform
-                    var birdTransform = transform;
-                    birdTransform.Rotation = rotation;
-                    birdTransform.Position = spawnPosition;
-                    state.EntityManager.SetComponentData(birdProjectile, birdTransform);
-
                     // set owner data
                     state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
                     {
@@ -113,7 +99,6 @@ public partial struct BirdSpecialAttackSystem : ISystem
                         AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
                         BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
                         CenterPointEntity = config.ValueRO.CenterPointEntity
-                      //  moveAroundType = CircularMovementComponent.MoveAroundType.Player
                     });
                 }
                 

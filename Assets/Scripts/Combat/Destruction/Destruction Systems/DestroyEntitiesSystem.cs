@@ -48,6 +48,11 @@ namespace Destruction
                             spawnedTransform.Scale = spawnElement.Settings.NewScale;
                         }
                         
+                        if (spawnElement.Settings.AddOffset)
+                        {
+                            spawnedTransform.Position += spawnElement.Settings.Offset;
+                        }
+                        
                         spawnedTransform.Rotation = transform.Rotation;
                         state.EntityManager.SetComponentData(spawnedEntity, spawnedTransform);
                         

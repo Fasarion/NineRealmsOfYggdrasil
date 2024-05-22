@@ -48,9 +48,9 @@ namespace Destruction
                             spawnedTransform.Scale = spawnElement.Settings.NewScale;
                         }
                         
-                        if (spawnElement.Settings.AddOffset)
+                        if (spawnElement.Settings.SetYPosition)
                         {
-                            spawnedTransform.Position += spawnElement.Settings.Offset;
+                            spawnedTransform.Position.y = spawnElement.Settings.YPosition;
                         }
                         
                         spawnedTransform.Rotation = transform.Rotation;

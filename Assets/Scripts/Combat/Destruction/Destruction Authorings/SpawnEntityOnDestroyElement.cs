@@ -11,6 +11,7 @@ public struct SpawnEntityOnDestroyElement : IBufferElementData
 [System.Serializable]
 public struct SpawnSettings 
 {
+    [Header("Scale")]
     [Tooltip("Mark this if the scale should be set to the value \"New Scale\". " +
              "Otherwise, the value defaults to that of the prefab.")]
     public bool SetScale;
@@ -18,11 +19,12 @@ public struct SpawnSettings
     [Tooltip("New scale set to the spawned entity.")]
     public float NewScale;
     
-    [Tooltip("Adds an offset to the spawn position.")]
-    public bool AddOffset;
+    [Header("Y Position")]
+    [Tooltip("Forces the y position of the spawned object to have a fixed value.")]
+    public bool SetYPosition;
     
     [Tooltip("Offset added to spawn position.")]
-    public float3 Offset;
+    public float YPosition; 
 }
 
 [System.Serializable]

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
@@ -10,9 +11,9 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
     [Tooltip("Speed modifiers that are applied for every charge stage.")]
     [SerializeField] private List<AngularSpeedChargeStageBuff> angularSpeedBuffs;
     [Space]
-    [Tooltip("Base value for angular speed when the attack is charging.")]
+    [Tooltip("Base value for angular speed when the attack is charging (revolutions per second).")]
     [SerializeField] private float baseAngularSpeedDuringCharge = 2f;
-    [Tooltip("Base value for angular speed when the attack is released.")]
+    [Tooltip("Base value for angular speed when the attack is released (revolutions per second).")]
     [SerializeField] private float baseAngularSpeedAfterRelease = 5f;
     
     [Header("Bird Settings")]
@@ -54,8 +55,9 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
                 RadiusIncreaseSpeed = authoring.radiusIncreaseSpeed,
                 
                 AngleStep = 360f / authoring.birdCount,
-                AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge,
-                AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease,
+                
+                AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge * math.PI,
+                AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease * math.PI,
                 LifeTimeAfterRelease = authoring.lifeTimeAfterRelease
             });
 

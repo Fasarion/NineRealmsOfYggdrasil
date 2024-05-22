@@ -324,7 +324,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObjects:
-  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
+  - SpawnPrefab: {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf,
+      type: 3}
+    SpawnSettings:
+      SetScale: 0
+      NewScale: 1
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0

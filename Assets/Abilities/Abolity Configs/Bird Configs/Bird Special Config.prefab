@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7909604834349037978}
   - component: {fileID: 4214904477233245641}
   - component: {fileID: 3296797574519026838}
+  - component: {fileID: 146232011931542145}
   m_Layer: 0
   m_Name: Bird Special Config
   m_TagString: Untagged
@@ -88,3 +89,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponType: 3
   AttackType: 2
+--- !u!114 &146232011931542145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736799127333753709}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458b2f73b0eb46a1815b9f2a54f66bf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargeStageBuffs:
+  - DamageModifier: 1
+    RangeModifier: 1
+  - DamageModifier: 1.2
+    RangeModifier: 1
+  - DamageModifier: 1.5
+    RangeModifier: 1

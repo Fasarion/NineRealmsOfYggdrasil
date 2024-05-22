@@ -10,6 +10,8 @@ using Unity.Transforms;
 using UnityEngine;
 using Weapon;
 
+//[UpdateAfter(typeof(PlayerAttackSystem))]
+[UpdateAfter(typeof(CombatStatHandleSystem))]
 public partial struct BirdSpecialAttackSystem : ISystem
 {
     private int cachedChargeLevel;
@@ -35,6 +37,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<BirdsSpecialAttackConfig>();
+        var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
         var chargeInfo = attackCaller.SpecialChargeInfo;
         if (chargeInfo.ChargingWeapon != WeaponType.Birds) return;
@@ -100,6 +104,13 @@ public partial struct BirdSpecialAttackSystem : ISystem
                         BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
                         CenterPointEntity = config.ValueRO.CenterPointEntity
                     });
+                    
+                    // update stats
+                    ecb.AddComponent(birdProjectile, new UpdateStatsComponent
+                    {
+                        EntityToTransferStatsFrom = configEntity
+                    });
+                    
                 }
                 
                 config.ValueRW.HasReleased = false;
@@ -129,16 +140,23 @@ public partial struct BirdSpecialAttackSystem : ISystem
             {
                 cachedChargeLevel = chargeInfo.Level;
 
-                var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
                 var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
 
                 float speedModifier = speedBuffer[cachedChargeLevel].Value.DuringChargeBuff;
+                
+                
             
                 foreach (var (birdMovement,  entity) in SystemAPI
                     .Query<RefRW<CircularMovementComponent>>()
                     .WithEntityAccess())
                 {
                     birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+                    
+                    // update stats
+                    ecb.AddComponent(entity, new UpdateStatsComponent
+                    {
+                        EntityToTransferStatsFrom = configEntity
+                    });
                 }
             }
         }
@@ -148,12 +166,17 @@ public partial struct BirdSpecialAttackSystem : ISystem
         {
             cachedChargeLevel = chargeInfo.Level;
 
-            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-            var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
             var speedBuffer = state.EntityManager.GetBuffer<AngularSpeedChargeStageBuffElement>(configEntity);
 
             float speedModifier = speedBuffer[cachedChargeLevel].Value.AfterReleaseBuff;
+            
+            // update damage based on buffer
+            var chargeBuffer = state.EntityManager.GetBuffer<ChargeBuffElement>(configEntity);
+            float damageMod = chargeBuffer[cachedChargeLevel].Value.DamageModifier;
+            var cachedDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+            cachedDamage.Value.DamageValue *= damageMod;
+            state.EntityManager.SetComponentData(configEntity, cachedDamage);
             
             foreach (var (birdMovement,  entity) in SystemAPI
                 .Query<RefRW<CircularMovementComponent>>()
@@ -167,14 +190,19 @@ public partial struct BirdSpecialAttackSystem : ISystem
                 {
                     TimeToDestroy = config.ValueRO.LifeTimeAfterRelease
                 });
+                
+                ecb.AddComponent(entity, new UpdateStatsComponent
+                {
+                    EntityToTransferStatsFrom = configEntity
+                });
             }
             
-            ecb.Playback(state.EntityManager);
-            ecb.Dispose();
-
             config = SystemAPI.GetSingletonRW<BirdsSpecialAttackConfig>();
             config.ValueRW.HasReleased = true;
             config.ValueRW.InReleaseState = true;
         }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

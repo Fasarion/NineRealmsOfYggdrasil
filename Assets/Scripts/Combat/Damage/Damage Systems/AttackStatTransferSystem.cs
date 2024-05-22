@@ -10,11 +10,11 @@ public partial struct AttackStatTransferSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         // transfer damage
-        foreach (var (damageTranserReciever, updateStats) in SystemAPI
+        foreach (var (damageTransferReceiver, updateStats) in SystemAPI
             .Query<RefRW<CachedDamageComponent>, UpdateStatsComponent>())
         {
             var damageToTransfer = state.EntityManager.GetComponentData<CachedDamageComponent>(updateStats.EntityToTransferStatsFrom);
-            damageTranserReciever.ValueRW.Value = damageToTransfer.Value;
+            damageTransferReceiver.ValueRW.Value = damageToTransfer.Value;
         }
 
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);

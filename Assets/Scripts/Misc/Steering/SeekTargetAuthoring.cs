@@ -7,11 +7,11 @@ using UnityEngine;
 public class SeekTargetAuthoring : MonoBehaviour
 {
     [Header("Distance")]
-    [Tooltip("Minimum distance for an to be considered a target.")]
-    [SerializeField] private float minDistance = 0;
+    [Tooltip("Closest distance for an entity to be considered a target when seeking for a new target.")]
+    [SerializeField] private float minDistanceForFindingTarget = 0;
     
-    [Tooltip("Maximum distance for an to be considered a target.")]
-    [SerializeField] private float maxDistance;
+    [Tooltip("Furthest distance for an entity to be considered a target when seeking for a new target.")]
+    [SerializeField] private float maxDistanceForFindingTarget;
 
     [Header("Field of View")]
     [Range(0, 360)]
@@ -29,8 +29,8 @@ public class SeekTargetAuthoring : MonoBehaviour
             
             AddComponent(entity, new SeekTargetComponent
             {
-                MinDistanceForSeek = authoring.minDistance,
-                HalfMaxDistance = authoring.maxDistance * 0.5f,
+                MinDistanceForSeek = authoring.minDistanceForFindingTarget,
+                HalfMaxDistance = authoring.maxDistanceForFindingTarget * 0.5f,
                    
                 FovInRadians = math.radians(authoring.fov) * 0.5f
             });
@@ -45,7 +45,6 @@ public struct SeekTargetComponent : IComponentData
 {
     public Entity LastTargetEntity;
     
-    public float MinDistanceAfterTargetFound;
     public float MinDistanceForSeek;
     public float HalfMaxDistance;
 

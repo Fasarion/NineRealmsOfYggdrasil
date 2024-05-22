@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5376623906357920042}
   - component: {fileID: 1906484001275493266}
+  - component: {fileID: 2721724589688101465}
+  - component: {fileID: 1927580293839562194}
   m_Layer: 0
   m_Name: Bird Ultimate Config
   m_TagString: Untagged
@@ -56,3 +58,31 @@ MonoBehaviour:
   birdCount: 2
   lifeTime: 4
   circleRadius: 8
+--- !u!114 &2721724589688101465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998664864989752839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  criticalChance: 0
+--- !u!114 &1927580293839562194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998664864989752839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9340161221149bcb122c107d3c8b893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 3
+  AttackType: 3

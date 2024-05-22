@@ -54,6 +54,12 @@ public partial struct BirdPassiveAttackSystem : ISystem
                 ecb.AddComponent<HasSeekTargetEntity>(entity);
                 ecb.SetComponent(entity, hasSeekTargetEntity);
                 ecb.SetComponentEnabled<HasSeekTargetEntity>(entity, false);
+                
+                // update stats
+                ecb.AddComponent<UpdateStatsComponent>(entity);
+                UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
+                    {EntityToTransferStatsFrom = configEntity};
+                ecb.SetComponent(entity, updateStatsComponent);
             }
         }
         

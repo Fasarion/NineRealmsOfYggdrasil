@@ -110,6 +110,7 @@ public partial struct BirdPassiveAttackSystem : ISystem
                     ecb.AddComponent<DestroyAfterSecondsComponent>(birdProjectile);
                     ecb.SetComponent(birdProjectile, new DestroyAfterSecondsComponent{TimeToDestroy = config.ValueRO.LifeTime});
 
+                    // adding a timer for a seek delay
                     ecb.AddComponent<TimerObject>(birdProjectile);
                     ecb.SetComponent(birdProjectile, new TimerObject{maxTime = config.ValueRO.SeekDelay});
                         

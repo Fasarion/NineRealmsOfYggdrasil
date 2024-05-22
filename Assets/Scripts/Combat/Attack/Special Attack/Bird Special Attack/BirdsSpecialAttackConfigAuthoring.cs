@@ -56,8 +56,8 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
                 
                 AngleStep = 360f / authoring.birdCount,
                 
-                AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge * math.PI,
-                AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease * math.PI,
+                AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge * math.PI * 2,
+                AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease * math.PI * 2,
                 LifeTimeAfterRelease = authoring.lifeTimeAfterRelease
             });
 

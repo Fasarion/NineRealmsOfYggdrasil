@@ -15,7 +15,7 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private float timeBetweenSuctions = 0.3f; 
     
     [Header("Angular speed")]
-    [Tooltip("How fast the birds spin.")]
+    [Tooltip("How fast the birds spin (revolutions per second).")]
     [SerializeField] private float angularSpeed = 2f; 
     
     [Header("Bird Settings")]
@@ -53,7 +53,7 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 Radius = authoring.circleRadius,
                 
                 AngleStep = 360f / authoring.birdCount,
-                AngularSpeed = authoring.angularSpeed,
+                AngularSpeed = authoring.angularSpeed * math.PI * 2,
                 LifeTime = authoring.lifeTime
             });
         }

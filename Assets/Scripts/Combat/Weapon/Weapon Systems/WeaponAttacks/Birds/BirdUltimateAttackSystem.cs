@@ -111,7 +111,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
             
             // set size of tornado as configs diameter
             var tornadoTransform = state.EntityManager.GetComponentData<LocalTransform>(tornado);
-            tornadoTransform.Scale = config.ValueRO.Radius * 2;
+            tornadoTransform.Scale = config.ValueRO.TornadoRadius * 2;
             state.EntityManager.SetComponentData(tornado, tornadoTransform);
             
             // set tornado suction rate

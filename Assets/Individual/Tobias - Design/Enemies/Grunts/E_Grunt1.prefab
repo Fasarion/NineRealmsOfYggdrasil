@@ -452,6 +452,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyAnimationType: 0
+  attackDelay: 0.3
 --- !u!114 &8269505085597687999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,7 +479,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 2
-  attackDelay: 0.4
   distanceToPerformAttack: 2
 --- !u!114 &3568396196641309044
 MonoBehaviour:

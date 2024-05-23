@@ -4,9 +4,13 @@ using UnityEngine.Serialization;
 
 public class AttackPlayerWhenCloseAuthoring : MonoBehaviour
 {
-    [FormerlySerializedAs("shootingCooldown")] [SerializeField] private float attackCooldown;
-    [FormerlySerializedAs("shootingDelay")] [SerializeField] private float attackDelay;
-    [FormerlySerializedAs("ditanceToPerformAttack")] [FormerlySerializedAs("shootDistance")] [SerializeField] private float distanceToPerformAttack;
+    [Tooltip("How long this entity has to wait between attacks.")]
+    [SerializeField] private float attackCooldown;
+    
+    
+    
+    [Tooltip("How close to the player this entity needs to be to start attacking.")]
+    [SerializeField] private float distanceToPerformAttack;
     
     class Baker : Baker<AttackPlayerWhenCloseAuthoring>
     {
@@ -20,11 +24,7 @@ public class AttackPlayerWhenCloseAuthoring : MonoBehaviour
             });
             
             
-            AddComponent(entity, new EnemyAttackAnimationComponent
-            {
-                AnimationDelayTime = authoring.attackDelay
-            });
-            SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
+           
 
             AddComponent(entity, new ShouldAttackComponent());
             SetComponentEnabled<ShouldAttackComponent>(entity, false);
@@ -32,11 +32,6 @@ public class AttackPlayerWhenCloseAuthoring : MonoBehaviour
     }
 }
 
-public struct EnemyAttackAnimationComponent : IComponentData, IEnableableComponent
-{
-    public float AnimationDelayTime;
-    public float CurrentDelayTime;
-    public bool HasSetTrigger;
-}
+
 
 public struct ShouldAttackComponent : IComponentData, IEnableableComponent { }

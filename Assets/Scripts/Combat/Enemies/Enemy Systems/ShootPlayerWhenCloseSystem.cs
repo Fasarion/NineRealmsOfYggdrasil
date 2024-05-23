@@ -38,22 +38,4 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
             }
         }
     }
-
-    //     foreach (var (transform, shootWhenClose, projectileSpawner, entity) 
-    //         in SystemAPI.Query<LocalTransform, RefRW<ShootPlayerWhenCloseComponent>, ProjectileSpawnerComponent>()
-    //             .WithEntityAccess())
-    //     {
-    //         shootWhenClose.ValueRW.CurrentCooldownTime += deltaTime;
-    //         
-    //         var distanceToPlayer = math.distancesq(playerPos, transform.Position);
-    //         if (distanceToPlayer <= shootWhenClose.ValueRO.MinimumDistanceForShootingSquared)
-    //         {
-    //             if (shootWhenClose.ValueRO.CurrentCooldownTime > shootWhenClose.ValueRO.ShootingCooldownTime)
-    //             {
-    //                 state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, true);
-    //                 shootWhenClose.ValueRW.CurrentCooldownTime = 0;
-    //             }
-    //         }
-    //     }
-    // }
 }

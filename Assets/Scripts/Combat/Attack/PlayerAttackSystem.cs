@@ -574,6 +574,22 @@ namespace Patrik
                chargeState = _weaponManager.chargeState,
                Level = oldChargeInfo.Level
            };
+
+            if (_weaponManager.chargeState == ChargeState.Start)
+            {
+                // update stats when beginning charge
+                var weaponEntity = GetWeaponEntity(_weaponManager.CurrentWeaponType);
+
+                // TODO: hack to set attack type at start of charge
+                var weapon = SystemAPI.GetComponent<WeaponComponent>(weaponEntity);
+                weapon.CurrentAttackType = AttackType.Special;
+                SystemAPI.SetComponent(weaponEntity, weapon);
+                
+                Debug.Log("Update stats!");
+                
+                var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
+                statHandler.ValueRW.ShouldUpdateStats = true;
+            }
             
            if (specialAttackInput.KeyUp)
            {

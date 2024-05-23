@@ -18,6 +18,9 @@ public partial struct AttackStatTransferSystem : ISystem
         {
             Entity transfererEnttiy = updateStats.EntityToTransferStatsFrom;
 
+            // TODO: Add "ShouldTransferDamage" tag to avoiding checking every single type of
+            // transferable data?
+            // TODO: ITrasferable ?
             TryTransferComponentData<CachedDamageComponent>(state, transfererEnttiy, receiverEntity, ecb);
             TryTransferComponentData<KnockBackOnHitComponent>(state, transfererEnttiy, receiverEntity, ecb);
             TryTransferComponentData<ShouldApplyHitStopOnHit>(state, transfererEnttiy, receiverEntity, ecb);

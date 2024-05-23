@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using DevLocker.Utils;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-    public void SwapScene(string targetScene)
+    public SceneReference _sceneReference;
+    public void SwapScene()
     {
-        SceneManager.LoadScene(targetScene);
+        SceneManager.LoadScene(_sceneReference.ScenePath);
     }
 
     public void ExitGame()

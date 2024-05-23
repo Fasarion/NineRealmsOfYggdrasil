@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7796913833894053849}
   - component: {fileID: 1968590867285531591}
   - component: {fileID: 1691980620707738550}
+  - component: {fileID: 6906953246264831228}
   m_Layer: 5
   m_Name: VictoryUI
   m_TagString: Untagged
@@ -136,6 +137,22 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6906953246264831228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734307361602543989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014f8e9c047453448baaf34dddc7c7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneReference:
+    m_SceneAsset: {fileID: 102900000, guid: d75266438a8d0e54fa20ab994d433e0f, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/Main Scene.unity
 --- !u!1 &2584532529895065376
 GameObject:
   m_ObjectHideFlags: 0
@@ -524,7 +541,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1153025203127044308}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6906953246264831228}
+        m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+        m_MethodName: SwapScene
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7552026991580251277
 GameObject:
   m_ObjectHideFlags: 0
@@ -645,4 +674,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3458194718978121831}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6906953246264831228}
+        m_TargetAssemblyTypeName: SceneHandler, Assembly-CSharp
+        m_MethodName: ExitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

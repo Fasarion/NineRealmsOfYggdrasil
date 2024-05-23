@@ -52,10 +52,13 @@ public partial struct SpawnProjectilesSystem : ISystem
                 projectileTransform.Rotation = math.mul(spawnerTransform.Rotation, projectileTransform.Rotation);
             }
 
-            // set new transform values and direction
-            entityManager.SetComponentData(projectileEntity, projectileTransform);
-            entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(projectileTransform.Forward())));
-            
+            if (entityManager.HasComponent<DirectionComponent>(projectileEntity))
+            {
+                // set new transform values and direction
+                entityManager.SetComponentData(projectileEntity, projectileTransform);
+                entityManager.SetComponentData(projectileEntity, new DirectionComponent(math.normalizesafe(projectileTransform.Forward())));
+            }
+
             state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(spawnerEntity, false);
         }
     }

@@ -10,6 +10,7 @@ using UnityEngine;
 
 namespace Damage
 {
+    [DisableAutoCreation]
     [UpdateInGroup(typeof(PhysicsSystemGroup))]
     [UpdateAfter(typeof(PhysicsSimulationGroup))]
     public partial struct DetectHitCollisionSystem : ISystem

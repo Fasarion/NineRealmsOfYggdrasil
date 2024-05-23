@@ -26,6 +26,8 @@ GameObject:
   - component: {fileID: 7776188516205560807}
   - component: {fileID: 2876683596753378015}
   - component: {fileID: 8269505085597687999}
+  - component: {fileID: 6883993067792208077}
+  - component: {fileID: 3568396196641309044}
   m_Layer: 0
   m_Name: E_Grunt1
   m_TagString: Untagged
@@ -329,6 +331,8 @@ MonoBehaviour:
     SpawnSettings:
       SetScale: 0
       NewScale: 1
+      SetYPosition: 0
+      YPosition: 0
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,8 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 0
-  awayFromPlayerMoveSpeed: 0.5
+  minimumDistanceForMoving: 0.5
+  awayFromPlayerMoveSpeed: 2.4
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -461,3 +465,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 4
+--- !u!114 &6883993067792208077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 2
+  attackDelay: 0.4
+  distanceToPerformAttack: 2
+--- !u!114 &3568396196641309044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f9a11865114d5c8b91b2ee672d192e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7824363987953266496, guid: 04e0de8b256dfe647bde25a35c3f1f1a,
+    type: 3}

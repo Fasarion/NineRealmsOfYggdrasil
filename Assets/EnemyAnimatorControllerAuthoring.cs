@@ -27,7 +27,6 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
             
             AddComponent(entity, new HasSetupEnemyAnimator { });
             SetComponentEnabled<HasSetupEnemyAnimator>(entity, false);
-            
         }
     }
 }
@@ -38,4 +37,3 @@ public struct EnemyAnimatorControllerComponent : IComponentData
 }
 
 public struct HasSetupEnemyAnimator : IComponentData, IEnableableComponent{}
-

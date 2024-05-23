@@ -16,19 +16,16 @@ namespace Destruction
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         }
         
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-            // var beginSimECB = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
-            //     .CreateCommandBuffer(state.WorldUnmanaged);
-            //
-            // var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
+            var beginSimECB = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
+                .CreateCommandBuffer(state.WorldUnmanaged);
+            
+            var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
             var spawnEntityOnDestroyLookup = SystemAPI.GetBufferLookup<SpawnEntityOnDestroyElement>();
 
-            foreach (var (_, transform, entity) in SystemAPI.
-                Query<RefRW<ShouldBeDestroyed>, LocalTransform>()
-                .WithEntityAccess())
+            foreach (var (_, entity) in SystemAPI.Query<RefRW<ShouldBeDestroyed>>().WithEntityAccess())
             {
                 
                 // Spawn Objects on destroy
@@ -38,38 +35,19 @@ namespace Destruction
 
                     foreach (var spawnElement in spawnBuffer)
                     {
-                        var spawnedEntity = state.EntityManager.Instantiate(spawnElement.Entity);
-
-                        var spawnedTransform = state.EntityManager.GetComponentData<LocalTransform>(spawnedEntity);
-                        spawnedTransform.Position = transform.Position;
-
-                        if (spawnElement.Settings.SetScale)
+                        var spawnedEntity = beginSimECB.Instantiate(spawnElement.Value);
+                        if (transformLookup.TryGetComponent(entity, out var transform))
                         {
-                            spawnedTransform.Scale = spawnElement.Settings.NewScale;
+                            var localTransform = SystemAPI.GetComponent<LocalTransform>(entity);
+                            localTransform.Position = transform.Position;
+                            localTransform.Rotation = transform.Rotation;
+                            beginSimECB.SetComponent(spawnedEntity, localTransform);
                         }
-                        
-                        if (spawnElement.Settings.SetYPosition)
-                        {
-                            spawnedTransform.Position.y = spawnElement.Settings.YPosition;
-                        }
-                        
-                        spawnedTransform.Rotation = transform.Rotation;
-                        state.EntityManager.SetComponentData(spawnedEntity, spawnedTransform);
-                        
-                        // TODO (NOTE): below is old code for instantiating objects on destroy, but it gave incorrect scale
-                        // var spawnedEntity = beginSimECB.Instantiate(spawnElement.Value);
-                        // if (transformLookup.TryGetComponent(entity, out var transform))
-                        // {
-                        //     var localTransform = SystemAPI.GetComponent<LocalTransform>(entity);
-                        //     localTransform.Position = transform.Position;
-                        //     localTransform.Rotation = transform.Rotation;
-                        //     beginSimECB.SetComponent(spawnedEntity, localTransform);
-                        // }
                     }
                 }
 
-                // // Destroy all children
-                // DestroyChildrenRecursively(state, entity, ecb);
+                // Destroy all children
+                DestroyChildrenRecursively(state, entity, ecb);
                 
                 ecb.DestroyEntity(entity);
             }

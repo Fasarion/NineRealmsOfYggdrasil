@@ -66,40 +66,7 @@ public partial struct CombatStatHandleSystem : ISystem
             currDamageComp.ValueRW.Value = damageContents;
         }
         
-        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-        // transfer stats to abilites
-        
-        foreach (var weapon in 
-            SystemAPI.Query<WeaponComponent>())
-        {
-            foreach (var (updateStatsFromAttack, entity) in 
-                SystemAPI.Query<UpdateStatsFromAttack>()
-                    .WithNone<UpdateStatsComponent>()
-                    .WithEntityAccess())
-            {
-                if (weapon.WeaponType != updateStatsFromAttack.WeaponType) continue;
-                if (weapon.CurrentAttackType != updateStatsFromAttack.AttackType) continue;
-
-                var entityToTransferStatsFrom = GetWeaponEntity(ref state, updateStatsFromAttack.WeaponType);
-            
-                ecb.AddComponent<UpdateStatsComponent>(entity);
-
-                UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
-                {
-                    EntityToTransferStatsFrom = entityToTransferStatsFrom
-                };
-                ecb.SetComponent(entity, updateStatsComponent);
-            }
-        }
-        
-        
-        
-        
-        ecb.Playback(state.EntityManager);
-        ecb.Dispose();
-        
-        statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>(); 
         statHandler.ValueRW.ShouldUpdateStats = false;
     }
     

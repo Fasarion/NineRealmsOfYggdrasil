@@ -99,14 +99,10 @@ public partial struct BirdUltimateAttackSystem : ISystem
         bool startAttack = attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Birds, AttackType.Ultimate);
         if (startAttack)
         {
-            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-
             config.ValueRW.IsActive = true;
             
             var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
             var configRO = SystemAPI.GetSingleton<BirdsUltimateAttackConfig>();
-            
-            var configEntity = SystemAPI.GetSingletonEntity<BirdsUltimateAttackConfig>();
 
             config.ValueRW.CenterPointEntity = SystemAPI.GetSingletonEntity<MousePositionComponent>();
 
@@ -115,7 +111,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
             
             // set size of tornado as configs diameter
             var tornadoTransform = state.EntityManager.GetComponentData<LocalTransform>(tornado);
-            tornadoTransform.Scale = config.ValueRO.TornadoRadius * 2;
+            tornadoTransform.Scale = config.ValueRO.Radius * 2;
             state.EntityManager.SetComponentData(tornado, tornadoTransform);
             
             // set tornado suction rate
@@ -168,19 +164,8 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     
                     // disable auto move
                     state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
-                    
-                    // update stats
-                    ecb.AddComponent<UpdateStatsComponent>(birdProjectile);
-                    UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
-                        {EntityToTransferStatsFrom = configEntity};
-                    ecb.SetComponent(birdProjectile, updateStatsComponent);
                 }
             }
-            
-            ecb.Playback(state.EntityManager);
-            ecb.Dispose();
         }
-        
-        
     }
 }

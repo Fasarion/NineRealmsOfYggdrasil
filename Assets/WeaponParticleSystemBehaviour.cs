@@ -19,8 +19,6 @@ public class WeaponParticleSystemBehaviour : MonoBehaviour
         
         EventManager.OnPassiveAttackStart += OnPassiveAttackStart;
         EventManager.OnPassiveAttackStop += OnPassiveAttackStop;
-
-        EventManager.OnWeaponSwitch += OnWeaponSwitch;
     }
     
     private void OnDisable()
@@ -30,16 +28,6 @@ public class WeaponParticleSystemBehaviour : MonoBehaviour
 
         EventManager.OnPassiveAttackStart -= OnPassiveAttackStart;
         EventManager.OnPassiveAttackStop -= OnPassiveAttackStop;
-        
-        EventManager.OnWeaponSwitch -= OnWeaponSwitch;
-    }
-
-    private void OnWeaponSwitch(WeaponBehaviour weapon)
-    {
-        if (weapon.WeaponType == weaponType)
-        {
-            SetParticleSystemActive(false);
-        }
     }
 
     void HandleParticleActivision(AttackData attackData, bool activate)
@@ -48,13 +36,8 @@ public class WeaponParticleSystemBehaviour : MonoBehaviour
 
         if (attacksToActivateParticles.Contains(attackData.AttackType))
         {
-            SetParticleSystemActive(activate);
+            _particleSystem.gameObject.SetActive(activate);
         }
-    }
-
-    private void SetParticleSystemActive(bool activate)
-    {
-        _particleSystem.gameObject.SetActive(activate);
     }
 
     private void OnActiveAttackStart(AttackData attackData)

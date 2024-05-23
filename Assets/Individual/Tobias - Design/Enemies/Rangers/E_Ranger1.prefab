@@ -326,12 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObjects:
-  - SpawnPrefab: {fileID: 0}
-    SpawnSettings:
-      SetScale: 0
-      NewScale: 1
-      SetYPosition: 0
-      YPosition: 0
+  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,9 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 4
-  attackDelay: 0.6
-  distanceToPerformAttack: 9
+  shootingCooldown: 4
+  shootDistance: 9
 --- !u!114 &922261842375008278
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Destruction
 {
@@ -38,6 +39,13 @@ namespace Destruction
 
                     foreach (var spawnElement in spawnBuffer)
                     {
+                        var entityToSpawn = spawnElement.Entity;
+                        if (entityToSpawn == Entity.Null)
+                        {
+                            Debug.LogError("Entity to spawn on destroy is not assigned!");
+                            continue;
+                        }
+                        
                         var spawnedEntity = state.EntityManager.Instantiate(spawnElement.Entity);
 
                         var spawnedTransform = state.EntityManager.GetComponentData<LocalTransform>(spawnedEntity);

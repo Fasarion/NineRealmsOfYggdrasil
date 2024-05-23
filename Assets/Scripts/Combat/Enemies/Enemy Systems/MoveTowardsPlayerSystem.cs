@@ -33,6 +33,13 @@ public partial struct MoveTowardsPlayerSystem : ISystem
             {
                 speed = -moveToPlayer.MoveAwayFromPlayerSpeed;
             }
+
+            const float distanceSquaredForStandingStill = 0.2f;
+            bool standingStill = (distanceToPlayer - moveToPlayer.MinimumDistanceForMovingSquared) < distanceSquaredForStandingStill;
+            if (standingStill)
+            {
+                Debug.Log("Standing still");
+            }
             
             
             var direction = playerPos - transform.ValueRO.Position;

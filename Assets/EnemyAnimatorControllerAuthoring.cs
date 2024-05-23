@@ -4,6 +4,7 @@ using Movement;
 using Patrik;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum AnimationEnemyType
 {
@@ -13,7 +14,14 @@ public enum AnimationEnemyType
 
 public class EnemyAnimatorControllerAuthoring : MonoBehaviour
 {
+    [Tooltip("Specifies enemy type in animator.")]
     public AnimationEnemyType EnemyAnimationType;
+    
+    [FormerlySerializedAs("attackDelay")]
+    [Tooltip("How long the attack logic (like spawning a projectile) is delayed from the start of the attack animation.")]
+    [SerializeField] private float attackDelayAfterAnimationStart = 0.6f;
+    
+    
     
     class Baker : Baker<EnemyAnimatorControllerAuthoring>
     {
@@ -25,9 +33,20 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
                 EnemyType = authoring.EnemyAnimationType
             }); 
             
+            // Set up
             AddComponent(entity, new HasSetupEnemyAnimator { });
             SetComponentEnabled<HasSetupEnemyAnimator>(entity, false);
             
+            // Attack
+            AddComponent(entity, new EnemyAttackAnimationComponent
+            {
+                AnimationDelayTime = authoring.attackDelayAfterAnimationStart
+            });
+            SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
+            
+            // Hit Stun
+            AddComponent(entity, new EnemyHitStunAnimationComponent { });
+            SetComponentEnabled<EnemyHitStunAnimationComponent>(entity, false);
         }
     }
 }
@@ -39,3 +58,11 @@ public struct EnemyAnimatorControllerComponent : IComponentData
 
 public struct HasSetupEnemyAnimator : IComponentData, IEnableableComponent{}
 
+public struct EnemyAttackAnimationComponent : IComponentData, IEnableableComponent
+{
+    public float AnimationDelayTime;
+    public float CurrentDelayTime;
+    public bool HasSetTrigger;
+}
+
+public struct EnemyHitStunAnimationComponent : IComponentData, IEnableableComponent { }

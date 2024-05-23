@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9009766087481269620}
   - component: {fileID: 6890863186539063678}
   - component: {fileID: 2417312551657138311}
+  - component: {fileID: 6023794667313361465}
   m_Layer: 0
   m_Name: Bird Normal Config
   m_TagString: Untagged
@@ -81,3 +82,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 0
   criticalChance: 0
+--- !u!114 &6023794667313361465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096473208791492296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd77be6ab74fbb845ae1c858a79ef71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 0.1

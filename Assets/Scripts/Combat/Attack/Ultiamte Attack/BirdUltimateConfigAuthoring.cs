@@ -12,10 +12,12 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [Tooltip("How the mid point of the tornado is offset from the bird circle. Will have an effect on suction direction.")]
     [SerializeField] private float3 tornadoOffset = new float3(0, 3, 0);
     [Tooltip("How much delay between each suction towards the tornado mid point.")]
-    [SerializeField] private float timeBetweenSuctions = 0.3f; 
+    [SerializeField] private float timeBetweenSuctions = 0.3f;
+    [Tooltip("Radius of the tornado.")]
+    [SerializeField] private float tornadoRadius = 2f;
     
     [Header("Angular speed")]
-    [Tooltip("How fast the birds spin.")]
+    [Tooltip("How fast the birds spin (revolutions per second).")]
     [SerializeField] private float angularSpeed = 2f; 
     
     [Header("Bird Settings")]
@@ -47,13 +49,14 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 TornadoPrefab = GetEntity(authoring.tornadoEntityPrefab, TransformUsageFlags.Dynamic),
                 TornadoOffset = authoring.tornadoOffset,
                 TimeBetweenSuctions = authoring.timeBetweenSuctions,
+                TornadoRadius = authoring.tornadoRadius,
                 
                 BirdCount = authoring.birdCount,
                 
                 Radius = authoring.circleRadius,
                 
                 AngleStep = 360f / authoring.birdCount,
-                AngularSpeed = authoring.angularSpeed,
+                AngularSpeed = authoring.angularSpeed * math.PI * 2,
                 LifeTime = authoring.lifeTime
             });
         }
@@ -65,6 +68,7 @@ public struct BirdsUltimateAttackConfig : IComponentData
     public Entity TornadoPrefab;
     public float3 TornadoOffset;
     public float TimeBetweenSuctions;
+    public float TornadoRadius;
     
     public Entity CenterPointEntity;
     

@@ -44,6 +44,9 @@ public partial struct BirdNormalAttackSystem : ISystem
         var ltwMatrix = playerLTW.Value;
         
         var birdSettings = SystemAPI.GetSingleton<BirdNormalAttackConfig>(); 
+        var configEntity = SystemAPI.GetSingletonEntity<BirdNormalAttackConfig>(); 
+        
+        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
         // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
         foreach (var (transform, spawner, weapon, entity) in SystemAPI
@@ -93,8 +96,17 @@ public partial struct BirdNormalAttackSystem : ISystem
             // disable auto move
             state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
             
+            // update stats
+            ecb.AddComponent<UpdateStatsComponent>(birdProjectile);
+            UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
+                {EntityToTransferStatsFrom = configEntity};
+            ecb.SetComponent(birdProjectile, updateStatsComponent);
+            
             // update last index
             lastIndex = (lastIndex + 1) % 2;
         }
+        
+        ecb.Playback(state.EntityManager);
+        ecb.Dispose();
     }
 }

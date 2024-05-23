@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 302677058517972376}
   - component: {fileID: 3478056360914475543}
+  - component: {fileID: 4598384833184231880}
+  - component: {fileID: 6695292130375018699}
+  - component: {fileID: 7620217465841585742}
   m_Layer: 0
   m_Name: Bird Passive Config
   m_TagString: Untagged
@@ -44,3 +47,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe98989d26dd0ba4fada130d182f2dc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  birdCount: 2
+  spawnHeight: 3
+  lifeTime: 2
+  seekDelay: 0.15
+--- !u!114 &4598384833184231880
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121073991305019142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca7c130f978e6ba458d9534e316f9cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minDistanceForFindingTarget: 0.3
+  maxDistanceForFindingTarget: 7
+  fov: 180
+--- !u!114 &6695292130375018699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121073991305019142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9340161221149bcb122c107d3c8b893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 3
+  AttackType: 4
+--- !u!114 &7620217465841585742
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121073991305019142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  criticalChance: 0

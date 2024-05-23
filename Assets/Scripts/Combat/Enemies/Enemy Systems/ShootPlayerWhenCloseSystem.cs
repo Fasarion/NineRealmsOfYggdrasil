@@ -20,9 +20,9 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
     {
         float3 playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         float deltaTime = SystemAPI.Time.DeltaTime;
-
-        foreach (var (transform, shootWhenClose, projectileSpawner, entity) 
-            in SystemAPI.Query<LocalTransform, RefRW<ShootPlayerWhenCloseComponent>, ProjectileSpawnerComponent>()
+        
+        foreach (var (transform, shootWhenClose, entity) 
+            in SystemAPI.Query<LocalTransform, RefRW<AttackPlayerWhenCloseComponent>>()
                 .WithEntityAccess())
         {
             shootWhenClose.ValueRW.CurrentCooldownTime += deltaTime;
@@ -32,7 +32,7 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
             {
                 if (shootWhenClose.ValueRO.CurrentCooldownTime > shootWhenClose.ValueRO.ShootingCooldownTime)
                 {
-                    state.EntityManager.SetComponentEnabled<ShouldSpawnProjectile>(entity, true);
+                    state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, true);
                     shootWhenClose.ValueRW.CurrentCooldownTime = 0;
                 }
             }

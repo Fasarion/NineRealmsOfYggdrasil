@@ -25,14 +25,13 @@ public partial struct SteerToTargetSystem : ISystem
                 float3 directionValue = math.normalizesafe(directionToTarget);
 
                 // stop steering to entity if too close
-                if (distanceToTarget < moveToTarget.ValueRO.MinDistanceAfterTargetFound)
+                if (distanceToTarget < moveToTarget.ValueRO.MinDistanceForSeek)
                 {
                     moveToTarget.ValueRW.LastTargetEntity = hasTarget.TargetEntity;
                     state.EntityManager.SetComponentEnabled<HasSeekTargetEntity>(entity, false);
 
                     // set y to 0 to remove entity going through the ground
                     directionValue.y = 0;
-                    directionValue = math.normalizesafe(directionToTarget);
                 }
 
                 direction.ValueRW.Value = directionValue;

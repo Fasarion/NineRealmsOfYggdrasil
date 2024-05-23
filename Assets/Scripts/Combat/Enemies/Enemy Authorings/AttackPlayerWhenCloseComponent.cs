@@ -1,6 +1,6 @@
 ﻿using Unity.Entities;
 
-public struct ShootPlayerWhenCloseComponent : IComponentData
+public struct AttackPlayerWhenCloseComponent : IComponentData
 {
     public float ShootingCooldownTime;
     public float CurrentCooldownTime;

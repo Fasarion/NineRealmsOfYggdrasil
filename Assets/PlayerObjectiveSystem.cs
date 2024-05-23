@@ -36,7 +36,7 @@ public partial struct PlayerObjectiveSystem : ISystem
             var buffer = state.EntityManager.GetBuffer<SpawnEntityOnDestroyElement>(entity);
             var spawnElement = new SpawnEntityOnDestroyElement
             {
-                Value = config.ObjectiveObjectPrefab,
+                Entity = config.ObjectiveObjectPrefab,
             };
             buffer.Add(spawnElement);
 

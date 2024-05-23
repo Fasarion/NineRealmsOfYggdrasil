@@ -253,6 +253,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasHitBuffer: 1
+  isHitTrigger: 0
+  isHitTriggerTarget: 0
+  isHitCollider: 0
+  isHitColliderTarget: 0
 --- !u!114 &1874418875601952184
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -265,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 2.5
+  knockBackForce: 5
   KnockDirection: 0
 --- !u!114 &5666488964864685074
 MonoBehaviour:
@@ -366,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 13
+  attackDamage: 8
   criticalChance: 0.05
 --- !u!114 &7514640210241842317
 MonoBehaviour:
@@ -395,9 +400,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillModifier:
     Normal: 1
-    Special: 1
-    Ultimate: 1
-    Passive: 1
+    Special: 1.5
+    Ultimate: 2
+    Passive: 0.5
 --- !u!114 &7466375490567166985
 MonoBehaviour:
   m_ObjectHideFlags: 0

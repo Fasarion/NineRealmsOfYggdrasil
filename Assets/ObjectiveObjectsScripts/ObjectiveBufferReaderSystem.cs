@@ -25,8 +25,8 @@ public partial class ObjectiveBufferReaderSystem : SystemBase
             isInitialized = true;
             return;
         }
-        
-        var buffer = SystemAPI.GetSingletonBuffer<ObjectivePickupBufferElement>();
+
+        if (!SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<ObjectivePickupBufferElement> buffer)) return;
         
          if (!buffer.IsEmpty)
          {

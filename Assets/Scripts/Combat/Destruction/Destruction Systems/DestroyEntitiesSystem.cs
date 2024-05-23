@@ -42,7 +42,7 @@ namespace Destruction
                         var entityToSpawn = spawnElement.Entity;
                         if (entityToSpawn == Entity.Null)
                         {
-                            Debug.LogWarning("Entity to spawn on destroy is not assigned!");
+                            Debug.LogError("Entity to spawn on destroy is not assigned!");
                             continue;
                         }
                         

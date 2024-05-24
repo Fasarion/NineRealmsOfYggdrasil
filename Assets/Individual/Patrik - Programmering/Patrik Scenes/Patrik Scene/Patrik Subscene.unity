@@ -548,6 +548,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Grunt1
       objectReference: {fileID: 0}
+    - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: maxHP
+      value: 5000
+      objectReference: {fileID: 0}
     - target: {fileID: 5845518096462122248, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: isHitCollider
@@ -859,6 +864,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040318899576448565, guid: 046f9e46492d73b47b60dcbb722f3c32,
+        type: 3}
+      propertyPath: maxHP
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 5845518096462122248, guid: 046f9e46492d73b47b60dcbb722f3c32,
         type: 3}

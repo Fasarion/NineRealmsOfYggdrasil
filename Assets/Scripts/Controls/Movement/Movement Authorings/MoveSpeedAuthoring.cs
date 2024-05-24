@@ -19,8 +19,8 @@ namespace Movement
                     Value = authoring.speedValue
                 });
                 
-                AddComponent(entity, new IsMovingComponent(){ });
-                SetComponentEnabled<IsMovingComponent>(entity, true);
+                // AddComponent(entity, new IsMovingComponent(){ });
+                // SetComponentEnabled<IsMovingComponent>(entity, true);
             }
         }
     }
@@ -28,8 +28,11 @@ namespace Movement
     public struct MoveSpeedComponent : IComponentData
     {
         public float Value;
+
+        public bool IsMoving;
+        public bool WasMoving;
     }
     
-    public struct IsMovingComponent : IComponentData, IEnableableComponent{}
+   //public struct IsMovingComponent : IComponentData, IEnableableComponent{}
 }
 

@@ -24,9 +24,9 @@ public partial struct MoveTowardsPlayerSystem : ISystem
         float deltaTime = SystemAPI.Time.DeltaTime;
         
         foreach (var (transform, moveSpeed, moveToPlayer) 
-            in SystemAPI.Query<RefRW<LocalTransform>, MoveSpeedComponent, MoveTowardsPlayerComponent>().WithNone<HitStopComponent>())
+            in SystemAPI.Query<RefRW<LocalTransform>, RefRW<MoveSpeedComponent>, MoveTowardsPlayerComponent>().WithNone<HitStopComponent>())
         {
-            float speed = moveSpeed.Value;
+            float speed = moveSpeed.ValueRO.Value;
             
             var distanceToPlayer = math.distancesq(playerPos, transform.ValueRO.Position);
             if (distanceToPlayer < moveToPlayer.MinimumDistanceForMovingSquared)
@@ -34,20 +34,22 @@ public partial struct MoveTowardsPlayerSystem : ISystem
                 speed = -moveToPlayer.MoveAwayFromPlayerSpeed;
             }
 
-            const float distanceSquaredForStandingStill = 0.2f;
-            bool standingStill = (distanceToPlayer - moveToPlayer.MinimumDistanceForMovingSquared) < distanceSquaredForStandingStill;
-            if (standingStill)
-            {
-                Debug.Log("Standing still");
-            }
+            moveSpeed.ValueRW.WasMoving = moveSpeed.ValueRO.IsMoving;
+
             
-            
+
             var direction = playerPos - transform.ValueRO.Position;
             direction.y = 0;
             quaternion lookRotation = math.normalizesafe(quaternion.LookRotation(direction, math.up()));
             
             transform.ValueRW.Rotation = lookRotation;
+
+            //var lastPosition = transform.ValueRW.Position;
             transform.ValueRW.Position += math.normalize(direction) * speed * deltaTime;
+            
+            // const float distanceSquaredForStandingStill = 0.00001f;
+            // bool moving = math.distancesq(lastPosition, transform.ValueRW.Position)  > distanceSquaredForStandingStill;
+            moveSpeed.ValueRW.IsMoving = math.abs(speed) > 0;
         }
     }
 }

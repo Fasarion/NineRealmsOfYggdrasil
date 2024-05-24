@@ -54,8 +54,6 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
             
             animatorReference.Animator.SetTrigger(knockBackTrigger);
             state.EntityManager.SetComponentEnabled<EnemyKnockBackAnimationComponent>(entity, true);
-            
-            Debug.Log("Add knock back"); 
         }
         
         // handle knock back - disable
@@ -65,8 +63,6 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
             .WithAll<HasSetupEnemyAnimator, EnemyAnimatorControllerComponent, EnemyKnockBackAnimationComponent>())
         {
             state.EntityManager.SetComponentEnabled<EnemyKnockBackAnimationComponent>(entity, false);
-            
-            Debug.Log("Remove knock back");
         }
         
         // handle hit stuns - enable

@@ -1,7 +1,7 @@
 [System.Serializable]
 public struct AudioData
 {
-    public int AudioEnumValue;
+    //public int AudioEnumValue;
     
     public EventCategoryType eventCategoryType;
     public WeaponTyping weaponType;

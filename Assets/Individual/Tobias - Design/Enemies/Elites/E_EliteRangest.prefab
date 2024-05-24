@@ -27,6 +27,7 @@ GameObject:
   - component: {fileID: 3590551985909671166}
   - component: {fileID: 7776188516205560807}
   - component: {fileID: -200509008157379024}
+  - component: {fileID: 2741096830942234737}
   m_Layer: 0
   m_Name: E_EliteRangest
   m_TagString: Untagged
@@ -325,7 +326,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnObjects:
-  - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
+  - {fileID: 5345650359192567939, guid: ea965292dc2608642a2e72f8a7d79e72, type: 3}
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -473,3 +474,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyAnimationType: 1
+--- !u!114 &2741096830942234737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e4268fb16f4c6a43bbe1098509330c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 15

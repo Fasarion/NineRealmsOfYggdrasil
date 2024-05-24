@@ -19646,6 +19646,7 @@ GameObject:
   - component: {fileID: 7666903862217150206}
   - component: {fileID: 3239886245462155775}
   - component: {fileID: 4453779624314017857}
+  - component: {fileID: 6956763587215093787}
   m_Layer: 0
   m_Name: SwordSpecialAttackVFX
   m_TagString: Untagged
@@ -24542,6 +24543,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &6956763587215093787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2288991140442585764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4f23e5ff82f23141820c57fe033b503, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5209071308368086005
 GameObject:
   m_ObjectHideFlags: 0

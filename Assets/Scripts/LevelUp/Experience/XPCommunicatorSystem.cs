@@ -24,13 +24,10 @@ public partial class XPCommunicatorSystem : SystemBase
             isInitialized = true;
             return;
         }
-        
-        
-        var level = SystemAPI.GetSingleton<PlayerLevel>();
-        var xp = SystemAPI.GetSingleton<PlayerXP>();
-        
 
-        
+        if (!SystemAPI.TryGetSingleton(out PlayerLevel level)) return;
+        if (!SystemAPI.TryGetSingleton(out PlayerXP xp)) return;
+
         if (_cachedXP == xp.XPValue && _cachedXP != 0) return;
         
         _cachedXP = xp.XPValue;

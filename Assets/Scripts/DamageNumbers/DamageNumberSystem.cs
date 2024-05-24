@@ -32,7 +32,10 @@ public partial class DamageNumberSystem : SystemBase
         //initialize config
         if (_pool == null)
         {
-            _pool = GameObject.FindObjectOfType<DamageNumberPool>().Pool;
+            var poolObject = GameObject.FindObjectOfType<DamageNumberPool>();
+            if (!poolObject) return;
+            
+            _pool = poolObject.Pool;
         
             if (_pool == null)
             {

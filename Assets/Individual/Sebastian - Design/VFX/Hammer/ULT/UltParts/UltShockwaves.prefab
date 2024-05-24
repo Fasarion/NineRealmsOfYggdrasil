@@ -9792,6 +9792,7 @@ GameObject:
   - component: {fileID: 346759642856895626}
   - component: {fileID: 8956144738786911310}
   - component: {fileID: 5428084177933322568}
+  - component: {fileID: 2769171024726802286}
   m_Layer: 0
   m_Name: UltShockwaves
   m_TagString: Untagged
@@ -14728,6 +14729,18 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &2769171024726802286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3558808916172960676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f58344beac761f4d97ebfd84e7f3dbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6507994178902395200
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,6 +40,7 @@ public partial struct HammerPassiveAbilitySystem : ISystem
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         //var targetPositions = new NativeArray<float3>(config.StrikeCount, Allocator.Persistent);
         var boltConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
+        var passiveEntity = SystemAPI.GetSingletonEntity<HammerPassiveAbilityConfig>();
 
         foreach (var (ability, timer, entity) in
                  SystemAPI.Query<RefRW<HammerPassiveAbility>, RefRW<TimerObject>>()
@@ -92,10 +93,9 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                             Rotation = quaternion.identity,
                             Scale = 1,
                         });
-                        state.EntityManager.SetComponentData(bolt, new ShouldSetDamageValuesComponent
+                        state.EntityManager.SetComponentData(bolt, new UpdateStatsComponent
                         {
-                            AttackType = AttackType.Passive,
-                            WeaponType = WeaponType.Hammer,
+                            EntityToTransferStatsFrom = passiveEntity,
                         });
 
                         break;

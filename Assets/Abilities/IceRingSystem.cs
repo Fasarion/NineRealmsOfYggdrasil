@@ -156,11 +156,10 @@ public partial struct IceRingSystem : ISystem
                 {
                     area = area
                 });
-                state.EntityManager.SetComponentData(effect, new ShouldSetDamageValuesComponent
-                {
-                    AttackType = AttackType.Special,
-                    WeaponType = WeaponType.Sword,
-                });
+                state.EntityManager.SetComponentData(effect, new UpdateStatsComponent
+                                   {
+                                       EntityToTransferStatsFrom = iceRingEntity,
+                                   });
 
                 // play impact audio
                 var audioElement = new AudioBufferData() {AudioData = config.ValueRO.impactAudioData};

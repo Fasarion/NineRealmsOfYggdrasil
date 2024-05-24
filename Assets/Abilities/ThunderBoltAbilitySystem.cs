@@ -32,6 +32,7 @@ public partial struct ThunderBoltAbilitySystem : ISystem
         var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var config = SystemAPI.GetSingleton<ThunderBoltConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+        var configEntity = SystemAPI.GetSingletonEntity<ThunderBoltConfig>();
 
         foreach (var (ability, timer, entity) in
                  SystemAPI.Query<RefRW<ThunderBoltAbility>, RefRW<TimerObject>>()
@@ -79,10 +80,9 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                     Rotation = quaternion.identity,
                     Scale = 1,
                 });
-                state.EntityManager.SetComponentData(projectile, new ShouldSetDamageValuesComponent
+                state.EntityManager.SetComponentData(projectile, new UpdateStatsComponent
                 {
-                    AttackType = AttackType.Normal,
-                    WeaponType = WeaponType.Hammer,
+                    EntityToTransferStatsFrom = configEntity,
                 });
 
                 ability.ValueRW.CurrentCount++;

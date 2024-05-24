@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: -3109671545990140542}
   - component: {fileID: -5044828462011965065}
   - component: {fileID: 8038806604216708831}
-  - component: {fileID: 7201033945460190207}
+  - component: {fileID: 1742396698067816947}
   m_Layer: 0
   m_Name: ShockwaveAbilityPrefab
   m_TagString: Untagged
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.4
---- !u!114 &7201033945460190207
+--- !u!114 &1742396698067816947
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -174,8 +174,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 3383446916815051859}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4004a8b05839584a8e636f2a3db7bdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 3f21f65d68014ab4bd59cf9ebdefeeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackType: 0
-  weaponType: 0

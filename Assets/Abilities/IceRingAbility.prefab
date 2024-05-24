@@ -16,8 +16,8 @@ GameObject:
   - component: {fileID: 2466035642879652135}
   - component: {fileID: -2240624451221393486}
   - component: {fileID: -2945285643535285347}
-  - component: {fileID: -6790970077155698810}
   - component: {fileID: -89021452518267575}
+  - component: {fileID: -1528938125869595140}
   m_Layer: 0
   m_Name: IceRingAbility
   m_TagString: Untagged
@@ -142,20 +142,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   knockBackForce: 5
   KnockDirection: 2
---- !u!114 &-6790970077155698810
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4004a8b05839584a8e636f2a3db7bdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackType: 0
-  weaponType: 0
 --- !u!114 &-89021452518267575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,5 +152,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-1528938125869595140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5736946099070336933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f21f65d68014ab4bd59cf9ebdefeeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

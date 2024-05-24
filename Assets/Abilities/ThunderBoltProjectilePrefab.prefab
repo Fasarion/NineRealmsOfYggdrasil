@@ -15,10 +15,10 @@ GameObject:
   - component: {fileID: 4249560091680255410}
   - component: {fileID: 5531553047931774714}
   - component: {fileID: 6971158187958455815}
-  - component: {fileID: -4943903144819662146}
   - component: {fileID: -8680297407986362021}
   - component: {fileID: -1674843368136517089}
   - component: {fileID: 3038242268975273724}
+  - component: {fileID: -1129091770023645977}
   m_Layer: 0
   m_Name: ThunderBoltProjectilePrefab
   m_TagString: Untagged
@@ -126,20 +126,6 @@ MonoBehaviour:
   isHitTriggerTarget: 0
   isHitCollider: 0
   isHitColliderTarget: 0
---- !u!114 &-4943903144819662146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7227252102786388703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4004a8b05839584a8e636f2a3db7bdb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackType: 0
-  weaponType: 0
 --- !u!114 &-8680297407986362021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,3 +165,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.3
+--- !u!114 &-1129091770023645977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227252102786388703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f21f65d68014ab4bd59cf9ebdefeeb9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

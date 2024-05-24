@@ -15,12 +15,14 @@ using UnityEngine;
 
 [UpdateBefore(typeof(HitStopSystem))]
 [UpdateBefore(typeof(HandleHitBufferSystem))]
+[UpdateBefore(typeof(IceRingSystem))]
 [BurstCompile]
 public partial struct ThunderStrikeSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<PlayerTargetInfoSingleton>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
         state.RequireForUpdate<ThunderStrikeAbility>();
@@ -32,6 +34,7 @@ public partial struct ThunderStrikeSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var thunderConfig = SystemAPI.GetSingleton<ThunderStrikeConfig>();
+        var thunderEntity = SystemAPI.GetSingletonEntity<ThunderStrikeConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var target = SystemAPI.GetSingleton<PlayerTargetInfoSingleton>();
         var targetPos = target.LastPosition;
@@ -98,10 +101,9 @@ public partial struct ThunderStrikeSystem : ISystem
                     Rotation = Quaternion.Euler(-90f, 0f, 0f),
                     Scale = 1
                 });
-                state.EntityManager.SetComponentData(effect, new ShouldSetDamageValuesComponent
+                state.EntityManager.SetComponentData(effect, new UpdateStatsComponent
                 {
-                    WeaponType = WeaponType.Hammer,
-                    AttackType = AttackType.Ultimate,
+                    EntityToTransferStatsFrom = thunderEntity,
                 });
 
                 timer.ValueRW.currentTime = 0;

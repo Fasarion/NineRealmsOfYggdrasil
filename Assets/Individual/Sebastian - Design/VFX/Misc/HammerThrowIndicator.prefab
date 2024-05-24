@@ -4915,6 +4915,7 @@ GameObject:
   - component: {fileID: 8149726752541330047}
   - component: {fileID: 3516788083004799704}
   - component: {fileID: 5286129624451468036}
+  - component: {fileID: -9077704569568749785}
   m_Layer: 0
   m_Name: HammerThrowIndicator
   m_TagString: Untagged
@@ -9791,3 +9792,15 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!114 &-9077704569568749785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7865255996814199009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfa38a9e9a69fea4fb759aae992f02a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

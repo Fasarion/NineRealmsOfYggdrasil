@@ -585,8 +585,6 @@ namespace Patrik
                 weapon.CurrentAttackType = AttackType.Special;
                 SystemAPI.SetComponent(weaponEntity, weapon);
                 
-                Debug.Log("Update stats!");
-                
                 var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
                 statHandler.ValueRW.ShouldUpdateStats = true;
             }

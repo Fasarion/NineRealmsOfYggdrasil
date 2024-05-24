@@ -11,7 +11,7 @@ using UnityEngine;
 using Weapon;
 
 //[UpdateAfter(typeof(PlayerAttackSystem))]
-[UpdateAfter(typeof(CombatStatHandleSystem))]
+[UpdateAfter(typeof(AttackStatTransferSystem))]
 public partial struct BirdSpecialAttackSystem : ISystem
 {
     private int cachedChargeLevel;
@@ -104,6 +104,9 @@ public partial struct BirdSpecialAttackSystem : ISystem
                         BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
                         CenterPointEntity = config.ValueRO.CenterPointEntity
                     });
+
+                    var cachedDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity).Value.DamageValue;
+                    Debug.Log($"Damage: {cachedDamage}");
                     
                     // update stats
                     ecb.AddComponent(birdProjectile, new UpdateStatsComponent

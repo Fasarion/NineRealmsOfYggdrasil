@@ -69,7 +69,6 @@ public partial struct CombatStatHandleSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
         // transfer stats to abilites
-        
         foreach (var weapon in 
             SystemAPI.Query<WeaponComponent>())
         {
@@ -84,7 +83,6 @@ public partial struct CombatStatHandleSystem : ISystem
                 var entityToTransferStatsFrom = GetWeaponEntity(ref state, updateStatsFromAttack.WeaponType);
             
                 ecb.AddComponent<UpdateStatsComponent>(entity);
-
                 UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
                 {
                     EntityToTransferStatsFrom = entityToTransferStatsFrom

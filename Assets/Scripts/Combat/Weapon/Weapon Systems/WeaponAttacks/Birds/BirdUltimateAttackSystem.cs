@@ -120,6 +120,10 @@ public partial struct BirdUltimateAttackSystem : ISystem
             
             // set tornado suction rate
             state.EntityManager.SetComponentData(tornado, new TimerObject{maxTime = config.ValueRO.TimeBetweenSuctions});
+            
+            // play sound
+            var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+            audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
 
             // Spawn birds evenly spaced around player
             for (int i = 0; i < configRO.BirdCount; i++)

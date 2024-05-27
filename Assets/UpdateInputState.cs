@@ -27,18 +27,15 @@ public class UpdateInputState : StateMachineBehaviour
         [Tooltip("Determines whether or not the player can rotate (from input) during this attack.")]
         public InputState RotationStateChange;
         
-        [Tooltip("Determines whether or not the player can take damage.")]
+        [Tooltip("Determines whether or not the player will be invincible.")]
         public InputState InvincibilityStateChange;
     }
-    
-    
-    
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         HandleStateChange(OnEnter);
     }
     
-
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         HandleStateChange(OnExit);

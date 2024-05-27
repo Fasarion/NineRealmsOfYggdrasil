@@ -9,6 +9,15 @@ public partial struct HandleAnimationSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
         // remove game objects when animator reference has been destroyed
+        foreach (var (rendererReference, entity) in
+                 SystemAPI.Query<SkinnedMeshRendererReference>()
+                     .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
+                     .WithEntityAccess())
+        {
+            ecb.RemoveComponent<SkinnedMeshRendererReference>(entity);
+        }
+        
+        // remove game objects when animator reference has been destroyed
         foreach (var (animatorReference, entity) in
                  SystemAPI.Query<AnimatorReference>()
                      .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
@@ -17,6 +26,8 @@ public partial struct HandleAnimationSystem : ISystem
             Object.Destroy(animatorReference.Animator.gameObject);
             ecb.RemoveComponent<AnimatorReference>(entity);
         }
+        
+
         
         // Add animator references
         foreach (var (gameObjectPrefab, entity) in SystemAPI.Query<GameObjectAnimatorPrefab>()

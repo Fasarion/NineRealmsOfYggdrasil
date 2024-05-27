@@ -15,6 +15,10 @@ public class HammerPassiveAbilityConfigAuthoring : MonoBehaviour
     public float timeBetweenStrikes;
     public GameObject abilityPrefab;
     public float vfxHeightOffset;
+    
+    [Header("Audio")] 
+    [Tooltip("Sound to play when lightning strikes.")]
+    [SerializeField] private AudioData hitAudio;
 
     public class HammerPassiveAbilityConfigAuthoringBaker : Baker<HammerPassiveAbilityConfigAuthoring>
     {
@@ -29,7 +33,8 @@ public class HammerPassiveAbilityConfigAuthoring : MonoBehaviour
                     StrikeCount = authoring.strikeCount,
                     TimeBetweenStrikes = authoring.timeBetweenStrikes,
                     AbilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
-                    VFXHeightOffset = authoring.vfxHeightOffset
+                    VFXHeightOffset = authoring.vfxHeightOffset,
+                    HitAudio = authoring.hitAudio
                 });
         }
     }
@@ -43,4 +48,6 @@ public struct HammerPassiveAbilityConfig : IComponentData
     public float TimeBetweenStrikes;
     public Entity AbilityPrefab;
     public float VFXHeightOffset;
+
+    public AudioData HitAudio;
 }

@@ -41,5 +41,17 @@ public partial class PauseManagerSystem : SystemBase
         UnityEngine.Time.timeScale = 1;
     }
 
-    protected override void OnUpdate() { }
+    protected override void OnUpdate()
+    {
+        if (!SystemAPI.TryGetSingleton(out PauseInput pauseInput))
+        {
+            return;
+        }
+
+        if (pauseInput.KeyPressed)
+        {
+            Debug.Log("Pause key pressed!");
+            EventManager.OnPause?.Invoke();
+        }
+    }
 }

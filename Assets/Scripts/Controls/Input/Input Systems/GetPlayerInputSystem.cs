@@ -39,6 +39,7 @@ public partial class GetPlayerInputSystem : SystemBase
         
         // UI
         playerInputActions.InputMap.UpgradeUIButton.performed += OnUpgradeUIButtonPressed;
+        playerInputActions.InputMap.Pause.performed += OnPauseButtonPressed;
         
         // Movement
         playerInputActions.InputMap.Dash.performed += OnDashPressed;
@@ -46,6 +47,8 @@ public partial class GetPlayerInputSystem : SystemBase
         
         playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
     }
+
+   
 
     private void OnUltimateAttackUp(InputAction.CallbackContext obj)
     {
@@ -178,5 +181,13 @@ public partial class GetPlayerInputSystem : SystemBase
         
         var uiButtonInput = SystemAPI.GetSingletonRW<PrimaryButtonInput>();
         uiButtonInput.ValueRW.isPressed = true;
+    }
+    
+    private void OnPauseButtonPressed(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+        
+        var pauseButtonInput = SystemAPI.GetSingletonRW<PauseInput>();
+        pauseButtonInput.ValueRW.KeyPressed = true;
     }
 }

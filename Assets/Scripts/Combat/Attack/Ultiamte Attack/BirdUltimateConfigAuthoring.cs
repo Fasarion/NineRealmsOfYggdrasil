@@ -30,6 +30,9 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [Tooltip("Radius of the circle that the birds circle around in.")]
     [SerializeField] private float circleRadius = 2f;
 
+    [Header("Audio")] 
+    [SerializeField] private AudioData tornadoSound;
+    
     private void OnValidate()
     {
         if (birdCount <= 0)
@@ -57,7 +60,9 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 
                 AngleStep = 360f / authoring.birdCount,
                 AngularSpeed = authoring.angularSpeed * math.PI * 2,
-                LifeTime = authoring.lifeTime
+                LifeTime = authoring.lifeTime,
+                
+                TornadoSound = authoring.tornadoSound
             });
         }
     }
@@ -83,4 +88,6 @@ public struct BirdsUltimateAttackConfig : IComponentData
     public float LifeTime;
 
     public bool IsActive;
+
+    public AudioData TornadoSound;
 }

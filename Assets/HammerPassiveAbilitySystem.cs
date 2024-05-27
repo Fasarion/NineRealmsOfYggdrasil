@@ -101,6 +101,10 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                         break;
                     }
                 }
+                
+                // Handle  audio
+                var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+                audioBuffer.Add(new AudioBufferData { AudioData = config.HitAudio});
 
                 ability.ValueRW.CurrentStrikeCheckpoint++;
                 ability.ValueRW.HasFired = true;

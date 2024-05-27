@@ -26,16 +26,16 @@ public class UpdateInputState : StateMachineBehaviour
         
         [Tooltip("Determines whether or not the player can rotate (from input) during this attack.")]
         public InputState RotationStateChange;
+        
+        [Tooltip("Determines whether or not the player will be invincible.")]
+        public InputState InvincibilityStateChange;
     }
-    
-    
-    
+
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         HandleStateChange(OnEnter);
     }
     
-
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         HandleStateChange(OnExit);
@@ -62,6 +62,17 @@ public class UpdateInputState : StateMachineBehaviour
             
             case InputState.Enable:
                 EventManager.OnEnableRotationInput?.Invoke(true);
+                break;
+        }
+        
+        switch (information.InvincibilityStateChange)
+        {
+            case InputState.Enable:
+                EventManager.OnEnablePlayerInvincibility?.Invoke(true);
+                break;
+            
+            case InputState.Disable:
+                EventManager.OnEnablePlayerInvincibility?.Invoke(false);
                 break;
         }
     }

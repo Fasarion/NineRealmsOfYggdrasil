@@ -33,6 +33,7 @@ public static class EventManager
     
     public static UnityAction<bool> OnEnableMovementInput;
     public static UnityAction<bool> OnEnableRotationInput;
+    public static UnityAction<bool> OnEnablePlayerInvincibility;
 }
 
 public struct PlayerHealthData

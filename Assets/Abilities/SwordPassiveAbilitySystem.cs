@@ -32,9 +32,11 @@ public partial struct SwordPassiveAbilitySystem : ISystem
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var config = SystemAPI.GetSingleton<SwordPassiveAbilityConfig>();
         
-        foreach (var (targeting, transform, swordEntity) in
-                 SystemAPI.Query<RefRW<SwordTargetingComponent>, RefRW<LocalTransform>>().WithNone<ActiveWeapon>().WithEntityAccess())
+        foreach (var (targeting, transform, animatorGO, swordEntity) in
+                 SystemAPI.Query<RefRW<SwordTargetingComponent>, RefRW<LocalTransform>, GameObjectAnimatorPrefab>().WithNone<ActiveWeapon>().WithEntityAccess())
         {
+            animatorGO.FollowEntity = true; 
+            
             if (!state.EntityManager.Exists(targeting.ValueRO.EntityToFollow))
             {
                                 var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
@@ -66,4 +68,9 @@ public partial struct SwordPassiveAbilitySystem : ISystem
             }
         }
     }
+}
+
+public partial class SwitchFollowEntityOnWeaponSwitchSystem
+{
+    
 }

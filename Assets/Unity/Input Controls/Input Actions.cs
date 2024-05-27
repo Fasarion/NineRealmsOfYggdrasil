@@ -89,6 +89,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""b8f6b759-2980-4daf-87ff-1a9ffa763839"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -322,6 +331,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32833e81-e318-4675-b38a-f7076230f4c1"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -405,6 +425,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_InputMap_PlayerUltimateAttack = m_InputMap.FindAction("PlayerUltimateAttack", throwIfNotFound: true);
         m_InputMap_MousePosition = m_InputMap.FindAction("MousePosition", throwIfNotFound: true);
         m_InputMap_Dash = m_InputMap.FindAction("Dash", throwIfNotFound: true);
+        m_InputMap_Pause = m_InputMap.FindAction("Pause", throwIfNotFound: true);
         // WeaponMap
         m_WeaponMap = asset.FindActionMap("WeaponMap", throwIfNotFound: true);
         m_WeaponMap_SwitchWeapon1 = m_WeaponMap.FindAction("SwitchWeapon1", throwIfNotFound: true);
@@ -478,6 +499,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_InputMap_PlayerUltimateAttack;
     private readonly InputAction m_InputMap_MousePosition;
     private readonly InputAction m_InputMap_Dash;
+    private readonly InputAction m_InputMap_Pause;
     public struct InputMapActions
     {
         private @InputActions m_Wrapper;
@@ -489,6 +511,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @PlayerUltimateAttack => m_Wrapper.m_InputMap_PlayerUltimateAttack;
         public InputAction @MousePosition => m_Wrapper.m_InputMap_MousePosition;
         public InputAction @Dash => m_Wrapper.m_InputMap_Dash;
+        public InputAction @Pause => m_Wrapper.m_InputMap_Pause;
         public InputActionMap Get() { return m_Wrapper.m_InputMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -519,6 +542,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Dash.started += instance.OnDash;
             @Dash.performed += instance.OnDash;
             @Dash.canceled += instance.OnDash;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IInputMapActions instance)
@@ -544,6 +570,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @Dash.started -= instance.OnDash;
             @Dash.performed -= instance.OnDash;
             @Dash.canceled -= instance.OnDash;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IInputMapActions instance)
@@ -632,6 +661,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnPlayerUltimateAttack(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IWeaponMapActions
     {

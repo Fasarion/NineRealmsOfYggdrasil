@@ -43,9 +43,9 @@ public partial class DamageNumberSystem : SystemBase
                 return;
             }
         }
-        
-        var buffer = SystemAPI.GetSingletonBuffer<DamageNumberBufferElement>();
-        
+
+        SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DamageNumberBufferElement> buffer);
+
         if (buffer.IsEmpty)
         {
             return;

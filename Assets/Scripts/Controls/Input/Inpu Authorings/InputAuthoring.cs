@@ -31,6 +31,7 @@ public class InputAuthoring : MonoBehaviour
 
             // General Input
             AddComponent<PrimaryButtonInput>(entity);
+            AddComponent<PauseInput>(entity);
         }
     }
 }
@@ -91,6 +92,11 @@ public struct WeaponTwoInput : IComponentData
 }
 
 public struct WeaponThreeInput : IComponentData
+{
+    public bool KeyPressed;
+}
+
+public struct PauseInput : IComponentData
 {
     public bool KeyPressed;
 }

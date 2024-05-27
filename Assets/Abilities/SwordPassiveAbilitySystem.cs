@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Destruction;
+using Patrik;
 using Player;
 using Unity.Burst;
 using Unity.Collections;
@@ -29,17 +30,25 @@ public partial struct SwordPassiveAbilitySystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        foreach (var (sword, weapon, animatorGO, swordEntity) in
+            SystemAPI.Query<SwordComponent, WeaponComponent, GameObjectAnimatorPrefab>()
+                .WithNone<ActiveWeapon>().WithEntityAccess())
+        {
+            bool isPassive = weapon.CurrentAttackType == AttackType.Passive;
+            
+            animatorGO.FollowEntity = isPassive;
+        }
+
+
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var config = SystemAPI.GetSingleton<SwordPassiveAbilityConfig>();
         
-        foreach (var (targeting, transform, animatorGO, swordEntity) in
-                 SystemAPI.Query<RefRW<SwordTargetingComponent>, RefRW<LocalTransform>, GameObjectAnimatorPrefab>().WithNone<ActiveWeapon>().WithEntityAccess())
+        foreach (var (targeting, transform, swordEntity) in
+                 SystemAPI.Query<RefRW<SwordTargetingComponent>, RefRW<LocalTransform>>().WithNone<ActiveWeapon>().WithEntityAccess())
         {
-            animatorGO.FollowEntity = true; 
-            
             if (!state.EntityManager.Exists(targeting.ValueRO.EntityToFollow))
             {
-                                var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
+                var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
                 var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
 
                 float totalArea = config.Radius;

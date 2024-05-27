@@ -32,7 +32,6 @@ public partial struct ObjectiveObjectSystem : ISystem
         
         var config = SystemAPI.GetSingleton<ObjectiveObjectConfig>();
 
-
         var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 

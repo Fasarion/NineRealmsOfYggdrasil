@@ -52,6 +52,9 @@ public partial struct ResetInputSystem : ISystem
         dash.ValueRW.KeyDown = false;
         dash.ValueRW.KeyUp = false;
 
+        var pauseInput = SystemAPI.GetSingletonRW<PauseInput>();
+        pauseInput.ValueRW.KeyPressed = false;
+        
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

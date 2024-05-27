@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class SceneHandler : MonoBehaviour
 {
     public SceneReference sceneToLoad;
+    
     public void SwapScene()
     {
         SceneManager.LoadScene(sceneToLoad.ScenePath);

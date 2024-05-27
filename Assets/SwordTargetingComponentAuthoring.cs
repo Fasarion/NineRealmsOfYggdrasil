@@ -9,9 +9,9 @@ public class SwordTargetingComponentAuthoring : MonoBehaviour
     public float3 offset;
     public bool shouldWaitForDeath;
 
-    public class ObjectiveObjectMarkerAuthoringBaker : Baker<ObjectiveObjectMarkerAuthoring>
+    public class SwordBakerAuthoringBaker : Baker<SwordTargetingComponentAuthoring>
     {
-        public override void Bake(ObjectiveObjectMarkerAuthoring authoring)
+        public override void Bake(SwordTargetingComponentAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity, new SwordTargetingComponent { Offset = authoring.offset, ShouldWaitForDeath = authoring.shouldWaitForDeath});

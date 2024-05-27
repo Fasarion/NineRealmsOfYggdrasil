@@ -2,6 +2,7 @@
 using Player;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Entities.Content;
 using UnityEngine;
 
 namespace Damage
@@ -12,13 +13,13 @@ namespace Damage
     public partial struct PlayerHealthSystem : ISystem
     {
         private bool hasInitialized;
-        
+
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<PlayerTag>();
         }
-        
+
         public void OnUpdate(ref SystemState state)
         {
             if (!hasInitialized)
@@ -32,13 +33,12 @@ namespace Damage
                         currentHealth = currentHP.Value,
                         maxHealth = maxHealth.Value
                     };
-                
+
                     EventManager.OnPlayerHealthSet?.Invoke(data);
                 }
-
+                
                 hasInitialized = true;
             }
-            
             
             foreach (var (currentHP, maxHealth) in
                 SystemAPI.Query<CurrentHpComponent, MaxHpComponent>()
@@ -49,7 +49,7 @@ namespace Damage
                     currentHealth = currentHP.Value,
                     maxHealth = maxHealth.Value
                 };
-                
+
                 EventManager.OnPlayerHealthSet?.Invoke(data);
             }
         }

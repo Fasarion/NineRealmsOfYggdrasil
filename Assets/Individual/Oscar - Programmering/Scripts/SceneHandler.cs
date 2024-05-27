@@ -7,10 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class SceneHandler : MonoBehaviour
 {
-    public SceneReference _sceneReference;
+    public SceneReference sceneToLoad;
     public void SwapScene()
     {
-        SceneManager.LoadScene(_sceneReference.ScenePath);
+        SceneManager.LoadScene(sceneToLoad.ScenePath);
     }
 
     public void ExitGame()

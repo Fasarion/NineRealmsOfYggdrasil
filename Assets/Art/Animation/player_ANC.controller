@@ -2669,9 +2669,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 2
     RotationStateChange: 2
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!1101 &-3183677775682878041
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2964,6 +2966,7 @@ AnimatorState:
   - {fileID: -957588063654470339}
   m_StateMachineBehaviours:
   - {fileID: 3920496700142077403}
+  - {fileID: 327196228816764908}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4029,6 +4032,18 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!114 &327196228816764908
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 361ea1d209bcc0b45aeb8d9bc1531723, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &563458380572461410
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4892,9 +4907,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 0
     RotationStateChange: 2
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!206 &1983615459242061978
 BlendTree:
   m_ObjectHideFlags: 1
@@ -5307,9 +5324,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 0
     RotationStateChange: 0
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 0
+    InvincibilityStateChange: 0
 --- !u!114 &3256494505630101552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5559,9 +5578,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 2
     RotationStateChange: 2
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 1
     RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!206 &3917797024228222464
 BlendTree:
   m_ObjectHideFlags: 1
@@ -5730,9 +5751,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 0
     RotationStateChange: 2
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!1101 &4201245769329687406
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -5776,9 +5799,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 2
     RotationStateChange: 2
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 1
     RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!114 &4329032536126882818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7675,9 +7700,11 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 1
     RotationStateChange: 1
+    InvincibilityStateChange: 0
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 0
+    InvincibilityStateChange: 0
 --- !u!1102 &8622787790108443097
 AnimatorState:
   serializedVersion: 6

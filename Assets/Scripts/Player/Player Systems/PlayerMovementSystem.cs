@@ -1,6 +1,5 @@
 ﻿using System;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Physics.Systems;
 using Unity.Transforms;
 using UnityEngine;
@@ -47,57 +46,8 @@ namespace Player
                 {
                     animatorReference.Animator.transform.position += step;
                 }
-                // else
-                // {
-                //     playerTransform.ValueRW.Position += (float3)step;
-                // }
-                
+
                 playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
-                
-                // don't dash if busy
-                if (attackCaller.BusyAttackInfo.Busy) continue;
-
-                if (dashInput.KeyDown)
-                {
-                    PlayerWeaponManagerBehaviour.Instance.transform.forward = moveInputVec3;
-                    PlayerWeaponManagerBehaviour.Instance.Dash();
-                }
-
-                return;
-                
-                // Check for dash input - and apply dash force
-                if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
-                {
-                    Debug.Log("Dash!");
-                    dashTimer.ValueRW.currentTime = 0;
-                    dashConfig.ValueRW.IsDashing = true;
-                    dashConfig.ValueRW.IsDashOnCooldown = true;
-
-                    velocity.ValueRW.Linear += (float3)moveInputVec3 * dashConfig.ValueRO.DashForce;
-                    
-                    gameObjectAnimator.FollowEntity = true;
-                    
-                    
-                }
-                
-                dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-
-                if (dashConfig.ValueRO.IsDashing)
-                {
-                    //Check if dash is done
-                    if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashDuration)
-                    {
-                        dashConfig.ValueRW.IsDashing = false;
-                        gameObjectAnimator.FollowEntity = false;
-                        velocity.ValueRW.Linear = new float3(0, 0, 0);
-                        
-                    }
-                }
-
-                if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
-                {
-                    dashConfig.ValueRW.IsDashOnCooldown = false;
-                }
             }
         }
     }

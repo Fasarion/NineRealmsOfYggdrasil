@@ -8,6 +8,7 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
     public float dashForce;
     public float dashDuration;
     public float dashCooldown;
+    public AudioData Audio; 
 
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDashOnCooldown;
@@ -24,7 +25,8 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
                     DashDuration = authoring.dashDuration,
                     DashCooldown = authoring.dashCooldown,
                     IsDashing = authoring.isDashing,
-                    IsDashOnCooldown = authoring.isDashOnCooldown
+                    IsDashOnCooldown = authoring.isDashOnCooldown,
+                    Audio = authoring.Audio
                 });
         }
     }
@@ -37,4 +39,5 @@ public struct PlayerDashConfig : IComponentData
     public float DashCooldown;
     public bool IsDashing;
     public bool IsDashOnCooldown;
+    public AudioData Audio;
 }

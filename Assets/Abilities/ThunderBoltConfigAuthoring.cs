@@ -16,6 +16,10 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
     public float strikeSpacing;
     public float timeBetweenStrikes;
     public float vfxHeightOffset;
+    
+    [Header("Audio")] 
+    [Tooltip("Sound to play when lightning strikes.")]
+    [SerializeField] private AudioData hitAudio;
 
     public class ThunderBoltConfigAuthoringBaker : Baker<ThunderBoltConfigAuthoring>
     {
@@ -34,6 +38,8 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
                     StrikeSpacing = authoring.strikeSpacing,
                     TimeBetweenStrikes = authoring.timeBetweenStrikes,
                     VfxHeightOffset = authoring.vfxHeightOffset,
+                    
+                    HitAudio = authoring.hitAudio
                 });
 
         }
@@ -51,6 +57,8 @@ public struct ThunderBoltConfig : IComponentData
     public float StrikeSpacing;
     public float TimeBetweenStrikes;
     public float VfxHeightOffset;
+
+    public AudioData HitAudio;
 }
 
 public struct TargetBufferElement : IBufferElementData

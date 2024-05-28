@@ -86,6 +86,10 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                 });
 
                 ability.ValueRW.CurrentCount++;
+                
+                // Handle  audio
+                var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+                audioBuffer.Add(new AudioBufferData { AudioData = config.HitAudio}); 
             }
         }
         

@@ -45,21 +45,46 @@ public partial struct ThunderBoltAbilitySystem : ISystem
 
             if (!ability.ValueRO.isInitialized)
             {
-                var rotation = playerRotation.Value;
-                var directionVector = math.forward(rotation);
+
+
                 var targetBuffer = state.EntityManager.GetBuffer<TargetBufferElement>(entity);
 
-                for (int i = 0; i < config.MaxStrikes; i++)
+                for (int j = 0; j < config.MaxRows; j++)
                 {
-                    float3 pos = playerPosition.Value
-                                 + directionVector * (config.StrikeSpacing * (i + 1));
-                    var element = new TargetBufferElement
+                    var rotation = playerRotation.Value;
+                    var directionVector = math.forward(rotation);
+                    
+                    if (j != 0)
                     {
-                        Position = pos,
-                    };
-                    targetBuffer.Add(element);
+                        float angle;
+                        quaternion rotationQ;
+                    
+                        if (j % 2 == 0)
+                        {
+                            angle = config.RowsAngle * (j) / 2;
+                            rotationQ = quaternion.RotateY(math.radians(angle));
+                        }
+                        else
+                        {
+                            angle = -(config.RowsAngle * (j + 1) / 2);
+                            rotationQ = quaternion.RotateY(math.radians(angle));
+                        }
+                    
+                        directionVector = math.rotate(rotationQ, directionVector);
+                    }
+                    
+                    for (int i = 0; i < config.MaxStrikes; i++)
+                    {
+                        
+                        float3 pos = playerPosition.Value
+                                     + directionVector * (config.StrikeSpacing * (i + 1));
+                        var element = new TargetBufferElement
+                        {
+                            Position = pos,
+                        };
+                        targetBuffer.Add(element);
+                    }
                 }
-
                 ability.ValueRW.isInitialized = true;
             }
             
@@ -69,27 +94,32 @@ public partial struct ThunderBoltAbilitySystem : ISystem
 
             if (timerCheckpoint < timer.ValueRO.currentTime)
             {
-                var projectile = state.EntityManager.Instantiate(config.ProjectilePrefab);
-                var targetBuffer = state.EntityManager.GetBuffer<TargetBufferElement>(entity);
-                var pos = targetBuffer[ability.ValueRO.CurrentCount].Position;
-
-                state.EntityManager.SetComponentData(projectile, new LocalTransform
+                for (int i = 0; i < config.MaxRows; i++)
                 {
-                    Position = pos
-                               + new float3(0, config.VfxHeightOffset, 0),
-                    Rotation = quaternion.identity,
-                    Scale = 1,
-                });
-                state.EntityManager.SetComponentData(projectile, new UpdateStatsComponent
-                {
-                    EntityToTransferStatsFrom = configEntity,
-                });
+                    var projectile = state.EntityManager.Instantiate(config.ProjectilePrefab);
+                    var targetBuffer = state.EntityManager.GetBuffer<TargetBufferElement>(entity);
+                    var pos = targetBuffer[ability.ValueRO.CurrentCount + (config.MaxStrikes * i)].Position;
 
-                ability.ValueRW.CurrentCount++;
+                    state.EntityManager.SetComponentData(projectile, new LocalTransform
+                    {
+                        Position = pos
+                                   + new float3(0, config.VfxHeightOffset, 0),
+                        Rotation = quaternion.identity,
+                        Scale = 1,
+                    });
+                    state.EntityManager.SetComponentData(projectile, new UpdateStatsComponent
+                    {
+                        EntityToTransferStatsFrom = configEntity,
+                    });
+
+
                 
-                // Handle  audio
-                var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
-                audioBuffer.Add(new AudioBufferData { AudioData = config.HitAudio}); 
+                    // Handle  audio
+                    var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+                    audioBuffer.Add(new AudioBufferData { AudioData = config.HitAudio}); 
+                }
+                
+                ability.ValueRW.CurrentCount++;
             }
         }
         

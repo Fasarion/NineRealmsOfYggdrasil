@@ -6,11 +6,13 @@ using Player;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
+using Unity.Entities.UniversalDelegates;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 
+[UpdateBefore(typeof(HandleAnimationSystem))]
 public partial struct SwordPassiveAbilitySystem : ISystem
 {
     private CollisionFilter _detectionFilter;
@@ -20,6 +22,7 @@ public partial struct SwordPassiveAbilitySystem : ISystem
     {
         state.RequireForUpdate<SwordPassiveAbilityConfig>();
         state.RequireForUpdate<PlayerPositionSingleton>();
+        state.RequireForUpdate<GameUnpaused>();
         _detectionFilter = new CollisionFilter
         {
             BelongsTo = 1, // Projectile
@@ -30,19 +33,13 @@ public partial struct SwordPassiveAbilitySystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        foreach (var (sword, weapon, animatorGO, swordEntity) in
-            SystemAPI.Query<SwordComponent, WeaponComponent, GameObjectAnimatorPrefab>()
-                .WithNone<ActiveWeapon>().WithEntityAccess())
-        {
-            bool isPassive = weapon.CurrentAttackType == AttackType.Passive;
-            
-            animatorGO.FollowEntity = isPassive;
-        }
+        
 
 
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var config = SystemAPI.GetSingleton<SwordPassiveAbilityConfig>();
         
+
         foreach (var (targeting, transform, swordEntity) in
                  SystemAPI.Query<RefRW<SwordTargetingComponent>, RefRW<LocalTransform>>().WithNone<ActiveWeapon>().WithEntityAccess())
         {
@@ -73,13 +70,44 @@ public partial struct SwordPassiveAbilitySystem : ISystem
             {
                 var entityToFollowTransform = state.EntityManager.GetComponentData<LocalTransform>(targeting.ValueRO.EntityToFollow);
                 var entityToFollowPos = entityToFollowTransform.Position;
-                transform.ValueRW.Position = entityToFollowPos + new float3(targeting.ValueRO.Offset);
+                
+               var directionToTarget = math.normalizesafe(transform.ValueRO.Position - entityToFollowPos);
+
+               float offset = targeting.ValueRO.Offset;
+               transform.ValueRW.Position = entityToFollowPos + directionToTarget * offset;
+
+
+                transform.ValueRW.Rotation = quaternion.LookRotation(-directionToTarget, new float3(0,1,0));
             }
         }
     }
 }
 
-public partial class SwitchFollowEntityOnWeaponSwitchSystem
+public partial class SwitchFollowEntityOnWeaponSwitchSystem : SystemBase
 {
+    protected override void OnStartRunning()
+    {
+        EventManager.OnWeaponSwitch += OnWeaponSwitch;
+    }
     
+    protected override void OnStopRunning()
+    {
+        EventManager.OnWeaponSwitch -= OnWeaponSwitch;
+    }
+
+    private void OnWeaponSwitch(WeaponBehaviour _)
+    {
+        foreach (var (sword, weapon, animatorGO, swordEntity) in
+            SystemAPI.Query<SwordComponent, WeaponComponent, GameObjectAnimatorPrefab>()
+                .WithEntityAccess())
+        {
+            bool isPassive = weapon.CurrentAttackType == AttackType.Passive;
+            
+            animatorGO.FollowEntity = isPassive;
+        }
+    }
+
+    protected override void OnUpdate()
+    {
+    }
 }

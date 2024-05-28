@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SwordTargetingComponentAuthoring : MonoBehaviour
 {
-    public float3 offset;
+    public float offset = 0.5f;
     public bool shouldWaitForDeath;
 
     public class SwordBakerAuthoringBaker : Baker<SwordTargetingComponentAuthoring>
@@ -21,7 +21,7 @@ public class SwordTargetingComponentAuthoring : MonoBehaviour
 
 public struct SwordTargetingComponent : IComponentData
 {
-    public float3 Offset;
+    public float Offset;
     public Entity EntityToFollow;
     public bool ShouldWaitForDeath;
 }

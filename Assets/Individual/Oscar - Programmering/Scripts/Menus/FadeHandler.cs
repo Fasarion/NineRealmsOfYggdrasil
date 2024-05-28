@@ -122,6 +122,7 @@ public class FadeHandler : MonoBehaviour
             imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
             yield return null;
         }
+        Debug.Log("FadeComplete");
             
        
         

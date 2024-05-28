@@ -9,6 +9,7 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
     public float dashDuration;
     public float dashCooldown;
     public AudioData Audio; 
+    public GameObject DashShieldPrefab;  
 
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDashOnCooldown;
@@ -26,7 +27,8 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
                     DashCooldown = authoring.dashCooldown,
                     IsDashing = authoring.isDashing,
                     IsDashOnCooldown = authoring.isDashOnCooldown,
-                    Audio = authoring.Audio
+                    Audio = authoring.Audio,
+                    DashShieldPrefab = GetEntity(authoring.DashShieldPrefab, TransformUsageFlags.Dynamic)
                 });
         }
     }
@@ -40,4 +42,5 @@ public struct PlayerDashConfig : IComponentData
     public bool IsDashing;
     public bool IsDashOnCooldown;
     public AudioData Audio;
+    public Entity DashShieldPrefab;
 }

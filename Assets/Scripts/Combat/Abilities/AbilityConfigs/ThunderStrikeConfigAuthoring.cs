@@ -19,6 +19,8 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
     public float damageDelayTime;
     public float damageArea;
     public float shockwaveEffectHeightOffset;
+
+    public bool useMousePosition;
     
     [SerializeField] private AudioData impactAudioData;
     
@@ -42,6 +44,7 @@ public class ThunderStrikeConfigAuthoring : MonoBehaviour
                     mainEffectHeightOffset = authoring.mainEffectHeightOffset,
                     shockwaveEffectHeightOffset = authoring.shockwaveEffectHeightOffset,
                     impactAudioData = authoring.impactAudioData,
+                    UseMousePosition = authoring.useMousePosition,
                 });
         }
     }
@@ -59,6 +62,8 @@ public struct ThunderStrikeConfig : IComponentData
     public float initialStrikeDelay;
     public float mainEffectHeightOffset;
     public float shockwaveEffectHeightOffset;
+
+    public bool UseMousePosition;
 
     public AudioData impactAudioData;
 }

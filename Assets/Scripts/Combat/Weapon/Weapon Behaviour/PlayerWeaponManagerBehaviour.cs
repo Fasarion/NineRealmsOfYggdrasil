@@ -53,6 +53,7 @@ namespace Patrik
         private void OnEnable()
         {
             EventManager.OnUpdateAttackAnimation += UpdateAttackAnimation;
+            EventManager.OnDash += Dash;
         }
 
         private void OnDisable()
@@ -63,6 +64,7 @@ namespace Patrik
             }
             
             EventManager.OnUpdateAttackAnimation -= UpdateAttackAnimation;
+            EventManager.OnDash -= Dash;
         }
 
         private void UpdateAttackAnimation(AttackType attackType, bool shouldAttack)
@@ -314,7 +316,7 @@ namespace Patrik
             playerAnimator.SetFloat("movementSpeed", localMovementVector.y);
         }
 
-        public void Dash()
+        void Dash()
         {
             playerAnimator.SetTrigger("dashTrigger");
         }

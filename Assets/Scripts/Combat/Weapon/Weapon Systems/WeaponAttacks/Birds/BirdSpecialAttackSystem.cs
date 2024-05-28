@@ -43,8 +43,6 @@ public partial struct BirdSpecialAttackSystem : ISystem
         var chargeInfo = attackCaller.SpecialChargeInfo;
         if (chargeInfo.ChargingWeapon != WeaponType.Birds) return;
         
-        var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
-
         if (config.ValueRO.InReleaseState)
         {
             config.ValueRW.lifeTimeTimer += SystemAPI.Time.DeltaTime;
@@ -106,7 +104,6 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     });
 
                     var cachedDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity).Value.DamageValue;
-                    Debug.Log($"Damage: {cachedDamage}");
                     
                     // update stats
                     ecb.AddComponent(birdProjectile, new UpdateStatsComponent

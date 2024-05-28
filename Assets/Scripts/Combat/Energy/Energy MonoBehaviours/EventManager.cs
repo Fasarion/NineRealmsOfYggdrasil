@@ -35,7 +35,8 @@ public static class EventManager
     public static UnityAction<bool> OnEnableRotationInput;
     public static UnityAction<bool> OnEnablePlayerInvincibility;
 
-    public static UnityAction OnDash;
+    public static UnityAction OnDashBegin;
+    public static UnityAction OnDashEnd;
 }
 
 public struct PlayerHealthData

@@ -125,26 +125,14 @@ namespace Patrik
             EventManager.OnActiveAttackStart += OnActiveAttackStart;
             EventManager.OnActiveAttackStop += OnActiveAttackStop;
             
-            // _weaponManager.OnActiveAttackStart += OnActiveAttackStart;
-            // _weaponManager.OnActiveAttackStop += OnActiveAttackStop;
-            
             EventManager.OnPassiveAttackStart += OnPassiveAttackStart;
             EventManager.OnPassiveAttackStop += OnPassiveAttackStop;
             
-            // _weaponManager.OnPassiveAttackStart += OnPassiveAttackStart;
-            // _weaponManager.OnPassiveAttackStop += OnPassiveAttackStop;
-            
             EventManager.OnSpecialCharge += OnSpecialCharge;
             EventManager.OnUltimatePrepare += OnUltimatePrepare;
-            
-            // _weaponManager.OnSpecialCharge += OnSpecialCharge;
-            // _weaponManager.OnUltimatePrepare += OnUltimatePrepare;
-            
+           
             EventManager.OnWeaponActive += SetWeaponActive;
             EventManager.OnWeaponPassive += SetWeaponPassive;
-
-            // _weaponManager.OnWeaponActive += SetWeaponActive;
-            // _weaponManager.OnWeaponPassive += SetWeaponPassive;
 
             EventManager.OnBusyUpdate += OnBusyUpdate;
             EventManager.OnChargeLevelChange += OnChargeLevelChange;
@@ -157,28 +145,16 @@ namespace Patrik
         {
             EventManager.OnActiveAttackStart -= OnActiveAttackStart;
             EventManager.OnActiveAttackStop -= OnActiveAttackStop;
-            
-            // _weaponManager.OnActiveAttackStart -= OnActiveAttackStart;
-            // _weaponManager.OnActiveAttackStop -= OnActiveAttackStop;
-            
+
             EventManager.OnPassiveAttackStart -= OnPassiveAttackStart;
             EventManager.OnPassiveAttackStop -= OnPassiveAttackStop;
-            
-            // _weaponManager.OnPassiveAttackStart -= OnPassiveAttackStart;
-            // _weaponManager.OnPassiveAttackStop -= OnPassiveAttackStop;
-            
+
             EventManager.OnSpecialCharge -= OnSpecialCharge;
             EventManager.OnUltimatePrepare -= OnUltimatePrepare;
-            
-            // _weaponManager.OnSpecialCharge -= OnSpecialCharge;
-            // _weaponManager.OnUltimatePrepare -= OnUltimatePrepare;
-            
+
             EventManager.OnWeaponActive -= SetWeaponActive;
             EventManager.OnWeaponPassive -= SetWeaponPassive;
 
-            // _weaponManager.OnWeaponActive -= SetWeaponActive;
-            // _weaponManager.OnWeaponPassive -= SetWeaponPassive;
-            
             EventManager.OnBusyUpdate -= OnBusyUpdate;
             EventManager.OnChargeLevelChange -= OnChargeLevelChange;
             
@@ -502,7 +478,7 @@ namespace Patrik
                 // No weapon manager found, can't read weapon inputs.
                 return;
             }
-            
+
             if (!SystemAPI.TryGetSingleton(out GameManagerSingleton gameManager))
                 return;
 

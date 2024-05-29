@@ -9,6 +9,7 @@ public class IceRingAbilityAuthoring : MonoBehaviour
     [HideInInspector] public float area;
     [HideInInspector] public bool hasFired;
     [HideInInspector] public int currentAbilityStage;
+    [HideInInspector] public int currentRingCount;
 
     public class IceRingAbilityAuthoringBaker : Baker<IceRingAbilityAuthoring>
     {
@@ -19,7 +20,7 @@ public class IceRingAbilityAuthoring : MonoBehaviour
                 new IceRingAbility
                     {
                         isInitialized = authoring.isInitialized, area = authoring.area, hasFired = authoring.hasFired,
-                        currentAbilityStage = authoring.currentAbilityStage,
+                        currentAbilityStage = authoring.currentAbilityStage, CurrentRingCount = authoring.currentRingCount,
                     });
         }
     }
@@ -31,4 +32,5 @@ public struct IceRingAbility : IComponentData
     public float area;
     public bool hasFired;
     public int currentAbilityStage;
+    public int CurrentRingCount;
 }

@@ -11,13 +11,6 @@ GameObject:
   - component: {fileID: 7547186599945496512}
   - component: {fileID: 7375497099947157991}
   - component: {fileID: 4838189504359201309}
-  - component: {fileID: 2264950140990489993}
-  - component: {fileID: 4533057731650261418}
-  - component: {fileID: 2466035642879652135}
-  - component: {fileID: -2240624451221393486}
-  - component: {fileID: -2945285643535285347}
-  - component: {fileID: -89021452518267575}
-  - component: {fileID: -1528938125869595140}
   m_Layer: 0
   m_Name: IceRingAbility
   m_TagString: Untagged
@@ -56,6 +49,7 @@ MonoBehaviour:
   area: 0
   hasFired: 0
   currentAbilityStage: 0
+  currentRingCount: 0
 --- !u!114 &4838189504359201309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,99 +64,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentTime: 0
   maxTime: 0
---- !u!114 &2264950140990489993
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: afa493f1eebb75941af3bd96d0c5d8fb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 2288991140442585764, guid: f72c68c66f9ac6d4f81a5248052265a1,
-    type: 3}
-  followsEntity: 1
---- !u!114 &4533057731650261418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attackDamage: 0
-  criticalChance: 0
---- !u!114 &2466035642879652135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hasHitBuffer: 1
-  isHitTrigger: 1
-  isHitTriggerTarget: 0
-  isHitCollider: 0
-  isHitColliderTarget: 0
---- !u!114 &-2240624451221393486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-2945285643535285347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockBackForce: 5
-  KnockDirection: 2
---- !u!114 &-89021452518267575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &-1528938125869595140
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5736946099070336933}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3f21f65d68014ab4bd59cf9ebdefeeb9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

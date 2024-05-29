@@ -51,6 +51,10 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
             // Knock Back
             AddComponent(entity, new EnemyKnockBackAnimationComponent { });
             SetComponentEnabled<EnemyKnockBackAnimationComponent>(entity, false);
+            
+            // Death
+            AddComponent(entity, new EnemyDeathAnimationComponent() { });
+            SetComponentEnabled<EnemyDeathAnimationComponent>(entity, false);
         }
     }
 }
@@ -71,3 +75,4 @@ public struct EnemyAttackAnimationComponent : IComponentData, IEnableableCompone
 
 public struct EnemyHitStunAnimationComponent : IComponentData, IEnableableComponent { }
 public struct EnemyKnockBackAnimationComponent : IComponentData, IEnableableComponent { }
+public struct EnemyDeathAnimationComponent : IComponentData, IEnableableComponent { }

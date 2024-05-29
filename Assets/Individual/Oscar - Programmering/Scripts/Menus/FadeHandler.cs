@@ -19,6 +19,9 @@ public class FadeHandler : MonoBehaviour
     private float currentAlpha;
     private float fadeTime;
     public AnimationCurve fadeInCurve;
+
+    public float fadeDelay;
+    private float currentFadeDelay;
     //public AnimationCurve fadeOutCurve;
 
     public float fadeTimeMultiplier = 1f;
@@ -29,7 +32,8 @@ public class FadeHandler : MonoBehaviour
 
     public void OnFadeIn()
     {
-        
+
+        currentFadeDelay = 0;
         fadeTime = 0;
         fadeMode = FadeMode.FadeIn;
        
@@ -38,7 +42,7 @@ public class FadeHandler : MonoBehaviour
     
     public void OnFadeOut()
     {
-       
+        currentFadeDelay = 0;
         fadeTime = 0;
         fadeMode = FadeMode.FadeOut;
         StartCoroutine(Fade());
@@ -46,7 +50,20 @@ public class FadeHandler : MonoBehaviour
     
     public IEnumerator Fade()
     {
-        
+        while (currentFadeDelay < fadeDelay)
+        {
+            currentFadeDelay += Time.deltaTime;
+            if (fadeMode == FadeMode.FadeIn)
+            {
+                currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
+            }
+            else if(fadeMode == FadeMode.FadeOut)
+            {
+                currentAlpha = fadeInCurve.Evaluate(fadeTime);
+                
+            }
+            yield return null;
+        }
         while(fadeTime < 1)
         {
             if (fadeMode == FadeMode.FadeIn)
@@ -65,7 +82,7 @@ public class FadeHandler : MonoBehaviour
         }
 
         //Put event to tell the game that the fade is completed here.
-
+        EventManager.OnScreenFadeComplete?.Invoke();
 
 
     }

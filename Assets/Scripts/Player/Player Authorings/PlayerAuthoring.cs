@@ -30,5 +30,7 @@ namespace Player
     
     public struct PlayerTag : IComponentData { }
 
+    public struct PlayerDeath : IComponentData { }
+
 }
 

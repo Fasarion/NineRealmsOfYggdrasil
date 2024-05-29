@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2039439143520124052}
   - component: {fileID: 2120929042057779170}
+  - component: {fileID: 6460762032987377754}
   m_Layer: 5
-  m_Name: Dash UI
+  m_Name: Dash UI Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,3 +49,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3038b2d036f9fe140b2ea366df9d4303, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashIconPrefab: {fileID: 4077103123120106196, guid: a51713ac2baa7544b9cce8fa4e2dd2cf,
+    type: 3}
+--- !u!114 &6460762032987377754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8607084502243876246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 3
+  m_Spacing: 150
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
+  m_ChildScaleWidth: 0
+  m_ChildScaleHeight: 0
+  m_ReverseArrangement: 0

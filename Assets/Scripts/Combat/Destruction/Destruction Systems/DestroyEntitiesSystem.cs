@@ -1,5 +1,8 @@
+using Damage;
+using Player;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
@@ -14,6 +17,7 @@ namespace Destruction
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<PlayerPositionSingleton>();
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         }
         
@@ -21,11 +25,10 @@ namespace Destruction
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-            // var beginSimECB = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
-            //     .CreateCommandBuffer(state.WorldUnmanaged);
-            //
-            // var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
+            var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
+            var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
             var spawnEntityOnDestroyLookup = SystemAPI.GetBufferLookup<SpawnEntityOnDestroyElement>();
+            RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
 
             foreach (var (dyingComponent, transform, entity) in SystemAPI.
                 Query<RefRW<IsDyingComponent>, LocalTransform>()
@@ -38,6 +41,7 @@ namespace Destruction
                 if (spawnEntityOnDestroyLookup.HasBuffer(entity))
                 {
                     var spawnBuffer = spawnEntityOnDestroyLookup[entity];
+                    var counter = 0;
 
                     foreach (var spawnElement in spawnBuffer)
                     {
@@ -49,6 +53,26 @@ namespace Destruction
                         }
                         
                         var spawnedEntity = state.EntityManager.Instantiate(spawnElement.Entity);
+
+                        if (state.EntityManager.HasBuffer<KnockBackBufferElement>(spawnedEntity))
+                        {
+                            var knockBackBufferElements = knockBackBufferLookup[spawnedEntity];
+                            var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 15f, 0)));
+                            var knockBackForce = 7f;
+
+                            if (counter > 0)
+                            {
+                                var radAngle = random.ValueRW.random.NextFloat(0f, math.PI * 2);
+                                knockBackForce = random.ValueRW.random.NextFloat(5, 10);
+                                var rotationQ = quaternion.RotateY(radAngle);
+                                forceDirection = math.rotate(rotationQ, forceDirection);
+                            }
+                            
+                            knockBackBufferElements.Add(new KnockBackBufferElement
+                            {
+                                KnockBackForce = forceDirection * knockBackForce,
+                            });
+                        }
 
                         var spawnedTransform = state.EntityManager.GetComponentData<LocalTransform>(spawnedEntity);
                         spawnedTransform.Position = transform.Position;
@@ -65,7 +89,7 @@ namespace Destruction
                         
                         spawnedTransform.Rotation = transform.Rotation;
                         state.EntityManager.SetComponentData(spawnedEntity, spawnedTransform);
-                        
+                        counter++;
                     }
                 }
             }

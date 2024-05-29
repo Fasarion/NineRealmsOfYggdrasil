@@ -38,18 +38,19 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
                 
                 ecb.RemoveComponent<MoveTowardsPlayerComponent>(entity);
                 var knockBackBufferElements = knockBackBufferLookup[entity];
-                var forceDirection = math.normalize(transform.Position - playerPos.Value);
-                var knockBackForce = currentHP.Value * -1;
+                var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 0.5f, 0)));
+                var knockBackForce = (currentHP.Value * -1) + 1;
+                var damping = 0.8f;
                 knockBackBufferElements.Add(new KnockBackBufferElement
                 {
-                    KnockBackForce = forceDirection * knockBackForce,
+                    KnockBackForce = forceDirection * (knockBackForce * damping),
                 });
                 dyingComponent.ValueRW.IsHandled = true;
                 
                 continue;
             }
 
-            if (math.length(velocity.ValueRO.Linear) <= 0)
+            if (math.length(velocity.ValueRO.Linear) <= 0.9f)
             {
                 ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
             }

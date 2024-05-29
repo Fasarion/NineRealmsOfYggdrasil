@@ -433,7 +433,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData:
-    AudioEnumValue: 0
     eventCategoryType: 2
     weaponType: 0
     enemyTyping: 1
@@ -452,7 +451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyAnimationType: 0
-  attackDelay: 0.3
+  attackDelayAfterAnimationStart: 0.3
 --- !u!114 &8269505085597687999
 MonoBehaviour:
   m_ObjectHideFlags: 0

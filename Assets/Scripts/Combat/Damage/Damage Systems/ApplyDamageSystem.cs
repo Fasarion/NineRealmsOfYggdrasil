@@ -82,7 +82,7 @@ namespace Damage
                 // If zero health, mark entity with Destroy Tag so it is destroyed in a later system
                 if (currentHP.ValueRO.Value <= 0)
                 {
-                    ecb.SetComponentEnabled<ShouldBeDestroyed>(damageReceivingEntity, true);
+                    ecb.AddComponent<IsDyingComponent>(damageReceivingEntity);
                 }
             }
             

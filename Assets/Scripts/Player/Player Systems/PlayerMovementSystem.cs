@@ -28,10 +28,6 @@ namespace Player
         {
             var playerPosSingleton = SystemAPI.GetSingletonRW<PlayerPositionSingleton>();
             var moveInput = SystemAPI.GetSingleton<PlayerMoveInput>();
-            var dashInput = SystemAPI.GetSingleton<PlayerDashInput>();
-            var dashConfig = SystemAPI.GetSingletonRW<PlayerDashConfig>();
-            var dashTimer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<PlayerDashConfig>());
-            var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
             
             foreach (var (playerTransform, speedComp, animatorReference, gameObjectAnimator, velocity) 
                 in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, AnimatorReference, GameObjectAnimatorPrefab, RefRW<PhysicsVelocity>>()
@@ -47,6 +43,13 @@ namespace Player
                     animatorReference.Animator.transform.position += step;
                 }
 
+                //playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
+            }
+            
+            foreach (var playerTransform
+                in SystemAPI.Query<RefRW<LocalTransform>>()
+                    .WithAll<PlayerTag>())
+            {
                 playerPosSingleton.ValueRW.Value = playerTransform.ValueRO.Position;
             }
         }

@@ -122,5 +122,15 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
             //     enemyAttackAnimation.ValueRW.HasSetTrigger = false;
             // }
         }
+        
+        // handle death animation
+        // foreach (var (enemyAttackAnimation, animatorReference, entity) in SystemAPI
+        //     .Query<RefRW<EnemyAttackAnimationComponent>, AnimatorReference>()
+        //     .WithEntityAccess()
+        //     .WithNone<HitStopComponent>()
+        //     .WithAll<HasSetupEnemyAnimator, EnemyAnimatorControllerComponent>())
+        // {
+        //     
+        // }
     }
 }

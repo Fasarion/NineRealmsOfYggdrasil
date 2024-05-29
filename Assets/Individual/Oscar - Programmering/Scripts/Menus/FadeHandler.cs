@@ -5,46 +5,69 @@ using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
 
+public enum FadeMode
+{
+    FadeIn,
+    FadeOut
+}
 public class FadeHandler : MonoBehaviour
-{ 
+{
+
+    private FadeMode fadeMode;
     public Image imageToFade;
     private Color currentColor;
     private float currentAlpha;
-    
+    private float fadeTime;
+    public AnimationCurve fadeInCurve;
+    //public AnimationCurve fadeOutCurve;
+
+    public float fadeTimeMultiplier = 1f;
     public void Awake()
     {
         currentColor = imageToFade.color;
     }
 
-    public void OnFade()
+    public void OnFadeIn()
     {
         
-        imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
+        fadeTime = 0;
+        fadeMode = FadeMode.FadeIn;
+       
+        StartCoroutine(Fade());
     }
-
-    public void Update()
+    
+    public void OnFadeOut()
     {
-        
-        
+       
+        fadeTime = 0;
+        fadeMode = FadeMode.FadeOut;
+        StartCoroutine(Fade());
     }
-
-    public bool IsFadeFinished()
-    {
-        if (currentAlpha >= 1)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-           
-    }
-
+    
     public IEnumerator Fade()
     {
         
-        return new WaitUntil(IsFadeFinished);
+        while(fadeTime < 1)
+        {
+            if (fadeMode == FadeMode.FadeIn)
+            {
+                currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
+            }
+            else if(fadeMode == FadeMode.FadeOut)
+            {
+                currentAlpha = fadeInCurve.Evaluate(fadeTime);
+                
+            }
+
+            fadeTime += Time.deltaTime * fadeTimeMultiplier;
+            imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
+            yield return null;
+        }
+
+        //Put event to tell the game that the fade is completed here.
+
+
+
     }
 
 }

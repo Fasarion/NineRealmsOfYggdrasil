@@ -22,17 +22,21 @@ public class CombatUIWeaponSymbolModel : ElementMVC
     public void OnEnable()
     {
         CombatUIWeaponHandlerModel.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
-        CombatUIWeaponHandlerModel.onStartingWeaponSet += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandlerModel.onStartingWeaponSet += OnStartingWeaponSetup;
     }
-
-    private void OnCurrentWeaponUpdated(WeaponType weaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
+    private void OnStartingWeaponSetup(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
     {
-        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,weaponType, currentLeftInactiveWeapon, currentRightInactiveWeapon);
+        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,mainWeaponData.WeaponType, leftInactiveWeaponData.WeaponType, rightInactiveWeaponData.WeaponType);
+    }
+    
+    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
+    {
+        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,mainWeaponData, leftInactiveWeaponData, rightInactiveWeaponData);
     }
 
     public void OnDisable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet -= OnCurrentWeaponUpdated;
+        CombatUIWeaponHandler.onStartingWeaponSet -= OnStartingWeaponSetup;
     }
 }

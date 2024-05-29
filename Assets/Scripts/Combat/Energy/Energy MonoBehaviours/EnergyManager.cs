@@ -33,17 +33,17 @@ public class EnergyManager : MonoBehaviour
         icon.UpdateBar(currentEnergy, maxEnergy);
     }
 
-    private void SetupWeapon(WeaponBehaviour weapon, bool active)
+    private void SetupWeapon(WeaponSetupData data)
     {
         Vector3 iconPosition = transform.position + Vector3.right * distanceBetweenIcons * iconCount;
         var icon = Instantiate(weaponIconPrefab, transform);
         icon.transform.position = iconPosition;
         
-        icon.Setup(weapon);
-        icon.SetActiveWeapon(active);
+        icon.Setup(data.WeaponBehaviour);
+        icon.SetActiveWeapon(data.Active);
         
         weaponIcons.Add(icon);
-        weaponIconMap.Add(weapon.WeaponType, icon);
+        weaponIconMap.Add(data.WeaponType, icon);
     }
 
     private void OnWeaponSwitch(WeaponBehaviour activeWeapon)

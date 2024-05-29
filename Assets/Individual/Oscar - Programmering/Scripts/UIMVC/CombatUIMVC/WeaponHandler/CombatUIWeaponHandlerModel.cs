@@ -35,9 +35,9 @@ public class CombatUIWeaponHandlerModel : ElementMVC
         app.Notify(NotificationMVC.WeaponSwitchedWeaponHandler, this, weaponBehaviour);
     }
 
-    private void OnSetupWeapon(WeaponBehaviour weaponBehaviour, bool isActiveWeapon)
+    private void OnSetupWeapon(WeaponSetupData data)
     {
-        app.Notify(NotificationMVC.WeaponSetupWeaponHandler, this, weaponBehaviour, isActiveWeapon);
+        app.Notify(NotificationMVC.WeaponSetupWeaponHandler, this, data.WeaponBehaviour, data.Active);
     }
 
    

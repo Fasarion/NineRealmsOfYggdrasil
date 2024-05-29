@@ -3,11 +3,11 @@ using UnityEngine.Events;
 
 public static class EventManager
 {
-    public static UnityAction<WeaponBehaviour, bool> OnSetupWeapon;
+    public static UnityAction<WeaponSetupData> OnSetupWeapon;
     public static UnityAction<WeaponBehaviour> OnWeaponSwitch;
 
-    public static UnityAction OnPause;
-    public static UnityAction OnUnpause;
+    public static UnityAction<PauseType> OnPause;
+    public static UnityAction<PauseType> OnUnpause;
     
     public static UnityAction<AttackData> OnActiveAttackStart;
     public static UnityAction<AttackData> OnActiveAttackStop;
@@ -38,6 +38,8 @@ public static class EventManager
     public static UnityAction OnDashBegin;
     public static UnityAction OnDashInput;
     public static UnityAction OnDashEnd;
+
+    public static UnityAction OnScreenFadeComplete;
 }
 
 public struct PlayerHealthData

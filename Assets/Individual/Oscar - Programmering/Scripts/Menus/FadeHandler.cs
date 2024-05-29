@@ -58,7 +58,7 @@ public class FadeHandler : MonoBehaviour
     {
         while (currentFadeStartDelay < fadeStartDelay)
         {
-            
+            //Could be cleaned up a bit, but not now.
             if (fadeMode == FadeMode.FadeIn)
             {
                 currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);

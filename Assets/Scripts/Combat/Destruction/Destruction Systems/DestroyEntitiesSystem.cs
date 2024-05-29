@@ -27,11 +27,13 @@ namespace Destruction
             // var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
             var spawnEntityOnDestroyLookup = SystemAPI.GetBufferLookup<SpawnEntityOnDestroyElement>();
 
-            foreach (var (_, transform, entity) in SystemAPI.
-                Query<RefRW<ShouldBeDestroyed>, LocalTransform>()
+            foreach (var (dyingComponent, transform, entity) in SystemAPI.
+                Query<RefRW<IsDyingComponent>, LocalTransform>()
                 .WithEntityAccess())
             {
-                
+                if (dyingComponent.ValueRO.HasDoneSpawning) continue;
+
+                dyingComponent.ValueRW.HasDoneSpawning = true;
                 // Spawn Objects on destroy
                 if (spawnEntityOnDestroyLookup.HasBuffer(entity))
                 {
@@ -64,21 +66,13 @@ namespace Destruction
                         spawnedTransform.Rotation = transform.Rotation;
                         state.EntityManager.SetComponentData(spawnedEntity, spawnedTransform);
                         
-                        // TODO (NOTE): below is old code for instantiating objects on destroy, but it gave incorrect scale
-                        // var spawnedEntity = beginSimECB.Instantiate(spawnElement.Value);
-                        // if (transformLookup.TryGetComponent(entity, out var transform))
-                        // {
-                        //     var localTransform = SystemAPI.GetComponent<LocalTransform>(entity);
-                        //     localTransform.Position = transform.Position;
-                        //     localTransform.Rotation = transform.Rotation;
-                        //     beginSimECB.SetComponent(spawnedEntity, localTransform);
-                        // }
                     }
                 }
+            }
 
-                // // Destroy all children
-                // DestroyChildrenRecursively(state, entity, ecb);
-                
+            foreach (var (_, entity) in SystemAPI.Query<ShouldBeDestroyed>()
+                         .WithEntityAccess())
+            {
                 ecb.DestroyEntity(entity);
             }
 

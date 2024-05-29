@@ -12,9 +12,9 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
     private static string attackTriggerName = "enemyAttack";
     private static string isAttackingName = "isAttacking";
     private static string hitStopTrigger = "hitStun";
-    private static string knockBackTrigger = "isStunned";
+    private static string knockBackTrigger = "hitKnockback";
     
-    private static string deathName = "death";
+    private static string deathName = "isKnockbacked";
     
     public void OnUpdate(ref SystemState state)
     {
@@ -127,8 +127,8 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
         }
         
         // handle death animation
-        foreach (var (enemyAttackAnimation, animatorReference, hp, entity) in SystemAPI
-            .Query<RefRW<EnemyAttackAnimationComponent>, AnimatorReference, IsDyingComponent>()
+        foreach (var (animatorReference, hp, entity) in SystemAPI
+            .Query< AnimatorReference, IsDyingComponent>()
             .WithEntityAccess()
             .WithAll<HasSetupEnemyAnimator, EnemyAnimatorControllerComponent>()
             .WithNone<EnemyDeathAnimationComponent>())

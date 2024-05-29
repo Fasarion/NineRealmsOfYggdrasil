@@ -40,6 +40,8 @@ public static class EventManager
     public static UnityAction OnDashEnd;
 
     public static UnityAction OnScreenFadeComplete;
+
+    public static UnityAction OnPlayerDeath;
 }
 
 public struct PlayerHealthData

@@ -1,3 +1,4 @@
+using AI;
 using Damage;
 using Destruction;
 using Health;
@@ -29,6 +30,7 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
         
         foreach (var (currentHP, velocity, transform, dyingComponent, entity) in SystemAPI
                      .Query<CurrentHpComponent, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()
+                     .WithAll<EnemyTypeComponent>()
                      .WithEntityAccess())
         {
             if (!dyingComponent.ValueRO.IsHandled)
@@ -55,7 +57,9 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
                 ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
             }
         }
-            
+
+        
+
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

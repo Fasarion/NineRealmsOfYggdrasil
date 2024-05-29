@@ -53,7 +53,7 @@ namespace Patrik
         private void OnEnable()
         {
             EventManager.OnUpdateAttackAnimation += UpdateAttackAnimation;
-            EventManager.OnDashBegin += Dash;
+            EventManager.OnDashInput += Dash;
         }
 
         private void OnDisable()
@@ -64,7 +64,7 @@ namespace Patrik
             }
             
             EventManager.OnUpdateAttackAnimation -= UpdateAttackAnimation;
-            EventManager.OnDashBegin -= Dash;
+            EventManager.OnDashInput -= Dash;
         }
 
         private void UpdateAttackAnimation(AttackType attackType, bool shouldAttack)

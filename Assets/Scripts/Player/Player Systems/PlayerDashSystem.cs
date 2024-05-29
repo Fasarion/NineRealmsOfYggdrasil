@@ -35,7 +35,7 @@ namespace Player
                 // Check for dash input - and apply dash force
                 if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
                 {
-                    EventManager.OnDashBegin?.Invoke();
+                    EventManager.OnDashInput?.Invoke();
                     
                     dashTimer.ValueRW.currentTime = 0;
                     dashConfig.ValueRW.IsDashing = true;

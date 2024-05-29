@@ -90,7 +90,7 @@ public class UpgradeCardUIManager : MonoBehaviour
 
         _isUIDisplayed = true;
         //Time.timeScale = 0f;
-        EventManager.OnPause?.Invoke();
+        EventManager.OnPause?.Invoke(PauseType.FreezeGame);
     }
 
     private void HideUI()
@@ -102,7 +102,7 @@ public class UpgradeCardUIManager : MonoBehaviour
 
         _isUIDisplayed = false;
         //Time.timeScale = 1f;
-        EventManager.OnUnpause?.Invoke();
+        EventManager.OnUnpause?.Invoke(PauseType.FreezeGame);
     }
 
     public RectTransform[] GetUpgradeCardDimensions(UpgradeObject[] upgradeObjects)

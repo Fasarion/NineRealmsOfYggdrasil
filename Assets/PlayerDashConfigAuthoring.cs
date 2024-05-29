@@ -38,7 +38,11 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
             {
                 dashBuffer.Add(new DashInfoElement
                 {
-                    Value = new DashInfo{CooldownTime = authoring.dashCooldown}
+                    Value = new DashInfo
+                    {
+                        CooldownTime = authoring.dashCooldown,
+                        CurrentTime = authoring.dashCooldown,
+                    }
                 });
             }
         }
@@ -66,5 +70,5 @@ public struct DashInfo
 {
     public float CurrentTime;
     public float CooldownTime;
-    public bool Ready => CooldownTime <= 0;
+    public bool Ready => CurrentTime >= CooldownTime;
 }

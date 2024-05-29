@@ -10,6 +10,11 @@ public enum FadeMode
     FadeIn,
     FadeOut
 }
+
+public enum FadeTrigger
+{
+    
+}
 public class FadeHandler : MonoBehaviour
 {
 
@@ -18,7 +23,7 @@ public class FadeHandler : MonoBehaviour
     private Color currentColor;
     private float currentAlpha;
     private float fadeTime;
-    public AnimationCurve fadeInCurve;
+    public AnimationCurve fadeCurve;
 
     public float fadeStartDelay;
     private float currentFadeStartDelay;
@@ -61,11 +66,11 @@ public class FadeHandler : MonoBehaviour
             //Could be cleaned up a bit, but not now.
             if (fadeMode == FadeMode.FadeIn)
             {
-                currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
+                currentAlpha = fadeCurve.Evaluate(1 - fadeTime);
             }
             else if(fadeMode == FadeMode.FadeOut)
             {
-                currentAlpha = fadeInCurve.Evaluate(fadeTime);
+                currentAlpha = fadeCurve.Evaluate(fadeTime);
                 
             }
             currentFadeStartDelay += Time.deltaTime;
@@ -76,11 +81,11 @@ public class FadeHandler : MonoBehaviour
         {
             if (fadeMode == FadeMode.FadeIn)
             {
-                currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
+                currentAlpha = fadeCurve.Evaluate(1 - fadeTime);
             }
             else if(fadeMode == FadeMode.FadeOut)
             {
-                currentAlpha = fadeInCurve.Evaluate(fadeTime);
+                currentAlpha = fadeCurve.Evaluate(fadeTime);
                 
             }
 

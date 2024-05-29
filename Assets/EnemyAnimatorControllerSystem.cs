@@ -1,4 +1,5 @@
 ﻿using Damage;
+using Health;
 using Movement;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -11,7 +12,9 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
     private static string attackTriggerName = "enemyAttack";
     private static string isAttackingName = "isAttacking";
     private static string hitStopTrigger = "hitStun";
-    private static string knockBackTrigger = "hitKnockback";
+    private static string knockBackTrigger = "isStunned";
+    
+    private static string deathName = "death";
     
     public void OnUpdate(ref SystemState state)
     {
@@ -124,13 +127,14 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
         }
         
         // handle death animation
-        // foreach (var (enemyAttackAnimation, animatorReference, entity) in SystemAPI
-        //     .Query<RefRW<EnemyAttackAnimationComponent>, AnimatorReference>()
-        //     .WithEntityAccess()
-        //     .WithNone<HitStopComponent>()
-        //     .WithAll<HasSetupEnemyAnimator, EnemyAnimatorControllerComponent>())
-        // {
-        //     
-        // }
+        foreach (var (enemyAttackAnimation, animatorReference, hp, entity) in SystemAPI
+            .Query<RefRW<EnemyAttackAnimationComponent>, AnimatorReference, IsDyingComponent>()
+            .WithEntityAccess()
+            .WithAll<HasSetupEnemyAnimator, EnemyAnimatorControllerComponent>()
+            .WithNone<EnemyDeathAnimationComponent>())
+        {
+            animatorReference.Animator.SetBool(deathName, true);
+            state.EntityManager.SetComponentEnabled<EnemyDeathAnimationComponent>(entity, true);
+        }
     }
 }

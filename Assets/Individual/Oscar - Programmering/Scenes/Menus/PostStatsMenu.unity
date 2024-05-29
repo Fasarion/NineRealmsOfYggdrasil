@@ -134,7 +134,22 @@ PrefabInstance:
     - target: {fileID: 1022294975315658856, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
       propertyPath: m_Name
-      value: MenuButton (1)
+      value: ExitToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1630214618}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostGameSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4510580754193187321, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
@@ -264,6 +279,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FadeOutTester
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022294975315658856, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
@@ -536,7 +556,7 @@ GameObject:
   - component: {fileID: 135111796}
   - component: {fileID: 135111795}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: SelectionButtons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -614,6 +634,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FadeInTester
+      objectReference: {fileID: 0}
+    - target: {fileID: 1022294975315658856, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
@@ -856,7 +881,22 @@ PrefabInstance:
     - target: {fileID: 1022294975315658856, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
       propertyPath: m_Name
-      value: MenuButton
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1630214618}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Continue
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostGameSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4510580754193187321, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
@@ -1464,7 +1504,22 @@ PrefabInstance:
     - target: {fileID: 1022294975315658856, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
       propertyPath: m_Name
-      value: MenuButton (2)
+      value: QuitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1630214618}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ExitGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200955209618881756, guid: b1a2b19b394f4034ea696fb9a0634706,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PostGameSceneManager, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 4510580754193187321, guid: b1a2b19b394f4034ea696fb9a0634706,
         type: 3}
@@ -1800,6 +1855,87 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1194712069}
   m_CullTransparentMesh: 1
+--- !u!1 &1630214617
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1630214620}
+  - component: {fileID: 1630214619}
+  - component: {fileID: 1630214621}
+  - component: {fileID: 1630214618}
+  m_Layer: 0
+  m_Name: PostStatsSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1630214618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630214617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e770180b9c858c545a517e7a1dd9a0c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continueSceneHandler: {fileID: 1630214619}
+  exitToMenuSceneHandler: {fileID: 1630214621}
+  fadeHandler: {fileID: 1950804641}
+--- !u!114 &1630214619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630214617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014f8e9c047453448baaf34dddc7c7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad:
+    m_SceneAsset: {fileID: 102900000, guid: d75266438a8d0e54fa20ab994d433e0f, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Scenes/Main Scene.unity
+--- !u!4 &1630214620
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630214617}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1474.8682, y: 197.39992, z: -10.427118}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1630214621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630214617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 014f8e9c047453448baaf34dddc7c7ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad:
+    m_SceneAsset: {fileID: 102900000, guid: 9d7271f7f988e4d41aa35494b449dc4d, type: 3}
+    m_IsDirty: 0
+    m_ScenePath: Assets/Individual/Oscar - Programmering/Scenes/Menus/MainMenu.unity
 --- !u!1 &1639194971
 GameObject:
   m_ObjectHideFlags: 0
@@ -2201,7 +2337,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  fadeTimeMultiplier: 2
+  fadeStartDelay: 0
+  fadeExitDelay: 0
+  fadeTimeMultiplier: 1.5
 --- !u!1 &1966616140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2289,3 +2427,4 @@ SceneRoots:
   - {fileID: 1778886731}
   - {fileID: 325008705}
   - {fileID: 691216516}
+  - {fileID: 1630214620}

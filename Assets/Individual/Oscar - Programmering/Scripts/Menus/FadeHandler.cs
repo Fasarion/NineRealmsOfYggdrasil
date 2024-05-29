@@ -33,7 +33,7 @@ public class FadeHandler : MonoBehaviour
         currentColor = imageToFade.color;
     }
 
-    public void OnFadeIn()
+    public void FadeIn()
     {
 
         currentFadeStartDelay = 0;
@@ -45,7 +45,7 @@ public class FadeHandler : MonoBehaviour
         StartCoroutine(Fade());
     }
     
-    public void OnFadeOut()
+    public void FadeOut()
     {
         currentFadeStartDelay = 0;
         currentFadeExitDelay = 0;
@@ -94,11 +94,10 @@ public class FadeHandler : MonoBehaviour
             currentFadeExitDelay += Time.deltaTime;
             yield return null;
         }
-
-        //Put event to tell the game that the fade is completed here.
+        
         EventManager.OnScreenFadeComplete?.Invoke();
 
-        Debug.Log("Fade Complete");
+        //Debug.Log("Fade Complete");
 
     }
 

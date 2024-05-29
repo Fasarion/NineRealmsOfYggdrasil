@@ -36,7 +36,8 @@ public partial struct XPObjectSystem : ISystem
         {
             PlayerPosition = playerPosition.Value,
             ECB = ecb.AsParallelWriter(),
-            DistanceRadiusSQ = config.baseDistance * config.baseDistance
+            DistanceRadiusSQ = config.baseDistance * config.baseDistance,
+            DeltaTime = SystemAPI.Time.DeltaTime,
         }.ScheduleParallel(new JobHandle());
         
         _checkDistanceJob.Complete();
@@ -86,13 +87,22 @@ partial struct CheckXPObjectDistanceJob : IJobEntity
     public float3 PlayerPosition;
     public EntityCommandBuffer.ParallelWriter ECB;
     public float DistanceRadiusSQ;
+    public float DeltaTime;
 
-    void Execute(Entity entity, ref LocalTransform transform, [ChunkIndexInQuery] int chunkIndex)
+    void Execute(Entity entity, ref XpObject xpObject, ref LocalTransform transform, [ChunkIndexInQuery] int chunkIndex)
     {
-        if (math.distancesq(transform.Position, PlayerPosition) <= DistanceRadiusSQ)
+        if (xpObject.TimerTime > xpObject.TimeBeforePickup)
         {
-            ECB.SetComponentEnabled<DirectionComponent>(chunkIndex, entity, true);
+            if (math.distancesq(transform.Position, PlayerPosition) <= DistanceRadiusSQ)
+            {
+                ECB.SetComponentEnabled<DirectionComponent>(chunkIndex, entity, true);
+            }
         }
+        else
+        {
+            xpObject.TimerTime += DeltaTime;
+        }
+
     }
 }
 

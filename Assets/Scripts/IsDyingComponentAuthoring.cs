@@ -8,6 +8,7 @@ public class IsDyingComponentAuthoring : MonoBehaviour
 {
     public float excessDamage;
     public bool isHandled;
+    public bool hasDoneSpawning;
 
     public class IsDyingComponentAuthoringBaker : Baker<IsDyingComponentAuthoring>
     {
@@ -17,7 +18,9 @@ public class IsDyingComponentAuthoring : MonoBehaviour
             AddComponent(entity,
                 new IsDyingComponent
                 {
-                    ExcessDamage = authoring.excessDamage, IsHandled = authoring.isHandled
+                    ExcessDamage = authoring.excessDamage,
+                    IsHandled = authoring.isHandled,
+                    HasDoneSpawning = authoring.hasDoneSpawning
                 });
         }
     }
@@ -27,4 +30,5 @@ public struct IsDyingComponent : IComponentData
 {
     public float ExcessDamage;
     public bool IsHandled;
+    public bool HasDoneSpawning;
 }

@@ -194,7 +194,6 @@ public partial struct SpawnSystem : ISystem
             if (distance > maxDistance)
             {
                 transform.ValueRW.Position = (math.normalizesafe(playerPos, transform.ValueRO.Position) * outerRadius) + playerPos;
-                Debug.Log("moved enemy");
             }
         }
     }

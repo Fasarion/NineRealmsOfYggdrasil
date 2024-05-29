@@ -6,6 +6,12 @@ using UnityEngine;
 public class PauseMenuManager : MonoBehaviour
 {
     public GameObject pauseMenuPanel;
+
+    public void Awake()
+    {
+        DeactivatePauseMenu();
+    }
+
     public void PauseGame()
     {
         EventManager.OnPause?.Invoke();

@@ -15,7 +15,12 @@ public partial struct SlowTimeApplierSystem : ISystem
     
     public void OnUpdate(ref SystemState state)
     {
-        var config = SystemAPI.GetSingletonRW<SlowTimeSingleton>();
+        //var config = SystemAPI.GetSingletonRW<SlowTimeSingleton>();
+        SystemAPI.TryGetSingletonRW(out RefRW<SlowTimeSingleton> config);
+        if (!config.IsValid)
+        {
+            return;
+        }
         if (!config.ValueRO.ShouldSlowTime && !_isSlowingTime) return;
 
         if (!_isSlowingTime)

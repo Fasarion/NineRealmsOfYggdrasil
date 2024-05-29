@@ -40,9 +40,9 @@ public class CombatUIUltIconsModel : ElementMVC
     {
         app.Notify(NotificationMVC.UltimateUsedUltIcons, this,  weaponType, currentEnergy, maxEnergy);
     }
-    private void OnWeaponSetup(WeaponBehaviour weaponBehaviour, bool activeWeapon)
+    private void OnWeaponSetup(WeaponSetupData data)
     {
-        app.Notify(NotificationMVC.WeaponSetupUltIcons, this,  weaponBehaviour, activeWeapon);
+        app.Notify(NotificationMVC.WeaponSetupUltIcons, this,  data.WeaponBehaviour, data.Active);
     }
 
     

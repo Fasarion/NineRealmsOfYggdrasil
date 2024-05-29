@@ -60,25 +60,25 @@ public class CombatUIWeaponHandler : ElementMVC
         EventManager.OnSetupWeapon -= OnSetupWeapon;
     }
 
-    private void OnSetupWeapon(WeaponBehaviour weaponBehaviour, bool isActiveWeapon)
+    private void OnSetupWeapon(WeaponSetupData data)
     {
         
         //This does not account for the right inactive weapon
-        if (isActiveWeapon)
+        if (data.Active)
         {
-            currentWeapon = weaponBehaviour.WeaponType;
+            currentWeapon = data.WeaponType;
             currentWeaponSet = true;
         }
         else
         {
             if (currentLeftWeaponSet != true)
             {
-                currentLeftInactiveWeapon = weaponBehaviour.WeaponType;
+                currentLeftInactiveWeapon = data.WeaponType;
                 currentLeftWeaponSet = true;
             }
             else
             {
-                currentRightInactiveWeapon = weaponBehaviour.WeaponType;
+                currentRightInactiveWeapon = data.WeaponType;
                 currentRightWeaponSet = true;
             }
         }

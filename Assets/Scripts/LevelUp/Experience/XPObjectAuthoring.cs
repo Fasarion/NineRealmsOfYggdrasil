@@ -8,6 +8,9 @@ using UnityEngine;
 public class XPObjectAuthoring : MonoBehaviour
 {
     public int xpAwardedOnPickup;
+    public float timerTime;
+    public float timeBeforePickup;
+    
     public class XpObjectAuthoringBaker : Baker<XPObjectAuthoring>
     {
         public override void Bake(XPObjectAuthoring authoring)
@@ -16,6 +19,8 @@ public class XPObjectAuthoring : MonoBehaviour
             AddComponent(entity, new XpObject
             {
                 XpAwardedOnPickup = authoring.xpAwardedOnPickup,
+                TimerTime = authoring.timerTime,
+                TimeBeforePickup = authoring.timeBeforePickup,
             });
             
             AddComponent(entity, new DirectionComponent{});
@@ -30,4 +35,6 @@ public class XPObjectAuthoring : MonoBehaviour
 public struct XpObject : IComponentData
 {
     public int XpAwardedOnPickup;
+    public float TimerTime;
+    public float TimeBeforePickup;
 }

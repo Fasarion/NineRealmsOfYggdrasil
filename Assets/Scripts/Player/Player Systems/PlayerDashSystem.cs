@@ -3,6 +3,7 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
+using UnityEngine;
 
 namespace Player
 {
@@ -22,6 +23,7 @@ namespace Player
         {
             var dashInput = SystemAPI.GetSingleton<PlayerDashInput>();
             var dashConfig = SystemAPI.GetSingletonRW<PlayerDashConfig>();
+            
             var dashTimer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<PlayerDashConfig>());
             var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
             
@@ -32,38 +34,63 @@ namespace Player
                 // don't dash if busy
                 if (attackCaller.BusyAttackInfo.Busy) continue;
                 
-                // Check for dash input - and apply dash force
-                if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
+                bool dashBufferSingletonExists =
+                    SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DashInfoElement> dashBuffer);
+
+                if (!dashBufferSingletonExists) return;
+
+                bool playerDashInput = dashInput.KeyDown;
+                bool playerCanDash = !dashConfig.ValueRO.IsDashing;
+
+                for (int i = 0; i < dashBuffer.Length; i++)
                 {
-                    EventManager.OnDashInput?.Invoke();
+                    var dashInfo = dashBuffer.ElementAt(i);
+                    dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
+                    dashInfo.Value.CurrentTime += SystemAPI.Time.DeltaTime;
                     
-                    dashTimer.ValueRW.currentTime = 0;
-                    dashConfig.ValueRW.IsDashing = true;
-                    dashConfig.ValueRW.IsDashOnCooldown = true;
-                    
-                    // play sound
-                    var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
-                    audioBuffer.Add(new AudioBufferData { AudioData = dashConfig.ValueRO.Audio});
+                    if (dashInfo.Value.Ready && playerDashInput && playerCanDash)
+                    {
+                        EventManager.OnDashInput?.Invoke();
+                        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+                        audioBuffer.Add(new AudioBufferData { AudioData = dashConfig.ValueRO.Audio});
+
+                        dashInfo.Value.CurrentTime = 0f;
+                        playerCanDash = false;
+
+                        dashTimer.ValueRW.currentTime = 0f;
+                    }
+
+                    dashBuffer.ElementAt(i) = dashInfo; 
                 }
                 
-                dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
+                // dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
                 //
-                // if (dashConfig.ValueRO.IsDashing)
+                // if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
                 // {
-                //     //Check if dash is done
-                //     if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashDuration)
-                //     {
-                //         dashConfig.ValueRW.IsDashing = false;
-                //      //   gameObjectAnimator.FollowEntity = false;
-                //     //    velocity.ValueRW.Linear = new float3(0, 0, 0);
-                //         
-                //     }
+                //     dashConfig.ValueRW.IsDashOnCooldown = false;
+                // }
+                
+                
+                // // Check for dash input - and apply dash force
+                // if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
+                // {
+                //     EventManager.OnDashInput?.Invoke();
+                //     
+                //     dashTimer.ValueRW.currentTime = 0;
+                //     dashConfig.ValueRW.IsDashing = true;
+                //     dashConfig.ValueRW.IsDashOnCooldown = true;
+                //     
+                //     // play sound
+                //     var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+                //     audioBuffer.Add(new AudioBufferData { AudioData = dashConfig.ValueRO.Audio});
                 // }
                 //
-                if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
-                {
-                    dashConfig.ValueRW.IsDashOnCooldown = false;
-                }
+                // dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
+                //
+                // if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
+                // {
+                //     dashConfig.ValueRW.IsDashOnCooldown = false;
+                // }
             }
         }
     }

@@ -22,6 +22,20 @@ namespace Player
 
                 transform.ValueRW.Position = playerPos.Value + playerForward * shield.OffsetFromPlayer;
             }
+
+            // bool dashBufferSingletonExists =
+            //     SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DashInfoElement> dashBuffer);
+            //
+            // if (!dashBufferSingletonExists) return;
+            //
+            // foreach (var dashInfoElement in dashBuffer)
+            // {
+            //     var dashInfo = dashInfoElement.Value;
+            //
+            //     if (dashInfo.Ready) continue;
+            //     
+            //     
+            // }
         }
         
         protected override void OnStartRunning()
@@ -44,6 +58,8 @@ namespace Player
                 return;
             }
 
+            dashConfig.ValueRW.IsDashing = true;
+
             var dashShieldPrefab = dashConfig.ValueRO.DashShieldPrefab;
             if (dashShieldPrefab == Entity.Null)
             {
@@ -52,7 +68,6 @@ namespace Player
             }
 
             EntityManager.Instantiate(dashShieldPrefab);
-
         }
 
         private void OnDashEnd()
@@ -62,6 +77,8 @@ namespace Player
                 Debug.LogError("No Player Dash Config exists!");
                 return;
             }
+            
+            dashConfig.ValueRW.IsDashing = false;
 
             var dashShieldPrefab = dashConfig.ValueRO.DashShieldPrefab;
             if (dashShieldPrefab == Entity.Null)

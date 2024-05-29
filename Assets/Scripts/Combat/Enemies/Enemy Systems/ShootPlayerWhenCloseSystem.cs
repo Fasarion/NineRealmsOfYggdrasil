@@ -23,6 +23,7 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
         
         foreach (var (transform, shootWhenClose, entity) 
             in SystemAPI.Query<LocalTransform, RefRW<AttackPlayerWhenCloseComponent>>()
+                .WithNone<HitStopComponent>()
                 .WithEntityAccess())
         {
             shootWhenClose.ValueRW.CurrentCooldownTime += deltaTime;
@@ -36,6 +37,15 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
                     shootWhenClose.ValueRW.CurrentCooldownTime = 0;
                 }
             }
+        }
+        
+        // reset cooldown on hit
+        foreach (var (transform, shootWhenClose, entity) 
+            in SystemAPI.Query<LocalTransform, RefRW<AttackPlayerWhenCloseComponent>>()
+                .WithAll<HitStopComponent>()
+                .WithEntityAccess())
+        {
+            shootWhenClose.ValueRW.CurrentCooldownTime = 0;
         }
     }
 }

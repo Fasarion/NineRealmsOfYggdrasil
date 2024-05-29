@@ -70,6 +70,9 @@ namespace Player
                 return;
             }
 
+            dashConfig.ValueRW.IsDashing = false;
+
+
             var ecb = new EntityCommandBuffer(Allocator.Temp);
             
             // TODO: create a more general attach to player tag ?

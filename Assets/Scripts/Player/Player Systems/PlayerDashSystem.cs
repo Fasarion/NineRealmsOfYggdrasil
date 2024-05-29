@@ -62,35 +62,6 @@ namespace Player
 
                     dashBuffer.ElementAt(i) = dashInfo; 
                 }
-                
-                // dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-                //
-                // if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
-                // {
-                //     dashConfig.ValueRW.IsDashOnCooldown = false;
-                // }
-                
-                
-                // // Check for dash input - and apply dash force
-                // if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
-                // {
-                //     EventManager.OnDashInput?.Invoke();
-                //     
-                //     dashTimer.ValueRW.currentTime = 0;
-                //     dashConfig.ValueRW.IsDashing = true;
-                //     dashConfig.ValueRW.IsDashOnCooldown = true;
-                //     
-                //     // play sound
-                //     var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
-                //     audioBuffer.Add(new AudioBufferData { AudioData = dashConfig.ValueRO.Audio});
-                // }
-                //
-                // dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-                //
-                // if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
-                // {
-                //     dashConfig.ValueRW.IsDashOnCooldown = false;
-                // }
             }
         }
     }

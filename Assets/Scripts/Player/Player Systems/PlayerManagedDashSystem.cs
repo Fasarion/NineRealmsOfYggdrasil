@@ -23,11 +23,13 @@ namespace Player
                 transform.ValueRW.Position = playerPos.Value + playerForward * shield.OffsetFromPlayer;
             }
 
-            // bool dashBufferSingletonExists =
-            //     SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DashInfoElement> dashBuffer);
-            //
-            // if (!dashBufferSingletonExists) return;
-            //
+            bool dashBufferSingletonExists =
+                SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DashInfoElement> dashBuffer);
+            
+            if (!dashBufferSingletonExists) return;
+
+            EventManager.OnDashInfoUpdate?.Invoke(dashBuffer);
+            
             // foreach (var dashInfoElement in dashBuffer)
             // {
             //     var dashInfo = dashInfoElement.Value;

@@ -10,6 +10,11 @@ public enum FadeMode
     FadeIn,
     FadeOut
 }
+
+public enum FadeTrigger
+{
+    
+}
 public class FadeHandler : MonoBehaviour
 {
 
@@ -18,10 +23,13 @@ public class FadeHandler : MonoBehaviour
     private Color currentColor;
     private float currentAlpha;
     private float fadeTime;
-    public AnimationCurve fadeInCurve;
+    public AnimationCurve fadeCurve;
 
-    public float fadeDelay;
-    private float currentFadeDelay;
+    public float fadeStartDelay;
+    private float currentFadeStartDelay;
+    
+    public float fadeExitDelay;
+    private float currentFadeExitDelay;
     //public AnimationCurve fadeOutCurve;
 
     public float fadeTimeMultiplier = 1f;
@@ -30,19 +38,22 @@ public class FadeHandler : MonoBehaviour
         currentColor = imageToFade.color;
     }
 
-    public void OnFadeIn()
+    public void FadeIn()
     {
 
-        currentFadeDelay = 0;
+        currentFadeStartDelay = 0;
+        currentFadeExitDelay = 0;
         fadeTime = 0;
         fadeMode = FadeMode.FadeIn;
+        
        
         StartCoroutine(Fade());
     }
     
-    public void OnFadeOut()
+    public void FadeOut()
     {
-        currentFadeDelay = 0;
+        currentFadeStartDelay = 0;
+        currentFadeExitDelay = 0;
         fadeTime = 0;
         fadeMode = FadeMode.FadeOut;
         StartCoroutine(Fade());
@@ -50,29 +61,31 @@ public class FadeHandler : MonoBehaviour
     
     public IEnumerator Fade()
     {
-        while (currentFadeDelay < fadeDelay)
+        while (currentFadeStartDelay < fadeStartDelay)
         {
-            currentFadeDelay += Time.deltaTime;
+            //Could be cleaned up a bit, but not now.
             if (fadeMode == FadeMode.FadeIn)
             {
-                currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
+                currentAlpha = fadeCurve.Evaluate(1 - fadeTime);
             }
             else if(fadeMode == FadeMode.FadeOut)
             {
-                currentAlpha = fadeInCurve.Evaluate(fadeTime);
+                currentAlpha = fadeCurve.Evaluate(fadeTime);
                 
             }
+            currentFadeStartDelay += Time.deltaTime;
+            imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
             yield return null;
         }
         while(fadeTime < 1)
         {
             if (fadeMode == FadeMode.FadeIn)
             {
-                currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
+                currentAlpha = fadeCurve.Evaluate(1 - fadeTime);
             }
             else if(fadeMode == FadeMode.FadeOut)
             {
-                currentAlpha = fadeInCurve.Evaluate(fadeTime);
+                currentAlpha = fadeCurve.Evaluate(fadeTime);
                 
             }
 
@@ -81,9 +94,15 @@ public class FadeHandler : MonoBehaviour
             yield return null;
         }
 
-        //Put event to tell the game that the fade is completed here.
+        while (currentFadeExitDelay < fadeExitDelay)
+        {
+            currentFadeExitDelay += Time.deltaTime;
+            yield return null;
+        }
+        
         EventManager.OnScreenFadeComplete?.Invoke();
 
+        //Debug.Log("Fade Complete");
 
     }
 

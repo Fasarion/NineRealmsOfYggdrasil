@@ -8,6 +8,7 @@ public enum MenuButtonSelection
         
     Start,
     Continue,
+    Restart,
     ExitToMenu,
     ExitGame
 }

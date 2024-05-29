@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class CombatMenuSceneManager : MonoBehaviour
 { 
-    public SceneHandler continueSceneHandler; 
+    public SceneHandler continueSceneHandler;
+    public SceneHandler restartSceneHandler;
     public SceneHandler exitToMenuSceneHandler;
 
     public FadeHandler fadeHandler;
@@ -34,6 +35,12 @@ public class CombatMenuSceneManager : MonoBehaviour
         menuButtonSelection = MenuButtonSelection.Continue;
         fadeHandler.FadeOut();
     }
+    
+    public void Restart()
+    {
+        menuButtonSelection = MenuButtonSelection.Restart;
+        fadeHandler.FadeOut();
+    }
     public void ExitToMenu()
     {
         menuButtonSelection = MenuButtonSelection.ExitToMenu;
@@ -55,6 +62,11 @@ public class CombatMenuSceneManager : MonoBehaviour
            case MenuButtonSelection.Continue:
            {
                continueSceneHandler.SwapScene();
+               break;
+           }
+           case MenuButtonSelection.Restart:
+           {
+               restartSceneHandler.SwapScene();
                break;
            }
            case MenuButtonSelection.ExitToMenu:

@@ -20,8 +20,11 @@ public class FadeHandler : MonoBehaviour
     private float fadeTime;
     public AnimationCurve fadeInCurve;
 
-    public float fadeDelay;
-    private float currentFadeDelay;
+    public float fadeStartDelay;
+    private float currentFadeStartDelay;
+    
+    public float fadeExitDelay;
+    private float currentFadeExitDelay;
     //public AnimationCurve fadeOutCurve;
 
     public float fadeTimeMultiplier = 1f;
@@ -33,16 +36,19 @@ public class FadeHandler : MonoBehaviour
     public void OnFadeIn()
     {
 
-        currentFadeDelay = 0;
+        currentFadeStartDelay = 0;
+        currentFadeExitDelay = 0;
         fadeTime = 0;
         fadeMode = FadeMode.FadeIn;
+        
        
         StartCoroutine(Fade());
     }
     
     public void OnFadeOut()
     {
-        currentFadeDelay = 0;
+        currentFadeStartDelay = 0;
+        currentFadeExitDelay = 0;
         fadeTime = 0;
         fadeMode = FadeMode.FadeOut;
         StartCoroutine(Fade());
@@ -50,9 +56,9 @@ public class FadeHandler : MonoBehaviour
     
     public IEnumerator Fade()
     {
-        while (currentFadeDelay < fadeDelay)
+        while (currentFadeStartDelay < fadeStartDelay)
         {
-            currentFadeDelay += Time.deltaTime;
+            
             if (fadeMode == FadeMode.FadeIn)
             {
                 currentAlpha = fadeInCurve.Evaluate(1 - fadeTime);
@@ -62,6 +68,8 @@ public class FadeHandler : MonoBehaviour
                 currentAlpha = fadeInCurve.Evaluate(fadeTime);
                 
             }
+            currentFadeStartDelay += Time.deltaTime;
+            imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
             yield return null;
         }
         while(fadeTime < 1)
@@ -81,9 +89,16 @@ public class FadeHandler : MonoBehaviour
             yield return null;
         }
 
+        while (currentFadeExitDelay < fadeExitDelay)
+        {
+            currentFadeExitDelay += Time.deltaTime;
+            yield return null;
+        }
+
         //Put event to tell the game that the fade is completed here.
         EventManager.OnScreenFadeComplete?.Invoke();
 
+        Debug.Log("Fade Complete");
 
     }
 

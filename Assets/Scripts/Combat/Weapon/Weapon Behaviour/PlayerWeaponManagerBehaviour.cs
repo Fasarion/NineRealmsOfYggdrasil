@@ -2,17 +2,27 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Patrik
 {
+    public struct WeaponSetupData
+    {
+        public bool Active;
+        public WeaponType WeaponType;
+        public int WeaponButtonIndex;
+        public WeaponBehaviour WeaponBehaviour;
+    }
+    
     // TODO: extract PlayerManager, PlayerWeaponBehaviour, PlayerAnimationBehaviour
     public class PlayerWeaponManagerBehaviour : MonoBehaviour
     {
         public static PlayerWeaponManagerBehaviour Instance { get; private set; }
 
         [Header("Weapon")]
-        [SerializeField] private WeaponType startWeaponType = WeaponType.Sword;
+        [SerializeField] private List<WeaponType> startingWeaponTypes = new List<WeaponType>();
 
         [Header("Animation")]
         [SerializeField] private Animator playerAnimator;
@@ -32,6 +42,7 @@ namespace Patrik
         private WeaponBehaviour activeWeapon;
         public WeaponType CurrentWeaponType => activeWeapon.WeaponType;
         private Dictionary<WeaponBehaviour, Transform> weaponParents = new ();
+        private Dictionary<WeaponType, int> weaponIdMap;
 
         // Attack Data
         private AttackType currentAttackType { get;  set; }
@@ -48,6 +59,25 @@ namespace Patrik
         {
             Instance = this;
             playerAnimator = gameObject.GetComponent<Animator>();
+            
+            SetWeaponIds();
+        }
+
+        private void OnValidate()
+        {
+            SetWeaponIds();
+        }
+
+        private void SetWeaponIds()
+        {
+            weaponIdMap = new Dictionary<WeaponType, int>();
+
+            int nextId = 1;
+            
+            foreach (var pair in startingWeaponTypes)
+            {
+                weaponIdMap[pair] = nextId++;
+            }
         }
 
         private void OnEnable()
@@ -148,22 +178,37 @@ namespace Patrik
         public void SetupWeapons()
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
+            foundWeapons = foundWeapons.OrderBy(weapon => weaponIdMap[weapon.WeaponType]).ToList();
+
             weapons = new List<WeaponBehaviour>();
 
             int passiveSlotCounter = 0;
+
+            bool hasSetStarter = false;
+
+            int buttonIndex = 0;
             
             foreach (var weapon in foundWeapons)
             {
+                buttonIndex++;
+                
                 SubscribeToPassiveEvents(weapon);
                 
                 // Handle active weapon
-                if (weapon.WeaponType == startWeaponType)
+                if (!hasSetStarter)
                 {
                     MakeWeaponActive(weapon);
                     weapons.Add(activeWeapon);
-                    
-                    EventManager.OnSetupWeapon?.Invoke(weapon, true);
-                    
+
+                    EventManager.OnSetupWeapon?.Invoke(new WeaponSetupData
+                    {
+                        Active = true,
+                        WeaponType = weapon.WeaponType,
+                        WeaponButtonIndex = buttonIndex,
+                        WeaponBehaviour = weapon
+                    });
+
+                    hasSetStarter = true;
                     continue;
                 }
                 
@@ -175,7 +220,13 @@ namespace Patrik
 
                 weapons.Add(weapon);
                 passiveSlotCounter++;
-                EventManager.OnSetupWeapon?.Invoke(weapon, false);
+                EventManager.OnSetupWeapon?.Invoke(new WeaponSetupData
+                {
+                    Active = false,
+                    WeaponType = weapon.WeaponType,
+                    WeaponButtonIndex = buttonIndex,
+                    WeaponBehaviour = weapon
+                });
             }
         }
         

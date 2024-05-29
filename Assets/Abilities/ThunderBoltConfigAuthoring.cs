@@ -16,6 +16,8 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
     public float strikeSpacing;
     public float timeBetweenStrikes;
     public float vfxHeightOffset;
+    public int maxRows;
+    public float rowsAngle;
     
     [Header("Audio")] 
     [Tooltip("Sound to play when lightning strikes.")]
@@ -38,6 +40,8 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
                     StrikeSpacing = authoring.strikeSpacing,
                     TimeBetweenStrikes = authoring.timeBetweenStrikes,
                     VfxHeightOffset = authoring.vfxHeightOffset,
+                    MaxRows = authoring.maxRows,
+                    RowsAngle = authoring.rowsAngle,
                     
                     HitAudio = authoring.hitAudio
                 });
@@ -57,6 +61,8 @@ public struct ThunderBoltConfig : IComponentData
     public float StrikeSpacing;
     public float TimeBetweenStrikes;
     public float VfxHeightOffset;
+    public int MaxRows;
+    public float RowsAngle;
 
     public AudioData HitAudio;
 }

@@ -90,6 +90,7 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
         foreach (var (enemyAttackAnimation, animatorReference, entity) in SystemAPI
             .Query<RefRW<EnemyAttackAnimationComponent>, AnimatorReference>()
             .WithEntityAccess()
+            .WithNone<HitStopComponent>()
             .WithAll<HasSetupEnemyAnimator, EnemyAnimatorControllerComponent>())
         {
             // Trigger attack animation

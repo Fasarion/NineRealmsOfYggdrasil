@@ -35,30 +35,31 @@ namespace Player
                 // Check for dash input - and apply dash force
                 if (dashInput.KeyDown && !dashConfig.ValueRO.IsDashing && !dashConfig.ValueRO.IsDashOnCooldown)
                 {
-                    EventManager.OnDashBegin?.Invoke();
+                    EventManager.OnDashInput?.Invoke();
                     
                     dashTimer.ValueRW.currentTime = 0;
                     dashConfig.ValueRW.IsDashing = true;
                     dashConfig.ValueRW.IsDashOnCooldown = true;
                     
+                    // play sound
                     var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
                     audioBuffer.Add(new AudioBufferData { AudioData = dashConfig.ValueRO.Audio});
                 }
                 
                 dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-
-                if (dashConfig.ValueRO.IsDashing)
-                {
-                    //Check if dash is done
-                    if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashDuration)
-                    {
-                        dashConfig.ValueRW.IsDashing = false;
-                        gameObjectAnimator.FollowEntity = false;
-                        velocity.ValueRW.Linear = new float3(0, 0, 0);
-                        
-                    }
-                }
-
+                //
+                // if (dashConfig.ValueRO.IsDashing)
+                // {
+                //     //Check if dash is done
+                //     if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashDuration)
+                //     {
+                //         dashConfig.ValueRW.IsDashing = false;
+                //      //   gameObjectAnimator.FollowEntity = false;
+                //     //    velocity.ValueRW.Linear = new float3(0, 0, 0);
+                //         
+                //     }
+                // }
+                //
                 if (dashTimer.ValueRO.currentTime >= dashConfig.ValueRO.DashCooldown)
                 {
                     dashConfig.ValueRW.IsDashOnCooldown = false;

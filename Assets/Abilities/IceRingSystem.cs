@@ -18,8 +18,6 @@ using UnityEngine;
 [BurstCompile]
 public partial struct IceRingSystem : ISystem
 {
-    private CollisionFilter _detectionFilter;
-    private int prevChargeLevel;
     
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -34,13 +32,6 @@ public partial struct IceRingSystem : ISystem
         state.RequireForUpdate<PlayerSpecialAttackInput>();
         state.RequireForUpdate<AudioBufferData>();
         
-        _detectionFilter = new CollisionFilter
-        {
-            BelongsTo = 1, // Projectile
-            CollidesWith = 1 << 1 // Enemy
-        };
-
-        prevChargeLevel = -1;
     }
 
     [BurstCompile]
@@ -110,32 +101,7 @@ public partial struct IceRingSystem : ISystem
             ecb.SetComponent(configEntity, damageComponent);
             
             var area = rangeMod;
-
-            prevChargeLevel = chargeLevel;
-
-            // //Charge behaviour
-            // chargeTimer.ValueRW.currentChargeTime += SystemAPI.Time.DeltaTime * config.ValueRO.chargeSpeed;
-            // if (chargeTimer.ValueRO.currentChargeTime >= stageBuffer[ability.ValueRO.currentAbilityStage].maxChargeTime)
-            // {
-            //     chargeTimer.ValueRW.currentChargeTime = 0;
-            //     ability.ValueRW.currentAbilityStage++;
-            //     
-            //     if (ability.ValueRO.currentAbilityStage >= stageBuffer.Length)
-            //     {
-            //         ability.ValueRW.currentAbilityStage = stageBuffer.Length - 1;
-            //     }
-            //
-            //     var damageComponent = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
-            //     damageComponent.Value.DamageValue = stageBuffer[ability.ValueRO.currentAbilityStage].damageModifier *
-            //                                         config.ValueRO.ogCachedDamageValue;
-            //     ecb.SetComponent(configEntity, damageComponent);
-            // }
-            // //TODO: Factor in player base stats into area calculation
-            // // var tValue = chargeTimer.ValueRO.currentChargeTime / config.ValueRO.maxChargeTime;
-            // // var area = math.lerp(0, config.ValueRO.maxArea, tValue
-            // //     );
-            // // ability.ValueRW.area = area;
-            // var area = stageBuffer[ability.ValueRO.currentAbilityStage].maxArea;
+            
 
             transform.ValueRW.Position = playerPos.Value + new float3(0, -.5f, 0);
             transform.ValueRW.Scale = area * .5f;
@@ -144,7 +110,35 @@ public partial struct IceRingSystem : ISystem
             if (attackCaller.SpecialChargeInfo.chargeState == ChargeState.Stop)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
+                
                 var effect = state.EntityManager.Instantiate(config.ValueRO.abilityPrefab);
+                
+                state.EntityManager.SetComponentData(effect, new IceRingAbility
+                {
+                    area = area
+                });
+
+            }
+        }
+        
+
+        foreach (var (ability, timer, entity) in
+                 SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>>()
+                     .WithEntityAccess())
+        {
+            if (ability.ValueRO.CurrentRingCount >= config.ValueRO.MaxRings)
+            {
+                ecb.AddComponent<ShouldBeDestroyed>(entity);
+                continue;
+            }
+
+            timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
+
+            if (timer.ValueRO.currentTime >= config.ValueRO.MultiSpawnDelayTime * ability.ValueRO.CurrentRingCount)
+            {
+                var effect = state.EntityManager.Instantiate(config.ValueRO.projectilePrefab);
+                var area = ability.ValueRO.area +
+                           config.ValueRO.MultiSpawnSizeGrowth * ability.ValueRO.CurrentRingCount;
 
                 state.EntityManager.SetComponentData(effect, new LocalTransform
                 {
@@ -152,81 +146,24 @@ public partial struct IceRingSystem : ISystem
                     Rotation = Quaternion.Euler(-90f, 0f, 0f),
                     Scale = area * .5f
                 });
-                state.EntityManager.SetComponentData(effect, new IceRingAbility
+                state.EntityManager.SetComponentData(effect, new IceRingProjectile
                 {
-                    area = area
+                    Area = area,
                 });
                 state.EntityManager.SetComponentData(effect, new UpdateStatsComponent
-                                   {
-                                       EntityToTransferStatsFrom = iceRingEntity,
-                                   });
+                {
+                    EntityToTransferStatsFrom = iceRingEntity,
+                });
 
                 // play impact audio
                 var audioElement = new AudioBufferData() {AudioData = config.ValueRO.impactAudioData};
                 audioBuffer.Add(audioElement);
+            
+                ability.ValueRW.CurrentRingCount++;
             }
-        }
-
-        //spawned ability handling
-        foreach (var (ability, timer, transform, entity) in
-                 SystemAPI.Query<RefRW<IceRingAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
-                     .WithEntityAccess())
-        {
-            //set up
-            if (!ability.ValueRO.isInitialized)
-            {
-                timer.ValueRW.maxTime = config.ValueRO.maxDisplayTime;
-                ability.ValueRW.isInitialized = true;
-            }
-            
-            timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-            
-            if (timer.ValueRO.currentTime >= timer.ValueRO.maxTime)
-            {
-                ecb.AddComponent<ShouldBeDestroyed>(entity);
-            }
-
-            if (ability.ValueRO.hasFired) continue;
-            
-            if (timer.ValueRO.currentTime >= config.ValueRO.damageDelayTime)
-            {
-                var collisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld;
-                var hits = new NativeList<DistanceHit>(state.WorldUpdateAllocator);
-                
-                var transformLookup = SystemAPI.GetComponentLookup<LocalTransform>();
-        
-                float totalArea = ability.ValueRO.area;
-                
-                hits.Clear();
-
-                var hitBuffer = state.EntityManager.GetBuffer<HitBufferElement>(entity);
-                
-                
-                if (collisionWorld.OverlapSphere(playerPos.Value, totalArea, ref hits, _detectionFilter))
-                {
-                    foreach (var hit in hits)
-                    {
-                        var enemyPos = transformLookup[hit.Entity].Position;
-                        var colPos = hit.Position;
-                        float3 directionToHit = math.normalizesafe((enemyPos - transform.ValueRO.Position));
-
-                        //Maybe TODO: kolla om hit redan finns i buffer
-                        HitBufferElement element = new HitBufferElement
-                        {
-                            IsHandled = false,
-                            HitEntity = hit.Entity,
-                            Position = colPos,
-                            Normal = directionToHit
-
-                        };
-                        hitBuffer.Add(element);
-                    }
-                }
-                ability.ValueRW.hasFired = true;
-            }
-            
-            
         }
         ecb.Playback(state.EntityManager);
+        ecb.Dispose();
+
     }
 }

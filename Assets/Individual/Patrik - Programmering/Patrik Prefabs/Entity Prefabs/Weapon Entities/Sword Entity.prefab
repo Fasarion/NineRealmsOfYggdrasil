@@ -398,10 +398,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23d1ae080f258e4cbddabdeeae5a904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset:
-    x: 0
-    y: 0
-    z: 0
+  offset: 0.5
   shouldWaitForDeath: 0
 --- !u!114 &7005701228367506839
 MonoBehaviour:
@@ -418,5 +415,5 @@ MonoBehaviour:
   skillModifier:
     Normal: 1
     Special: 1
-    Ultimate: 1
+    Ultimate: 3
     Passive: 0.2

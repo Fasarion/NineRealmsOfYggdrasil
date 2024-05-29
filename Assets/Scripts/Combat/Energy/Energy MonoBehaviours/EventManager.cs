@@ -36,6 +36,7 @@ public static class EventManager
     public static UnityAction<bool> OnEnablePlayerInvincibility;
 
     public static UnityAction OnDashBegin;
+    public static UnityAction OnDashInput;
     public static UnityAction OnDashEnd;
 }
 

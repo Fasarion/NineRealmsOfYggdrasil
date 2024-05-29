@@ -16,12 +16,14 @@ using UnityEngine;
 [UpdateBefore(typeof(HitStopSystem))]
 [UpdateBefore(typeof(HandleHitBufferSystem))]
 [UpdateBefore(typeof(IceRingSystem))]
+[UpdateAfter(typeof(UpdateMouseWorldPositionSystem))]
 [BurstCompile]
 public partial struct ThunderStrikeSystem : ISystem
 {
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<PlayerTargetInfoSingleton>();
         state.RequireForUpdate<PhysicsWorldSingleton>();
@@ -38,6 +40,7 @@ public partial struct ThunderStrikeSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var target = SystemAPI.GetSingleton<PlayerTargetInfoSingleton>();
         var targetPos = target.LastPosition;
+        var mousePos = SystemAPI.GetSingleton<MousePositionInput>();
         
         var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
 
@@ -94,6 +97,8 @@ public partial struct ThunderStrikeSystem : ISystem
                 audioBuffer.Add(audioElement);
                 
                 var effect = state.EntityManager.Instantiate(thunderConfig.projectileAbilityPrefab);
+
+                if (thunderConfig.UseMousePosition) targetPos = mousePos.WorldPosition;
                 
                 state.EntityManager.SetComponentData(effect, new LocalTransform
                 {

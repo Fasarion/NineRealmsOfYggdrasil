@@ -295,10 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a23d1ae080f258e4cbddabdeeae5a904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset:
-    x: 3
-    y: 0
-    z: 3
+  offset: 0.5
   shouldWaitForDeath: 0
 --- !u!1001 &282076706
 PrefabInstance:
@@ -362,6 +359,47 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxRings
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6837703229795121589, guid: 11cf5f14c37a2d54f866fb9f813765db,
+        type: 3}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: multiSpawnDelayTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: multiSpawnSizeGrowth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: useMousePosition
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxRows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: rowsAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: maxStrikes
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

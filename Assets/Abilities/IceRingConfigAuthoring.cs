@@ -7,16 +7,19 @@ using UnityEngine.Serialization;
 public class IceRingConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
+    public GameObject projectilePrefab;
     public GameObject chargeAreaPrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
     [HideInInspector] public float maxChargeTime;
     [HideInInspector] public float maxArea;
     [HideInInspector] public float chargeSpeed;
-   // public List<IceRingStage> abilityStages;
     public float vfxScale = 0.5f;
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
+    public int maxRings;
+    public float multiSpawnDelayTime;
+    public float multiSpawnSizeGrowth;
 
     [HideInInspector] public float ogCachedDamageValue;
     [HideInInspector] public bool isInitialized;
@@ -37,6 +40,7 @@ public class IceRingConfigAuthoring : MonoBehaviour
                 {
                     abilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
                     chargeAreaPrefab = GetEntity(authoring.chargeAreaPrefab, TransformUsageFlags.Dynamic),
+                    projectilePrefab = GetEntity(authoring.projectilePrefab, TransformUsageFlags.Dynamic),
                     maxDisplayTime = authoring.maxDisplayTime,
                     damageDelayTime = authoring.damageDelayTime,
                     maxChargeTime = authoring.maxChargeTime,
@@ -47,6 +51,9 @@ public class IceRingConfigAuthoring : MonoBehaviour
                     vfxScale = authoring.vfxScale,
                     chargeAreaVfxHeightOffset = authoring.chargeAreaVfxHeightOffset,
                     abilityVfxHeightOffset = authoring.abilityVfxHeightOffset,
+                    MaxRings = authoring.maxRings,
+                    MultiSpawnDelayTime = authoring.multiSpawnDelayTime,
+                    MultiSpawnSizeGrowth = authoring.multiSpawnSizeGrowth,
                   //  ogCachedDamageValue = authoring.ogCachedDamageValue,
                   
                   
@@ -73,6 +80,7 @@ public struct IceRingConfig : IComponentData
 {
     public Entity abilityPrefab;
     public Entity chargeAreaPrefab;
+    public Entity projectilePrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
     public float maxChargeTime;
@@ -83,6 +91,12 @@ public struct IceRingConfig : IComponentData
     public float vfxScale;
     public float chargeAreaVfxHeightOffset;
     public float abilityVfxHeightOffset;
+
+    public int MaxRings;
+
+    public float MultiSpawnDelayTime;
+
+    public float MultiSpawnSizeGrowth;
    // public float ogCachedDamageValue;
    
    public AudioData chargeAudioData;

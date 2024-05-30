@@ -23,11 +23,13 @@ public class DashUiManager : MonoBehaviour
     {
         while (dashIcons.Count != dashBuffer.Length)
         {
+            // Add more dashes
             if (dashIcons.Count < dashBuffer.Length)
             {
                 var newDashIcon = Instantiate(dashIconPrefab, transform);
                 dashIcons.Add(newDashIcon);
             }
+            // remove dashes
             else
             {
                 int lastIndex = dashIcons.Count - 1;
@@ -38,12 +40,7 @@ public class DashUiManager : MonoBehaviour
             }
         }
         
-        // while (dashIcons.Count < dashBuffer.Length)
-        // {
-        //     var dashIcon = Instantiate(dashIconPrefab, transform);
-        //     dashIcons.Add(dashIcon);
-        // }
-
+        // update dashes
         for (int i = 0; i < dashIcons.Count; i++)
         {
             dashIcons[i].UpdateInfo(dashBuffer[i]);

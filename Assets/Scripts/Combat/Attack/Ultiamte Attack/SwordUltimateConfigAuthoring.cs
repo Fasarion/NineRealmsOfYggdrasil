@@ -7,6 +7,11 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
 {
     [SerializeField] private int numberOfScaledAttacks = 3;
     [SerializeField] private float scaleIncrease = 2f;
+
+    [Header("Beam")] 
+    [SerializeField] private GameObject beamPrefab; 
+    [SerializeField] private GameObject beamVfx; 
+    [SerializeField] private float beamSpawnTimeAfterAttack = 0.3f; 
     
     class Baker : Baker<SwordUltimateConfigAuthoring>
     {
@@ -16,7 +21,12 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
             AddComponent(entity, new SwordUltimateConfig
             {
                 NumberOfScaledAttacks = authoring.numberOfScaledAttacks,
-                ScaleIncrease = authoring.scaleIncrease
+                ScaleIncrease = authoring.scaleIncrease,
+                
+                BeamEntityPrefab = GetEntity(authoring.beamPrefab, TransformUsageFlags.Dynamic),
+                BeamVfxPrefab = GetEntity(authoring.beamVfx, TransformUsageFlags.Dynamic),
+                
+                BeamSpawnTimeAfterAttackStart = authoring.beamSpawnTimeAfterAttack
             });
         }
     }
@@ -24,9 +34,15 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
 
 public struct SwordUltimateConfig : IComponentData
 {
+    public Entity BeamEntityPrefab;
+    public Entity BeamVfxPrefab;
+    
     public int NumberOfScaledAttacks;
     public float ScaleIncrease;
     
     public bool IsActive;
     public int CurrentAttackCount;
+
+    public float CurrentTime;
+    public float BeamSpawnTimeAfterAttackStart;
 }

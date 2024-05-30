@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
@@ -11,6 +12,7 @@ public class AudioManager : MonoBehaviour
     public EnemyAudio enemyAudio;
     public PlayerAudio playerAudio;
     public UIAudio uiAudio;
+    public EnvironmentAudio environmentAudio;
 
     private void Awake()
     {
@@ -55,7 +57,7 @@ public class AudioManager : MonoBehaviour
             }
             case 4:
             {
-                //EnvironmentCategory
+                environmentAudio.EnvironmentAudioCaller((int)audioData.environmentType, audioData);
                 break;
             }
         }

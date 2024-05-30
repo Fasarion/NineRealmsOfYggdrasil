@@ -8,6 +8,7 @@ public struct AudioData
     public EnemyTyping enemyTyping;
     public AudioEventType audioEventType;
     public AttackTypeAudio attackType;
+    public EnvironmentType environmentType;
 }
 [System.Serializable]
 public enum WeaponTyping
@@ -56,4 +57,12 @@ public enum AudioEventType
     OnUse = 1,
     OnImpact = 2,
     OnCharge = 3,
+    OnDeath = 4
+}
+
+[System.Serializable]
+public enum EnvironmentType
+{
+    None = 0,
+    Tree = 1,
 }

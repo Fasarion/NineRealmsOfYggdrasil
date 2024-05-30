@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 7767933751272567670}
   - component: {fileID: 4096158895332971307}
   - component: {fileID: 1863205220537232072}
+  - component: {fileID: 237125003528377706}
   m_Layer: 0
   m_Name: Tree03
   m_TagString: Untagged
@@ -101,7 +102,7 @@ MonoBehaviour:
       m_Override: 0
       m_Value:
         Category00: 0
-        Category01: 0
+        Category01: 1
         Category02: 0
         Category03: 0
         Category04: 0
@@ -210,7 +211,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
-  shouldDisplayDamageNumbers: 0
   damageReductionValue: 1
 --- !u!114 &4096158895332971307
 MonoBehaviour:
@@ -273,6 +273,25 @@ MonoBehaviour:
     NewScale: 1
     SetYPosition: 0
     YPosition: 0
+--- !u!114 &237125003528377706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805626051316816799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ddaca49fae6a5944aa29d5f50b8cca9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioData:
+    eventCategoryType: 4
+    weaponType: 0
+    enemyTyping: 0
+    audioEventType: 4
+    attackType: 0
+    environmentType: 1
 --- !u!1001 &2901354856038760633
 PrefabInstance:
   m_ObjectHideFlags: 0

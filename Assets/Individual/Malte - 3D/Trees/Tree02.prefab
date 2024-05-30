@@ -101,7 +101,7 @@ MonoBehaviour:
       m_Override: 0
       m_Value:
         Category00: 0
-        Category01: 1
+        Category01: 0
         Category02: 0
         Category03: 0
         Category04: 0
@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects:
+  entitiesToSpawn:
   - {fileID: 6151853891027980557, guid: 696e33466e7c36f45a8e9283f72bd42d, type: 3}
   - {fileID: 3222051086591697869, guid: 2e8c628138f479f49bbc1281f053fc75, type: 3}
   - {fileID: 756488704249721139, guid: 9c6cb95b106d40c4a908a21873f3d7cf, type: 3}
@@ -266,6 +266,11 @@ MonoBehaviour:
   - {fileID: 7496232194178145891, guid: 9daaab83f34e4c7409e82cedadf8d072, type: 3}
   - {fileID: 694923755315807660, guid: d6c7ac1561def00458cabb541e0ef184, type: 3}
   - {fileID: 6590207090893308037, guid: fb5b96c30d0a7d14eba2e53b9e365493, type: 3}
+  spawnSettings:
+    SetScale: 0
+    NewScale: 1
+    SetYPosition: 0
+    YPosition: 0
 --- !u!1001 &6400298586600758317
 PrefabInstance:
   m_ObjectHideFlags: 0

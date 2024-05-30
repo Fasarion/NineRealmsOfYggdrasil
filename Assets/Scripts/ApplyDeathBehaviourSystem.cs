@@ -45,7 +45,7 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
 
         foreach (var (_, entity) in SystemAPI
                      .Query<IsDyingComponent>()
-                     .WithNone<PhysicsVelocity>()
+                     .WithNone<EnemyTypeComponent>()
                      .WithEntityAccess())
         {
             ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);

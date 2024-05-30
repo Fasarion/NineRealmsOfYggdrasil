@@ -29,7 +29,7 @@ public partial struct ThunderBoltProjectileSystem : ISystem
         _detectionFilter = new CollisionFilter
         {
             BelongsTo = 1, // Projectile
-            CollidesWith = 1 << 1 // Enemy
+            CollidesWith = 1 << 1 | 1 << 5, // Enemy
         };
     }
 

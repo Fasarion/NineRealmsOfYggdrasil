@@ -63,3 +63,35 @@ public partial struct SpawnProjectilesSystem : ISystem
         }
     }
 }
+
+[UpdateBefore(typeof(SpawnProjectilesSystem))]
+public partial struct PlaySoundOnProjectileFireSystem : ISystem
+{
+    [BurstCompile]
+    public void OnCreate(ref SystemState state)
+    {
+        state.RequireForUpdate<DynamicBuffer<AudioBufferData>>();
+        state.RequireForUpdate<PlaySoundOnProjectileFireComponent>();
+        state.RequireForUpdate<RandomComponent>();
+    }
+    
+    [BurstCompile]
+    public void OnUpdate(ref SystemState state)
+    {
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+        var random = SystemAPI.GetSingletonRW<RandomComponent>();
+        
+        foreach (var playSound in SystemAPI.Query<PlaySoundOnProjectileFireComponent>()
+                .WithAll<ShouldSpawnProjectile>())
+        {
+            float randomFloat = random.ValueRW.random.NextFloat();
+
+            if (randomFloat > playSound.ChanceToPlay)
+            {
+                Debug.Log("Play spawn sound!");
+                audioBuffer.Add(new AudioBufferData {AudioData = playSound.AudioData});
+            }
+        }
+    }
+}
+

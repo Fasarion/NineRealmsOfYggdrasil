@@ -6,10 +6,12 @@ using UnityEngine;
 public class PauseMenuManager : MonoBehaviour
 {
     public GameObject pauseMenuPanel;
+    public GameObject audioSettingsMenu;
 
     public void Awake()
     {
         DeactivatePauseMenu();
+        AudioSettingsDeactivated();
     }
 
     public void PauseGame()
@@ -27,6 +29,16 @@ public class PauseMenuManager : MonoBehaviour
     {
         EventManager.OnPause -= OnPause;
         EventManager.OnUnpause -= OnUnpause;
+    }
+
+    public void AudioSettingsActivated()
+    {
+        audioSettingsMenu.SetActive(true);
+    }
+    
+    public void AudioSettingsDeactivated()
+    {
+        audioSettingsMenu.SetActive(false);
     }
     
     public void OnPause(PauseType pauseType)

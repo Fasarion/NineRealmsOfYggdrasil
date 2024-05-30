@@ -41,6 +41,8 @@ public partial struct VisualEffectComponentSystem : ISystem
                 
                 transform.ValueRW.Rotation = entityToFollowTransform.Rotation;
             }
+
+            effectComponent.ValueRW.TimerTime += SystemAPI.Time.DeltaTime;
         }
         
         ecb.Playback(state.EntityManager);

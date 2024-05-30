@@ -24,8 +24,8 @@ namespace Damage
             var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
             var damageNumberBuffer = SystemAPI.GetSingletonBuffer<DamageNumberBufferElement>();
 
-            foreach (var (currentHP, damageBuffer, damageReduction, damageReceivingTransform, damageReceivingEntity) in SystemAPI
-                .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>, DamageReductionComponent, LocalTransform>()
+            foreach (var (currentHP, damageBuffer, damageReduction, damageReceivingTransform, damageNumbers, damageReceivingEntity) in SystemAPI
+                .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>, DamageReductionComponent, LocalTransform, DamageNumbersComponent>()
                 .WithEntityAccess())
             {
                 float totalDamageToDeal = 0;
@@ -68,15 +68,18 @@ namespace Damage
 
                 // Deal damage
                 currentHP.ValueRW.Value -= totalDamageToDeal;
-                
-                // Add damage info to damage number buffer
-                var damageNumberElement = new DamageNumberBufferElement
+
+                if (damageNumbers.ShouldDisplayDamageNumbers)
                 {
-                    damage = totalDamageToDeal,
-                    isCritical = hasCrit,
-                    position = damageReceivingTransform.Position,
-                };
-                damageNumberBuffer.Add(damageNumberElement);
+                    // Add damage info to damage number buffer
+                    var damageNumberElement = new DamageNumberBufferElement
+                    {
+                        damage = totalDamageToDeal,
+                        isCritical = hasCrit,
+                        position = damageReceivingTransform.Position,
+                    };
+                    damageNumberBuffer.Add(damageNumberElement);
+                }
                 
 
                 // If zero health, mark entity with Destroy Tag so it is destroyed in a later system

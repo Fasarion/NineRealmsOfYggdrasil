@@ -210,6 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
+  shouldDisplayDamageNumbers: 0
   damageReductionValue: 1
 --- !u!114 &4643453269192651568
 MonoBehaviour:
@@ -223,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects:
+  entitiesToSpawn:
   - {fileID: 885019729241185472, guid: 7480eb307f8eb0740860986dabb51831, type: 3}
   - {fileID: 4118218871147838763, guid: 13804b841e71a504eb424cb3c5bcaad4, type: 3}
   - {fileID: 7723428236288161292, guid: 696b27883b8a57849ac912003c8cc240, type: 3}
@@ -254,6 +255,11 @@ MonoBehaviour:
   - {fileID: 2333329204696606051, guid: ffe90e8fd4d75144b9c510df1d033b3c, type: 3}
   - {fileID: 410281813876119280, guid: 49f01576290e8bd438bb26dd1449b0e9, type: 3}
   - {fileID: 59014845105172521, guid: d55c9c05e984bcf43863bd95d63cb13a, type: 3}
+  spawnSettings:
+    SetScale: 0
+    NewScale: 1
+    SetYPosition: 0
+    YPosition: 0
 --- !u!114 &1902502201116752573
 MonoBehaviour:
   m_ObjectHideFlags: 0

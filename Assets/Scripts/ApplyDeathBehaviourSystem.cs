@@ -27,6 +27,14 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+
+        foreach (var (_, entity) in SystemAPI
+                     .Query<IsDyingComponent>()
+                     .WithNone<PhysicsVelocity>()
+                     .WithEntityAccess())
+        {
+            ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
+        }
         
         foreach (var (currentHP, velocity, transform, dyingComponent, entity) in SystemAPI
                      .Query<CurrentHpComponent, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()

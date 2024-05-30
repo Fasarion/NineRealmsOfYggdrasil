@@ -48,7 +48,7 @@ namespace Destruction
                         var entityToSpawn = spawnElement.Entity;
                         if (entityToSpawn == Entity.Null)
                         {
-                            Debug.LogError("Entity to spawn on destroy is not assigned!");
+                            Debug.LogError($"Entity to spawn on destroy is not assigned! (from entity {entity.Index}");
                             continue;
                         }
                         
@@ -101,6 +101,7 @@ namespace Destruction
             }
 
             ecb.Playback(state.EntityManager);
+            ecb.Dispose();
         }
 
         // TODO: make burstable

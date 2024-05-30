@@ -27,11 +27,15 @@ namespace Destruction
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
             var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+            
             var spawnEntityOnDestroyLookup = SystemAPI.GetBufferLookup<SpawnEntityOnDestroyElement>();
+            var spawnSettingsLookup = SystemAPI.GetComponentLookup<SpawnSettingsComponent>();
+            
             RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
 
             foreach (var (dyingComponent, transform, entity) in SystemAPI.
                 Query<RefRW<IsDyingComponent>, LocalTransform>()
+                .WithAll<SpawnOnDestroyTag>()
                 .WithEntityAccess())
             {
                 if (dyingComponent.ValueRO.HasDoneSpawning) continue;
@@ -45,14 +49,14 @@ namespace Destruction
 
                     foreach (var spawnElement in spawnBuffer)
                     {
-                        var entityToSpawn = spawnElement.Entity;
+                        var entityToSpawn = spawnElement.Value;
                         if (entityToSpawn == Entity.Null)
                         {
                             Debug.LogError($"Entity to spawn on destroy is not assigned! (from entity {entity.Index}");
                             continue;
                         }
                         
-                        var spawnedEntity = state.EntityManager.Instantiate(spawnElement.Entity);
+                        var spawnedEntity = state.EntityManager.Instantiate(spawnElement.Value);
 
                         if (state.EntityManager.HasBuffer<KnockBackBufferElement>(spawnedEntity))
                         {
@@ -77,14 +81,16 @@ namespace Destruction
                         var spawnedTransform = state.EntityManager.GetComponentData<LocalTransform>(spawnedEntity);
                         spawnedTransform.Position = transform.Position;
 
-                        if (spawnElement.Settings.SetScale)
+                        var spawnSettings = spawnSettingsLookup.GetRefRO(entity).ValueRO.Value;
+                        
+                        if (spawnSettings.SetScale)
                         {
-                            spawnedTransform.Scale = spawnElement.Settings.NewScale;
+                            spawnedTransform.Scale = spawnSettings.NewScale;
                         }
                         
-                        if (spawnElement.Settings.SetYPosition)
+                        if (spawnSettings.SetYPosition) 
                         {
-                            spawnedTransform.Position.y = spawnElement.Settings.YPosition;
+                            spawnedTransform.Position.y = spawnSettings.YPosition;
                         }
                         
                         spawnedTransform.Rotation = transform.Rotation;

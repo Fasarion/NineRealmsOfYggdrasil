@@ -4,9 +4,13 @@ using UnityEngine;
 
 public struct SpawnEntityOnDestroyElement : IBufferElementData
 {
-    public Entity Entity;
-    public SpawnSettings Settings;
+    public Entity Value;
 }
+
+// public struct SpawnNormalEntityOnDestroyElement : IBufferElementData
+// {
+//     public Entity Value;
+// }
 
 [System.Serializable]
 public struct SpawnSettings 

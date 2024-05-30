@@ -102,7 +102,7 @@ MonoBehaviour:
       m_Override: 0
       m_Value:
         Category00: 0
-        Category01: 1
+        Category01: 0
         Category02: 0
         Category03: 0
         Category04: 0
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
+  shouldDisplayDamageNumbers: 1
   damageReductionValue: 1
 --- !u!114 &4096158895332971307
 MonoBehaviour:

@@ -156,7 +156,6 @@ public class WeaponAudio : ScriptableObject
             }
             case 2: //Hammare
             {
-                Debug.Log("HammarLjud");
                 RuntimeManager.PlayOneShot(hammerImpact);
                 break;
             }

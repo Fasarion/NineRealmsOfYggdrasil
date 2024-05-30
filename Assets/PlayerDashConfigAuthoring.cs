@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
@@ -14,6 +15,12 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
 
     [HideInInspector] public bool isDashing;
     [HideInInspector] public bool isDashOnCooldown;
+
+    private void OnValidate()
+    {
+        if (maxDashes < 0)
+            maxDashes = 0;
+    }
 
     public class PlayerDashConfigAuthoringBaker : Baker<PlayerDashConfigAuthoring>
     {

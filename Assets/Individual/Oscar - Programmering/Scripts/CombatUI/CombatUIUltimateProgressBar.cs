@@ -26,23 +26,23 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
 
     }
 
-    private void OnStartingWeaponsSet(WeaponType mainWeapon, WeaponType leftWeapon, WeaponType rightWeapon)
+    private void OnStartingWeaponsSet(WeaponSetupData mainWeapon, WeaponSetupData leftWeapon, WeaponSetupData rightWeapon)
     {
         switch (symbolType)
         {
             case WeaponSymbolType.Main:
             {
-                currentWeaponType = mainWeapon;
+                currentWeaponType = mainWeapon.WeaponType;
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                currentWeaponType = leftWeapon;
+                currentWeaponType = leftWeapon.WeaponType;
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                currentWeaponType = rightWeapon;
+                currentWeaponType = rightWeapon.WeaponType;
                 break;
             } 
         }
@@ -56,7 +56,7 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
         CombatUIWeaponHandler.onStartingWeaponSet -= OnStartingWeaponsSet;
     }
     
-    private void OnCurrentWeaponUpdated(WeaponType mainWeapon, WeaponType leftWeapon, WeaponType rightWeapon)
+    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftWeaponData, WeaponSetupData rightWeaponData)
     {
         //SavePreviousEnergy();
         switch (symbolType)
@@ -65,17 +65,17 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
             case WeaponSymbolType.Main:
             {
                 
-                currentWeaponType = mainWeapon;
+                currentWeaponType = mainWeaponData.WeaponType;
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                currentWeaponType = leftWeapon;
+                currentWeaponType = leftWeaponData.WeaponType;
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                currentWeaponType = rightWeapon;
+                currentWeaponType = rightWeaponData.WeaponType;
                 break;
             } 
         }

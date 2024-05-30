@@ -49,35 +49,63 @@ public class CombatUIWeaponSymbol : MonoBehaviour
     public void OnEnable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet += OnCurrentWeaponUpdated;
+        CombatUIWeaponHandler.onStartingWeaponSet += OnWeaponSetup;
     }
     
     public void OnDisable()
     {
         CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet -= OnCurrentWeaponUpdated;
+        CombatUIWeaponHandler.onStartingWeaponSet -= OnWeaponSetup;
     }
-    private void OnCurrentWeaponUpdated(WeaponType mainWeaponType, WeaponType currentLeftInactiveWeapon, WeaponType currentRightInactiveWeapon)
+
+    private void OnWeaponSetup(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
     {
         switch (weaponSymbolType)
         {
             case WeaponSymbolType.Main:
             {
-                SetMainWeaponType(mainWeaponType);
+                SetMainWeaponType(mainWeaponData.WeaponType);
+                selectedKeySymbolNumber.text = (mainWeaponData.WeaponButtonIndex).ToString();
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                SetInactiveWeaponType(currentLeftInactiveWeapon);
+                SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
+                selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                SetInactiveWeaponType(currentRightInactiveWeapon);
+                SetInactiveWeaponType(rightInactiveWeaponData.WeaponType);
+                selectedKeySymbolNumber.text = (rightInactiveWeaponData.WeaponButtonIndex).ToString();
                 break;
             } 
         }
-      
+    }
+    
+    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
+    {
+        switch (weaponSymbolType)
+        {
+            case WeaponSymbolType.Main:
+            {
+                SetMainWeaponType(mainWeaponData.WeaponType);
+                selectedKeySymbolNumber.text = (mainWeaponData.WeaponButtonIndex).ToString();
+                break;
+            }    
+            case WeaponSymbolType.LeftInactive:
+            {
+                SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
+                selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
+                break;
+            } 
+            case WeaponSymbolType.RightInactive:
+            {
+                SetInactiveWeaponType(rightInactiveWeaponData.WeaponType);
+                selectedKeySymbolNumber.text = (rightInactiveWeaponData.WeaponButtonIndex).ToString();
+                break;
+            } 
+        }
         
         //imageTransform.sizeDelta = new Vector2(rect.width, rect.height);
     }
@@ -91,7 +119,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 currentlySelectedNormalSymbol = symbolHolder.hammerSymbols[0];
                 currentlySelectedUltSymbol = symbolHolder.hammerSymbols[1];
                 currentlySelectedSpecialSymbol = symbolHolder.hammerSymbols[2];
-                selectedKeySymbolNumber.text = symbolHolder.keyTexts[0];
+                //selectedKeySymbolNumber.text = symbolHolder.keyTexts[0];
                 break;
             }
             case WeaponType.Sword:
@@ -99,7 +127,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 currentlySelectedNormalSymbol = symbolHolder.swordSymbols[0];
                 currentlySelectedUltSymbol = symbolHolder.swordSymbols[1];
                 currentlySelectedSpecialSymbol = symbolHolder.swordSymbols[2];
-                selectedKeySymbolNumber.text = symbolHolder.keyTexts[1];
+                //selectedKeySymbolNumber.text = symbolHolder.keyTexts[1];
                 break;
             }
             case WeaponType.Mead:
@@ -146,14 +174,14 @@ public class CombatUIWeaponSymbol : MonoBehaviour
             case WeaponType.Hammer:
             {
                 currentlySelectedPassiveSymbol = symbolHolder.hammerSymbols[3];
-                selectedKeySymbolNumber.text = symbolHolder.keyTexts[0];
+                //selectedKeySymbolNumber.text = symbolHolder.keyTexts[0];
                 
                 break;
             }
             case WeaponType.Sword:
             {
                 currentlySelectedPassiveSymbol = symbolHolder.swordSymbols[3];
-                selectedKeySymbolNumber.text = symbolHolder.keyTexts[1];
+                //selectedKeySymbolNumber.text = symbolHolder.keyTexts[1];
                 break;
             }
             case WeaponType.Mead:

@@ -45,7 +45,22 @@ public class CombatUIWeaponHandlerController : BaseControllerMVC
     
     private void SetStartingWeapons(CombatUIWeaponHandlerView weaponHandlerView)
     {
-        CombatUIWeaponHandlerModel.onStartingWeaponSet?.Invoke(weaponHandlerView.currentWeapon, weaponHandlerView.currentLeftInactiveWeapon, weaponHandlerView.currentRightInactiveWeapon);
+        
+        //This is pretty hacky as the structs don't contain all of their data.
+        WeaponSetupData currentWeaponSetupData = new WeaponSetupData()
+        {
+            WeaponType = weaponHandlerView.currentWeapon
+        };
+        
+        WeaponSetupData currentLeftInactiveWeaponSetupData = new WeaponSetupData()
+        {
+            WeaponType = weaponHandlerView.currentLeftInactiveWeapon
+        };
+        WeaponSetupData currentRightInactiveWeaponSetupData = new WeaponSetupData()
+        {
+            WeaponType = weaponHandlerView.currentRightInactiveWeapon
+        };
+        CombatUIWeaponHandlerModel.onStartingWeaponSet?.Invoke(currentWeaponSetupData, currentLeftInactiveWeaponSetupData, currentRightInactiveWeaponSetupData);
     }
     
     public void UpdateCurrentWeapon(WeaponType weaponType, CombatUIWeaponHandlerView weaponHandlerView, CombatUIWeaponHandlerModel weaponHandlerModel)
@@ -74,7 +89,21 @@ public class CombatUIWeaponHandlerController : BaseControllerMVC
         
         
         //currentInactiveWeapons.AddRange(selectableWeapons);
-                
-        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated?.Invoke(   weaponHandlerView.currentWeapon,    weaponHandlerView.currentLeftInactiveWeapon,    weaponHandlerView.currentRightInactiveWeapon);
+        WeaponSetupData currentWeaponData = new WeaponSetupData()
+        {
+            WeaponType = weaponHandlerView.currentWeapon
+        };
+        
+        WeaponSetupData currentLeftWeaponData = new WeaponSetupData()
+        {
+            WeaponType = weaponHandlerView.currentLeftInactiveWeapon
+        };
+        
+        WeaponSetupData currentRightWeaponData = new WeaponSetupData()
+        {
+            WeaponType = weaponHandlerView.currentRightInactiveWeapon
+        };
+        
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated?.Invoke(   currentWeaponData,   currentLeftWeaponData,    currentRightWeaponData);
     }
 }

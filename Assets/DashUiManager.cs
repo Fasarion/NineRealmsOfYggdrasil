@@ -43,7 +43,8 @@ public class DashUiManager : MonoBehaviour
         // update dashes
         for (int i = 0; i < dashIcons.Count; i++)
         {
-            dashIcons[i].UpdateInfo(dashBuffer[i]);
+            int index = i;
+            dashIcons[index].UpdateInfo(dashBuffer[index]);
         }
     }
 }

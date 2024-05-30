@@ -10,6 +10,7 @@ namespace Patrik.Special_Attack
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<HammerComponent>();
             state.RequireForUpdate<ThunderBoltConfig>();
         }
 
@@ -29,6 +30,12 @@ namespace Patrik.Special_Attack
             if (combo != 2) return;
 
             state.EntityManager.Instantiate(abilityConfig.AbilityPrefab);
+            var spark = state.EntityManager.Instantiate(abilityConfig.SparkEffectPrefab);
+            state.EntityManager.SetComponentData(spark, new VisualEffectComponent
+            {
+                EntityToFollow = SystemAPI.GetSingletonEntity<HammerComponent>(),
+                
+            });
         }
     }
 }

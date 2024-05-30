@@ -21,14 +21,26 @@ public class DashUiManager : MonoBehaviour
 
     private void OnDashInfoUpdate(DynamicBuffer<DashInfoElement> dashBuffer)
     {
-        while (dashIcons.Count < dashBuffer.Length)
+        while (dashIcons.Count != dashBuffer.Length)
         {
-            Debug.Log("Add dash icon");
-            
-            var dashIcon = Instantiate(dashIconPrefab, transform);
-            dashIcons.Add(dashIcon);
+            // Add more dashes
+            if (dashIcons.Count < dashBuffer.Length)
+            {
+                var newDashIcon = Instantiate(dashIconPrefab, transform);
+                dashIcons.Add(newDashIcon);
+            }
+            // remove dashes
+            else
+            {
+                int lastIndex = dashIcons.Count - 1;
+                
+                var lastDashIcon = dashIcons[lastIndex];
+                Destroy(lastDashIcon.gameObject);
+                dashIcons.RemoveAt(lastIndex);
+            }
         }
-
+        
+        // update dashes
         for (int i = 0; i < dashIcons.Count; i++)
         {
             dashIcons[i].UpdateInfo(dashBuffer[i]);

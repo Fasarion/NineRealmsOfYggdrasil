@@ -29,15 +29,6 @@ namespace Player
             if (!dashBufferSingletonExists) return;
 
             EventManager.OnDashInfoUpdate?.Invoke(dashBuffer);
-            
-            // foreach (var dashInfoElement in dashBuffer)
-            // {
-            //     var dashInfo = dashInfoElement.Value;
-            //
-            //     if (dashInfo.Ready) continue;
-            //     
-            //     
-            // }
         }
         
         protected override void OnStartRunning()

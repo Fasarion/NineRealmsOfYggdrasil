@@ -104,6 +104,8 @@ namespace Destruction
                          .WithEntityAccess())
             {
                 ecb.DestroyEntity(entity);
+                
+                DestroyChildrenRecursively(ref state, entity, ecb);
             }
 
             ecb.Playback(state.EntityManager);
@@ -111,7 +113,7 @@ namespace Destruction
         }
 
         // TODO: make burstable
-        private static void DestroyChildrenRecursively(SystemState state, Entity entity, EntityCommandBuffer ecb)
+        private static void DestroyChildrenRecursively(ref SystemState state, Entity entity, EntityCommandBuffer ecb)
         {
             if (state.EntityManager.HasBuffer<Child>(entity))
             {
@@ -119,7 +121,7 @@ namespace Destruction
 
                 foreach (var child in childBuffer)
                 {
-                    DestroyChildrenRecursively(state, child.Value, ecb);
+                    DestroyChildrenRecursively(ref state, child.Value, ecb);
                     ecb.DestroyEntity(child.Value);
                 }
             }

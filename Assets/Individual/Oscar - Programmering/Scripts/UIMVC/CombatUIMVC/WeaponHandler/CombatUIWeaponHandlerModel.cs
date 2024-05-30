@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class CombatUIWeaponHandlerModel : ElementMVC
 {
-    public static Action<WeaponType, WeaponType, WeaponType> onCurrentWeaponUpdated;
-    public static Action<WeaponType, WeaponType, WeaponType> onStartingWeaponSet;
+    public static Action<WeaponSetupData, WeaponSetupData, WeaponSetupData> onCurrentWeaponUpdated;
+    public static Action<WeaponSetupData, WeaponSetupData, WeaponSetupData> onStartingWeaponSet;
     
     [NonSerialized]public bool currentWeaponSet;
     [NonSerialized]public bool currentLeftWeaponSet;

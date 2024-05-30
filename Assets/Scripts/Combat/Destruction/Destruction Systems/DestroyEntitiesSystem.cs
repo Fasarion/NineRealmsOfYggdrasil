@@ -113,6 +113,7 @@ namespace Destruction
         }
 
         // TODO: make burstable
+        [BurstCompile]
         private static void DestroyChildrenRecursively(ref SystemState state, Entity entity, EntityCommandBuffer ecb)
         {
             if (state.EntityManager.HasBuffer<Child>(entity))

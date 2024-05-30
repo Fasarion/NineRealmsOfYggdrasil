@@ -390,6 +390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 50
+  shouldDisplayDamageNumbers: 0
   damageReductionValue: 1
 --- !u!114 &4376167777974654248
 MonoBehaviour:
@@ -437,7 +438,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData:
-    AudioEnumValue: 0
     eventCategoryType: 0
     weaponType: 0
     enemyTyping: 0

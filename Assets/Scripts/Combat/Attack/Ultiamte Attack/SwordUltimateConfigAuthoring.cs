@@ -12,8 +12,11 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private GameObject beamPrefab; 
     [SerializeField] private GameObject beamVfx; 
     [SerializeField] private float beamSpawnTimeAfterAttack = 0.3f; 
-    [Header("Audio")] 
-    [SerializeField] private AudioData onUseAudioData;
+    [SerializeField] private int beamsPerSwing = 1; 
+    [SerializeField] private float degreesBetweenBeams = 20f; 
+    [Range(0, 360)]
+    [SerializeField] private float maxTotalDegrees = 180f; 
+    
     class Baker : Baker<SwordUltimateConfigAuthoring>
     {
         public override void Bake(SwordUltimateConfigAuthoring authoring)
@@ -28,8 +31,9 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
                 BeamVfxPrefab = GetEntity(authoring.beamVfx, TransformUsageFlags.Dynamic),
                 
                 BeamSpawnTimeAfterAttackStart = authoring.beamSpawnTimeAfterAttack,
-                
-                onUseAudioData = authoring.onUseAudioData
+                BeamsPerSwing = authoring.beamsPerSwing,
+                degreesBetweenBeams = authoring.degreesBetweenBeams,
+                MaximumTotalDegreesPerSide = authoring.maxTotalDegrees / 2f
             });
         }
     }
@@ -48,6 +52,8 @@ public struct SwordUltimateConfig : IComponentData
 
     public float CurrentTime;
     public float BeamSpawnTimeAfterAttackStart;
-
-    public AudioData onUseAudioData;
+    public int BeamsPerSwing;
+    public float degreesBetweenBeams;
+    public float MaximumTotalDegreesPerSide;
+    public bool PrepareBeam { get; set; }
 }

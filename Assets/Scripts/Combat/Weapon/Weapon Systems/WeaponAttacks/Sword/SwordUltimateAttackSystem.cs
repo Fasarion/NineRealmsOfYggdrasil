@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Destruction;
 using Movement;
 using Patrik;
 using Player;
@@ -9,11 +6,10 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
-using UnityEngine.VFX;
 
 [BurstCompile]
-//[UpdateAfter(typeof(HandleAnimationSystem))]
 [UpdateAfter(typeof(AttackStatTransferSystem))]
+[UpdateAfter(typeof(PlayerRotationSystem))]
 
 public partial struct SwordUltimateAttackSystem : ISystem
 {
@@ -31,19 +27,30 @@ public partial struct SwordUltimateAttackSystem : ISystem
         var ultConfig = SystemAPI.GetSingletonRW<SwordUltimateConfig>();
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
-        
-        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
 
-        if (ultConfig.ValueRO.IsActive)
+        if (ultConfig.ValueRW.PrepareBeam)
         {
             ultConfig.ValueRW.CurrentTime += Time.deltaTime;
             
-
             if (ultConfig.ValueRW.CurrentTime > ultConfig.ValueRO.BeamSpawnTimeAfterAttackStart)
             {
                 SpawnSwordBeam(ref state, ultConfig, ecb);
                 ultConfig.ValueRW.CurrentTime = -1000f; // hard reset timer
+                ultConfig.ValueRW.PrepareBeam = false;
             }
+
+        }
+        
+
+        if (ultConfig.ValueRO.IsActive)
+        {
+            // ultConfig.ValueRW.CurrentTime += Time.deltaTime;
+            //
+            // if (ultConfig.ValueRW.CurrentTime > ultConfig.ValueRO.BeamSpawnTimeAfterAttackStart)
+            // {
+            //     SpawnSwordBeam(ref state, ultConfig, ecb);
+            //     ultConfig.ValueRW.CurrentTime = -1000f; // hard reset timer
+            // }
             
             bool stoppedSwordAttack = attackCaller.ValueRO.ActiveAttackData.ShouldStopAttack(WeaponType.Sword) ||
                                       attackCaller.ValueRO.PassiveAttackData.ShouldStopAttack(WeaponType.Sword);
@@ -64,65 +71,81 @@ public partial struct SwordUltimateAttackSystem : ISystem
                 }
             }
         }
-        
-        if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Ultimate))
-            return;
 
-        ultConfig.ValueRW.CurrentTime = 0f;
-
-        // Initialize attack
-        if (!ultConfig.ValueRO.IsActive)
+        if (attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Ultimate))
         {
-            Debug.Log("Svärd?");
-            var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
+            ultConfig.ValueRW.CurrentTime = 0f;
+            ultConfig.ValueRW.PrepareBeam = true;
 
-            float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
-            
-            scaleComp.Value = newSize;
-            state.EntityManager.SetComponentData(swordEntity, scaleComp);
-            
-            var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
-            statHandler.ValueRW.ShouldUpdateStats = true;
+            // Initialize attack
+            if (!ultConfig.ValueRO.IsActive)
+            {
+                var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
 
-            ultConfig.ValueRW.IsActive = true;
-            ultConfig.ValueRW.CurrentAttackCount = 0;
+                float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
             
-            var audioElement = new AudioBufferData() {AudioData = ultConfig.ValueRO.onUseAudioData};
-            audioBuffer.Add(audioElement);
+                scaleComp.Value = newSize;
+                state.EntityManager.SetComponentData(swordEntity, scaleComp);
+            
+                var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
+                statHandler.ValueRW.ShouldUpdateStats = true;
 
-            //SpawnSwordBeam(ref state, ultConfig, ecb);
+                ultConfig.ValueRW.IsActive = true;
+                ultConfig.ValueRW.CurrentAttackCount = 0;
+            }
         }
-        
+
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }
 
     private void SpawnSwordBeam(ref SystemState state, RefRW<SwordUltimateConfig> ultConfig, EntityCommandBuffer ecb)
     {
-        // spawn sword beams
-        var beamEntity = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamEntityPrefab);
+        int beamCount = ultConfig.ValueRO.BeamsPerSwing;
+        
+        if (beamCount <= 0) return;
 
-        var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
-
-        LocalTransform beamTransform = new LocalTransform
+        for (int i = 0; i < beamCount; i++)
         {
-            Position = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value,
-            Rotation = playerRot.Value,
-            Scale = 1
-        };
-        state.EntityManager.SetComponentData(beamEntity, beamTransform);
-        state.EntityManager.SetComponentData(beamEntity, new DirectionComponent {Value = playerRot.Forward});
+            var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
 
-        var beamVfx = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamVfxPrefab);
-        state.EntityManager.SetComponentData(beamVfx, beamTransform);
+            float rotationAngle = beamCount > 4 ? ultConfig.ValueRO.MaximumTotalDegreesPerSide / beamCount : ultConfig.ValueRO.degreesBetweenBeams;
+            
+            float angleToRotate = rotationAngle * i;
 
+            if (i % 2 == 0)
+                angleToRotate *= -1;
+            
+            quaternion rotation = quaternion.RotateY(math.radians(angleToRotate));
 
-        var configEntity = SystemAPI.GetSingletonEntity<SwordUltimateConfig>();
+            float3 forwardInLocalSpace = playerRot.Forward;
+            float3 forwardInGlobalSpace = math.rotate(rotation, forwardInLocalSpace);
 
-        // update stats
-        ecb.AddComponent<UpdateStatsComponent>(beamEntity);
-        UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
-            {EntityToTransferStatsFrom = configEntity};
-        ecb.SetComponent(beamEntity, updateStatsComponent);
+            quaternion additionalRotation = quaternion.AxisAngle(math.up(), math.radians(angleToRotate));
+
+            // Combine the player's rotation with the additional rotation
+            quaternion newRotation = math.mul(playerRot.Value, additionalRotation);
+            var beamEntity = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamEntityPrefab);
+
+            LocalTransform beamTransform = new LocalTransform
+            {
+                Position = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value,
+                Rotation = newRotation,
+                Scale = 1
+            };
+            state.EntityManager.SetComponentData(beamEntity, beamTransform);
+            state.EntityManager.SetComponentData(beamEntity, new DirectionComponent {Value = forwardInGlobalSpace});
+
+            var beamVfx = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamVfxPrefab);
+            state.EntityManager.SetComponentData(beamVfx, beamTransform);
+            
+            var configEntity = SystemAPI.GetSingletonEntity<SwordUltimateConfig>();
+
+            // update stats
+            ecb.AddComponent<UpdateStatsComponent>(beamEntity);
+            UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
+                {EntityToTransferStatsFrom = configEntity};
+            ecb.SetComponent(beamEntity, updateStatsComponent);
+        }
     }
 }

@@ -22,7 +22,9 @@ public enum MaterialType
     Ranger5Material,
 
     EliteGrontMaterial,
-    EliteRangestMaterial
+    EliteRangestMaterial,
+
+    BearMaterial
 }
 
 public class MaterialReferenceHolder : MonoBehaviour

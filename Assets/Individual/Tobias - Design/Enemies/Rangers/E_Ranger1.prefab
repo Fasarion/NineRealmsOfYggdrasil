@@ -45,7 +45,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.27, y: 0, z: -2.45}
-  m_LocalScale: {x: 0.8, y: 0.8, z: 0.8}
+  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 40
+  shouldDisplayDamageNumbers: 1
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -325,13 +326,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects:
-  - SpawnPrefab: {fileID: 0}
-    SpawnSettings:
-      SetScale: 0
-      NewScale: 1
-      SetYPosition: 0
-      YPosition: 0
+  entitiesToSpawn:
+  - {fileID: 0}
+  spawnSettings:
+    SetScale: 0
+    NewScale: 1
+    SetYPosition: 0
+    YPosition: 0
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -372,7 +373,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackCooldown: 4
-  attackDelay: 0.6
   distanceToPerformAttack: 9
 --- !u!114 &922261842375008278
 MonoBehaviour:
@@ -461,12 +461,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData:
-    AudioEnumValue: 0
     eventCategoryType: 0
     weaponType: 0
     enemyTyping: 1
     audioEventType: 0
     attackType: 0
+    environmentType: 0
 --- !u!114 &-200509008157379024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,6 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyAnimationType: 1
+  attackDelayAfterAnimationStart: 0.6
 --- !u!114 &-2303412869338236957
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -284,6 +284,31 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4990315668895044643, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Path
+      value: event:/Musik/VillageTheme2Battle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990315668895044643, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data1
+      value: -888973154
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990315668895044643, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data2
+      value: 1301899272
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990315668895044643, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data3
+      value: -1316129904
+      objectReference: {fileID: 0}
+    - target: {fileID: 4990315668895044643, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: EventReference.Guid.Data4
+      value: 376194218
+      objectReference: {fileID: 0}
     - target: {fileID: 6343745338063693577, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -367,17 +392,17 @@ PrefabInstance:
     - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: enemyCountStageOne
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: enemyCountStageTwo
-      value: 15
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7168146192408718008, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: enemyCountStageThree
-      value: 25
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -137,7 +137,7 @@ MonoBehaviour:
     timerCutoffTime: 210
     minSpawnCount: 2
     maxSpawnCount: 3
-  - targetEnemyCount: 900
+  - targetEnemyCount: 1000
     CheckpointEnemyData:
     - EnemyType: 2
       Weight: 1
@@ -146,9 +146,9 @@ MonoBehaviour:
     - EnemyType: 4
       Weight: 1
     timerCutoffTime: 240
-    minSpawnCount: 1
+    minSpawnCount: 2
     maxSpawnCount: 5
-  - targetEnemyCount: 300
+  - targetEnemyCount: 350
     CheckpointEnemyData:
     - EnemyType: 3
       Weight: 8
@@ -159,7 +159,7 @@ MonoBehaviour:
     timerCutoffTime: 270
     minSpawnCount: 2
     maxSpawnCount: 3
-  - targetEnemyCount: 330
+  - targetEnemyCount: 400
     CheckpointEnemyData:
     - EnemyType: 3
       Weight: 4
@@ -170,7 +170,7 @@ MonoBehaviour:
     timerCutoffTime: 300
     minSpawnCount: 2
     maxSpawnCount: 3
-  - targetEnemyCount: 250
+  - targetEnemyCount: 400
     CheckpointEnemyData:
     - EnemyType: 3
       Weight: 3
@@ -181,8 +181,8 @@ MonoBehaviour:
     - EnemyType: 6
       Weight: 1
     timerCutoffTime: 330
-    minSpawnCount: 2
-    maxSpawnCount: 3
+    minSpawnCount: 3
+    maxSpawnCount: 6
   - targetEnemyCount: 600
     CheckpointEnemyData:
     - EnemyType: 4
@@ -190,8 +190,8 @@ MonoBehaviour:
     - EnemyType: 7
       Weight: 1
     timerCutoffTime: 360
-    minSpawnCount: 2
-    maxSpawnCount: 3
+    minSpawnCount: 3
+    maxSpawnCount: 6
   startingCheckpointIndex: 0
   spawningCenterPoint: {fileID: 2718740116621298742}
   VisualizationThickness: 0.23

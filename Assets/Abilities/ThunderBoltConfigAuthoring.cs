@@ -9,6 +9,7 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
 {
     public GameObject abilityPrefab;
     public GameObject projectilePrefab;
+    public GameObject sparkEffectPrefab;
     public float maxDisplayTime;
     public float damageDelayTime;
     public float maxArea; 
@@ -33,6 +34,7 @@ public class ThunderBoltConfigAuthoring : MonoBehaviour
                 {
                     AbilityPrefab = GetEntity(authoring.abilityPrefab, TransformUsageFlags.Dynamic),
                     ProjectilePrefab = GetEntity(authoring.projectilePrefab, TransformUsageFlags.Dynamic),
+                    SparkEffectPrefab = GetEntity(authoring.sparkEffectPrefab, TransformUsageFlags.Dynamic),
                     MaxDisplayTime = authoring.maxDisplayTime,
                     DamageDelayTime = authoring.damageDelayTime,
                     MaxArea = authoring.maxArea,
@@ -54,6 +56,7 @@ public struct ThunderBoltConfig : IComponentData
 {
     public Entity AbilityPrefab;
     public Entity ProjectilePrefab;
+    public Entity SparkEffectPrefab;
     public float MaxDisplayTime;
     public float DamageDelayTime;
     public float MaxArea;

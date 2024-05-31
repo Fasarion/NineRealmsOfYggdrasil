@@ -27,9 +27,7 @@ namespace Player
             var dashTimer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<PlayerDashConfig>());
             var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
             
-            foreach (var (playerTransform, speedComp, animatorReference, gameObjectAnimator, velocity) 
-                in SystemAPI.Query<RefRW<LocalTransform>, RefRO<MoveSpeedComponent>, AnimatorReference, GameObjectAnimatorPrefab, RefRW<PhysicsVelocity>>()
-                    .WithAll<PlayerTag, CanMoveFromInput>())
+            foreach (var _ in SystemAPI.Query<PlayerTag>().WithAll<CanMoveFromInput>())
             {
                 // don't dash if busy
                 if (attackCaller.BusyAttackInfo.Busy) continue;

@@ -29,13 +29,14 @@ public partial class PauseManagerSystem : SystemBase
         isPaused = true;
         this.pauseType = pauseType;
         
-        var gameManager = SystemAPI.GetSingletonEntity<GameManagerSingleton>();
-        
-        if (EntityManager.HasComponent<GameUnpaused>(gameManager))
+        if (SystemAPI.TryGetSingletonEntity<GameManagerSingleton>(out Entity gameManager))
         {
-            EntityManager.RemoveComponent<GameUnpaused>(gameManager);
+            if (EntityManager.HasComponent<GameUnpaused>(gameManager))
+            {
+                EntityManager.RemoveComponent<GameUnpaused>(gameManager);
+            }
         }
-        
+
         UnityEngine.Time.timeScale = 0;
     }
     
@@ -43,14 +44,16 @@ public partial class PauseManagerSystem : SystemBase
     {
         isPaused = false;
         this.pauseType = pauseType;
-        
-        var gameManager = SystemAPI.GetSingletonEntity<GameManagerSingleton>();
-        
-        if (!EntityManager.HasComponent<GameUnpaused>(gameManager))
+
+
+        if (SystemAPI.TryGetSingletonEntity<GameManagerSingleton>(out Entity gameManager))
         {
-            EntityManager.AddComponent<GameUnpaused>(gameManager);
+            if (!EntityManager.HasComponent<GameUnpaused>(gameManager))
+            {
+                EntityManager.AddComponent<GameUnpaused>(gameManager);
+            }
         }
-        
+
         UnityEngine.Time.timeScale = 1;
     }
 

@@ -12,7 +12,7 @@ public partial class UpdateMouseWorldPositionSystem : SystemBase
         var hasMouseInput = SystemAPI.TryGetSingleton(out MousePositionInput mousePositionInput);
         if (!hasMouseInput)
         {
-            Debug.LogWarning("No mouse position found, wont rotate player.");
+            //Debug.LogWarning("No mouse position found, wont rotate player.");
             return;
         }
         
@@ -23,7 +23,7 @@ public partial class UpdateMouseWorldPositionSystem : SystemBase
             _camera = Camera.main;
             if (!_camera)
             {
-                Debug.LogWarning("No camera found, wont rotate player.");
+                //Debug.LogWarning("No camera found, wont rotate player.");
                 return;
             }
         }

@@ -21,6 +21,7 @@ public class MusicManager : MonoBehaviour
     private int nextStageCount;
 
     [SerializeField]private bool playLevelMusic;
+    [SerializeField]private bool playMenuMusic;
     
     private void Awake()
     {
@@ -41,6 +42,11 @@ public class MusicManager : MonoBehaviour
         if (playLevelMusic)
         {
             levelMusic.Play();
+        }
+
+        if (playMenuMusic)
+        {
+            menuMusic.Play();
         }
       
         SetNextStageCount(nextStage);

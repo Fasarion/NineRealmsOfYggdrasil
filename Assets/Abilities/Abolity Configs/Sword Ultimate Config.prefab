@@ -54,7 +54,9 @@ MonoBehaviour:
   beamPrefab: {fileID: 7824363987953266496, guid: 727b40c0a51cf494b894f2a715f78109,
     type: 3}
   beamVfx: {fileID: 4785275565148283202, guid: 3cfd71351f88a1d48952c92c81d39b07, type: 3}
-  beamSpawnTimeAfterAttack: 0.2
+  beamSpawnTimeAfterAttack: 0.1
+  beamsPerSwing: 3
+  degreesBetweenBeams: 25
 --- !u!114 &7644122277154232076
 MonoBehaviour:
   m_ObjectHideFlags: 0

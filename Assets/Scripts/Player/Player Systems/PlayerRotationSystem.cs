@@ -11,6 +11,9 @@ namespace Player
     {
         public void OnUpdate(ref SystemState state)
         {
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
+                return;
+            
             bool hasAimSettings = SystemAPI.TryGetSingleton(out AimSettingsData aimSettings);
 
             if (hasAimSettings && aimSettings.autoAim)
@@ -21,6 +24,15 @@ namespace Player
             {
                 HandleManualAim(ref state);
             }
+            
+            foreach (var playerTransform in
+                SystemAPI.Query<LocalTransform>()
+                    .WithAll<PlayerTag>())
+            {
+                playerRotationSingleton.ValueRW.Value = playerTransform.Rotation;
+                playerRotationSingleton.ValueRW.Forward = playerTransform.Forward();
+            }
+            
         }
 
         private void HandleAutoAim(ref SystemState state)
@@ -42,8 +54,7 @@ namespace Player
                 return;
             }
 
-            if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerRotationSingleton> playerRotationSingleton))
-                return;
+            
 
             bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
             if (gameIsPaused) return;
@@ -79,8 +90,8 @@ namespace Player
                     animReference.Animator.transform.rotation = newRotation;
                 }
 
-                playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
-                playerRotationSingleton.ValueRW.Forward = playerTransform.ValueRO.Forward();
+                // playerRotationSingleton.ValueRW.Value = playerTransform.ValueRO.Rotation;
+                // playerRotationSingleton.ValueRW.Forward = playerTransform.ValueRO.Forward();
             }
         }
     }

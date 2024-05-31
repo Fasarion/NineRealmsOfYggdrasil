@@ -49,6 +49,65 @@ public class UpgradeCardUIManager : MonoBehaviour
         
         HideUI();
     }
+    
+    public Camera camera; // Reference to the camera
+    public GameObject[] objectsToPlace; // Array of objects to place in front of the camera
+    public float distanceInFront = 5.0f; // Distance in front of the camera
+    public float duration = 2.0f; // Duration of the lowering animation
+    public float spacing = 2.0f; // Horizontal spacing between objects
+    public float delay = 1.0f; // Delay before the effect starts
+
+    void Start()
+    {
+        // Start the coroutine to lower the objects one by one
+        //StartCoroutine(LowerObjectsSequentially());
+    }
+
+    IEnumerator LowerObjectsSequentially()
+    {
+        yield return new WaitForSeconds(delay);
+        
+        // Calculate the central target position in front of the camera
+        Vector3 cameraPosition = camera.transform.position;
+        Vector3 cameraForward = camera.transform.forward;
+        Vector3 centerPosition = cameraPosition + cameraForward * distanceInFront;
+
+        // Get the world position of the top of the screen
+        Vector3 topOfScreen = camera.ViewportToWorldPoint(new Vector3(0.5f, 1f, distanceInFront));
+
+        // Calculate the starting positions and target positions for each object
+        for (int i = 0; i < objectsToPlace.Length; i++)
+        {
+            float offset = (i - (objectsToPlace.Length - 1) / 2.0f) * spacing;
+            Vector3 targetPosition = centerPosition + camera.transform.right * offset;
+            Vector3 startPosition = topOfScreen + camera.transform.right * offset;
+
+            // Set the initial position of the object
+            objectsToPlace[i].transform.position = startPosition;
+
+            // Optional: Align the object to face the same direction as the camera
+            //objectsToPlace[i].transform.rotation = camera.transform.rotation;
+
+            // Start the coroutine to lower the current object
+            yield return StartCoroutine(LowerObject(objectsToPlace[i], startPosition, targetPosition));
+        }
+    }
+
+    IEnumerator LowerObject(GameObject obj, Vector3 startPosition, Vector3 targetPosition)
+    {
+        float elapsedTime = 0f;
+
+        // Gradually move the object from startPosition to targetPosition
+        while (elapsedTime < duration)
+        {
+            obj.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
+            elapsedTime += Time.fixedUnscaledDeltaTime * 10;
+            yield return null;
+        }
+
+        // Ensure the object is exactly at the target position at the end
+        obj.transform.position = targetPosition;
+    }
 
     private void Update()
     {

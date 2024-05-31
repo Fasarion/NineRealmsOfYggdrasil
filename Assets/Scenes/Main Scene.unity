@@ -176,6 +176,12 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &850059176 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2527466941114435367, guid: 19bc8b518d1199e4299c877952c35106,
+    type: 3}
+  m_PrefabInstance: {fileID: 7307923143516728856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7307923143516728856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -358,6 +364,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: delay
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 850059176}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: objectsToPlace.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: objectsToPlace.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: objectsToPlace.Array.data[1]
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: objectsToPlace.Array.data[2]
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 6343745338063693577, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}

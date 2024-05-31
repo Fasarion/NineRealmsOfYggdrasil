@@ -61,8 +61,15 @@ public class FadeHandler : MonoBehaviour
     
     public IEnumerator Fade()
     {
-        while (currentFadeStartDelay < fadeStartDelay)
+
+        
+        while (currentFadeStartDelay <= fadeStartDelay)
         {
+            var time = Time.unscaledDeltaTime;
+            if (Time.unscaledDeltaTime > Time.maximumDeltaTime)
+            {
+                time = Time.maximumDeltaTime;
+            }
             //Could be cleaned up a bit, but not now.
             if (fadeMode == FadeMode.FadeIn)
             {
@@ -73,11 +80,12 @@ public class FadeHandler : MonoBehaviour
                 currentAlpha = fadeCurve.Evaluate(fadeTime);
                 
             }
-            currentFadeStartDelay += Time.deltaTime;
+            
+            currentFadeStartDelay += time;
             imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
             yield return null;
         }
-        while(fadeTime < 1)
+        while(fadeTime <= 1)
         {
             if (fadeMode == FadeMode.FadeIn)
             {
@@ -89,14 +97,28 @@ public class FadeHandler : MonoBehaviour
                 
             }
 
-            fadeTime += Time.deltaTime * fadeTimeMultiplier;
+           
+            var time = Time.unscaledDeltaTime;
+            if (Time.unscaledDeltaTime > Time.maximumDeltaTime)
+            {
+                time = Time.maximumDeltaTime;
+            }
+            fadeTime += time * fadeTimeMultiplier;
             imageToFade.color = new Color(currentColor.r,currentColor.g, currentColor.b, currentAlpha);
+          
             yield return null;
         }
 
-        while (currentFadeExitDelay < fadeExitDelay)
+        while (currentFadeExitDelay <= fadeExitDelay)
         {
-            currentFadeExitDelay += Time.deltaTime;
+            
+            var time = Time.unscaledDeltaTime;
+            if (Time.unscaledDeltaTime > Time.maximumDeltaTime)
+            {
+                time = Time.maximumDeltaTime;
+            }
+            currentFadeExitDelay += time;
+            
             yield return null;
         }
         

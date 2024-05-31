@@ -28,6 +28,7 @@ GameObject:
   - component: {fileID: 851364982739974534}
   - component: {fileID: 8931064742681460953}
   - component: {fileID: 4133225118689222593}
+  - component: {fileID: 2550018134363494271}
   m_Layer: 0
   m_Name: Hammer Entity
   m_TagString: Untagged
@@ -399,12 +400,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData:
-    AudioEnumValue: 0
     eventCategoryType: 1
     weaponType: 2
     enemyTyping: 0
     audioEventType: 2
     attackType: 1
+    environmentType: 0
 --- !u!114 &137017837829733646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -488,3 +489,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+--- !u!114 &2550018134363494271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8745109184148579111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3432d5cce846d3a4e8df22714c5a93cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cachedSpeed: 0
+  slowPercentage: 0.8
+  isInitialized: 0
+  slowTimer: 0
+  slowDuration: 1.1
+  weaponType: 2
+  isSlowing: 0

@@ -4,6 +4,9 @@ using UnityEngine.UI;
 
 public class DashUIIconBehaviour : MonoBehaviour
 {
+    [Header("Contents")] 
+    [SerializeField] private GameObject dashContents;
+
     [Header("Fill")]
     [SerializeField] private Image fillImage;
     
@@ -17,18 +20,34 @@ public class DashUIIconBehaviour : MonoBehaviour
     {
         var dashInfo = dashInfoElement.Value;
         
-        bool ready = dashInfo.Ready;
+        float tVal = dashInfo.CurrentTime / dashInfo.CooldownTime;
+        
+        fillImage.fillAmount = tVal;
 
-        fillImage.fillAmount = dashInfo.CurrentTime / dashInfo.CooldownTime;
 
-        float alpha = ready ? 1 : alphaWhenNotReady;
-
-        UpdateImageColor(dashIcon, alpha);
-        UpdateImageColor(fillImage, alpha);
+        UpdateImageColor(dashIcon,  tVal);
+        UpdateImageColor(fillImage, tVal);
     }
 
-    private void UpdateImageColor(Image image, float alpha)
+    private void UpdateImageColor(Image image, float t)
     {
+        float alpha;
+
+        if (t >= 1)
+        {
+            alpha = 1;
+        } 
+        else if (t <= 0)
+        {
+            alpha = 0;
+        }
+        else
+        {
+            alpha = alphaWhenNotReady;
+        }
+        
+        dashContents.SetActive(alpha > 0);
+
         var oldColor = image.color;
         image.color = new Color(oldColor.r, oldColor.g, oldColor.b, alpha);
     }

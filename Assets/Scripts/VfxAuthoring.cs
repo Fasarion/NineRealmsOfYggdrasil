@@ -55,8 +55,15 @@ public partial struct HandleVfxSystem : ISystem
                 .WithNone<LocalTransform, GameObjectVfxPrefab>()
                 .WithEntityAccess())
         {
-            Object.Destroy(animatorReference.Vfx.gameObject);
-            ecb.RemoveComponent<AnimatorReference>(entity);
+            GameObject vfxObject = animatorReference.Vfx.gameObject;
+            
+            while (vfxObject.transform.parent != null)
+            {
+                vfxObject = vfxObject.transform.parent.gameObject;
+            }
+            
+            Object.Destroy(vfxObject);
+            ecb.RemoveComponent<VfxReference>(entity);
         }
         
         // Add animator references
@@ -67,7 +74,7 @@ public partial struct HandleVfxSystem : ISystem
             var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value);
             var animatorReference = new VfxReference()
             {
-                Vfx = gameObjectInstance.GetComponent<VisualEffect>()
+                Vfx = gameObjectInstance.GetComponentInChildren<VisualEffect>()
             };
             ecb.AddComponent(entity, animatorReference);
         }

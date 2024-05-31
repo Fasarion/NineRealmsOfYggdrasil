@@ -114,12 +114,12 @@ public class WeaponAudio : ScriptableObject
     {
         switch (audioEvent)
         {
-            case 1: 
+            case 1: //onUse
             {
                 PlaySpecialUseAudio((int)audioData.weaponType);
                 break;
             }
-            case 2:
+            case 2: //onImpact
             {
                 PlaySpecialImpactAudio((int)audioData.weaponType);
                 break;
@@ -131,12 +131,12 @@ public class WeaponAudio : ScriptableObject
     {
         switch (audioEvent)
         {
-            case 1:
+            case 1: //onUse
             {
-                //PlayUltimateUseAudio((int)audioData.weaponType);
+                PlayUltimateUseAudio((int)audioData.weaponType);
                 break;
             }
-            case 2:
+            case 2: //onImpact
             {
                 PlayUltimateImpactAudio((int)audioData.weaponType);
                 break;
@@ -156,7 +156,6 @@ public class WeaponAudio : ScriptableObject
             }
             case 2: //Hammare
             {
-                Debug.Log("HammarLjud");
                 RuntimeManager.PlayOneShot(hammerImpact);
                 break;
             }
@@ -224,7 +223,7 @@ public class WeaponAudio : ScriptableObject
         {
             case 1:
             {
-                //SvärdUltimateUse
+                RuntimeManager.PlayOneShot(swordUltimate);
                 break;
             }
             case 2:

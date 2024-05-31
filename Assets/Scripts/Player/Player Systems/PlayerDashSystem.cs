@@ -40,11 +40,38 @@ namespace Player
                 bool playerDashInput = dashInput.KeyDown;
                 bool playerCanDash = !dashConfig.ValueRO.IsDashing;
 
+                bool fillOneDashAtTime = dashConfig.ValueRO.waitBetweenDashes;
+                bool oneDashIsFilled = false;
+
+                float deltaTime = SystemAPI.Time.DeltaTime;
+
+                SortBuffer(ref state, ref dashBuffer);
+
                 for (int i = 0; i < dashBuffer.Length; i++)
                 {
-                    var dashInfo = dashBuffer.ElementAt(i);
-                    dashTimer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-                    dashInfo.Value.CurrentTime += SystemAPI.Time.DeltaTime;
+                    int index = i;
+
+                    // if (fillOneDashAtTime)
+                    // {
+                    //     index = dashBuffer.Length - i - 1;
+                    // }
+
+                    var dashInfo = dashBuffer.ElementAt(index);
+                    dashTimer.ValueRW.currentTime += deltaTime;
+
+                    bool updateTimer = true;
+
+                    if (!dashInfo.Value.Ready)
+                    {
+                        if (fillOneDashAtTime && oneDashIsFilled)
+                            updateTimer = false;
+                        
+                        if (updateTimer)
+                        {
+                            dashInfo.Value.CurrentTime += deltaTime;
+                            oneDashIsFilled = true;
+                        }
+                    }
                     
                     if (dashInfo.Value.Ready && playerDashInput && playerCanDash)
                     {
@@ -58,7 +85,23 @@ namespace Player
                         dashTimer.ValueRW.currentTime = 0f;
                     }
 
-                    dashBuffer.ElementAt(i) = dashInfo; 
+                    dashBuffer.ElementAt(index) = dashInfo;
+                }
+            }
+        }
+
+        private void SortBuffer(ref SystemState state, ref DynamicBuffer<DashInfoElement> dashBuffer)
+        {
+            for (int i = 0; i < dashBuffer.Length; i++)
+            {
+                for (int j = i + 1; j < dashBuffer.Length; j++)
+                {
+                    if (dashBuffer.ElementAt(i).Value.CurrentTime <= dashBuffer.ElementAt(j).Value.CurrentTime)
+                    {
+                        var temp = dashBuffer.ElementAt(j);
+                        dashBuffer.ElementAt(j) = dashBuffer.ElementAt(i);
+                        dashBuffer.ElementAt(i) = temp;
+                    }
                 }
             }
         }

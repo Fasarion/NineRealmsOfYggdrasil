@@ -10,6 +10,8 @@ namespace Health
         [Tooltip("Maximum health points of this object.")]
         [SerializeField] private float maxHP = 5;
 
+        [SerializeField] private bool shouldDisplayDamageNumbers = true;
+
         [SerializeField] private float damageReductionValue = 1;
         
         class Baker : Baker<HealthPointsAuthoring>
@@ -29,6 +31,9 @@ namespace Health
                 // Tag to mark whenever an entity has changed HP in a given frame
                 AddComponent<HasChangedHP>(entity);
                 SetComponentEnabled<HasChangedHP>(entity, false);
+                
+                // Damage Numbers
+                AddComponent(entity, new DamageNumbersComponent{ShouldDisplayDamageNumbers = authoring.shouldDisplayDamageNumbers});
                 
                 // Objects with health are assumed to be destroyed
                 AddComponent(entity, new ShouldBeDestroyed());
@@ -50,6 +55,11 @@ namespace Health
     public struct DamageReductionComponent : IComponentData
     {
         public float Value;
+    }
+    
+    public struct DamageNumbersComponent : IComponentData
+    {
+        public bool ShouldDisplayDamageNumbers;
     }
 }
 

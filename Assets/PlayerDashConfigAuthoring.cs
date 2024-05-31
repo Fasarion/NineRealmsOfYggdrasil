@@ -11,6 +11,8 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
     public float dashCooldown;
     public AudioData Audio; 
     public GameObject DashShieldPrefab;
+
+    [SerializeField] private bool waitBetweenDashes;
     public int maxDashes = 1;
 
     [HideInInspector] public bool isDashing;
@@ -37,7 +39,8 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
                     IsDashOnCooldown = authoring.isDashOnCooldown,
                     Audio = authoring.Audio,
                     DashShieldPrefab = GetEntity(authoring.DashShieldPrefab, TransformUsageFlags.Dynamic),
-                    MaxDashes = authoring.maxDashes
+                    MaxDashes = authoring.maxDashes,
+                    waitBetweenDashes = authoring.waitBetweenDashes
                 });
 
             var dashBuffer = AddBuffer<DashInfoElement>(entity);
@@ -58,7 +61,9 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
 
 public struct PlayerDashConfig : IComponentData
 {
-  //  public float DashForce;
+    public bool waitBetweenDashes;
+    
+    //  public float DashForce;
   //  public float DashDuration;
     public float DashCooldown;
     public bool IsDashing;

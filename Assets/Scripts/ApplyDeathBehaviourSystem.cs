@@ -27,6 +27,29 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+
+        
+        bool audioBufferExists = SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<AudioBufferData> audioBuffer);
+
+        if (audioBufferExists)
+        {
+            foreach (var (isDyingComponent, soundOnDeath) in SystemAPI
+                .Query<IsDyingComponent, PlaySoundOnDeathComponent>())
+            {
+                if (isDyingComponent.IsHandled) continue;
+                
+                audioBuffer.Add(new AudioBufferData {AudioData = soundOnDeath.AudioData});
+            }
+        }
+
+
+        foreach (var (_, entity) in SystemAPI
+                     .Query<IsDyingComponent>()
+                     .WithNone<EnemyTypeComponent>()
+                     .WithEntityAccess())
+        {
+            ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
+        }
         
         foreach (var (currentHP, velocity, transform, dyingComponent, entity) in SystemAPI
                      .Query<CurrentHpComponent, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()

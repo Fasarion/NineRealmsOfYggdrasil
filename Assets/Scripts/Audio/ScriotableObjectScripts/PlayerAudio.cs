@@ -33,6 +33,7 @@ public class PlayerAudio : ScriptableObject
             }
             case 1: //HitAudio
             {
+                Debug.Log("Owie");
                 RuntimeManager.PlayOneShot(playerHit);
                 break;
             }

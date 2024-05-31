@@ -47,11 +47,11 @@ MonoBehaviour:
   CollisionTag: 
   EventReference:
     Guid:
-      Data1: -888973154
-      Data2: 1301899272
-      Data3: -1316129904
-      Data4: 376194218
-    Path: event:/Musik/Main Event
+      Data1: 1219563285
+      Data2: 1128224744
+      Data3: -1077628007
+      Data4: 731635143
+    Path: event:/Musik/MainTheme
   Event: 
   PlayEvent: 0
   StopEvent: 0
@@ -172,6 +172,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   menuMusic: {fileID: 3248188091032165001}
   levelMusic: {fileID: 7833705385013913452}
-  enemyCountStageOne: 10
-  enemyCountStageTwo: 0
-  enemyCountStageThree: 0
+  enemyCountStageOne: 5
+  enemyCountStageTwo: 15
+  enemyCountStageThree: 25
+  playLevelMusic: 1
+  playMenuMusic: 0

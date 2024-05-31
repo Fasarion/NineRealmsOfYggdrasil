@@ -13,7 +13,7 @@ public partial class XPEventCaller : SystemBase
         bool playerXpExist = SystemAPI.TryGetSingleton<PlayerXP>(out PlayerXP xp);
         if (!playerXpExist)
         {
-            Debug.Log("No player xp found");
+            //Debug.Log("No player xp found");
             return;
         }
         

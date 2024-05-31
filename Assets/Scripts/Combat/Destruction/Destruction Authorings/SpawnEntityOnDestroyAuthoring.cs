@@ -3,22 +3,28 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpawnEntityOnDestroyAuthoring : MonoBehaviour
 {
-    [Tooltip("Game Objects to spawn when this entity gets destroyed.")]
-    [SerializeField] private List<SpawnObjectContents> spawnObjects;
+    [Header("Spawn Objects")]
+    [FormerlySerializedAs("objectsWithSettings")]
+    [FormerlySerializedAs("spawnObjects")]
+    [Tooltip("Game Objects to spawn when this entity gets destroyed (with settings).")]
+    [SerializeField] private List<GameObject> entitiesToSpawn;
+
+    [Header("Spawn Settings")]
+    [Tooltip("Settings for entities to spawn")]
+    [SerializeField] private SpawnSettings spawnSettings;
+    
+    // [Tooltip("Game Objects to spawn when this entity gets destroyed (without settings).")]
+    // [SerializeField] private List<GameObject> objectsWithOutSettings;
 
     private void OnValidate()
     {
-        for (var i = 0; i < spawnObjects.Count; i++)
+        if (spawnSettings.NewScale <= 0)
         {
-            var spawnObject = spawnObjects[i];
-            if (spawnObject.SpawnSettings.NewScale <= 0)
-            {
-                spawnObject.SpawnSettings.NewScale = 1;
-                spawnObjects[i] = spawnObject;
-            }
+            spawnSettings.NewScale = 1;
         }
     }
 
@@ -28,15 +34,33 @@ public class SpawnEntityOnDestroyAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             
-            var buffer = AddBuffer<SpawnEntityOnDestroyElement>(entity);
-            foreach (var spawnObject in authoring.spawnObjects)
+            var spawnBuffer = AddBuffer<SpawnEntityOnDestroyElement>(entity);
+            foreach (var spawnSettingsObject in authoring.entitiesToSpawn)
             {
-                buffer.Add(new SpawnEntityOnDestroyElement
+                spawnBuffer.Add(new SpawnEntityOnDestroyElement
                 {
-                    Entity = GetEntity(spawnObject.SpawnPrefab, TransformUsageFlags.Dynamic),
-                    Settings = spawnObject.SpawnSettings
+                    Value = GetEntity(spawnSettingsObject, TransformUsageFlags.Dynamic),
                 });
             }
+            
+            AddComponent(entity, new SpawnSettingsComponent{Value = authoring.spawnSettings});
+            AddComponent(entity, new SpawnOnDestroyTag());
+            
+            // var normalBuffer = AddBuffer<SpawnNormalEntityOnDestroyElement>(entity);
+            // foreach (var spawnObject in authoring.objectsWithOutSettings)
+            // {
+            //     normalBuffer.Add(new SpawnNormalEntityOnDestroyElement
+            //     {
+            //         Value = GetEntity(spawnObject, TransformUsageFlags.Dynamic),
+            //     });
+            // }
         }
     }
+}
+
+public struct SpawnOnDestroyTag : IComponentData{}
+
+public struct SpawnSettingsComponent : IComponentData
+{
+    public SpawnSettings Value;
 }

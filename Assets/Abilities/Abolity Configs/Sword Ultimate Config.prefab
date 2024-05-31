@@ -11,6 +11,10 @@ GameObject:
   - component: {fileID: 4288099518066920023}
   - component: {fileID: 254863360881952147}
   - component: {fileID: 7644122277154232076}
+  - component: {fileID: 2724801224189099907}
+  - component: {fileID: 3858257242953754444}
+  - component: {fileID: 7215396623326362912}
+  - component: {fileID: 7587177894121845818}
   m_Layer: 0
   m_Name: Sword Ultimate Config
   m_TagString: Untagged
@@ -47,6 +51,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfScaledAttacks: 2
   scaleIncrease: 2
+  beamPrefab: {fileID: 7824363987953266496, guid: 727b40c0a51cf494b894f2a715f78109,
+    type: 3}
+  beamVfx: {fileID: 7824363987953266496, guid: 00d2139a641630648afcaae99458775b, type: 3}
+  beamSpawnTimeAfterAttack: 0.1
+  beamsPerSwing: 3
+  degreesBetweenBeams: 25
+  maxTotalDegrees: 180
 --- !u!114 &7644122277154232076
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57,5 +68,59 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4c5986fe2e9a8446a1e23dda0fafc6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2724801224189099907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130377291682013088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  criticalChance: 0
+--- !u!114 &3858257242953754444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130377291682013088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9340161221149bcb122c107d3c8b893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WeaponType: 1
+  AttackType: 3
+--- !u!114 &7215396623326362912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130377291682013088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockBackForce: 1
+  KnockDirection: 0
+--- !u!114 &7587177894121845818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5130377291682013088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

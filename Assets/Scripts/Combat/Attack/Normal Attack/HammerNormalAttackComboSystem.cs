@@ -34,7 +34,8 @@ namespace Patrik.Special_Attack
             state.EntityManager.SetComponentData(spark, new VisualEffectComponent
             {
                 EntityToFollow = SystemAPI.GetSingletonEntity<HammerComponent>(),
-                
+                ActiveTime = 1.5f,
+                ShouldFollowParentEntity = true,
             });
         }
     }

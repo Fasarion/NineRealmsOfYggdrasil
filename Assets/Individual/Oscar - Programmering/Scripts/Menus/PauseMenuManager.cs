@@ -11,7 +11,7 @@ public class PauseMenuManager : MonoBehaviour
     public void Awake()
     {
         DeactivatePauseMenu();
-        AudioSettingsDeactivated();
+        DeactivateAudioSettings();
     }
 
     public void PauseGame()
@@ -31,12 +31,12 @@ public class PauseMenuManager : MonoBehaviour
         EventManager.OnUnpause -= OnUnpause;
     }
 
-    public void AudioSettingsActivated()
+    public void ActivateAudioSettings()
     {
         audioSettingsMenu.SetActive(true);
     }
     
-    public void AudioSettingsDeactivated()
+    public void DeactivateAudioSettings()
     {
         audioSettingsMenu.SetActive(false);
     }

@@ -108,7 +108,10 @@ public partial struct SwordUltimateAttackSystem : ISystem
         for (int i = 0; i < beamCount; i++)
         {
             var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
-            float angleToRotate = ultConfig.ValueRO.degreesBetweenBeams * i;
+
+            float rotationAngle = beamCount > 4 ? ultConfig.ValueRO.MaximumTotalDegreesPerSide / beamCount : ultConfig.ValueRO.degreesBetweenBeams;
+            
+            float angleToRotate = rotationAngle * i;
 
             if (i % 2 == 0)
                 angleToRotate *= -1;

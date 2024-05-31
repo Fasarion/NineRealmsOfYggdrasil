@@ -14,6 +14,8 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private float beamSpawnTimeAfterAttack = 0.3f; 
     [SerializeField] private int beamsPerSwing = 1; 
     [SerializeField] private float degreesBetweenBeams = 20f; 
+    [Range(0, 360)]
+    [SerializeField] private float maxTotalDegrees = 180f; 
     
     class Baker : Baker<SwordUltimateConfigAuthoring>
     {
@@ -30,7 +32,8 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
                 
                 BeamSpawnTimeAfterAttackStart = authoring.beamSpawnTimeAfterAttack,
                 BeamsPerSwing = authoring.beamsPerSwing,
-                degreesBetweenBeams = authoring.degreesBetweenBeams
+                degreesBetweenBeams = authoring.degreesBetweenBeams,
+                MaximumTotalDegreesPerSide = authoring.maxTotalDegrees / 2f
             });
         }
     }
@@ -51,5 +54,6 @@ public struct SwordUltimateConfig : IComponentData
     public float BeamSpawnTimeAfterAttackStart;
     public int BeamsPerSwing;
     public float degreesBetweenBeams;
+    public float MaximumTotalDegreesPerSide;
     public bool PrepareBeam { get; set; }
 }

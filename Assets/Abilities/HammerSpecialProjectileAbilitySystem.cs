@@ -12,6 +12,7 @@ public partial struct HammerSpecialProjectileAbilitySystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<HammerSpecialConfig>();
+        state.RequireForUpdate<HammerSpecialAbility>();
     }
 
     [BurstCompile]

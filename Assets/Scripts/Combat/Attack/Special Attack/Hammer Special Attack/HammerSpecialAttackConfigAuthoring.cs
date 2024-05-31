@@ -11,6 +11,14 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [Header("Indicator")]
     [Tooltip("Indicator that spawns when hammer starts to charge")]
     [SerializeField] private GameObject indicatorPrefab;
+
+    [Header("Extra Hammer Projectiles")]
+    [SerializeField] private GameObject hammerProjectileAbilityPrefab;
+
+    [SerializeField] private int maxProjectiles;
+    [SerializeField] private float timeBetweenSpawns;
+    [SerializeField] private float timeBetweenInitialThrowAndProjectiles;
+    [SerializeField] private float timeBetweenProjectileFires;
     
     [Header("Zap")]
     [Tooltip("Zap object that spawns when the hammer travels.")]
@@ -55,6 +63,7 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
             {
                 IndicatorPrefab = GetEntity(authoring.indicatorPrefab, TransformUsageFlags.None),
                 ElectricChargePrefab = GetEntity(authoring.electricZapPrefab, TransformUsageFlags.None),
+                HammerSpecialProjectilePrefab = GetEntity(authoring.hammerProjectileAbilityPrefab, TransformUsageFlags.Dynamic),
                 
                 BaseDistanceToTravel = authoring.baseDistanceToTravel,
                 DistanceToTravel = authoring.baseDistanceToTravel,
@@ -75,7 +84,12 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 CancelDelayTime = authoring.cancelDelayTime,
                 
                 throwImpactAudioData = authoring.throwImpactAudioData,
-                throwingAudioData = authoring.throwingAudioData
+                throwingAudioData = authoring.throwingAudioData,
+                
+                MaxProjectiles = authoring.maxProjectiles,
+                TimeBetweenSpawns = authoring.timeBetweenSpawns,
+                TimeBetweenInitialThrowAndProjectiles = authoring.timeBetweenInitialThrowAndProjectiles,
+                TimeBetweenProjectileFires = authoring.timeBetweenProjectileFires,
             });
         }
     }
@@ -85,6 +99,12 @@ public struct HammerSpecialConfig : IComponentData
 {
     public Entity IndicatorPrefab;
     public Entity ElectricChargePrefab;
+    public Entity HammerSpecialProjectilePrefab;
+    
+    public int MaxProjectiles;
+    public float TimeBetweenSpawns;
+    public float TimeBetweenInitialThrowAndProjectiles;
+    public float TimeBetweenProjectileFires;
     
     public float BaseDistanceToTravel;
     public float DistanceToTravel;

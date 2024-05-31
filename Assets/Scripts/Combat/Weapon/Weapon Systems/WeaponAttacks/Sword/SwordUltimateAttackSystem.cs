@@ -1,3 +1,6 @@
+using System.Collections;
+using System.Collections.Generic;
+using Destruction;
 using Movement;
 using Patrik;
 using Player;
@@ -6,10 +9,11 @@ using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
+using UnityEngine.VFX;
 
 [BurstCompile]
+//[UpdateAfter(typeof(HandleAnimationSystem))]
 [UpdateAfter(typeof(AttackStatTransferSystem))]
-[UpdateAfter(typeof(PlayerRotationSystem))]
 
 public partial struct SwordUltimateAttackSystem : ISystem
 {
@@ -27,10 +31,13 @@ public partial struct SwordUltimateAttackSystem : ISystem
         var ultConfig = SystemAPI.GetSingletonRW<SwordUltimateConfig>();
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+        
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
 
         if (ultConfig.ValueRO.IsActive)
         {
             ultConfig.ValueRW.CurrentTime += Time.deltaTime;
+            
 
             if (ultConfig.ValueRW.CurrentTime > ultConfig.ValueRO.BeamSpawnTimeAfterAttackStart)
             {
@@ -66,6 +73,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         // Initialize attack
         if (!ultConfig.ValueRO.IsActive)
         {
+            Debug.Log("Svärd?");
             var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
 
             float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
@@ -78,6 +86,11 @@ public partial struct SwordUltimateAttackSystem : ISystem
 
             ultConfig.ValueRW.IsActive = true;
             ultConfig.ValueRW.CurrentAttackCount = 0;
+            
+            var audioElement = new AudioBufferData() {AudioData = ultConfig.ValueRO.onUseAudioData};
+            audioBuffer.Add(audioElement);
+
+            //SpawnSwordBeam(ref state, ultConfig, ecb);
         }
         
         ecb.Playback(state.EntityManager);
@@ -86,50 +99,30 @@ public partial struct SwordUltimateAttackSystem : ISystem
 
     private void SpawnSwordBeam(ref SystemState state, RefRW<SwordUltimateConfig> ultConfig, EntityCommandBuffer ecb)
     {
-        int beamCount = ultConfig.ValueRO.BeamsPerSwing;
-        
-        if (beamCount <= 0) return;
+        // spawn sword beams
+        var beamEntity = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamEntityPrefab);
 
-        for (int i = 0; i < beamCount; i++)
+        var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
+
+        LocalTransform beamTransform = new LocalTransform
         {
-            var playerRot = SystemAPI.GetSingleton<PlayerRotationSingleton>();
-            float angleToRotate = ultConfig.ValueRO.degreesBetweenBeams * i;
+            Position = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value,
+            Rotation = playerRot.Value,
+            Scale = 1
+        };
+        state.EntityManager.SetComponentData(beamEntity, beamTransform);
+        state.EntityManager.SetComponentData(beamEntity, new DirectionComponent {Value = playerRot.Forward});
 
-            if (i % 2 == 0)
-                angleToRotate *= -1;
-            
-            quaternion rotation = quaternion.RotateY(math.radians(angleToRotate));
+        var beamVfx = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamVfxPrefab);
+        state.EntityManager.SetComponentData(beamVfx, beamTransform);
 
-            float3 forwardInLocalSpace = playerRot.Forward;
-            float3 forwardInGlobalSpace = math.rotate(rotation, forwardInLocalSpace);
-            
-            
-            // Create a quaternion for a 10-degree rotation around the y-axis
-            quaternion additionalRotation = quaternion.AxisAngle(math.up(), math.radians(angleToRotate));
 
-            // Combine the player's rotation with the additional rotation
-            quaternion newRotation = math.mul(playerRot.Value, additionalRotation);
-            var beamEntity = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamEntityPrefab);
+        var configEntity = SystemAPI.GetSingletonEntity<SwordUltimateConfig>();
 
-            LocalTransform beamTransform = new LocalTransform
-            {
-                Position = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value,
-                Rotation = newRotation,
-                Scale = 1
-            };
-            state.EntityManager.SetComponentData(beamEntity, beamTransform);
-            state.EntityManager.SetComponentData(beamEntity, new DirectionComponent {Value = forwardInGlobalSpace});
-
-            var beamVfx = state.EntityManager.Instantiate(ultConfig.ValueRO.BeamVfxPrefab);
-            state.EntityManager.SetComponentData(beamVfx, beamTransform);
-            
-            var configEntity = SystemAPI.GetSingletonEntity<SwordUltimateConfig>();
-
-            // update stats
-            ecb.AddComponent<UpdateStatsComponent>(beamEntity);
-            UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
-                {EntityToTransferStatsFrom = configEntity};
-            ecb.SetComponent(beamEntity, updateStatsComponent);
-        }
+        // update stats
+        ecb.AddComponent<UpdateStatsComponent>(beamEntity);
+        UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
+            {EntityToTransferStatsFrom = configEntity};
+        ecb.SetComponent(beamEntity, updateStatsComponent);
     }
 }

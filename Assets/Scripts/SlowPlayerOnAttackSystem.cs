@@ -54,6 +54,7 @@ public partial struct SlowPlayerOnAttackSystem : ISystem
 
             slowComponent.ValueRW.SlowTimer += SystemAPI.Time.DeltaTime;
 
+            //Reset slow
             if (slowComponent.ValueRO.SlowTimer > slowComponent.ValueRO.SlowDuration)
             {
                 var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();

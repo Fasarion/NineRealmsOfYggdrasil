@@ -28,15 +28,29 @@ public partial struct SwordUltimateAttackSystem : ISystem
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-        if (ultConfig.ValueRO.IsActive)
+        if (ultConfig.ValueRW.PrepareBeam)
         {
             ultConfig.ValueRW.CurrentTime += Time.deltaTime;
-
+            
             if (ultConfig.ValueRW.CurrentTime > ultConfig.ValueRO.BeamSpawnTimeAfterAttackStart)
             {
                 SpawnSwordBeam(ref state, ultConfig, ecb);
                 ultConfig.ValueRW.CurrentTime = -1000f; // hard reset timer
+                ultConfig.ValueRW.PrepareBeam = false;
             }
+
+        }
+        
+
+        if (ultConfig.ValueRO.IsActive)
+        {
+            // ultConfig.ValueRW.CurrentTime += Time.deltaTime;
+            //
+            // if (ultConfig.ValueRW.CurrentTime > ultConfig.ValueRO.BeamSpawnTimeAfterAttackStart)
+            // {
+            //     SpawnSwordBeam(ref state, ultConfig, ecb);
+            //     ultConfig.ValueRW.CurrentTime = -1000f; // hard reset timer
+            // }
             
             bool stoppedSwordAttack = attackCaller.ValueRO.ActiveAttackData.ShouldStopAttack(WeaponType.Sword) ||
                                       attackCaller.ValueRO.PassiveAttackData.ShouldStopAttack(WeaponType.Sword);
@@ -57,29 +71,30 @@ public partial struct SwordUltimateAttackSystem : ISystem
                 }
             }
         }
-        
-        if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Ultimate))
-            return;
 
-        ultConfig.ValueRW.CurrentTime = 0f;
-
-        // Initialize attack
-        if (!ultConfig.ValueRO.IsActive)
+        if (attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Sword, AttackType.Ultimate))
         {
-            var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
+            ultConfig.ValueRW.CurrentTime = 0f;
+            ultConfig.ValueRW.PrepareBeam = true;
 
-            float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
-            
-            scaleComp.Value = newSize;
-            state.EntityManager.SetComponentData(swordEntity, scaleComp);
-            
-            var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
-            statHandler.ValueRW.ShouldUpdateStats = true;
+            // Initialize attack
+            if (!ultConfig.ValueRO.IsActive)
+            {
+                var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
 
-            ultConfig.ValueRW.IsActive = true;
-            ultConfig.ValueRW.CurrentAttackCount = 0;
+                float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
+            
+                scaleComp.Value = newSize;
+                state.EntityManager.SetComponentData(swordEntity, scaleComp);
+            
+                var statHandler = SystemAPI.GetSingletonRW<StatHandlerComponent>();
+                statHandler.ValueRW.ShouldUpdateStats = true;
+
+                ultConfig.ValueRW.IsActive = true;
+                ultConfig.ValueRW.CurrentAttackCount = 0;
+            }
         }
-        
+
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }
@@ -102,9 +117,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
 
             float3 forwardInLocalSpace = playerRot.Forward;
             float3 forwardInGlobalSpace = math.rotate(rotation, forwardInLocalSpace);
-            
-            
-            // Create a quaternion for a 10-degree rotation around the y-axis
+
             quaternion additionalRotation = quaternion.AxisAngle(math.up(), math.radians(angleToRotate));
 
             // Combine the player's rotation with the additional rotation

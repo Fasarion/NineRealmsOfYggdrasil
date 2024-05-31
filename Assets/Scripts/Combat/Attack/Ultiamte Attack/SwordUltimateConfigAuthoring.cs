@@ -51,4 +51,5 @@ public struct SwordUltimateConfig : IComponentData
     public float BeamSpawnTimeAfterAttackStart;
     public int BeamsPerSwing;
     public float degreesBetweenBeams;
+    public bool PrepareBeam { get; set; }
 }

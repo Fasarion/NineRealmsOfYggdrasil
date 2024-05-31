@@ -12,7 +12,8 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private GameObject beamPrefab; 
     [SerializeField] private GameObject beamVfx; 
     [SerializeField] private float beamSpawnTimeAfterAttack = 0.3f; 
-    
+    [Header("Audio")] 
+    [SerializeField] private AudioData onUseAudioData;
     class Baker : Baker<SwordUltimateConfigAuthoring>
     {
         public override void Bake(SwordUltimateConfigAuthoring authoring)
@@ -26,7 +27,9 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
                 BeamEntityPrefab = GetEntity(authoring.beamPrefab, TransformUsageFlags.Dynamic),
                 BeamVfxPrefab = GetEntity(authoring.beamVfx, TransformUsageFlags.Dynamic),
                 
-                BeamSpawnTimeAfterAttackStart = authoring.beamSpawnTimeAfterAttack
+                BeamSpawnTimeAfterAttackStart = authoring.beamSpawnTimeAfterAttack,
+                
+                onUseAudioData = authoring.onUseAudioData
             });
         }
     }
@@ -45,4 +48,6 @@ public struct SwordUltimateConfig : IComponentData
 
     public float CurrentTime;
     public float BeamSpawnTimeAfterAttackStart;
+
+    public AudioData onUseAudioData;
 }

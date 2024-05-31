@@ -31,10 +31,13 @@ public partial struct SwordUltimateAttackSystem : ISystem
         var ultConfig = SystemAPI.GetSingletonRW<SwordUltimateConfig>();
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+        
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
 
         if (ultConfig.ValueRO.IsActive)
         {
             ultConfig.ValueRW.CurrentTime += Time.deltaTime;
+            
 
             if (ultConfig.ValueRW.CurrentTime > ultConfig.ValueRO.BeamSpawnTimeAfterAttackStart)
             {
@@ -70,6 +73,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         // Initialize attack
         if (!ultConfig.ValueRO.IsActive)
         {
+            Debug.Log("Svärd?");
             var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
 
             float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;
@@ -82,6 +86,9 @@ public partial struct SwordUltimateAttackSystem : ISystem
 
             ultConfig.ValueRW.IsActive = true;
             ultConfig.ValueRW.CurrentAttackCount = 0;
+            
+            var audioElement = new AudioBufferData() {AudioData = ultConfig.ValueRO.onUseAudioData};
+            audioBuffer.Add(audioElement);
 
             //SpawnSwordBeam(ref state, ultConfig, ecb);
         }

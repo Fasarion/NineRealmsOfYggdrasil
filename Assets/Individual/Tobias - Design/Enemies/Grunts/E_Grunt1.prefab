@@ -258,6 +258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 25
+  shouldDisplayDamageNumbers: 1
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -433,11 +434,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData:
-    eventCategoryType: 2
+    eventCategoryType: 0
     weaponType: 0
-    enemyTyping: 1
-    audioEventType: 1
+    enemyTyping: 0
+    audioEventType: 0
     attackType: 0
+    environmentType: 0
 --- !u!114 &2876683596753378015
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,4 +513,5 @@ MonoBehaviour:
     enemyTyping: 1
     audioEventType: 2
     attackType: 1
+    environmentType: 0
   chanceToPlay: 0.3

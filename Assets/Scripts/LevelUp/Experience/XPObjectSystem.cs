@@ -107,8 +107,6 @@ partial struct CheckXPObjectDistanceJob : IJobEntity
             damping.Linear = 1;
             xpObject.HasStopped = true;
         }
-
-
     }
 }
 

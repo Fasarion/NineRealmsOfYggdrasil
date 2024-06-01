@@ -411,6 +411,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
+      propertyPath: timeToTurnBack
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
       propertyPath: spawnWidthGrowth
       value: 1
       objectReference: {fileID: 0}
@@ -433,8 +438,13 @@ PrefabInstance:
         type: 3}
     - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
+      propertyPath: timeToReturnAfterTurning
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
       propertyPath: timeBetweenProjectileFires
-      value: 0.25
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -445,7 +455,7 @@ PrefabInstance:
     - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: timeBetweenInitialThrowAndProjectiles
-      value: 0.5
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}

@@ -35,7 +35,7 @@ class Baker : Baker<ParticleComponentAuthoring>
     }
 }
 
-public class GameObjectParticlePrefab : IComponentData
+public class GameObjectParticlePrefab : IComponentData, IEnableableComponent
 {
     public GameObject Value;
     public bool FollowEntity;

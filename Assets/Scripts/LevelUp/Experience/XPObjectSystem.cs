@@ -5,6 +5,7 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Jobs;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 
 [UpdateAfter(typeof(PlayerMovement))]
@@ -89,7 +90,7 @@ partial struct CheckXPObjectDistanceJob : IJobEntity
     public float DistanceRadiusSQ;
     public float DeltaTime;
 
-    void Execute(Entity entity, ref XpObject xpObject, ref LocalTransform transform, [ChunkIndexInQuery] int chunkIndex)
+    void Execute(Entity entity, ref XpObject xpObject, ref LocalTransform transform, ref PhysicsDamping damping, [ChunkIndexInQuery] int chunkIndex)
     {
         if (xpObject.TimerTime > xpObject.TimeBeforePickup)
         {
@@ -98,10 +99,15 @@ partial struct CheckXPObjectDistanceJob : IJobEntity
                 ECB.SetComponentEnabled<DirectionComponent>(chunkIndex, entity, true);
             }
         }
-        else
+
+        xpObject.TimerTime += DeltaTime;
+
+        if (xpObject.TimerTime > xpObject.TimeBeforeMovementStop && !xpObject.HasStopped)
         {
-            xpObject.TimerTime += DeltaTime;
+            damping.Linear = 1;
+            xpObject.HasStopped = true;
         }
+
 
     }
 }

@@ -117,7 +117,6 @@ public partial struct IceRingSystem : ISystem
                 {
                     area = area
                 });
-
             }
         }
         

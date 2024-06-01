@@ -10,6 +10,8 @@ public class XPObjectAuthoring : MonoBehaviour
     public int xpAwardedOnPickup;
     public float timerTime;
     public float timeBeforePickup;
+    public float timeBeforeMovementStop;
+    [HideInInspector] public bool shouldStop;
     
     public class XpObjectAuthoringBaker : Baker<XPObjectAuthoring>
     {
@@ -21,6 +23,8 @@ public class XPObjectAuthoring : MonoBehaviour
                 XpAwardedOnPickup = authoring.xpAwardedOnPickup,
                 TimerTime = authoring.timerTime,
                 TimeBeforePickup = authoring.timeBeforePickup,
+                TimeBeforeMovementStop = authoring.timeBeforeMovementStop,
+                HasStopped = authoring.shouldStop,
             });
             
             AddComponent(entity, new DirectionComponent{});
@@ -37,4 +41,6 @@ public struct XpObject : IComponentData
     public int XpAwardedOnPickup;
     public float TimerTime;
     public float TimeBeforePickup;
+    public float TimeBeforeMovementStop;
+    public bool HasStopped;
 }

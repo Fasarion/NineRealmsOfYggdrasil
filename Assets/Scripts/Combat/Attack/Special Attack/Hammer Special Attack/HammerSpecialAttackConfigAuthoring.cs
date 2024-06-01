@@ -15,10 +15,18 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
     [Header("Extra Hammer Projectiles")]
     [SerializeField] private GameObject hammerProjectileAbilityPrefab;
 
+    [SerializeField] private GameObject hammerProjectilePrefab;
+
     [SerializeField] private int maxProjectiles;
     [SerializeField] private float timeBetweenSpawns;
     [SerializeField] private float timeBetweenInitialThrowAndProjectiles;
     [SerializeField] private float timeBetweenProjectileFires;
+    [SerializeField] private float maxSpawnHeight;
+    [SerializeField] private float minSpawnHeight;
+    [SerializeField] private float minSpawnWidth;
+    [SerializeField] private float maxSpawnWidth;
+    [SerializeField] private float spawnWidthGrowth;
+    [SerializeField] private GameObject hammerSparkPrefab;
     
     [Header("Zap")]
     [Tooltip("Zap object that spawns when the hammer travels.")]
@@ -63,7 +71,9 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
             {
                 IndicatorPrefab = GetEntity(authoring.indicatorPrefab, TransformUsageFlags.None),
                 ElectricChargePrefab = GetEntity(authoring.electricZapPrefab, TransformUsageFlags.None),
-                HammerSpecialProjectilePrefab = GetEntity(authoring.hammerProjectileAbilityPrefab, TransformUsageFlags.Dynamic),
+                HammerSpecialProjectileAbilityPrefab = GetEntity(authoring.hammerProjectileAbilityPrefab, TransformUsageFlags.Dynamic),
+                HammerProjectilePrefab = GetEntity(authoring.hammerProjectilePrefab, TransformUsageFlags.Dynamic),
+                HammerSparkPrefab = GetEntity(authoring.hammerSparkPrefab, TransformUsageFlags.Dynamic),
                 
                 BaseDistanceToTravel = authoring.baseDistanceToTravel,
                 DistanceToTravel = authoring.baseDistanceToTravel,
@@ -90,6 +100,12 @@ public class HammerSpecialAttackConfigAuthoring : MonoBehaviour
                 TimeBetweenSpawns = authoring.timeBetweenSpawns,
                 TimeBetweenInitialThrowAndProjectiles = authoring.timeBetweenInitialThrowAndProjectiles,
                 TimeBetweenProjectileFires = authoring.timeBetweenProjectileFires,
+                MaxSpawnHeight = authoring.maxSpawnHeight,
+                MinSpawnHeight = authoring.minSpawnHeight,
+                MinSpawnWidth = authoring.minSpawnWidth,
+                MaxSpawnWidth = authoring.maxSpawnWidth,
+                SpawnWidthGrowth = authoring.spawnWidthGrowth,
+
             });
         }
     }
@@ -99,12 +115,19 @@ public struct HammerSpecialConfig : IComponentData
 {
     public Entity IndicatorPrefab;
     public Entity ElectricChargePrefab;
-    public Entity HammerSpecialProjectilePrefab;
+    public Entity HammerSpecialProjectileAbilityPrefab;
+    public Entity HammerProjectilePrefab;
+    public Entity HammerSparkPrefab;
     
     public int MaxProjectiles;
     public float TimeBetweenSpawns;
     public float TimeBetweenInitialThrowAndProjectiles;
     public float TimeBetweenProjectileFires;
+    public float MaxSpawnHeight;
+    public float MinSpawnHeight;
+    public float MinSpawnWidth;
+    public float MaxSpawnWidth;
+    public float SpawnWidthGrowth;
     
     public float BaseDistanceToTravel;
     public float DistanceToTravel;

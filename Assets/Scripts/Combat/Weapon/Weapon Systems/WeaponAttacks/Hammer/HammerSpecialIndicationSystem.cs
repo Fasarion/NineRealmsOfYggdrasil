@@ -65,6 +65,9 @@ public partial struct HammerSpecialIndicationSystem : ISystem
                 maxChargeTime = 3
             });
             
+            //spawn projectile manager object
+            state.EntityManager.Instantiate(config.HammerSpecialProjectileAbilityPrefab);
+            
             hasInitialized = true;
         }
 

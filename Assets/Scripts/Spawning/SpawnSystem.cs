@@ -49,7 +49,6 @@ public partial struct SpawnSystem : ISystem
             //Debug.Log("check");
         }
         
-
         if (!config.ValueRO.isInitialized)
         {
             _enemyProbabilities = new NativeArray<float>(enemyPrefabsBuffer.Length, Allocator.Persistent);
@@ -72,7 +71,6 @@ public partial struct SpawnSystem : ISystem
             _timerCutoffPoint = config.ValueRO.minTimerTime;
         }
         
-
         config.ValueRW.currentTimerTime += SystemAPI.Time.DeltaTime;
         var currentTimerTime = config.ValueRO.currentTimerTime;
         if (currentTimerTime < _timerCutoffPoint) return;
@@ -83,20 +81,14 @@ public partial struct SpawnSystem : ISystem
         
         config.ValueRW.currentTimerTime = 0f;
         _timerCutoffPoint = GetTimerCutoff(config, currentEnemyCount);
-
-
         
         int spawnCount = GetSpawnCount(config, currentEnemyCount);
-
         if (spawnCount <= 0) return;
-            
         var enemySpawnTypes = new NativeArray<int>(spawnCount, Allocator.TempJob);
         
         GenerateEnemyTypesArray(random, config, spawnCount, ref enemySpawnTypes);
         
         SpawnEnemies(random, spawnCount, ref enemySpawnTypes, config, state);
-
-
     }
 
     public void OnDestroy(ref SystemState state)

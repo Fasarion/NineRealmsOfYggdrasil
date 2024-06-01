@@ -375,6 +375,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleWeaponRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""882fbfd8-8ae7-4306-843b-fe9e3d02f40f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CycleWeaponLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""1cbb59b7-02ee-4185-b73a-005e6075097d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -410,6 +428,28 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""SwitchWeapon3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7ecc919d-d811-4cb0-8cb1-de2776cd6132"",
+                    ""path"": ""<Keyboard>/#(E)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleWeaponRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""467210cc-f1e2-45bd-8616-acb6057d0ccd"",
+                    ""path"": ""<Keyboard>/#(Q)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CycleWeaponLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -431,6 +471,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_WeaponMap_SwitchWeapon1 = m_WeaponMap.FindAction("SwitchWeapon1", throwIfNotFound: true);
         m_WeaponMap_SwitchWeapon2 = m_WeaponMap.FindAction("SwitchWeapon2", throwIfNotFound: true);
         m_WeaponMap_SwitchWeapon3 = m_WeaponMap.FindAction("SwitchWeapon3", throwIfNotFound: true);
+        m_WeaponMap_CycleWeaponRight = m_WeaponMap.FindAction("CycleWeaponRight", throwIfNotFound: true);
+        m_WeaponMap_CycleWeaponLeft = m_WeaponMap.FindAction("CycleWeaponLeft", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -597,6 +639,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_WeaponMap_SwitchWeapon1;
     private readonly InputAction m_WeaponMap_SwitchWeapon2;
     private readonly InputAction m_WeaponMap_SwitchWeapon3;
+    private readonly InputAction m_WeaponMap_CycleWeaponRight;
+    private readonly InputAction m_WeaponMap_CycleWeaponLeft;
     public struct WeaponMapActions
     {
         private @InputActions m_Wrapper;
@@ -604,6 +648,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @SwitchWeapon1 => m_Wrapper.m_WeaponMap_SwitchWeapon1;
         public InputAction @SwitchWeapon2 => m_Wrapper.m_WeaponMap_SwitchWeapon2;
         public InputAction @SwitchWeapon3 => m_Wrapper.m_WeaponMap_SwitchWeapon3;
+        public InputAction @CycleWeaponRight => m_Wrapper.m_WeaponMap_CycleWeaponRight;
+        public InputAction @CycleWeaponLeft => m_Wrapper.m_WeaponMap_CycleWeaponLeft;
         public InputActionMap Get() { return m_Wrapper.m_WeaponMap; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -622,6 +668,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwitchWeapon3.started += instance.OnSwitchWeapon3;
             @SwitchWeapon3.performed += instance.OnSwitchWeapon3;
             @SwitchWeapon3.canceled += instance.OnSwitchWeapon3;
+            @CycleWeaponRight.started += instance.OnCycleWeaponRight;
+            @CycleWeaponRight.performed += instance.OnCycleWeaponRight;
+            @CycleWeaponRight.canceled += instance.OnCycleWeaponRight;
+            @CycleWeaponLeft.started += instance.OnCycleWeaponLeft;
+            @CycleWeaponLeft.performed += instance.OnCycleWeaponLeft;
+            @CycleWeaponLeft.canceled += instance.OnCycleWeaponLeft;
         }
 
         private void UnregisterCallbacks(IWeaponMapActions instance)
@@ -635,6 +687,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @SwitchWeapon3.started -= instance.OnSwitchWeapon3;
             @SwitchWeapon3.performed -= instance.OnSwitchWeapon3;
             @SwitchWeapon3.canceled -= instance.OnSwitchWeapon3;
+            @CycleWeaponRight.started -= instance.OnCycleWeaponRight;
+            @CycleWeaponRight.performed -= instance.OnCycleWeaponRight;
+            @CycleWeaponRight.canceled -= instance.OnCycleWeaponRight;
+            @CycleWeaponLeft.started -= instance.OnCycleWeaponLeft;
+            @CycleWeaponLeft.performed -= instance.OnCycleWeaponLeft;
+            @CycleWeaponLeft.canceled -= instance.OnCycleWeaponLeft;
         }
 
         public void RemoveCallbacks(IWeaponMapActions instance)
@@ -668,5 +726,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnSwitchWeapon1(InputAction.CallbackContext context);
         void OnSwitchWeapon2(InputAction.CallbackContext context);
         void OnSwitchWeapon3(InputAction.CallbackContext context);
+        void OnCycleWeaponRight(InputAction.CallbackContext context);
+        void OnCycleWeaponLeft(InputAction.CallbackContext context);
     }
 }

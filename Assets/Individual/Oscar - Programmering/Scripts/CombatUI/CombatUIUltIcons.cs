@@ -43,14 +43,14 @@ public class CombatUIUltIcons : MonoBehaviour
         EventManager.OnSetupWeapon -= OnWeaponSetup;
     }
 
-    public void OnWeaponSetup(WeaponSetupData data)
+    public void OnWeaponSetup(WeaponSetupData weaponSetupData)
     {
-        weaponTypes.Add(data.WeaponType); 
+        
         //if (weaponTypes.Count == 2) 
         //{
             //for (int i = 0; i < weaponTypes.Count; i++)
             //{
-                switch (data.WeaponType)
+                switch (weaponSetupData.WeaponType)
                 {
                     case WeaponType.Hammer:
                     {
@@ -80,7 +80,7 @@ public class CombatUIUltIcons : MonoBehaviour
                         break;
                     }
                 }
-                ultWeaponReadyHolders[symbolCounter].currentWeaponType = data.WeaponType;
+                ultWeaponReadyHolders[symbolCounter].currentWeaponType = weaponSetupData.WeaponType;
                 ultWeaponReadyHolders[symbolCounter].imageTarget.SetNativeSize();
                 ultWeaponReadyHolders[symbolCounter].objectToSet.SetActive(false);
                 symbolCounter++;

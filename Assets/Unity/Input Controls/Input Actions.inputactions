@@ -353,6 +353,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CycleWeaponRight",
+                    "type": "Button",
+                    "id": "882fbfd8-8ae7-4306-843b-fe9e3d02f40f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "CycleWeaponLeft",
+                    "type": "Button",
+                    "id": "1cbb59b7-02ee-4185-b73a-005e6075097d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -386,6 +404,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "SwitchWeapon3",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ecc919d-d811-4cb0-8cb1-de2776cd6132",
+                    "path": "<Keyboard>/#(E)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleWeaponRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "467210cc-f1e2-45bd-8616-acb6057d0ccd",
+                    "path": "<Keyboard>/#(Q)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CycleWeaponLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

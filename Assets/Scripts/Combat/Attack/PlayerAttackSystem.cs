@@ -107,6 +107,16 @@ namespace Patrik
                 _weaponManager.SwitchWeapon(3);
                 return;
             }
+
+            if (SystemAPI.TryGetSingleton(out WeaponCycleRightInput cycleRightKey) && cycleRightKey.KeyPressed)
+            {
+                _weaponManager.CycleWeaponsRight();
+            }
+            
+            if (SystemAPI.TryGetSingleton(out WeaponCycleLeftInput cycleLeftKey) && cycleLeftKey.KeyPressed)
+            {
+                _weaponManager.CycleWeaponsLeft();
+            }
         }
 
         private void DisableAllWeapons()

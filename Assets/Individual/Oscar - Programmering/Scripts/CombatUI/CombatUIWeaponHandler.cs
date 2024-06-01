@@ -38,7 +38,7 @@ public class CombatUIWeaponHandler : ElementMVC
         currentWeaponSet = false;
         currentLeftWeaponSet = false;
         currentRightWeaponSet = false;
-        currentPlayerWeapons = new List<WeaponSetupData>();
+        
     }
 
     // Start is called before the first frame update
@@ -53,7 +53,7 @@ public class CombatUIWeaponHandler : ElementMVC
     public void OnEnable()
     {
         EventManager.OnWeaponSwitch += OnWeaponSwitched;
-        EventManager.OnSetupWeapon += OnSetupWeapon;
+        EventManager.OnAllWeaponsSetup += OnSetupWeapon;
     }
 
    
@@ -61,12 +61,14 @@ public class CombatUIWeaponHandler : ElementMVC
     public void OnDisable()
     {
         EventManager.OnWeaponSwitch -= OnWeaponSwitched;
-        EventManager.OnSetupWeapon -= OnSetupWeapon;
+        EventManager.OnAllWeaponsSetup -= OnSetupWeapon;
     }
 
-    private void OnSetupWeapon(WeaponSetupData data)
+    private void OnSetupWeapon(List<WeaponSetupData> allWeapons)
     {
-        currentPlayerWeapons.Add(data);
+        //currentPlayerWeapons = new List<WeaponBehaviour>();
+        currentPlayerWeapons = allWeapons;
+      
         
         //This does not account for the right inactive weapon
         /*if (data.Active)
@@ -97,17 +99,15 @@ public class CombatUIWeaponHandler : ElementMVC
         {
             SetStartingWeapons();
         }*/
-        if (currentPlayerWeapons.Count == 3)
-        {
-            mainWeaponSetupData = currentPlayerWeapons[0];
-            leftInactiveWeaponSetupData = currentPlayerWeapons[1];
-            rightInactiveWeaponSetupData = currentPlayerWeapons[2];
-            currentWeapon = currentPlayerWeapons[0].WeaponType; 
-            currentLeftInactiveWeapon = currentPlayerWeapons[1].WeaponType; 
-            currentRightInactiveWeapon = currentPlayerWeapons[2].WeaponType; 
-            SetStartingWeapons();
-        }
         
+            //mainWeaponSetupData = currentPlayerWeapons[0];
+            //leftInactiveWeaponSetupData = currentPlayerWeapons[1];
+            //rightInactiveWeaponSetupData = currentPlayerWeapons[2];
+            //currentWeapon = currentPlayerWeapons[0].WeaponType; 
+            //currentLeftInactiveWeapon = currentPlayerWeapons[1].WeaponType; 
+            //currentRightInactiveWeapon = currentPlayerWeapons[2].WeaponType; 
+            SetStartingWeapons();
+
     }
     
     private void SetStartingWeapons()
@@ -115,8 +115,10 @@ public class CombatUIWeaponHandler : ElementMVC
         onStartingWeaponSet?.Invoke(currentPlayerWeapons[0], currentPlayerWeapons[1], currentPlayerWeapons[2]);
     }
 
-    private void OnWeaponSwitched(WeaponBehaviour weaponBehaviour)
+    private void OnWeaponSwitched(WeaponSetupData currentWeaponData, List<WeaponSetupData> allWeapons)
     {
+        currentPlayerWeapons = allWeapons;
+        /*
         if (weaponBehaviour.WeaponType == currentLeftInactiveWeapon)
         {
             var last = currentPlayerWeapons[^1];
@@ -143,10 +145,10 @@ public class CombatUIWeaponHandler : ElementMVC
                 
                 currentPlayerWeapons[i - 1] =  currentPlayerWeapons[i];
                 currentPlayerWeapons[i - 2] = nextValue;
-            }*/
+            }
 
             //currentPlayerWeapons[currentPlayerWeapons.Count - 1] = first;
-        }
+        }*/
         UpdateCurrentWeapon(currentPlayerWeapons);
         //UpdateCurrentWeapon();
         //Superhacky, but it should work
@@ -195,6 +197,8 @@ public class CombatUIWeaponHandler : ElementMVC
     //We're going to need a list of the players current weapons here.
     public void UpdateCurrentWeapon(List<WeaponSetupData> weaponSetupData)
     {
+        
+        
         //currentInactiveWeapons.Clear();
         //var selectableWeapons = new List<WeaponType>(currentPlayerWeapons);
         
@@ -218,17 +222,17 @@ public class CombatUIWeaponHandler : ElementMVC
             Debug.Log("Something went wrong! You tried to set a weapon that was not one of your inactive weapons!");
         }*/
         
-        currentWeapon = weaponSetupData[0].WeaponType;
-        currentLeftInactiveWeapon = weaponSetupData[1].WeaponType;
-        currentRightInactiveWeapon = weaponSetupData[2].WeaponType;
-        mainWeaponSetupData = weaponSetupData[0];
-        leftInactiveWeaponSetupData = weaponSetupData[1];
-        rightInactiveWeaponSetupData = weaponSetupData[2];
+        //currentWeapon = ;
+        //currentLeftInactiveWeapon = weaponSetupData[1];
+        //currentRightInactiveWeapon = weaponSetupData[2];
+        //mainWeaponSetupData = weaponSetupData[0];
+        //leftInactiveWeaponSetupData = weaponSetupData[1];
+        //rightInactiveWeaponSetupData = weaponSetupData[2];
         
         
         //currentInactiveWeapons.AddRange(selectableWeapons);
                 
-        onCurrentWeaponUpdated?.Invoke(mainWeaponSetupData, leftInactiveWeaponSetupData, rightInactiveWeaponSetupData);
+        onCurrentWeaponUpdated?.Invoke(weaponSetupData[0], weaponSetupData[1], weaponSetupData[2]);
     }
     // Update is called once per frame
     void Update()

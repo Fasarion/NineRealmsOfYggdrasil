@@ -46,6 +46,10 @@ public partial struct ResetInputSystem : ISystem
         weapon2.ValueRW.KeyPressed = false;
         var weapon3 = SystemAPI.GetSingletonRW<WeaponThreeInput>();
         weapon3.ValueRW.KeyPressed = false;
+        var cycleLeft = SystemAPI.GetSingletonRW<WeaponCycleLeftInput>();
+        cycleLeft.ValueRW.KeyPressed = false;
+        var cycleRight = SystemAPI.GetSingletonRW<WeaponCycleRightInput>();
+        cycleRight.ValueRW.KeyPressed = false;
         
         // Reset dash input
         var dash = SystemAPI.GetSingletonRW<PlayerDashInput>();

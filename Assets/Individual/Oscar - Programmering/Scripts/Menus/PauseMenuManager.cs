@@ -54,13 +54,15 @@ public class PauseMenuManager : MonoBehaviour
         if (pauseType == PauseType.PauseScreen)
         {
             DeactivatePauseMenu();
+            DeactivateAudioSettings();
         }
     }
 
     public void UnpauseGame()
     {
         EventManager.OnUnpause?.Invoke(PauseType.PauseScreen);
-        DeactivatePauseMenu();
+        //DeactivateAudioSettings();
+        //DeactivatePauseMenu();
     }
 
     private void ActivatePauseMenu()

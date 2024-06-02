@@ -35,6 +35,8 @@ public class EnergyManager : MonoBehaviour
 
     private void SetupWeapon(List<WeaponSetupData> allWeapons)
     {
+        weaponIcons = new List<WeaponEnergyUIBehaviour>();
+        weaponIconMap = new Dictionary<WeaponType, WeaponEnergyUIBehaviour>();
         for (int i = 0; i < allWeapons.Count; i++)
         {
             Vector3 iconPosition = transform.position + Vector3.right * distanceBetweenIcons * iconCount;

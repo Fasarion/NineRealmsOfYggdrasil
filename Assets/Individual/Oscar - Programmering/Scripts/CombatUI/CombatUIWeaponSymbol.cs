@@ -58,51 +58,82 @@ public class CombatUIWeaponSymbol : MonoBehaviour
         CombatUIWeaponHandler.onStartingWeaponSet -= OnWeaponSetup;
     }
 
-    private void OnWeaponSetup(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
+    private void OnWeaponSetup(List<WeaponSetupData> weaponSetupDataList)//WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
     {
+        
         switch (weaponSymbolType)
         {
             case WeaponSymbolType.Main:
             {
-                SetMainWeaponType(mainWeaponData.WeaponType);
-                selectedKeySymbolNumber.text = (mainWeaponData.WeaponButtonIndex).ToString();
+                SetMainWeaponType(weaponSetupDataList[0].WeaponType);
+                selectedKeySymbolNumber.text = (weaponSetupDataList[0].WeaponButtonIndex).ToString();
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
-                selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
+                if (weaponSetupDataList.Count >= 2)
+                {
+                    SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
+                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                }
+                //SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
+                //selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                SetInactiveWeaponType(rightInactiveWeaponData.WeaponType);
-                selectedKeySymbolNumber.text = (rightInactiveWeaponData.WeaponButtonIndex).ToString();
+                if (weaponSetupDataList.Count == 3)
+                {
+                    SetInactiveWeaponType(weaponSetupDataList[2].WeaponType);
+                    selectedKeySymbolNumber.text = (weaponSetupDataList[2].WeaponButtonIndex).ToString();
+                }
+                else if (weaponSetupDataList.Count == 2)
+                {
+                    SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
+                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                }
+               
                 break;
             } 
         }
     }
     
-    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
+    private void OnCurrentWeaponUpdated(List<WeaponSetupData> weaponSetupDataList)
     {
         switch (weaponSymbolType)
         {
             case WeaponSymbolType.Main:
             {
-                SetMainWeaponType(mainWeaponData.WeaponType);
-                selectedKeySymbolNumber.text = (mainWeaponData.WeaponButtonIndex).ToString();
+                SetMainWeaponType(weaponSetupDataList[0].WeaponType);
+                selectedKeySymbolNumber.text = (weaponSetupDataList[0].WeaponButtonIndex).ToString();
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
-                selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
+                if (weaponSetupDataList.Count >= 2)
+                {
+                    SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
+                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                }
+
+                //SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
+                //selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                SetInactiveWeaponType(rightInactiveWeaponData.WeaponType);
-                selectedKeySymbolNumber.text = (rightInactiveWeaponData.WeaponButtonIndex).ToString();
+                if (weaponSetupDataList.Count == 3)
+                {
+                    SetInactiveWeaponType(weaponSetupDataList[2].WeaponType);
+                    selectedKeySymbolNumber.text = (weaponSetupDataList[2].WeaponButtonIndex).ToString();
+                }
+                else if (weaponSetupDataList.Count == 2)
+                {
+                    SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
+                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                }
+                //SetInactiveWeaponType(rightInactiveWeaponData.WeaponType);
+                //selectedKeySymbolNumber.text = (rightInactiveWeaponData.WeaponButtonIndex).ToString();
                 break;
             } 
         }

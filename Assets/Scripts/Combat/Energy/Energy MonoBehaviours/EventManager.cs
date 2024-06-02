@@ -53,6 +53,8 @@ public static class EventManager
     public static UnityAction OnEnableUI;
     public static UnityAction OnDisableUI;
 
+    public static UnityAction<int> OnWeaponCountSet;
+
 }
 
 public struct PlayerHealthData

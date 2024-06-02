@@ -24,14 +24,14 @@ public class CombatUIWeaponSymbolModel : ElementMVC
         CombatUIWeaponHandlerModel.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
         CombatUIWeaponHandlerModel.onStartingWeaponSet += OnStartingWeaponSetup;
     }
-    private void OnStartingWeaponSetup(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
+    private void OnStartingWeaponSetup(List<WeaponSetupData> weaponSetupDataList)
     {
-        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,mainWeaponData.WeaponType, leftInactiveWeaponData.WeaponType, rightInactiveWeaponData.WeaponType);
+        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,weaponSetupDataList);
     }
     
-    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftInactiveWeaponData, WeaponSetupData rightInactiveWeaponData)
+    private void OnCurrentWeaponUpdated(List<WeaponSetupData> weaponSetupDataList)
     {
-        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,mainWeaponData, leftInactiveWeaponData, rightInactiveWeaponData);
+        app.Notify(NotificationMVC.WeaponSymbolCurrentWeaponUpdated,this,identifier ,weaponSetupDataList);
     }
 
     public void OnDisable()

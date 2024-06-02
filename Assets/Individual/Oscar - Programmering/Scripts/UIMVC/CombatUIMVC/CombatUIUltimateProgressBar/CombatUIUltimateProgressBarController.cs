@@ -16,7 +16,7 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
 
     }
 
-    private void OnStartingWeaponsSet(WeaponSetupData mainWeapon, WeaponSetupData leftWeapon, WeaponSetupData rightWeapon)
+    private void OnStartingWeaponsSet(List<WeaponSetupData> weaponSetupDataList)
     {
         for(int i = 0; i< app.view.combatUIUltimateProgressBarViews.Count; i++) 
         {
@@ -29,13 +29,13 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
                     
                     var weaponSymbolType = ultimateProgressBarView.symbolType;
                     ultimateProgressBarModel.currentWeaponType =
-                        SetWeapons(weaponSymbolType, mainWeapon.WeaponType, leftWeapon.WeaponType, rightWeapon.WeaponType);
+                        SetWeapons(weaponSymbolType, weaponSetupDataList[0].WeaponType, weaponSetupDataList[1].WeaponType, weaponSetupDataList[2].WeaponType);
                 }
             }
         }
     }
 
-    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftWeaponData, WeaponSetupData rightWeaponData)
+    private void OnCurrentWeaponUpdated(List<WeaponSetupData> weaponSetupDataList)
     {
         for(int i = 0; i<app.view.combatUIUltimateProgressBarViews.Count; i++) 
         {
@@ -48,7 +48,7 @@ public class CombatUIUltimateProgressBarController : BaseControllerMVC
                     var weaponSymbolType = ultimateProgressBarView.symbolType;
 
                     ultimateProgressBarModel.currentWeaponType =
-                        SetWeapons(weaponSymbolType, mainWeaponData.WeaponType, leftWeaponData.WeaponType, rightWeaponData.WeaponType);
+                        SetWeapons(weaponSymbolType, weaponSetupDataList[0].WeaponType, weaponSetupDataList[1].WeaponType, weaponSetupDataList[2].WeaponType);
                     LoadCurrentEnergy(ultimateProgressBarModel, ultimateProgressBarView);
                 }
             }

@@ -26,23 +26,38 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
 
     }
 
-    private void OnStartingWeaponsSet(WeaponSetupData mainWeapon, WeaponSetupData leftWeapon, WeaponSetupData rightWeapon)
+    private void OnStartingWeaponsSet(List<WeaponSetupData> weaponSetupDataList)//WeaponSetupData mainWeapon, WeaponSetupData leftWeapon, WeaponSetupData rightWeapon)
     {
         switch (symbolType)
         {
+           
             case WeaponSymbolType.Main:
             {
-                currentWeaponType = mainWeapon.WeaponType;
+              
+                currentWeaponType =  weaponSetupDataList[0].WeaponType;
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                currentWeaponType = leftWeapon.WeaponType;
+
+                if (weaponSetupDataList.Count >= 2)
+                {
+                    currentWeaponType = weaponSetupDataList[1].WeaponType;
+                }
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                currentWeaponType = rightWeapon.WeaponType;
+                
+                if (weaponSetupDataList.Count == 3)
+                {
+                    currentWeaponType = weaponSetupDataList[2].WeaponType;
+                } 
+                else if (weaponSetupDataList.Count == 2)
+                {
+                    currentWeaponType = weaponSetupDataList[1].WeaponType;
+                } 
+                //currentWeaponType = rightWeapon.WeaponType;
                 break;
             } 
         }
@@ -56,7 +71,7 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
         CombatUIWeaponHandler.onStartingWeaponSet -= OnStartingWeaponsSet;
     }
     
-    private void OnCurrentWeaponUpdated(WeaponSetupData mainWeaponData, WeaponSetupData leftWeaponData, WeaponSetupData rightWeaponData)
+    private void OnCurrentWeaponUpdated(List<WeaponSetupData> weaponSetupDataList)
     {
         //SavePreviousEnergy();
         switch (symbolType)
@@ -65,17 +80,29 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
             case WeaponSymbolType.Main:
             {
                 
-                currentWeaponType = mainWeaponData.WeaponType;
+                currentWeaponType =  weaponSetupDataList[0].WeaponType;
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
-                currentWeaponType = leftWeaponData.WeaponType;
+                if (weaponSetupDataList.Count >= 2)
+                {
+                    currentWeaponType = weaponSetupDataList[1].WeaponType;
+                }
                 break;
             } 
             case WeaponSymbolType.RightInactive:
             {
-                currentWeaponType = rightWeaponData.WeaponType;
+                
+                if (weaponSetupDataList.Count == 3)
+                {
+                    currentWeaponType = weaponSetupDataList[2].WeaponType;
+                } 
+                else if (weaponSetupDataList.Count == 2)
+                {
+                    currentWeaponType = weaponSetupDataList[1].WeaponType;
+                } 
+                //currentWeaponType = rightWeaponData.WeaponType;
                 break;
             } 
         }

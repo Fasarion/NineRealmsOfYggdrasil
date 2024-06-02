@@ -46,6 +46,9 @@ public static class EventManager
     public static UnityAction OnScreenFadeComplete;
 
     public static UnityAction OnPlayerDeath;
+    
+    public static UnityAction<MoveSpeedChangeData> OnChangeMoveSpeed;
+    public static UnityAction OnResetMoveSpeed;
 }
 
 public struct PlayerHealthData

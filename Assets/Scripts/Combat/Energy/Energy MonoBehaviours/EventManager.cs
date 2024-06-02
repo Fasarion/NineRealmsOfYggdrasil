@@ -1,11 +1,13 @@
-﻿using Patrik;
+﻿using System.Collections.Generic;
+using Patrik;
 using Unity.Entities;
 using UnityEngine.Events;
 
 public static class EventManager
 {
     public static UnityAction<WeaponSetupData> OnSetupWeapon;
-    public static UnityAction<WeaponBehaviour> OnWeaponSwitch;
+    public static UnityAction<List<WeaponSetupData>> OnAllWeaponsSetup;
+    public static UnityAction<WeaponSetupData,List<WeaponSetupData>> OnWeaponSwitch;
 
     public static UnityAction<PauseType> OnPause;
     public static UnityAction<PauseType> OnUnpause;
@@ -44,6 +46,9 @@ public static class EventManager
     public static UnityAction OnScreenFadeComplete;
 
     public static UnityAction OnPlayerDeath;
+    
+    public static UnityAction<MoveSpeedChangeData> OnChangeMoveSpeed;
+    public static UnityAction OnResetMoveSpeed;
 }
 
 public struct PlayerHealthData

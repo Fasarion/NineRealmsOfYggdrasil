@@ -34,9 +34,9 @@ public class WeaponParticleSystemBehaviour : MonoBehaviour
         EventManager.OnWeaponSwitch -= OnWeaponSwitch;
     }
 
-    private void OnWeaponSwitch(WeaponBehaviour weapon)
+    private void OnWeaponSwitch(WeaponSetupData weaponData, List<WeaponSetupData> allWeapons)
     {
-        if (weapon.WeaponType == weaponType)
+        if (weaponData.WeaponType == weaponType)
         {
             SetParticleSystemActive(false);
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Patrik;
 using UnityEngine;
 
@@ -38,7 +39,7 @@ public class PlayerAudioBehaviour : MonoBehaviour
         // $"Spelarn har {healthData.currentHealth} hp just nu");
     }
 
-    private void OnWeaponSwitch(WeaponBehaviour currentWeapon)
+    private void OnWeaponSwitch(WeaponSetupData currentWeapon, List<WeaponSetupData> allWeapons)
     {
         weaponType = currentWeapon.WeaponType;
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("ActiveWeapon", (int)weaponType);

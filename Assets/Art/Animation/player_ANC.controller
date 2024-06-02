@@ -104,6 +104,26 @@ MonoBehaviour:
   OnExit:
     TurnOn: 1
     TurnOff: 0
+--- !u!114 &-8837877458639541215
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 2
+    InvincibilityStateChange: 0
+  OnExit:
+    MovementStateChange: 0
+    RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!1102 &-8836028816796545377
 AnimatorState:
   serializedVersion: 6
@@ -183,6 +203,26 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!114 &-8767731634255141864
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 2
+    InvincibilityStateChange: 0
+  OnExit:
+    MovementStateChange: 0
+    RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!1102 &-8713347931597042095
 AnimatorState:
   serializedVersion: 6
@@ -1662,6 +1702,26 @@ MonoBehaviour:
   SetOngoing: 0
   EndChargeOnEnd: 0
   SetNone: 0
+--- !u!114 &-5296693105062232808
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 2
+    InvincibilityStateChange: 0
+  OnExit:
+    MovementStateChange: 1
+    RotationStateChange: 1
+    InvincibilityStateChange: 0
 --- !u!1101 &-5281859173526259389
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -2105,6 +2165,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 3592314725919585641}
   - {fileID: -8707631065150265971}
+  - {fileID: -8837877458639541215}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2669,7 +2730,7 @@ MonoBehaviour:
   OnEnter:
     MovementStateChange: 2
     RotationStateChange: 2
-    InvincibilityStateChange: 0
+    InvincibilityStateChange: 1
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 1
@@ -2746,6 +2807,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 1566514593593012709}
   - {fileID: -3347882060818103964}
+  - {fileID: -8767731634255141864}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -6239,6 +6301,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &5382761751240883106
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08859df891d5b8747a2388c8385d46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    SpeedChangeOption: 1
+    SpeedChangeFactor: 0.7
+    SpeedChangeDuration: 1
+  OnExit:
+    SpeedChangeOption: 2
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
 --- !u!1101 &5465536471494643773
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6986,6 +7068,7 @@ AnimatorState:
   - {fileID: -7433714140933105598}
   - {fileID: 9097188883659741230}
   - {fileID: 3642793940382167782}
+  - {fileID: 5382761751240883106}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -7140,6 +7223,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 1386086715281205906}
   - {fileID: 7147083166772732057}
+  - {fileID: -5296693105062232808}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -7704,7 +7788,7 @@ MonoBehaviour:
   OnExit:
     MovementStateChange: 0
     RotationStateChange: 0
-    InvincibilityStateChange: 0
+    InvincibilityStateChange: 2
 --- !u!1102 &8622787790108443097
 AnimatorState:
   serializedVersion: 6

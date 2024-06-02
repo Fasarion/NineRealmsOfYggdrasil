@@ -8,6 +8,7 @@ using UnityEngine;
 public partial class UpgradeApplierSystem : SystemBase
 {
     private UpgradePoolManager _pool;
+    private int _weaponCount = 1;
     
     protected override void OnUpdate()
     {
@@ -52,6 +53,11 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         switch (upgradeValueToUpgrade)
         {
+            case UpgradeValueTypes.Unlock:
+                _weaponCount++;
+                EventManager.OnWeaponCountSet(_weaponCount);
+                return;
+            
             case UpgradeValueTypes.damage:
                 if (!EntityManager.HasComponent<DamageComponent>(entity))
                 {

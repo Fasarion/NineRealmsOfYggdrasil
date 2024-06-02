@@ -4,6 +4,13 @@ using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
 
+public enum UpgradePoolType
+{
+    Commerce,
+    BirdUnlock,
+    HammerUnlock,
+}
+
 public partial class UpgradeUISystem : SystemBase
 {
     public Action<UpgradeObject[]> OnUpgradeUIDisplayCall;
@@ -44,6 +51,7 @@ public partial class UpgradeUISystem : SystemBase
         GenerateUpgradeUIChoices();
         
         OnUpgradeUIDisplayCall?.Invoke(_upgradeObjects);
+        
     }
 
     private void SubscribeToManager()
@@ -69,6 +77,16 @@ public partial class UpgradeUISystem : SystemBase
         choice.ValueRW.IsHandled = false;
     }
 
+    private UpgradePoolType GetUpgradePoolType()
+    {
+        UpgradePoolType poolType;
+
+        if (_cachedLevel == 2) poolType = UpgradePoolType.HammerUnlock;
+        else if (_cachedLevel == 6) poolType = UpgradePoolType.BirdUnlock;
+        else poolType = UpgradePoolType.Commerce;
+
+        return poolType;
+    }
 
     private void GenerateUpgradeUIChoices()
     {
@@ -77,6 +95,8 @@ public partial class UpgradeUISystem : SystemBase
             _pool = UpgradePoolManager.Instance;
         }
 
-        _upgradeObjects = _pool.GetRandomUpgrades();
+        UpgradePoolType poolType = GetUpgradePoolType();
+
+        _upgradeObjects = _pool.GetRandomUpgrades(poolType);
     }
 }

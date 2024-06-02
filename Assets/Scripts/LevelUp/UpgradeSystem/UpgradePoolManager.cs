@@ -106,8 +106,24 @@ public class UpgradePoolManager : MonoBehaviour
         return result;
     }
     
-    public UpgradeObject[] GetRandomUpgrades()
+    public UpgradeObject[] GetRandomUpgrades(UpgradePoolType poolType)
     {
+        if (poolType == UpgradePoolType.HammerUnlock)
+        {
+            UpgradeObject[] hammerArray = new UpgradeObject[1];
+            UpgradeObject unlock = GetUpgradeObjectReferenceByKey(0);
+            hammerArray[0] = unlock;
+            return hammerArray;
+        }
+        
+        if (poolType == UpgradePoolType.BirdUnlock)
+        {
+            UpgradeObject[] birdArray = new UpgradeObject[1];
+            UpgradeObject unlock = GetUpgradeObjectReferenceByKey(1);
+            birdArray[0] = unlock;
+            return birdArray;
+        }
+        
         List<int> upgradeIndecis = GetActiveUpgradesIndecisList();
         int numberOfUpgrades = 3;
 
@@ -136,7 +152,6 @@ public class UpgradePoolManager : MonoBehaviour
         {
             unlockedUpgrades.Add(index);
         }
-
         
         return unlockedUpgrades;
     }

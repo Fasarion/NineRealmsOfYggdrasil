@@ -95,7 +95,7 @@ public partial class SwitchFollowEntityOnWeaponSwitchSystem : SystemBase
         EventManager.OnWeaponSwitch -= OnWeaponSwitch;
     }
 
-    private void OnWeaponSwitch(WeaponBehaviour _)
+    private void OnWeaponSwitch(WeaponSetupData _, List<WeaponSetupData>__)
     {
         foreach (var (sword, weapon, animatorGO, swordEntity) in
             SystemAPI.Query<SwordComponent, WeaponComponent, GameObjectAnimatorPrefab>()

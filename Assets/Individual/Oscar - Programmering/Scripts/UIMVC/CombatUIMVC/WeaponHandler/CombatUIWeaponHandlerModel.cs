@@ -30,9 +30,9 @@ public class CombatUIWeaponHandlerModel : ElementMVC
         EventManager.OnSetupWeapon -= OnSetupWeapon;
     }
 
-    private void OnWeaponSwitched(WeaponBehaviour weaponBehaviour)
+    private void OnWeaponSwitched(WeaponSetupData currentWeapon, List<WeaponSetupData> weaponBehaviour)
     {
-        app.Notify(NotificationMVC.WeaponSwitchedWeaponHandler, this, weaponBehaviour);
+        app.Notify(NotificationMVC.WeaponSwitchedWeaponHandler, this, currentWeapon);
     }
 
     private void OnSetupWeapon(WeaponSetupData data)

@@ -15,14 +15,14 @@ public class EnergyManager : MonoBehaviour
 
     private void Awake()
     {
-        EventManager.OnSetupWeapon += SetupWeapon;
+        EventManager.OnAllWeaponsSetup += SetupWeapon;
         EventManager.OnWeaponSwitch += OnWeaponSwitch;
         EventManager.OnEnergyChange += OnEnergyChange;
     }
     
     private void OnDisable()
     {
-        EventManager.OnSetupWeapon -= SetupWeapon;
+        EventManager.OnAllWeaponsSetup -= SetupWeapon;
         EventManager.OnWeaponSwitch -= OnWeaponSwitch;
         EventManager.OnEnergyChange -= OnEnergyChange;
     }
@@ -33,24 +33,28 @@ public class EnergyManager : MonoBehaviour
         icon.UpdateBar(currentEnergy, maxEnergy);
     }
 
-    private void SetupWeapon(WeaponSetupData data)
+    private void SetupWeapon(List<WeaponSetupData> allWeapons)
     {
-        Vector3 iconPosition = transform.position + Vector3.right * distanceBetweenIcons * iconCount;
-        var icon = Instantiate(weaponIconPrefab, transform);
-        icon.transform.position = iconPosition;
+        for (int i = 0; i < allWeapons.Count; i++)
+        {
+            Vector3 iconPosition = transform.position + Vector3.right * distanceBetweenIcons * iconCount;
+            var icon = Instantiate(weaponIconPrefab, transform);
+            icon.transform.position = iconPosition;
         
-        icon.Setup(data.WeaponBehaviour);
-        icon.SetActiveWeapon(data.Active);
+            icon.Setup(allWeapons[i].WeaponBehaviour);
+            icon.SetActiveWeapon(allWeapons[i].Active);
         
-        weaponIcons.Add(icon);
-        weaponIconMap.Add(data.WeaponType, icon);
+            weaponIcons.Add(icon);
+            weaponIconMap.Add(allWeapons[i].WeaponType, icon);
+        }
+       
     }
 
-    private void OnWeaponSwitch(WeaponBehaviour activeWeapon)
+    private void OnWeaponSwitch(WeaponSetupData activeWeapon, List<WeaponSetupData> allWeapons)
     {
         foreach (var weaponIcon in weaponIcons)
         {
-            bool isActive = weaponIcon.Weapon == activeWeapon;
+            bool isActive = weaponIcon.Weapon == activeWeapon.WeaponBehaviour;
             weaponIcon.SetActiveWeapon(isActive);
         }
     }

@@ -35,6 +35,8 @@ public partial class GetPlayerInputSystem : SystemBase
         playerInputActions.WeaponMap.SwitchWeapon1.performed += OnWeapon1;
         playerInputActions.WeaponMap.SwitchWeapon2.performed += OnWeapon2;
         playerInputActions.WeaponMap.SwitchWeapon3.performed += OnWeapon3;
+        playerInputActions.WeaponMap.CycleWeaponRight.performed += OnWeaponCycleRight;
+        playerInputActions.WeaponMap.CycleWeaponLeft.performed += OnWeaponCycleLeft;
        
         
         // UI
@@ -111,6 +113,8 @@ public partial class GetPlayerInputSystem : SystemBase
         playerInputActions.WeaponMap.SwitchWeapon1.performed -= OnWeapon1;
         playerInputActions.WeaponMap.SwitchWeapon2.performed -= OnWeapon2;
         playerInputActions.WeaponMap.SwitchWeapon3.performed -= OnWeapon3;
+        playerInputActions.WeaponMap.CycleWeaponRight.performed -= OnWeaponCycleRight;
+        playerInputActions.WeaponMap.CycleWeaponLeft.performed -= OnWeaponCycleLeft;
 
         playerInputActions.InputMap.UpgradeUIButton.performed -= OnUpgradeUIButtonPressed;
     }
@@ -142,9 +146,24 @@ public partial class GetPlayerInputSystem : SystemBase
 
     private void OnWeapon3(InputAction.CallbackContext obj)
     {
+        
+        if (!SystemAPI.Exists(playerEntity)) return;
+        var fireInput = SystemAPI.GetSingletonRW<WeaponThreeInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+    
+    private void OnWeaponCycleRight(InputAction.CallbackContext obj)
+    {
+        if (!SystemAPI.Exists(playerEntity)) return;
+        var fireInput = SystemAPI.GetSingletonRW<WeaponCycleRightInput>();
+        fireInput.ValueRW.KeyPressed = true; 
+    }
+    
+    private void OnWeaponCycleLeft(InputAction.CallbackContext obj)
+    {
         if (!SystemAPI.Exists(playerEntity)) return;
 
-        var fireInput = SystemAPI.GetSingletonRW<WeaponThreeInput>();
+        var fireInput = SystemAPI.GetSingletonRW<WeaponCycleLeftInput>();
         fireInput.ValueRW.KeyPressed = true; 
     }
 

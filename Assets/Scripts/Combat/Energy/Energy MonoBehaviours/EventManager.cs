@@ -46,6 +46,10 @@ public static class EventManager
     public static UnityAction OnScreenFadeComplete;
 
     public static UnityAction OnPlayerDeath;
+
+    public static UnityAction OnEnableUI;
+    public static UnityAction OnDisableUI;
+   
 }
 
 public struct PlayerHealthData

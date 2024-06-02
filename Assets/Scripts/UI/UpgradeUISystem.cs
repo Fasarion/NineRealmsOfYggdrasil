@@ -44,7 +44,6 @@ public partial class UpgradeUISystem : SystemBase
         GenerateUpgradeUIChoices();
         
         OnUpgradeUIDisplayCall?.Invoke(_upgradeObjects);
-        
     }
 
     private void SubscribeToManager()

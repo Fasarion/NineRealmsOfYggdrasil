@@ -40,7 +40,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     {
         _cardTitle = upgradeObject.upgradeTitle;
         _cardDescription = upgradeObject.upgradeDescription;
-        _cardSprite = upgradeObject.upgradeSprite;
+        //_cardSprite = upgradeObject.upgradeSprite;
         _upgradeObjectIndex = upgradeObject.upgradeIndex;
     }
 
@@ -51,7 +51,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
 
         cardTitleText.text = _cardTitle;
         cardDescriptionText.text = _cardDescription;
-        cardImage.sprite = _cardSprite;
+        //cardImage.sprite = _cardSprite;
     }
 
     public void OnMouseHoverEnter()
@@ -66,9 +66,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
 
     public void RegisterMouseClick()
     {
-
         _manager.RegisterUpgradeCardClick(_upgradeObjectIndex);
         _audioManager.uiAudio.MenuClickAudio();
-
     }
 }

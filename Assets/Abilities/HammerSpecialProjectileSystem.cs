@@ -5,6 +5,7 @@ using Player;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -12,6 +13,7 @@ using UnityEngine.SocialPlatforms;
 [BurstCompile]
 public partial struct HammerSpecialProjectileSystem : ISystem
 {
+    private CollisionFilter _collisionFilter;
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
@@ -19,6 +21,11 @@ public partial struct HammerSpecialProjectileSystem : ISystem
         state.RequireForUpdate<HammerSpecialConfig>();
         state.RequireForUpdate<HammerComponent>();
         state.RequireForUpdate<PlayerTag>();
+        _collisionFilter = new CollisionFilter
+        {
+            BelongsTo = 1, // Projectile
+            CollidesWith = 1 << 1 | 1 << 5, // Enemy
+        };
     }
 
     [BurstCompile]
@@ -44,7 +51,8 @@ public partial struct HammerSpecialProjectileSystem : ISystem
                 ecb.SetComponentEnabled<GameObjectParticlePrefab>(entity, false);
                 projectile.ValueRW.IsInitialized = true;
                 
-
+                var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
+                collider.ValueRW.Value.Value.SetCollisionFilter(CollisionFilter.Zero);
             }
             
             if (currentChargeState == ChargeState.Stop && !projectile.ValueRO.HasFired)
@@ -56,6 +64,8 @@ public partial struct HammerSpecialProjectileSystem : ISystem
                 projectile.ValueRW.DirectionVector = direction;
                 currentDelayTime += config.TimeBetweenProjectileFires;
                 projectile.ValueRW.DelayTime = currentDelayTime;
+                var collider = SystemAPI.GetComponentRW<PhysicsCollider>(entity);
+                collider.ValueRW.Value.Value.SetCollisionFilter(_collisionFilter);
             }
 
             if (projectile.ValueRO.HasFired)

@@ -18,8 +18,8 @@ public class CombatUIWeaponHandler : ElementMVC
     public WeaponType currentRightInactiveWeapon;
     public WeaponSetupData rightInactiveWeaponSetupData;
 
-    public static Action<WeaponSetupData, WeaponSetupData, WeaponSetupData> onCurrentWeaponUpdated;
-    public static Action<WeaponSetupData, WeaponSetupData, WeaponSetupData> onStartingWeaponSet;
+    public static Action<List<WeaponSetupData>> onCurrentWeaponUpdated;
+    public static Action<List<WeaponSetupData>> onStartingWeaponSet;
     //Placeholder for debugging purposes;
     //private WeaponType hammerWeapon = WeaponType.Hammer;
     //private WeaponType swordWeapon = WeaponType.Sword;
@@ -112,7 +112,7 @@ public class CombatUIWeaponHandler : ElementMVC
     
     private void SetStartingWeapons()
     {
-        onStartingWeaponSet?.Invoke(currentPlayerWeapons[0], currentPlayerWeapons[1], currentPlayerWeapons[2]);
+        onStartingWeaponSet?.Invoke(currentPlayerWeapons);
     }
 
     private void OnWeaponSwitched(WeaponSetupData currentWeaponData, List<WeaponSetupData> allWeapons)
@@ -232,7 +232,7 @@ public class CombatUIWeaponHandler : ElementMVC
         
         //currentInactiveWeapons.AddRange(selectableWeapons);
                 
-        onCurrentWeaponUpdated?.Invoke(weaponSetupData[0], weaponSetupData[1], weaponSetupData[2]);
+        onCurrentWeaponUpdated?.Invoke(currentPlayerWeapons);
     }
     // Update is called once per frame
     void Update()

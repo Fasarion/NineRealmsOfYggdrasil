@@ -34,6 +34,9 @@ namespace Patrik
         [Header("Attack Buffer")]
         [SerializeField] float attackBufferTime = 0.2f;
 
+        [Range(1,3)]
+        public int currentlyAllowedWeapons = 1;
+
         BusyAttackInfo busyAttackInfo;
         public ChargeState chargeState { get; private set; }= ChargeState.None;
 
@@ -99,6 +102,11 @@ namespace Patrik
             
             EventManager.OnUpdateAttackAnimation -= UpdateAttackAnimation;
             EventManager.OnDashInput -= Dash;
+        }
+
+        public void OnNewWeaponCountSet(int newValue)
+        {
+            currentlyAllowedWeapons = newValue;
         }
 
         private void UpdateAttackAnimation(AttackType attackType, bool shouldAttack)
@@ -191,8 +199,60 @@ namespace Patrik
             bool hasSetStarter = false;
 
             int buttonIndex = 0;
+            for (int i = 0; i < currentlyAllowedWeapons; i++)
+            {
+                buttonIndex++;
+                
+                SubscribeToPassiveEvents(foundWeapons[i]);
+                
+                // Handle active weapon
+                if (!hasSetStarter)
+                {
+                    var activeWeaponData = new WeaponSetupData
+                    {
+                        Active = true,
+                        WeaponType = foundWeapons[i].WeaponType,
+                        WeaponButtonIndex = buttonIndex,
+                        WeaponBehaviour = foundWeapons[i]
+                    };
+                    MakeWeaponActive(activeWeaponData);
+                    startingWeapons.Add(activeWeapon);
+                    
+                    weaponDataList.Add(activeWeaponData);
+
+                    EventManager.OnSetupWeapon?.Invoke(activeWeaponData);
+
+                    hasSetStarter = true;
+                    continue;
+                }
+                
+                // Handle passive weapon
+                Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
+                    ? passiveSlots[passiveSlotCounter]
+                    : activeSlot;
+                
+                var passiveWeaponData = new WeaponSetupData
+                {
+                    Active = false,
+                    WeaponType = foundWeapons[i].WeaponType,
+                    WeaponButtonIndex = buttonIndex,
+                    WeaponBehaviour = foundWeapons[i]
+                };
+                startingWeapons.Add(foundWeapons[i]);
+                weaponDataList.Add(passiveWeaponData);
+                MakeWeaponPassive(passiveWeaponData, passiveParent);
+
+                
+                passiveSlotCounter++;
+
+                
+                EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
+                //EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
+            }
             
-            foreach (var weapon in foundWeapons)
+            EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
+            
+            /*foreach (var weapon in foundWeapons)
             {
                 buttonIndex++;
                 
@@ -243,7 +303,7 @@ namespace Patrik
                 //EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
             }
             
-            EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
+            EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);*/
         }
         
         private void MakeWeaponActive(WeaponSetupData weaponData)
@@ -323,14 +383,33 @@ namespace Patrik
 
         public void CycleWeaponsRight()
         {
-            Debug.Log("RightCycle Pressed");
-            /*var last = weapons[^1];
-            for (int i = weapons.Count-1; i > 0; i--)
-            {
-                weapons[i] = weapons[i - 1 % weapons.Count];
-            }
-            weapons[0] = last;*/
             
+            Debug.Log("RightCycle Pressed");
+
+            var last = weaponDataList[currentlyAllowedWeapons-1];
+            for (int i = currentlyAllowedWeapons-1; i > 0; i--)
+            {
+                weaponDataList[i] = weaponDataList[(i - 1) % currentlyAllowedWeapons];
+            }
+            weaponDataList[0] = last;
+
+            WeaponSetupData newActiveWeaponData = weaponDataList[0];
+            WeaponSetupData oldActiveWeaponData = activeWeaponData;
+            
+            if (newActiveWeaponData.WeaponType == oldActiveWeaponData.WeaponType)
+            {
+                Debug.LogError("The new weapon was the same as the old weapon!");
+                return;
+            }
+
+            Transform newPassiveSlot = weaponParents[newActiveWeaponData.WeaponBehaviour];
+
+            // switching passive from active
+            MakeWeaponPassive(oldActiveWeaponData, newPassiveSlot);
+            MakeWeaponActive(newActiveWeaponData);
+            EventManager.OnWeaponSwitch?.Invoke(newActiveWeaponData,weaponDataList);
+            /*Debug.Log("RightCycle Pressed");
+
             var last = weaponDataList[^1];
             for (int i = weaponDataList.Count-1; i > 0; i--)
             {
@@ -352,13 +431,38 @@ namespace Patrik
             // switching passive from active
             MakeWeaponPassive(oldActiveWeaponData, newPassiveSlot);
             MakeWeaponActive(newActiveWeaponData);
-            EventManager.OnWeaponSwitch?.Invoke(newActiveWeaponData,weaponDataList);
+            EventManager.OnWeaponSwitch?.Invoke(newActiveWeaponData,weaponDataList);*/
            
         }
         
         public void CycleWeaponsLeft()
         {
             var first = weaponDataList[0];
+            for (int i = 0; i < currentlyAllowedWeapons; i++)
+            {
+                weaponDataList[i] =  weaponDataList[(i + 1) % currentlyAllowedWeapons] ;
+            }
+            weaponDataList[currentlyAllowedWeapons-1] = first;
+
+            
+            WeaponSetupData newActiveWeaponData = weaponDataList[0];
+            WeaponSetupData oldActiveWeaponData = activeWeaponData;
+        
+           
+            if (newActiveWeaponData.WeaponType == oldActiveWeaponData.WeaponType)
+            {
+                Debug.LogError("The new weapon was the same as the old weapon!");
+                return;
+            }
+
+            Transform newPassiveSlot = weaponParents[newActiveWeaponData.WeaponBehaviour];
+
+            // switching passive from active
+            MakeWeaponPassive(oldActiveWeaponData, newPassiveSlot);
+            MakeWeaponActive(newActiveWeaponData);
+            EventManager.OnWeaponSwitch?.Invoke(newActiveWeaponData,weaponDataList);
+            
+                /*var first = weaponDataList[0];
                 for (int i = 0; i < weaponDataList.Count - 1; i++)
                 {
                     weaponDataList[i] =  weaponDataList[i + 1 % weaponDataList.Count] ;
@@ -381,7 +485,7 @@ namespace Patrik
                 // switching passive from active
                 MakeWeaponPassive(oldActiveWeaponData, newPassiveSlot);
                 MakeWeaponActive(newActiveWeaponData);
-                EventManager.OnWeaponSwitch?.Invoke(newActiveWeaponData,weaponDataList);
+                EventManager.OnWeaponSwitch?.Invoke(newActiveWeaponData,weaponDataList);*/
             
         }
         public void SwitchWeapon(int weaponNumber)
@@ -389,6 +493,11 @@ namespace Patrik
             if (weaponNumber > startingWeapons.Count)
             {
                 Debug.LogWarning($"Can't switch to weapon {weaponNumber} because there are only {startingWeapons.Count} weapons.");
+                return;
+            }
+
+            if (weaponNumber > currentlyAllowedWeapons)
+            {
                 return;
             }
 

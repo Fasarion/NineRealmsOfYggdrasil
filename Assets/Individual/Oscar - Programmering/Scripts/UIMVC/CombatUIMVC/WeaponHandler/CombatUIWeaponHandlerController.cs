@@ -60,7 +60,12 @@ public class CombatUIWeaponHandlerController : BaseControllerMVC
         {
             WeaponType = weaponHandlerView.currentRightInactiveWeapon
         };
-        CombatUIWeaponHandlerModel.onStartingWeaponSet?.Invoke(currentWeaponSetupData, currentLeftInactiveWeaponSetupData, currentRightInactiveWeaponSetupData);
+
+        List<WeaponSetupData> weaponSetupDataList = new List<WeaponSetupData>();
+        weaponSetupDataList.Add(currentWeaponSetupData);
+        weaponSetupDataList.Add(currentLeftInactiveWeaponSetupData);
+        weaponSetupDataList.Add(currentRightInactiveWeaponSetupData);
+        CombatUIWeaponHandlerModel.onStartingWeaponSet?.Invoke(weaponSetupDataList);
     }
     
     public void UpdateCurrentWeapon(WeaponType weaponType, CombatUIWeaponHandlerView weaponHandlerView, CombatUIWeaponHandlerModel weaponHandlerModel)
@@ -103,7 +108,10 @@ public class CombatUIWeaponHandlerController : BaseControllerMVC
         {
             WeaponType = weaponHandlerView.currentRightInactiveWeapon
         };
-        
-        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated?.Invoke(   currentWeaponData,   currentLeftWeaponData,    currentRightWeaponData);
+        List<WeaponSetupData> weaponSetupDataList = new List<WeaponSetupData>();
+        weaponSetupDataList.Add(currentWeaponData);
+        weaponSetupDataList.Add(currentLeftWeaponData);
+        weaponSetupDataList.Add(currentRightWeaponData);
+        CombatUIWeaponHandlerModel.onCurrentWeaponUpdated?.Invoke(  weaponSetupDataList);
     }
 }

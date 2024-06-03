@@ -253,7 +253,7 @@ namespace Patrik
                 
             }
 
-            for (int i = previousWeaponDataList.Count; i < foundWeapons.Count; i++)
+            for (int i = previousWeaponDataList.Count; i < currentlyAllowedWeapons; i++)
             {
                 Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
                     ? passiveSlots[passiveSlotCounter]
@@ -272,7 +272,7 @@ namespace Patrik
                 
                 passiveSlotCounter++;
             
-                EventManager.OnSetupWeapon?.Invoke(previousWeaponDataList[i]);
+                EventManager.OnSetupWeapon?.Invoke(weaponDataList[i]);
             }
             EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
 

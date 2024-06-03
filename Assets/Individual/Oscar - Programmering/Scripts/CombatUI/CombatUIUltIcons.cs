@@ -35,14 +35,25 @@ public class CombatUIUltIcons : MonoBehaviour
     {
         EventManager.OnEnergyChange += OnUltimate;
         EventManager.OnSetupWeapon += OnWeaponSetup;
+        EventManager.OnAllWeaponsSetup += OnAllWeaponsSetup;
     }
-    
+
+    private void OnAllWeaponsSetup(List<WeaponSetupData> arg0)
+    {
+        symbolCounter = 0;
+    }
+
+
     public void OnDisable()
     {
         EventManager.OnEnergyChange -= OnUltimate;
         EventManager.OnSetupWeapon -= OnWeaponSetup;
+        EventManager.OnAllWeaponsSetup -= OnAllWeaponsSetup;
     }
 
+    
+    
+    
     public void OnWeaponSetup(WeaponSetupData weaponSetupData)
     {
         

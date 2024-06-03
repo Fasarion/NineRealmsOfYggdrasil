@@ -140,6 +140,7 @@ namespace Patrik
             
             EventManager.OnSpecialCharge += OnSpecialCharge;
             EventManager.OnUltimatePrepare += OnUltimatePrepare;
+            EventManager.OnUltimatePerform += OnUltimatePerform;
            
             EventManager.OnWeaponActive += SetWeaponActive;
             EventManager.OnWeaponPassive += SetWeaponPassive;
@@ -161,6 +162,7 @@ namespace Patrik
 
             EventManager.OnSpecialCharge -= OnSpecialCharge;
             EventManager.OnUltimatePrepare -= OnUltimatePrepare;
+            EventManager.OnUltimatePerform -= OnUltimatePerform;
 
             EventManager.OnWeaponActive -= SetWeaponActive;
             EventManager.OnWeaponPassive -= SetWeaponPassive;
@@ -204,6 +206,10 @@ namespace Patrik
             attackCaller.ValueRW.BusyAttackInfo = info;
         }
         
+        private void OnUltimatePerform(WeaponType currentWeaponType, AttackData data)
+        {
+            TryWriteOverActiveAttackData(data);
+        }
         private void OnUltimatePrepare(AttackData data)
         {
             TryWriteOverActiveAttackData(data);
@@ -513,6 +519,8 @@ namespace Patrik
             {
                 EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, true);
                 _weaponManager.PrepareUltimateAttack();
+                //_weaponManager.PerformUltimateAttack(currentWeapon);
+                
                 canAttack = false;
             }
             // Handle ultimate prepare

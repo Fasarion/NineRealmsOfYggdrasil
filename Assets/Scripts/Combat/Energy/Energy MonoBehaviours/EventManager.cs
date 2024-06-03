@@ -25,6 +25,8 @@ public static class EventManager
     
     public static UnityAction<AttackData> OnSpecialCharge;
     public static UnityAction<AttackData> OnUltimatePrepare;
+    public static UnityAction<WeaponType, AttackData> OnUltimatePerform;
+    
 
     public static UnityAction<WeaponType, float, float> OnEnergyChange;
     public static UnityAction<AttackType> OnAttackInput;

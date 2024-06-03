@@ -77,6 +77,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
             ultConfig.ValueRW.CurrentTime = 0f;
             ultConfig.ValueRW.PrepareBeam = true;
 
+           
             // Initialize attack
             if (!ultConfig.ValueRO.IsActive)
             {

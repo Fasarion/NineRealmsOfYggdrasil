@@ -10,21 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: HammerUpgrade 1
+  m_Name: UnlockBirds
   m_EditorClassIdentifier: 
   upgradeTitle: Hammer lvl 3
   upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: 'Hammer ult will stunn enemies for longer
-
-
-    +5 Atk'
+  upgradeDescription: unlocks the birds
   upgrades:
-  - thingToUpgrade: 6
-    valueToUpgrade: 24
+  - thingToUpgrade: 8
+    valueToUpgrade: 22
     valueAmount: 0.2
-  - thingToUpgrade: 4
-    valueToUpgrade: 0
-    valueAmount: 5
   startUnlocked: 0
   upgradeIndex: 1
   isUnlocked: 0

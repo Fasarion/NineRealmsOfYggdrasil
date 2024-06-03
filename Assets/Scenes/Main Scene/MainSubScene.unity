@@ -256,8 +256,33 @@ PrefabInstance:
     - {fileID: 4993815072262655146, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6221755797999946281, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 118337991}
   m_SourcePrefab: {fileID: 100100000, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5, type: 3}
+--- !u!1 &118337970 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6221755797999946281, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
+    type: 3}
+  m_PrefabInstance: {fileID: 23824921}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &118337991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 118337970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8aa6912b0dc6d5488a213549a39769f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRecorded: 0
+  recordingTime: 1
+  currentRecordingTime: 0
 --- !u!1001 &282076706
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -266,6 +291,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 716962282394368914, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: radius
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_Name
@@ -321,131 +351,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxRings
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: projectilePrefab
-      value: 
-      objectReference: {fileID: 6837703229795121589, guid: 11cf5f14c37a2d54f866fb9f813765db,
-        type: 3}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: multiSpawnDelayTime
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: multiSpawnSizeGrowth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6939662387199463831, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: useMousePosition
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxSpawnWidth
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: minSpawnWidth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxProjectiles
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxSpawnHeight
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: minSpawnHeight
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeToTurnBack
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: spawnWidthGrowth
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: hammerSparkPrefab
-      value: 
-      objectReference: {fileID: 3342080299073069443, guid: afef867d727f67e40b0606a106bd754a,
-        type: 3}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeBetweenSpawns
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: hammerProjectilePrefab
-      value: 
-      objectReference: {fileID: 629890809973566461, guid: d842dfd9739266649bf0e2ab3fab0ef0,
-        type: 3}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeToReturnAfterTurning
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeBetweenProjectileFires
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: hammerProjectileAbilityPrefab
-      value: 
-      objectReference: {fileID: 2980240001410318769, guid: 01c19e1a270734d4680446fa308a466a,
-        type: 3}
-    - target: {fileID: 8200186334667100056, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: timeBetweenInitialThrowAndProjectiles
-      value: 0.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxRows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: rowsAngle
-      value: 45
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: maxStrikes
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8252350592938105101, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: sparkEffectPrefab
-      value: 
-      objectReference: {fileID: 3342080299073069443, guid: afef867d727f67e40b0606a106bd754a,
-        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8630937659040687369, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3519656319106089348}
   m_SourcePrefab: {fileID: 100100000, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
+--- !u!1 &282076707 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8630937659040687369, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    type: 3}
+  m_PrefabInstance: {fileID: 282076706}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &367399154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1104,6 +1024,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404ee0ae44fc8f94e9fe59ecaf2b0f39, type: 3}
+--- !u!114 &3519656319106089348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282076707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7c6c072f88f8145b7ebf13a415c6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordCount: 5
+  radius: 5
+  initialSpawnDelay: 1
+  delayBetweenSwords: 0.25
+  swordProjectilePrefab: {fileID: 9149154176972138520, guid: 0e6d317cff56c6d49a9c563f330bf86f,
+    type: 3}
+  swordComboAbilityPrefab: {fileID: 3667457265074221073, guid: aee6de18796330d4cb3ee7925c0f4d65,
+    type: 3}
+  swordSpawnEffectPrefab: {fileID: 0}
+  offset: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

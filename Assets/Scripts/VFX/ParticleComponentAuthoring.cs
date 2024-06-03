@@ -19,6 +19,8 @@ public class ParticleComponentAuthoring : MonoBehaviour
              "logic on the game object side (like an animator), this should be marked as False.")]
     [SerializeField]
     private bool followsEntity;
+
+    [SerializeField] private bool spawnAtEntity;
     
 
 class Baker : Baker<ParticleComponentAuthoring>
@@ -29,7 +31,8 @@ class Baker : Baker<ParticleComponentAuthoring>
             AddComponentObject(entity, new GameObjectParticlePrefab
             {
                 Value = authoring.gameObjectPrefab,
-                FollowEntity = authoring.followsEntity
+                FollowEntity = authoring.followsEntity,
+                SpawnAtEntity = authoring.spawnAtEntity,
             });
         }
     }
@@ -39,6 +42,7 @@ public class GameObjectParticlePrefab : IComponentData, IEnableableComponent
 {
     public GameObject Value;
     public bool FollowEntity;
+    public bool SpawnAtEntity;
 }
 
 public class ParticleReference : ICleanupComponentData
@@ -68,7 +72,15 @@ public partial struct HandleParticleSystem : ISystem
             .WithNone<ParticleReference>()
             .WithEntityAccess())
         {
-            var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value, new Vector3(0, 1000f, 0), quaternion.identity);
+            Vector3 spawnPos = new Vector3(0, 1000, 0);
+            
+            if (gameObjectPrefab.SpawnAtEntity)
+            {
+                var transform = state.EntityManager.GetComponentData<LocalTransform>(entity);
+                spawnPos = transform.Position;
+            }
+            
+            var gameObjectInstance = Object.Instantiate(gameObjectPrefab.Value, spawnPos, quaternion.identity);
             var particleReference = new ParticleReference()
             {
                 Particle = gameObjectInstance.GetComponent<ParticleSystem>()

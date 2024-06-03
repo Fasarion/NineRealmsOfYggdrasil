@@ -33,9 +33,6 @@ public partial struct SwordPassiveAbilitySystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        
-
-
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
         var config = SystemAPI.GetSingleton<SwordPassiveAbilityConfig>();
         

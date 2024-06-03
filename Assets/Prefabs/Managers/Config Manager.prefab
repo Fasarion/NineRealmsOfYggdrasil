@@ -1476,6 +1476,80 @@ MonoBehaviour:
         AttackOne: 1
         AttackTwo: 1
         AttackThree: 1
+--- !u!1001 &1918195172779595735
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 4850372986711739024}
+    m_Modifications:
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7879483275852182238, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      propertyPath: m_Name
+      value: SwordComboAbility
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: c73b6875b5fe1084fae851563f625524, type: 3}
+--- !u!4 &3341175030886280057 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3801302680098585774, guid: c73b6875b5fe1084fae851563f625524,
+    type: 3}
+  m_PrefabInstance: {fileID: 1918195172779595735}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3410494838757285968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1566,8 +1640,118 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6760676926318262621, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
+      propertyPath: maxRows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760676926318262621, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: rowsAngle
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760676926318262621, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: maxStrikes
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760676926318262621, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
       propertyPath: vfxHeightOffset
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6760676926318262621, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: sparkEffectPrefab
+      value: 
+      objectReference: {fileID: 3342080299073069443, guid: afef867d727f67e40b0606a106bd754a,
+        type: 3}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: maxSpawnWidth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: minSpawnWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: maxProjectiles
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: maxSpawnHeight
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: minSpawnHeight
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: timeToTurnBack
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: spawnWidthGrowth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: hammerSparkPrefab
+      value: 
+      objectReference: {fileID: 3342080299073069443, guid: afef867d727f67e40b0606a106bd754a,
+        type: 3}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: timeBetweenSpawns
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: hammerProjectilePrefab
+      value: 
+      objectReference: {fileID: 629890809973566461, guid: d842dfd9739266649bf0e2ab3fab0ef0,
+        type: 3}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: timeBetweenProjectileFires
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: hammerProjectileAbilityPrefab
+      value: 
+      objectReference: {fileID: 2980240001410318769, guid: 01c19e1a270734d4680446fa308a466a,
+        type: 3}
+    - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: timeBetweenInitialThrowAndProjectiles
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: maxRings
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 6837703229795121589, guid: 11cf5f14c37a2d54f866fb9f813765db,
+        type: 3}
+    - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: multiSpawnDelayTime
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: multiSpawnSizeGrowth
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 318049080820494885, guid: 051db4a6bbdfb4d40b0da93f940628a8, type: 3}
@@ -1580,6 +1764,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 9044729146895328956}
+    - targetCorrespondingSourceObject: {fileID: 7789959017307368128, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3341175030886280057}
     - targetCorrespondingSourceObject: {fileID: 5651922056175955718, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
       insertIndex: -1

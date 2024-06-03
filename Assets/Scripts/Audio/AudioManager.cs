@@ -47,7 +47,6 @@ public class AudioManager : MonoBehaviour
             {
                 playerAudio.PlayerAudioCaller((int) audioData.audioEventType);
                 break;
-                
             }
 
             case 3: //EnemyCategory

@@ -518,8 +518,8 @@ namespace Patrik
                 && canAttack)
             {
                 EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, true);
-                _weaponManager.PrepareUltimateAttack();
-                //_weaponManager.PerformUltimateAttack(currentWeapon);
+                //_weaponManager.PrepareUltimateAttack();
+                _weaponManager.PerformUltimateAttack(currentWeapon);
                 
                 canAttack = false;
             }

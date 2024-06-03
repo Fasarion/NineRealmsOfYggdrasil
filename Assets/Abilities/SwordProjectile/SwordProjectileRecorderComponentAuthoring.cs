@@ -6,7 +6,9 @@ using UnityEngine;
 
 public class SwordProjectileRecorderComponentAuthoring : MonoBehaviour
 {
-    public float hasRecorded;
+    public bool hasRecorded;
+    public float recordingTime;
+    public float currentRecordingTime;
 
     public class SwordProjectileRecorderComponentAuthoringBaker : Baker<SwordProjectileRecorderComponentAuthoring>
     {
@@ -14,7 +16,12 @@ public class SwordProjectileRecorderComponentAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
-                new SwordProjectileRecorderComponent { HasRecorded = authoring.hasRecorded });
+                new SwordProjectileRecorderComponent
+                {
+                    HasRecorded = authoring.hasRecorded,
+                    RecordingTime = authoring.recordingTime,
+                    CurrentRecordingTime = authoring.currentRecordingTime,
+                });
             AddBuffer<SwordTrajectoryRecordingElement>(entity);
         }
     }
@@ -22,11 +29,13 @@ public class SwordProjectileRecorderComponentAuthoring : MonoBehaviour
 
 public struct SwordProjectileRecorderComponent : IComponentData
 {
-    public float HasRecorded;
+    public bool HasRecorded;
+    public float RecordingTime;
+    public float CurrentRecordingTime;
 }
 
 public struct SwordTrajectoryRecordingElement : IBufferElementData
 {
     public float3 Position;
-    public float3 Rotation;
+    public quaternion Rotation;
 }

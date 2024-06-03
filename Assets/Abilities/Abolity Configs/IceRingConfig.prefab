@@ -55,6 +55,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   abilityPrefab: {fileID: 5736946099070336933, guid: 8a747dec1117ff74f9ea89dce8bdfa6b,
     type: 3}
+  projectilePrefab: {fileID: 0}
   chargeAreaPrefab: {fileID: 3054128452994836860, guid: 3296f554ce86fa64e90a6efcfdbbc810,
     type: 3}
   maxDisplayTime: 1
@@ -65,23 +66,26 @@ MonoBehaviour:
   vfxScale: 0.5
   chargeAreaVfxHeightOffset: 0
   abilityVfxHeightOffset: 0
+  maxRings: 1
+  multiSpawnDelayTime: 0
+  multiSpawnSizeGrowth: 0
   ogCachedDamageValue: 0
   isInitialized: 0
   isAbilityReleased: 0
   chargeAudioData:
-    AudioEnumValue: 0
     eventCategoryType: 4
     weaponType: 1
     enemyTyping: 0
     audioEventType: 1
     attackType: 0
+    environmentType: 0
   impactAudioData:
-    AudioEnumValue: 0
     eventCategoryType: 1
     weaponType: 1
     enemyTyping: 0
     audioEventType: 2
     attackType: 2
+    environmentType: 0
 --- !u!114 &613255897913659809
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 16341d20f121c7a43ad41871a7a40c8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hasHitBuffer: 1
+  isHitTrigger: 0
+  isHitTriggerTarget: 0
+  isHitCollider: 0
+  isHitColliderTarget: 0
 --- !u!114 &1904816828412757982
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,10 +170,10 @@ MonoBehaviour:
   chargeStageBuffs:
   - DamageModifier: 1
     RangeModifier: 2.5
-  - DamageModifier: 1.5
+  - DamageModifier: 1.3
     RangeModifier: 4.5
-  - DamageModifier: 2
-    RangeModifier: 6
+  - DamageModifier: 1.8
+    RangeModifier: 3.5
 --- !u!114 &4894214247397636823
 MonoBehaviour:
   m_ObjectHideFlags: 0

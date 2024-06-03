@@ -427,6 +427,14 @@ namespace Patrik
             string specialAtk = GetActiveAttackAnimationName(AttackType.Special);
             playerAnimator.SetBool(specialAtk, false);
         }
+        
+        public void PerformUltimateAttack(WeaponType currentWeapon)
+        {
+            currentAttackType = AttackType.Ultimate;
+            EventManager.OnUltimatePerform?.Invoke(currentWeapon,GetActiveAttackData());
+            playerAnimator.SetTrigger("startUltimateTrigger");
+            Debug.Log("Ultimate performed with weapon " + currentWeapon);
+        }
 
         public void PrepareUltimateAttack()
         {

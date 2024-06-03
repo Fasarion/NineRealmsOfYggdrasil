@@ -39,7 +39,6 @@ public partial struct HammerUltimateAttackSystem : ISystem
             return;
 
         attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
-        Debug.Log("ult!");
 
         var config = SystemAPI.GetSingleton<ThunderStrikeConfig>();
         var ability = state.EntityManager.Instantiate(config.mainAbilityPrefab);

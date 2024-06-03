@@ -19,6 +19,7 @@ public class MusicManager : MonoBehaviour
     public int enemyCountStageTwo;
     public int enemyCountStageThree;
     private int nextStageCount;
+    
 
     [SerializeField]private bool playLevelMusic;
     [SerializeField]private bool playMenuMusic;
@@ -106,7 +107,53 @@ public class MusicManager : MonoBehaviour
         SetNextStageCount(nextStage);
         levelMusic.SetParameter("EnemyCountStage", 0);
     }
-    // Update is called once per frame
+
+    private float lastMusicChange;
+    public float musicChangeCooldown = 5f;
+    
+    public void SwordUltimateMusic()
+    {
+        float timeOfMusicChange = Time.time;
+        if (timeOfMusicChange > lastMusicChange + musicChangeCooldown)
+        {
+            //SET CHANGE HERE
+            lastMusicChange = timeOfMusicChange;
+        }
+    }
+    
+    public void HammerUltimateMusic()
+    {
+        float timeOfMusicChange = Time.time;
+        if (timeOfMusicChange > lastMusicChange + musicChangeCooldown)
+        {
+            //SET CHANGE HERE
+            lastMusicChange = timeOfMusicChange;
+        }
+    }
+    
+    public void BirdsUltimateMusic()
+    {
+        float timeOfMusicChange = Time.time;
+        if (timeOfMusicChange > lastMusicChange + musicChangeCooldown)
+        {
+            //SET CHANGE HERE
+            lastMusicChange = timeOfMusicChange;
+        }
+    }
+
+
+    public void BossMusic()
+    {
+        //insert parameter or event
+    }
+
+    public void BossEndMusic()
+    {
+        //insert whatever
+    }
+    
+    
+    
     public void Play(StudioEventEmitter emitter)
     {
         emitter.Play();

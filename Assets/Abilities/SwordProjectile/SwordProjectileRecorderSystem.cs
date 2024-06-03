@@ -1,19 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using Unity.Burst;
 using Unity.Entities;
+using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
 [BurstCompile]
 public partial struct SwordProjectileRecorderSystem : ISystem
 {
-    private bool _hasRecordingStarted;
-    private bool _isRecording;
-    
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<ShouldRecordSwordTrajectoryComponent>();
     }
@@ -22,24 +22,29 @@ public partial struct SwordProjectileRecorderSystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var recorder = SystemAPI.GetSingletonRW<SwordProjectileRecorderComponent>();
-        var recorderBuffer = SystemAPI.GetSingletonBuffer<SwordTrajectoryRecordingElement>();
-        var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
-        var swordTransform = state.EntityManager.GetComponentData<LocalTransform>(swordEntity);
+        var swordLocalToWorld = state.EntityManager.GetComponentData<LocalToWorld>(swordEntity);
+        var playerEntity = SystemAPI.GetSingletonEntity<PlayerTag>();
+        var playerLocalToWorld = state.EntityManager.GetComponentData<LocalToWorld>(playerEntity);
 
-        if (!_hasRecordingStarted && state.EntityManager.HasComponent<WeaponIsAttacking>(swordEntity))
+        recorder.ValueRW.CurrentRecordingTime += SystemAPI.Time.DeltaTime;
+        
+        if (recorder.ValueRO.CurrentRecordingTime > recorder.ValueRO.RecordingTime)
         {
-            _isRecording = true;
-            _hasRecordingStarted = true;
+            state.EntityManager.RemoveComponent<ShouldRecordSwordTrajectoryComponent>(swordEntity);
         }
 
-        if (_isRecording)
+        var playerInverse = math.inverse(playerLocalToWorld.Value);
+        var pos = swordLocalToWorld.Position;
+        var localPos = math.transform(playerInverse, pos);
+
+        var element = new SwordTrajectoryRecordingElement
         {
-            if (!state.EntityManager.HasComponent<WeaponIsAttacking>(swordEntity))
-            {
-                _isRecording = false;
-                ecb.RemoveComponent<ShouldRecordSwordTrajectoryComponent>(swordEntity);
-            }
-        }
+            Position = localPos,
+            Rotation = swordLocalToWorld.Rotation,
+        };
+        var recorderBuffer = SystemAPI.GetSingletonBuffer<SwordTrajectoryRecordingElement>();
+        recorderBuffer.Add(element);
     }
 }

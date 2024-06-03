@@ -1,18 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Entities;
 using UnityEngine;
 
 public class SwordProjectileAbilityAuthoring : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int currentSpawnCount;
+    public bool isInitialized;
+    public int bufferLength;
 
-    // Update is called once per frame
-    void Update()
+    public class SwordProjectileAbilityAuthoringBaker : Baker<SwordProjectileAbilityAuthoring>
     {
-        
+        public override void Bake(SwordProjectileAbilityAuthoring authoring)
+        {
+            var entity = GetEntity(TransformUsageFlags.Dynamic);
+            AddComponent(entity,
+                new SwordProjectileAbility
+                {
+                    CurrentSpawnCount = authoring.currentSpawnCount, IsInitialized = authoring.isInitialized,
+                    bufferLength = authoring.bufferLength,
+                });
+        }
     }
+}
+
+public struct SwordProjectileAbility : IComponentData
+{
+    public int CurrentSpawnCount;
+    public bool IsInitialized;
+    public int bufferLength;
 }

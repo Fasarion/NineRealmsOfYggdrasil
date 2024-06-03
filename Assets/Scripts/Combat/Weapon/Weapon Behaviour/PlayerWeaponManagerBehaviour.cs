@@ -60,20 +60,14 @@ namespace Patrik
 
         float timeOfLastAttackHold;
         float timeSinceLastAttackHold;
-
-        private bool updateWeaponCountAtRuntime;
-        private int previouslyAllowedWeapons;
-
-        private List<WeaponSetupData> previousWeaponDataList;
-        private List<WeaponBehaviour> previousWeapons;
-
+        
+        
         private void Awake()
         {
             Instance = this;
             playerAnimator = gameObject.GetComponent<Animator>();
             
             SetWeaponIds();
-            updateWeaponCountAtRuntime = false;
         }
 
         private void OnValidate()
@@ -97,7 +91,6 @@ namespace Patrik
         {
             EventManager.OnUpdateAttackAnimation += UpdateAttackAnimation;
             EventManager.OnDashInput += Dash;
-            EventManager.OnWeaponCountSet += OnNewWeaponCountSet;
         }
 
         private void OnDisable()
@@ -109,18 +102,11 @@ namespace Patrik
             
             EventManager.OnUpdateAttackAnimation -= UpdateAttackAnimation;
             EventManager.OnDashInput -= Dash;
-            EventManager.OnWeaponCountSet -= OnNewWeaponCountSet;
         }
 
         public void OnNewWeaponCountSet(int newValue)
         {
-            previouslyAllowedWeapons = currentlyAllowedWeapons;
             currentlyAllowedWeapons = newValue;
-            updateWeaponCountAtRuntime = true;
-            previousWeapons = startingWeapons;
-            previousWeaponDataList = weaponDataList;
-            UpdateWeapons();
-            //SetupWeapons();
         }
 
         private void UpdateAttackAnimation(AttackType attackType, bool shouldAttack)
@@ -201,87 +187,11 @@ namespace Patrik
             return attackData;
         }
 
-        public void UpdateWeapons()
-        {
-            var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
-            foundWeapons = foundWeapons.OrderBy(weapon => weaponIdMap[weapon.WeaponType]).ToList();
-            
-            startingWeapons = new List<WeaponBehaviour>();
-            weaponDataList = new List<WeaponSetupData>();
-            int passiveSlotCounter = 0;
-
-            bool hasSetStarter = false;
-
-            int buttonIndex = 0;
-            //for (int i = 0; i < previousWeaponDataList.Count; i++)
-            //{
-            //buttonIndex++;
-            
-            //SubscribeToPassiveEvents(foundWeapons[i]);
-            
-            // Handle active weapon
-            for (int i = 0; i < previousWeaponDataList.Count; i++)
-            {
-                buttonIndex++;
-        
-                SubscribeToPassiveEvents(foundWeapons[i]);
-                
-                if (!hasSetStarter)
-                {
-                    MakeWeaponActive(activeWeaponData);
-                    startingWeapons.Add(activeWeapon);
-            
-                    weaponDataList.Add(activeWeaponData);
-
-                    EventManager.OnSetupWeapon?.Invoke(activeWeaponData);
-
-                    hasSetStarter = true;
-                    continue;
-                }
-                // Handle passive weapon
-                Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
-                    ? passiveSlots[passiveSlotCounter]
-                    : activeSlot;
-            
-                startingWeapons.Add(previousWeaponDataList[i].WeaponBehaviour);
-                weaponDataList.Add(previousWeaponDataList[i]);
-                MakeWeaponPassive(previousWeaponDataList[i], passiveParent);
-            
-                passiveSlotCounter++;
-            
-                EventManager.OnSetupWeapon?.Invoke(previousWeaponDataList[i]);
-                
-            }
-
-            for (int i = previousWeaponDataList.Count; i < foundWeapons.Count; i++)
-            {
-                Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
-                    ? passiveSlots[passiveSlotCounter]
-                    : activeSlot;
-        
-                var passiveWeaponData = new WeaponSetupData
-                {
-                    Active = false,
-                    WeaponType = foundWeapons[i].WeaponType,
-                    WeaponButtonIndex = buttonIndex,
-                    WeaponBehaviour = foundWeapons[i]
-                };
-                startingWeapons.Add(foundWeapons[i]);
-                weaponDataList.Add(passiveWeaponData);
-                MakeWeaponPassive(passiveWeaponData, passiveParent);
-                
-                passiveSlotCounter++;
-            
-                EventManager.OnSetupWeapon?.Invoke(previousWeaponDataList[i]);
-            }
-            EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
-
-        }
         public void SetupWeapons()
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
             foundWeapons = foundWeapons.OrderBy(weapon => weaponIdMap[weapon.WeaponType]).ToList();
-            
+
             startingWeapons = new List<WeaponBehaviour>();
             weaponDataList = new List<WeaponSetupData>();
             int passiveSlotCounter = 0;
@@ -289,18 +199,13 @@ namespace Patrik
             bool hasSetStarter = false;
 
             int buttonIndex = 0;
-            //for (int i = 0; i < previousWeaponDataList.Count; i++)
-            //{
-                //buttonIndex++;
-                
-                //SubscribeToPassiveEvents(foundWeapons[i]);
-                
-                // Handle active weapon
-            for(int i = 0; i < currentlyAllowedWeapons; i++)
+            for (int i = 0; i < currentlyAllowedWeapons; i++)
             {
                 buttonIndex++;
-        
+                
                 SubscribeToPassiveEvents(foundWeapons[i]);
+                
+                // Handle active weapon
                 if (!hasSetStarter)
                 {
                     var activeWeaponData = new WeaponSetupData
@@ -312,7 +217,7 @@ namespace Patrik
                     };
                     MakeWeaponActive(activeWeaponData);
                     startingWeapons.Add(activeWeapon);
-            
+                    
                     weaponDataList.Add(activeWeaponData);
 
                     EventManager.OnSetupWeapon?.Invoke(activeWeaponData);
@@ -320,12 +225,12 @@ namespace Patrik
                     hasSetStarter = true;
                     continue;
                 }
-        
+                
                 // Handle passive weapon
                 Transform passiveParent = passiveSlotCounter <= passiveSlots.Count
                     ? passiveSlots[passiveSlotCounter]
                     : activeSlot;
-        
+                
                 var passiveWeaponData = new WeaponSetupData
                 {
                     Active = false,
@@ -337,17 +242,16 @@ namespace Patrik
                 weaponDataList.Add(passiveWeaponData);
                 MakeWeaponPassive(passiveWeaponData, passiveParent);
 
-        
+                
                 passiveSlotCounter++;
 
-        
-                EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
-            }
-            //EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
-            EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
-
-            //}
                 
+                EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
+                //EventManager.OnSetupWeapon?.Invoke(passiveWeaponData);
+            }
+            
+            EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
+            
             /*foreach (var weapon in foundWeapons)
             {
                 buttonIndex++;
@@ -401,8 +305,6 @@ namespace Patrik
             
             EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);*/
         }
-
-       
         
         private void MakeWeaponActive(WeaponSetupData weaponData)
         {

@@ -192,7 +192,8 @@ public class UpgradeCardUIManager : MonoBehaviour
                 return gameObject;
         }
 
-        return null;
+        gameObject = playerStonePrefab;
+        return gameObject;
     }
 
     private void OnEnable()

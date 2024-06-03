@@ -52,7 +52,7 @@ public class AudioManager : MonoBehaviour
 
             case 3: //EnemyCategory
             {
-                enemyAudio.EnemyAudioCaller((int)audioData.enemyTyping);
+                enemyAudio.EnemyAudioCaller((int)audioData.enemyTyping, audioData);
                 break;
             }
             case 4:

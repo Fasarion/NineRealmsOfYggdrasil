@@ -14,12 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Storm of Thought
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "Summon a storm of ravens imbued with the power of Huginn that
-    sweeps up enemies in its path.\n\nMore ravens now swirl within the storm, increasing
-    the ferocity of its winds.  \n\nR BUTTON When the ravens' energy is full"
+  upgradeDescription: 'Even more ravens now swirl within the storm. The winds of
+    their making whirl at your whim.
+
+
+    Steer with MOUSE BUTTON
+
+
+    R BUTTON
+    When the ravens'' energy is full'
   upgrades:
   - thingToUpgrade: 15
     valueToUpgrade: 15
+    valueAmount: 3
+  - thingToUpgrade: 15
+    valueToUpgrade: 29
     valueAmount: 5
   startUnlocked: 0
   upgradeIndex: 0

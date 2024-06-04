@@ -54,7 +54,7 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
                 CurrentRadius = authoring.initialRadius,
                 RadiusIncreaseSpeed = authoring.radiusIncreaseSpeed,
                 
-                AngleStep = 360f / authoring.birdCount,
+                //AngleStep = 360f / authoring.birdCount,
                 
                 AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge * math.PI * 2,
                 AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease * math.PI * 2,
@@ -82,7 +82,7 @@ public struct BirdsSpecialAttackConfig : IComponentData
     public float TargetRadius;
     public float RadiusIncreaseSpeed;
     
-    public float AngleStep;
+    public float AngleStep => BirdCount < 0 ? 180f : 360f / BirdCount;
     public float AngularSpeedDuringCharge;
     public float AngularSpeedAfterRelease;
     

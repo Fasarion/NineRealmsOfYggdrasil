@@ -19,6 +19,8 @@ public partial class ChangePlayerSpeedOnAttackManagedSystem : SystemBase
 
     private void OnChangeMoveSpeed(MoveSpeedChangeData data)
     {
+        OnResetMoveSpeed();
+        
         bool hasBuffer = SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<PlayerMoveSpeedChangeElement> buffer);
         if (!hasBuffer) return;
 

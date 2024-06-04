@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 7644122277154232076}
   - component: {fileID: 2724801224189099907}
   - component: {fileID: 3858257242953754444}
-  - component: {fileID: 7215396623326362912}
   - component: {fileID: 7587177894121845818}
   m_Layer: 0
   m_Name: Sword Ultimate Config
@@ -98,20 +97,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponType: 1
   AttackType: 3
---- !u!114 &7215396623326362912
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5130377291682013088}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  knockBackForce: 1
-  KnockDirection: 0
 --- !u!114 &7587177894121845818
 MonoBehaviour:
   m_ObjectHideFlags: 0

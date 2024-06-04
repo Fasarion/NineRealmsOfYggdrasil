@@ -35,12 +35,14 @@ public partial struct BirdSpecialAttackSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<BirdsSpecialAttackConfig>();
         var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
+        if (!state.EntityManager.HasComponent<IsUnlocked>(configEntity)) return;
+        var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
+
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-        if (!state.EntityManager.HasComponent<IsUnlocked>(configEntity)) return;
+
 
         var chargeInfo = attackCaller.SpecialChargeInfo;
         if (chargeInfo.ChargingWeapon != WeaponType.Birds) return;

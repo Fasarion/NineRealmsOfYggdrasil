@@ -9,40 +9,54 @@ using Patrik;
 public class EnemyAudio : ScriptableObject
 {
     [Header("BaseEnemy")]
-    public EventReference grunts;
-    private EventInstance gruntsIns;
+    //public EventReference grunts;
+    //private EventInstance gruntsIns;
     public EventReference gruntHit;
     private EventInstance gruntHitIns;
 
-    public EventReference gruntBackup;
+    //public EventReference gruntBackup;
 
-    private EventInstance gruntBackIns;
+    //private EventInstance gruntBackIns;
     //public EventReference gruntAttack;
-    public EventReference ranger;
+    //public EventReference ranger;
     //public EventReference rangerAttack;
-    [Header("WeaponImpacts")] 
-    public EventReference swordImpact;
-    public EventReference hammerImpact;
-
+   
     private int gruntAmount;
     private int rangerAmount;
 
-    public void EnemyAudioCaller(int enemyType)
+    public void EnemyAudioCaller(int enemyType, AudioData audioData)
     {
-        //enemytyp, vapentyp?
+        //enemytyp
         switch (enemyType)
         {
             case 0:
             {
                 break;
             }
-            case 1:
+            case 1:  //grunt
             {
-                gruntOnHit();
+                GruntSoundCaller((int)audioData.audioEventType);
                 break;
             }
         }
     }
+
+    public void GruntSoundCaller(int audioEvent)
+    {
+        switch (audioEvent)
+        {
+            case 0:
+            {
+                break;
+            }
+            case 2:
+            {
+                RuntimeManager.PlayOneShot(gruntHit);
+                break;
+            }
+        }
+    }
+    
     public void gruntSound(int nbrGrunts)
     {
         /*gruntsIns = RuntimeManager.CreateInstance(grunts);
@@ -60,7 +74,7 @@ public class EnemyAudio : ScriptableObject
     }
 
     //Spelar Ljud med rätt vapen när träffad. OBS JUST NU BROKEN
-    public void gruntOnHit()
+    /*public void gruntOnHit()
     {
         switch (PlayerAudioBehaviour.GetWeaponTypeAudio())
         {
@@ -76,12 +90,13 @@ public class EnemyAudio : ScriptableObject
             }
 
         }
-        /*gruntHitIns = RuntimeManager.CreateInstance(gruntHit);
+        gruntHitIns = RuntimeManager.CreateInstance(gruntHit);
         gruntHitIns.setParameterByName("WeaponTest", PlayerAudioBehaviour.GetWeaponTypeAudio());
         gruntHitIns.start();
         gruntHitIns.release();
-        Debug.Log("Du kom hit");*/
+        Debug.Log("Du kom hit");
     }
+    */
 
 
 }

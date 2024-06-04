@@ -7,6 +7,7 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine;
 using Weapon;
 
 
@@ -139,7 +140,9 @@ public partial struct BirdUltimateAttackSystem : ISystem
             // play sound
             var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
             audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
-
+            
+           
+            
             // Spawn birds evenly spaced around player
             for (int i = 0; i < configRO.BirdCount; i++)
             {

@@ -63,15 +63,16 @@ MonoBehaviour:
     type: 3}
   maxAftermathDisplayTime: 1
   damageDelayTime: 0.2
-  damageArea: 7
+  damageArea: 6.3
   shockwaveEffectHeightOffset: 0.001
+  useMousePosition: 0
   impactAudioData:
-    AudioEnumValue: 0
     eventCategoryType: 1
     weaponType: 2
     enemyTyping: 0
     audioEventType: 2
     attackType: 3
+    environmentType: 0
 --- !u!114 &1358274090480011263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 0.5
+  knockBackForce: 0.4
   KnockDirection: 0
 --- !u!114 &2596202326436399737
 MonoBehaviour:

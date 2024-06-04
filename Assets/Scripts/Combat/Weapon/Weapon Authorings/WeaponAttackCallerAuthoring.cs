@@ -24,9 +24,16 @@ public struct WeaponAttackCaller : IComponentData
     public SpecialChargeInfo SpecialChargeInfo; 
     public PrepareUltimateInfo PrepareUltimateInfo;
 
+    public UnlockInfo UnlockInfo;
+
     public BusyAttackInfo BusyAttackInfo;
 
     public bool ReturnWeapon;
+
+    public readonly bool AttackUnlocked(WeaponType weaponType, AttackType attackType)
+    {
+        return UnlockInfo.AttackUnlocked(weaponType, attackType);
+    }
     
     public readonly bool IsPreparingAttack()
     {
@@ -38,17 +45,17 @@ public struct WeaponAttackCaller : IComponentData
         return ActiveAttackData.ShouldStartAttack(weaponType, attackType);
     }
     
-    public bool ShouldStartPassiveAttack(WeaponType type)
+    public readonly bool ShouldStartPassiveAttack(WeaponType type)
     {
         return PassiveAttackData.ShouldStartAttack(type, AttackType.Passive);
     }
     
-    public bool ShouldStopActiveAttack(WeaponType weaponType, AttackType attackType)
+    public readonly bool ShouldStopActiveAttack(WeaponType weaponType, AttackType attackType)
     {
         return ActiveAttackData.ShouldStopAttack(weaponType, attackType);
     }
     
-    public bool ShouldStopPassiveAttack(WeaponType type)
+    public readonly bool ShouldStopPassiveAttack(WeaponType type)
     {
         return PassiveAttackData.ShouldStopAttack(type, AttackType.Passive);
     }
@@ -75,6 +82,49 @@ public partial struct PrepareUltimateInfo
     public bool IsPreparing;
 }
 
+public struct UnlockInfo
+{
+    struct UnlockWeaponInfo
+    {
+        public WeaponType WeaponType;
+        public bool PassiveUnlocked;
+        public bool NormalUnlocked;
+        public bool SpecialUnlocked;
+        public bool UltimateUnlocked;
+
+        public bool AttackUnlocked(AttackType type)
+        {
+            switch (type)
+            {
+                case AttackType.Passive: return PassiveUnlocked;
+                case AttackType.Normal: return NormalUnlocked;
+                case AttackType.Special: return SpecialUnlocked;
+                case AttackType.Ultimate: return UltimateUnlocked;
+            }
+            
+            Debug.LogError($"{type.ToString()} is not a recognized attack for unlock.");
+            return false;
+        }
+    }
+    
+    private UnlockWeaponInfo swordInfo;
+    private UnlockWeaponInfo hammerInfo;
+    private UnlockWeaponInfo birdsInfo;
+    
+    public readonly bool AttackUnlocked(WeaponType weaponType, AttackType attackType)
+    {
+        switch (weaponType)
+        {
+            case WeaponType.Sword: return swordInfo.AttackUnlocked(attackType);
+            case WeaponType.Hammer: return hammerInfo.AttackUnlocked(attackType);
+            case WeaponType.Birds: return birdsInfo.AttackUnlocked(attackType);
+        }
+        
+        Debug.LogError($"{weaponType.ToString()} is not a recognized weapon for unlock.");
+        return false;
+    }
+}
+
 public struct WeaponCallData
 {
     public bool ShouldStart;
@@ -84,21 +134,21 @@ public struct WeaponCallData
     public int Combo;
     public bool IsAttacking;
 
-    public bool ShouldStartAttack(WeaponType weaponType, AttackType attackType)
+    public readonly bool ShouldStartAttack(WeaponType weaponType, AttackType attackType)
     {
         if (!ShouldStart) return false;
 
         return weaponType == WeaponType && attackType == AttackType;
     }
     
-    public bool ShouldStopAttack(WeaponType weaponType, AttackType attackType)
+    public readonly bool ShouldStopAttack(WeaponType weaponType, AttackType attackType)
     {
         if (!ShouldStop) return false;
 
         return weaponType == WeaponType && attackType == AttackType;
     }
     
-    public bool ShouldStopAttack(WeaponType weaponType)
+    public readonly bool ShouldStopAttack(WeaponType weaponType)
     {
         if (!ShouldStop) return false;
 

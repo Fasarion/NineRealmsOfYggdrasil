@@ -37,19 +37,19 @@ public class CombatUIUltIcons : MonoBehaviour
         swordWeaponEnergyData = new WeaponEnergyData{
             weaponType = WeaponType.Sword,
             currentEnergy = 0,
-            maxEnergy = 0
+            maxEnergy = float.PositiveInfinity
         };
         
          hammerWeaponEnergyData = new WeaponEnergyData{
             weaponType = WeaponType.Hammer,
             currentEnergy = 0,
-            maxEnergy = 0
+            maxEnergy = float.PositiveInfinity
         };
         
          birdWeaponEnergyData = new WeaponEnergyData{
             weaponType = WeaponType.Birds,
             currentEnergy = 0,
-            maxEnergy = 0
+            maxEnergy = float.PositiveInfinity
         };
         weaponEnergyDataList.Add(swordWeaponEnergyData);
         weaponEnergyDataList.Add(hammerWeaponEnergyData);
@@ -66,8 +66,12 @@ public class CombatUIUltIcons : MonoBehaviour
        
         for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
         {
+            
             ultWeaponReadyHolders[i].StopSystem();
+            
         }
+        
+       
         ultimateActiveText.gameObject.SetActive(false);
 
     }
@@ -105,21 +109,30 @@ public class CombatUIUltIcons : MonoBehaviour
         activeUltCounter = 0;
         for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
         {
-            if (ultWeaponReadyHolders[i].currentWeaponType == weaponEnergyDataList[i].weaponType)
+            for (int j = 0; j < weaponEnergyDataList.Count; j++)
             {
-                if (weaponEnergyDataList[i].maxEnergy >= 0)
+                if (ultWeaponReadyHolders[i].currentWeaponType == weaponEnergyDataList[j].weaponType)
                 {
-                    ultWeaponReadyHolders[symbolCounter].PlaySystem();
-                    //ultWeaponReadyHolders[i].objectToSet.SetActive(true);
-                    activeUltCounter++;
-                }
-                else
-                {
-                    ultWeaponReadyHolders[symbolCounter].StopSystem();
-                    //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
-                    //activeUltCounter--;
+                    if (weaponEnergyDataList[j].currentEnergy >= weaponEnergyDataList[j].maxEnergy)
+                    {
+                        ultWeaponReadyHolders[i].PlaySystem();
+                        //ultWeaponReadyHolders[i].objectToSet.SetActive(true);
+                        activeUltCounter++;
+                    }
+                    else
+                    {
+                        //if (weaponEnergyDataList[j].currentEnergy == 0)
+                        //{
+                            ultWeaponReadyHolders[i].StopSystem();
+                            //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
+                        //}
+                        //ultWeaponReadyHolders[i].StopSystem();
+                        //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
+                        //activeUltCounter--;
+                    }
                 }
             }
+            
         }
         
         
@@ -165,7 +178,7 @@ public class CombatUIUltIcons : MonoBehaviour
                     }
                 }*/
 
-                WeaponEnergyData weaponEnergyData = new WeaponEnergyData();
+                //WeaponEnergyData weaponEnergyData = new WeaponEnergyData();
                 
                 ultWeaponReadyHolders[symbolCounter].currentWeaponType = weaponSetupData.WeaponType;
                 //ultWeaponReadyHolders[symbolCounter].imageTarget.SetNativeSize();
@@ -209,16 +222,27 @@ public class CombatUIUltIcons : MonoBehaviour
             
             for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
             {
-                if (ultWeaponReadyHolders[i].currentWeaponType == weaponEnergyDataList[i].weaponType)
+                for (int j = 0; j < weaponEnergyDataList.Count; j++)
                 {
-                    if (weaponEnergyDataList[i].currentEnergy == 0)
+                    if (ultWeaponReadyHolders[i].currentWeaponType == weaponEnergyDataList[j].weaponType)
                     {
-                        ultWeaponReadyHolders[symbolCounter].StopSystem();
-                        //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
-                        activeUltCounter--;
+                        if (weaponEnergyDataList[j].currentEnergy == 0)
+                        {
+                            ultWeaponReadyHolders[i].StopSystem();
+                            //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
+                            activeUltCounter--;
+                        }
+                        
+                        if (weaponEnergyDataList[j].currentEnergy >= weaponEnergyDataList[j].maxEnergy)
+                        {
+                            ultWeaponReadyHolders[i].PlaySystem();
+                            //ultWeaponReadyHolders[i].objectToSet.SetActive(true);
+                            activeUltCounter++;
+                        }
+
                     }
-                   
                 }
+              
             
             }
         //}
@@ -226,8 +250,10 @@ public class CombatUIUltIcons : MonoBehaviour
         //UltimateReady
         //if (currentEnergy >= maxEnergy)
         //{
-            for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
+           /* for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
             {
+                
+                
                 if (ultWeaponReadyHolders[i].currentWeaponType == weaponEnergyDataList[i].weaponType)
                 {
                     if (weaponEnergyDataList[i].currentEnergy >= weaponEnergyDataList[i].maxEnergy)
@@ -237,7 +263,7 @@ public class CombatUIUltIcons : MonoBehaviour
                         activeUltCounter++;
                     }
                 }
-            }
+            }*/
         //}
 
         if (activeUltCounter > 0)

@@ -9,21 +9,23 @@ public class CombatUIUltWeaponReadyHolder : MonoBehaviour
 {
     public WeaponType currentWeaponType;
     //public Image imageTarget;
-    //public GameObject objectToSet;
-    public VisualEffect vfx;
+    public GameObject objectToSet;
+    //public VisualEffect vfx;
 
     public bool shouldPlay;
     
     public void PlaySystem()
     {
        
-        vfx.SendEvent("OnPlay");
+        objectToSet.SetActive(true);
+        //vfx.SendEvent("OnPlay");
         
         
     }
     
     public void StopSystem()
     {
-        vfx.SendEvent("OnStop");
+        objectToSet.SetActive(false);
+        //vfx.SendEvent("OnStop");
     }
 }

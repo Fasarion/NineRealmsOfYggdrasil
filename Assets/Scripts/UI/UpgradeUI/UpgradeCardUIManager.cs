@@ -31,6 +31,8 @@ public class UpgradeCardUIManager : MonoBehaviour
     private float _cachedTimeStamp;
 
     public float uiOffset;
+
+    private bool _isStartup;
     
     
     public static UpgradeCardUIManager Instance
@@ -143,6 +145,8 @@ public class UpgradeCardUIManager : MonoBehaviour
     private void DisplayUpgradeCards(UpgradeObject[] upgradeObjects)
     {
         this.upgradeObjects = upgradeObjects;
+
+        if (this.upgradeObjects.Length <= 0) return;
         
         //ShowUI(upgradeObjects.Length);
         
@@ -170,7 +174,6 @@ public class UpgradeCardUIManager : MonoBehaviour
             upgradeCards[i].UpdateCardDisplay(upg);
             upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i]);
         }
-
     }
 
     private GameObject GetUpgradeStonePrefab(UpgradeObject upg)
@@ -216,6 +219,8 @@ public class UpgradeCardUIManager : MonoBehaviour
             upgradeCards[i].gameObject.SetActive(true);
         }
 
+        EventManager.OnDisableUI();
+
         _isUIDisplayed = true;
         //Time.timeScale = 0f;
 
@@ -237,6 +242,13 @@ public class UpgradeCardUIManager : MonoBehaviour
         _isUIDisplayed = false;
         //Time.timeScale = 1f;
         EventManager.OnUnpause?.Invoke(PauseType.FreezeGame);
+
+        if (!_isStartup)
+        {
+            _isStartup = true;
+        }
+        else EventManager.OnEnableUI();
+        
     }
 
     public RectTransform[] GetUpgradeCardDimensions(UpgradeObject[] upgradeObjects)

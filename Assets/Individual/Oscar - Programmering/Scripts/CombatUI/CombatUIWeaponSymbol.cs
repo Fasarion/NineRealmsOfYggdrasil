@@ -66,15 +66,16 @@ public class CombatUIWeaponSymbol : MonoBehaviour
             case WeaponSymbolType.Main:
             {
                 SetMainWeaponType(weaponSetupDataList[0].WeaponType);
-                selectedKeySymbolNumber.text = (weaponSetupDataList[0].WeaponButtonIndex).ToString();
+                //selectedKeySymbolNumber.text = (weaponSetupDataList[0].WeaponButtonIndex).ToString();
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
             {
+                
                 if (weaponSetupDataList.Count >= 2)
                 {
                     SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
-                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                    //selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
                 }
                 //SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
                 //selectedKeySymbolNumber.text = (leftInactiveWeaponData.WeaponButtonIndex).ToString();
@@ -85,12 +86,12 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 if (weaponSetupDataList.Count == 3)
                 {
                     SetInactiveWeaponType(weaponSetupDataList[2].WeaponType);
-                    selectedKeySymbolNumber.text = (weaponSetupDataList[2].WeaponButtonIndex).ToString();
+                    //selectedKeySymbolNumber.text = (weaponSetupDataList[2].WeaponButtonIndex).ToString();
                 }
                 else if (weaponSetupDataList.Count == 2)
                 {
                     SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
-                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                    //selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
                 }
                
                 break;
@@ -105,7 +106,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
             case WeaponSymbolType.Main:
             {
                 SetMainWeaponType(weaponSetupDataList[0].WeaponType);
-                selectedKeySymbolNumber.text = (weaponSetupDataList[0].WeaponButtonIndex).ToString();
+                //selectedKeySymbolNumber.text = (weaponSetupDataList[0].WeaponButtonIndex).ToString();
                 break;
             }    
             case WeaponSymbolType.LeftInactive:
@@ -113,7 +114,7 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 if (weaponSetupDataList.Count >= 2)
                 {
                     SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
-                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                    //selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
                 }
 
                 //SetInactiveWeaponType(leftInactiveWeaponData.WeaponType);
@@ -125,12 +126,12 @@ public class CombatUIWeaponSymbol : MonoBehaviour
                 if (weaponSetupDataList.Count == 3)
                 {
                     SetInactiveWeaponType(weaponSetupDataList[2].WeaponType);
-                    selectedKeySymbolNumber.text = (weaponSetupDataList[2].WeaponButtonIndex).ToString();
+                    //selectedKeySymbolNumber.text = (weaponSetupDataList[2].WeaponButtonIndex).ToString();
                 }
                 else if (weaponSetupDataList.Count == 2)
                 {
                     SetInactiveWeaponType(weaponSetupDataList[1].WeaponType);
-                    selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
+                    //selectedKeySymbolNumber.text = (weaponSetupDataList[1].WeaponButtonIndex).ToString();
                 }
                 //SetInactiveWeaponType(rightInactiveWeaponData.WeaponType);
                 //selectedKeySymbolNumber.text = (rightInactiveWeaponData.WeaponButtonIndex).ToString();

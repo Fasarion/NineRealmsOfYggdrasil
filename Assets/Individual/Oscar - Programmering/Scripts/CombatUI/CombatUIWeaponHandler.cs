@@ -17,6 +17,7 @@ public class CombatUIWeaponHandler : ElementMVC
     public WeaponSetupData leftInactiveWeaponSetupData;
     public WeaponType currentRightInactiveWeapon;
     public WeaponSetupData rightInactiveWeaponSetupData;
+    public List<GameObject> inactiveWeaponSymbols;
 
     public static Action<List<WeaponSetupData>> onCurrentWeaponUpdated;
     public static Action<List<WeaponSetupData>> onStartingWeaponSet;
@@ -53,7 +54,7 @@ public class CombatUIWeaponHandler : ElementMVC
     public void OnEnable()
     {
         EventManager.OnWeaponSwitch += OnWeaponSwitched;
-        EventManager.OnAllWeaponsSetup += OnSetupWeapon;
+        EventManager.OnAllWeaponsSetup += OnAllWeaponsSetup;
     }
 
    
@@ -61,15 +62,28 @@ public class CombatUIWeaponHandler : ElementMVC
     public void OnDisable()
     {
         EventManager.OnWeaponSwitch -= OnWeaponSwitched;
-        EventManager.OnAllWeaponsSetup -= OnSetupWeapon;
+        EventManager.OnAllWeaponsSetup -= OnAllWeaponsSetup;
     }
 
-    private void OnSetupWeapon(List<WeaponSetupData> allWeapons)
+    private void OnAllWeaponsSetup(List<WeaponSetupData> allWeapons)
     {
         //currentPlayerWeapons = new List<WeaponBehaviour>();
         currentPlayerWeapons = allWeapons;
-      
-        
+        if (currentPlayerWeapons.Count < 2)
+        {
+            for (int i = 0; i < inactiveWeaponSymbols.Count; i++)
+            {
+                inactiveWeaponSymbols[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < inactiveWeaponSymbols.Count; i++)
+            {
+                inactiveWeaponSymbols[i].SetActive(true);
+            }
+        }
+
         //This does not account for the right inactive weapon
         /*if (data.Active)
         {

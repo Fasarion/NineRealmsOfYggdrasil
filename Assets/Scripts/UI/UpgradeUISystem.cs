@@ -81,8 +81,8 @@ public partial class UpgradeUISystem : SystemBase
     {
         UpgradePoolType poolType;
 
-        if (_cachedLevel == 1) poolType = UpgradePoolType.HammerUnlock;
-        else if (_cachedLevel == 2) poolType = UpgradePoolType.BirdUnlock;
+        if (_cachedLevel == 10) poolType = UpgradePoolType.HammerUnlock;
+        else if (_cachedLevel == 20) poolType = UpgradePoolType.BirdUnlock;
         else poolType = UpgradePoolType.Commerce;
 
         return poolType;

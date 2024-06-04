@@ -121,11 +121,11 @@ public class CombatUIUltIcons : MonoBehaviour
                     }
                     else
                     {
-                        if (weaponEnergyDataList[j].currentEnergy == 0)
-                        {
+                        //if (weaponEnergyDataList[j].currentEnergy == 0)
+                        //{
                             ultWeaponReadyHolders[i].StopSystem();
                             //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
-                        }
+                        //}
                         //ultWeaponReadyHolders[i].StopSystem();
                         //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
                         //activeUltCounter--;

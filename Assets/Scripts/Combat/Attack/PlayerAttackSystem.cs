@@ -507,15 +507,22 @@ namespace Patrik
 
             WeaponType currentWeapon = attackCaller.ValueRO.ActiveAttackData.WeaponType;
             
+            
+
            bool canAttack = true;
+
 
            // reset ult flag
            EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, false);
            
+           bool ultUnlocked = UltAttackUnlocked(currentWeapon);
+
+           
+           
            // Handle ultimate perform
             if (attackCaller.ValueRO.PrepareUltimateInfo.Perform 
                 && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
-                && canAttack)
+                && canAttack && ultUnlocked)
             {
                 EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, true);
                 //_weaponManager.PrepareUltimateAttack();
@@ -526,7 +533,7 @@ namespace Patrik
             // Handle ultimate prepare
             else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame 
                      && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
-                     && canAttack)
+                     && canAttack && ultUnlocked)
             {
                 _weaponManager.PrepareUltimateAttack();
                 canAttack = false;
@@ -540,7 +547,8 @@ namespace Patrik
             var specialAttackInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             bool specIsHeld = specialAttackInput.IsHeld;
 
-            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon);
+            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon)
+                && SpecialAttackUnlocked(currentWeapon);
             EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Special, canSpecialAttack);
 
             if (canSpecialAttack)
@@ -588,7 +596,76 @@ namespace Patrik
                _weaponManager.ReleaseSpecial();
            }
         }
+
+        // private bool AttackUnlocked(WeaponType weaponType, AttackType attackType)
+        // {
+        //     switch (attackType)
+        //     {
+        //         case AttackType.Special:
+        //             return SpecialAttackUnlocked(weaponType);
+        //         
+        //         case AttackType.Ultimate:
+        //             return UltAttackUnlocked(weaponType);
+        //     }
+        //
+        //     // assume every other attack is unlocked
+        //     return true;
+        // }
         
+        private bool CheckForUnlock<T>(ComponentLookup<IsUnlocked> lookup) where T : unmanaged, IComponentData
+        {
+            bool entityExists = SystemAPI.TryGetSingletonEntity<T>(out Entity swordSpecial);
+            bool lookupUnlock = entityExists && lookup.HasComponent(swordSpecial);
+
+            return lookupUnlock;
+        }
+        
+        private bool CheckForUnlock<T>() where T : unmanaged, IComponentData
+        {
+            bool entityExists = SystemAPI.TryGetSingletonEntity<T>(out Entity swordSpecial);
+            bool lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(swordSpecial);
+
+            return lookupUnlock;
+        }
+
+        
+        private bool SpecialAttackUnlocked(WeaponType weaponType)
+        {
+            //var unlockLookup = SystemAPI.GetComponentLookup<IsUnlocked>();
+            
+            switch (weaponType)
+            {
+                case WeaponType.Sword:
+                    return CheckForUnlock<IceRingConfig>();
+
+                case WeaponType.Hammer:
+                    return CheckForUnlock<HammerSpecialConfig>();
+                
+                case WeaponType.Birds:
+                    return CheckForUnlock<BirdsSpecialAttackConfig>();
+
+            }
+
+            return false;
+        }
+
+        private bool UltAttackUnlocked(WeaponType weaponType)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.Sword:
+                    return CheckForUnlock<SwordUltimateConfig>();
+                
+                case WeaponType.Hammer:
+                    return CheckForUnlock<ThunderStrikeConfig>();
+
+                case WeaponType.Birds:
+                    return CheckForUnlock<BirdsUltimateAttackConfig>();
+            }
+
+            return false;
+        }
+
         protected override void OnStopRunning()
         {
             UnsubscribeFromAttackEvents();

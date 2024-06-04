@@ -21,8 +21,8 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private float angularSpeed = 2f; 
     
     [Header("Bird Settings")]
-    [Tooltip("How many birds that are spawned in this attack.")]
-    [SerializeField] private int birdCount = 2;
+    // [Tooltip("How many birds that are spawned in this attack.")]
+    // [SerializeField] private int birdCount = 2;
     [Tooltip("How long this attack lasts.")]
     [SerializeField] private float lifeTime = 2f;
     
@@ -35,14 +35,14 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
 
     [SerializeField] private bool useMouse;
     
-    private void OnValidate()
-    {
-        if (birdCount <= 0)
-        {
-            birdCount = 1;
-            Debug.LogWarning("Bird Count must be positive.");
-        }
-    }
+    // private void OnValidate()
+    // {
+    //     if (birdCount <= 0)
+    //     {
+    //         birdCount = 1;
+    //         Debug.LogWarning("Bird Count must be positive.");
+    //     }
+    // }
 
     class Baker : Baker<BirdUltimateConfigAuthoring>
     {
@@ -56,11 +56,11 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 TimeBetweenSuctions = authoring.timeBetweenSuctions,
                 TornadoRadius = authoring.tornadoRadius,
                 
-                BirdCount = authoring.birdCount,
+               // BirdCount = authoring.birdCount,
                 
                 Radius = authoring.circleRadius,
                 
-                AngleStep = 360f / authoring.birdCount,
+                //AngleStep = 360f / authoring.birdCount,
                 AngularSpeed = authoring.angularSpeed * math.PI * 2,
                 LifeTime = authoring.lifeTime,
                 
@@ -84,7 +84,7 @@ public struct BirdsUltimateAttackConfig : IComponentData
     
     public float Radius;
 
-    public float AngleStep;
+    public float AngleStep => BirdCount < 0 ? 180f : 360f / BirdCount;
     public float AngularSpeed;
     
     public float LifeTimeTimer;

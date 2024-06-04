@@ -84,6 +84,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     ecb.AddComponent<ShouldBeDestroyed>(entity);
                 }
                 
+                Debug.Log("destroy tornado"); 
                 // destroy birdnado on return
                 foreach (var (_, entity) in SystemAPI
                     .Query<BirdnadoComponent>()
@@ -126,6 +127,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
                 config.ValueRW.UseMouse = true;
             }
 
+            Debug.Log("Spawn tornado");
             // spawn tornado
             var tornado = state.EntityManager.Instantiate(config.ValueRO.TornadoPrefab);
             

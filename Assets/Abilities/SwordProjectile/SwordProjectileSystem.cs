@@ -23,6 +23,7 @@ public partial struct SwordProjectileSystem : ISystem
         state.RequireForUpdate<SwordComboAbilityConfig>();
         state.RequireForUpdate<PlayerPositionSingleton>();
         state.RequireForUpdate<SwordProjectile>();
+        state.RequireForUpdate<GameUnpaused>();
         _detectionFilter = new CollisionFilter
         {
             BelongsTo = 1, // Projectile

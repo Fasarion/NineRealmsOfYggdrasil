@@ -13,6 +13,7 @@ public partial struct SwordProjectileAbilitySystem : ISystem
     {
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<SwordComboAbilityConfig>();
+        state.RequireForUpdate<GameUnpaused>();
     }
 
     [BurstCompile]

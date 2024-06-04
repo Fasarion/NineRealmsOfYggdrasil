@@ -97,7 +97,7 @@ public class CombatUIUltIcons : MonoBehaviour
 
     private void OnWeaponSwitch(WeaponSetupData arg0, List<WeaponSetupData> weaponSetupDataList)
     {
-        for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
+        for (int i = 0; i < weaponSetupDataList.Count; i++)
         {
             ultWeaponReadyHolders[i].currentWeaponType = weaponSetupDataList[i].WeaponType;
         }

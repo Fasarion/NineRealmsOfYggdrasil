@@ -35,7 +35,7 @@ public partial struct ThunderStrikeSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var thunderConfig = SystemAPI.GetSingleton<ThunderStrikeConfig>();
+        var thunderConfig = SystemAPI.GetSingletonRW<ThunderStrikeConfig>();
         var thunderEntity = SystemAPI.GetSingletonEntity<ThunderStrikeConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var target = SystemAPI.GetSingleton<PlayerTargetInfoSingleton>();
@@ -48,18 +48,11 @@ public partial struct ThunderStrikeSystem : ISystem
                  SystemAPI.Query<RefRW<ThunderStrikeAbility>, RefRW<TimerObject>, RefRW<LocalTransform>>()
                      .WithEntityAccess())
         {
-            
-            if (ability.ValueRO.strikeCounter >= thunderConfig.maxStrikes)
-            {
-                ecb.AddComponent<ShouldBeDestroyed>(entity);
-            }
-            
-            
             if (!ability.ValueRO.isInitialized)
             {
                 ability.ValueRW.isInitialized = true;
 
-                originTransform.ValueRW.Position = targetPos + new float3(0, thunderConfig.mainEffectHeightOffset, 0);
+                originTransform.ValueRW.Position = targetPos + new float3(0, thunderConfig.ValueRO.mainEffectHeightOffset, 0);
                 originTransform.ValueRW.Rotation = Quaternion.Euler(0f, 0f, 0f);
                 originTransform.ValueRW.Scale = 1;
                 
@@ -75,17 +68,28 @@ public partial struct ThunderStrikeSystem : ISystem
                     OwnerEntity = hammerComponent,
                     OwnerWasActive = weapon.InActiveState
                 });
-                
+
+                var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(thunderEntityConfig);
+                thunderConfig.ValueRW.maxStrikes = spawnCount.Value;
+                if (state.EntityManager.HasComponent<UseMousePosition>(thunderEntityConfig))
+                {
+                    thunderConfig.ValueRW.UseMousePosition = true;
+                }
+            }
+            
+            if (ability.ValueRO.strikeCounter >= thunderConfig.ValueRO.maxStrikes)
+            {
+                ecb.AddComponent<ShouldBeDestroyed>(entity);
             }
 
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
 
 
-            float currentCheckpointTime = thunderConfig.timeBetweenStrikes;
+            float currentCheckpointTime = thunderConfig.ValueRO.timeBetweenStrikes;
             
             if (!ability.ValueRO.hasDoneFirstStrike)
             {
-                currentCheckpointTime = thunderConfig.initialStrikeDelay;
+                currentCheckpointTime = thunderConfig.ValueRO.initialStrikeDelay;
                 ability.ValueRW.hasDoneFirstStrike = true;
             }
             
@@ -93,16 +97,16 @@ public partial struct ThunderStrikeSystem : ISystem
             {
                 ability.ValueRW.strikeCounter++;
                 
-                var audioElement = new AudioBufferData() {AudioData = thunderConfig.impactAudioData};
+                var audioElement = new AudioBufferData() {AudioData = thunderConfig.ValueRO.impactAudioData};
                 audioBuffer.Add(audioElement);
                 
-                var effect = state.EntityManager.Instantiate(thunderConfig.projectileAbilityPrefab);
+                var effect = state.EntityManager.Instantiate(thunderConfig.ValueRO.projectileAbilityPrefab);
 
-                if (thunderConfig.UseMousePosition) targetPos = mousePos.WorldPosition;
+                if (thunderConfig.ValueRO.UseMousePosition) targetPos = mousePos.WorldPosition;
                 
                 state.EntityManager.SetComponentData(effect, new LocalTransform
                 {
-                    Position = targetPos + new float3(0, thunderConfig.shockwaveEffectHeightOffset, 0),
+                    Position = targetPos + new float3(0, thunderConfig.ValueRO.shockwaveEffectHeightOffset, 0),
                     Rotation = Quaternion.Euler(-90f, 0f, 0f),
                     Scale = 1
                 });

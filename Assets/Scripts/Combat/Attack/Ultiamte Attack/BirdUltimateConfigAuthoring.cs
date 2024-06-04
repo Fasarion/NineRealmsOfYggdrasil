@@ -32,6 +32,8 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
 
     [Header("Audio")] 
     [SerializeField] private AudioData tornadoSound;
+
+    [SerializeField] private bool useMouse;
     
     private void OnValidate()
     {
@@ -62,7 +64,8 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 AngularSpeed = authoring.angularSpeed * math.PI * 2,
                 LifeTime = authoring.lifeTime,
                 
-                TornadoSound = authoring.tornadoSound
+                TornadoSound = authoring.tornadoSound,
+                UseMouse = authoring.useMouse,
             });
         }
     }
@@ -90,4 +93,5 @@ public struct BirdsUltimateAttackConfig : IComponentData
     public bool IsActive;
 
     public AudioData TornadoSound;
+    public bool UseMouse;
 }

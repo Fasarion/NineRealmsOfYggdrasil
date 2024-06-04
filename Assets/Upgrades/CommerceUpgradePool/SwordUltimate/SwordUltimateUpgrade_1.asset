@@ -10,25 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: HammerSpecialUpgrade_1
+  m_Name: SwordUltimateUpgrade_1
   m_EditorClassIdentifier: 
-  upgradeTitle: "Mj\xF6lnir's Fury"
+  upgradeTitle: Wrath of Bifrost
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "When throwing your hammer, 5 additional hammers are summoned.
-    \n\nEach hammer is imbued with surging might. \n\nRIGHT MOUSE BUTTON"
+  upgradeDescription: "Swing the sword like Heimdall himself, imbuing each strike
+    with overflowing power.\n\n Each swing now summons 7 beams of Bifrost light.
+    \n\nR BUTTON When the sword's energy is full"
   upgrades:
-  - thingToUpgrade: 5
+  - thingToUpgrade: 2
     valueToUpgrade: 15
     valueAmount: 5
-  - thingToUpgrade: 4
-    valueToUpgrade: 18
-    valueAmount: 0.5
-  - thingToUpgrade: 5
-    valueToUpgrade: 26
-    valueAmount: 2
-  startUnlocked: 0
+  startUnlocked: 1
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: 37d9ad21fd196174bbf60386329a1b79, type: 2}
+  - {fileID: 11400000, guid: 26d33728cc61a124aba9345ab24c257c, type: 2}

@@ -40,6 +40,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
         var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
+        if (!state.EntityManager.HasComponent<IsUnlocked>(configEntity)) return;
+
         var chargeInfo = attackCaller.SpecialChargeInfo;
         if (chargeInfo.ChargingWeapon != WeaponType.Birds) return;
         
@@ -67,6 +69,8 @@ public partial struct BirdSpecialAttackSystem : ISystem
         if (currentChargeState == ChargeState.Start)
         {
             config.ValueRW.CenterPointEntity = playerEntity;
+            var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+            config.ValueRW.BirdCount = spawnCount.Value;
             
             // Spawn birds evenly spaced around player
             for (int i = 0; i < config.ValueRO.BirdCount; i++)

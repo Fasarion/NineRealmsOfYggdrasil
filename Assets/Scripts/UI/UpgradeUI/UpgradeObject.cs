@@ -35,6 +35,7 @@ public enum UpgradeValueTypes
     damageModifier,
     spawnCount,
     spawnDelay,
+    spawnCountMultiplier,
     
     // skill modifiers
     normalModifier,
@@ -51,6 +52,7 @@ public enum UpgradeValueTypes
     UnlockSpecial,
     knockbackForce,
     hitStopDuration,
+    UseMousePosition,
 }
 
 public enum UpgradeBaseType
@@ -59,11 +61,13 @@ public enum UpgradeBaseType
     SwordSpecialAbility,
     SwordUltimateAbility,
     SwordPassiveAbility,
+    SwordComboAbility,
     
     Hammer,
     HammerSpecialAbility,
     HammerUltimateAbility,
     HammerPassiveAbility,
+    HammerComboAbility,
     
     Birds,
     Mead,

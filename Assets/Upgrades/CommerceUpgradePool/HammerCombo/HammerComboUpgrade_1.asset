@@ -10,25 +10,28 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: HammerSpecialUpgrade_1
+  m_Name: HammerComboUpgrade_1
   m_EditorClassIdentifier: 
-  upgradeTitle: "Mj\xF6lnir's Fury"
+  upgradeTitle: Hammer
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "When throwing your hammer, 5 additional hammers are summoned.
-    \n\nEach hammer is imbued with surging might. \n\nRIGHT MOUSE BUTTON"
+  upgradeDescription: 'Increase the hammer''s power.
+
+
+    Every third strike will
+    now summon 7 lightning bolts. '
   upgrades:
   - thingToUpgrade: 5
-    valueToUpgrade: 15
-    valueAmount: 5
-  - thingToUpgrade: 4
-    valueToUpgrade: 18
-    valueAmount: 0.5
+    valueToUpgrade: 0
+    valueAmount: 10
   - thingToUpgrade: 5
-    valueToUpgrade: 26
+    valueToUpgrade: 27
     valueAmount: 2
+  - thingToUpgrade: 9
+    valueToUpgrade: 15
+    valueAmount: 4
   startUnlocked: 0
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: 37d9ad21fd196174bbf60386329a1b79, type: 2}
+  - {fileID: 11400000, guid: a21313650d7dbc34a82c7e6390bfefe8, type: 2}

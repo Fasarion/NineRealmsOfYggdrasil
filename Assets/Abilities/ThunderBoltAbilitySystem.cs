@@ -30,7 +30,7 @@ public partial struct ThunderBoltAbilitySystem : ISystem
     {
         var playerRotation = SystemAPI.GetSingleton<PlayerRotationSingleton>();
         var playerPosition = SystemAPI.GetSingleton<PlayerPositionSingleton>();
-        var config = SystemAPI.GetSingleton<ThunderBoltConfig>();
+        var config = SystemAPI.GetSingletonRW<ThunderBoltConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var configEntity = SystemAPI.GetSingletonEntity<ThunderBoltConfig>();
 
@@ -38,18 +38,22 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                  SystemAPI.Query<RefRW<ThunderBoltAbility>, RefRW<TimerObject>>()
                      .WithEntityAccess())
         {
-            if (ability.ValueRO.CurrentCount >= config.MaxStrikes)
+            if (ability.ValueRO.CurrentCount >= config.ValueRW.MaxStrikes)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
             }
 
             if (!ability.ValueRO.isInitialized)
             {
+                var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+                config.ValueRW.MaxStrikes = spawnCount.Value;
 
-
+                var spawnMultiplier = state.EntityManager.GetComponentData<SpawnCountMultiplier>(configEntity);
+                config.ValueRW.MaxRows = spawnMultiplier.Value;
+                
                 var targetBuffer = state.EntityManager.GetBuffer<TargetBufferElement>(entity);
 
-                for (int j = 0; j < config.MaxRows; j++)
+                for (int j = 0; j < config.ValueRW.MaxRows; j++)
                 {
                     var rotation = playerRotation.Value;
                     var directionVector = math.forward(rotation);
@@ -61,23 +65,23 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                     
                         if (j % 2 == 0)
                         {
-                            angle = config.RowsAngle * (j) / 2;
+                            angle = config.ValueRO.RowsAngle * (j) / 2;
                             rotationQ = quaternion.RotateY(math.radians(angle));
                         }
                         else
                         {
-                            angle = -(config.RowsAngle * (j + 1) / 2);
+                            angle = -(config.ValueRO.RowsAngle * (j + 1) / 2);
                             rotationQ = quaternion.RotateY(math.radians(angle));
                         }
                     
                         directionVector = math.rotate(rotationQ, directionVector);
                     }
                     
-                    for (int i = 0; i < config.MaxStrikes; i++)
+                    for (int i = 0; i < config.ValueRO.MaxStrikes; i++)
                     {
                         
                         float3 pos = playerPosition.Value
-                                     + directionVector * (config.StrikeSpacing * (i + 1));
+                                     + directionVector * (config.ValueRO.StrikeSpacing * (i + 1));
                         var element = new TargetBufferElement
                         {
                             Position = pos,
@@ -90,20 +94,20 @@ public partial struct ThunderBoltAbilitySystem : ISystem
             
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
 
-            float timerCheckpoint = ability.ValueRO.CurrentCount * config.TimeBetweenStrikes;
+            float timerCheckpoint = ability.ValueRO.CurrentCount * config.ValueRO.TimeBetweenStrikes;
 
             if (timerCheckpoint < timer.ValueRO.currentTime)
             {
-                for (int i = 0; i < config.MaxRows; i++)
+                for (int i = 0; i < config.ValueRO.MaxRows; i++)
                 {
-                    var projectile = state.EntityManager.Instantiate(config.ProjectilePrefab);
+                    var projectile = state.EntityManager.Instantiate(config.ValueRO.ProjectilePrefab);
                     var targetBuffer = state.EntityManager.GetBuffer<TargetBufferElement>(entity);
-                    var pos = targetBuffer[ability.ValueRO.CurrentCount + (config.MaxStrikes * i)].Position;
+                    var pos = targetBuffer[ability.ValueRO.CurrentCount + (config.ValueRW.MaxStrikes * i)].Position;
 
                     state.EntityManager.SetComponentData(projectile, new LocalTransform
                     {
                         Position = pos
-                                   + new float3(0, config.VfxHeightOffset, 0),
+                                   + new float3(0, config.ValueRO.VfxHeightOffset, 0),
                         Rotation = quaternion.identity,
                         Scale = 1,
                     });
@@ -116,7 +120,7 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                 
                     // Handle  audio
                     var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
-                    audioBuffer.Add(new AudioBufferData { AudioData = config.HitAudio}); 
+                    audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.HitAudio}); 
                 }
                 
                 ability.ValueRW.CurrentCount++;

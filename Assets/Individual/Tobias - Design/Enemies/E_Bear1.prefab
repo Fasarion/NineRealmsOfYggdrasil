@@ -120,6 +120,36 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_SphereRadius
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_Cylinder.Axis
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_Capsule.Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_Cylinder.Height
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_PrimitiveSize.y
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_PrimitiveCenter.y
+      value: 0.7
+      objectReference: {fileID: 0}
     - target: {fileID: 9062196686115931803, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: minimumDistanceForMoving

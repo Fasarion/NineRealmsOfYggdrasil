@@ -16,10 +16,20 @@ public class SceneHandler : MonoBehaviour
 
     public void ExitGame()
     {
-        if (Application.isEditor)
-        {
-            EditorApplication.isPlaying = false;
-        }
+    
+        #if UNITY_EDITOR
+            EditorUtility.DisplayDialog("Great!", "You got the pattern right!", "Next Level!");
+            if (Application.isEditor)
+            {
+                EditorApplication.isPlaying = false;
+            }
+      
+           
+        #endif
+        #if !UNITY_EDITOR
         Application.Quit();
+        #endif
+       
+        
     }
 }

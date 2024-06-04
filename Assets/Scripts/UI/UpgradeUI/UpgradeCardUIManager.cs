@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class UpgradeCardUIManager : MonoBehaviour
@@ -33,6 +34,8 @@ public class UpgradeCardUIManager : MonoBehaviour
     public float uiOffset;
 
     private bool _isStartup;
+
+    public float yUIOffset;
     
     
     public static UpgradeCardUIManager Instance
@@ -91,7 +94,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         for (int i = 0; i < objectsToPlace.Count; i++)
         {
             float offset = (i - (objectsToPlace.Count - 1) / 2.0f) * spacing;
-            Vector3 targetPosition = centerPosition + camera.transform.right * offset;
+            Vector3 targetPosition = centerPosition + camera.transform.right * offset + new Vector3(0, -.20f, -.05f);
             Vector3 startPosition = topOfScreen + camera.transform.right * offset;
 
             // Set the initial position of the object
@@ -138,7 +141,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         
         for (int i = 0; i < upgradeObjects.Length; i++)
         {
-            upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i] + new Vector3(uiOffset, 0, 0));
+            upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i] + new Vector3(uiOffset, yUIOffset, yUIOffset * 2));
         }
     }
 

@@ -1,5 +1,6 @@
 using Damage;
 using Movement;
+using Patrik.Special_Attack;
 using Player;
 using Unity.Entities;
 using UnityEngine;
@@ -333,6 +334,23 @@ public partial class UpgradeApplierSystem : SystemBase
                 }
                 break;
             
+            case UpgradeBaseType.SwordComboAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<SwordComboAbilityConfig>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.HammerComboAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<ThunderBoltConfig>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
         }
 
         return default;

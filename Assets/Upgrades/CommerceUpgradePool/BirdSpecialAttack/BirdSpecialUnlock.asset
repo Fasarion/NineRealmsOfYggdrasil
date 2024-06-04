@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: BirdSpecialUnlock
+  m_EditorClassIdentifier: 
+  upgradeTitle: Storm of Memory and Mind
+  upgradeSprite: {fileID: 0}
+  upgradeDescription: "Unlock a sei\xF0r. \n\nHold RIGHT MOUSE BUTTON to call a storm
+    of ravens to your side.\n\nLet go of the button to release the sei\xF0r and let
+    your ravens rip your enemies apart."
+  upgrades:
+  - thingToUpgrade: 11
+    valueToUpgrade: 25
+    valueAmount: 0
+  startUnlocked: 0
+  upgradeIndex: 0
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock: []

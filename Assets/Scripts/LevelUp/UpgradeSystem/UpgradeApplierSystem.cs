@@ -53,6 +53,18 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         switch (upgradeValueToUpgrade)
         {
+            case UpgradeValueTypes.UnlockSpecial:
+            {
+                EntityManager.AddComponent<IsUnlocked>(entity);
+                return;
+            }
+            
+            case UpgradeValueTypes.spawnCount:
+                var spawnCountComponent = EntityManager.GetComponentData<SpawnCount>(entity);
+                spawnCountComponent.Value += (int)valueAmount;
+                EntityManager.SetComponentData(entity, spawnCountComponent);
+                return;
+            
             case UpgradeValueTypes.Unlock:
                 _weaponCount++;
                 EventManager.OnWeaponCountSet(_weaponCount);

@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: HammerSpecialUpgrade_2
+  m_EditorClassIdentifier: 
+  upgradeTitle: "Mj\xF6lnir's Fury"
+  upgradeSprite: {fileID: 0}
+  upgradeDescription: "Unleash power to rival Mj\xF6lnir itself!  \n\n14 hammers
+    in total are summoned. One for each \xC6sir."
+  upgrades:
+  - thingToUpgrade: 5
+    valueToUpgrade: 15
+    valueAmount: 6
+  startUnlocked: 0
+  upgradeIndex: 0
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock: []

@@ -54,13 +54,7 @@ public partial struct AddElementalEffectSystem : ISystem
             foreach (var hit in hitBuffer)
             {
                 if (hit.IsHandled) continue;
-                if (!state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
-                {
-                    //Add Ice effect
-                    ecb.AddComponent<ElementalIceEffectComponent>(hit.HitEntity);
-                }
-                else
-                {
+
                     //Add Freeze Effect
                     int stacks = 0;
                     if (!state.EntityManager.HasComponent<ElementalFreezeEffectComponent>(hit.HitEntity))
@@ -87,18 +81,17 @@ public partial struct AddElementalEffectSystem : ISystem
                         CurrentDurationTime = 0,
                     });
                     
-                    //Add Conduct Effect
-                    if (state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
-                    {
-                        ApplyConductEffect(state, hit, ecb, conductConfig);
-                    }
-                    
-                    //Add Vulnerable Effect
-                    if (state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
-                    {
-                        ApplyVulnerableEffect(state, hit, ecb, vulnerableConfig);
-                    }
-                }
+                    // //Add Conduct Effect
+                    // if (state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
+                    // {
+                    //     ApplyConductEffect(state, hit, ecb, conductConfig);
+                    // }
+                    //
+                    // //Add Vulnerable Effect
+                    // if (state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
+                    // {
+                    //     ApplyVulnerableEffect(state, hit, ecb, vulnerableConfig);
+                    // },mkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk$$$$$$$$$$$$$$$$$$$$$444444444oppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp87
             }
         }
     }
@@ -114,13 +107,7 @@ public partial struct AddElementalEffectSystem : ISystem
             foreach (var hit in hitBuffer)
             {
                 if (hit.IsHandled) continue;
-                if (!state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
-                {
-                    //Set Lightning
-                    ecb.AddComponent<ElementalLightningEffectComponent>(hit.HitEntity);
-                }
-                else
-                {
+
                     //Set Shock
                     int stacks = 0;
                     if (!state.EntityManager.HasComponent<ElementalShockEffectComponent>(hit.HitEntity))
@@ -147,19 +134,19 @@ public partial struct AddElementalEffectSystem : ISystem
                         CurrentDurationTime = 0,
                     });
                     
-                    //Add Conduct Effect
-                    if (state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
-                    {
-                        ApplyConductEffect(state, hit, ecb, conductConfig);
-                    }
+                    // //Add Conduct Effect
+                    // if (state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
+                    // {
+                    //     ApplyConductEffect(state, hit, ecb, conductConfig);
+                    // }
+                    //
+                    // //Add combust effect
+                    // if (state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
+                    // {
+                    //     ApplyCombustionEffect(state, hit, ecb, combustConfig);
+                    // }
                     
-                    //Add combust effect
-                    if (state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
-                    {
-                        ApplyCombustionEffect(state, hit, ecb, combustConfig);
-                    }
-                    
-                }
+                
             }
         }
     }
@@ -175,12 +162,7 @@ public partial struct AddElementalEffectSystem : ISystem
             foreach (var hit in hitBuffer)
             {
                 if (hit.IsHandled) continue;
-                if (!state.EntityManager.HasComponent<ElementalFireEffectComponent>(hit.HitEntity))
-                {
-                    ecb.AddComponent<ElementalFireEffectComponent>(hit.HitEntity);
-                }
-                else
-                {
+
                     //Add Burn effect
                     int stacks = 0;
                     if (!state.EntityManager.HasComponent<ElementalBurnEffectComponent>(hit.HitEntity))
@@ -207,18 +189,18 @@ public partial struct AddElementalEffectSystem : ISystem
                         CurrentDurationTime = 0,
                     });
 
-                    //apply vulnerable
-                    if (state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
-                    {
-                        ApplyVulnerableEffect(state, hit, ecb, vulnerableConfig);
-                    }
-                    
-                    //apply combustion
-                    if (state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
-                    {
-                        ApplyCombustionEffect(state, hit, ecb, combustConfig);
-                    }
-                }
+                    // //apply vulnerable
+                    // if (state.EntityManager.HasComponent<ElementalIceEffectComponent>(hit.HitEntity))
+                    // {
+                    //     ApplyVulnerableEffect(state, hit, ecb, vulnerableConfig);
+                    // }
+                    //
+                    // //apply combustion
+                    // if (state.EntityManager.HasComponent<ElementalLightningEffectComponent>(hit.HitEntity))
+                    // {
+                    //     ApplyCombustionEffect(state, hit, ecb, combustConfig);
+                    // }
+                
             }
         }
     }

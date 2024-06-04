@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: SwordSpecialUpgrade_2
+  m_EditorClassIdentifier: 
+  upgradeTitle: Jotnar's Ring
+  upgradeSprite: {fileID: 0}
+  upgradeDescription: "The sei\xF0r reaches its apex. \n\n5 rings in total are summoned.
+    \n\nEach ring deals damage enough to frighten gods."
+  upgrades:
+  - thingToUpgrade: 3
+    valueToUpgrade: 15
+    valueAmount: 2
+  - thingToUpgrade: 0
+    valueToUpgrade: 18
+    valueAmount: 1
+  - thingToUpgrade: 1
+    valueToUpgrade: 26
+    valueAmount: 3
+  startUnlocked: 0
+  upgradeIndex: 0
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock: []

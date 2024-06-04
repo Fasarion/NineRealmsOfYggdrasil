@@ -20,10 +20,8 @@ GameObject:
   - component: {fileID: 8099106034715878466}
   - component: {fileID: 4031505932382415400}
   - component: {fileID: 9206287725747069478}
-  - component: {fileID: 7039986743124456623}
   - component: {fileID: 5382247577314883155}
   - component: {fileID: 7005701228367506839}
-  - component: {fileID: 1041269460654780280}
   m_Layer: 0
   m_Name: Sword Entity
   m_TagString: Untagged
@@ -375,19 +373,6 @@ MonoBehaviour:
     audioEventType: 2
     attackType: 1
     environmentType: 0
---- !u!114 &7039986743124456623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261443476895494700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fc49a81778dbbe48af695aa9d18f362, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stacksPerHit: 1
 --- !u!114 &5382247577314883155
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -419,22 +404,3 @@ MonoBehaviour:
     Special: 1
     Ultimate: 3
     Passive: 0.2
---- !u!114 &1041269460654780280
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8261443476895494700}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3432d5cce846d3a4e8df22714c5a93cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cachedSpeed: 0
-  slowPercentage: 0.8
-  isInitialized: 0
-  slowTimer: 0
-  slowDuration: 0.5
-  weaponType: 1
-  isSlowing: 0

@@ -657,7 +657,7 @@ namespace Patrik
                     return CheckForUnlock<SwordUltimateConfig>();
                 
                 case WeaponType.Hammer:
-                    return CheckForUnlock<ThunderBoltConfig>();
+                    return CheckForUnlock<ThunderStrikeConfig>();
 
                 case WeaponType.Birds:
                     return CheckForUnlock<BirdsUltimateAttackConfig>();

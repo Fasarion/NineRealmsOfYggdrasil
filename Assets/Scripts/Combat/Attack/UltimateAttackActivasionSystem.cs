@@ -167,7 +167,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
                 return lookupUnlock;
             
             case WeaponType.Hammer:
-                entityExists = SystemAPI.TryGetSingletonEntity<ThunderBoltConfig>(out Entity hammer);
+                entityExists = SystemAPI.TryGetSingletonEntity<ThunderStrikeConfig>(out Entity hammer);
                 lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(hammer);
                 
                 return lookupUnlock;

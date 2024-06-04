@@ -12,17 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: BirdSpecialUnlock
   m_EditorClassIdentifier: 
-  upgradeTitle: Storm of Memory and Mind
+  upgradeTitle: Murder of Memory
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "Unlock a sei\xF0r. \n\nHold RIGHT MOUSE BUTTON to call a storm
-    of ravens to your side.\n\nLet go of the button to release the sei\xF0r and let
-    your ravens rip your enemies apart."
+  upgradeDescription: "Unlock a Raven sei\xF0r. \n\nHold RIGHT MOUSE BUTTON to call
+    a storm of ravens to your side.\n\nLet go of the button to release the sei\xF0r
+    and let your ravens rip your enemies apart."
   upgrades:
-  - thingToUpgrade: 11
-    valueToUpgrade: 25
+  - thingToUpgrade: 13
+    valueToUpgrade: 26
     valueAmount: 0
   startUnlocked: 0
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 3dbee14e89a220942a6bff7fcc5cdd17, type: 2}

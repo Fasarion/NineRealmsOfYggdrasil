@@ -65,6 +65,12 @@ public partial class UpgradeApplierSystem : SystemBase
                 EntityManager.SetComponentData(entity, spawnCountComponent);
                 return;
             
+            case UpgradeValueTypes.spawnCountMultiplier:
+                var spawnCountMultiplierComponent = EntityManager.GetComponentData<SpawnCountMultiplier>(entity);
+                spawnCountMultiplierComponent.Value += (int)valueAmount;
+                EntityManager.SetComponentData(entity, spawnCountMultiplierComponent);
+                return;
+            
             case UpgradeValueTypes.Unlock:
                 _weaponCount++;
                 EventManager.OnWeaponCountSet(_weaponCount);
@@ -226,6 +232,10 @@ public partial class UpgradeApplierSystem : SystemBase
 
                 return;
             
+            case UpgradeValueTypes.UseMousePosition:
+                EntityManager.AddComponent<UseMousePosition>(entity);
+                return;
+            
         }
     }
 
@@ -269,6 +279,15 @@ public partial class UpgradeApplierSystem : SystemBase
                     return entity;
                 }
                 break;
+            
+            case UpgradeBaseType.BirdSpecialAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<BirdsSpecialAttackConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
                 
             case UpgradeBaseType.SwordSpecialAbility:
                 
@@ -279,9 +298,35 @@ public partial class UpgradeApplierSystem : SystemBase
                 }
                 break;
             
+            case UpgradeBaseType.HammerSpecialAbility:
+                foreach (var(_, entity)  in SystemAPI.Query<HammerSpecialConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
             case UpgradeBaseType.HammerUltimateAbility:
                 
                 foreach (var(_, entity)  in SystemAPI.Query<ThunderStrikeConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.SwordUltimateAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<SwordUltimateConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.BirdUltimateAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<BirdsUltimateAttackConfig>()
                              .WithEntityAccess())
                 {
                     return entity;

@@ -29,7 +29,11 @@ public partial struct SwordNormalAttackSystem : ISystem
         {
             if (attackType == 1)
             {
-                var projectile = state.EntityManager.Instantiate(config.SwordComboAbilityPrefab);
+                var configEntity = SystemAPI.GetSingletonEntity<SwordComboAbilityConfig>();
+                if (state.EntityManager.HasComponent<IsUnlocked>(configEntity))
+                {
+                    state.EntityManager.Instantiate(config.SwordComboAbilityPrefab);
+                }
             }
             else
             {

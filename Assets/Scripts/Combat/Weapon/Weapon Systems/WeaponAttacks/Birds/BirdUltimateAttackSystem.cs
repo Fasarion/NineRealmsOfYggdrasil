@@ -16,6 +16,8 @@ public partial struct BirdUltimateAttackSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<MousePositionComponent>();
+        state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<BirdsUltimateAttackConfig>();
@@ -33,6 +35,11 @@ public partial struct BirdUltimateAttackSystem : ISystem
         {
             var targetPos = SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position +
                             config.ValueRO.TornadoOffset;
+            if (config.ValueRO.UseMouse)
+            {
+                var mousePos = SystemAPI.GetSingleton<MousePositionInput>();
+                targetPos = mousePos.WorldPosition + config.ValueRO.TornadoOffset;
+            }
             
             foreach (var (transform, timer, hitBuffer) in SystemAPI
                 .Query<RefRW<LocalTransform>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>>()
@@ -110,6 +117,14 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var configEntity = SystemAPI.GetSingletonEntity<BirdsUltimateAttackConfig>();
 
             config.ValueRW.CenterPointEntity = SystemAPI.GetSingletonEntity<MousePositionComponent>();
+
+            var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+
+            config.ValueRW.BirdCount = spawnCount.Value;
+            if (state.EntityManager.HasComponent<UseMousePosition>(configEntity))
+            {
+                config.ValueRW.UseMouse = true;
+            }
 
             // spawn tornado
             var tornado = state.EntityManager.Instantiate(config.ValueRO.TornadoPrefab);

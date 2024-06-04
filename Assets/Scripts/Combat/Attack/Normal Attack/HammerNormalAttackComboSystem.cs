@@ -17,17 +17,20 @@ namespace Patrik.Special_Attack
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var abilityConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
-            
             var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
 
             if (!attackCaller.ValueRO.ShouldStartActiveAttack(WeaponType.Hammer, AttackType.Normal))
                 return;
 
             int combo = attackCaller.ValueRO.ActiveAttackData.Combo;
-            
 
             if (combo != 2) return;
+            
+            var abilityConfig = SystemAPI.GetSingleton<ThunderBoltConfig>();
+
+            
+            var configEntity = SystemAPI.GetSingletonEntity<ThunderBoltConfig>();
+            if (!state.EntityManager.HasComponent<IsUnlocked>(configEntity)) return;
 
             state.EntityManager.Instantiate(abilityConfig.AbilityPrefab);
             var spark = state.EntityManager.Instantiate(abilityConfig.SparkEffectPrefab);

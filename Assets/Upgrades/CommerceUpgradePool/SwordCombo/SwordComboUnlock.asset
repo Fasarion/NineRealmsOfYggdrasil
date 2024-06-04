@@ -10,25 +10,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: HammerSpecialUpgrade_1
+  m_Name: SwordComboUnlock
   m_EditorClassIdentifier: 
-  upgradeTitle: "Mj\xF6lnir's Fury"
+  upgradeTitle: Sword
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "When throwing your hammer, 5 additional hammers are summoned.
-    \n\nEach hammer is imbued with surging might. \n\nRIGHT MOUSE BUTTON"
+  upgradeDescription: "Increase the sword's power. \n\nEvery second strike will now
+    summon 2 phantom swords to strike your enemies.\n\nIn addition, each sword strike
+    now freezes the enemies it hits."
   upgrades:
-  - thingToUpgrade: 5
-    valueToUpgrade: 15
+  - thingToUpgrade: 0
+    valueToUpgrade: 0
+    valueAmount: 5
+  - thingToUpgrade: 0
+    valueToUpgrade: 24
     valueAmount: 5
   - thingToUpgrade: 4
-    valueToUpgrade: 18
-    valueAmount: 0.5
-  - thingToUpgrade: 5
     valueToUpgrade: 26
-    valueAmount: 2
-  startUnlocked: 0
+    valueAmount: 5
+  - thingToUpgrade: 0
+    valueToUpgrade: 27
+    valueAmount: 1
+  startUnlocked: 1
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: 37d9ad21fd196174bbf60386329a1b79, type: 2}
+  - {fileID: 11400000, guid: f0fa87f88e1a4174ba1817b9f11469da, type: 2}

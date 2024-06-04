@@ -69,6 +69,17 @@ public partial struct IceRingSystem : ISystem
 
                 cachedStageBuffer.ValueRW.Value.DamageModifier = damageComponent.Value.DamageValue;
                 
+                var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+                config.ValueRW.MaxRings = spawnCount.Value;
+
+                if (config.ValueRO.MaxRings > 3)
+                {
+                    config.ValueRW.MultiSpawnDelayTime = 0.2f;
+                }
+                else
+                {
+                    config.ValueRW.MultiSpawnDelayTime = 0.5f;
+                }
                 
                 // fetch owner data
                 Entity swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();

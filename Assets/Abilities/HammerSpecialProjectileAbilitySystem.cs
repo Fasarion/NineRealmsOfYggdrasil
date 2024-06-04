@@ -28,13 +28,17 @@ public partial struct HammerSpecialProjectileAbilitySystem : ISystem
     public void OnUpdate(ref SystemState state)
     {
         var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
-        var config = SystemAPI.GetSingleton<HammerSpecialConfig>();
+        var config = SystemAPI.GetSingletonRW<HammerSpecialConfig>();
         ChargeState currentChargeState = attackCaller.SpecialChargeInfo.chargeState;
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         RefRW<RandomComponent> random = SystemAPI.GetSingletonRW<RandomComponent>();
         var hammerEntity = SystemAPI.GetSingletonEntity<HammerComponent>();
+        var configEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
         
         if (attackCaller.ActiveAttackData.WeaponType != WeaponType.Hammer) return;
+
+        var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+        config.ValueRW.MaxProjectiles = spawnCount.Value;
 
         foreach (var (ability, timer, entity) in
                  SystemAPI.Query<RefRW<HammerSpecialAbility>, RefRW<TimerObject>>()
@@ -42,12 +46,12 @@ public partial struct HammerSpecialProjectileAbilitySystem : ISystem
         {
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
             
-            if (timer.ValueRO.currentTime > config.TimeBetweenSpawns && !ability.ValueRO.HasFired && ability.ValueRO.CurrentSpawnCount < config.MaxProjectiles)
+            if (timer.ValueRO.currentTime > config.ValueRO.TimeBetweenSpawns && !ability.ValueRO.HasFired && ability.ValueRO.CurrentSpawnCount < config.ValueRO.MaxProjectiles)
             {
                 timer.ValueRW.currentTime = 0;
                 ability.ValueRW.CurrentSpawnCount++;
-                var projectile = state.EntityManager.Instantiate(config.HammerProjectilePrefab);
-                var vfx = state.EntityManager.Instantiate(config.HammerSparkPrefab);
+                var projectile = state.EntityManager.Instantiate(config.ValueRO.HammerProjectilePrefab);
+                var vfx = state.EntityManager.Instantiate(config.ValueRO. HammerSparkPrefab);
                 state.EntityManager.SetComponentData(vfx, new VisualEffectComponent
                 {
                     EntityToFollow = projectile,
@@ -89,11 +93,11 @@ public partial struct HammerSpecialProjectileAbilitySystem : ISystem
 
     [BurstCompile]
     private HammerSpecialProjectileTransformValues GetTransformValues(RefRW<RandomComponent> random,
-        HammerSpecialConfig config, int currentSpawnCount)
+        RefRW<HammerSpecialConfig> config, int currentSpawnCount)
     {
-        var randomHOffset = random.ValueRW.random.NextFloat(config.MinSpawnHeight, config.MaxSpawnHeight);
-        var randomWOffset = random.ValueRW.random.NextFloat(config.MinSpawnWidth, config.MaxSpawnWidth) +
-                            config.SpawnWidthGrowth * currentSpawnCount;
+        var randomHOffset = random.ValueRW.random.NextFloat(config.ValueRO. MinSpawnHeight, config.ValueRO.MaxSpawnHeight);
+        var randomWOffset = random.ValueRW.random.NextFloat(config.ValueRO.MinSpawnWidth, config.ValueRO.MaxSpawnWidth) +
+                            config.ValueRO.SpawnWidthGrowth * currentSpawnCount;
 
         bool widthDirectionIsPositive;
         

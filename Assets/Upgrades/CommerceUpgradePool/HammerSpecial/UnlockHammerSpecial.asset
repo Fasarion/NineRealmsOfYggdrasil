@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: UnlockHammerSpecial
+  m_EditorClassIdentifier: 
+  upgradeTitle: "Mj\xF6lnir's Fury"
+  upgradeSprite: {fileID: 0}
+  upgradeDescription: "Unlock a sei\xF0r.\n\nHold RIGHT MOUSE BUTTON to charge your
+    hammer with power. \n\nLet go of the button to throw the hammer like mighty Thor
+    himself.\n"
+  upgrades:
+  - thingToUpgrade: 5
+    valueToUpgrade: 25
+    valueAmount: 8
+  - thingToUpgrade: 4
+    valueToUpgrade: 18
+    valueAmount: 0.5
+  startUnlocked: 0
+  upgradeIndex: 0
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: c0fe6df7f0c13e54db811d4890098d67, type: 2}

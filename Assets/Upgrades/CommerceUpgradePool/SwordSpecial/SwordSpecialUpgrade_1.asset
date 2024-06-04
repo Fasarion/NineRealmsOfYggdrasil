@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: SwordSpecialUpgrade_1
+  m_EditorClassIdentifier: 
+  upgradeTitle: Jotnar's Ring
+  upgradeSprite: {fileID: 0}
+  upgradeDescription: "The sei\xF0r now summons 2 additional rings. \n\nThe power
+    of each ring grows."
+  upgrades:
+  - thingToUpgrade: 1
+    valueToUpgrade: 15
+    valueAmount: 2
+  - thingToUpgrade: 0
+    valueToUpgrade: 18
+    valueAmount: 0.5
+  - thingToUpgrade: 1
+    valueToUpgrade: 26
+    valueAmount: 2
+  startUnlocked: 0
+  upgradeIndex: 0
+  isUnlocked: 0
+  upgradesToLock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 5a7b8139a1e539e47a5c0c9191689336, type: 2}

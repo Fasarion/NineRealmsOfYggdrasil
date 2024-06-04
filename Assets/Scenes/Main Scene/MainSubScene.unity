@@ -291,11 +291,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 716962282394368914, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      propertyPath: radius
-      value: 5
-      objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: m_Name
@@ -351,21 +346,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1472549629764689934, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 8630937659040687369, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 3519656319106089348}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a2a20f829d16e5c4d9a9e7ef225f0002, type: 3}
---- !u!1 &282076707 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8630937659040687369, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
-    type: 3}
-  m_PrefabInstance: {fileID: 282076706}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &367399154
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1024,28 +1010,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 404ee0ae44fc8f94e9fe59ecaf2b0f39, type: 3}
---- !u!114 &3519656319106089348
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 282076707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb7c6c072f88f8145b7ebf13a415c6f8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  swordCount: 5
-  radius: 5
-  initialSpawnDelay: 1
-  delayBetweenSwords: 0.25
-  swordProjectilePrefab: {fileID: 9149154176972138520, guid: 0e6d317cff56c6d49a9c563f330bf86f,
-    type: 3}
-  swordComboAbilityPrefab: {fileID: 3667457265074221073, guid: aee6de18796330d4cb3ee7925c0f4d65,
-    type: 3}
-  swordSpawnEffectPrefab: {fileID: 0}
-  offset: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

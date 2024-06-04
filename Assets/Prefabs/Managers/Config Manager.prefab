@@ -1542,7 +1542,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7879483275852182238, guid: c73b6875b5fe1084fae851563f625524,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8409243914239128991}
   m_SourcePrefab: {fileID: 100100000, guid: c73b6875b5fe1084fae851563f625524, type: 3}
 --- !u!4 &3341175030886280057 stripped
 Transform:
@@ -1550,6 +1554,34 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1918195172779595735}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &8630937659040687369 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7879483275852182238, guid: c73b6875b5fe1084fae851563f625524,
+    type: 3}
+  m_PrefabInstance: {fileID: 1918195172779595735}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8409243914239128991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8630937659040687369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb7c6c072f88f8145b7ebf13a415c6f8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  swordCount: 5
+  radius: 5
+  initialSpawnDelay: 0.5
+  delayBetweenSwords: 0.25
+  swordProjectilePrefab: {fileID: 9149154176972138520, guid: 0e6d317cff56c6d49a9c563f330bf86f,
+    type: 3}
+  swordComboAbilityPrefab: {fileID: 3667457265074221073, guid: aee6de18796330d4cb3ee7925c0f4d65,
+    type: 3}
+  swordSpawnEffectPrefab: {fileID: 0}
+  offset: 1
 --- !u!1001 &3410494838757285968
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1677,7 +1709,7 @@ PrefabInstance:
     - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
       propertyPath: maxProjectiles
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6816313459474837448, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
@@ -1735,7 +1767,7 @@ PrefabInstance:
     - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
       propertyPath: maxRings
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
@@ -1751,6 +1783,11 @@ PrefabInstance:
     - target: {fileID: 8254560111912644420, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
       propertyPath: multiSpawnSizeGrowth
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8349161963494775516, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      propertyPath: knockBackForce
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents:
@@ -1793,6 +1830,14 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 4480651594797473950}
     m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2040685509397493693, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3533238155438616064}
+    - targetCorrespondingSourceObject: {fileID: 2040685509397493693, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7823215819034815159}
     - targetCorrespondingSourceObject: {fileID: 150488227142155778, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
       insertIndex: -1
@@ -1813,6 +1858,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2162092157478127171}
+    - targetCorrespondingSourceObject: {fileID: 957267195545187226, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5421497809243728629}
     - targetCorrespondingSourceObject: {fileID: 4126832523959451414, guid: 051db4a6bbdfb4d40b0da93f940628a8,
         type: 3}
       insertIndex: -1
@@ -1911,8 +1960,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 3
+  knockBackForce: 2
   KnockDirection: 0
+--- !u!114 &5421497809243728629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457953352830718922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a09f0ec589c8a499f16c3e391d5f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 0
 --- !u!1 &3261211697884552786 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 150488227142155778, guid: 051db4a6bbdfb4d40b0da93f940628a8,
@@ -1953,6 +2015,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackType: 1
   weaponType: 2
+--- !u!1 &3676479175662950381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2040685509397493693, guid: 051db4a6bbdfb4d40b0da93f940628a8,
+    type: 3}
+  m_PrefabInstance: {fileID: 3410494838757285968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3533238155438616064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676479175662950381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a09f0ec589c8a499f16c3e391d5f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
+--- !u!114 &7823215819034815159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3676479175662950381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609fc4240244d7f4589cf2a488be8f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stacksPerHit: 1
 --- !u!4 &4850372986711739024 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7789959017307368128, guid: 051db4a6bbdfb4d40b0da93f940628a8,
@@ -2061,6 +2155,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5439079627553062164, guid: 29f794f864ad6164092b4d5f227c7ee1,
+        type: 3}
+      propertyPath: radius
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

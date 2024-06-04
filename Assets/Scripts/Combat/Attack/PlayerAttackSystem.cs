@@ -489,6 +489,16 @@ namespace Patrik
 
         private void HandleWeaponInput()
         {
+            // // hammer upgrade test
+            // if (Input.GetKeyDown(KeyCode.K))
+            // {
+            //     Debug.Log("Test upgrade");
+            //
+            //     var hammerEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
+            //     EntityManager.AddComponent<IsUnlocked>(hammerEntity);
+            // }
+            
+            
             if (!_weaponManager)
             {
                 // No weapon manager found, can't read weapon inputs.

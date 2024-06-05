@@ -5,6 +5,7 @@ using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
+using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
 using Random = Unity.Mathematics.Random;
@@ -182,19 +183,21 @@ public partial struct SpawnSystem : ISystem
     [BurstCompile]
     private void CheckForOutOfBoundsEnemies(ref SystemState state, float maxDistance, float3 playerPos, float outerRadius)
     {
-        foreach (var transform in
-                 SystemAPI.Query<RefRW<LocalTransform>>()
+        foreach (var (transform, velocity) in
+                 SystemAPI.Query<RefRW<LocalTransform>, RefRW<PhysicsVelocity>>()
                      .WithAll<EnemyTypeComponent>())
         {
             float distance = ((Vector3)transform.ValueRO.Position - (Vector3)playerPos).magnitude;
             if (distance > maxDistance)
             {
                 transform.ValueRW.Position = (math.normalizesafe(playerPos, transform.ValueRO.Position) * outerRadius) + playerPos;
+                velocity.ValueRW.Linear = new float3(0, 0, 0);
             }
             if (transform.ValueRO.Position.x > _mapXMinMax || transform.ValueRO.Position.x < -_mapXMinMax ||
                 transform.ValueRO.Position.z > _mapZMinMax || transform.ValueRO.Position.z < -_mapZMinMax)
             {
                 transform.ValueRW.Position = new float3(0, 1, 0);
+                velocity.ValueRW.Linear = new float3(0, 0, 0);
             }
         }
     }

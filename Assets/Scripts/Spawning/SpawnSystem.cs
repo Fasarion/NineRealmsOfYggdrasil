@@ -18,6 +18,8 @@ public partial struct SpawnSystem : ISystem
     private NativeArray<float> _enemyProbabilities;
     private NativeParallelHashMap<int, Entity> _enemyPrefabs;
     private float _timerCutoffPoint;
+    private float _mapXMinMax;
+    private float _mapZMinMax;
     
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -26,6 +28,8 @@ public partial struct SpawnSystem : ISystem
         state.RequireForUpdate<SpawnConfig>();
         state.RequireForUpdate<RandomComponent>();
         state.RequireForUpdate<SpawningEnabledComponent>();
+        _mapXMinMax = 125f;
+        _mapZMinMax = 125f;
     }
 
     [BurstCompile]
@@ -186,6 +190,11 @@ public partial struct SpawnSystem : ISystem
             if (distance > maxDistance)
             {
                 transform.ValueRW.Position = (math.normalizesafe(playerPos, transform.ValueRO.Position) * outerRadius) + playerPos;
+            }
+            if (transform.ValueRO.Position.x > _mapXMinMax || transform.ValueRO.Position.x < -_mapXMinMax ||
+                transform.ValueRO.Position.z > _mapZMinMax || transform.ValueRO.Position.z < -_mapZMinMax)
+            {
+                transform.ValueRW.Position = new float3(0, 1, 0);
             }
         }
     }

@@ -13,6 +13,8 @@ namespace Health
         [SerializeField] private bool shouldDisplayDamageNumbers = true;
 
         [SerializeField] private float damageReductionValue = 1;
+
+        private float killingBlowValue;
         
         class Baker : Baker<HealthPointsAuthoring>
         {
@@ -50,6 +52,7 @@ namespace Health
     public struct CurrentHpComponent : IComponentData
     {
         public float Value;
+        public float KillingBlowValue;
     }
 
     public struct DamageReductionComponent : IComponentData

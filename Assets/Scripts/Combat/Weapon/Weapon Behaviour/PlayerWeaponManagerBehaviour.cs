@@ -42,9 +42,9 @@ namespace Patrik
 
         // Weapons
         //This list should not be modified after setup
-        private List<WeaponBehaviour> startingWeapons;
+        private List<WeaponBehaviour> startingWeapons = new List<WeaponBehaviour>();
         //Use this list instead as it changes at runtime.
-        private List<WeaponSetupData> weaponDataList;
+        private List<WeaponSetupData> weaponDataList = new List<WeaponSetupData>();
         private WeaponBehaviour activeWeapon;
         private WeaponSetupData activeWeaponData;
         public WeaponType CurrentWeaponType => activeWeapon.WeaponType;

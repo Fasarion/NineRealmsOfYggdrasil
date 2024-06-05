@@ -16,6 +16,7 @@ public partial struct ElementalApplyShockSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<HammerSpecialConfig>();
         state.RequireForUpdate<ElementalShockEffectConfig>();
     }
     
@@ -25,6 +26,7 @@ public partial struct ElementalApplyShockSystem : ISystem
         var config = SystemAPI.GetSingleton<ElementalShockEffectConfig>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var buffer = SystemAPI.GetBuffer<HitBufferElement>(SystemAPI.GetSingletonEntity<ElementalShockEffectConfig>());
+        
         
         foreach (var (shockComponent, affectedTransform, affectedEntity)
                  in SystemAPI.Query<RefRW<ElementalShockEffectComponent>, LocalTransform>().WithEntityAccess())
@@ -54,6 +56,13 @@ public partial struct ElementalApplyShockSystem : ISystem
                     Position = affectedTransform.Position,
                 };
                 buffer.Add(element);
+                
+                var hammerConfig = SystemAPI.GetSingleton<HammerSpecialConfig>();
+                var spark = state.EntityManager.Instantiate(hammerConfig.HammerSparkPrefab);
+                state.EntityManager.SetComponentData(spark, new VisualEffectComponent
+                {
+                    EntityToFollow = affectedEntity,
+                });
                 
                 shockComponent.ValueRW.HasBeenApplied = true;
             }

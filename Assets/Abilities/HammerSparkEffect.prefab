@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shouldLoop: 0
-  activeTime: 0
+  activeTime: 1
   spawnOffset:
     x: 0
     y: 0
@@ -68,3 +68,4 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 2736296298598651452, guid: d76d5b4fa831afe4e9668b39a258d785,
     type: 3}
   followsEntity: 1
+  spawnAtEntity: 1

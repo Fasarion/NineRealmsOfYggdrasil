@@ -64,7 +64,7 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
                 ecb.RemoveComponent<MoveTowardsPlayerComponent>(entity);
                 var knockBackBufferElements = knockBackBufferLookup[entity];
                 var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 0.5f, 0)));
-                var knockBackForce = (currentHP.Value * -1) + 1;
+                var knockBackForce = (currentHP.Value * -0.5f) + 1;
                 var damping = 0.8f;
                 knockBackBufferElements.Add(new KnockBackBufferElement
                 {

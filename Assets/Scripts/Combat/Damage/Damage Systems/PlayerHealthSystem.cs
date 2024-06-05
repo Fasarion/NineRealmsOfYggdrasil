@@ -14,7 +14,7 @@ namespace Damage
     [UpdateBefore(typeof(DisableHasChangedHealthTagsSystem))]
     public partial struct PlayerHealthSystem : ISystem
     {
-        private bool hasInitialized;
+       // private bool hasInitialized;
 
         [BurstCompile]
         public void OnCreate(ref SystemState state)
@@ -24,24 +24,23 @@ namespace Damage
 
         public void OnUpdate(ref SystemState state)
         {
-            if (!hasInitialized)
-            {
-                foreach (var (currentHP, maxHealth) in
-                    SystemAPI.Query<CurrentHpComponent, MaxHpComponent>()
-                        .WithAll<PlayerTag>())
-                {
-                    PlayerHealthData data = new PlayerHealthData
-                    {
-                        currentHealth = currentHP.Value,
-                        maxHealth = maxHealth.Value
-                    };
+            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
-                    EventManager.OnPlayerHealthSet?.Invoke(data);
-                }
-                
-                hasInitialized = true;
+            foreach (var (currentHP, maxHealth, entity) in
+                SystemAPI.Query<CurrentHpComponent, MaxHpComponent>()
+                    .WithAll<PlayerTag>()
+                    .WithNone<HealthHasBeenSet>().WithEntityAccess())
+            {
+                PlayerHealthData data = new PlayerHealthData
+                {
+                    currentHealth = currentHP.Value,
+                    maxHealth = maxHealth.Value
+                };
+
+                EventManager.OnPlayerHealthSet?.Invoke(data);
+                ecb.AddComponent<HealthHasBeenSet>(entity);
             }
-            
+
             foreach (var (currentHP, maxHealth) in
                 SystemAPI.Query<CurrentHpComponent, MaxHpComponent>()
                     .WithAll<PlayerTag, HasChangedHP>())
@@ -55,7 +54,6 @@ namespace Damage
                 EventManager.OnPlayerHealthSet?.Invoke(data);
             }
 
-            var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             
             foreach (var (dying, entity) in SystemAPI
                 .Query<RefRW<IsDyingComponent>>()

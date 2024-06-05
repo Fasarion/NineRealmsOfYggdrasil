@@ -35,6 +35,7 @@ namespace Player
     public struct PlayerDeath : IComponentData { }
 
     public struct HealthHasBeenSet : IComponentData { }
+    public struct WeaponsHaveBeenSetup : IComponentData { }
 
 }
 

@@ -31,25 +31,52 @@ namespace Patrik
 
         protected override void OnUpdate()
         {
-            if (!hasSetUpWeaponManager)
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            foreach (var (playerTag, entity) in SystemAPI.Query<PlayerTag>().WithNone<WeaponsHaveBeenSetup>().WithEntityAccess())
             {
+                _weaponManager = PlayerWeaponManagerBehaviour.Instance;
+                    
                 if (_weaponManager == null)
                 {
-                    _weaponManager = PlayerWeaponManagerBehaviour.Instance;
-                    
-                    if (_weaponManager == null)
-                    {
-                        // Missing Player Weapon Handler, attacks not possible.;
-                        return;
-                    }
-
-                    DisableAllWeapons();
-                    SubscribeToEvents();
-                    hasSetUpWeaponManager = true;
-
-                    _weaponManager.SetupWeapons();
+                    // Missing Player Weapon Handler, attacks not possible.;
+                    return;
                 }
+
+                
+                ecb.AddComponent<WeaponsHaveBeenSetup>(entity);
+                
+                
+
+                DisableAllWeapons();
+                SubscribeToEvents();
+                hasSetUpWeaponManager = true;
+
+                _weaponManager.SetupWeapons();
             }
+            
+            ecb.Playback(EntityManager);
+            ecb.Dispose();
+            
+            // if (!hasSetUpWeaponManager)
+            // {
+            //     if (_weaponManager == null)
+            //     {
+            //         _weaponManager = PlayerWeaponManagerBehaviour.Instance;
+            //         
+            //         if (_weaponManager == null)
+            //         {
+            //             // Missing Player Weapon Handler, attacks not possible.;
+            //             return;
+            //         }
+            //
+            //         DisableAllWeapons();
+            //         SubscribeToEvents();
+            //         hasSetUpWeaponManager = true;
+            //
+            //         _weaponManager.SetupWeapons();
+            //     }
+            // }
 
             bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
             if (gameIsPaused) return;

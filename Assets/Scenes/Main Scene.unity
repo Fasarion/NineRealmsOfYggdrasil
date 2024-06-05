@@ -177,57 +177,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &457348257 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8418202495739083897, guid: 19bc8b518d1199e4299c877952c35106,
-    type: 3}
-  m_PrefabInstance: {fileID: 7307923143516728856}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &915470823
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 915470824}
-  - component: {fileID: 915470825}
-  m_Layer: 0
-  m_Name: CursorSelecter
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &915470824
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915470823}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 457348257}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &915470825
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 915470823}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 420dfa94975a5ae4096fb3e57eaa1b28, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cursor: {fileID: 2800000, guid: bb57a4c5a1ec38a41949d0975ede9ac1, type: 3}
 --- !u!1001 &7307923143516728856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -240,31 +189,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
-        type: 3}
-      propertyPath: EventReference.Path
-      value: event:/Musik/NewMainEvent
-      objectReference: {fileID: 0}
-    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
-        type: 3}
-      propertyPath: EventReference.Guid.Data1
-      value: -2108929289
-      objectReference: {fileID: 0}
-    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
-        type: 3}
-      propertyPath: EventReference.Guid.Data2
-      value: 1285532341
-      objectReference: {fileID: 0}
-    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
-        type: 3}
-      propertyPath: EventReference.Guid.Data3
-      value: -1365192575
-      objectReference: {fileID: 0}
-    - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
-        type: 3}
-      propertyPath: EventReference.Guid.Data4
-      value: -966547120
       objectReference: {fileID: 0}
     - target: {fileID: 2747678806823177205, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
@@ -338,11 +262,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 8418202495739083897, guid: 19bc8b518d1199e4299c877952c35106,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 915470824}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 19bc8b518d1199e4299c877952c35106, type: 3}
 --- !u!1660057539 &9223372036854775807

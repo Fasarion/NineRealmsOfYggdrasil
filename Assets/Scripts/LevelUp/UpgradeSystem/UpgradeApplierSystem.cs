@@ -56,11 +56,11 @@ public partial class UpgradeApplierSystem : SystemBase
     {
         WeaponType type;
 
-        if (EntityManager.HasComponent<SwordComponent>(entity))
+        if (EntityManager.HasComponent<IceRingConfig>(entity))
         {
             type = WeaponType.Sword;
         }
-        else if (EntityManager.HasComponent<HammerComponent>(entity))
+        else if (EntityManager.HasComponent<HammerSpecialConfig>(entity))
         {
             type = WeaponType.Hammer;
         }

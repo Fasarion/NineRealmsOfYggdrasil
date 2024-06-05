@@ -83,6 +83,7 @@ public class PlayerObjectiveDataManager : MonoBehaviour
         if (dataHolder.CheckIfObjectiveReached() && !winState)
         {
             DisplayWinScreen();
+            EventManager.OnObjectiveReached.Invoke();
             this.winState = true;
         }
     }

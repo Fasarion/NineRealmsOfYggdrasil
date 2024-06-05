@@ -74,7 +74,7 @@ public partial class UpgradeApplierSystem : SystemBase
             
             case UpgradeValueTypes.Unlock:
                 _weaponCount++;
-                EventManager.OnWeaponCountSet(_weaponCount);
+                EventManager.OnWeaponCountSet?.Invoke(_weaponCount);
                 return;
             
             case UpgradeValueTypes.damage:

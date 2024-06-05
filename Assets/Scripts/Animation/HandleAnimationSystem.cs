@@ -23,7 +23,10 @@ public partial struct HandleAnimationSystem : ISystem
                      .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
                      .WithEntityAccess())
         {
-            Object.Destroy(animatorReference.Animator.gameObject);
+            if (animatorReference.Animator && animatorReference.Animator.gameObject)
+            {
+                Object.Destroy(animatorReference.Animator.gameObject);
+            }
             ecb.RemoveComponent<AnimatorReference>(entity);
         }
         

@@ -14,6 +14,7 @@ namespace Patrik
         public WeaponType WeaponType;
         public int WeaponButtonIndex;
         public WeaponBehaviour WeaponBehaviour;
+        public bool hasWeaponAttackUnlocked;
     }
     
     // TODO: extract PlayerManager, PlayerWeaponBehaviour, PlayerAnimationBehaviour

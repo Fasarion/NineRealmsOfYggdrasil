@@ -1338,7 +1338,7 @@ MonoBehaviour:
   OnEnter:
     SpeedChangeOption: 1
     SpeedChangeFactor: 0.6
-    SpeedChangeDuration: 2
+    SpeedChangeDuration: 1000
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -2127,6 +2127,7 @@ AnimatorState:
   - {fileID: -8617140444807090619}
   - {fileID: -1368754071134552831}
   - {fileID: -8221418442136315661}
+  - {fileID: 7982538251849936388}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2974,6 +2975,7 @@ AnimatorState:
   - {fileID: 1566514593593012709}
   - {fileID: -3347882060818103964}
   - {fileID: -8767731634255141864}
+  - {fileID: -1997836572352200692}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3209,6 +3211,26 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-1997836572352200692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08859df891d5b8747a2388c8385d46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    SpeedChangeOption: 1
+    SpeedChangeFactor: 0.75
+    SpeedChangeDuration: 10
+  OnExit:
+    SpeedChangeOption: 0
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
 --- !u!114 &-1992994100357463867
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4331,7 +4353,7 @@ MonoBehaviour:
   OnEnter:
     SpeedChangeOption: 1
     SpeedChangeFactor: 0.6
-    SpeedChangeDuration: 2
+    SpeedChangeDuration: 1000
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -4943,7 +4965,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 779125008932010738}
-    m_Position: {x: 330, y: 420, z: 0}
+    m_Position: {x: 360, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4604101698856809079}
     m_Position: {x: 510, y: 110, z: 0}
@@ -6274,7 +6296,7 @@ MonoBehaviour:
   OnEnter:
     SpeedChangeOption: 1
     SpeedChangeFactor: 0.6
-    SpeedChangeDuration: 2
+    SpeedChangeDuration: 1000
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -6609,7 +6631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnEnter:
     SpeedChangeOption: 1
-    SpeedChangeFactor: 0.8
+    SpeedChangeFactor: 0.75
     SpeedChangeDuration: 10
   OnExit:
     SpeedChangeOption: 0
@@ -6810,8 +6832,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnEnter:
     SpeedChangeOption: 1
-    SpeedChangeFactor: 0.8
-    SpeedChangeDuration: 1
+    SpeedChangeFactor: 0.75
+    SpeedChangeDuration: 10
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -7953,6 +7975,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &7982538251849936388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08859df891d5b8747a2388c8385d46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    SpeedChangeOption: 2
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
+  OnExit:
+    SpeedChangeOption: 0
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
 --- !u!1102 &8139438391407616429
 AnimatorState:
   serializedVersion: 6

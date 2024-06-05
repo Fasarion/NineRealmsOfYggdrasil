@@ -66,9 +66,7 @@ public class CombatUIUltIcons : MonoBehaviour
        
         for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
         {
-            
             ultWeaponReadyHolders[i].StopSystem();
-            
         }
         
        
@@ -106,6 +104,7 @@ public class CombatUIUltIcons : MonoBehaviour
             ultWeaponReadyHolders[i].currentWeaponType = weaponSetupDataList[i].WeaponType;
         }
 
+       
         activeUltCounter = 0;
         for (int i = 0; i < ultWeaponReadyHolders.Count; i++)
         {
@@ -115,15 +114,25 @@ public class CombatUIUltIcons : MonoBehaviour
                 {
                     if (weaponEnergyDataList[j].currentEnergy >= weaponEnergyDataList[j].maxEnergy)
                     {
+                        if (i == 0)
+                        {
+                            ultimateActiveText.gameObject.SetActive(true);
+                        }
                         ultWeaponReadyHolders[i].PlaySystem();
+                        
                         //ultWeaponReadyHolders[i].objectToSet.SetActive(true);
                         activeUltCounter++;
                     }
                     else
                     {
+                        if (i == 0)
+                        {
+                            ultimateActiveText.gameObject.SetActive(false);
+                        }
                         //if (weaponEnergyDataList[j].currentEnergy == 0)
                         //{
                             ultWeaponReadyHolders[i].StopSystem();
+                            //ultimateActiveText.gameObject.SetActive(false);
                             //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
                         //}
                         //ultWeaponReadyHolders[i].StopSystem();
@@ -228,14 +237,24 @@ public class CombatUIUltIcons : MonoBehaviour
                     {
                         if (weaponEnergyDataList[j].currentEnergy == 0)
                         {
+                            if (i == 0)
+                            {
+                                ultimateActiveText.gameObject.SetActive(false);
+                            }
                             ultWeaponReadyHolders[i].StopSystem();
+                            
                             //ultWeaponReadyHolders[i].objectToSet.SetActive(false);
                             activeUltCounter--;
                         }
                         
                         if (weaponEnergyDataList[j].currentEnergy >= weaponEnergyDataList[j].maxEnergy)
                         {
+                            if (i == 0)
+                            {
+                                ultimateActiveText.gameObject.SetActive(true);
+                            }
                             ultWeaponReadyHolders[i].PlaySystem();
+                            
                             //ultWeaponReadyHolders[i].objectToSet.SetActive(true);
                             activeUltCounter++;
                         }
@@ -266,14 +285,14 @@ public class CombatUIUltIcons : MonoBehaviour
             }*/
         //}
 
-        if (activeUltCounter > 0)
+        /*if (activeUltCounter > 0)
         {
             ultimateActiveText.gameObject.SetActive(true);
         }
         else
         {
             ultimateActiveText.gameObject.SetActive(false);
-        }
+        }*/
         
     }
     // Update is called once per frame

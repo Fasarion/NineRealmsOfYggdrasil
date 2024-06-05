@@ -14,15 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Sword
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "Increase the sword's power. \n\nEvery second strike will now
-    summon 2 phantom swords to strike your enemies.\n\nIn addition, each sword strike
-    now freezes the enemies it hits."
+  upgradeDescription: 'Every second strike will now summon 2 phantom swords.
+
+
+'
   upgrades:
   - thingToUpgrade: 0
     valueToUpgrade: 0
-    valueAmount: 5
-  - thingToUpgrade: 0
-    valueToUpgrade: 24
     valueAmount: 5
   - thingToUpgrade: 4
     valueToUpgrade: 26

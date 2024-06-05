@@ -22,6 +22,7 @@ public class WeaponAudio : ScriptableObject
     [Header("Hammer")]
     public EventReference hammerSwing;
     public EventReference hammerImpact;
+    public EventReference hammerPassiveImpact;
     public EventReference hammerThrow;
     public EventReference hammerThrowImpact;
     public EventReference lightningStrike;
@@ -179,11 +180,12 @@ public class WeaponAudio : ScriptableObject
                 RuntimeManager.PlayOneShot(swordPassiveImpact);
                 break;
             }
-            // case 2: //Hammare
-            // {
-            //     RuntimeManager.PlayOneShot(hammerImpact);
-            //     break;
-            // }
+            case 2: //Hammare
+            {
+                Debug.Log("Hammer passive sound");
+                RuntimeManager.PlayOneShot(hammerPassiveImpact);
+                break;
+            }
         }
     }
     

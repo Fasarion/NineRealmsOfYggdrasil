@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 9206287725747069478}
   - component: {fileID: 5382247577314883155}
   - component: {fileID: 7005701228367506839}
+  - component: {fileID: 9169103094705375015}
   m_Layer: 0
   m_Name: Sword Entity
   m_TagString: Untagged
@@ -404,3 +405,29 @@ MonoBehaviour:
     Special: 1
     Ultimate: 3
     Passive: 0.2
+--- !u!114 &9169103094705375015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8261443476895494700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1fbd613f8b44d2991c11045fa09a58d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeHitAudio:
+    eventCategoryType: 1
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 2
+    attackType: 1
+    environmentType: 0
+  passiveHitAudio:
+    eventCategoryType: 1
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 2
+    attackType: 4
+    environmentType: 0

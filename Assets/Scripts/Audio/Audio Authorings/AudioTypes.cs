@@ -26,6 +26,7 @@ public enum AttackTypeAudio
     Normal = 1,
     Special = 2,
     Ultimate = 3,
+    Passive = 4,
     
 }
 

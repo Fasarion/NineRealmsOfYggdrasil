@@ -14,9 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Hammer
   upgradeSprite: {fileID: 0}
-  upgradeDescription: "Increase the hammer's power. \n\nEvery third strike will now
-    summon 3 lightning bolts. \n\nIn addition, each hammer strike now shocks the
-    enemies it hits."
+  upgradeDescription: "Every third strike will now summon 3 lightning bolts. \n\n"
   upgrades:
   - thingToUpgrade: 5
     valueToUpgrade: 0
@@ -27,11 +25,8 @@ MonoBehaviour:
   - thingToUpgrade: 9
     valueToUpgrade: 26
     valueAmount: 2
-  - thingToUpgrade: 5
-    valueToUpgrade: 22
-    valueAmount: 2
   startUnlocked: 0
-  upgradeIndex: 0
+  upgradeIndex: 10
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:

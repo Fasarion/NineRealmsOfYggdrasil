@@ -51,8 +51,8 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
             ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
         }
         
-        foreach (var (currentHP, velocity, transform, dyingComponent, entity) in SystemAPI
-                     .Query<CurrentHpComponent, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()
+        foreach (var (currentHP, mass, pDamping, velocity, transform, dyingComponent, entity) in SystemAPI
+                     .Query<CurrentHpComponent, RefRW<PhysicsMass>, RefRW<PhysicsDamping>, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()
                      .WithAll<EnemyTypeComponent>()
                      .WithEntityAccess())
         {
@@ -64,8 +64,10 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
                 ecb.RemoveComponent<MoveTowardsPlayerComponent>(entity);
                 var knockBackBufferElements = knockBackBufferLookup[entity];
                 var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 0.5f, 0)));
-                var knockBackForce = (currentHP.Value * -1) + 1;
+                var knockBackForce = currentHP.KillingBlowValue * -1;
                 var damping = 0.8f;
+                pDamping.ValueRW.Linear = 1;
+                mass.ValueRW.InverseMass = 0.01f;
                 knockBackBufferElements.Add(new KnockBackBufferElement
                 {
                     KnockBackForce = forceDirection * (knockBackForce * damping),

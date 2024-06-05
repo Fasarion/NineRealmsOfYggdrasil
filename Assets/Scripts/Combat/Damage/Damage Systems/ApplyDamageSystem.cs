@@ -86,6 +86,7 @@ namespace Damage
                 if (currentHP.ValueRO.Value <= 0)
                 {
                     ecb.AddComponent<IsDyingComponent>(damageReceivingEntity);
+                    currentHP.ValueRW.KillingBlowValue = totalDamageToDeal;
                 }
             }
             

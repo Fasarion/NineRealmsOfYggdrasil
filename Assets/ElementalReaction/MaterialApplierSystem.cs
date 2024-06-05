@@ -25,10 +25,26 @@ public partial struct MaterialApplierSystem : ISystem
             var materialType = materialChange.MaterialType;
             if (materialType == MaterialType.BASEMATERIAL)
             {
-                materialType = state.EntityManager.GetComponentData<BaseMaterialReferenceComponent>(entity).Type;
+                //materialType = state.EntityManager.GetComponentData<BaseMaterialReferenceComponent>(entity).Type;
+                var rendererMaterialsReference = rendererReference.Renderer.materials;
+                var newMaterials = new Material[1];
+                var material = rendererMaterialsReference[0];
+                newMaterials[0] = material;
+                rendererReference.Renderer.materials = newMaterials;
             }
-            var material = materialDatabase.GetMaterialReference(materialType);
-            rendererReference.Renderer.material = material;
+            else
+            {
+                var material = materialDatabase.GetMaterialReference(materialType);
+                var rendererMaterialsReference = rendererReference.Renderer.materials;
+                var newMaterials = new Material[2];
+                for (int i = 0; i < rendererMaterialsReference.Length; i++)
+                {
+                    newMaterials[i] = rendererMaterialsReference[i];
+                }
+                newMaterials[newMaterials.Length - 1] = material;
+                rendererReference.Renderer.materials = newMaterials;
+            }
+
             ecb.RemoveComponent<ShouldChangeMaterialComponent>(entity);
         }
         

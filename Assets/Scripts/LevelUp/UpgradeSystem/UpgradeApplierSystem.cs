@@ -1,8 +1,10 @@
 using Damage;
 using Movement;
+using Patrik;
 using Patrik.Special_Attack;
 using Player;
 using Unity.Entities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]
@@ -50,6 +52,26 @@ public partial class UpgradeApplierSystem : SystemBase
         InformStatHandler();
     }
 
+    private WeaponType GetCurrentWeaponType(Entity entity)
+    {
+        WeaponType type;
+
+        if (EntityManager.HasComponent<SwordComponent>(entity))
+        {
+            type = WeaponType.Sword;
+        }
+        else if (EntityManager.HasComponent<HammerComponent>(entity))
+        {
+            type = WeaponType.Hammer;
+        }
+        else
+        {
+            type = WeaponType.Birds;
+        }
+
+        return type;
+    }
+
     private void ApplyComponentUpgrade(UpgradeValueTypes upgradeValueToUpgrade, float valueAmount, Entity entity)
     {
         switch (upgradeValueToUpgrade)
@@ -57,6 +79,8 @@ public partial class UpgradeApplierSystem : SystemBase
             case UpgradeValueTypes.UnlockSpecial:
             {
                 EntityManager.AddComponent<IsUnlocked>(entity);
+                var type = GetCurrentWeaponType(entity);
+                EventManager.OnSpecialAttackUnlocked(type);
                 return;
             }
             

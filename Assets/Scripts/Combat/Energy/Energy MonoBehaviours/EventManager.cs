@@ -59,6 +59,7 @@ public static class EventManager
 
     public static UnityAction<WeaponType> OnSpecialAttackUnlocked;
 
+    public static UnityAction OnSceneChange;
 }
 
 public struct PlayerHealthData

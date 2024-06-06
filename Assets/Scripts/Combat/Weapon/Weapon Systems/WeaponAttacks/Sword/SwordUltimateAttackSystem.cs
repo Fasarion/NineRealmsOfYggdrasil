@@ -10,7 +10,7 @@ using UnityEngine;
 [BurstCompile]
 [UpdateAfter(typeof(AttackStatTransferSystem))]
 [UpdateAfter(typeof(PlayerRotationSystem))]
-
+[UpdateAfter(typeof(CombatStatHandleSystem))]
 public partial struct SwordUltimateAttackSystem : ISystem
 {
     public void OnCreate(ref SystemState state)

@@ -10,7 +10,10 @@ using Unity.Transforms;
 using UnityEngine;
 using Weapon;
 
-
+[BurstCompile]
+[UpdateAfter(typeof(AttackStatTransferSystem))]
+[UpdateAfter(typeof(PlayerRotationSystem))]
+[UpdateAfter(typeof(CombatStatHandleSystem))]
 public partial struct BirdUltimateAttackSystem : ISystem
 {
     [BurstCompile]
@@ -79,6 +82,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
                 // destroy all birds on return
                 foreach (var (_, entity) in SystemAPI
                     .Query<BirdProjectileComponent>()
+                    .WithAll<CircularMovementComponent>()
                     .WithEntityAccess())
                 {
                     ecb.AddComponent<ShouldBeDestroyed>(entity);
@@ -113,7 +117,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
             config.ValueRW.IsActive = true;
             
             var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
-            var configRO = SystemAPI.GetSingleton<BirdsUltimateAttackConfig>();
+           // var configRO = SystemAPI.GetSingleton<BirdsUltimateAttackConfig>();
             
             var configEntity = SystemAPI.GetSingletonEntity<BirdsUltimateAttackConfig>();
 
@@ -143,15 +147,14 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
             audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
             
+            
             // set damage
             CachedDamageComponent thisDamage =
                 state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
-
-            thisDamage.Value.DamageValue *= config.ValueRO.TornadoDamageMod;
             state.EntityManager.SetComponentData(tornado, thisDamage);
 
             // Spawn birds evenly spaced around player
-            for (int i = 0; i < configRO.BirdCount; i++)
+            for (int i = 0; i < config.ValueRO.BirdCount; i++)
             {
                 // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
                 foreach (var (transform, spawner, weapon, entity) in SystemAPI
@@ -163,9 +166,9 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
                     
                     // // get spawn position
-                    float angle = math.radians(configRO.AngleStep * i);
-                    float x = mousePos.x + configRO.Radius * math.cos(angle);
-                    float z = mousePos.z + configRO.Radius * math.sin(angle);
+                    float angle = math.radians(config.ValueRO.AngleStep * i);
+                    float x = mousePos.x + config.ValueRO.Radius * math.cos(angle);
+                    float z = mousePos.z + config.ValueRO.Radius * math.sin(angle);
                     float3 spawnPosition = new float3(x, 0, z);
                     
                     // get rotation
@@ -189,9 +192,9 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     state.EntityManager.SetComponentData(birdProjectile, new CircularMovementComponent
                     {
                         CurrentAngle = angle,
-                        Radius = configRO.Radius,
-                        AngularSpeed = configRO.AngularSpeed,
-                        BaseAngularSpeed = configRO.AngularSpeed,
+                        Radius = config.ValueRO.Radius,
+                        AngularSpeed = config.ValueRO.AngularSpeed,
+                        BaseAngularSpeed = config.ValueRO.AngularSpeed,
                         CenterPointEntity = config.ValueRO.CenterPointEntity,
                     });
                     
@@ -203,6 +206,12 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
                         {EntityToTransferStatsFrom = configEntity};
                     ecb.SetComponent(birdProjectile, updateStatsComponent);
+                    
+                    // remove energy fill
+                    if (state.EntityManager.HasComponent<EnergyFillComponent>(birdProjectile))
+                    {
+                        ecb.RemoveComponent<EnergyFillComponent>(birdProjectile);
+                    }
                 }
             }
             

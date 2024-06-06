@@ -65,7 +65,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         // go through all active weapons (should be 1 maximum)
         foreach (var (energyFill, hitBuffer) in SystemAPI
                 .Query<EnergyFillComponent, DynamicBuffer<HitBufferElement>>()
-                .WithAll<WeaponComponent, ActiveWeapon>())
+                .WithAll<WeaponComponent, ActiveWeapon, IsUnlocked>())
         {
             if (!HasHit(hitBuffer, out var hitCount))
                 continue;
@@ -76,6 +76,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
             foreach (var ( barToFill, weaponComponent, passiveEntity) in SystemAPI
                     .Query<RefRW<EnergyBarComponent>, WeaponComponent>()
                     .WithNone<ActiveWeapon>()
+                    .WithAll<IsUnlocked>()
                     .WithEntityAccess())
             {
                 // exit out if energy bar is already full
@@ -94,6 +95,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
         foreach (var (energyFill, energyBar, weapon, hitBuffer, entity) in
             SystemAPI.Query<EnergyFillComponent, RefRW<EnergyBarComponent>, WeaponComponent, DynamicBuffer<HitBufferElement>>()
                 .WithNone<ActiveWeapon>()
+                .WithAll<IsUnlocked>()
                 .WithEntityAccess())
         {
             // exit out if energy bar is already fill
@@ -112,7 +114,9 @@ public partial struct FillEnergyOnHitSystem : ISystem
     private void FillEnergyFromActiveAbilities(ref SystemState state)
     {
         foreach (var (ownerWeapon, abilityHitBuffer, fillMod) in
-            SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>())//.WithAll<HasChangedHP>())
+            SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>()
+                .WithAll<IsUnlocked>()
+            )//.WithAll<HasChangedHP>())
         {
             Entity ownerEntity = ownerWeapon.OwnerEntity;
             
@@ -123,7 +127,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
             
             // exit if owner was not passive. 
             if (!ownerIsActive) continue;
-
+            
             EnergyBarComponent energyBar = state.EntityManager.GetComponentData<EnergyBarComponent>(ownerEntity);
 
             // exit early if the bar already has reached its max energy
@@ -141,6 +145,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
             foreach (var ( barToFill, weaponComponent, passiveEntity) in SystemAPI
                 .Query<RefRW<EnergyBarComponent>, WeaponComponent>()
                 .WithNone<ActiveWeapon>()
+                .WithAll<IsUnlocked>()
                 .WithEntityAccess())
             {
                 // exit out if energy bar is already full
@@ -156,7 +161,9 @@ public partial struct FillEnergyOnHitSystem : ISystem
     private void FillEnergyFromPassiveAbilities(ref SystemState state)
     {
         foreach (var (ownerWeapon, abilityHitBuffer, fillMod) in
-            SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>())//.WithAll<HasChangedHP>())
+            SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>()
+                .WithAll<IsUnlocked>()
+            )//.WithAll<HasChangedHP>())
         {
             Entity ownerEntity = ownerWeapon.OwnerEntity;
             

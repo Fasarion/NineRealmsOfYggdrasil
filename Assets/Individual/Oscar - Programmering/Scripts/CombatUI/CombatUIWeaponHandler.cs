@@ -65,9 +65,9 @@ public class CombatUIWeaponHandler : ElementMVC
         EventManager.OnWeaponSwitch += OnWeaponSwitched;
         EventManager.OnAllWeaponsSetup += OnAllWeaponsSetup;
         EventManager.OnSpecialAttackUnlocked += OnSpecialAttackUnlocked;
+        
     }
 
-   
 
     public void OnDisable()
     {
@@ -75,6 +75,7 @@ public class CombatUIWeaponHandler : ElementMVC
         EventManager.OnAllWeaponsSetup -= OnAllWeaponsSetup;
         EventManager.OnSpecialAttackUnlocked -= OnSpecialAttackUnlocked;
     }
+    
 
     public void OnSpecialAttackUnlocked(WeaponType weaponType)
     {

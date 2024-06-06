@@ -19,6 +19,9 @@ GameObject:
   - component: {fileID: -1674843368136517089}
   - component: {fileID: 3038242268975273724}
   - component: {fileID: -1129091770023645977}
+  - component: {fileID: 128575675295744601}
+  - component: {fileID: 4658863135779300955}
+  - component: {fileID: 487965345456242553}
   m_Layer: 0
   m_Name: ThunderBoltProjectilePrefab
   m_TagString: Untagged
@@ -83,6 +86,7 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 5629841373111078732, guid: 99d45d6a35ca3bb4b8d3a54bda5739ed,
     type: 3}
   followsEntity: 1
+  spawnAtEntity: 0
 --- !u!114 &4249560091680255410
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,3 +181,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3f21f65d68014ab4bd59cf9ebdefeeb9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &128575675295744601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227252102786388703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d6135e1a64bc445abfc91bb00ee961, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4658863135779300955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227252102786388703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c745165577242df4896c6ba3358149f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &487965345456242553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7227252102786388703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0926d93b98014cec9db2721b9133e149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveFillPerHit: 1
+  activeFillPerHit: 0

@@ -15,6 +15,7 @@ using UnityEngine;
 [UpdateInGroup(typeof(CombatSystemGroup))]
 [UpdateBefore(typeof(HitStopSystem))]
 [UpdateBefore(typeof(HandleHitBufferSystem))]
+//[UpdateBefore(typeof(FillEnergyOnHitSystem))]
 [BurstCompile]
 public partial struct HammerPassiveAbilitySystem : ISystem
 {
@@ -97,6 +98,35 @@ public partial struct HammerPassiveAbilitySystem : ISystem
                         {
                             EntityToTransferStatsFrom = passiveEntity,
                         });
+                        
+                        // handle energy
+                        // get owner - hammer component
+                        var ownerEntity = SystemAPI.GetSingletonEntity<HammerComponent>();
+                        
+                        state.EntityManager.SetComponentData(bolt, new HasOwnerWeapon
+                        {
+                            OwnerEntity = ownerEntity,
+                            OwnerWasActive = false
+                        });
+
+                        
+        
+                        // // set owner
+                        // ecb.AddComponent<HasOwnerWeapon>(bolt);
+                        // HasOwnerWeapon hasOwnerWeapon = new HasOwnerWeapon()
+                        // {
+                        //     OwnerEntity = ownerEntity,
+                        //     OwnerWasActive = false
+                        // };
+                        //
+                        // ecb.SetComponent(bolt, hasOwnerWeapon);
+                        //
+                        // // set energy fill
+                        // ecb.AddComponent<EnergyFillComponent>(bolt);
+                        // EnergyFillComponent hammerFill =
+                        //     state.EntityManager.GetComponentData<EnergyFillComponent>(ownerEntity);
+                        //
+                        // ecb.SetComponent(bolt, hammerFill);
 
                         break;
                     }

@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8997762945285822728}
   - component: {fileID: 4088007281408269294}
+  - component: {fileID: 3669377985727253823}
+  - component: {fileID: 466931788843695639}
   m_Layer: 0
   m_Name: HammerPassiveConfig
   m_TagString: Untagged
@@ -58,6 +60,32 @@ MonoBehaviour:
     audioEventType: 2
     attackType: 4
     environmentType: 0
+--- !u!114 &3669377985727253823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544724437640329423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c745165577242df4896c6ba3358149f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &466931788843695639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6544724437640329423}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0926d93b98014cec9db2721b9133e149, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  passiveFillPerHit: 1
+  activeFillPerHit: 0
 --- !u!1 &7899877930264919998
 GameObject:
   m_ObjectHideFlags: 0

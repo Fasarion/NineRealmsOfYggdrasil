@@ -10,20 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: SwordSpecialUnlock
+  m_Name: PlayerAttackSpeedUpgrade
   m_EditorClassIdentifier: 
-  upgradeTitle: Sword
-  upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
-  upgradeDescription: 'SPECIAL
-
-    Charge up a ring of ice with RIGHT MOUSE BUTTON'
+  upgradeTitle: Speed
+  upgradeSprite: {fileID: 0}
+  upgradeDescription: Attacks are 20% faster
   upgrades:
-  - thingToUpgrade: 1
-    valueToUpgrade: 26
-    valueAmount: 0
+  - thingToUpgrade: 12
+    valueToUpgrade: 2
+    valueAmount: 0.2
   startUnlocked: 1
-  upgradeIndex: 22
-  isUnlocked: 1
+  upgradeIndex: 0
+  isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock:
-  - {fileID: 11400000, guid: 411041592fea4f141b32155eb756fb3e, type: 2}
+  upgradesToUnlock: []

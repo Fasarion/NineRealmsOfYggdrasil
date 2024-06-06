@@ -840,9 +840,9 @@ MonoBehaviour:
   cardImage: {fileID: 2150927398129151841}
   cardTitleText: {fileID: 8534962992292680376}
   cardDescriptionText: {fileID: 7074552751035098020}
-  standardScale: {x: 0, y: 0, z: 0}
-  hoverScale: {x: 0, y: 0, z: 0}
-  cardIndex: 0
+  standardScale: {x: 0.86, y: 0.58, z: 0.5}
+  hoverScale: {x: 1.124, y: 0.84, z: 0.5}
+  cardIndex: 2
 --- !u!222 &2414513670388286457
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2207,6 +2207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb6f0168be64ca4e9d039d4dbd8bfd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialActive: 0
   hasPressedUp: 0
   hasPressedDown: 0
   hasPressedLeft: 0
@@ -2623,6 +2624,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e976faf62336f0246a22d42f21c02c52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialActive: 0
   hasUnlockedRightClick: 0
   hasUnlockedSecondWeapon: 0
   hasFilledUpUltimate: 0
@@ -2844,6 +2846,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8208aeebf017d84eb199cc0b5db19e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialActive: 0
   dashTutorialObject: {fileID: 690580905800688099}
 --- !u!1 &3423395500856043921
 GameObject:
@@ -4603,8 +4606,8 @@ MonoBehaviour:
   cardImage: {fileID: 9111236389253048824}
   cardTitleText: {fileID: 112468404259580685}
   cardDescriptionText: {fileID: 4602295780841475172}
-  standardScale: {x: 0, y: 0, z: 0}
-  hoverScale: {x: 0, y: 0, z: 0}
+  standardScale: {x: 0.86, y: 0.58, z: 0.5}
+  hoverScale: {x: 1.124, y: 0.84, z: 0.5}
   cardIndex: 0
 --- !u!222 &5644414438889306798
 CanvasRenderer:
@@ -4852,9 +4855,9 @@ MonoBehaviour:
   cardImage: {fileID: 7935480308014125857}
   cardTitleText: {fileID: 7401581753492223444}
   cardDescriptionText: {fileID: 7486163810381011872}
-  standardScale: {x: 0, y: 0, z: 0}
-  hoverScale: {x: 0, y: 0, z: 0}
-  cardIndex: 0
+  standardScale: {x: 0.86, y: 0.58, z: 0.5}
+  hoverScale: {x: 1.124, y: 0.84, z: 0.5}
+  cardIndex: 1
 --- !u!222 &8366950341061005023
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6291,6 +6294,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae1d43651d6de1b429067f198a111b2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialActive: 0
   leftClickHighlight: {fileID: 4266376745977058236}
 --- !u!1 &6948602869293364846
 GameObject:

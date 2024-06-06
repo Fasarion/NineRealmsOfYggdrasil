@@ -14,6 +14,7 @@ namespace Damage
         [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
+            state.RequireForUpdate<KillCounterSingleton>();
             state.RequireForUpdate<RandomComponent>();
         }
 
@@ -23,6 +24,7 @@ namespace Damage
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
             var randomComponent = SystemAPI.GetSingletonRW<RandomComponent>();
             var damageNumberBuffer = SystemAPI.GetSingletonBuffer<DamageNumberBufferElement>();
+            var killCounter = SystemAPI.GetSingletonRW<KillCounterSingleton>();
 
             foreach (var (currentHP, damageBuffer, damageReduction, damageReceivingTransform, damageNumbers, damageReceivingEntity) in SystemAPI
                 .Query<RefRW<CurrentHpComponent>, DynamicBuffer<DamageBufferElement>, DamageReductionComponent, LocalTransform, DamageNumbersComponent>()
@@ -87,11 +89,13 @@ namespace Damage
                 {
                     ecb.AddComponent<IsDyingComponent>(damageReceivingEntity);
                     currentHP.ValueRW.KillingBlowValue = totalDamageToDeal;
+                    killCounter.ValueRW.Value++;
                 }
             }
             
             // Play back all operations in entity command buffer
             ecb.Playback(state.EntityManager);
+            ecb.Dispose();
         }
     }
 }

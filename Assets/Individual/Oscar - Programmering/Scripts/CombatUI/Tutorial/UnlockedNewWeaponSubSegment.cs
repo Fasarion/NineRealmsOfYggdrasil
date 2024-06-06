@@ -24,6 +24,12 @@ public class UnlockedNewWeaponSubSegment : MonoBehaviour
         EventManager.OnWeaponCountSet += OnWeaponUnlocked;
         EventManager.OnWeaponSwitch += OnWeaponSwitchActivated;
     }
+    
+    public void OnDisable()
+    {
+        EventManager.OnWeaponCountSet -= OnWeaponUnlocked;
+        EventManager.OnWeaponSwitch -= OnWeaponSwitchActivated;
+    }
 
     private void OnWeaponSwitchActivated(WeaponSetupData currentWeapon, List<WeaponSetupData> weaponSetupDataList)
     {

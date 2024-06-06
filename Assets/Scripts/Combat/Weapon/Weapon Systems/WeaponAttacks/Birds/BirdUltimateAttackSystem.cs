@@ -147,17 +147,10 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
             audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
             
-            // // update stats
-            // ecb.AddComponent<UpdateStatsComponent>(tornado);
-            // UpdateStatsComponent tornadoUpdateStats = new UpdateStatsComponent
-            //     {EntityToTransferStatsFrom = configEntity};
-            // ecb.SetComponent(tornado, tornadoUpdateStats);
             
             // set damage
             CachedDamageComponent thisDamage =
                 state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
-           
-           // thisDamage.Value.DamageValue *= config.ValueRO.TornadoDamageMod;
             state.EntityManager.SetComponentData(tornado, thisDamage);
 
             // Spawn birds evenly spaced around player
@@ -213,6 +206,12 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     UpdateStatsComponent updateStatsComponent = new UpdateStatsComponent
                         {EntityToTransferStatsFrom = configEntity};
                     ecb.SetComponent(birdProjectile, updateStatsComponent);
+                    
+                    // remove energy fill
+                    if (state.EntityManager.HasComponent<EnergyFillComponent>(birdProjectile))
+                    {
+                        ecb.RemoveComponent<EnergyFillComponent>(birdProjectile);
+                    }
                 }
             }
             

@@ -14,6 +14,7 @@ public class DashTutorialSegment : TutorialSegment
     }
     public override void StartSegment()
     {
+        base.StartSegment();
         dashTutorialObject.SetActive(true);
     }
 
@@ -28,7 +29,10 @@ public class DashTutorialSegment : TutorialSegment
     }
     private void OnDash()
     {
-        dashTutorialObject.SetActive(false);
-        SegmentCompleted();
+        if (tutorialActive)
+        {
+            dashTutorialObject.SetActive(false);
+            SegmentCompleted();
+        }
     }
 }

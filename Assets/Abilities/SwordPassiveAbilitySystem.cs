@@ -76,6 +76,11 @@ public partial struct SwordPassiveAbilitySystem : ISystem
 
                 transform.ValueRW.Rotation = quaternion.LookRotation(-directionToTarget, new float3(0,1,0));
             }
+            else
+            {
+                // Reset EntityToFollow so it can find a new target to chase
+                targeting.ValueRW.EntityToFollow = Entity.Null;
+            }
         }
     }
 }

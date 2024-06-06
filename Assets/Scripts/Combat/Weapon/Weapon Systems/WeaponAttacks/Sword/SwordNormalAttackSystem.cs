@@ -10,7 +10,7 @@ using UnityEngine;
 [BurstCompile]
 public partial struct SwordNormalAttackSystem : ISystem
 {
-    private bool hasRecorded;
+   // private bool hasRecorded;
     private int attackType;
     public void OnCreate(ref SystemState state)
     {
@@ -50,9 +50,11 @@ public partial struct SwordNormalAttackSystem : ISystem
             else attackType = 0;
             
             attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
-            if (!hasRecorded)
+            if (!config.HasRecorded)
             {
-                hasRecorded = true;
+                var configRW = SystemAPI.GetSingletonRW<SwordComboAbilityConfig>();
+                
+                configRW.ValueRW.HasRecorded = true;
                 var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
                 state.EntityManager.AddComponent<ShouldRecordSwordTrajectoryComponent>(swordEntity);
             }

@@ -47,5 +47,6 @@ public struct SwordComboAbilityConfig : IComponentData
     public Entity SwordComboAbilityPrefab;
     public Entity SwordSpawnEffectPrefab;
     public float Offset;
+    public bool HasRecorded;
 }
     

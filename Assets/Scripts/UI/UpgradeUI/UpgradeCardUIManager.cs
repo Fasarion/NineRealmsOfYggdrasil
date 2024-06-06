@@ -2,17 +2,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
+using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UpgradeCardUIManager : MonoBehaviour
 {
     [SerializeField] private List<UpgradeCardUIBehaviour> upgradeCards;
-    [SerializeField] private List<GameObject> upgradeStones;
+    [SerializeField] private List<GameObject> upgradeStoneSmoke;
+    [SerializeField] private List<GameObject> upgradeClickSmoke;
     [SerializeField] private GameObject birdStonePrefab;
     [SerializeField] private GameObject hammerStonePrefab;
     [SerializeField] private GameObject swordStonePrefab;
     [SerializeField] private GameObject playerStonePrefab;
     private Vector3[] _uICardPositions;
+
+    [SerializeField] private Vector3 smokeOffset;
+
+    public float fallSpeedGrowth;
 
     private UpgradeObject[] upgradeObjects;
     
@@ -28,10 +35,16 @@ public class UpgradeCardUIManager : MonoBehaviour
 
     private float _upgradeUIClickDelayTimer = 0;
 
-    private float _cachedTimeStamp;
-
     public float uiOffset;
-    
+
+    private bool _isStartup;
+
+    public float yUIOffset;
+
+    private AudioManager _audioManager;
+
+    private AudioData _audioData;
+
     
     public static UpgradeCardUIManager Instance
     {
@@ -59,6 +72,15 @@ public class UpgradeCardUIManager : MonoBehaviour
 
         _uICardPositions = new Vector3[3];
         HideUI();
+        _audioData = new AudioData
+        {
+            audioEventType = AudioEventType.OnUse,
+            eventCategoryType = EventCategoryType.Weapon,
+            enemyTyping = EnemyTyping.None,
+            attackType = AttackTypeAudio.Special,
+            weaponType = WeaponTyping.Hammer,
+            environmentType = EnvironmentType.None,
+        };
     }
     
     public Camera camera; // Reference to the camera
@@ -67,48 +89,53 @@ public class UpgradeCardUIManager : MonoBehaviour
     public float spacing = 2.0f; // Horizontal spacing between objects
     public float delay = 1.0f; // Delay before the effect starts
 
+    public float startY;
+    public float targetY;
+    public float fallSpeed;
+
     void Start()
     {
-        // Start the coroutine to lower the objects one by one
-        //StartCoroutine(LowerObjectsSequentially());
+        _audioManager = AudioManager.Instance;
     }
 
-    IEnumerator LowerObjectsSequentially(List<GameObject> objectsToPlace)
+    IEnumerator LowerObjectsSequentially(int count)
     {
         //yield return new WaitForSeconds(delay);
         
         // Calculate the central target position in front of the camera
-        Vector3 cameraPosition = camera.transform.position;
-        Vector3 cameraForward = camera.transform.forward;
-        Vector3 centerPosition = cameraPosition + cameraForward * distanceInFront;
+        //Vector3 cameraPosition = camera.transform.position;
+        //Vector3 cameraForward = camera.transform.forward;
+        //Vector3 centerPosition = cameraPosition + cameraForward * distanceInFront;
 
         // Get the world position of the top of the screen
-        Vector3 topOfScreen = camera.ViewportToWorldPoint(new Vector3(0.5f, 2f, distanceInFront));
+        //Vector3 topOfScreen = camera.ViewportToWorldPoint(new Vector3(0.5f, 2f, distanceInFront));
 
         // Calculate the starting positions and target positions for each object
-        for (int i = 0; i < objectsToPlace.Count; i++)
+        for (int i = 0; i < count; i++)
         {
-            float offset = (i - (objectsToPlace.Count - 1) / 2.0f) * spacing;
-            Vector3 targetPosition = centerPosition + camera.transform.right * offset;
-            Vector3 startPosition = topOfScreen + camera.transform.right * offset;
+            // float offset = (i - (objectsToPlace.Count - 1) / 2.0f) * spacing;
+            // Vector3 targetPosition = centerPosition + camera.transform.right * offset + new Vector3(0, -.20f, -.05f);
+            // Vector3 startPosition = topOfScreen + camera.transform.right * offset;
 
             // Set the initial position of the object
-            objectsToPlace[i].transform.position = startPosition;
+            upgradeCards[i].transform.position = new Vector3(upgradeCards[i].transform.position.x, startY, upgradeCards[i].transform.position.z);
 
             // Optional: Align the object to face the same direction as the camera
             //objectsToPlace[i].transform.rotation = camera.transform.rotation;
             float currentDelay = delay * i;
             // Start the coroutine to lower the current object
-            StartCoroutine(LowerObject(objectsToPlace[i], startPosition, targetPosition, i, currentDelay));
+            StartCoroutine(LowerObject(upgradeCards[i], i, currentDelay));
         }
 
         yield return null;
     }
 
-    IEnumerator LowerObject(GameObject obj, Vector3 startPosition, Vector3 targetPosition, int i, float delay)
+    IEnumerator LowerObject(UpgradeCardUIBehaviour obj, int i, float delay)
     {
         float elapsedTime = 0f;
+        float elapsedTime2 = 0;
         if (i == 0) elapsedTime = delay;
+        float currentFallSpeed = fallSpeed;
 
         while (elapsedTime < delay)
         {
@@ -117,46 +144,92 @@ public class UpgradeCardUIManager : MonoBehaviour
         }
 
         // Gradually move the object from startPosition to targetPosition
-        while (elapsedTime < duration)
+        while (elapsedTime2 < duration)
         {
-            obj.transform.position = Vector3.Lerp(startPosition, targetPosition, elapsedTime / duration);
-            elapsedTime += Time.unscaledDeltaTime * 10;
+            obj.transform.position = Vector3.Lerp(obj.transform.position, new Vector3(obj.transform.position.x, targetY, obj.transform.position.z), elapsedTime2 / duration);
+            elapsedTime2 += Time.unscaledDeltaTime * (currentFallSpeed);
+            currentFallSpeed *= 1 + fallSpeedGrowth;
             yield return null;
         }
 
         // Ensure the object is exactly at the target position at the end
-        obj.transform.position = targetPosition;
-        _uICardPositions[i] = targetPosition;
-        if(i == upgradeObjects.Length - 1) DisplayUpgradeText(upgradeObjects);
+        obj.transform.position = new Vector3(obj.transform.position.x, targetY, obj.transform.position.z);
+        PlaySpawnSmokeEffect(i);
+        _audioManager.PlayAudioData(_audioData);
+        //if(i == upgradeObjects.Length - 1) DisplayUpgradeText(upgradeObjects);
     }
 
     private void Update()
     {
-        if (!_isUIDisplayed) return;
+         if (!_isUIDisplayed) return;
+
+         _upgradeUIClickDelayTimer += Time.unscaledDeltaTime;
         
-        for (int i = 0; i < upgradeObjects.Length; i++)
+
+
+    }
+
+    private void PlaySpawnSmokeEffect(int i)
+    {
+        upgradeStoneSmoke[i].SetActive(true);
+        upgradeStoneSmoke[i].transform.position = GetUIPosition(i);
+    }
+
+    private void PlaySelectionSmokeEffect(int i)
+    {
+        upgradeClickSmoke[i].SetActive(true);
+        upgradeClickSmoke[i].transform.position = GetUIPosition(i);
+    }
+
+    private Vector3 GetUIPosition(int i)
+    {
+        RectTransform uiElementRectTransform = upgradeCards[i].GetComponent<RectTransform>();
+        Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, uiElementRectTransform.position);
+        float distanceFromCamera = 1f;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, distanceFromCamera));
+
+        switch (i)
         {
-            upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i] + new Vector3(uiOffset, 0, 0));
+            case 0:
+                worldPosition += new Vector3(0, 0.26828f, 0);
+                break;
+            case 1:
+                worldPosition += new Vector3(2.164204f, 0.26828f, 0);
+                break;
+            case 2:
+                worldPosition += new Vector3(4.0f, 0.26828f, 0);
+                break;
         }
+        
+        return worldPosition;
     }
 
     private void DisplayUpgradeCards(UpgradeObject[] upgradeObjects)
     {
         this.upgradeObjects = upgradeObjects;
+
+        if (this.upgradeObjects.Length <= 0) return;
         
-        //ShowUI(upgradeObjects.Length);
+        ShowUI(upgradeObjects.Length);
         
         EventManager.OnPause?.Invoke(PauseType.FreezeGame);
+        
+        // for (int i = 0; i < upgradeObjects.Length; i++)
+        // {
+        //     UpgradeObject upg = upgradeObjects[i];
+        //     var prefab = GetUpgradeStonePrefab(upg);
+        //     var stone = GameObject.Instantiate(prefab);
+        //     upgradeStones.Add(stone);
+        // }
         
         for (int i = 0; i < upgradeObjects.Length; i++)
         {
             UpgradeObject upg = upgradeObjects[i];
-            var prefab = GetUpgradeStonePrefab(upg);
-            var stone = GameObject.Instantiate(prefab);
-            upgradeStones.Add(stone);
+            upgradeCards[i].UpdateCardDisplay(upg);
+            //upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i]);
         }
         
-        StartCoroutine(LowerObjectsSequentially(upgradeStones));
+        StartCoroutine(LowerObjectsSequentially(upgradeObjects.Length));
     }
 
     private void DisplayUpgradeText(UpgradeObject[] upgradeObjects)
@@ -164,12 +237,6 @@ public class UpgradeCardUIManager : MonoBehaviour
         
         ShowUI(upgradeObjects.Length);
         
-        for (int i = 0; i < upgradeObjects.Length; i++)
-        {
-            UpgradeObject upg = upgradeObjects[i];
-            upgradeCards[i].UpdateCardDisplay(upg);
-            upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i]);
-        }
 
     }
 
@@ -211,14 +278,18 @@ public class UpgradeCardUIManager : MonoBehaviour
 
     private void ShowUI(int cardCount)
     {
+        _upgradeUIClickDelayTimer = 0;
+        
         for (int i = 0; i < cardCount; i++)
         {
             upgradeCards[i].gameObject.SetActive(true);
         }
 
+        EventManager.OnDisableUI();
+
         _isUIDisplayed = true;
         //Time.timeScale = 0f;
-
+        
     }
 
     private void HideUI()
@@ -228,15 +299,22 @@ public class UpgradeCardUIManager : MonoBehaviour
             card.gameObject.SetActive(false);
         }
 
-        foreach (var stone in upgradeStones)
-        {
-            GameObject.Destroy(stone);
-        }
-        upgradeStones = new List<GameObject>();
+        // foreach (var stone in upgradeStones)
+        // {
+        //     GameObject.Destroy(stone);
+        // }
+        // upgradeStones = new List<GameObject>();
 
         _isUIDisplayed = false;
         //Time.timeScale = 1f;
         EventManager.OnUnpause?.Invoke(PauseType.FreezeGame);
+
+        if (!_isStartup)
+        {
+            _isStartup = true;
+        }
+        else EventManager.OnEnableUI();
+        
     }
 
     public RectTransform[] GetUpgradeCardDimensions(UpgradeObject[] upgradeObjects)
@@ -251,10 +329,10 @@ public class UpgradeCardUIManager : MonoBehaviour
         return transforms;
     }
     
-    public void RegisterUpgradeCardClick(int index)
+    public void RegisterUpgradeCardClick(int index, int cardIndex)
     {
-        //if (_upgradeUIClickDelayTimer < _cachedTimeStamp + upgradeUIClickDelay) return;
-        
+        if (_upgradeUIClickDelayTimer < upgradeUIClickDelay) return;
+        //PlaySelectionSmokeEffect(cardIndex);
         HideUI();
         OnUpgradeChosen?.Invoke(index);
     }

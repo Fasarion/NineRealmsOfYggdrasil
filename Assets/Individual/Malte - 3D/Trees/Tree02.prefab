@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 10
-  shouldDisplayDamageNumbers: 1
+  shouldDisplayDamageNumbers: 0
   damageReductionValue: 1
 --- !u!114 &-7810992260240429371
 MonoBehaviour:
@@ -273,6 +273,7 @@ MonoBehaviour:
     NewScale: 1
     SetYPosition: 0
     YPosition: 0
+    transferKnockBackToChildren: 1
 --- !u!114 &2568355613616828530
 MonoBehaviour:
   m_ObjectHideFlags: 0

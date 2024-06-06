@@ -1,7 +1,10 @@
 using Damage;
 using Movement;
+using Patrik;
+using Patrik.Special_Attack;
 using Player;
 using Unity.Entities;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateAfter(typeof(UpgradeUISystem))]
@@ -9,7 +12,22 @@ public partial class UpgradeApplierSystem : SystemBase
 {
     private UpgradePoolManager _pool;
     private int _weaponCount = 1;
+
+    protected override void OnStartRunning()
+    {
+        EventManager.OnSceneChange += OnSceneChange;
+    }
     
+    protected override void OnStopRunning()
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
+    private void OnSceneChange(MenuButtonSelection arg0)
+    {
+        _weaponCount = 1;
+    }
+
     protected override void OnUpdate()
     {
         bool choiceExists = SystemAPI.TryGetSingletonRW(out RefRW<UpgradeChoice> choice);
@@ -21,19 +39,19 @@ public partial class UpgradeApplierSystem : SystemBase
         
         if (choice.ValueRO.IsHandled) return;
         
-            if (_pool == null)
-            {
-                _pool = UpgradePoolManager.Instance;
-            }
+        if (_pool == null)
+        {
+            _pool = UpgradePoolManager.Instance;
+        }
 
-            UpgradeObject upgradeObject = _pool.GetUpgradeObjectReferenceByKey(choice.ValueRO.ChoiceIndex);
-            choice.ValueRW.IsHandled = true;
-            
-            HandleLocks(upgradeObject);
+        UpgradeObject upgradeObject = _pool.GetUpgradeObjectReferenceByKey(choice.ValueRO.ChoiceIndex);
+        choice.ValueRW.IsHandled = true;
         
-            Debug.Log($"Upgrade chosen: {upgradeObject.upgradeTitle}");
+        HandleLocks(upgradeObject);
+    
+        Debug.Log($"Upgrade chosen: {upgradeObject.upgradeTitle}");
 
-            Apply(upgradeObject);
+        Apply(upgradeObject);
     }
 
     public void Apply(UpgradeObject upgradeObject)
@@ -49,13 +67,60 @@ public partial class UpgradeApplierSystem : SystemBase
         InformStatHandler();
     }
 
+    private WeaponType GetCurrentWeaponType(Entity entity)
+    {
+        WeaponType type;
+
+        if (EntityManager.HasComponent<IceRingConfig>(entity))
+        {
+            type = WeaponType.Sword;
+        }
+        else if (EntityManager.HasComponent<HammerSpecialConfig>(entity))
+        {
+            type = WeaponType.Hammer;
+        }
+        else if (EntityManager.HasComponent<BirdsSpecialAttackConfig>(entity))
+        {
+            type = WeaponType.Birds;
+        }
+        else
+        {
+            type = WeaponType.None;
+        }
+
+        return type;
+    }
+
     private void ApplyComponentUpgrade(UpgradeValueTypes upgradeValueToUpgrade, float valueAmount, Entity entity)
     {
         switch (upgradeValueToUpgrade)
         {
+            case UpgradeValueTypes.UnlockSpecial:
+            {
+                EntityManager.AddComponent<IsUnlocked>(entity);
+                var type = GetCurrentWeaponType(entity);
+                if (type != WeaponType.None)
+                {
+                    EventManager.OnSpecialAttackUnlocked?.Invoke(type);
+                }
+                return;
+            }
+            
+            case UpgradeValueTypes.spawnCount:
+                var spawnCountComponent = EntityManager.GetComponentData<SpawnCount>(entity);
+                spawnCountComponent.Value += (int)valueAmount;
+                EntityManager.SetComponentData(entity, spawnCountComponent);
+                return;
+            
+            case UpgradeValueTypes.spawnCountMultiplier:
+                var spawnCountMultiplierComponent = EntityManager.GetComponentData<SpawnCountMultiplier>(entity);
+                spawnCountMultiplierComponent.Value += (int)valueAmount;
+                EntityManager.SetComponentData(entity, spawnCountMultiplierComponent);
+                return;
+            
             case UpgradeValueTypes.Unlock:
                 _weaponCount++;
-                EventManager.OnWeaponCountSet(_weaponCount);
+                EventManager.OnWeaponCountSet?.Invoke(_weaponCount);
                 return;
             
             case UpgradeValueTypes.damage:
@@ -214,6 +279,10 @@ public partial class UpgradeApplierSystem : SystemBase
 
                 return;
             
+            case UpgradeValueTypes.UseMousePosition:
+                EntityManager.AddComponent<UseMousePosition>(entity);
+                return;
+            
         }
     }
 
@@ -257,10 +326,27 @@ public partial class UpgradeApplierSystem : SystemBase
                     return entity;
                 }
                 break;
+            
+            case UpgradeBaseType.BirdSpecialAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<BirdsSpecialAttackConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
                 
             case UpgradeBaseType.SwordSpecialAbility:
                 
                 foreach (var(_, entity)  in SystemAPI.Query<IceRingConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.HammerSpecialAbility:
+                foreach (var(_, entity)  in SystemAPI.Query<HammerSpecialConfig>()
                              .WithEntityAccess())
                 {
                     return entity;
@@ -276,6 +362,41 @@ public partial class UpgradeApplierSystem : SystemBase
                 }
                 break;
             
+            case UpgradeBaseType.SwordUltimateAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<SwordUltimateConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.BirdUltimateAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<BirdsUltimateAttackConfig>()
+                             .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.SwordComboAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<SwordComboAbilityConfig>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
+            
+            case UpgradeBaseType.HammerComboAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<ThunderBoltConfig>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
         }
 
         return default;

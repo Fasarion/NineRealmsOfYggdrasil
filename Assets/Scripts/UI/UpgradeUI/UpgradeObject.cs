@@ -33,6 +33,9 @@ public enum UpgradeValueTypes
     damage, //this is in % on player
     lightningchains,
     damageModifier,
+    spawnCount,
+    spawnDelay,
+    spawnCountMultiplier,
     
     // skill modifiers
     normalModifier,
@@ -46,8 +49,10 @@ public enum UpgradeValueTypes
     applyIce,
     
     Unlock,
+    UnlockSpecial,
     knockbackForce,
     hitStopDuration,
+    UseMousePosition,
 }
 
 public enum UpgradeBaseType
@@ -56,15 +61,20 @@ public enum UpgradeBaseType
     SwordSpecialAbility,
     SwordUltimateAbility,
     SwordPassiveAbility,
+    SwordComboAbility,
     
     Hammer,
     HammerSpecialAbility,
     HammerUltimateAbility,
     HammerPassiveAbility,
+    HammerComboAbility,
     
     Birds,
     Mead,
     Player,
+    BirdSpecialAbility,
+    BirdPassiveAbility,
+    BirdUltimateAbility,
 }
 
 [CreateAssetMenu(fileName = "UpgradeObject", menuName = "Upgrades/UpgradeObject" +

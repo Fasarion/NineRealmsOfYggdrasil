@@ -38,7 +38,6 @@ public partial struct SwordUltimateAttackSystem : ISystem
                 ultConfig.ValueRW.CurrentTime = -1000f; // hard reset timer
                 ultConfig.ValueRW.PrepareBeam = false;
             }
-
         }
         
 
@@ -57,6 +56,13 @@ public partial struct SwordUltimateAttackSystem : ISystem
             if (stoppedSwordAttack)
             {
                 ultConfig.ValueRW.CurrentAttackCount++;
+
+                var ultConfigEntity = SystemAPI.GetSingletonEntity<SwordUltimateConfig>();
+                var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(ultConfigEntity);
+                var spawnMultiplier = state.EntityManager.GetComponentData<SpawnCountMultiplier>(ultConfigEntity);
+
+                ultConfig.ValueRW.NumberOfScaledAttacks = spawnMultiplier.Value;
+                ultConfig.ValueRW.BeamsPerSwing = spawnCount.Value;
                 
                 if (ultConfig.ValueRO.CurrentAttackCount > ultConfig.ValueRO.NumberOfScaledAttacks)
                 {

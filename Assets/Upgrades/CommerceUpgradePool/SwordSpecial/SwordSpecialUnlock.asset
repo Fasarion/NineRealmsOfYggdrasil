@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: SwordSpecialUnlock
+  m_EditorClassIdentifier: 
+  upgradeTitle: Jotnar's Ring
+  upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
+  upgradeDescription: 'SPECIAL
+
+    Charge up a ring of ice with RIGHT MOUSE BUTTON'
+  upgrades:
+  - thingToUpgrade: 1
+    valueToUpgrade: 26
+    valueAmount: 0
+  startUnlocked: 1
+  upgradeIndex: 22
+  isUnlocked: 1
+  upgradesToLock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 411041592fea4f141b32155eb756fb3e, type: 2}

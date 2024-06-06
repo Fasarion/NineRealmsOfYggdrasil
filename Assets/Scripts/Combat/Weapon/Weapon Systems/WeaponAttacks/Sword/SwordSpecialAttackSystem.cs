@@ -29,6 +29,10 @@ public partial struct SwordSpecialAttackSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
+        var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
+        if (!state.EntityManager.HasComponent<IsUnlocked>(configEntity)) return;
+        
+        
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         
         if (attackCaller.ValueRO.SpecialChargeInfo.chargeState != ChargeState.Start)
@@ -48,8 +52,7 @@ public partial struct SwordSpecialAttackSystem : ISystem
         if (query.CalculateEntityCount() == 0)
         {
             var config = SystemAPI.GetSingleton<IceRingConfig>();
-        
-            var configEntity = SystemAPI.GetSingletonEntity<IceRingConfig>();
+            
             var abilityDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
             var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
             var swordDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(swordEntity);

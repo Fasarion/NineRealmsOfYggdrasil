@@ -4,6 +4,7 @@ using UnityEngine;
 
 public partial struct HandleAnimationSystem : ISystem
 {
+    
     public void OnUpdate(ref SystemState state)
     {
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -14,7 +15,11 @@ public partial struct HandleAnimationSystem : ISystem
                      .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
                      .WithEntityAccess())
         {
-            ecb.RemoveComponent<SkinnedMeshRendererReference>(entity);
+            if (rendererReference.Renderer && rendererReference.Renderer.gameObject)
+            {
+                Object.Destroy(rendererReference.Renderer.gameObject);
+                ecb.RemoveComponent<AnimatorReference>(entity);
+            }
         }
         
         // remove game objects when animator reference has been destroyed
@@ -23,8 +28,11 @@ public partial struct HandleAnimationSystem : ISystem
                      .WithNone<LocalTransform, GameObjectAnimatorPrefab>()
                      .WithEntityAccess())
         {
-            Object.Destroy(animatorReference.Animator.gameObject);
-            ecb.RemoveComponent<AnimatorReference>(entity);
+            if (animatorReference.Animator && animatorReference.Animator.gameObject)
+            {
+                Object.Destroy(animatorReference.Animator.gameObject);
+                ecb.RemoveComponent<AnimatorReference>(entity);
+            }
         }
         
 

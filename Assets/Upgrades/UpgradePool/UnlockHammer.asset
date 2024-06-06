@@ -12,16 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: UnlockHammer
   m_EditorClassIdentifier: 
-  upgradeTitle: Hammer lvl 2
-  upgradeSprite: {fileID: 21300000, guid: 48fe64cf6414894429d5ce05f0e727fc, type: 3}
-  upgradeDescription: unlock hammer
+  upgradeTitle: Hammer
+  upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
+  upgradeDescription: 'Unlocks a new weapon.
+
+    The hammer.'
   upgrades:
-  - thingToUpgrade: 4
-    valueToUpgrade: 22
+  - thingToUpgrade: 5
+    valueToUpgrade: 25
     valueAmount: 10
   startUnlocked: 0
   upgradeIndex: 0
   isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: f9e23fc5c72474c4bbad8816caab0412, type: 2}
+  - {fileID: 11400000, guid: 233a8a3a12fa94b40bae2f870d03991e, type: 2}
+  - {fileID: 11400000, guid: 33b2f62ac1dc8cf42a973256ff233f50, type: 2}
+  - {fileID: 11400000, guid: 147ecc614d5f4814ba41e230b17de056, type: 2}
+  - {fileID: 11400000, guid: 808d29640e539bf4cbe07676ab598a78, type: 2}

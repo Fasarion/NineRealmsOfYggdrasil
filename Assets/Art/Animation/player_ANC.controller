@@ -349,7 +349,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Ultimate - 01 Recover
-  m_Speed: 0.6
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4519435247546175581}
@@ -376,7 +376,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Special - Charge 03 (Blend)
-  m_Speed: 0.1
+  m_Speed: 0.116
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1405744564204629934}
@@ -1338,7 +1338,7 @@ MonoBehaviour:
   OnEnter:
     SpeedChangeOption: 1
     SpeedChangeFactor: 0.6
-    SpeedChangeDuration: 2
+    SpeedChangeDuration: 1000
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -1668,6 +1668,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5822662023931261026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 2
+  OnExit:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 0
 --- !u!1102 &-5695829769660276577
 AnimatorState:
   serializedVersion: 6
@@ -2127,6 +2147,7 @@ AnimatorState:
   - {fileID: -8617140444807090619}
   - {fileID: -1368754071134552831}
   - {fileID: -8221418442136315661}
+  - {fileID: 7982538251849936388}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2393,6 +2414,7 @@ AnimatorState:
   - {fileID: -3808153182384051613}
   - {fileID: 7615928565370930753}
   - {fileID: 8684129588317268551}
+  - {fileID: 1341534705122713641}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -2974,6 +2996,7 @@ AnimatorState:
   - {fileID: 1566514593593012709}
   - {fileID: -3347882060818103964}
   - {fileID: -8767731634255141864}
+  - {fileID: -1997836572352200692}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3209,6 +3232,26 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &-1997836572352200692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08859df891d5b8747a2388c8385d46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    SpeedChangeOption: 1
+    SpeedChangeFactor: 0.75
+    SpeedChangeDuration: 10
+  OnExit:
+    SpeedChangeOption: 0
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
 --- !u!114 &-1992994100357463867
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4331,7 +4374,7 @@ MonoBehaviour:
   OnEnter:
     SpeedChangeOption: 1
     SpeedChangeFactor: 0.6
-    SpeedChangeDuration: 2
+    SpeedChangeDuration: 1000
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -4419,7 +4462,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Special - Charge 02 (Blend)
-  m_Speed: 0.04
+  m_Speed: 0.0466
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5154822295052695705}
@@ -4737,6 +4780,7 @@ AnimatorState:
   - {fileID: 4938777758725446446}
   m_StateMachineBehaviours:
   - {fileID: -1945584826119911993}
+  - {fileID: -5822662023931261026}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4831,6 +4875,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &1341534705122713641
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 1
+  OnExit:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 0
 --- !u!114 &1386086715281205906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4943,7 +5007,7 @@ AnimatorStateMachine:
     m_Position: {x: 330, y: 550, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 779125008932010738}
-    m_Position: {x: 330, y: 420, z: 0}
+    m_Position: {x: 360, y: 420, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4604101698856809079}
     m_Position: {x: 510, y: 110, z: 0}
@@ -6274,7 +6338,7 @@ MonoBehaviour:
   OnEnter:
     SpeedChangeOption: 1
     SpeedChangeFactor: 0.6
-    SpeedChangeDuration: 2
+    SpeedChangeDuration: 1000
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -6609,7 +6673,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnEnter:
     SpeedChangeOption: 1
-    SpeedChangeFactor: 0.8
+    SpeedChangeFactor: 0.75
     SpeedChangeDuration: 10
   OnExit:
     SpeedChangeOption: 0
@@ -6675,6 +6739,7 @@ AnimatorState:
   - {fileID: 2906484257214994731}
   m_StateMachineBehaviours:
   - {fileID: 308569861926980642}
+  - {fileID: 6991883029141269178}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -6809,8 +6874,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OnEnter:
     SpeedChangeOption: 1
-    SpeedChangeFactor: 0.8
-    SpeedChangeDuration: 1
+    SpeedChangeFactor: 0.75
+    SpeedChangeDuration: 10
   OnExit:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
@@ -7276,7 +7341,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Ultimate - 02 Recover
-  m_Speed: 0.7
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7666709547406649919}
@@ -7295,6 +7360,26 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &6991883029141269178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08859df891d5b8747a2388c8385d46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    SpeedChangeOption: 0
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
+  OnExit:
+    SpeedChangeOption: 2
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
 --- !u!114 &7014087183317899602
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7542,7 +7627,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Special - Charge 01 (Blend)
-  m_Speed: 0.06
+  m_Speed: 0.07
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5029640031524501743}
@@ -7932,6 +8017,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &7982538251849936388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08859df891d5b8747a2388c8385d46ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    SpeedChangeOption: 2
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
+  OnExit:
+    SpeedChangeOption: 0
+    SpeedChangeFactor: 0
+    SpeedChangeDuration: 0
 --- !u!1102 &8139438391407616429
 AnimatorState:
   serializedVersion: 6

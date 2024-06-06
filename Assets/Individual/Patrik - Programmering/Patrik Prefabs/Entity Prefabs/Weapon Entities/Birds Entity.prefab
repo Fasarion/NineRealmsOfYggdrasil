@@ -25,7 +25,6 @@ GameObject:
   - component: {fileID: 7466375490567166985}
   - component: {fileID: 7111714050978543598}
   - component: {fileID: 6368701291099728357}
-  - component: {fileID: 1857093719201326346}
   m_Layer: 0
   m_Name: Birds Entity
   m_TagString: Untagged
@@ -271,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad64232fc8594fa8bc3d39dddf771ca6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  knockBackForce: 5
+  knockBackForce: 2
   KnockDirection: 0
 --- !u!114 &5666488964864685074
 MonoBehaviour:
@@ -319,7 +318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11c2bd8a3be71554f851be3db06bc90b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energyToFill: 1
+  energyToFill: 100
 --- !u!114 &2498903212905155995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -443,22 +442,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 7824363987953266496, guid: 3a00998723f2fe948a3de14e20caed47,
     type: 3}
---- !u!114 &1857093719201326346
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8896407907922882422}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3432d5cce846d3a4e8df22714c5a93cd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cachedSpeed: 0
-  slowPercentage: 0.7
-  isInitialized: 0
-  slowTimer: 0
-  slowDuration: 1
-  weaponType: 3
-  isSlowing: 0

@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 1460681271371317403}
   - component: {fileID: 7427665774132536621}
   - component: {fileID: -4255106074282190939}
+  - component: {fileID: -3797486347566703552}
   m_Layer: 0
   m_Name: IceRingProjectile
   m_TagString: Untagged
@@ -85,6 +86,7 @@ MonoBehaviour:
   gameObjectPrefab: {fileID: 2288991140442585764, guid: f72c68c66f9ac6d4f81a5248052265a1,
     type: 3}
   followsEntity: 1
+  spawnAtEntity: 0
 --- !u!114 &4591225800375533268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,3 +168,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1425c7cdb7e20034f9851288d9e51e5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3797486347566703552
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837703229795121589}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609fc4240244d7f4589cf2a488be8f18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stacksPerHit: 1

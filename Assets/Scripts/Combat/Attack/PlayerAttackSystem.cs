@@ -31,25 +31,52 @@ namespace Patrik
 
         protected override void OnUpdate()
         {
-            if (!hasSetUpWeaponManager)
+            var ecb = new EntityCommandBuffer(Allocator.Temp);
+
+            foreach (var (playerTag, entity) in SystemAPI.Query<PlayerTag>().WithNone<WeaponsHaveBeenSetup>().WithEntityAccess())
             {
+                _weaponManager = PlayerWeaponManagerBehaviour.Instance;
+                    
                 if (_weaponManager == null)
                 {
-                    _weaponManager = PlayerWeaponManagerBehaviour.Instance;
-                    
-                    if (_weaponManager == null)
-                    {
-                        // Missing Player Weapon Handler, attacks not possible.;
-                        return;
-                    }
-
-                    DisableAllWeapons();
-                    SubscribeToEvents();
-                    hasSetUpWeaponManager = true;
-
-                    _weaponManager.SetupWeapons();
+                    // Missing Player Weapon Handler, attacks not possible.;
+                    return;
                 }
+
+                
+                ecb.AddComponent<WeaponsHaveBeenSetup>(entity);
+                
+                
+
+                DisableAllWeapons();
+                SubscribeToEvents();
+                hasSetUpWeaponManager = true;
+
+                _weaponManager.SetupWeapons();
             }
+            
+            ecb.Playback(EntityManager);
+            ecb.Dispose();
+            
+            // if (!hasSetUpWeaponManager)
+            // {
+            //     if (_weaponManager == null)
+            //     {
+            //         _weaponManager = PlayerWeaponManagerBehaviour.Instance;
+            //         
+            //         if (_weaponManager == null)
+            //         {
+            //             // Missing Player Weapon Handler, attacks not possible.;
+            //             return;
+            //         }
+            //
+            //         DisableAllWeapons();
+            //         SubscribeToEvents();
+            //         hasSetUpWeaponManager = true;
+            //
+            //         _weaponManager.SetupWeapons();
+            //     }
+            // }
 
             bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
             if (gameIsPaused) return;
@@ -308,6 +335,7 @@ namespace Patrik
         {
             if (newData.AttackType != lastData.AttackType) return true;
             if (newData.ComboCounter != lastData.ComboCounter) return true;
+            if (newData.WeaponType != lastData.WeaponType) return true;
 
             return false;
         }
@@ -489,6 +517,16 @@ namespace Patrik
 
         private void HandleWeaponInput()
         {
+            // // hammer upgrade test
+            // if (Input.GetKeyDown(KeyCode.K))
+            // {
+            //     Debug.Log("Test upgrade");
+            //
+            //     var hammerEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
+            //     EntityManager.AddComponent<IsUnlocked>(hammerEntity);
+            // }
+            
+            
             if (!_weaponManager)
             {
                 // No weapon manager found, can't read weapon inputs.
@@ -507,15 +545,22 @@ namespace Patrik
 
             WeaponType currentWeapon = attackCaller.ValueRO.ActiveAttackData.WeaponType;
             
+            
+
            bool canAttack = true;
+
 
            // reset ult flag
            EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, false);
            
+           bool ultUnlocked = UltAttackUnlocked(currentWeapon);
+
+           
+           
            // Handle ultimate perform
             if (attackCaller.ValueRO.PrepareUltimateInfo.Perform 
                 && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
-                && canAttack)
+                && canAttack && ultUnlocked)
             {
                 EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Ultimate, true);
                 //_weaponManager.PrepareUltimateAttack();
@@ -526,7 +571,7 @@ namespace Patrik
             // Handle ultimate prepare
             else if (attackCaller.ValueRO.PrepareUltimateInfo.HasPreparedThisFrame 
                      && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Ultimate, currentWeapon)
-                     && canAttack)
+                     && canAttack && ultUnlocked)
             {
                 _weaponManager.PrepareUltimateAttack();
                 canAttack = false;
@@ -540,7 +585,8 @@ namespace Patrik
             var specialAttackInput = SystemAPI.GetSingleton<PlayerSpecialAttackInput>();
             bool specIsHeld = specialAttackInput.IsHeld;
 
-            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon);
+            bool canSpecialAttack = canAttack && specIsHeld && !attackCaller.ValueRO.BusyAttackInfo.IsBusy(AttackType.Special, currentWeapon)
+                && SpecialAttackUnlocked(currentWeapon);
             EventManager.OnUpdateAttackAnimation?.Invoke(AttackType.Special, canSpecialAttack);
 
             if (canSpecialAttack)
@@ -588,7 +634,76 @@ namespace Patrik
                _weaponManager.ReleaseSpecial();
            }
         }
+
+        // private bool AttackUnlocked(WeaponType weaponType, AttackType attackType)
+        // {
+        //     switch (attackType)
+        //     {
+        //         case AttackType.Special:
+        //             return SpecialAttackUnlocked(weaponType);
+        //         
+        //         case AttackType.Ultimate:
+        //             return UltAttackUnlocked(weaponType);
+        //     }
+        //
+        //     // assume every other attack is unlocked
+        //     return true;
+        // }
         
+        private bool CheckForUnlock<T>(ComponentLookup<IsUnlocked> lookup) where T : unmanaged, IComponentData
+        {
+            bool entityExists = SystemAPI.TryGetSingletonEntity<T>(out Entity swordSpecial);
+            bool lookupUnlock = entityExists && lookup.HasComponent(swordSpecial);
+
+            return lookupUnlock;
+        }
+        
+        private bool CheckForUnlock<T>() where T : unmanaged, IComponentData
+        {
+            bool entityExists = SystemAPI.TryGetSingletonEntity<T>(out Entity swordSpecial);
+            bool lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(swordSpecial);
+
+            return lookupUnlock;
+        }
+
+        
+        private bool SpecialAttackUnlocked(WeaponType weaponType)
+        {
+            //var unlockLookup = SystemAPI.GetComponentLookup<IsUnlocked>();
+            
+            switch (weaponType)
+            {
+                case WeaponType.Sword:
+                    return CheckForUnlock<IceRingConfig>();
+
+                case WeaponType.Hammer:
+                    return CheckForUnlock<HammerSpecialConfig>();
+                
+                case WeaponType.Birds:
+                    return CheckForUnlock<BirdsSpecialAttackConfig>();
+
+            }
+
+            return false;
+        }
+
+        private bool UltAttackUnlocked(WeaponType weaponType)
+        {
+            switch (weaponType)
+            {
+                case WeaponType.Sword:
+                    return CheckForUnlock<SwordUltimateConfig>();
+                
+                case WeaponType.Hammer:
+                    return CheckForUnlock<ThunderStrikeConfig>();
+
+                case WeaponType.Birds:
+                    return CheckForUnlock<BirdsUltimateAttackConfig>();
+            }
+
+            return false;
+        }
+
         protected override void OnStopRunning()
         {
             UnsubscribeFromAttackEvents();

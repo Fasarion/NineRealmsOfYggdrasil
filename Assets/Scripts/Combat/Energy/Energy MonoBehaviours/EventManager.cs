@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Patrik;
 using Unity.Entities;
+using UnityEngine;
 using UnityEngine.Events;
 
 public static class EventManager
@@ -57,6 +58,13 @@ public static class EventManager
 
     public static UnityAction<int> OnWeaponCountSet;
 
+    public static UnityAction<WeaponType> OnSpecialAttackUnlocked;
+    
+    public static UnityAction OnObjectiveReached;
+
+    public static UnityAction<MenuButtonSelection> OnSceneChange;
+
+    public static UnityAction<Vector3> OnPlayerMoveInput;
 }
 
 public struct PlayerHealthData

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1906484001275493266}
   - component: {fileID: 2721724589688101465}
   - component: {fileID: 1927580293839562194}
+  - component: {fileID: 3931799476243726285}
   m_Layer: 0
   m_Name: Bird Ultimate Config
   m_TagString: Untagged
@@ -52,12 +53,19 @@ MonoBehaviour:
     x: 0
     y: 3
     z: 0
-  timeBetweenSuctions: 0.2
+  timeBetweenSuctions: 0.5
   tornadoRadius: 9
-  angularSpeed: 2
-  birdCount: 2
+  angularSpeed: 1
   lifeTime: 4
-  circleRadius: 8
+  circleRadius: 6
+  tornadoSound:
+    eventCategoryType: 0
+    weaponType: 0
+    enemyTyping: 0
+    audioEventType: 0
+    attackType: 0
+    environmentType: 0
+  useMouse: 0
 --- !u!114 &2721724589688101465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +94,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   WeaponType: 3
   AttackType: 3
+--- !u!114 &3931799476243726285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998664864989752839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a09f0ec589c8a499f16c3e391d5f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 2

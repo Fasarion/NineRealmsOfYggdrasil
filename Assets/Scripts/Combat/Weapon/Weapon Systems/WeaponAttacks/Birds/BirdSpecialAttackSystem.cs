@@ -35,10 +35,14 @@ public partial struct BirdSpecialAttackSystem : ISystem
     [BurstCompile]
     public void OnUpdate(ref SystemState state)
     {
-        var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<BirdsSpecialAttackConfig>();
         var configEntity = SystemAPI.GetSingletonEntity<BirdsSpecialAttackConfig>();
+        if (!state.EntityManager.HasComponent<IsUnlocked>(configEntity)) return;
+        var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
+
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+
+
 
         var chargeInfo = attackCaller.SpecialChargeInfo;
         if (chargeInfo.ChargingWeapon != WeaponType.Birds) return;
@@ -68,54 +72,72 @@ public partial struct BirdSpecialAttackSystem : ISystem
         {
             config.ValueRW.CenterPointEntity = playerEntity;
             
-            // Spawn birds evenly spaced around player
-            for (int i = 0; i < config.ValueRO.BirdCount; i++)
+            var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+            var layerCount = state.EntityManager.GetComponentData<SpawnCountMultiplier>(configEntity);
+            
+            config.ValueRW.BirdCount = spawnCount.Value;
+            config.ValueRW.BirdLayers = layerCount.Value;
+
+            for (int layer = 0; layer < config.ValueRW.BirdLayers; layer++)
             {
-                // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
-                foreach (var (spawner, weapon, entity) in SystemAPI
-                    .Query<ProjectileSpawnerComponent, WeaponComponent>()
-                    .WithAll<BirdsComponent>()
-                    .WithEntityAccess())
+                float radius = config.ValueRO.InitialRadius + config.ValueRO.BirdLayersRadiusIncrease * layer;
+                
+                // Spawn birds evenly spaced around player
+                for (int birdIndex = 0; birdIndex < config.ValueRO.BirdCount; birdIndex++)
                 {
-                    // instantiate bird
-                    var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
-                    
-                    float angle = math.radians(config.ValueRO.AngleStep * i);
-                    
-                    // set owner data
-                    state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
+                    // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
+                    foreach (var (spawner, weapon, entity) in SystemAPI
+                        .Query<ProjectileSpawnerComponent, WeaponComponent>()
+                        .WithAll<BirdsComponent>()
+                        .WithEntityAccess())
                     {
-                        OwnerEntity = entity,
-                        OwnerWasActive = weapon.InActiveState
-                    });
+                        // instantiate bird
+                        var birdProjectile = state.EntityManager.Instantiate(spawner.Projectile);
 
-                    // disable auto move
-                    state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
-                    
-                    // set special movement
-                    state.EntityManager.SetComponentEnabled<CircularMovementComponent>(birdProjectile, true);
-                    state.EntityManager.SetComponentData(birdProjectile, new CircularMovementComponent
-                    {
-                        CurrentAngle = angle,
-                        Radius = config.ValueRO.InitialRadius,
-                        AngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
-                        BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
-                        CenterPointEntity = config.ValueRO.CenterPointEntity
-                    });
+                        float angle = math.radians(config.ValueRO.AngleStep * birdIndex);
+                        
+                        // set owner data
+                        state.EntityManager.SetComponentData(birdProjectile, new HasOwnerWeapon
+                        {
+                            OwnerEntity = entity,
+                            OwnerWasActive = weapon.InActiveState
+                        });
 
-                    var cachedDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity).Value.DamageValue;
+                        // disable auto move
+                        state.EntityManager.SetComponentEnabled<AutoMoveComponent>(birdProjectile, false);
+
+                        float angularSpeedDecrease = math.pow(config.ValueRO.SpeedChangePerLayer, layer);
+                        
+                        // set special movement
+                        state.EntityManager.SetComponentEnabled<CircularMovementComponent>(birdProjectile, true);
+                        state.EntityManager.SetComponentData(birdProjectile, new CircularMovementComponent
+                        {
+                            CurrentAngle = angle,
+                            Radius = radius,
+                            AngularSpeed = config.ValueRO.AngularSpeedDuringCharge * angularSpeedDecrease,
+                            BaseAngularSpeed = config.ValueRO.AngularSpeedDuringCharge,
+                            CenterPointEntity = config.ValueRO.CenterPointEntity,
+                            Layer = layer,
+                            CounterClockWiseMovement = layer % 2 == 0,
+                        });
+
+                        var cachedDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity).Value.DamageValue;
+                        
+                        // update stats
+                        ecb.AddComponent(birdProjectile, new UpdateStatsComponent
+                        {
+                            EntityToTransferStatsFrom = configEntity
+                        });
+                        
+                    }
                     
-                    // update stats
-                    ecb.AddComponent(birdProjectile, new UpdateStatsComponent
-                    {
-                        EntityToTransferStatsFrom = configEntity
-                    });
                     
                 }
-                
                 config.ValueRW.HasReleased = false;
                 config.ValueRW.InReleaseState = false;
             }
+            
+            
         }
         
         // During Charge Up
@@ -132,7 +154,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
                 .Query<RefRW<CircularMovementComponent>>()
                 .WithEntityAccess())
             {
-                birdMovement.ValueRW.Radius = currentRadius;
+                birdMovement.ValueRW.Radius = currentRadius + birdMovement.ValueRO.Layer * config.ValueRO.BirdLayersRadiusIncrease;
             }
 
             // On New Charge Level
@@ -150,7 +172,7 @@ public partial struct BirdSpecialAttackSystem : ISystem
                     .Query<RefRW<CircularMovementComponent>>()
                     .WithEntityAccess())
                 {
-                    birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier;
+                    birdMovement.ValueRW.AngularSpeed = birdMovement.ValueRO.BaseAngularSpeed * speedModifier * math.pow(config.ValueRO.SpeedChangePerLayer, birdMovement.ValueRO.Layer);
                     
                     // update stats
                     ecb.AddComponent(entity, new UpdateStatsComponent

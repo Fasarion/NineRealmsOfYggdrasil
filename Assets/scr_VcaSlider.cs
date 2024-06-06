@@ -19,6 +19,7 @@ public enum VCAName
     {
         // Vi deklarerar en variabel av vår enum som vi skapade tidigare så att vi kommer åt den i Unity
         public VCAName vcaName;
+        public VolumeDataScriptableObject volumeDataScriptableObject;
 
         // Vi deklarerar en variabel som ska innehålla den specifika slidern i spelets ljudinställningar (options)
         [SerializeField] private Slider m_Slider;
@@ -29,6 +30,8 @@ public enum VCAName
         private string musicPath = "vca:/Music";
         private string sfxPath = "vca:/SFX";
         private string masterPath = "vca:/Master";
+        
+        //public 
 
         void Awake()
         {
@@ -45,11 +48,14 @@ public enum VCAName
                     vca = RuntimeManager.GetVCA(masterPath);
                     break;
             }
+            
 
             //Ta reda på det nuvarande värdet på denna VCA.
-            
-            float value;
-            vca.getVolume(out value);
+
+            float value = volumeDataScriptableObject.LoadVolume(vcaName);
+            //vca.getVolume(out value);
+
+            vca.setVolume(value);
             
             //Sätt sedan det nuvarande värdet på VCAn som värde på slidern.
             m_Slider.value = (value);
@@ -60,8 +66,11 @@ public enum VCAName
 
         void SliderValueChange(float value)
         {
+            
             //Sätt volymen till det värde som slidern har.
+            volumeDataScriptableObject.SaveVolume(value, vcaName);
             vca.setVolume(value);
+            
         }
     }
 

@@ -13,6 +13,7 @@ public class WeaponAudio : ScriptableObject
     [Header("Sword")] 
     public EventReference swordSwing;
     public EventReference swordImpact;
+    public EventReference swordPassiveImpact;
     public EventReference iceChargeImpact;
     public EventReference swordUltimate;
     private EventInstance _swordInstance;
@@ -21,6 +22,7 @@ public class WeaponAudio : ScriptableObject
     [Header("Hammer")]
     public EventReference hammerSwing;
     public EventReference hammerImpact;
+    public EventReference hammerPassiveImpact;
     public EventReference hammerThrow;
     public EventReference hammerThrowImpact;
     public EventReference lightningStrike;
@@ -89,9 +91,34 @@ public class WeaponAudio : ScriptableObject
                 UltimateAttackAudio((int)audioData.audioEventType, audioData);
                 break;
             }
+
+            case 4: // passive attacks
+            {
+                PassiveAttackAudio((int)audioData.audioEventType, audioData);
+                break;
+            }
         }
     }
-    
+
+    private void PassiveAttackAudio(int audioEvent, AudioData audioData)
+    {
+        switch (audioEvent)
+        {
+            case 1: 
+            {
+                //NotInUse, handled elsewhere
+                break;
+            }
+            case 2:
+            {
+                PlayPassiveImpactAudio((int)audioData.weaponType);
+                break;
+            }
+        }
+    }
+
+   
+
     //Directs Normal data to correct event (use, impact, charge)
     private void NormalAttackAudio(int audioEvent, AudioData audioData)
     {
@@ -139,6 +166,23 @@ public class WeaponAudio : ScriptableObject
             case 2: //onImpact
             {
                 PlayUltimateImpactAudio((int)audioData.weaponType);
+                break;
+            }
+        }
+    }
+    
+    private void PlayPassiveImpactAudio(int weapon)
+    {
+        switch (weapon)
+        {
+            case 1: //Svärd
+            {
+                RuntimeManager.PlayOneShot(swordPassiveImpact);
+                break;
+            }
+            case 2: //Hammare
+            {
+                RuntimeManager.PlayOneShot(hammerPassiveImpact);
                 break;
             }
         }

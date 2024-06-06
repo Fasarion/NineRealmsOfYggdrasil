@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
+  m_Name: HammerSpecialUpgrade_1
+  m_EditorClassIdentifier: 
+  upgradeTitle: "Mj\xF6lnir"
+  upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
+  upgradeDescription: "SPECIAL\nYour hammer throw launches 2 additional hammers \n"
+  upgrades:
+  - thingToUpgrade: 6
+    valueToUpgrade: 15
+    valueAmount: 2
+  startUnlocked: 0
+  upgradeIndex: 13
+  isUnlocked: 1
+  upgradesToLock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 37d9ad21fd196174bbf60386329a1b79, type: 2}

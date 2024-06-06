@@ -44,6 +44,21 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1241454776382192550, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241454776382192550, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241454776382192550, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1241454776382192550, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -90,6 +105,11 @@ PrefabInstance:
     - target: {fileID: 1241454776382192550, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2457381261264463122, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: m_GravityFactor
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4163681344479688090, guid: 8c0c34ffce5617749ad66e43edc83939,
@@ -222,6 +242,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer Entity
       objectReference: {fileID: 0}
+    - target: {fileID: 8931064742681460953, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: skillModifier.Ultimate
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -330,11 +355,11 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8261443476895494700, guid: f14416850a4f08e4e9e8370655f3495e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 3372213329053059802}
+      addedObject: {fileID: 4800628189721429173}
     - targetCorrespondingSourceObject: {fileID: 8261443476895494700, guid: f14416850a4f08e4e9e8370655f3495e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 4800628189721429173}
+      addedObject: {fileID: 6922426175850247765}
   m_SourcePrefab: {fileID: 100100000, guid: f14416850a4f08e4e9e8370655f3495e, type: 3}
 --- !u!4 &2759361216166142621 stripped
 Transform:
@@ -401,23 +426,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damageModifier: 0
---- !u!114 &3372213329053059802
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6221755797999946281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947779016d2c49e79d7e948ef6670b45, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillModifier:
-    Normal: 1
-    Special: 1
-    Ultimate: 1
-    Passive: 1
 --- !u!114 &4800628189721429173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -431,6 +439,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+--- !u!114 &6922426175850247765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6221755797999946281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8aa6912b0dc6d5488a213549a39769f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasRecorded: 0
+  recordingTime: 1
+  currentRecordingTime: 0
 --- !u!1001 &5827236863752051187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -493,11 +516,6 @@ PrefabInstance:
         type: 3}
       propertyPath: activeFillPerHit
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259606365192864958, guid: d62cf5fe2d10757458ac3f6445d26fdf,
-        type: 3}
-      propertyPath: energyToFill
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6378360401926587234, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}

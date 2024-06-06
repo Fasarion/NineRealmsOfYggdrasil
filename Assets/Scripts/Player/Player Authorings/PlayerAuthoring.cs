@@ -16,6 +16,8 @@ namespace Player
                 AddComponent<PlayerPositionSingleton>(entity);
                 AddComponent<PlayerRotationSingleton>(entity);
                 
+               // AddComponent<HealthHasBeenSet>(entity);
+                
                 AddComponent<CanMoveFromInput>(entity);
                 SetComponentEnabled<CanMoveFromInput>(entity, true);
                 
@@ -31,6 +33,9 @@ namespace Player
     public struct PlayerTag : IComponentData { }
 
     public struct PlayerDeath : IComponentData { }
+
+    public struct HealthHasBeenSet : IComponentData { }
+    public struct WeaponsHaveBeenSetup : IComponentData { }
 
 }
 

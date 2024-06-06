@@ -3,10 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DashUiManager : MonoBehaviour
 {
     [SerializeField] private DashUIIconBehaviour dashIconPrefab;
+    [SerializeField] private Transform dashIconsParent;
+    [SerializeField] private Image inputIcon;
+    
     private List<DashUIIconBehaviour> dashIcons = new List<DashUIIconBehaviour>();
 
     private void OnEnable()
@@ -26,7 +30,7 @@ public class DashUiManager : MonoBehaviour
             // Add more dashes
             if (dashIcons.Count < dashBuffer.Length)
             {
-                var newDashIcon = Instantiate(dashIconPrefab, transform);
+                var newDashIcon = Instantiate(dashIconPrefab, dashIconsParent);
                 dashIcons.Add(newDashIcon);
             }
             // remove dashes
@@ -40,11 +44,24 @@ public class DashUiManager : MonoBehaviour
             }
         }
         
-        // update dashes
+        // update dash icons
         for (int i = 0; i < dashIcons.Count; i++)
         {
             int index = i;
             dashIcons[index].UpdateInfo(dashBuffer[index]);
         }
+        
+        // update input icon
+        bool hasDash = false;
+        foreach (var bufferElement in dashBuffer)
+        {
+            if (bufferElement.Value.Ready)
+            {
+                hasDash = true;
+                break;
+            }
+        }
+        
+        inputIcon.gameObject.SetActive(hasDash);
     }
 }

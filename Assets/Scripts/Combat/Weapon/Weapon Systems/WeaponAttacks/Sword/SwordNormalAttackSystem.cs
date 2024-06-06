@@ -10,13 +10,14 @@ using UnityEngine;
 [BurstCompile]
 public partial struct SwordNormalAttackSystem : ISystem
 {
-    private bool hasRecorded;
+   // private bool hasRecorded;
     private int attackType;
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<SwordComboAbilityConfig>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<WeaponAttackCaller>();
+        state.RequireForUpdate<GameUnpaused>();
     }
 
     public void OnUpdate(ref SystemState state)
@@ -29,7 +30,11 @@ public partial struct SwordNormalAttackSystem : ISystem
         {
             if (attackType == 1)
             {
-                var projectile = state.EntityManager.Instantiate(config.SwordComboAbilityPrefab);
+                var configEntity = SystemAPI.GetSingletonEntity<SwordComboAbilityConfig>();
+                if (state.EntityManager.HasComponent<IsUnlocked>(configEntity))
+                {
+                    state.EntityManager.Instantiate(config.SwordComboAbilityPrefab);
+                }
             }
             else
             {
@@ -45,9 +50,11 @@ public partial struct SwordNormalAttackSystem : ISystem
             else attackType = 0;
             
             attackCaller.ValueRW.ActiveAttackData.ShouldStart = false;
-            if (!hasRecorded)
+            if (!config.HasRecorded)
             {
-                hasRecorded = true;
+                var configRW = SystemAPI.GetSingletonRW<SwordComboAbilityConfig>();
+                
+                configRW.ValueRW.HasRecorded = true;
                 var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
                 state.EntityManager.AddComponent<ShouldRecordSwordTrajectoryComponent>(swordEntity);
             }

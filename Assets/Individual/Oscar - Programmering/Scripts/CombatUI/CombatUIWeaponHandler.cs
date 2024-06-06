@@ -17,6 +17,8 @@ public class CombatUIWeaponHandler : ElementMVC
     public WeaponSetupData leftInactiveWeaponSetupData;
     public WeaponType currentRightInactiveWeapon;
     public WeaponSetupData rightInactiveWeaponSetupData;
+    public List<GameObject> inactiveWeaponSymbols;
+    public GameObject specialAttackSymbol;
 
     public static Action<List<WeaponSetupData>> onCurrentWeaponUpdated;
     public static Action<List<WeaponSetupData>> onStartingWeaponSet;
@@ -28,6 +30,9 @@ public class CombatUIWeaponHandler : ElementMVC
     //private WeaponType meadWeapon = WeaponType.Mead;
     //I am missing a class to reference to get the current types of weapons from the player
     private List<WeaponSetupData> currentPlayerWeapons;
+
+    private Dictionary<WeaponType, bool> specialAttackUnlockedDictionary;
+
 
     private bool currentWeaponSet;
     private bool currentLeftWeaponSet;
@@ -44,7 +49,12 @@ public class CombatUIWeaponHandler : ElementMVC
     // Start is called before the first frame update
     void Start()
     {
- 
+        specialAttackUnlockedDictionary = new Dictionary<WeaponType, bool>();
+        
+        specialAttackUnlockedDictionary.TryAdd(WeaponType.Sword, false);
+        specialAttackUnlockedDictionary.TryAdd(WeaponType.Hammer, false);
+        specialAttackUnlockedDictionary.TryAdd(WeaponType.Birds, false);
+        
         //currentPlayerWeapons.Add(hammerWeapon);
         //currentPlayerWeapons.Add(swordWeapon);
         //currentPlayerWeapons.Add(birdWeapon);
@@ -53,7 +63,8 @@ public class CombatUIWeaponHandler : ElementMVC
     public void OnEnable()
     {
         EventManager.OnWeaponSwitch += OnWeaponSwitched;
-        EventManager.OnAllWeaponsSetup += OnSetupWeapon;
+        EventManager.OnAllWeaponsSetup += OnAllWeaponsSetup;
+        EventManager.OnSpecialAttackUnlocked += OnSpecialAttackUnlocked;
     }
 
    
@@ -61,15 +72,63 @@ public class CombatUIWeaponHandler : ElementMVC
     public void OnDisable()
     {
         EventManager.OnWeaponSwitch -= OnWeaponSwitched;
-        EventManager.OnAllWeaponsSetup -= OnSetupWeapon;
+        EventManager.OnAllWeaponsSetup -= OnAllWeaponsSetup;
+        EventManager.OnSpecialAttackUnlocked -= OnSpecialAttackUnlocked;
     }
 
-    private void OnSetupWeapon(List<WeaponSetupData> allWeapons)
+    public void OnSpecialAttackUnlocked(WeaponType weaponType)
+    {
+        specialAttackUnlockedDictionary[weaponType] = true;
+        
+        specialAttackUnlockedDictionary.TryGetValue(currentPlayerWeapons[0].WeaponType, out bool value);
+        if (value)
+        {
+            specialAttackSymbol.SetActive(true);
+        }
+        else
+        {
+            specialAttackSymbol.SetActive(false);
+        }
+        /*for (int i = 0; i < currentPlayerWeapons.Count; i++)
+        {
+            if (weaponType == currentPlayerWeapons[i].WeaponType)
+            {
+                
+            }
+        }*/
+    }
+
+    private void OnAllWeaponsSetup(List<WeaponSetupData> allWeapons)
     {
         //currentPlayerWeapons = new List<WeaponBehaviour>();
         currentPlayerWeapons = allWeapons;
-      
         
+       
+        if (currentPlayerWeapons.Count < 2)
+        {
+            for (int i = 0; i < inactiveWeaponSymbols.Count; i++)
+            {
+                inactiveWeaponSymbols[i].SetActive(false);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < inactiveWeaponSymbols.Count; i++)
+            {
+                inactiveWeaponSymbols[i].SetActive(true);
+            }
+        }
+        
+        specialAttackUnlockedDictionary.TryGetValue(currentPlayerWeapons[0].WeaponType, out bool value);
+        if (value)
+        {
+            specialAttackSymbol.SetActive(true);
+        }
+        else
+        {
+            specialAttackSymbol.SetActive(false);
+        }
+
         //This does not account for the right inactive weapon
         /*if (data.Active)
         {
@@ -149,6 +208,17 @@ public class CombatUIWeaponHandler : ElementMVC
 
             //currentPlayerWeapons[currentPlayerWeapons.Count - 1] = first;
         }*/
+
+        specialAttackUnlockedDictionary.TryGetValue(currentPlayerWeapons[0].WeaponType, out bool value);
+        if (value)
+        {
+            specialAttackSymbol.SetActive(true);
+        }
+        else
+        {
+            specialAttackSymbol.SetActive(false);
+        }
+        
         UpdateCurrentWeapon(currentPlayerWeapons);
         //UpdateCurrentWeapon();
         //Superhacky, but it should work

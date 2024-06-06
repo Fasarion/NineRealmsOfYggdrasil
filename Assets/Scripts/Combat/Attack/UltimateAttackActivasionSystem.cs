@@ -93,7 +93,7 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         
         if (!weaponUsesTargeting)
         {
-            if (ultimateAttackKeyPressed && !isPreparingAttack && !isBusy)
+            if (ultimateAttackKeyPressed && !isPreparingAttack && !isBusy && UltUnlocked(ref state, attackCaller.ValueRO.ActiveAttackData.WeaponType))
             {
                 state.EntityManager.SetComponentEnabled<ResetEnergyTag>(weaponEntity, true);
                 attackCaller.ValueRW.PrepareUltimateInfo.Perform = true;
@@ -111,7 +111,8 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         }
         
         // Instantiate target
-        if (ultimateAttackKeyPressed && !hasPreparedUltimate && !isPreparingAttack && !isBusy)
+        if (ultimateAttackKeyPressed && !hasPreparedUltimate && !isPreparingAttack && !isBusy 
+            && UltUnlocked(ref state, attackCaller.ValueRO.ActiveAttackData.WeaponType))
         {
             var playerTargetPrefab = SystemAPI.GetSingleton<PlayerTargetingPrefab>();
             state.EntityManager.Instantiate(playerTargetPrefab.Value);
@@ -151,4 +152,41 @@ public partial struct UltimateAttackActivasionSystem : ISystem
         attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         attackCaller.ValueRW.PrepareUltimateInfo.IsPreparing = hasPreparedUltimate;
     }
+
+    private bool UltUnlocked(ref SystemState state, WeaponType weaponType)
+    {
+        bool entityExists;
+        bool lookupUnlock;
+        
+        switch (weaponType)
+        {
+            case WeaponType.Sword:
+                 entityExists = SystemAPI.TryGetSingletonEntity<SwordUltimateConfig>(out Entity swordSpecial);
+                 lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(swordSpecial);
+
+                return lookupUnlock;
+            
+            case WeaponType.Hammer:
+                entityExists = SystemAPI.TryGetSingletonEntity<ThunderStrikeConfig>(out Entity hammer);
+                lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(hammer);
+                
+                return lookupUnlock;
+
+            case WeaponType.Birds:
+                entityExists = SystemAPI.TryGetSingletonEntity<BirdsUltimateAttackConfig>(out Entity birds);
+                lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(birds);
+                
+                return lookupUnlock;
+        }
+
+        return false;
+    }
+    
+    // private bool CheckForUnlock<T>(ref SystemState state) where T : unmanaged, IComponentData
+    // {
+    //     bool entityExists = SystemAPI.TryGetSingletonEntity<T>(out Entity swordSpecial);
+    //     bool lookupUnlock = entityExists && SystemAPI.HasComponent<IsUnlocked>(swordSpecial);
+    //
+    //     return lookupUnlock;
+    // }
 }

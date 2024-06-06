@@ -15,14 +15,16 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private float timeBetweenSuctions = 0.3f;
     [Tooltip("Radius of the tornado.")]
     [SerializeField] private float tornadoRadius = 2f;
+    [Tooltip("The tornado's final damage will be modified by this amount.")]
+    [SerializeField] private float tornadoDamageModifier = 0.2f;
     
     [Header("Angular speed")]
     [Tooltip("How fast the birds spin (revolutions per second).")]
     [SerializeField] private float angularSpeed = 2f; 
     
     [Header("Bird Settings")]
-    [Tooltip("How many birds that are spawned in this attack.")]
-    [SerializeField] private int birdCount = 2;
+    // [Tooltip("How many birds that are spawned in this attack.")]
+    // [SerializeField] private int birdCount = 2;
     [Tooltip("How long this attack lasts.")]
     [SerializeField] private float lifeTime = 2f;
     
@@ -32,15 +34,17 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
 
     [Header("Audio")] 
     [SerializeField] private AudioData tornadoSound;
+
+    [SerializeField] private bool useMouse;
     
-    private void OnValidate()
-    {
-        if (birdCount <= 0)
-        {
-            birdCount = 1;
-            Debug.LogWarning("Bird Count must be positive.");
-        }
-    }
+    // private void OnValidate()
+    // {
+    //     if (birdCount <= 0)
+    //     {
+    //         birdCount = 1;
+    //         Debug.LogWarning("Bird Count must be positive.");
+    //     }
+    // }
 
     class Baker : Baker<BirdUltimateConfigAuthoring>
     {
@@ -53,16 +57,18 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 TornadoOffset = authoring.tornadoOffset,
                 TimeBetweenSuctions = authoring.timeBetweenSuctions,
                 TornadoRadius = authoring.tornadoRadius,
+                TornadoDamageMod = authoring.tornadoDamageModifier,
                 
-                BirdCount = authoring.birdCount,
+               // BirdCount = authoring.birdCount,
                 
                 Radius = authoring.circleRadius,
                 
-                AngleStep = 360f / authoring.birdCount,
+                //AngleStep = 360f / authoring.birdCount,
                 AngularSpeed = authoring.angularSpeed * math.PI * 2,
                 LifeTime = authoring.lifeTime,
                 
-                TornadoSound = authoring.tornadoSound
+                TornadoSound = authoring.tornadoSound,
+                UseMouse = authoring.useMouse,
             });
         }
     }
@@ -74,6 +80,7 @@ public struct BirdsUltimateAttackConfig : IComponentData
     public float3 TornadoOffset;
     public float TimeBetweenSuctions;
     public float TornadoRadius;
+    public float TornadoDamageMod;
     
     public Entity CenterPointEntity;
     
@@ -81,7 +88,7 @@ public struct BirdsUltimateAttackConfig : IComponentData
     
     public float Radius;
 
-    public float AngleStep;
+    public float AngleStep => BirdCount < 0 ? 180f : 360f / BirdCount;
     public float AngularSpeed;
     
     public float LifeTimeTimer;
@@ -90,4 +97,5 @@ public struct BirdsUltimateAttackConfig : IComponentData
     public bool IsActive;
 
     public AudioData TornadoSound;
+    public bool UseMouse;
 }

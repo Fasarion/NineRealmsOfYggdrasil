@@ -27,6 +27,7 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+        var config = SystemAPI.GetSingleton<DeathBehaviourConfig>();
 
         
         bool audioBufferExists = SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<AudioBufferData> audioBuffer);
@@ -51,8 +52,8 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
             ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
         }
         
-        foreach (var (currentHP, velocity, transform, dyingComponent, entity) in SystemAPI
-                     .Query<CurrentHpComponent, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()
+        foreach (var (currentHP, mass, pDamping, velocity, transform, dyingComponent, entity) in SystemAPI
+                     .Query<CurrentHpComponent, RefRW<PhysicsMass>, RefRW<PhysicsDamping>, RefRW<PhysicsVelocity>, LocalTransform, RefRW<IsDyingComponent>>()
                      .WithAll<EnemyTypeComponent>()
                      .WithEntityAccess())
         {
@@ -64,24 +65,23 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
                 ecb.RemoveComponent<MoveTowardsPlayerComponent>(entity);
                 var knockBackBufferElements = knockBackBufferLookup[entity];
                 var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 0.5f, 0)));
-                var knockBackForce = (currentHP.Value * -1) + 1;
-                var damping = 0.8f;
+                var knockBackForce = currentHP.KillingBlowValue;
+                pDamping.ValueRW.Linear = config.LinearForceDamping;
+                mass.ValueRW.InverseMass = config.InverseMass;
                 knockBackBufferElements.Add(new KnockBackBufferElement
                 {
-                    KnockBackForce = forceDirection * (knockBackForce * damping),
+                    KnockBackForce = forceDirection * (knockBackForce * config.KnockBackForceDamping),
                 });
                 dyingComponent.ValueRW.IsHandled = true;
                 
                 continue;
             }
 
-            if (math.length(velocity.ValueRO.Linear) <= 0.9f)
+            if (math.length(velocity.ValueRO.Linear) <= config.MinVelocity)
             {
                 ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
             }
         }
-
-        
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

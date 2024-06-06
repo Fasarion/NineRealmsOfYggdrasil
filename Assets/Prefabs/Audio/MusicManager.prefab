@@ -134,6 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3669420300619919414}
   - component: {fileID: 804058048652469266}
+  - component: {fileID: 7545479755118852400}
   m_Layer: 0
   m_Name: MusicManager
   m_TagString: Untagged
@@ -177,3 +178,19 @@ MonoBehaviour:
   enemyCountStageThree: 25
   playLevelMusic: 1
   playMenuMusic: 0
+  musicChangeCooldown: 5
+--- !u!114 &7545479755118852400
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6847539160196235527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 990deb91eca650b439e1c17af4f0c6d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadAudioVolumesFromScriptableObject: 1
+  volumeDataScriptableObject: {fileID: 11400000, guid: bbbd7b8596f5699418e171cfdd08c688,
+    type: 2}

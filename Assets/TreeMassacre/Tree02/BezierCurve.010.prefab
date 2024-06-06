@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -3121492841828856863}
   - component: {fileID: 397125751439086002}
   - component: {fileID: -5261058945110605010}
+  - component: {fileID: 7676700291776982868}
   m_Layer: 0
   m_Name: BezierCurve.010
   m_TagString: Untagged
@@ -30,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 2123399913391937140}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071067}
-  m_LocalPosition: {x: 5.9641323, y: -0.5316293, z: 0.36629105}
+  m_LocalPosition: {x: 0.0029067993, y: 0.11, z: -0.05}
   m_LocalScale: {x: 150, y: 150, z: 150}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -293,3 +294,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifeTime: 10
+--- !u!114 &7676700291776982868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123399913391937140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d87cd2ab6d942848f1e81f17afdb095, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

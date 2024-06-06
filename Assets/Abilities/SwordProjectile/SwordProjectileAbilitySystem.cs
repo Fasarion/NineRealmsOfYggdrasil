@@ -13,6 +13,7 @@ public partial struct SwordProjectileAbilitySystem : ISystem
     {
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<SwordComboAbilityConfig>();
+        state.RequireForUpdate<GameUnpaused>();
     }
 
     [BurstCompile]
@@ -20,7 +21,7 @@ public partial struct SwordProjectileAbilitySystem : ISystem
     {
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         
-        var config = SystemAPI.GetSingleton<SwordComboAbilityConfig>();
+        var config = SystemAPI.GetSingletonRW<SwordComboAbilityConfig>();
 
         foreach (var (ability, timer, entity) in SystemAPI
                      .Query<RefRW<SwordProjectileAbility>, RefRW<TimerObject>>()
@@ -31,26 +32,29 @@ public partial struct SwordProjectileAbilitySystem : ISystem
                 var buffer = SystemAPI.GetSingletonBuffer<SwordTrajectoryRecordingElement>();
                 ability.ValueRW.IsInitialized = true;
                 ability.ValueRW.bufferLength = buffer.Length - 1;
+                var configEntity = SystemAPI.GetSingletonEntity<SwordComboAbilityConfig>();
+                var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+                config.ValueRW.SwordCount = spawnCount.Value;
             }
             
-            if (ability.ValueRO.CurrentSpawnCount >= config.SwordCount)
+            if (ability.ValueRO.CurrentSpawnCount >= config.ValueRO.SwordCount)
             {
                 ecb.AddComponent<ShouldBeDestroyed>(entity);
                 continue;
             }
 
-            float maxTime = config.DelayBetweenSwords;
+            float maxTime = config.ValueRO.DelayBetweenSwords;
 
             if (ability.ValueRO.CurrentSpawnCount == 0)
             {
-                maxTime = config.InitialSpawnDelay;
+                maxTime = config.ValueRO.InitialSpawnDelay;
             }
 
             timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
 
             if (timer.ValueRO.currentTime > maxTime)
             {
-                var projectile = state.EntityManager.Instantiate(config.SwordProjectilePrefab);
+                var projectile = state.EntityManager.Instantiate(config.ValueRO.SwordProjectilePrefab);
                 //TODO: add spawn effect
                 state.EntityManager.SetComponentData(projectile, new SwordProjectile
                 {

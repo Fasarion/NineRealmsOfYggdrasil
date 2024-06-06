@@ -57,20 +57,26 @@ public class CombatMenuSceneManager : MonoBehaviour
 
    private void OnFadeComplete()
    {
+       EventManager.OnSceneChange?.Invoke(menuButtonSelection);
+
+       
        switch (menuButtonSelection)
        {
            case MenuButtonSelection.Continue:
            {
+            //   EventManager.OnSceneChange?.Invoke();
                continueSceneHandler.SwapScene();
                break;
            }
            case MenuButtonSelection.Restart:
            {
+            //   EventManager.OnSceneChange?.Invoke();
                restartSceneHandler.SwapScene();
                break;
            }
            case MenuButtonSelection.ExitToMenu:
            {
+              // EventManager.OnSceneChange?.Invoke();
                exitToMenuSceneHandler.SwapScene();
                break;
            }

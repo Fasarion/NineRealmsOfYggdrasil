@@ -119,9 +119,9 @@ MonoBehaviour:
     y: 0
     z: 0
   m_PrimitiveSize:
-    x: 1
+    x: 1.3
     y: 2
-    z: 1
+    z: 1.3
   m_PrimitiveOrientation:
     Value:
       x: -0
@@ -130,11 +130,11 @@ MonoBehaviour:
     RotationOrder: 4
   m_Capsule:
     Height: 2
-    Radius: 0.5
+    Radius: 0.65
     Axis: 1
   m_Cylinder:
     Height: 2
-    Radius: 0.5
+    Radius: 0.65
     Axis: 1
   m_CylinderSideCount: 20
   m_SphereRadius: 1
@@ -206,7 +206,7 @@ MonoBehaviour:
         Category04: 0
         Category05: 0
         Category06: 0
-        Category07: 0
+        Category07: 1
         Category08: 0
         Category09: 0
         Category10: 0
@@ -257,6 +257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHP: 140
+  shouldDisplayDamageNumbers: 1
   damageReductionValue: 1
 --- !u!114 &5845518096462122248
 MonoBehaviour:
@@ -325,8 +326,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c93a40b8ab743b45aa3eff255420a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnObjects:
+  entitiesToSpawn:
   - {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf, type: 3}
+  spawnSettings:
+    SetScale: 0
+    NewScale: 1
+    SetYPosition: 0
+    YPosition: 0
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,8 +372,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingCooldown: 4
-  shootDistance: 12
+  attackCooldown: 0
+  distanceToPerformAttack: 0
 --- !u!114 &922261842375008278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -380,7 +386,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f9a11865114d5c8b91b2ee672d192e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 7824363987953266496, guid: 5e68954400681ba47a60c4f7f560c74b,
+  projectilePrefab: {fileID: 7824363987953266496, guid: 48c0706b9def45649915134a2559fbf0,
     type: 3}
 --- !u!114 &5432305332946967007
 MonoBehaviour:
@@ -455,12 +461,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioData:
-    AudioEnumValue: 0
     eventCategoryType: 0
     weaponType: 0
     enemyTyping: 1
     audioEventType: 0
     attackType: 0
+    environmentType: 0
 --- !u!114 &-200509008157379024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   EnemyAnimationType: 1
+  attackDelayAfterAnimationStart: 0.6
 --- !u!114 &809344916137716791
 MonoBehaviour:
   m_ObjectHideFlags: 0

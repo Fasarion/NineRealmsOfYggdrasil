@@ -5,6 +5,7 @@ using Unity.Collections;
 using Unity.Entities;
 using Unity.Entities.Content;
 using Unity.Transforms;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
@@ -20,7 +21,37 @@ public partial class SpawningInitializerSystem : SystemBase
     private bool _isInitialized;
     private float startUpTimer;
     private SpawningTimerCheckpointStruct[] _checkpointDataList;
+
+    protected override void OnCreate()
+    {
+        EventManager.OnSceneChange += OnSceneChange;
+    }
     
+    protected override void OnStopRunning()
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
+    private void OnSceneChange(MenuButtonSelection _selection)
+    {
+        // switch (_selection)
+        // {
+        //     case MenuButtonSelection.Continue:
+        //     case MenuButtonSelection.Restart:
+        //     case MenuButtonSelection.Start:
+        //         Enabled = true;
+        //         break;
+        //     
+        //     default:
+        //         Enabled = false;
+        //         break;
+        // }
+        
+        startUpTimer = 0;
+        _controller = null;
+        _isInitialized = false;
+    }
+
     protected override void OnUpdate()
     {
         if (startUpTimer < 1)

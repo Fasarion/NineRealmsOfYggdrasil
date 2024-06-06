@@ -17,8 +17,8 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
     [SerializeField] private float baseAngularSpeedAfterRelease = 5f;
     
     [Header("Bird Settings")]
-    [Tooltip("How many birds that are spawned in this attack.")]
-    [SerializeField] private int birdCount = 2;
+    // [Tooltip("How many birds that are spawned in this attack.")]
+    // [SerializeField] private int birdCount = 2;
     [Tooltip("For how long should this attack exist (after the charge has been released)?")]
     [SerializeField] private float lifeTimeAfterRelease = 2f;
     
@@ -30,14 +30,20 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
     [Tooltip("How fast the radius changes.")]
     [SerializeField] private float radiusIncreaseSpeed;
     
+    [Header("Layer")]
+    [Tooltip("How much space between layers of bird circles.")]
+    [SerializeField] private float radiusIncreasePerLayer = 1f;
+    [Tooltip("How the speed changes for each layer (0.9 means 10% slower)")]
+    [SerializeField] private float angularSpeedModPerLayer = 0.9f;
+    
 
     private void OnValidate()
     {
-        if (birdCount <= 0)
-        {
-            birdCount = 1;
-            Debug.LogWarning("Bird Count must be positive.");
-        }
+        // if (birdCount <= 0)
+        // {
+        //     birdCount = 1;
+        //     Debug.LogWarning("Bird Count must be positive.");
+        // }
     }
 
     class Baker : Baker<BirdsSpecialAttackConfigAuthoring>
@@ -47,14 +53,18 @@ public class BirdsSpecialAttackConfigAuthoring : MonoBehaviour
             var entity = GetEntity(TransformUsageFlags.None);
             AddComponent(entity, new BirdsSpecialAttackConfig
             {
-                BirdCount = authoring.birdCount,
+                //BirdCount = authoring.birdCount,
                 
                 TargetRadius = authoring.targetRadius,
                 InitialRadius = authoring.initialRadius,
                 CurrentRadius = authoring.initialRadius,
                 RadiusIncreaseSpeed = authoring.radiusIncreaseSpeed,
                 
-                AngleStep = 360f / authoring.birdCount,
+                BirdLayers = 1,
+                BirdLayersRadiusIncrease = authoring.radiusIncreasePerLayer,
+                SpeedChangePerLayer = authoring.angularSpeedModPerLayer,
+                
+                //AngleStep = 360f / authoring.birdCount,
                 
                 AngularSpeedDuringCharge = authoring.baseAngularSpeedDuringCharge * math.PI * 2,
                 AngularSpeedAfterRelease = authoring.baseAngularSpeedAfterRelease * math.PI * 2,
@@ -77,12 +87,17 @@ public struct BirdsSpecialAttackConfig : IComponentData
     
     public int BirdCount;
     
+    public int BirdLayers;
+    public float BirdLayersRadiusIncrease;
+    
     public float CurrentRadius;
     public float InitialRadius;
     public float TargetRadius;
     public float RadiusIncreaseSpeed;
     
-    public float AngleStep;
+    public float AngleStep => BirdCount < 0 ? 180f : 360f / BirdCount;
+    public float SpeedChangePerLayer { get; set; }
+
     public float AngularSpeedDuringCharge;
     public float AngularSpeedAfterRelease;
     

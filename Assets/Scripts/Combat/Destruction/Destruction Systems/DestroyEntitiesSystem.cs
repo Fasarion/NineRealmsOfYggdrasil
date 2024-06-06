@@ -21,7 +21,7 @@ namespace Destruction
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
         }
         
-        [BurstCompile]
+        //[BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
             var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
@@ -46,6 +46,8 @@ namespace Destruction
                 {
                     var spawnBuffer = spawnEntityOnDestroyLookup[entity];
                     var counter = 0;
+                    
+                    
 
                     foreach (var spawnElement in spawnBuffer)
                     {
@@ -57,14 +59,17 @@ namespace Destruction
                         }
                         
                         var spawnedEntity = state.EntityManager.Instantiate(spawnElement.Value);
+                        var spawnSettings = spawnSettingsLookup.GetRefRO(entity).ValueRO.Value;
+                        
+                        
 
                         if (state.EntityManager.HasBuffer<KnockBackBufferElement>(spawnedEntity))
                         {
                             var knockBackBufferElements = knockBackBufferLookup[spawnedEntity];
-                            var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 15f, 0)));
+                            var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 5f, 0)));
                             var knockBackForce = 7f;
 
-                            if (counter > 0)
+                            if (counter > 0 && !spawnSettings.transferKnockBackToChildren)
                             {
                                 var radAngle = random.ValueRW.random.NextFloat(0f, math.PI * 2);
                                 knockBackForce = random.ValueRW.random.NextFloat(5, 10);
@@ -79,9 +84,9 @@ namespace Destruction
                         }
 
                         var spawnedTransform = state.EntityManager.GetComponentData<LocalTransform>(spawnedEntity);
-                        spawnedTransform.Position = transform.Position;
+                        spawnedTransform.Position += transform.Position;
 
-                        var spawnSettings = spawnSettingsLookup.GetRefRO(entity).ValueRO.Value;
+                        
                         
                         if (spawnSettings.SetScale)
                         {
@@ -113,7 +118,7 @@ namespace Destruction
         }
 
         // TODO: make burstable
-        [BurstCompile]
+        //[BurstCompile]
         private static void DestroyChildrenRecursively(ref SystemState state, Entity entity, EntityCommandBuffer ecb)
         {
             if (state.EntityManager.HasBuffer<Child>(entity))

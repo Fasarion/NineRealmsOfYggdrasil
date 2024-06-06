@@ -14,6 +14,7 @@ namespace Patrik
         public WeaponType WeaponType;
         public int WeaponButtonIndex;
         public WeaponBehaviour WeaponBehaviour;
+        public bool hasWeaponAttackUnlocked;
     }
     
     // TODO: extract PlayerManager, PlayerWeaponBehaviour, PlayerAnimationBehaviour
@@ -42,9 +43,9 @@ namespace Patrik
 
         // Weapons
         //This list should not be modified after setup
-        private List<WeaponBehaviour> startingWeapons;
+        private List<WeaponBehaviour> startingWeapons = new List<WeaponBehaviour>();
         //Use this list instead as it changes at runtime.
-        private List<WeaponSetupData> weaponDataList;
+        private List<WeaponSetupData> weaponDataList = new List<WeaponSetupData>();
         private WeaponBehaviour activeWeapon;
         private WeaponSetupData activeWeaponData;
         public WeaponType CurrentWeaponType => activeWeapon.WeaponType;
@@ -205,6 +206,11 @@ namespace Patrik
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
             foundWeapons = foundWeapons.OrderBy(weapon => weaponIdMap[weapon.WeaponType]).ToList();
+
+            foreach (var weapon in startingWeapons)
+            {
+                UnsubscribeFromPassiveEvents(weapon);
+            }
             
             startingWeapons = new List<WeaponBehaviour>();
             weaponDataList = new List<WeaponSetupData>();
@@ -224,7 +230,7 @@ namespace Patrik
             {
                 buttonIndex++;
         
-                SubscribeToPassiveEvents(foundWeapons[i]);
+              //  SubscribeToPassiveEvents(foundWeapons[i]);
                 
                 if (!hasSetStarter)
                 {
@@ -275,6 +281,11 @@ namespace Patrik
                 EventManager.OnSetupWeapon?.Invoke(weaponDataList[i]);
             }
             EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
+            
+            foreach (var weapon in startingWeapons)
+            {
+                SubscribeToPassiveEvents(weapon);
+            }
 
         }
         public void SetupWeapons()

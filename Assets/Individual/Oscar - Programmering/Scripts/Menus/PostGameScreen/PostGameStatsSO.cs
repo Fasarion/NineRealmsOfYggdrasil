@@ -7,5 +7,5 @@ public class PostGameStatsSO : ScriptableObject
 {
     public bool hasWon;
     public int enemyKills;
-    public int playTimeInSeconds;
+    public int playTime;
 }

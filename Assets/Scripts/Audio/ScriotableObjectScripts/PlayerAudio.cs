@@ -17,6 +17,7 @@ public class PlayerAudio : ScriptableObject
     public EventReference playerHit;
 
     public EventReference playerDeath;
+    public EventReference playerDash; 
 
     private EventInstance xpIns;
     
@@ -74,6 +75,12 @@ public class PlayerAudio : ScriptableObject
     public void DeathAudio()
     {
         RuntimeManager.PlayOneShot(playerDeath);
+        //Snapshot, music stuff here too?
+    }
+    
+    public void PlayDash()
+    {
+        RuntimeManager.PlayOneShot(playerDash);
         //Snapshot, music stuff here too?
     }
 

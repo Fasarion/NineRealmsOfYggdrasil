@@ -16,6 +16,8 @@ public partial struct BirdUltimateAttackSystem : ISystem
     [BurstCompile]
     public void OnCreate(ref SystemState state)
     {
+        state.RequireForUpdate<MousePositionComponent>();
+        state.RequireForUpdate<MousePositionInput>();
         state.RequireForUpdate<WeaponAttackCaller>();
         state.RequireForUpdate<PlayerTag>();
         state.RequireForUpdate<BirdsUltimateAttackConfig>();
@@ -33,6 +35,11 @@ public partial struct BirdUltimateAttackSystem : ISystem
         {
             var targetPos = SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position +
                             config.ValueRO.TornadoOffset;
+            if (config.ValueRO.UseMouse)
+            {
+                var mousePos = SystemAPI.GetSingleton<MousePositionInput>();
+                targetPos = mousePos.WorldPosition + config.ValueRO.TornadoOffset;
+            }
             
             foreach (var (transform, timer, hitBuffer) in SystemAPI
                 .Query<RefRW<LocalTransform>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>>()
@@ -77,6 +84,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     ecb.AddComponent<ShouldBeDestroyed>(entity);
                 }
                 
+                Debug.Log("destroy tornado"); 
                 // destroy birdnado on return
                 foreach (var (_, entity) in SystemAPI
                     .Query<BirdnadoComponent>()
@@ -111,6 +119,15 @@ public partial struct BirdUltimateAttackSystem : ISystem
 
             config.ValueRW.CenterPointEntity = SystemAPI.GetSingletonEntity<MousePositionComponent>();
 
+            var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
+
+            config.ValueRW.BirdCount = spawnCount.Value;
+            if (state.EntityManager.HasComponent<UseMousePosition>(configEntity))
+            {
+                config.ValueRW.UseMouse = true;
+            }
+
+            Debug.Log("Spawn tornado");
             // spawn tornado
             var tornado = state.EntityManager.Instantiate(config.ValueRO.TornadoPrefab);
             
@@ -126,8 +143,13 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
             audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
             
-           
-            
+            // set damage
+            CachedDamageComponent thisDamage =
+                state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+
+            thisDamage.Value.DamageValue *= config.ValueRO.TornadoDamageMod;
+            state.EntityManager.SetComponentData(tornado, thisDamage);
+
             // Spawn birds evenly spaced around player
             for (int i = 0; i < configRO.BirdCount; i++)
             {

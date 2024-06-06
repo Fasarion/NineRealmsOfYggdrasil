@@ -22,6 +22,8 @@ public class ParticleComponentAuthoring : MonoBehaviour
 
     [SerializeField] private bool spawnAtEntity;
     
+    [SerializeField] private bool dontFollowY;
+    
 
 class Baker : Baker<ParticleComponentAuthoring>
     {
@@ -33,6 +35,7 @@ class Baker : Baker<ParticleComponentAuthoring>
                 Value = authoring.gameObjectPrefab,
                 FollowEntity = authoring.followsEntity,
                 SpawnAtEntity = authoring.spawnAtEntity,
+                DontFollowY = authoring.dontFollowY,
             });
         }
     }
@@ -43,6 +46,7 @@ public class GameObjectParticlePrefab : IComponentData, IEnableableComponent
     public GameObject Value;
     public bool FollowEntity;
     public bool SpawnAtEntity;
+    public bool DontFollowY;
 }
 
 public class ParticleReference : ICleanupComponentData
@@ -103,10 +107,25 @@ public partial struct HandleParticleSystem : ISystem
             
             if (particleObject.FollowEntity)
             {
-                particleSystemTransform.position = transform.ValueRO.Position;
-                particleSystemTransform.rotation = transform.ValueRO.Rotation;
+                
                 float scaleValue = transform.ValueRO.Scale;
                 particleSystemTransform.localScale = new float3(scaleValue, scaleValue, scaleValue);
+                
+                if (particleObject.DontFollowY)
+                {
+                    particleSystemTransform.position =
+                        new Vector3(transform.ValueRO.Position.x, 0, transform.ValueRO.Position.z);
+                    float rotationAmount = 10f * Time.deltaTime;
+                    particleSystemTransform.Rotate(0, rotationAmount, 0);
+                    particleSystemTransform.localScale = new Vector3(1, 1, 1);
+                }
+                else
+                {
+                    particleSystemTransform.position = transform.ValueRO.Position;
+                    particleSystemTransform.rotation = transform.ValueRO.Rotation;
+                }
+                
+                
             }
             else
             {

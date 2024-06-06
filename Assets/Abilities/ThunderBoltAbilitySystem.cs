@@ -102,7 +102,15 @@ public partial struct ThunderBoltAbilitySystem : ISystem
                 {
                     var projectile = state.EntityManager.Instantiate(config.ValueRO.ProjectilePrefab);
                     var targetBuffer = state.EntityManager.GetBuffer<TargetBufferElement>(entity);
-                    var pos = targetBuffer[ability.ValueRO.CurrentCount + (config.ValueRW.MaxStrikes * i)].Position;
+
+                    int index = ability.ValueRO.CurrentCount + (config.ValueRW.MaxStrikes * i);
+                    if (index >= targetBuffer.Length)
+                    {
+                        Debug.LogError("Index out range for thunder bolt target buffer.");
+                        continue;
+                    }
+                    
+                    var pos = targetBuffer[index].Position;
 
                     state.EntityManager.SetComponentData(projectile, new LocalTransform
                     {

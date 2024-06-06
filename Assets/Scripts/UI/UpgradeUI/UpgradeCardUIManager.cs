@@ -191,13 +191,13 @@ public class UpgradeCardUIManager : MonoBehaviour
         switch (i)
         {
             case 0:
-                worldPosition += new Vector3(0, 0.26828f, 0);
+                worldPosition += new Vector3(0, 0.29828f, 0);
                 break;
             case 1:
-                worldPosition += new Vector3(2.164204f, 0.26828f, 0);
+                worldPosition += new Vector3(2.164204f, 0.29828f, 0);
                 break;
             case 2:
-                worldPosition += new Vector3(4.0f, 0.26828f, 0);
+                worldPosition += new Vector3(3.9f, 0.29828f, 0);
                 break;
         }
         
@@ -333,6 +333,7 @@ public class UpgradeCardUIManager : MonoBehaviour
     {
         if (_upgradeUIClickDelayTimer < upgradeUIClickDelay) return;
         //PlaySelectionSmokeEffect(cardIndex);
+        _audioManager.PlayAudioData(_audioData);
         HideUI();
         OnUpgradeChosen?.Invoke(index);
     }

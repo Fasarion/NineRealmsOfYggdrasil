@@ -83,8 +83,6 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
             }
         }
 
-        
-
         ecb.Playback(state.EntityManager);
         ecb.Dispose();
     }

@@ -20,8 +20,10 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
     [FormerlySerializedAs("attackDelay")]
     [Tooltip("How long the attack logic (like spawning a projectile) is delayed from the start of the attack animation.")]
     [SerializeField] private float attackDelayAfterAnimationStart = 0.6f;
-    
-    
+
+   // public bool waitForAttackToFinish = true;
+
+    public bool waitForAttackAnimationToFinish = false;
     
     class Baker : Baker<EnemyAnimatorControllerAuthoring>
     {
@@ -40,7 +42,8 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
             // Attack
             AddComponent(entity, new EnemyAttackAnimationComponent
             {
-                AnimationDelayTime = authoring.attackDelayAfterAnimationStart
+                AnimationDelayTime = authoring.attackDelayAfterAnimationStart,
+                WaitForAttackToFinish = authoring.waitForAttackAnimationToFinish
             });
             SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
             
@@ -71,6 +74,7 @@ public struct EnemyAttackAnimationComponent : IComponentData, IEnableableCompone
     public float AnimationDelayTime;
     public float CurrentDelayTime;
     public bool HasSetTrigger;
+    public bool WaitForAttackToFinish;
 }
 
 public struct EnemyHitStunAnimationComponent : IComponentData, IEnableableComponent { }

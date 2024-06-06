@@ -103,16 +103,40 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
                 animatorReference.Animator.SetBool(isAttackingName, true);
                 enemyAttackAnimation.ValueRW.HasSetTrigger = true;
             }
-            
-            // wait for attack animation to finish, then perform DOTS attack logic
-            bool isAttacking = animatorReference.Animator.GetBool(isAttackingName);
-            if (!isAttacking)
+
+            if (enemyAttackAnimation.ValueRO.WaitForAttackToFinish)
             {
-                state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
-                state.EntityManager.SetComponentEnabled<ShouldAttackComponent>(entity, true);
+                // wait for attack animation to finish, then perform DOTS attack logic
+                bool isAttacking = animatorReference.Animator.GetBool(isAttackingName);
+                if (!isAttacking)
+                {
+                    state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
+                    state.EntityManager.SetComponentEnabled<ShouldAttackComponent>(entity, true);
                 
-                enemyAttackAnimation.ValueRW.HasSetTrigger = false;
+                    enemyAttackAnimation.ValueRW.HasSetTrigger = false;
+                }
             }
+            else
+            {
+                enemyAttackAnimation.ValueRW.CurrentDelayTime += SystemAPI.Time.DeltaTime;
+                if (enemyAttackAnimation.ValueRO.CurrentDelayTime > enemyAttackAnimation.ValueRO.AnimationDelayTime)
+                {
+                    state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
+                    state.EntityManager.SetComponentEnabled<ShouldAttackComponent>(entity, true);
+                    enemyAttackAnimation.ValueRW.CurrentDelayTime = 0;
+                    enemyAttackAnimation.ValueRW.HasSetTrigger = false;
+                }
+            }
+            
+            // // wait for attack animation to finish, then perform DOTS attack logic
+            // bool isAttacking = animatorReference.Animator.GetBool(isAttackingName);
+            // if (!isAttacking)
+            // {
+            //     state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
+            //     state.EntityManager.SetComponentEnabled<ShouldAttackComponent>(entity, true);
+            //     
+            //     enemyAttackAnimation.ValueRW.HasSetTrigger = false;
+            // }
 
             // NOTE: TODO: Old code for using timers to trigger animations
             // // wait for attack animation to finish, then perform DOTS attack logic

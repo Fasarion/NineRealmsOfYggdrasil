@@ -19,6 +19,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     private RectTransform _transform;
     private UpgradeCardUIManager _manager;
     private AudioManager _audioManager;
+    [SerializeField] private int cardIndex;
     
 
     private void Awake()
@@ -66,7 +67,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
 
     public void RegisterMouseClick()
     {
-        _manager.RegisterUpgradeCardClick(_upgradeObjectIndex);
+        _manager.RegisterUpgradeCardClick(_upgradeObjectIndex, cardIndex);
         _audioManager.uiAudio.MenuClickAudio();
     }
 }

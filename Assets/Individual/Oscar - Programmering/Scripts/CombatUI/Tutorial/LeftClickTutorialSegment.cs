@@ -12,6 +12,10 @@ public class LeftClickTutorialSegment : TutorialSegment
     {
         EventManager.OnUpdateAttackAnimation += OnLeftClick;
     }
+    public void OnDisable()
+    {
+        EventManager.OnUpdateAttackAnimation -= OnLeftClick;
+    }
 
     public override void StartSegment()
     {
@@ -26,10 +30,7 @@ public class LeftClickTutorialSegment : TutorialSegment
         }
     }
 
-    public void OnDisable()
-    {
-        
-    }
+    
 
     // Start is called before the first frame update
    

@@ -58,10 +58,12 @@ public partial struct ElementalApplyShockSystem : ISystem
                 buffer.Add(element);
                 
                 var hammerConfig = SystemAPI.GetSingleton<HammerSpecialConfig>();
-                var spark = state.EntityManager.Instantiate(hammerConfig.HammerSparkPrefab);
-                state.EntityManager.SetComponentData(spark, new VisualEffectComponent
+                var vfx = state.EntityManager.Instantiate(hammerConfig.HammerSparkPrefab);
+                state.EntityManager.SetComponentData(vfx, new VisualEffectComponent
                 {
                     EntityToFollow = affectedEntity,
+                    ActiveTime = 1f,
+                    ShouldFollowParentEntity = true,
                 });
                 
                 shockComponent.ValueRW.HasBeenApplied = true;

@@ -1,4 +1,3 @@
-using System.Linq;
 using AI;
 using Player;
 using Unity.Burst;
@@ -8,7 +7,6 @@ using Unity.Mathematics;
 using Unity.Physics;
 using Unity.Transforms;
 using UnityEngine;
-using Random = Unity.Mathematics.Random;
 
 [UpdateInGroup(typeof(SimulationSystemGroup))]
 [UpdateBefore(typeof(TransformSystemGroup))]

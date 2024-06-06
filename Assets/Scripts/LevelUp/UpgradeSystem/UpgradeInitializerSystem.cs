@@ -7,9 +7,26 @@ using UnityEngine;
 [UpdateBefore(typeof(UpgradeUISystem))]
 public partial struct UpgradeInitializerSystem : ISystem
 {
+    
+    
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<UpgradeChoice>();
+        EventManager.OnSceneChange += OnSceneChange;
+    }
+
+    public void OnDestroy(ref SystemState state)
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
+    private void OnSceneChange()
+    {
+        // Reset Upgrade choice
+        if (SystemAPI.TryGetSingletonRW<UpgradeChoice>(out RefRW<UpgradeChoice> choice))
+        {
+            choice.ValueRW.IsHandled = true;
+        }
     }
 
     public void OnUpdate(ref SystemState state)

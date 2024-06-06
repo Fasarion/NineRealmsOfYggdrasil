@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4372292805818682600}
   - component: {fileID: 902288827338204326}
   - component: {fileID: 6958475280633900023}
+  - component: {fileID: -8739627506275669391}
   m_Layer: 0
   m_Name: Tornado Entiy Prefab
   m_TagString: Untagged
@@ -316,3 +317,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackDamage: 2
   criticalChance: 0.1
+--- !u!114 &-8739627506275669391
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2985631337868830301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afa493f1eebb75941af3bd96d0c5d8fb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjectPrefab: {fileID: 5857570137354848846, guid: b5a8cc11e9428f446b9df04233d07853,
+    type: 3}
+  followsEntity: 1
+  spawnAtEntity: 0
+  dontFollowY: 1

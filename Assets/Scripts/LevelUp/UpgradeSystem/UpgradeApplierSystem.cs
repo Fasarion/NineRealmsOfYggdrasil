@@ -12,7 +12,22 @@ public partial class UpgradeApplierSystem : SystemBase
 {
     private UpgradePoolManager _pool;
     private int _weaponCount = 1;
+
+    protected override void OnStartRunning()
+    {
+        EventManager.OnSceneChange += OnSceneChange;
+    }
     
+    protected override void OnStopRunning()
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
+    private void OnSceneChange(MenuButtonSelection arg0)
+    {
+        _weaponCount = 1;
+    }
+
     protected override void OnUpdate()
     {
         bool choiceExists = SystemAPI.TryGetSingletonRW(out RefRW<UpgradeChoice> choice);
@@ -64,9 +79,13 @@ public partial class UpgradeApplierSystem : SystemBase
         {
             type = WeaponType.Hammer;
         }
-        else
+        else if (EntityManager.HasComponent<BirdsSpecialAttackConfig>(entity))
         {
             type = WeaponType.Birds;
+        }
+        else
+        {
+            type = WeaponType.None;
         }
 
         return type;
@@ -80,7 +99,10 @@ public partial class UpgradeApplierSystem : SystemBase
             {
                 EntityManager.AddComponent<IsUnlocked>(entity);
                 var type = GetCurrentWeaponType(entity);
-                EventManager.OnSpecialAttackUnlocked(type);
+                if (type != WeaponType.None)
+                {
+                    EventManager.OnSpecialAttackUnlocked?.Invoke(type);
+                }
                 return;
             }
             

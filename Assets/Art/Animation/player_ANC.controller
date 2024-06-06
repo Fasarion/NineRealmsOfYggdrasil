@@ -349,7 +349,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Ultimate - 01 Recover
-  m_Speed: 0.6
+  m_Speed: 0.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 4519435247546175581}
@@ -1668,6 +1668,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &-5822662023931261026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 2
+  OnExit:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 0
 --- !u!1102 &-5695829769660276577
 AnimatorState:
   serializedVersion: 6
@@ -2394,6 +2414,7 @@ AnimatorState:
   - {fileID: -3808153182384051613}
   - {fileID: 7615928565370930753}
   - {fileID: 8684129588317268551}
+  - {fileID: 1341534705122713641}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4759,6 +4780,7 @@ AnimatorState:
   - {fileID: 4938777758725446446}
   m_StateMachineBehaviours:
   - {fileID: -1945584826119911993}
+  - {fileID: -5822662023931261026}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4853,6 +4875,26 @@ AnimatorStateTransition:
   m_InterruptionSource: 2
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &1341534705122713641
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bebcb478471531b46ab2762d4ee3a711, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 1
+  OnExit:
+    MovementStateChange: 0
+    RotationStateChange: 0
+    InvincibilityStateChange: 0
 --- !u!114 &1386086715281205906
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -7299,7 +7341,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Sword Ultimate - 02 Recover
-  m_Speed: 0.7
+  m_Speed: 0.6
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 7666709547406649919}

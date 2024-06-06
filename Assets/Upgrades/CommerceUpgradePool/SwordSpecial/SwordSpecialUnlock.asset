@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Jotnar's Ring
   upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
-  upgradeDescription: Hold RIGHT MOUSE BUTTON to charge a ring of ice. Let go of
-    the button to release the ring.
+  upgradeDescription: 'SPECIAL
+
+    Charge up a ring of ice with RIGHT MOUSE BUTTON'
   upgrades:
   - thingToUpgrade: 1
     valueToUpgrade: 26
     valueAmount: 0
   startUnlocked: 1
   upgradeIndex: 22
-  isUnlocked: 0
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 411041592fea4f141b32155eb756fb3e, type: 2}

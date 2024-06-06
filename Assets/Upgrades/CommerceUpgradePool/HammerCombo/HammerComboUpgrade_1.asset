@@ -14,20 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Hammer
   upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
-  upgradeDescription: 'Every third strike will now summon 7 lightning bolts. '
+  upgradeDescription: 'NORMAL
+
+    Every third strike will summon lightningstrikes
+    around you'
   upgrades:
-  - thingToUpgrade: 5
-    valueToUpgrade: 0
-    valueAmount: 10
-  - thingToUpgrade: 5
-    valueToUpgrade: 27
-    valueAmount: 2
   - thingToUpgrade: 9
-    valueToUpgrade: 15
-    valueAmount: 4
+    valueToUpgrade: 17
+    valueAmount: 3
   startUnlocked: 0
   upgradeIndex: 11
-  isUnlocked: 0
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: a21313650d7dbc34a82c7e6390bfefe8, type: 2}

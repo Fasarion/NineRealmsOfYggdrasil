@@ -182,7 +182,6 @@ public class WeaponAudio : ScriptableObject
             }
             case 2: //Hammare
             {
-                Debug.Log("Hammer passive sound");
                 RuntimeManager.PlayOneShot(hammerPassiveImpact);
                 break;
             }

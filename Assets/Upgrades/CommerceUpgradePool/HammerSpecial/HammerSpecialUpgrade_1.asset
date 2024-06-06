@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: HammerSpecialUpgrade_1
   m_EditorClassIdentifier: 
-  upgradeTitle: "Mj\xF6lnir's Fury"
+  upgradeTitle: "Mj\xF6lnir"
   upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
-  upgradeDescription: "When throwing your hammer, 5 additional hammers are summoned.
-    \n\nEach hammer is imbued with surging might. \n\nRIGHT MOUSE BUTTON"
+  upgradeDescription: "When holding the RIGHT MOUSE BUTTON to throw your hammer,
+    5 additional hammers are summoned. \n"
   upgrades:
   - thingToUpgrade: 6
     valueToUpgrade: 15
@@ -28,7 +28,7 @@ MonoBehaviour:
     valueAmount: 2
   startUnlocked: 0
   upgradeIndex: 13
-  isUnlocked: 1
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 37d9ad21fd196174bbf60386329a1b79, type: 2}

@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: BirdSpecialUpgrade_2
   m_EditorClassIdentifier: 
-  upgradeTitle: Murder of Memory
+  upgradeTitle: Murder
   upgradeSprite: {fileID: 21300000, guid: 9402504d93b85b1468fdad05e1d9cc99, type: 3}
-  upgradeDescription: "The Raven sei\xF0r reaches its apex. \n\nThe ravens now congregate
-    in 3 circles. \n\nEach raven is a merciless fury of talons.\n\nRIGHT MOUSE BUTTON"
+  upgradeDescription: Holding the RIGHT MOUSE BUTTON now summons 2 additional circles
+    of ravens.
   upgrades:
   - thingToUpgrade: 13
     valueToUpgrade: 17
     valueAmount: 2
   startUnlocked: 0
   upgradeIndex: 4
-  isUnlocked: 1
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock: []

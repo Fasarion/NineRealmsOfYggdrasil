@@ -208,12 +208,32 @@ PrefabInstance:
     - target: {fileID: 613902946236294797, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: chainRadius
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 613902946236294797, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: initialRadius
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 716962282394368914, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: radius
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 716962282394368914, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
       propertyPath: maxRangeFromPlayer
-      value: 10
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 985587920786746601, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: chargeStageBuffs.Array.data[0].DamageModifier
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 985587920786746601, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: chargeStageBuffs.Array.data[1].DamageModifier
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 4849479046651394249, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
@@ -269,6 +289,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: vfxScale
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6762880877132713748, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: multiSpawnSizeGrowth
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7092756478536628210, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: radiusIncreaseSpeed
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

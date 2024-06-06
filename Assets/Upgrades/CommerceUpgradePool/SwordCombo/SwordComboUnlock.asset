@@ -20,7 +20,7 @@ MonoBehaviour:
 '
   upgrades:
   - thingToUpgrade: 0
-    valueToUpgrade: 0
+    valueToUpgrade: 12
     valueAmount: 5
   - thingToUpgrade: 4
     valueToUpgrade: 26
@@ -30,7 +30,7 @@ MonoBehaviour:
     valueAmount: 1
   startUnlocked: 1
   upgradeIndex: 19
-  isUnlocked: 0
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: f0fa87f88e1a4174ba1817b9f11469da, type: 2}

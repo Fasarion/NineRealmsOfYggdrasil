@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: PlayerAttackUpgrade
   m_EditorClassIdentifier: 
-  upgradeTitle: Strength of Tyr
+  upgradeTitle: Strength
   upgradeSprite: {fileID: 21300000, guid: daeb4250d024e914d83d375f58bd8e3f, type: 3}
-  upgradeDescription: 'Increases the attack damage of each weapon by 5. '
+  upgradeDescription: 'The attack damage of each weapon is increased by 5. '
   upgrades:
   - thingToUpgrade: 12
-    valueToUpgrade: 0
+    valueToUpgrade: 12
     valueAmount: 5
   startUnlocked: 1
   upgradeIndex: 18

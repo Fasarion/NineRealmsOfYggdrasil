@@ -15,8 +15,8 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
     [SerializeField] private float timeBetweenSuctions = 0.3f;
     [Tooltip("Radius of the tornado.")]
     [SerializeField] private float tornadoRadius = 2f;
-    [Tooltip("The tornado's final damage will be modified by this amount.")]
-    [SerializeField] private float tornadoDamageModifier = 0.2f;
+    // [Tooltip("The tornado's final damage will be modified by this amount.")]
+    // [SerializeField] private float tornadoDamageModifier = 0.2f;
     
     [Header("Angular speed")]
     [Tooltip("How fast the birds spin (revolutions per second).")]
@@ -57,7 +57,7 @@ public class BirdUltimateConfigAuthoring : MonoBehaviour
                 TornadoOffset = authoring.tornadoOffset,
                 TimeBetweenSuctions = authoring.timeBetweenSuctions,
                 TornadoRadius = authoring.tornadoRadius,
-                TornadoDamageMod = authoring.tornadoDamageModifier,
+             //   TornadoDamageMod = authoring.tornadoDamageModifier,
                 
                // BirdCount = authoring.birdCount,
                 
@@ -80,7 +80,7 @@ public struct BirdsUltimateAttackConfig : IComponentData
     public float3 TornadoOffset;
     public float TimeBetweenSuctions;
     public float TornadoRadius;
-    public float TornadoDamageMod;
+  //  public float TornadoDamageMod;
     
     public Entity CenterPointEntity;
     

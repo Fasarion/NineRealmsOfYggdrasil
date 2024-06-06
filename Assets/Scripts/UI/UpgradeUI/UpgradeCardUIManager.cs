@@ -41,18 +41,6 @@ public class UpgradeCardUIManager : MonoBehaviour
 
     public float yUIOffset;
 
-    public Vector3 indexZeroPoint;
-    public Vector3 indexOnePoint;
-    public Vector3 indexTwoPoint;
-    
-    public Vector3 indexZeroOg;
-    public Vector3 indexOneOg;
-    public Vector3 indexTwoOg;
-    
-    public Vector3 indexZeroOffset;
-    public Vector3 indexOneOffset;
-    public Vector3 indexTwoOffset;
-    
     
     public static UpgradeCardUIManager Instance
     {
@@ -163,14 +151,7 @@ public class UpgradeCardUIManager : MonoBehaviour
          if (!_isUIDisplayed) return;
 
          _upgradeUIClickDelayTimer += Time.unscaledDeltaTime;
-
-         indexZeroPoint = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[0].transform.position);
-         indexOnePoint = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[1].transform.position);
-         indexTwoPoint = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[2].transform.position);
-
-         indexZeroOffset = indexZeroPoint - indexZeroOg;
-         indexOneOffset = indexOnePoint - indexOneOg;
-         indexTwoOffset = indexTwoPoint - indexTwoOg;
+        
 
 
     }
@@ -197,13 +178,13 @@ public class UpgradeCardUIManager : MonoBehaviour
         switch (i)
         {
             case 0:
-                worldPosition += new Vector3(1155, -575, -15);
+                worldPosition += new Vector3(0, 0.26828f, 0);
                 break;
             case 1:
-                worldPosition += new Vector3(287, -580, -15);
+                worldPosition += new Vector3(2.164204f, 0.26828f, 0);
                 break;
             case 2:
-                worldPosition += new Vector3(-576, -583, -15);
+                worldPosition += new Vector3(4.05649149f, 0.26828f, 0);
                 break;
         }
         
@@ -296,10 +277,6 @@ public class UpgradeCardUIManager : MonoBehaviour
         _isUIDisplayed = true;
         //Time.timeScale = 0f;
         
-        indexZeroOg = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[0].transform.position);
-        indexOneOg = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[1].transform.position);
-        indexTwoOg = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[2].transform.position);
-
     }
 
     private void HideUI()

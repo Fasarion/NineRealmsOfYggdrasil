@@ -98,7 +98,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         _audioManager = AudioManager.Instance;
     }
 
-    IEnumerator LowerObjectsSequentially(List<GameObject> objectsToPlace)
+    IEnumerator LowerObjectsSequentially(int count)
     {
         //yield return new WaitForSeconds(delay);
         
@@ -111,7 +111,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         //Vector3 topOfScreen = camera.ViewportToWorldPoint(new Vector3(0.5f, 2f, distanceInFront));
 
         // Calculate the starting positions and target positions for each object
-        for (int i = 0; i < upgradeCards.Count; i++)
+        for (int i = 0; i < count; i++)
         {
             // float offset = (i - (objectsToPlace.Count - 1) / 2.0f) * spacing;
             // Vector3 targetPosition = centerPosition + camera.transform.right * offset + new Vector3(0, -.20f, -.05f);
@@ -229,7 +229,7 @@ public class UpgradeCardUIManager : MonoBehaviour
             //upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i]);
         }
         
-        StartCoroutine(LowerObjectsSequentially(upgradeStoneSmoke));
+        StartCoroutine(LowerObjectsSequentially(upgradeObjects.Length));
     }
 
     private void DisplayUpgradeText(UpgradeObject[] upgradeObjects)

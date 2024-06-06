@@ -23,6 +23,12 @@ public class UnlockedNewAttackSubSegment : MonoBehaviour
         EventManager.OnSpecialAttackUnlocked += OnRightClickUnlocked;
         EventManager.OnUpdateAttackAnimation += OnRightClickActivated;
     }
+    
+    public void OnDisable()
+    {
+        EventManager.OnSpecialAttackUnlocked -= OnRightClickUnlocked;
+        EventManager.OnUpdateAttackAnimation -= OnRightClickActivated;
+    }
 
     private void OnRightClickActivated(AttackType attackType, bool canSpecialAttack)
     {

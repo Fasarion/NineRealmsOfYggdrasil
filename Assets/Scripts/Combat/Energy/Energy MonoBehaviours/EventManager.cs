@@ -58,6 +58,8 @@ public static class EventManager
     public static UnityAction<int> OnWeaponCountSet;
 
     public static UnityAction<WeaponType> OnSpecialAttackUnlocked;
+    
+    public static UnityAction OnObjectiveReached;
 
 }
 

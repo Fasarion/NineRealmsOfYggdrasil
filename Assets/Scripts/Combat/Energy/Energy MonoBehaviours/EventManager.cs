@@ -61,6 +61,7 @@ public static class EventManager
     
     public static UnityAction OnObjectiveReached;
 
+    public static UnityAction OnSceneChange;
 }
 
 public struct PlayerHealthData

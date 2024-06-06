@@ -22,6 +22,8 @@ public class PlayerAudioBehaviour : MonoBehaviour
         EventManager.OnPlayerHealthSet += OnPlayerHealthSet;
         EventManager.OnActiveAttackStart += OnActiveAttackStart;
         EventManager.OnUltimatePerform += OnUltimateUsage;
+        
+        EventManager.OnDashBegin += OnDashBegin;
     }
     
     private void OnDisable()
@@ -30,6 +32,13 @@ public class PlayerAudioBehaviour : MonoBehaviour
         EventManager.OnPlayerHealthSet -= OnPlayerHealthSet;
         EventManager.OnActiveAttackStart -= OnActiveAttackStart;
         EventManager.OnUltimatePerform -= OnUltimateUsage;
+        
+        EventManager.OnDashBegin -= OnDashBegin;
+    }
+
+    private void OnDashBegin()
+    {
+        _audioManager.playerAudio.PlayDash();
     }
 
     private void OnActiveAttackStart(AttackData data)

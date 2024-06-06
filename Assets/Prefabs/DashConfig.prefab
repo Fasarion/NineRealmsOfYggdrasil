@@ -47,11 +47,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dashCooldown: 3
   Audio:
-    eventCategoryType: 1
+    eventCategoryType: 0
     weaponType: 2
     enemyTyping: 0
     audioEventType: 2
     attackType: 3
+    environmentType: 0
   DashShieldPrefab: {fileID: 6645884837100014701, guid: 0bbf285745e19854599d33408b754c98,
     type: 3}
   waitBetweenDashes: 1

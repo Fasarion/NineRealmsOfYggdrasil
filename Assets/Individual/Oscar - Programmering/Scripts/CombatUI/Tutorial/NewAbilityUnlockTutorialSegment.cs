@@ -11,8 +11,9 @@ public class NewAbilityUnlockTutorialSegment : TutorialSegment
 
     public bool hasFilledUpUltimate;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         hasUnlockedRightClick = false;
         hasUnlockedSecondWeapon = false;
         hasFilledUpUltimate = false;

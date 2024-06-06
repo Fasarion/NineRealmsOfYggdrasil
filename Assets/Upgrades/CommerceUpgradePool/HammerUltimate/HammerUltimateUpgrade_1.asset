@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: "\xDEruma"
   upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
-  upgradeDescription: 3 shockwaves are spawned when pressing the hammer's R BUTTON.
+  upgradeDescription: 'ULTIMATE
+
+    Summons an additional thunderstrike after a
+    small delay'
   upgrades:
   - thingToUpgrade: 7
     valueToUpgrade: 15
-    valueAmount: 2
+    valueAmount: 1
   startUnlocked: 0
   upgradeIndex: 16
   isUnlocked: 1

@@ -41,6 +41,10 @@ public class UpgradeCardUIManager : MonoBehaviour
 
     public float yUIOffset;
 
+    private AudioManager _audioManager;
+
+    private AudioData _audioData;
+
     
     public static UpgradeCardUIManager Instance
     {
@@ -68,6 +72,15 @@ public class UpgradeCardUIManager : MonoBehaviour
 
         _uICardPositions = new Vector3[3];
         HideUI();
+        _audioData = new AudioData
+        {
+            audioEventType = AudioEventType.OnUse,
+            eventCategoryType = EventCategoryType.Weapon,
+            enemyTyping = EnemyTyping.None,
+            attackType = AttackTypeAudio.Special,
+            weaponType = WeaponTyping.Hammer,
+            environmentType = EnvironmentType.None,
+        };
     }
     
     public Camera camera; // Reference to the camera
@@ -82,8 +95,7 @@ public class UpgradeCardUIManager : MonoBehaviour
 
     void Start()
     {
-        // Start the coroutine to lower the objects one by one
-        //StartCoroutine(LowerObjectsSequentially());
+        _audioManager = AudioManager.Instance;
     }
 
     IEnumerator LowerObjectsSequentially(List<GameObject> objectsToPlace)
@@ -143,6 +155,7 @@ public class UpgradeCardUIManager : MonoBehaviour
         // Ensure the object is exactly at the target position at the end
         obj.transform.position = new Vector3(obj.transform.position.x, targetY, obj.transform.position.z);
         PlaySpawnSmokeEffect(i);
+        _audioManager.PlayAudioData(_audioData);
         //if(i == upgradeObjects.Length - 1) DisplayUpgradeText(upgradeObjects);
     }
 
@@ -165,7 +178,7 @@ public class UpgradeCardUIManager : MonoBehaviour
     private void PlaySelectionSmokeEffect(int i)
     {
         upgradeClickSmoke[i].SetActive(true);
-        upgradeStoneSmoke[i].transform.position = GetUIPosition(i);
+        upgradeClickSmoke[i].transform.position = GetUIPosition(i);
     }
 
     private Vector3 GetUIPosition(int i)
@@ -184,7 +197,7 @@ public class UpgradeCardUIManager : MonoBehaviour
                 worldPosition += new Vector3(2.164204f, 0.26828f, 0);
                 break;
             case 2:
-                worldPosition += new Vector3(4.05649149f, 0.26828f, 0);
+                worldPosition += new Vector3(4.0f, 0.26828f, 0);
                 break;
         }
         
@@ -319,7 +332,7 @@ public class UpgradeCardUIManager : MonoBehaviour
     public void RegisterUpgradeCardClick(int index, int cardIndex)
     {
         if (_upgradeUIClickDelayTimer < upgradeUIClickDelay) return;
-        PlaySelectionSmokeEffect(cardIndex);
+        //PlaySelectionSmokeEffect(cardIndex);
         HideUI();
         OnUpgradeChosen?.Invoke(index);
     }

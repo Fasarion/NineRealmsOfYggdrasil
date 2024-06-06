@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SwordComboUnlock
   m_EditorClassIdentifier: 
   upgradeTitle: Sword
-  upgradeSprite: {fileID: 0}
+  upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
   upgradeDescription: 'Every second strike will now summon 2 phantom swords.
 
 
@@ -30,7 +30,7 @@ MonoBehaviour:
     valueAmount: 1
   startUnlocked: 1
   upgradeIndex: 19
-  isUnlocked: 1
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: f0fa87f88e1a4174ba1817b9f11469da, type: 2}

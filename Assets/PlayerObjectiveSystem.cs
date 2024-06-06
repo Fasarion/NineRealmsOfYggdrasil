@@ -18,6 +18,7 @@ public partial struct PlayerObjectiveSystem : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<ObjectiveObjectConfig>();
+        state.RequireForUpdate<DontUpdate>();
         _spawnTimer = 0;
     }
     

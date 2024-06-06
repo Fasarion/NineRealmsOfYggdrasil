@@ -7,6 +7,7 @@ using UnityEngine;
 public class LeftClickTutorialSegment : TutorialSegment
 {
     public GameObject leftClickHighlight;
+    //public bool LeftClickTutorialActive;
 
     public void OnEnable()
     {
@@ -17,17 +18,27 @@ public class LeftClickTutorialSegment : TutorialSegment
         EventManager.OnUpdateAttackAnimation -= OnLeftClick;
     }
 
+    public override void Start()
+    {
+        base.Start();
+        
+    }
     public override void StartSegment()
     {
+        base.StartSegment();
         leftClickHighlight.SetActive(true);
     }
     private void OnLeftClick(AttackType attackType,bool canNormalAttack)
     {
-        if (attackType == AttackType.Normal && canNormalAttack)
-        { 
-            leftClickHighlight.SetActive(false); 
-            SegmentCompleted();
+        if (tutorialActive)
+        {
+            if (attackType == AttackType.Normal && canNormalAttack)
+            { 
+                leftClickHighlight.SetActive(false); 
+                SegmentCompleted();
+            }
         }
+      
     }
 
     

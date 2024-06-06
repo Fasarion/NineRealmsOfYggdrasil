@@ -23,7 +23,21 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
         EventManager.OnEnergyChange += OnEnergyChange;
         CombatUIWeaponHandler.onCurrentWeaponUpdated += OnCurrentWeaponUpdated;
         CombatUIWeaponHandler.onStartingWeaponSet += OnStartingWeaponsSet;
+        EventManager.OnWeaponCountSet += OnWeaponCountSet;
 
+    }
+    
+    public void OnDisable()
+    {
+        EventManager.OnEnergyChange -= OnEnergyChange;
+        CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
+        CombatUIWeaponHandler.onStartingWeaponSet -= OnStartingWeaponsSet;
+        EventManager.OnWeaponCountSet += OnWeaponCountSet;
+    }
+
+    private void OnWeaponCountSet(int arg0)
+    {
+        LoadCurrentEnergy();   
     }
 
     private void OnStartingWeaponsSet(List<WeaponSetupData> weaponSetupDataList)//WeaponSetupData mainWeapon, WeaponSetupData leftWeapon, WeaponSetupData rightWeapon)
@@ -64,12 +78,7 @@ public class CombatUIUltimateProgressBar : MonoBehaviour
     }
 
 
-    public void OnDisable()
-    {
-        EventManager.OnEnergyChange -= OnEnergyChange;
-        CombatUIWeaponHandler.onCurrentWeaponUpdated -= OnCurrentWeaponUpdated;
-        CombatUIWeaponHandler.onStartingWeaponSet -= OnStartingWeaponsSet;
-    }
+  
     
     private void OnCurrentWeaponUpdated(List<WeaponSetupData> weaponSetupDataList)
     {

@@ -24,6 +24,7 @@ public class DamageNumberPool : MonoBehaviour
     
     private void Awake()
     {
+        popups.Clear();
         pool = new ObjectPool<DamagePopup>(CreatePopup, OnTakePopupFromPool, OnReturnPopupToPool);
         StartCoroutine(PreAllocateSpawns());
     }

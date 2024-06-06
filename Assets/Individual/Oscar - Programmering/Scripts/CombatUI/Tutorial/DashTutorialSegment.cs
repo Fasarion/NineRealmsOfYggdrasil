@@ -22,6 +22,10 @@ public class DashTutorialSegment : TutorialSegment
         EventManager.OnDashInput += OnDash;
     }
 
+    public void OnDisable()
+    {
+        EventManager.OnDashInput -= OnDash;
+    }
     private void OnDash()
     {
         dashTutorialObject.SetActive(false);

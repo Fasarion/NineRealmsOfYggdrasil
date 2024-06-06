@@ -238,27 +238,27 @@ PrefabInstance:
     - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: EventReference.Path
-      value: event:/Musik/NewMainEvent
+      value: event:/Musik/MainTheme
       objectReference: {fileID: 0}
     - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: EventReference.Guid.Data1
-      value: -2108929289
+      value: 1219563285
       objectReference: {fileID: 0}
     - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: EventReference.Guid.Data2
-      value: 1285532341
+      value: 1128224744
       objectReference: {fileID: 0}
     - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: EventReference.Guid.Data3
-      value: -1365192575
+      value: -1077628007
       objectReference: {fileID: 0}
     - target: {fileID: 352444020766534086, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: EventReference.Guid.Data4
-      value: -966547120
+      value: 731635143
       objectReference: {fileID: 0}
     - target: {fileID: 1372308398193865741, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
@@ -568,17 +568,27 @@ PrefabInstance:
     - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: startY
-      value: 1030
+      value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: targetY
-      value: -11.24
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: fallSpeed
-      value: 1
+      value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: fallSpeedGrowth
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5302548754748335653, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: upgradeUIClickDelay
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5588545127782445018, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}

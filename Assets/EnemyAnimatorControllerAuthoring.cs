@@ -21,9 +21,9 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
     [Tooltip("How long the attack logic (like spawning a projectile) is delayed from the start of the attack animation.")]
     [SerializeField] private float attackDelayAfterAnimationStart = 0.6f;
 
-    public bool waitForAttackToFinish = true;
-    
-    
+   // public bool waitForAttackToFinish = true;
+
+    public bool waitForAttackAnimationToFinish = false;
     
     class Baker : Baker<EnemyAnimatorControllerAuthoring>
     {
@@ -43,7 +43,7 @@ public class EnemyAnimatorControllerAuthoring : MonoBehaviour
             AddComponent(entity, new EnemyAttackAnimationComponent
             {
                 AnimationDelayTime = authoring.attackDelayAfterAnimationStart,
-                WaitForAttackToFinish = authoring.waitForAttackToFinish
+                WaitForAttackToFinish = authoring.waitForAttackAnimationToFinish
             });
             SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
             

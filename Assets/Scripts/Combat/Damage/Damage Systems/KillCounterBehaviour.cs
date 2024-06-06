@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 
 public class KillCounterBehaviour : MonoBehaviour
 {
-    private int kills;
+    [SerializeField] private int kills;
     
     private KillCounterBehaviour killCounterBehaviour;
 

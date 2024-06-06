@@ -17,6 +17,7 @@ namespace Player
             state.RequireForUpdate<PlayerPositionSingleton>(); 
             state.RequireForUpdate<PlayerMoveInput>();
             state.RequireForUpdate<WeaponAttackCaller>();
+            state.RequireForUpdate<GameUnpaused>();
         }
     
         public void OnUpdate(ref SystemState state)

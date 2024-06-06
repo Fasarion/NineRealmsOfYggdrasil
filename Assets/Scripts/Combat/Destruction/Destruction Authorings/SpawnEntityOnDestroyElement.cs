@@ -28,7 +28,9 @@ public struct SpawnSettings
     public bool SetYPosition;
     
     [Tooltip("Offset added to spawn position.")]
-    public float YPosition; 
+    public float YPosition;
+
+    public bool transferKnockBackToChildren;
 }
 
 [System.Serializable]

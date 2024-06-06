@@ -36,6 +36,7 @@ namespace Player
                 float speed = speedComp.ValueRO.Value;
 
                 Vector3 moveInputVec3 = new Vector3(moveInput.Value.x, 0, moveInput.Value.y);
+                EventManager.OnPlayerMoveInput?.Invoke(moveInputVec3);
                 Vector3 step = moveInputVec3 * speed * SystemAPI.Time.DeltaTime;
 
                 if (!gameObjectAnimator.FollowEntity)

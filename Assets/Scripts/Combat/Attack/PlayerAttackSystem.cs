@@ -335,6 +335,7 @@ namespace Patrik
         {
             if (newData.AttackType != lastData.AttackType) return true;
             if (newData.ComboCounter != lastData.ComboCounter) return true;
+            if (newData.WeaponType != lastData.WeaponType) return true;
 
             return false;
         }

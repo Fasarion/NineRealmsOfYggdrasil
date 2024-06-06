@@ -143,8 +143,13 @@ public partial struct BirdUltimateAttackSystem : ISystem
             var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
             audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
             
-           
-            
+            // set damage
+            CachedDamageComponent thisDamage =
+                state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+
+            thisDamage.Value.DamageValue *= config.ValueRO.TornadoDamageMod;
+            state.EntityManager.SetComponentData(tornado, thisDamage);
+
             // Spawn birds evenly spaced around player
             for (int i = 0; i < configRO.BirdCount; i++)
             {

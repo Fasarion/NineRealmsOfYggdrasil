@@ -24,22 +24,68 @@ public partial class UpgradeUISystem : SystemBase
     private bool _shouldGenerateNewSkillChoices;
 
     private UpgradeCardUIManager _uiManager;
-    
+
+    protected override void OnStartRunning()
+    {
+        EventManager.OnSceneChange += OnSceneChange;
+    }
+
+    protected override void OnStopRunning()
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
+    private void OnSceneChange(MenuButtonSelection selection)
+    {
+        ResetSystem(selection);
+    }
+
+    private void ResetSystem(MenuButtonSelection menuButtonSelection)
+    {
+        _cachedLevel = 0;
+        
+        bool playerLevelExists = SystemAPI.TryGetSingletonRW<PlayerLevel>(out RefRW<PlayerLevel> level);
+        if (!playerLevelExists)
+        {
+            // No player level found";
+            return;
+        }
+
+        level.ValueRW.Value = 0;
+
+        switch (menuButtonSelection)
+        {
+            case MenuButtonSelection.ExitGame:
+                OnUpgradeUIDisplayCall = null;
+                _isUpgradeUIActive = false;
+                _isUpgradeUIButtonActive = false;
+                _isUpgradeUIGenerated = false;
+
+                _pool = null;
+                _upgradeObjects = null;
+                _shouldGenerateNewSkillChoices = false;
+
+                _uiManager = null;
+                break;
+        }
+        
+        
+    }
+
     protected override void OnUpdate()
     {
-         bool playerLevelExists = SystemAPI.TryGetSingleton<PlayerLevel>(out PlayerLevel level);
-         if (!playerLevelExists)
-         {
-             // No player level found";
-             return;
-         }
-         
+        bool playerLevelExists = SystemAPI.TryGetSingleton<PlayerLevel>(out PlayerLevel level);
+        if (!playerLevelExists)
+        {
+            // No player level found";
+            return;
+        }
+
         int currentLevel = level.Value;
-        
+
         SubscribeToManager();
-        
+
         CheckForLevelUp(currentLevel);
-        
     }
 
     private void CheckForLevelUp(int currentLevel)
@@ -47,11 +93,10 @@ public partial class UpgradeUISystem : SystemBase
         if (_cachedLevel == currentLevel) return;
 
         _cachedLevel = currentLevel;
-        
+
         GenerateUpgradeUIChoices();
-        
+
         OnUpgradeUIDisplayCall?.Invoke(_upgradeObjects);
-        
     }
 
     private void SubscribeToManager()
@@ -59,7 +104,7 @@ public partial class UpgradeUISystem : SystemBase
         if (_uiManager == null)
         {
             _uiManager = UpgradeCardUIManager.Instance;
-            
+
             if (_uiManager) _uiManager.OnUpgradeChosen += RecieveUpgradeChoice;
         }
 

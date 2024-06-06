@@ -32,8 +32,21 @@ public partial class SpawningInitializerSystem : SystemBase
         EventManager.OnSceneChange -= OnSceneChange;
     }
 
-    private void OnSceneChange()
+    private void OnSceneChange(MenuButtonSelection _selection)
     {
+        // switch (_selection)
+        // {
+        //     case MenuButtonSelection.Continue:
+        //     case MenuButtonSelection.Restart:
+        //     case MenuButtonSelection.Start:
+        //         Enabled = true;
+        //         break;
+        //     
+        //     default:
+        //         Enabled = false;
+        //         break;
+        // }
+        
         startUpTimer = 0;
         _controller = null;
         _isInitialized = false;

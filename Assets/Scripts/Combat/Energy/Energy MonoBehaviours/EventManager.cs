@@ -61,7 +61,7 @@ public static class EventManager
     
     public static UnityAction OnObjectiveReached;
 
-    public static UnityAction OnSceneChange;
+    public static UnityAction<MenuButtonSelection> OnSceneChange;
 }
 
 public struct PlayerHealthData

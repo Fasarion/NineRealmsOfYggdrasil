@@ -206,6 +206,11 @@ namespace Patrik
         {
             var foundWeapons = FindObjectsOfType<WeaponBehaviour>().ToList();
             foundWeapons = foundWeapons.OrderBy(weapon => weaponIdMap[weapon.WeaponType]).ToList();
+
+            foreach (var weapon in startingWeapons)
+            {
+                UnsubscribeFromPassiveEvents(weapon);
+            }
             
             startingWeapons = new List<WeaponBehaviour>();
             weaponDataList = new List<WeaponSetupData>();
@@ -225,7 +230,7 @@ namespace Patrik
             {
                 buttonIndex++;
         
-                SubscribeToPassiveEvents(foundWeapons[i]);
+              //  SubscribeToPassiveEvents(foundWeapons[i]);
                 
                 if (!hasSetStarter)
                 {
@@ -276,6 +281,11 @@ namespace Patrik
                 EventManager.OnSetupWeapon?.Invoke(weaponDataList[i]);
             }
             EventManager.OnAllWeaponsSetup?.Invoke(weaponDataList);
+            
+            foreach (var weapon in startingWeapons)
+            {
+                SubscribeToPassiveEvents(weapon);
+            }
 
         }
         public void SetupWeapons()

@@ -6,13 +6,14 @@ using UnityEngine;
 public class SwordPassiveAbilityConfigAuthoring : MonoBehaviour
 {
     public float radius;
+    public float maxRangeFromPlayer;
 
     public class SwordPassiveAbilityConfigBaker : Baker<SwordPassiveAbilityConfigAuthoring>
     {
         public override void Bake(SwordPassiveAbilityConfigAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new SwordPassiveAbilityConfig { Radius = authoring.radius });
+            AddComponent(entity, new SwordPassiveAbilityConfig { Radius = authoring.radius, MaxRangeFromPlayer = authoring.maxRangeFromPlayer});
         }
     }
 }
@@ -20,4 +21,5 @@ public class SwordPassiveAbilityConfigAuthoring : MonoBehaviour
 public struct SwordPassiveAbilityConfig : IComponentData
 {
     public float Radius;
+    public float MaxRangeFromPlayer;
 }

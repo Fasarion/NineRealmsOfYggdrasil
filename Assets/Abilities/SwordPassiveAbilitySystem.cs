@@ -80,6 +80,13 @@ public partial struct SwordPassiveAbilitySystem : ISystem
             {
                 // Reset EntityToFollow so it can find a new target to chase
                 targeting.ValueRW.EntityToFollow = Entity.Null;
+                transform.ValueRW.Position = playerPos.Value;
+            }
+
+            if (math.length(transform.ValueRO.Position - playerPos.Value) > config.MaxRangeFromPlayer)
+            {
+                targeting.ValueRW.EntityToFollow = Entity.Null;
+                transform.ValueRW.Position = playerPos.Value;
             }
         }
     }

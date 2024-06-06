@@ -13,8 +13,8 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     [SerializeField] private Image cardImage;
     [SerializeField] private TextMeshProUGUI cardTitleText;
     [SerializeField] private TextMeshProUGUI cardDescriptionText;
-    [SerializeField] private float standardScale = 0.5f; 
-    [SerializeField] private float hoverScale = 0.75f; 
+    [SerializeField] private Vector3 standardScale;
+    [SerializeField] private Vector3 hoverScale;
     private int _upgradeObjectIndex;
     private RectTransform _transform;
     private UpgradeCardUIManager _manager;
@@ -40,7 +40,7 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
     {
         _cardTitle = upgradeObject.upgradeTitle;
         _cardDescription = upgradeObject.upgradeDescription;
-        //_cardSprite = upgradeObject.upgradeSprite;
+        _cardSprite = upgradeObject.upgradeSprite;
         _upgradeObjectIndex = upgradeObject.upgradeIndex;
     }
 
@@ -51,17 +51,17 @@ public class UpgradeCardUIBehaviour : MonoBehaviour
 
         cardTitleText.text = _cardTitle;
         cardDescriptionText.text = _cardDescription;
-        //cardImage.sprite = _cardSprite;
+        cardImage.sprite = _cardSprite;
     }
 
     public void OnMouseHoverEnter()
     {
-        _transform.localScale = new Vector3(hoverScale, hoverScale, hoverScale);
+        _transform.localScale = hoverScale;
     }
 
     public void OnMouseHoverExit()
     {
-        _transform.localScale = new Vector3(standardScale, standardScale, standardScale);
+        _transform.localScale = standardScale;
     }
 
     public void RegisterMouseClick()

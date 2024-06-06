@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BirdUltimateUpgrade_1
   m_EditorClassIdentifier: 
   upgradeTitle: Storm of Thought
-  upgradeSprite: {fileID: 0}
+  upgradeSprite: {fileID: 21300000, guid: 9402504d93b85b1468fdad05e1d9cc99, type: 3}
   upgradeDescription: "Summon a storm of ravens imbued with the power of Huginn that
     sweeps up enemies in its path.\n\nMore ravens now swirl within the storm, increasing
     the ferocity of its winds.  \n\nR BUTTON When the ravens' energy is full"
@@ -22,8 +22,8 @@ MonoBehaviour:
     valueToUpgrade: 15
     valueAmount: 5
   startUnlocked: 0
-  upgradeIndex: 0
-  isUnlocked: 0
+  upgradeIndex: 5
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 9053e8f269fb27744ac37adc1914772c, type: 2}

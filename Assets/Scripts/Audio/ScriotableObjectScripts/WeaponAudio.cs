@@ -126,7 +126,7 @@ public class WeaponAudio : ScriptableObject
         {
             case 1: 
             {
-                //NotInUse, handled elsewhere
+                WeaponSwingAudio((int)audioData.weaponType, 0);
                 break;
             }
             case 2:

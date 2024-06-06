@@ -57,6 +57,20 @@ MonoBehaviour:
   beamsPerSwing: 3
   degreesBetweenBeams: 25
   maxTotalDegrees: 180
+  onUseAudioData:
+    eventCategoryType: 1
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 1
+    attackType: 3
+    environmentType: 0
+  swingAudioData:
+    eventCategoryType: 1
+    weaponType: 1
+    enemyTyping: 0
+    audioEventType: 1
+    attackType: 1
+    environmentType: 0
 --- !u!114 &7644122277154232076
 MonoBehaviour:
   m_ObjectHideFlags: 0

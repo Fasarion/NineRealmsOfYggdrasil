@@ -14,15 +14,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: "Mj\xF6lnir"
   upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
-  upgradeDescription: "Hold RIGHT MOUSE BUTTON to charge your hammer.\n\nRelease
-    to throw the hammer. \n"
+  upgradeDescription: 'SPECIAL
+
+    Hold RIGHT MOUSE BUTTON to charge a throw of
+    the hammer
+
+'
   upgrades:
   - thingToUpgrade: 6
     valueToUpgrade: 26
     valueAmount: 8
   startUnlocked: 0
   upgradeIndex: 15
-  isUnlocked: 1
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: c0fe6df7f0c13e54db811d4890098d67, type: 2}

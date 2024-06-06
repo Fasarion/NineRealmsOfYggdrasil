@@ -100,6 +100,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: entitiesToSpawn.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: entitiesToSpawn.Array.data[1]
+      value: 
+      objectReference: {fileID: 5567915179673970004, guid: 3030c77bb6301234c96dedc99f535d78,
+        type: 3}
     - target: {fileID: 8878746079526606225, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: chanceToPlay

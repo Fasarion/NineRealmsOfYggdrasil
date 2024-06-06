@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Damage;
 using Unity.Entities;
 using Unity.Transforms;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -13,7 +14,25 @@ public partial class DamageNumberSystem : SystemBase
     private ObjectPool<DamagePopup> _pool;
     private bool _isInitialized;
     private float startUpTimer;
-    
+
+
+    protected override void OnCreate()
+    {
+        EventManager.OnSceneChange += OnSceneChange;
+    }
+
+    private void OnSceneChange(MenuButtonSelection arg0)
+    {
+        startUpTimer = 0;
+        _isInitialized = false;
+        _pool = null;
+    }
+
+    protected override void OnDestroy()
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
     protected override void OnUpdate()
     {
         if (!_isInitialized)
@@ -33,6 +52,7 @@ public partial class DamageNumberSystem : SystemBase
         if (_pool == null)
         {
             var poolObject = GameObject.FindObjectOfType<DamageNumberPool>();
+            var poolObjects = GameObject.FindObjectsOfType<DamageNumberPool>();
             if (!poolObject) return;
             
             _pool = poolObject.Pool;

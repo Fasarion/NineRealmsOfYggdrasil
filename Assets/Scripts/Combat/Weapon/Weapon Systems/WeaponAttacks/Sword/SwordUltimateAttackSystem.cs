@@ -38,6 +38,10 @@ public partial struct SwordUltimateAttackSystem : ISystem
                 SpawnSwordBeam(ref state, ultConfig, ecb);
                 ultConfig.ValueRW.CurrentTime = -1000f; // hard reset timer
                 ultConfig.ValueRW.PrepareBeam = false;
+                
+                //audio
+                var audioElement = new AudioBufferData() { AudioData = ultConfig.ValueRO.swingAudioData };
+                audioBuffer.Add(audioElement);
             }
         }
         

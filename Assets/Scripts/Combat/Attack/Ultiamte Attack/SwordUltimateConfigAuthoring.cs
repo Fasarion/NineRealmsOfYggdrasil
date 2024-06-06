@@ -19,7 +19,7 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
     
     [Header("Audio")] 
     [SerializeField] private AudioData onUseAudioData;
-    
+    [SerializeField] private AudioData swingAudioData;
     class Baker : Baker<SwordUltimateConfigAuthoring>
     {
         public override void Bake(SwordUltimateConfigAuthoring authoring)
@@ -38,7 +38,8 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
                 degreesBetweenBeams = authoring.degreesBetweenBeams,
                 MaximumTotalDegreesPerSide = authoring.maxTotalDegrees / 2f,
                 
-                onUseAudioData = authoring.onUseAudioData
+                onUseAudioData = authoring.onUseAudioData,
+                swingAudioData = authoring.swingAudioData
             });
         }
     }
@@ -63,4 +64,5 @@ public struct SwordUltimateConfig : IComponentData
     public bool PrepareBeam { get; set; }
 
     public AudioData onUseAudioData;
+    public AudioData swingAudioData;
 }

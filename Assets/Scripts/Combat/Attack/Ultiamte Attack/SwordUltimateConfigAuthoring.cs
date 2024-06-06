@@ -17,6 +17,9 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
     [Range(0, 360)]
     [SerializeField] private float maxTotalDegrees = 180f; 
     
+    [Header("Audio")] 
+    [SerializeField] private AudioData onUseAudioData;
+    
     class Baker : Baker<SwordUltimateConfigAuthoring>
     {
         public override void Bake(SwordUltimateConfigAuthoring authoring)
@@ -33,7 +36,9 @@ public class SwordUltimateConfigAuthoring : MonoBehaviour
                 BeamSpawnTimeAfterAttackStart = authoring.beamSpawnTimeAfterAttack,
                 BeamsPerSwing = authoring.beamsPerSwing,
                 degreesBetweenBeams = authoring.degreesBetweenBeams,
-                MaximumTotalDegreesPerSide = authoring.maxTotalDegrees / 2f
+                MaximumTotalDegreesPerSide = authoring.maxTotalDegrees / 2f,
+                
+                onUseAudioData = authoring.onUseAudioData
             });
         }
     }
@@ -56,4 +61,6 @@ public struct SwordUltimateConfig : IComponentData
     public float degreesBetweenBeams;
     public float MaximumTotalDegreesPerSide;
     public bool PrepareBeam { get; set; }
+
+    public AudioData onUseAudioData;
 }

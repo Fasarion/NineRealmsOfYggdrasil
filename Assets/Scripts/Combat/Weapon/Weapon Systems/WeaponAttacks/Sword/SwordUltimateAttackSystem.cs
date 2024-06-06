@@ -27,6 +27,7 @@ public partial struct SwordUltimateAttackSystem : ISystem
         var ultConfig = SystemAPI.GetSingletonRW<SwordUltimateConfig>();
         var swordEntity = SystemAPI.GetSingletonEntity<SwordComponent>();
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
+        var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
 
         if (ultConfig.ValueRW.PrepareBeam)
         {
@@ -87,6 +88,8 @@ public partial struct SwordUltimateAttackSystem : ISystem
             // Initialize attack
             if (!ultConfig.ValueRO.IsActive)
             {
+                var audioElement = new AudioBufferData() { AudioData = ultConfig.ValueRO.onUseAudioData };
+                audioBuffer.Add(audioElement);
                 var scaleComp = state.EntityManager.GetComponentData<SizeComponent>(swordEntity);
 
                 float newSize = scaleComp.Value += ultConfig.ValueRO.ScaleIncrease;

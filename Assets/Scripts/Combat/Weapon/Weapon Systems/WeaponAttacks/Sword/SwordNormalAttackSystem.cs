@@ -17,6 +17,7 @@ public partial struct SwordNormalAttackSystem : ISystem
         state.RequireForUpdate<SwordComboAbilityConfig>();
         state.RequireForUpdate<SwordComponent>();
         state.RequireForUpdate<WeaponAttackCaller>();
+        state.RequireForUpdate<GameUnpaused>();
     }
 
     public void OnUpdate(ref SystemState state)

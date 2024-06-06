@@ -7,12 +7,13 @@ public class NewAbilityUnlockTutorialSegment : TutorialSegment
 
     [SerializeField]private bool hasUnlockedRightClick;
 
-    [SerializeField]private bool hasUnlockedSecondWeapon;
+    public bool hasUnlockedSecondWeapon;
 
-    [SerializeField]private bool hasFilledUpUltimate;
+    public bool hasFilledUpUltimate;
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         hasUnlockedRightClick = false;
         hasUnlockedSecondWeapon = false;
         hasFilledUpUltimate = false;

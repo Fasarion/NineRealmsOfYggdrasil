@@ -4,16 +4,20 @@ using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class UpgradeCardUIManager : MonoBehaviour
 {
     [SerializeField] private List<UpgradeCardUIBehaviour> upgradeCards;
-    [SerializeField] private List<GameObject> upgradeStones;
+    [SerializeField] private List<GameObject> upgradeStoneSmoke;
+    [SerializeField] private List<GameObject> upgradeClickSmoke;
     [SerializeField] private GameObject birdStonePrefab;
     [SerializeField] private GameObject hammerStonePrefab;
     [SerializeField] private GameObject swordStonePrefab;
     [SerializeField] private GameObject playerStonePrefab;
     private Vector3[] _uICardPositions;
+
+    [SerializeField] private Vector3 smokeOffset;
 
     public float fallSpeedGrowth;
 
@@ -36,6 +40,18 @@ public class UpgradeCardUIManager : MonoBehaviour
     private bool _isStartup;
 
     public float yUIOffset;
+
+    public Vector3 indexZeroPoint;
+    public Vector3 indexOnePoint;
+    public Vector3 indexTwoPoint;
+    
+    public Vector3 indexZeroOg;
+    public Vector3 indexOneOg;
+    public Vector3 indexTwoOg;
+    
+    public Vector3 indexZeroOffset;
+    public Vector3 indexOneOffset;
+    public Vector3 indexTwoOffset;
     
     
     public static UpgradeCardUIManager Instance
@@ -138,6 +154,7 @@ public class UpgradeCardUIManager : MonoBehaviour
 
         // Ensure the object is exactly at the target position at the end
         obj.transform.position = new Vector3(obj.transform.position.x, targetY, obj.transform.position.z);
+        PlaySpawnSmokeEffect(i);
         //if(i == upgradeObjects.Length - 1) DisplayUpgradeText(upgradeObjects);
     }
 
@@ -147,8 +164,50 @@ public class UpgradeCardUIManager : MonoBehaviour
 
          _upgradeUIClickDelayTimer += Time.unscaledDeltaTime;
 
+         indexZeroPoint = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[0].transform.position);
+         indexOnePoint = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[1].transform.position);
+         indexTwoPoint = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[2].transform.position);
+
+         indexZeroOffset = indexZeroPoint - indexZeroOg;
+         indexOneOffset = indexOnePoint - indexOneOg;
+         indexTwoOffset = indexTwoPoint - indexTwoOg;
 
 
+    }
+
+    private void PlaySpawnSmokeEffect(int i)
+    {
+        upgradeStoneSmoke[i].SetActive(true);
+        upgradeStoneSmoke[i].transform.position = GetUIPosition(i);
+    }
+
+    private void PlaySelectionSmokeEffect(int i)
+    {
+        upgradeClickSmoke[i].SetActive(true);
+        upgradeStoneSmoke[i].transform.position = GetUIPosition(i);
+    }
+
+    private Vector3 GetUIPosition(int i)
+    {
+        RectTransform uiElementRectTransform = upgradeCards[i].GetComponent<RectTransform>();
+        Vector2 screenPosition = RectTransformUtility.WorldToScreenPoint(Camera.main, uiElementRectTransform.position);
+        float distanceFromCamera = 1f;
+        Vector3 worldPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenPosition.x, screenPosition.y, distanceFromCamera));
+
+        switch (i)
+        {
+            case 0:
+                worldPosition += new Vector3(1155, -575, -15);
+                break;
+            case 1:
+                worldPosition += new Vector3(287, -580, -15);
+                break;
+            case 2:
+                worldPosition += new Vector3(-576, -583, -15);
+                break;
+        }
+        
+        return worldPosition;
     }
 
     private void DisplayUpgradeCards(UpgradeObject[] upgradeObjects)
@@ -176,7 +235,7 @@ public class UpgradeCardUIManager : MonoBehaviour
             //upgradeCards[i].transform.position = camera.WorldToScreenPoint(_uICardPositions[i]);
         }
         
-        StartCoroutine(LowerObjectsSequentially(upgradeStones));
+        StartCoroutine(LowerObjectsSequentially(upgradeStoneSmoke));
     }
 
     private void DisplayUpgradeText(UpgradeObject[] upgradeObjects)
@@ -236,6 +295,10 @@ public class UpgradeCardUIManager : MonoBehaviour
 
         _isUIDisplayed = true;
         //Time.timeScale = 0f;
+        
+        indexZeroOg = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[0].transform.position);
+        indexOneOg = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[1].transform.position);
+        indexTwoOg = Camera.main.WorldToScreenPoint(upgradeStoneSmoke[2].transform.position);
 
     }
 
@@ -276,10 +339,10 @@ public class UpgradeCardUIManager : MonoBehaviour
         return transforms;
     }
     
-    public void RegisterUpgradeCardClick(int index)
+    public void RegisterUpgradeCardClick(int index, int cardIndex)
     {
         if (_upgradeUIClickDelayTimer < upgradeUIClickDelay) return;
-        
+        PlaySelectionSmokeEffect(cardIndex);
         HideUI();
         OnUpgradeChosen?.Invoke(index);
     }

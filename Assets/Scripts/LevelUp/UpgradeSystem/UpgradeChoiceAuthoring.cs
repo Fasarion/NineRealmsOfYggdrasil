@@ -6,8 +6,8 @@ using UnityEngine.Serialization;
 
 public class UpgradeChoiceAuthoring : MonoBehaviour
 {
-    [HideInInspector] public int choiceIndex;
-    [HideInInspector] public bool isHandled = true;
+    // [HideInInspector] public int choiceIndex;
+    // [HideInInspector] public bool isHandled = true;
 
     public class UpgradeChoiceAuthoringBaker : Baker<UpgradeChoiceAuthoring>
     {
@@ -15,7 +15,7 @@ public class UpgradeChoiceAuthoring : MonoBehaviour
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
             AddComponent(entity,
-                new UpgradeChoice { ChoiceIndex = authoring.choiceIndex, IsHandled = authoring.isHandled });
+                new UpgradeChoice { ChoiceIndex = 0, IsHandled = true });
         }
     }
 }

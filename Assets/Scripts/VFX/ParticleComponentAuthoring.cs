@@ -63,8 +63,11 @@ public partial struct HandleParticleSystem : ISystem
                 .WithNone<LocalTransform, GameObjectParticlePrefab>()
                 .WithEntityAccess())
         {
-            Object.Destroy(particleReference.Particle.gameObject);
-            ecb.RemoveComponent<ParticleReference>(entity);
+            if (particleReference.Particle && particleReference.Particle.gameObject)
+            {
+                Object.Destroy(particleReference.Particle.gameObject);
+                ecb.RemoveComponent<ParticleReference>(entity);
+            }
         }
         
         // Add animator references

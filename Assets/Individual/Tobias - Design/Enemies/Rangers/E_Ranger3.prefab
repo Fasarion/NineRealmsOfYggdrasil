@@ -333,6 +333,7 @@ MonoBehaviour:
     NewScale: 1
     SetYPosition: 0
     YPosition: 0
+    transferKnockBackToChildren: 0
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -345,7 +346,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf5fe9af8a8a2584a81248f651ec3b90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minimumDistanceForMoving: 11
+  minimumDistanceForMoving: 10
   awayFromPlayerMoveSpeed: 0
 --- !u!114 &8071667428324845191
 MonoBehaviour:
@@ -372,8 +373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackCooldown: 0
-  distanceToPerformAttack: 0
+  attackCooldown: 3
+  distanceToPerformAttack: 11
 --- !u!114 &922261842375008278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAnimationType: 1
   attackDelayAfterAnimationStart: 0.6
+  waitForAttackAnimationToFinish: 0
 --- !u!114 &6172125938033893449
 MonoBehaviour:
   m_ObjectHideFlags: 0

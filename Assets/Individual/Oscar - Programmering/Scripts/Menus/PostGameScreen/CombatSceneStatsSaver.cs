@@ -6,7 +6,8 @@ using UnityEngine;
 public class CombatSceneStatsSaver : MonoBehaviour
 {
     public PostGameStatsSO postGameStatsSo;
-    [SerializeField] private bool resetStatsOnLoadingCombatScene;
+    [SerializeField] private bool resetStatsOnLoadingCombatScene = true;
+    public KillCounterBehaviour killCounterBehaviour;
     public void OnEnable()
     {
         EventManager.OnPlayerDeath += OnPlayerDeath;
@@ -23,14 +24,15 @@ public class CombatSceneStatsSaver : MonoBehaviour
     private void OnObjectiveReached()
     {
         postGameStatsSo.playTime = Mathf.RoundToInt(Time.time);
-        
-        //postGameStatsSo.enemyKills = We need some way to get the number of kills here;
+
+        postGameStatsSo.enemyKills = killCounterBehaviour.GetKills();
         postGameStatsSo.hasWon = true;
     }
 
     public void OnPlayerDeath()
     {
-        
+        postGameStatsSo.playTime = Mathf.RoundToInt(Time.time);
+        postGameStatsSo.enemyKills = killCounterBehaviour.GetKills();
         postGameStatsSo.hasWon = false;
     }
     void Start()

@@ -122,11 +122,6 @@ PrefabInstance:
       propertyPath: m_Material.m_BelongsToCategories.m_Value.Category03
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6980750288525973889, guid: 8c0c34ffce5617749ad66e43edc83939,
-        type: 3}
-      propertyPath: energyToFill
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7174780387647835181, guid: 8c0c34ffce5617749ad66e43edc83939,
         type: 3}
       propertyPath: NormalAttack.BaseDamage
@@ -247,6 +242,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hammer Entity
       objectReference: {fileID: 0}
+    - target: {fileID: 8931064742681460953, guid: 8c0c34ffce5617749ad66e43edc83939,
+        type: 3}
+      propertyPath: skillModifier.Ultimate
+      value: 1.1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -324,11 +324,6 @@ PrefabInstance:
     - target: {fileID: 7636761816899745512, guid: f14416850a4f08e4e9e8370655f3495e,
         type: 3}
       propertyPath: m_Material.m_BelongsToCategories.m_Value.Category03
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8099106034715878466, guid: f14416850a4f08e4e9e8370655f3495e,
-        type: 3}
-      propertyPath: energyToFill
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8261443476895494700, guid: f14416850a4f08e4e9e8370655f3495e,
@@ -521,11 +516,6 @@ PrefabInstance:
         type: 3}
       propertyPath: activeFillPerHit
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4259606365192864958, guid: d62cf5fe2d10757458ac3f6445d26fdf,
-        type: 3}
-      propertyPath: energyToFill
-      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6378360401926587234, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}

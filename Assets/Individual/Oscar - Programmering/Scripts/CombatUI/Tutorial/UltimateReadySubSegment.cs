@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Patrik;
@@ -26,6 +27,13 @@ public class UltimateReadySubSegment : MonoBehaviour
         EventManager.OnUltimatePerform += OnUltimatePerformed;
         EventManager.OnWeaponCountSet += OnWeaponUnlocked;
       
+    }
+
+    public void OnDisable()
+    {
+        EventManager.OnEnergyChange -= OnUltimateReady;
+        EventManager.OnUltimatePerform -= OnUltimatePerformed;
+        EventManager.OnWeaponCountSet -= OnWeaponUnlocked;
     }
 
     private void OnWeaponUnlocked(int arg0)

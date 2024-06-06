@@ -27,6 +27,7 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var knockBackBufferLookup = SystemAPI.GetBufferLookup<KnockBackBufferElement>();
         var playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>();
+        var config = SystemAPI.GetSingleton<DeathBehaviourConfig>();
 
         
         bool audioBufferExists = SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<AudioBufferData> audioBuffer);
@@ -65,25 +66,22 @@ public partial struct ApplyDeathBehaviourSystem : ISystem
                 var knockBackBufferElements = knockBackBufferLookup[entity];
                 var forceDirection = math.normalize(transform.Position - (playerPos.Value - new float3(0, 0.5f, 0)));
                 var knockBackForce = currentHP.KillingBlowValue;
-                var damping = 0.8f;
-                pDamping.ValueRW.Linear = 1;
-                mass.ValueRW.InverseMass = 0.001f;
+                pDamping.ValueRW.Linear = config.LinearForceDamping;
+                mass.ValueRW.InverseMass = config.InverseMass;
                 knockBackBufferElements.Add(new KnockBackBufferElement
                 {
-                    KnockBackForce = forceDirection * (knockBackForce * damping),
+                    KnockBackForce = forceDirection * (knockBackForce * config.KnockBackForceDamping),
                 });
                 dyingComponent.ValueRW.IsHandled = true;
                 
                 continue;
             }
 
-            if (math.length(velocity.ValueRO.Linear) <= 0.9f)
+            if (math.length(velocity.ValueRO.Linear) <= config.MinVelocity)
             {
                 ecb.SetComponentEnabled<ShouldBeDestroyed>(entity, true);
             }
         }
-
-        
 
         ecb.Playback(state.EntityManager);
         ecb.Dispose();

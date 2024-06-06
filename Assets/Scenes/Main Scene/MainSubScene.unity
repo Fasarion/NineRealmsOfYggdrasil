@@ -190,7 +190,7 @@ PrefabInstance:
     - target: {fileID: 7364503994779296283, guid: 660b6a7a0fcdd4947b3a83cef56e0bd5,
         type: 3}
       propertyPath: skillModifier.Ultimate
-      value: 0.001
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -307,6 +307,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806993063214021095, guid: 4f184544c3fe64f47a824ac762644929,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 3806993063214021095, guid: 4f184544c3fe64f47a824ac762644929,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 3806993063214021095, guid: 4f184544c3fe64f47a824ac762644929,
         type: 3}

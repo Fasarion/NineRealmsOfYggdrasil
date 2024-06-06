@@ -24,19 +24,19 @@ public partial class UpgradeApplierSystem : SystemBase
         
         if (choice.ValueRO.IsHandled) return;
         
-            if (_pool == null)
-            {
-                _pool = UpgradePoolManager.Instance;
-            }
+        if (_pool == null)
+        {
+            _pool = UpgradePoolManager.Instance;
+        }
 
-            UpgradeObject upgradeObject = _pool.GetUpgradeObjectReferenceByKey(choice.ValueRO.ChoiceIndex);
-            choice.ValueRW.IsHandled = true;
-            
-            HandleLocks(upgradeObject);
+        UpgradeObject upgradeObject = _pool.GetUpgradeObjectReferenceByKey(choice.ValueRO.ChoiceIndex);
+        choice.ValueRW.IsHandled = true;
         
-            Debug.Log($"Upgrade chosen: {upgradeObject.upgradeTitle}");
+        HandleLocks(upgradeObject);
+    
+        Debug.Log($"Upgrade chosen: {upgradeObject.upgradeTitle}");
 
-            Apply(upgradeObject);
+        Apply(upgradeObject);
     }
 
     public void Apply(UpgradeObject upgradeObject)

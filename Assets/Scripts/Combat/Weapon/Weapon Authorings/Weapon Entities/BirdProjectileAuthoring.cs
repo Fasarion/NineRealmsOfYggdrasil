@@ -54,6 +54,9 @@ public struct CircularMovementComponent : IComponentData, IEnableableComponent
     public float AngularSpeed;
     
     public bool InUpperHalfCircle;
+    
+    public int Layer;
+    public bool CounterClockWiseMovement;
 }
 
 public struct DiveMovementComponent : IComponentData, IEnableableComponent { }

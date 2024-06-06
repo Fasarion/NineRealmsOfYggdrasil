@@ -100,12 +100,15 @@ public partial struct BirdMovementSystem : ISystem
 
             transform.ValueRW.Position = targetPosition;
             
+            float directionMultiplier = circleMover.ValueRO.CounterClockWiseMovement ? 1 : -1;
+
             // rotate transform
-            quaternion rotation = quaternion.RotateY(-angle);
+            float extraAngle = circleMover.ValueRO.CounterClockWiseMovement ? 0 : math.PI;
+            quaternion rotation = quaternion.RotateY(-angle + extraAngle);
             transform.ValueRW.Rotation = rotation;
             
             // set new angle
-            var nextAngle = angleLastFrame + deltaTime * circleMover.ValueRO.AngularSpeed;
+            var nextAngle = angleLastFrame + deltaTime * circleMover.ValueRO.AngularSpeed * directionMultiplier;
             circleMover.ValueRW.CurrentAngle = nextAngle;
 
             bool wasInUpperCircle = circleMover.ValueRO.InUpperHalfCircle;

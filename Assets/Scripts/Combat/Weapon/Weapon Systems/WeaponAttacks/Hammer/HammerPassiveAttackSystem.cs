@@ -32,8 +32,6 @@ public partial struct HammerPassiveAttackSystem : ISystem
             return;
         }
         
-        Debug.Log("Hammer passive");
-
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
         var config = SystemAPI.GetSingleton<HammerPassiveAbilityConfig>();
         state.EntityManager.Instantiate(config.AbilityPrefab);

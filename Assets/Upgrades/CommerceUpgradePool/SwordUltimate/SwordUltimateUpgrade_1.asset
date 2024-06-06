@@ -12,18 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
   m_Name: SwordUltimateUpgrade_1
   m_EditorClassIdentifier: 
-  upgradeTitle: Wrath of Bifrost
+  upgradeTitle: Bifrost
   upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
-  upgradeDescription: "Swing the sword like Heimdall himself, imbuing each strike
-    with overflowing power.\n\n Each swing now summons 7 beams of Bifrost light.
-    \n\nR BUTTON When the sword's energy is full"
+  upgradeDescription: When pressing the swords R BUTTON 5 more waves of light are
+    summoned.
   upgrades:
   - thingToUpgrade: 2
     valueToUpgrade: 15
     valueAmount: 5
   startUnlocked: 0
   upgradeIndex: 25
-  isUnlocked: 1
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 26d33728cc61a124aba9345ab24c257c, type: 2}

@@ -14,11 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Sword
   upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
-  upgradeDescription: "Increase the sword's power. \n\nEvery second strike will now
-    summon 5 phantom swords to strike your enemies.\n"
+  upgradeDescription: ' Every second strike will now summon 5 phantom swords.
+
+'
   upgrades:
   - thingToUpgrade: 0
-    valueToUpgrade: 0
+    valueToUpgrade: 12
     valueAmount: 10
   - thingToUpgrade: 4
     valueToUpgrade: 15
@@ -28,7 +29,7 @@ MonoBehaviour:
     valueAmount: 1
   startUnlocked: 0
   upgradeIndex: 20
-  isUnlocked: 1
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
   - {fileID: 11400000, guid: 0f80d4401ad56c145b2d4496e021e98c, type: 2}

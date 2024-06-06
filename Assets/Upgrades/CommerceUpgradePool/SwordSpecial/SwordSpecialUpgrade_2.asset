@@ -14,18 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Jotnar's Ring
   upgradeSprite: {fileID: 21300000, guid: e1e93d77424d4a94bbe683365ed1db28, type: 3}
-  upgradeDescription: "The Sword sei\xF0r reaches its apex. \n\n5 rings in total
-    are summoned. \n\nEach ring deals damage enough to frighten gods.\n\nRIGHT MOUSE
-    BUTTON"
+  upgradeDescription: When letting go of the RIGHT MOUSE BUTTON to release the ring
+    of ice 3 additional rings are summoned.
   upgrades:
-  - thingToUpgrade: 3
+  - thingToUpgrade: 1
     valueToUpgrade: 15
     valueAmount: 2
   - thingToUpgrade: 0
-    valueToUpgrade: 18
+    valueToUpgrade: 19
     valueAmount: 1
   - thingToUpgrade: 1
-    valueToUpgrade: 26
+    valueToUpgrade: 27
     valueAmount: 3
   startUnlocked: 0
   upgradeIndex: 24

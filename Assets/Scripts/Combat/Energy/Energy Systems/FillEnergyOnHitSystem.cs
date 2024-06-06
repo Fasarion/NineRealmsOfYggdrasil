@@ -115,8 +115,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
     {
         foreach (var (ownerWeapon, abilityHitBuffer, fillMod) in
             SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>()
-                .WithAll<IsUnlocked>()
-            )//.WithAll<HasChangedHP>())
+        )//.WithAll<HasChangedHP>())
         {
             Entity ownerEntity = ownerWeapon.OwnerEntity;
             
@@ -162,8 +161,7 @@ public partial struct FillEnergyOnHitSystem : ISystem
     {
         foreach (var (ownerWeapon, abilityHitBuffer, fillMod) in
             SystemAPI.Query<HasOwnerWeapon, DynamicBuffer<HitBufferElement>, EnergyFillComponent>()
-                .WithAll<IsUnlocked>()
-            )//.WithAll<HasChangedHP>())
+        )//.WithAll<HasChangedHP>())
         {
             Entity ownerEntity = ownerWeapon.OwnerEntity;
             

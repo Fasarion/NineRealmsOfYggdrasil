@@ -33,6 +33,7 @@ public partial class DamageNumberSystem : SystemBase
         if (_pool == null)
         {
             var poolObject = GameObject.FindObjectOfType<DamageNumberPool>();
+            var poolObjects = GameObject.FindObjectsOfType<DamageNumberPool>();
             if (!poolObject) return;
             
             _pool = poolObject.Pool;

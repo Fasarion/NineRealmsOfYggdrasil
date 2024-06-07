@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class LeftClickTutorialSegment : TutorialSegment
 {
+    public bool useSwedish;
+    public LanguageLocalizerBehaviour localizerBehaviour;
     public GameObject leftClickHighlight;
+    public GameObject leftClickHighlightSWE;
     //public bool LeftClickTutorialActive;
 
     public void OnEnable()
@@ -21,20 +24,38 @@ public class LeftClickTutorialSegment : TutorialSegment
     public override void Start()
     {
         base.Start();
+        useSwedish = localizerBehaviour.GetLanguage();
         
     }
     public override void StartSegment()
     {
+        useSwedish = localizerBehaviour.GetLanguage();
         base.StartSegment();
-        leftClickHighlight.SetActive(true);
+        if (!useSwedish)
+        {
+            leftClickHighlight.SetActive(true);
+        }
+        else
+        {
+            leftClickHighlightSWE.SetActive(true);
+        }
+        
     }
     private void OnLeftClick(AttackType attackType,bool canNormalAttack)
     {
         if (tutorialActive)
         {
             if (attackType == AttackType.Normal && canNormalAttack)
-            { 
-                leftClickHighlight.SetActive(false);
+            {
+                if (!useSwedish)
+                {
+                    leftClickHighlight.SetActive(false);
+                }
+                else
+                {
+                    leftClickHighlightSWE.SetActive(false);
+                }
+               
                 tutorialActive = false;
                 SegmentCompleted();
             }

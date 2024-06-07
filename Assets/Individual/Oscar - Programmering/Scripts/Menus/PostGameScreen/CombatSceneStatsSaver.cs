@@ -23,15 +23,14 @@ public class CombatSceneStatsSaver : MonoBehaviour
     }
     private void OnObjectiveReached()
     {
-        postGameStatsSo.playTime = Mathf.RoundToInt(Time.time);
-
+        postGameStatsSo.playTime = Mathf.RoundToInt(Time.time - postGameStatsSo.previousTime);
         postGameStatsSo.enemyKills = killCounterBehaviour.GetKills();
         postGameStatsSo.hasWon = true;
     }
 
     public void OnPlayerDeath()
     {
-        postGameStatsSo.playTime = Mathf.RoundToInt(Time.time);
+        postGameStatsSo.playTime = Mathf.RoundToInt(Time.time - postGameStatsSo.previousTime);
         postGameStatsSo.enemyKills = killCounterBehaviour.GetKills();
         postGameStatsSo.hasWon = false;
     }
@@ -39,15 +38,21 @@ public class CombatSceneStatsSaver : MonoBehaviour
     {
         if (resetStatsOnLoadingCombatScene)
         {
+            postGameStatsSo.previousTime =  Mathf.RoundToInt(Time.time);
             ResetStats();
         }
+    }
+
+    public void Update()
+    {
+        
     }
 
     public void ResetStats()
     {
         postGameStatsSo.enemyKills = 0;
         postGameStatsSo.hasWon = false;
-        postGameStatsSo.enemyKills = 0;
+        postGameStatsSo.playTime = 0;
     }
 
   

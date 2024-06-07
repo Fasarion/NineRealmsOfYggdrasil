@@ -389,8 +389,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4c925afcfc91354db115da54ad1948c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHP: 50
-  shouldDisplayDamageNumbers: 0
+  maxHP: 60
+  shouldDisplayDamageNumbers: 1
   damageReductionValue: 1
 --- !u!114 &4376167777974654248
 MonoBehaviour:
@@ -443,6 +443,7 @@ MonoBehaviour:
     enemyTyping: 0
     audioEventType: 0
     attackType: 0
+    environmentType: 0
 --- !u!114 &3282528094519435972
 MonoBehaviour:
   m_ObjectHideFlags: 0

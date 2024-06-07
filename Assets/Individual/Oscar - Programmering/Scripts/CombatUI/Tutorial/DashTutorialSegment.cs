@@ -5,17 +5,35 @@ using UnityEngine;
 
 public class DashTutorialSegment : TutorialSegment
 {
+    public bool useSwedish;
     public GameObject dashTutorialObject;
-
+    public GameObject dashTutorialObjectSWE;
+    public LanguageLocalizerBehaviour localizerBehaviour;
     public override void Start()
     {
         base.Start();
-        dashTutorialObject.SetActive(false);
+        useSwedish = localizerBehaviour.GetLanguage();
+        if (!useSwedish)
+        {
+            dashTutorialObject.SetActive(false);
+        }
+        else
+        {
+            dashTutorialObjectSWE.SetActive(false);
+        }
     }
     public override void StartSegment()
     {
         base.StartSegment();
-        dashTutorialObject.SetActive(true);
+        useSwedish = localizerBehaviour.GetLanguage();
+        if (!useSwedish)
+        {
+            dashTutorialObject.SetActive(true);
+        }
+        else
+        {
+            dashTutorialObjectSWE.SetActive(true);
+        }
     }
 
     public void OnEnable()
@@ -31,7 +49,15 @@ public class DashTutorialSegment : TutorialSegment
     {
         if (tutorialActive)
         {
-            dashTutorialObject.SetActive(false);
+            if (!useSwedish)
+            {
+                dashTutorialObject.SetActive(false);
+            }
+            else
+            {
+                dashTutorialObjectSWE.SetActive(false);
+            }
+            
             SegmentCompleted();
             tutorialActive = false;
         }

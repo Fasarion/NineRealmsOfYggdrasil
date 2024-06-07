@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: PlayerCritRateUpgrade
   m_EditorClassIdentifier: 
   upgradeTitle: Crit
-  upgradeSprite: {fileID: 0}
-  upgradeDescription: All attacks have an additional 20% chance to critical strike
+  upgradeSprite: {fileID: 21300000, guid: daeb4250d024e914d83d375f58bd8e3f, type: 3}
+  upgradeDescription: All attacks have an additional 10% chance to critical strike
   upgrades:
   - thingToUpgrade: 12
     valueToUpgrade: 9
-    valueAmount: 0.2
+    valueAmount: 0.1
   startUnlocked: 1
-  upgradeIndex: 0
+  upgradeIndex: 25
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: 81e2602d4043f0942b54b521d3bf161b, type: 2}

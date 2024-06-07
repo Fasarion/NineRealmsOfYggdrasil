@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: PlayerAttackSpeedUpgrade
   m_EditorClassIdentifier: 
   upgradeTitle: Speed
-  upgradeSprite: {fileID: 0}
-  upgradeDescription: Attacks are 20% faster
+  upgradeSprite: {fileID: 21300000, guid: daeb4250d024e914d83d375f58bd8e3f, type: 3}
+  upgradeDescription: Attacks are 10% faster
   upgrades:
   - thingToUpgrade: 12
     valueToUpgrade: 2
-    valueAmount: 0.2
+    valueAmount: 0.1
   startUnlocked: 1
-  upgradeIndex: 0
+  upgradeIndex: 24
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock: []
+  upgradesToUnlock:
+  - {fileID: 11400000, guid: a74c79969d177984e849e28c14b1b6e3, type: 2}

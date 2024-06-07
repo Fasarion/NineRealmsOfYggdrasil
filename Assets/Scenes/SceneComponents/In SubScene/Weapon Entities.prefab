@@ -411,7 +411,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938905e44bc4abe40b35f53d41684a9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 13
+  attackDamage: 14
   criticalChance: 0.05
 --- !u!114 &827959151428894692
 MonoBehaviour:
@@ -511,11 +511,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2498903212905155995, guid: d62cf5fe2d10757458ac3f6445d26fdf,
-        type: 3}
-      propertyPath: activeFillPerHit
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6378360401926587234, guid: d62cf5fe2d10757458ac3f6445d26fdf,
         type: 3}

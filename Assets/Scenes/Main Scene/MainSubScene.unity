@@ -205,15 +205,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 252250736016188675, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: linearForceDamping
-      value: 1.2
+      propertyPath: enemyPrefabs.Array.size
+      value: 12
       objectReference: {fileID: 0}
-    - target: {fileID: 252250736016188675, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}
-      propertyPath: knockBackForceDamping
-      value: 0.4
+      propertyPath: enemyPrefabs.Array.data[11].prefab
+      value: 
+      objectReference: {fileID: 684637899669752120, guid: f04e668017bf3e44c922bd93b16da6be,
+        type: 3}
+    - target: {fileID: 372400880908142637, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
+        type: 3}
+      propertyPath: enemyPrefabs.Array.data[11].enemyType
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 613902946236294797, guid: a2a20f829d16e5c4d9a9e7ef225f0002,
         type: 3}

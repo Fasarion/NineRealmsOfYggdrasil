@@ -943,6 +943,16 @@ PrefabInstance:
       propertyPath: EventReference.Guid.Data4
       value: 731635143
       objectReference: {fileID: 0}
+    - target: {fileID: 964053897892969286, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[1].Weight
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 964053897892969286, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: SpawningCheckpoints.Array.data[0].CheckpointEnemyData.Array.data[1].EnemyType
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 1372308398193865741, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -1363,6 +1373,24 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -11.23999
       objectReference: {fileID: 0}
+    - target: {fileID: 6397790417938108870, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: upgradeObjects.Array.data[26]
+      value: 
+      objectReference: {fileID: 11400000, guid: 44ce316328fd0b24bad04f30e6045bda,
+        type: 2}
+    - target: {fileID: 6397790417938108870, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: upgradeObjects.Array.data[27]
+      value: 
+      objectReference: {fileID: 11400000, guid: 44ce316328fd0b24bad04f30e6045bda,
+        type: 2}
+    - target: {fileID: 6397790417938108870, guid: 19bc8b518d1199e4299c877952c35106,
+        type: 3}
+      propertyPath: upgradeObjects.Array.data[28]
+      value: 
+      objectReference: {fileID: 11400000, guid: 44ce316328fd0b24bad04f30e6045bda,
+        type: 2}
     - target: {fileID: 6473229459374140823, guid: 19bc8b518d1199e4299c877952c35106,
         type: 3}
       propertyPath: m_text

@@ -24,19 +24,27 @@ namespace Damage
         protected override void OnStartRunning()
         {
             EventManager.OnEnablePlayerInvincibility += OnEnablePlayerInvincibility;
-            EventManager.OnPlayerPermanentInvincibility += OnPlayerDamageReductionSet;
+            EventManager.OnPlayerDamageReductionSet += OnPlayerDamageReductionSet;
 
         }
         
         protected override void OnStopRunning()
         {
             EventManager.OnEnablePlayerInvincibility -= OnEnablePlayerInvincibility;
-            EventManager.OnPlayerPermanentInvincibility -= OnPlayerDamageReductionSet;
+            EventManager.OnPlayerDamageReductionSet -= OnPlayerDamageReductionSet;
         }
         
         private void OnPlayerDamageReductionSet(float reduction)
         {
-            var player = SystemAPI.GetSingletonEntity<PlayerTag>();
+            Debug.Log("Receive dmg reduction event");
+
+            bool playerExists = SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity player);
+            if (!playerExists)
+            {
+                Debug.LogWarning("No player exists.");
+                return;
+            }
+            
             var damageReduction = SystemAPI.GetComponentRW<DamageReductionComponent>(player);
             damageReduction.ValueRW.Value = reduction;
         }

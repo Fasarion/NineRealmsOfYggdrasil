@@ -70,7 +70,14 @@ namespace Patrik
 
         private void Awake()
         {
-            Instance = this;
+            if (Instance != null && Instance != this) 
+            { 
+                Destroy(this); 
+            } 
+            else 
+            { 
+                Instance = this; 
+            } 
             playerAnimator = gameObject.GetComponent<Animator>();
             
             SetWeaponIds();

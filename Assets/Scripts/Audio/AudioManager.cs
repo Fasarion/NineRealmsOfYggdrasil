@@ -24,11 +24,11 @@ public class AudioManager : MonoBehaviour
         {
             Instance = this;
         }
-        var parentTransform = gameObject.transform.parent;
-        if(parentTransform  != null)
-        {
-            gameObject.transform.parent = null;
-        }
+        //var parentTransform = gameObject.transform.parent;
+        //if(parentTransform  != null)
+        //{
+          //  gameObject.transform.parent = null;
+        //}
         DontDestroyOnLoad(gameObject);
     }
 

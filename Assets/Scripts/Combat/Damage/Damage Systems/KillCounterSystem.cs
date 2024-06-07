@@ -7,8 +7,34 @@ using SystemAPI = Unity.Entities.SystemAPI;
 public partial class KillCounterSystem : SystemBase
 {
     private KillCounterBehaviour _counter;
-    private bool _hasCounter;
     private int _cachedKills;
+
+    protected override void OnStartRunning()
+    {
+        ResetVariables();
+        EventManager.OnSceneChange += OnSceneChange;
+    }
+    
+    protected override void OnStopRunning()
+    {
+        EventManager.OnSceneChange -= OnSceneChange;
+    }
+
+    private void OnSceneChange(MenuButtonSelection arg0)
+    {
+        if (arg0 == MenuButtonSelection.Restart 
+            || arg0 == MenuButtonSelection.ExitToMenu)
+        {
+            ResetVariables();
+        }
+    }
+
+    private void ResetVariables()
+    {
+        _cachedKills = 0;
+        _counter = null;
+    }
+
     protected override void OnUpdate()
     {
         if (KillCounterBehaviour.Instance != null)
@@ -17,14 +43,15 @@ public partial class KillCounterSystem : SystemBase
             _cachedKills = 0;
         }
 
-        if (_counter != null)
+        if (_counter == null) return;
+        
+        bool configExists = SystemAPI.TryGetSingleton<KillCounterSingleton>(out KillCounterSingleton killConfig);
+        if (!configExists) return;
+            
+        if (killConfig.Value != _cachedKills)
         {
-            var killConfig = SystemAPI.GetSingleton<KillCounterSingleton>();
-            if (killConfig.Value != _cachedKills)
-            {
-                _cachedKills = killConfig.Value;
-                _counter.SetKills(_cachedKills);
-            }
+            _cachedKills = killConfig.Value;
+            _counter.SetKills(_cachedKills);
         }
     }
 }

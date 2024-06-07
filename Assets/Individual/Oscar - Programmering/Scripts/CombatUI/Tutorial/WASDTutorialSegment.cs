@@ -9,6 +9,8 @@ public class WASDTutorialSegment : TutorialSegment
     public bool hasPressedDown;
     public bool hasPressedLeft;
     public bool hasPressedRight;
+    
+    public bool hasCompletedSegment;
 
     public GameObject WBorder;
     public GameObject ABorder;
@@ -29,39 +31,52 @@ public class WASDTutorialSegment : TutorialSegment
 
     private void OnPlayerMoveInput(Vector3 moveVector)
     {
+        if (moveVector.z > 0)
+        {
+            hasPressedUp = true;
+        }
+
+        if (moveVector.z < 0)
+        {
+            hasPressedDown = true;
+        }
+
+        if (moveVector.x > 0)
+        {
+            hasPressedRight = true;
+        }
+
+        if (moveVector.x < 0)
+        {
+            hasPressedLeft = true;
+        }
+        
+        
         if (tutorialActive)
         {
-            if (moveVector.z > 0)
+            if (hasPressedUp)
             {
-                hasPressedUp = true;
                 WBorder.SetActive(false);
-            
             }
-        
-            if (moveVector.z < 0)
+            
+            if (hasPressedDown)
             {
-                hasPressedDown = true;
-           
                 SBorder.SetActive(false);
             }
-        
-            if (moveVector.x > 0)
-            {
-                hasPressedRight = true;
-                DBorder.SetActive(false);
-           
-            }
-
-            if (moveVector.x < 0)
-            {
-                hasPressedLeft = true;
-                ABorder.SetActive(false);
             
+            if (hasPressedRight)
+            {
+                DBorder.SetActive(false);
+            }
+            
+            if (hasPressedLeft)
+            {
+                ABorder.SetActive(false);
             }
 
-            if (hasPressedUp && hasPressedDown && hasPressedLeft && hasPressedRight)
+            if (hasPressedUp && hasPressedDown && hasPressedLeft && hasPressedRight && !hasCompletedSegment)
             {
-                EventManager.OnPlayerMoveInput -= OnPlayerMoveInput; 
+                hasCompletedSegment = true;
                 WASDText.SetActive(false);
                 SegmentCompleted();
             }

@@ -1,25 +1,44 @@
 ﻿using Health;
 using Player;
 using Unity.Entities;
+using UnityEngine;
 
 namespace Damage
 {
     public partial class PlayerManagedHealthSystem : SystemBase
     {
-        private bool hasInitialized;
         
         protected override void OnUpdate()
         {
-            if (!hasInitialized)
-            {
-                EventManager.OnEnablePlayerInvincibility += OnEnablePlayerInvincibility;
-                hasInitialized = true;
-            }
+            // if (Input.GetKeyDown(KeyCode.P))
+            // {
+            //     EventManager.OnPlayerPermanentInvincibility?.Invoke(0);
+            // }
+            //
+            // if (Input.GetKeyDown(KeyCode.L))
+            // {
+            //     EventManager.OnPlayerPermanentInvincibility?.Invoke(1);
+            // }
+        }
+
+        protected override void OnStartRunning()
+        {
+            EventManager.OnEnablePlayerInvincibility += OnEnablePlayerInvincibility;
+            EventManager.OnPlayerPermanentInvincibility += OnPlayerDamageReductionSet;
+
         }
         
         protected override void OnStopRunning()
         {
             EventManager.OnEnablePlayerInvincibility -= OnEnablePlayerInvincibility;
+            EventManager.OnPlayerPermanentInvincibility -= OnPlayerDamageReductionSet;
+        }
+        
+        private void OnPlayerDamageReductionSet(float reduction)
+        {
+            var player = SystemAPI.GetSingletonEntity<PlayerTag>();
+            var damageReduction = SystemAPI.GetComponentRW<DamageReductionComponent>(player);
+            damageReduction.ValueRW.Value = reduction;
         }
         
         private void OnEnablePlayerInvincibility(bool enable)

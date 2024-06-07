@@ -65,6 +65,8 @@ public static class EventManager
     public static UnityAction<MenuButtonSelection> OnSceneChange;
 
     public static UnityAction<Vector3> OnPlayerMoveInput;
+
+    public static UnityAction<float> OnPlayerPermanentInvincibility;
 }
 
 public struct PlayerHealthData

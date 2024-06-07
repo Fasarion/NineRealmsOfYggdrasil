@@ -5,18 +5,33 @@ using UnityEngine;
 
 public class UnlockedNewWeaponSubSegment : MonoBehaviour
 {
+    public bool useSwedish;
+    public LanguageLocalizerBehaviour localizerBehaviour;
     public NewAbilityUnlockTutorialSegment abilityUnlockTutorialSegment;
     public List<GameObject> weaponUnlockObjects;
+    public List<GameObject> weaponUnlockObjectsSWE;
 
     private bool weaponUnlocked;
     public void Start()
     {
+        useSwedish = localizerBehaviour.GetLanguage();
         abilityUnlockTutorialSegment = FindObjectOfType<NewAbilityUnlockTutorialSegment>();
         weaponUnlocked = false;
-        for (int i = 0; i < weaponUnlockObjects.Count; i++)
+        if (!useSwedish)
         {
-            weaponUnlockObjects[i].SetActive(false);
+            for (int i = 0; i < weaponUnlockObjects.Count; i++)
+            {
+                weaponUnlockObjects[i].SetActive(false);
+            }
         }
+        else
+        {
+            for (int i = 0; i < weaponUnlockObjectsSWE.Count; i++)
+            {
+                weaponUnlockObjectsSWE[i].SetActive(false);
+            }
+        }
+        
     }
 
     public void OnEnable()
@@ -35,10 +50,22 @@ public class UnlockedNewWeaponSubSegment : MonoBehaviour
     {
         if (weaponUnlocked)
         {
-            for (int i = 0; i < weaponUnlockObjects.Count; i++)
+           
+            if (!useSwedish)
             {
-                weaponUnlockObjects[i].SetActive(false);
+                for (int i = 0; i < weaponUnlockObjects.Count; i++)
+                {
+                    weaponUnlockObjects[i].SetActive(false);
+                }
             }
+            else
+            {
+                for (int i = 0; i < weaponUnlockObjectsSWE.Count; i++)
+                {
+                    weaponUnlockObjectsSWE[i].SetActive(false);
+                }
+            }
+           
           
             abilityUnlockTutorialSegment.SecondWeaponUnlocked(true);
         }
@@ -50,10 +77,21 @@ public class UnlockedNewWeaponSubSegment : MonoBehaviour
         if (weaponUnlocked != true)
         {
             weaponUnlocked = true;
-            for (int i = 0; i < weaponUnlockObjects.Count; i++)
+            if (!useSwedish)
             {
-                weaponUnlockObjects[i].SetActive(true);
+                for (int i = 0; i < weaponUnlockObjects.Count; i++)
+                {
+                    weaponUnlockObjects[i].SetActive(true);
+                }
             }
+            else
+            {
+                for (int i = 0; i < weaponUnlockObjectsSWE.Count; i++)
+                {
+                    weaponUnlockObjectsSWE[i].SetActive(true);
+                }
+            }
+            
         }
        
         

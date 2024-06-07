@@ -8,4 +8,5 @@ public class PostGameStatsSO : ScriptableObject
     public bool hasWon;
     public int enemyKills;
     public int playTime;
+    public int previousTime;
 }

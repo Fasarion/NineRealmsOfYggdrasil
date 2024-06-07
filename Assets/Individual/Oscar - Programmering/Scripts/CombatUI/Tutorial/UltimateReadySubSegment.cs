@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class UltimateReadySubSegment : MonoBehaviour
 {
+    public bool useSwedish;
+    public LanguageLocalizerBehaviour localizerBehaviour;
     public GameObject firstTimeUltimateReadyObject;
+    public GameObject firstTimeUltimateReadyObjectSWE;
     public NewAbilityUnlockTutorialSegment abilityUnlockTutorialSegment;
     
     private bool ultimateUsedFirstTime;
@@ -15,7 +18,16 @@ public class UltimateReadySubSegment : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        firstTimeUltimateReadyObject.SetActive(false);
+        useSwedish = localizerBehaviour.GetLanguage();
+        if (!useSwedish)
+        {
+            firstTimeUltimateReadyObject.SetActive(false);
+        }
+        else
+        {
+            firstTimeUltimateReadyObjectSWE.SetActive(false);
+        }
+       
         ultimateUsedFirstTime = false;
         hasEnoughEnergy = false;
         abilityUnlockTutorialSegment = FindObjectOfType<NewAbilityUnlockTutorialSegment>();
@@ -42,11 +54,15 @@ public class UltimateReadySubSegment : MonoBehaviour
         {
             if (!ultimateUsedFirstTime)
             {
-                firstTimeUltimateReadyObject.SetActive(true);
+                if (!useSwedish)
+                {
+                    firstTimeUltimateReadyObject.SetActive(true);
+                }
+                else
+                {
+                    firstTimeUltimateReadyObjectSWE.SetActive(true);
+                }
             }
-            
-
-          
         }
     }
 
@@ -55,7 +71,15 @@ public class UltimateReadySubSegment : MonoBehaviour
         if (!ultimateUsedFirstTime)
         {
             ultimateUsedFirstTime = true;
-            firstTimeUltimateReadyObject.SetActive(false);
+            if (!useSwedish)
+            {
+                firstTimeUltimateReadyObject.SetActive(false);
+            }
+            else
+            {
+                firstTimeUltimateReadyObjectSWE.SetActive(false);
+            }
+            
             abilityUnlockTutorialSegment.UltimateReady(true);
         }
     }
@@ -74,7 +98,14 @@ public class UltimateReadySubSegment : MonoBehaviour
                 
                 if (hasEnoughEnergy)
                 {
-                    firstTimeUltimateReadyObject.SetActive(true);
+                    if (!useSwedish)
+                    {
+                        firstTimeUltimateReadyObject.SetActive(true);
+                    }
+                    else
+                    {
+                        firstTimeUltimateReadyObjectSWE.SetActive(true);
+                    }
                 }
             }
         }

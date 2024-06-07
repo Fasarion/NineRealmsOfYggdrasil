@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WASDTutorialSegment : TutorialSegment
 {
-    
+    public LanguageLocalizerBehaviour localizerBehaviour;
     public bool hasPressedUp;
     public bool hasPressedDown;
     public bool hasPressedLeft;
@@ -17,6 +17,8 @@ public class WASDTutorialSegment : TutorialSegment
     public GameObject SBorder;
     public GameObject DBorder;
     public GameObject WASDText;
+    public GameObject WASDSWEText;
+    public bool useSwedish;
 
     
     public void OnEnable()
@@ -79,7 +81,16 @@ public class WASDTutorialSegment : TutorialSegment
             {
                 hasCompletedSegment = true;
                 tutorialActive = false;
-                WASDText.SetActive(false);
+                if (!useSwedish)
+                {
+                    WASDText.SetActive(false);
+                }
+                else
+                {
+                    WASDSWEText.SetActive(false);
+                }
+               
+               
                 SegmentCompleted();
             }
         }
@@ -88,9 +99,23 @@ public class WASDTutorialSegment : TutorialSegment
 
     public override void StartSegment()
     {
+        useSwedish = localizerBehaviour.GetLanguage();
         base.StartSegment();
         tutorialActive = true;
-        WASDText.SetActive(true);
+        if(!useSwedish)
+        {
+            WASDText.SetActive(true);
+        }
+        else
+        {
+            WASDSWEText.SetActive(true);
+        }
+      
+        WBorder.SetActive(true);
+        ABorder.SetActive(true);
+        SBorder.SetActive(true);
+        DBorder.SetActive(true);
+        
     }
     public override void  Start()
     {

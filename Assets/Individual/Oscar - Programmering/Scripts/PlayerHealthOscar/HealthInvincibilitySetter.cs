@@ -9,6 +9,6 @@ public class HealthInvincibilitySetter : MonoBehaviour
     public HealthInvincibilitySO invincibilitySo;
     public void Awake()
     {
-        //EventManager.OnPlayerDamageReductionSet?.Invoke(invincibilitySo.damageReductionValue);    
+        EventManager.OnPlayerPermanentInvincibility?.Invoke(invincibilitySo.damageReductionValue);    
     }
 }

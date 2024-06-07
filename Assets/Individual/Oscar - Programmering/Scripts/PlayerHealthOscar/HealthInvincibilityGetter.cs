@@ -13,7 +13,7 @@ public class HealthInvincibilityGetter : MonoBehaviour
     // Start is called before the first frame update
     public void Start()
     {
-        healthInvincibilitySo.damageReductionValue = 1;
+        //healthInvincibilitySo.damageReductionValue = 1;
         //Fetch the Toggle GameObject
         
         //Add listener for when the state of the Toggle changes, and output the state

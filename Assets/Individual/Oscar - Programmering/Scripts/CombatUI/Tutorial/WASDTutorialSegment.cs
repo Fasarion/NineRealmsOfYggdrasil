@@ -31,6 +31,7 @@ public class WASDTutorialSegment : TutorialSegment
 
     private void OnPlayerMoveInput(Vector3 moveVector)
     {
+        
         if (moveVector.z > 0)
         {
             hasPressedUp = true;
@@ -74,9 +75,10 @@ public class WASDTutorialSegment : TutorialSegment
                 ABorder.SetActive(false);
             }
 
-            if (hasPressedUp && hasPressedDown && hasPressedLeft && hasPressedRight && !hasCompletedSegment)
+            if (hasPressedUp && hasPressedDown && hasPressedLeft && hasPressedRight)
             {
                 hasCompletedSegment = true;
+                tutorialActive = false;
                 WASDText.SetActive(false);
                 SegmentCompleted();
             }
@@ -87,6 +89,7 @@ public class WASDTutorialSegment : TutorialSegment
     public override void StartSegment()
     {
         base.StartSegment();
+        tutorialActive = true;
         WASDText.SetActive(true);
     }
     public override void  Start()

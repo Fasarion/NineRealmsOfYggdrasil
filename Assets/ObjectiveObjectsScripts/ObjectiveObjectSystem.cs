@@ -11,7 +11,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine;
 
-[UpdateAfter(typeof(PlayerMovement))]
+[UpdateAfter(typeof(PlayerMovementSystem))]
 [BurstCompile]
 public partial struct ObjectiveObjectSystem : ISystem
 {

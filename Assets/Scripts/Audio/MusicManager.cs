@@ -34,7 +34,15 @@ public class MusicManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        var parentTransform = gameObject.transform.parent;
+        if(parentTransform  != null)
+        {
+            gameObject.transform.parent = null;
+        }
+        
         DontDestroyOnLoad(gameObject);
+        
     }
     
     // Start is called before the first frame update

@@ -24,7 +24,9 @@ public enum MaterialType
     EliteGrontMaterial,
     EliteRangestMaterial,
 
-    BearMaterial
+    BearMaterial,
+
+    FenrirMaterial
 }
 
 public class MaterialReferenceHolder : MonoBehaviour

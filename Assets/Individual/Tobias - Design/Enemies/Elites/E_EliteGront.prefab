@@ -26,6 +26,9 @@ GameObject:
   - component: {fileID: 7776188516205560807}
   - component: {fileID: 2876683596753378015}
   - component: {fileID: 8269505085597687999}
+  - component: {fileID: 4780167675257322831}
+  - component: {fileID: 5056070144704586416}
+  - component: {fileID: 6937856552376141180}
   m_Layer: 0
   m_Name: E_EliteGront
   m_TagString: Untagged
@@ -331,6 +334,7 @@ MonoBehaviour:
     NewScale: 1
     SetYPosition: 0
     YPosition: 0
+    transferKnockBackToChildren: 0
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +348,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimumDistanceForMoving: 0.5
-  awayFromPlayerMoveSpeed: 0
+  awayFromPlayerMoveSpeed: 2
 --- !u!114 &8071667428324845191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -451,6 +455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAnimationType: 0
   attackDelayAfterAnimationStart: 0.6
+  waitForAttackAnimationToFinish: 0
 --- !u!114 &8269505085597687999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,3 +469,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 14
+--- !u!114 &4780167675257322831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b88ad1858999477fb4df519d1a3f0b0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackCooldown: 2
+  distanceToPerformAttack: 2
+--- !u!114 &5056070144704586416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f9a11865114d5c8b91b2ee672d192e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 7824363987953266496, guid: 9176b6d79eeb7594a8c43c15f875510b,
+    type: 3}
+--- !u!114 &6937856552376141180
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 89125744733743645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33e4b497c5eb0cb43af506ffedaebb9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audio:
+    eventCategoryType: 1
+    weaponType: 1
+    enemyTyping: 1
+    audioEventType: 2
+    attackType: 1
+    environmentType: 0
+  chanceToPlay: 0.3

@@ -57,11 +57,11 @@ MonoBehaviour:
   - DuringChargeBuff: 2
     AfterReleaseBuff: 2
   baseAngularSpeedDuringCharge: 0.5
-  baseAngularSpeedAfterRelease: 1.3
+  baseAngularSpeedAfterRelease: 0.75
   lifeTimeAfterRelease: 2
   initialRadius: 1
   targetRadius: 4
-  radiusIncreaseSpeed: 10
+  radiusIncreaseSpeed: 1
   radiusIncreasePerLayer: 2
   angularSpeedModPerLayer: 0.9
 --- !u!114 &4214904477233245641

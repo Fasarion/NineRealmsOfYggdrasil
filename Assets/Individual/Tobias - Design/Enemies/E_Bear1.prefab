@@ -122,28 +122,48 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
+      propertyPath: m_Capsule.Axis
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
       propertyPath: m_SphereRadius
-      value: 0.75
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Cylinder.Axis
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Capsule.Height
-      value: 1.5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_Capsule.Radius
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Cylinder.Height
-      value: 1.5
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_Cylinder.Radius
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_PrimitiveSize.y
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_PrimitiveSize.z
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}

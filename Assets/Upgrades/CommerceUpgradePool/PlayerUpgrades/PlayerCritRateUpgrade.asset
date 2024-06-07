@@ -10,24 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: UnlockHammerSpecial
+  m_Name: PlayerCritRateUpgrade
   m_EditorClassIdentifier: 
-  upgradeTitle: Hammer
-  upgradeSprite: {fileID: 21300000, guid: a5aa9ff967653e94d9f5b830ba36cf0f, type: 3}
-  upgradeDescription: 'SPECIAL
-
-
-    Hold RIGHT MOUSE BUTTON to charge a throw of
-    the hammer
-
-'
+  upgradeTitle: Crit
+  upgradeSprite: {fileID: 21300000, guid: daeb4250d024e914d83d375f58bd8e3f, type: 3}
+  upgradeDescription: All attacks have an additional 10% chance to critical strike
   upgrades:
-  - thingToUpgrade: 6
-    valueToUpgrade: 26
-    valueAmount: 8
-  startUnlocked: 0
-  upgradeIndex: 12
-  isUnlocked: 1
+  - thingToUpgrade: 12
+    valueToUpgrade: 9
+    valueAmount: 0.1
+  startUnlocked: 1
+  upgradeIndex: 25
+  isUnlocked: 0
   upgradesToLock: []
   upgradesToUnlock:
-  - {fileID: 11400000, guid: c0fe6df7f0c13e54db811d4890098d67, type: 2}
+  - {fileID: 11400000, guid: 81e2602d4043f0942b54b521d3bf161b, type: 2}

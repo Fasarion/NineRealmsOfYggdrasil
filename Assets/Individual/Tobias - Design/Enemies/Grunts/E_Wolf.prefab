@@ -31,7 +31,12 @@ PrefabInstance:
     - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: maxHP
-      value: 1000
+      value: 2000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: damageReductionValue
+      value: 1.1
       objectReference: {fileID: 0}
     - target: {fileID: 3568396196641309044, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}

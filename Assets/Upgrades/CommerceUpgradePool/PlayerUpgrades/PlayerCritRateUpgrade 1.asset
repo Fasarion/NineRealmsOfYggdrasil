@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeTitle: Crit
   upgradeSprite: {fileID: 21300000, guid: daeb4250d024e914d83d375f58bd8e3f, type: 3}
-  upgradeDescription: All attacks have an additional 8% chance to critical strike
+  upgradeDescription: All attacks have an additional 10% chance to critical strike
   upgrades:
   - thingToUpgrade: 12
     valueToUpgrade: 9
-    valueAmount: 0.08
+    valueAmount: 0.1
   startUnlocked: 0
-  upgradeIndex: 25
-  isUnlocked: 0
+  upgradeIndex: 26
+  isUnlocked: 1
   upgradesToLock: []
   upgradesToUnlock: []

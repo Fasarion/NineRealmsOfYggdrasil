@@ -32,7 +32,7 @@ public class TutorialManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Tutorial Complete!");
+            //Debug.Log("Tutorial Complete!");
         }
         
     }

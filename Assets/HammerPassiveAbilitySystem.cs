@@ -14,8 +14,9 @@ using UnityEngine;
 
 //[UpdateInGroup(typeof(CombatSystemGroup))]
 //[UpdateBefore(typeof(HitStopSystem))]
- [UpdateAfter(typeof(HandleHitBufferSystem))]
-// [UpdateBefore(typeof(FillEnergyOnHitSystem))]
+ //[UpdateAfter(typeof(HandleHitBufferSystem))]
+[UpdateBefore(typeof(DetectHitTriggerSystem))] 
+//[UpdateBefore(typeof(FillEnergyOnHitSystem))]
 [BurstCompile]
 public partial struct HammerPassiveAbilitySystem : ISystem
 {

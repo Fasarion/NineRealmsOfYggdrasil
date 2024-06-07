@@ -11,11 +11,13 @@ using Unity.Transforms;
 using UnityEngine;
 
 [BurstCompile]
-[UpdateAfter(typeof(ThunderBoltAbilitySystem))]
-[UpdateBefore(typeof(HitStopSystem))]
-[UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
-[UpdateBefore(typeof(ApplyDamageSystem))]
-[UpdateInGroup(typeof(CombatSystemGroup))]
+// [UpdateAfter(typeof(ThunderBoltAbilitySystem))]
+// [UpdateBefore(typeof(HitStopSystem))]
+// [UpdateBefore(typeof(AddDamageBufferElementOnTriggerSystem))]
+// [UpdateBefore(typeof(ApplyDamageSystem))]
+// [UpdateInGroup(typeof(CombatSystemGroup))]
+[UpdateBefore(typeof(FillEnergyOnHitSystem))]
+
 public partial struct ThunderBoltProjectileSystem : ISystem
 {
     private CollisionFilter _detectionFilter;

@@ -29,16 +29,19 @@ public class CameraBehaviour : MonoBehaviour
         
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        Invoke("FindPlayer", 1f);
-      //  FindPlayer();
-    }
+    // // Start is called before the first frame update
+    // void Start()
+    // {
+    //     Invoke("FindPlayer", 1f);
+    //   //  FindPlayer();
+    // }
 
     private void FindPlayer()
     {
         _playerWeaponManagerBehaviour = PlayerWeaponManagerBehaviour.Instance;
+
+        if (!_playerWeaponManagerBehaviour) return;
+        
         playerTransform = _playerWeaponManagerBehaviour.gameObject.transform;
         var camPos = transform.position;
         xPosOffset = camPos.x;
@@ -49,6 +52,12 @@ public class CameraBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (playerTransform == null)
+        {
+            FindPlayer();
+        }
+        
+        
         if (playerTransform != null)
         {
             var playerPos = playerTransform.position;

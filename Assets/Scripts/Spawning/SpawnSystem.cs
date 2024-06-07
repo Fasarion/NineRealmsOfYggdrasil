@@ -27,8 +27,10 @@ public partial struct SpawnSystem : ISystem
         state.RequireForUpdate<SpawnConfig>();
         state.RequireForUpdate<RandomComponent>();
         state.RequireForUpdate<SpawningEnabledComponent>();
-        _mapXMinMax = 125f;
-        _mapZMinMax = 125f;
+        // _mapXMinMax = 125f;
+        // _mapZMinMax = 125f;
+        
+        _mapXMinMax = _mapZMinMax = 2800f;
     }
 
     [BurstCompile]

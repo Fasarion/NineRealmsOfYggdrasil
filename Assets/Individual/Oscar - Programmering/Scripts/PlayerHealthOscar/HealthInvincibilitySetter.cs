@@ -9,7 +9,7 @@ public class HealthInvincibilitySetter : MonoBehaviour
     public HealthInvincibilitySO invincibilitySo;
     public void OnEnable()
     {
-        EventManager.OnPlayerHealthSet += OnPlayerHealthSet;
+        EventManager.OnInitialPlayerHealthSet += OnPlayerHealthSet;
     }
 
     private void OnPlayerHealthSet(PlayerHealthData arg0)
@@ -20,6 +20,6 @@ public class HealthInvincibilitySetter : MonoBehaviour
 
     public void OnDisable()
     {
-        EventManager.OnPlayerHealthSet -= OnPlayerHealthSet;
+        EventManager.OnInitialPlayerHealthSet -= OnPlayerHealthSet;
     }
 }

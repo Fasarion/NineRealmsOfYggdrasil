@@ -38,6 +38,7 @@ namespace Damage
                 };
 
                 EventManager.OnPlayerHealthSet?.Invoke(data);
+                EventManager.OnInitialPlayerHealthSet?.Invoke(data);
                 ecb.AddComponent<HealthHasBeenSet>(entity);
             }
 

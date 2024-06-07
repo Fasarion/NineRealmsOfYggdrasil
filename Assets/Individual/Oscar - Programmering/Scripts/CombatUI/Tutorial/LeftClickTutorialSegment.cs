@@ -34,7 +34,8 @@ public class LeftClickTutorialSegment : TutorialSegment
         {
             if (attackType == AttackType.Normal && canNormalAttack)
             { 
-                leftClickHighlight.SetActive(false); 
+                leftClickHighlight.SetActive(false);
+                tutorialActive = false;
                 SegmentCompleted();
             }
         }

@@ -33,6 +33,7 @@ public class DashTutorialSegment : TutorialSegment
         {
             dashTutorialObject.SetActive(false);
             SegmentCompleted();
+            tutorialActive = false;
         }
     }
 }

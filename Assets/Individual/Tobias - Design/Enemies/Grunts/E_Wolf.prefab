@@ -53,7 +53,7 @@ PrefabInstance:
     - target: {fileID: 6120804167349058976, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Mass
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6883993067792208077, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
@@ -64,6 +64,11 @@ PrefabInstance:
         type: 3}
       propertyPath: distanceToPerformAttack
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071667428324845191, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: speedValue
+      value: 3.5
       objectReference: {fileID: 0}
     - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}

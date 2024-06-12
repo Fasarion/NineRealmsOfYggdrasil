@@ -50,6 +50,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8870220498742206646, guid: 56d96e17273d9d04c80dc7c68f341f64,
         type: 3}
+    - target: {fileID: 6120804167349058976, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_Mass
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6883993067792208077, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: attackCooldown
@@ -118,8 +123,14 @@ PrefabInstance:
     - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: entitiesToSpawn.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: entitiesToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 5567915179673970004, guid: 3030c77bb6301234c96dedc99f535d78,
+        type: 3}
     - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: entitiesToSpawn.Array.data[1]

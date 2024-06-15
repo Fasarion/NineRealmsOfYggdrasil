@@ -5,15 +5,27 @@ using UnityEngine;
 
 public class ObjectiveCompleted : MonoBehaviour
 {
-    public GameObject victoryUI;
+    public VictoryUI victoryUI;
+    
+    public void Start()
+    {
+        victoryUI = FindObjectOfType<VictoryUI>(true);
+       
+    }
     public void OnEnable()
     {
         EventManager.OnObjectiveReached += OnObjectiveReached;
     }
+    
+     public void OnDisable()
+     {
+         EventManager.OnObjectiveReached -= OnObjectiveReached;
+     }
+    
 
     private void OnObjectiveReached()
     {
-        victoryUI.SetActive(true);
+        victoryUI.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 }

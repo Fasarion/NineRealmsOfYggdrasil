@@ -658,7 +658,7 @@ namespace Patrik
             currentAttackType = AttackType.Ultimate;
             EventManager.OnUltimatePerform?.Invoke(currentWeapon,GetActiveAttackData());
             playerAnimator.SetTrigger("startUltimateTrigger");
-            Debug.Log("Ultimate performed with weapon " + currentWeapon);
+            //Debug.Log("Ultimate performed with weapon " + currentWeapon);
         }
 
         public void PrepareUltimateAttack()

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7796913833894053849}
   - component: {fileID: 1968590867285531591}
+  - component: {fileID: 162064791160551364}
   m_Layer: 5
   m_Name: VictoryUI
   m_TagString: Untagged
@@ -45,6 +46,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 734307361602543989}
   m_CullTransparentMesh: 1
+--- !u!114 &162064791160551364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734307361602543989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 159c7e32426917d4eaefc12e871314da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3033634991620094988
 GameObject:
   m_ObjectHideFlags: 0

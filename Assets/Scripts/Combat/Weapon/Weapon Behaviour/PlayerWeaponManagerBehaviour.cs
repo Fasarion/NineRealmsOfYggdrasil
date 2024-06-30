@@ -500,7 +500,7 @@ namespace Patrik
         public void CycleWeaponsRight()
         {
             
-            Debug.Log("RightCycle Pressed");
+            //Debug.Log("RightCycle Pressed");
 
             var last = weaponDataList[currentlyAllowedWeapons-1];
             for (int i = currentlyAllowedWeapons-1; i > 0; i--)
@@ -514,7 +514,7 @@ namespace Patrik
             
             if (newActiveWeaponData.WeaponType == oldActiveWeaponData.WeaponType)
             {
-                Debug.LogError("The new weapon was the same as the old weapon!");
+//                Debug.LogError("The new weapon was the same as the old weapon!");
                 return;
             }
 
@@ -567,7 +567,7 @@ namespace Patrik
            
             if (newActiveWeaponData.WeaponType == oldActiveWeaponData.WeaponType)
             {
-                Debug.LogError("The new weapon was the same as the old weapon!");
+             //   Debug.LogError("The new weapon was the same as the old weapon!");
                 return;
             }
 

@@ -1703,6 +1703,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -1673221813068183800}
   - {fileID: 4604852447775337451}
+  - {fileID: 877644744636325549}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1907,7 +1908,8 @@ AnimatorState:
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5872267154302480965}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 506300639887311887}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4360,6 +4362,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 361ea1d209bcc0b45aeb8d9bc1531723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &506300639887311887
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1bfed3dc3639347947e95b6d037cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableName: hammerReturn
+  resetAfterSeconds: 1
+  secondsToReset: 4
+  resetAfterClicks: 1
+  clicksToReset: 3
+  currentClicks: 0
 --- !u!114 &531940990200989696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4510,6 +4530,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &877644744636325549
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1bfed3dc3639347947e95b6d037cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableName: hammerReturn
+  resetAfterSeconds: 1
+  secondsToReset: 4
+  resetAfterClicks: 1
+  clicksToReset: 3
+  currentClicks: 0
 --- !u!1102 &934006383674479436
 AnimatorState:
   serializedVersion: 6
@@ -6984,6 +7022,24 @@ MonoBehaviour:
   OnExit:
     TurnOn: 0
     TurnOff: 0
+--- !u!114 &6175120958249965928
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1bfed3dc3639347947e95b6d037cf9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableName: startUltimateTrigger
+  resetAfterSeconds: 1
+  secondsToReset: 4
+  resetAfterClicks: 1
+  clicksToReset: 3
+  currentClicks: 0
 --- !u!206 &6206947633606461143
 BlendTree:
   m_ObjectHideFlags: 1
@@ -8507,7 +8563,8 @@ AnimatorState:
   - {fileID: -5956110771018287883}
   - {fileID: 813963767006176908}
   - {fileID: 7066006546077778245}
-  m_StateMachineBehaviours: []
+  m_StateMachineBehaviours:
+  - {fileID: 6175120958249965928}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

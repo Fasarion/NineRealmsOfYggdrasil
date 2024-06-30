@@ -22,6 +22,8 @@ namespace Patrik
         private AttackData previousActiveAttackData;
         private AttackData previousPassiveAttackData;
 
+        private bool canAttack;
+
         CollisionFilter collisionFilter = new CollisionFilter()
         {
             BelongsTo = 1, // Projectile
@@ -57,26 +59,6 @@ namespace Patrik
             
             ecb.Playback(EntityManager);
             ecb.Dispose();
-            
-            // if (!hasSetUpWeaponManager)
-            // {
-            //     if (_weaponManager == null)
-            //     {
-            //         _weaponManager = PlayerWeaponManagerBehaviour.Instance;
-            //         
-            //         if (_weaponManager == null)
-            //         {
-            //             // Missing Player Weapon Handler, attacks not possible.;
-            //             return;
-            //         }
-            //
-            //         DisableAllWeapons();
-            //         SubscribeToEvents();
-            //         hasSetUpWeaponManager = true;
-            //
-            //         _weaponManager.SetupWeapons();
-            //     }
-            // }
 
             bool gameIsPaused = !SystemAPI.HasSingleton<GameUnpaused>();
             if (gameIsPaused) return;
@@ -84,8 +66,8 @@ namespace Patrik
             if (!_weaponManager) return;
             
             HandleWeaponStates();
-            HandleWeaponSwitch();
             HandleWeaponInput();
+            HandleWeaponSwitch();
         }
 
         private void HandleWeaponStates()
@@ -102,6 +84,8 @@ namespace Patrik
 
         private void HandleWeaponSwitch()
         {
+            if (!canAttack) return;
+            
             if (!SystemAPI.TryGetSingletonRW(out RefRW<WeaponAttackCaller> attackCaller))
                 return;
 
@@ -517,15 +501,7 @@ namespace Patrik
 
         private void HandleWeaponInput()
         {
-            // // hammer upgrade test
-            // if (Input.GetKeyDown(KeyCode.K))
-            // {
-            //     Debug.Log("Test upgrade");
-            //
-            //     var hammerEntity = SystemAPI.GetSingletonEntity<HammerSpecialConfig>();
-            //     EntityManager.AddComponent<IsUnlocked>(hammerEntity);
-            // }
-            
+            canAttack = true;
             
             if (!_weaponManager)
             {
@@ -547,7 +523,6 @@ namespace Patrik
             
             
 
-           bool canAttack = true;
 
 
            // reset ult flag
@@ -629,26 +604,12 @@ namespace Patrik
                 statHandler.ValueRW.ShouldUpdateStats = true;
             }
             
-           if (specialAttackInput.KeyUp)
-           {
-               _weaponManager.ReleaseSpecial();
-           }
+            if (specialAttackInput.KeyUp)
+            {
+                _weaponManager.ReleaseSpecial();
+            }
         }
 
-        // private bool AttackUnlocked(WeaponType weaponType, AttackType attackType)
-        // {
-        //     switch (attackType)
-        //     {
-        //         case AttackType.Special:
-        //             return SpecialAttackUnlocked(weaponType);
-        //         
-        //         case AttackType.Ultimate:
-        //             return UltAttackUnlocked(weaponType);
-        //     }
-        //
-        //     // assume every other attack is unlocked
-        //     return true;
-        // }
         
         private bool CheckForUnlock<T>(ComponentLookup<IsUnlocked> lookup) where T : unmanaged, IComponentData
         {

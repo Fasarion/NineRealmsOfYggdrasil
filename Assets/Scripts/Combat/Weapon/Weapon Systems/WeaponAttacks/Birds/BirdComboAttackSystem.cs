@@ -2,6 +2,7 @@
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Transforms;
+using UnityEngine;
 using Weapon;
 
 [BurstCompile]
@@ -30,6 +31,13 @@ public partial struct BirdComboAttackSystem : ISystem
 
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
+        var frequency = state.EntityManager.GetComponentData<AbilityFrequencyComponent>(configEntity).Value;
+        if (frequency <= 0)
+        {
+            Debug.LogError("Non positive frequency detected for bird combo attack, defaults to 1.");
+            frequency = 1;
+        }
+
         // Spawn projectiles (TODO: move to a general system, repeated code for this and bird special)
         foreach (var (transform, spawner, weapon, entity) in SystemAPI
             .Query<LocalTransform, ProjectileSpawnerComponent, WeaponComponent>()
@@ -38,8 +46,8 @@ public partial struct BirdComboAttackSystem : ISystem
         {
             // update last index
             comboConfig.ValueRW.currentIndex++;
-
-            if (comboConfig.ValueRW.currentIndex % comboConfig.ValueRO.attackTornadoSpawnInterval == 0)
+            
+            if (comboConfig.ValueRW.currentIndex % frequency == 0)
             {
                 state.EntityManager.SetComponentEnabled<ShouldSpawnBirdnado>(configEntity, true);
             }

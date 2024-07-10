@@ -10,21 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: BirdComboUnlock
+  m_Name: BirdComoboFrq2
   m_EditorClassIdentifier: 
   upgradeTitle: Birds
   upgradeSprite: {fileID: 21300000, guid: 9402504d93b85b1468fdad05e1d9cc99, type: 3}
   upgradeDescription: 'NORMAL
 
 
-    Every fourth bird will spawn a mini tornado'
+    Tornados spawn EVEN MORE often'
   upgrades:
   - thingToUpgrade: 16
-    valueToUpgrade: 26
-    valueAmount: 2
+    valueToUpgrade: 30
+    valueAmount: -1
   startUnlocked: 0
-  upgradeIndex: 29
+  upgradeIndex: 31
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock:
-  - {fileID: 11400000, guid: 6b4c373ed6e9ded40b182edd8c8c363b, type: 2}
+  upgradesToUnlock: []

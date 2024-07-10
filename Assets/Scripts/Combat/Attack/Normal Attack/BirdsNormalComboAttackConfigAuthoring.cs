@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BirdsNormalComboAttackConfigAuthoring : MonoBehaviour
 {
-    [SerializeField] private int attackTornadoSpawnInterval = 4;
+   // [SerializeField] private int attackTornadoSpawnInterval = 4;
 
     class Baker : Baker<BirdsNormalComboAttackConfigAuthoring>
     {
@@ -14,7 +14,7 @@ public class BirdsNormalComboAttackConfigAuthoring : MonoBehaviour
 
             AddComponent(entity, new BirdComboAttackConfig
             {
-                attackTornadoSpawnInterval = configAuthoring.attackTornadoSpawnInterval,
+               // attackTornadoSpawnInterval = configAuthoring.attackTornadoSpawnInterval,
                 currentIndex = 0
             });
         }
@@ -23,6 +23,6 @@ public class BirdsNormalComboAttackConfigAuthoring : MonoBehaviour
 
 public struct BirdComboAttackConfig : IComponentData
 {
-    public int attackTornadoSpawnInterval;
+   // public int attackTornadoSpawnInterval;
     public int currentIndex;
 }

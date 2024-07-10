@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Entities;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class SpawnCountAuthoring : MonoBehaviour
 {
@@ -21,3 +22,6 @@ public struct SpawnCount : IComponentData
 {
     public int Value;
 }
+
+
+

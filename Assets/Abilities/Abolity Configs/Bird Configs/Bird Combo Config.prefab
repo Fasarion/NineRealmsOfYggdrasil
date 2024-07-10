@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 70283193757339261}
   - component: {fileID: 9139199247931002756}
   - component: {fileID: 918770520121857338}
+  - component: {fileID: 6986857031603739113}
+  - component: {fileID: 8458459795351397351}
   m_Layer: 0
   m_Name: Bird Combo Config
   m_TagString: Untagged
@@ -48,8 +50,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ad15e6f1a2486bb829d7948f8324d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnTornados: 1
-  attackTornadoSpawnInterval: 4
 --- !u!114 &4712988562582368791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,3 +121,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   duration: 0.1
+--- !u!114 &6986857031603739113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406570979337945547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4a09f0ec589c8a499f16c3e391d5f77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 1
+--- !u!114 &8458459795351397351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2406570979337945547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b90ced0f9657479a9cb795999d37a3f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Frequency: 4

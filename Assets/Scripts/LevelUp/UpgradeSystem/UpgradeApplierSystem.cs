@@ -118,6 +118,12 @@ public partial class UpgradeApplierSystem : SystemBase
                 EntityManager.SetComponentData(entity, spawnCountMultiplierComponent);
                 return;
             
+            case UpgradeValueTypes.spawnFrequency:
+                var freqComponent = EntityManager.GetComponentData<AbilityFrequencyComponent>(entity);
+                freqComponent.Value += (int)valueAmount;
+                EntityManager.SetComponentData(entity, freqComponent);
+                return;
+            
             case UpgradeValueTypes.Unlock:
                 _weaponCount++;
                 EventManager.OnWeaponCountSet?.Invoke(_weaponCount);

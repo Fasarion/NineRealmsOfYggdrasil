@@ -53,6 +53,8 @@ public enum UpgradeValueTypes
     knockbackForce,
     hitStopDuration,
     UseMousePosition,
+    
+    spawnFrequency, 
 }
 
 public enum UpgradeBaseType

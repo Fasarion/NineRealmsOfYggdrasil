@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2417312551657138311}
   - component: {fileID: 6023794667313361465}
   - component: {fileID: 4845892273033170218}
+  - component: {fileID: 2179486715261965588}
   m_Layer: 0
   m_Name: Bird Normal Config
   m_TagString: Untagged
@@ -48,6 +49,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fe4a82b4ee0d78468c22467b9ec456e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spawnTornados: 0
+  attackTornadoSpawnInterval: 4
   timeToCompleteMotion: 1
   controlPoint1:
     x: 5
@@ -109,3 +112,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stacksPerHit: 1
+--- !u!114 &2179486715261965588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9096473208791492296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb7ca72c65f4068ad23341e612c9e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tornadoEntityPrefab: {fileID: 9053573685995620709, guid: fd9460cd091bfab4f8e0e7187ba14ba8,
+    type: 3}
+  tornadoOffset:
+    x: 0
+    y: 3
+    z: 0
+  timeBetweenSuctions: 0.3
+  tornadoRadius: 0.22
+  tornadoDamageModifier: 0.2
+  lifeTime: 4
+  tornadoSound:
+    eventCategoryType: 0
+    weaponType: 0
+    enemyTyping: 0
+    audioEventType: 0
+    attackType: 0
+    environmentType: 0
+  useMouse: 0

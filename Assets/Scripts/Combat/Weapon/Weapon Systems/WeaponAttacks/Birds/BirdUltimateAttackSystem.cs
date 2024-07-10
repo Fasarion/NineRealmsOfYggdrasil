@@ -7,8 +7,8 @@ using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 using Weapon;
+
 
 [BurstCompile]
 [UpdateAfter(typeof(AttackStatTransferSystem))]
@@ -32,36 +32,26 @@ public partial struct BirdUltimateAttackSystem : ISystem
     {
         var attackCaller = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
         var config = SystemAPI.GetSingletonRW<BirdsUltimateAttackConfig>();
+        var configEntity = SystemAPI.GetSingletonEntity<BirdsUltimateAttackConfig>();
+
+        var tornadoSpawner = state.EntityManager.GetComponentData<BirdnadoSpawnerComponent>(configEntity);
 
         // if active
         if (config.ValueRO.IsActive)
         {
             var targetPos = SystemAPI.GetComponent<LocalTransform>(config.ValueRO.CenterPointEntity).Position +
-                            config.ValueRO.TornadoOffset;
+                            tornadoSpawner.TornadoOffset;
             if (config.ValueRO.UseMouse)
             {
                 var mousePos = SystemAPI.GetSingleton<MousePositionInput>();
-                targetPos = mousePos.WorldPosition + config.ValueRO.TornadoOffset;
+                targetPos = mousePos.WorldPosition + tornadoSpawner.TornadoOffset;
             }
-            
+
             foreach (var (transform, timer, hitBuffer) in SystemAPI
                 .Query<RefRW<LocalTransform>, RefRW<TimerObject>, DynamicBuffer<HitBufferElement>>()
-                .WithAll<BirdnadoComponent>())
+                .WithAll<BirdnadoComponent, PartOfBirdUltimate>())
             {
-                var distanceToTarget = math.length(targetPos - transform.ValueRW.Position);
-                float maxTimeStep = 1f;
-
-
                 transform.ValueRW.Position = targetPos;
-
-                timer.ValueRW.currentTime += SystemAPI.Time.DeltaTime;
-                
-                // clears hitbuffer based on timer
-                if (timer.ValueRO.currentTime > timer.ValueRO.maxTime)
-                {
-                    hitBuffer.Clear();
-                    timer.ValueRW.currentTime = 0;
-                }
             }
             
             
@@ -88,10 +78,9 @@ public partial struct BirdUltimateAttackSystem : ISystem
                     ecb.AddComponent<ShouldBeDestroyed>(entity);
                 }
                 
-                Debug.Log("destroy tornado"); 
-                // destroy birdnado on return
                 foreach (var (_, entity) in SystemAPI
                     .Query<BirdnadoComponent>()
+                    .WithAll<PartOfBirdUltimate>()
                     .WithEntityAccess())
                 {
                     ecb.AddComponent<ShouldBeDestroyed>(entity);
@@ -99,6 +88,8 @@ public partial struct BirdUltimateAttackSystem : ISystem
                 
                 config.ValueRW.LifeTimeTimer = 0;
                 config.ValueRW.IsActive = false;
+                
+                // inform animator to finish ult animation
                 var attackCallerRW = SystemAPI.GetSingletonRW<WeaponAttackCaller>();
                 attackCallerRW.ValueRW.ReturnWeapon = true;
                 
@@ -117,10 +108,7 @@ public partial struct BirdUltimateAttackSystem : ISystem
             config.ValueRW.IsActive = true;
             
             var mousePos = SystemAPI.GetSingleton<MousePositionInput>().WorldPosition;
-           // var configRO = SystemAPI.GetSingleton<BirdsUltimateAttackConfig>();
             
-            var configEntity = SystemAPI.GetSingletonEntity<BirdsUltimateAttackConfig>();
-
             config.ValueRW.CenterPointEntity = SystemAPI.GetSingletonEntity<MousePositionComponent>();
 
             var spawnCount = state.EntityManager.GetComponentData<SpawnCount>(configEntity);
@@ -130,28 +118,29 @@ public partial struct BirdUltimateAttackSystem : ISystem
             {
                 config.ValueRW.UseMouse = true;
             }
+            
+            
+            state.EntityManager.SetComponentEnabled<ShouldSpawnBirdnado>(configEntity, true);
 
-            Debug.Log("Spawn tornado");
-            // spawn tornado
-            var tornado = state.EntityManager.Instantiate(config.ValueRO.TornadoPrefab);
-            
-            // set size of tornado as configs diameter
-            var tornadoTransform = state.EntityManager.GetComponentData<LocalTransform>(tornado);
-            tornadoTransform.Scale = config.ValueRO.TornadoRadius * 2;
-            state.EntityManager.SetComponentData(tornado, tornadoTransform);
-            
-            // set tornado suction rate
-            state.EntityManager.SetComponentData(tornado, new TimerObject{maxTime = config.ValueRO.TimeBetweenSuctions});
-            
-            // play sound
-            var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
-            audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
-            
-            
-            // set damage
-            CachedDamageComponent thisDamage =
-                state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
-            state.EntityManager.SetComponentData(tornado, thisDamage);
+            // // spawn tornado
+            // var tornado = state.EntityManager.Instantiate(tornadoSpawner.TornadoPrefab);
+            //
+            // // set size of tornado as configs diameter
+            // var tornadoTransform = state.EntityManager.GetComponentData<LocalTransform>(tornado);
+            // tornadoTransform.Scale = tornadoSpawner.TornadoRadius * 2;
+            // state.EntityManager.SetComponentData(tornado, tornadoTransform);
+            //
+            // // set tornado suction rate
+            // state.EntityManager.SetComponentData(tornado, new TimerObject{maxTime = tornadoSpawner.TimeBetweenSuctions});
+            //
+            // // play sound
+            // var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();
+            // audioBuffer.Add(new AudioBufferData { AudioData = config.ValueRO.TornadoSound});
+            //
+            //
+            // // set damage
+            // CachedDamageComponent thisDamage = state.EntityManager.GetComponentData<CachedDamageComponent>(configEntity);
+            // state.EntityManager.SetComponentData(tornado, thisDamage);
 
             // Spawn birds evenly spaced around player
             for (int i = 0; i < config.ValueRO.BirdCount; i++)

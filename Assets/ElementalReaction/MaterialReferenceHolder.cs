@@ -26,7 +26,8 @@ public enum MaterialType
 
     BearMaterial,
 
-    FenrirMaterial
+    FenrirMaterial,
+    WolfMaterial,
 }
 
 public class MaterialReferenceHolder : MonoBehaviour

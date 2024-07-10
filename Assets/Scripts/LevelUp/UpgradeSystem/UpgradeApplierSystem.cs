@@ -397,6 +397,15 @@ public partial class UpgradeApplierSystem : SystemBase
                     return entity;
                 }
                 break;
+            
+            case UpgradeBaseType.BirdsComboAbility:
+                
+                foreach (var(_, entity)  in SystemAPI.Query<BirdComboAttackConfig>()
+                    .WithEntityAccess())
+                {
+                    return entity;
+                }
+                break;
         }
 
         return default;

@@ -75,6 +75,7 @@ public enum UpgradeBaseType
     BirdSpecialAbility,
     BirdPassiveAbility,
     BirdUltimateAbility,
+    BirdsComboAbility,
 }
 
 [CreateAssetMenu(fileName = "UpgradeObject", menuName = "Upgrades/UpgradeObject" +

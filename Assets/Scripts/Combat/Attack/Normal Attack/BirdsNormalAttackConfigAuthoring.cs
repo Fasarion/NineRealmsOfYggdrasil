@@ -6,12 +6,12 @@ using UnityEngine;
 
 public class BirdsNormalAttackConfigAuthoring : MonoBehaviour
 {
-    [Header("Tornado Options")] 
-   // [SerializeField] private GameObject torndaoPrefab;
-    
-    [SerializeField] private bool spawnTornados;
-    [Tooltip("After how many attacks should a tornado spawn?")]
-    [SerializeField] private int attackTornadoSpawnInterval = 6;
+   //  [Header("Tornado Options")] 
+   // // [SerializeField] private GameObject torndaoPrefab;
+   //  
+   //  [SerializeField] private bool spawnTornados;
+   //  [Tooltip("After how many attacks should a tornado spawn?")]
+   //  [SerializeField] private int attackTornadoSpawnInterval = 6;
     
     [Header("Movement Options")] 
     [Tooltip("How much time it should take for the bird to come back to the player once it has started moving.")]
@@ -52,10 +52,10 @@ public class BirdsNormalAttackConfigAuthoring : MonoBehaviour
                 controlPoint2 = new float4(cp2.x, 0, cp2.y, 1),
                 timeToCompleteMovement = configAuthoring.timeToCompleteMotion,
                 
-             //   TornadoPrefab = GetEntity(configAuthoring.torndaoPrefab, TransformUsageFlags.Dynamic),
-                spawnTornados = configAuthoring.spawnTornados,
-                attackTornadoSpawnInterval = configAuthoring.attackTornadoSpawnInterval,
-                currentIndex = 0
+             // //   TornadoPrefab = GetEntity(configAuthoring.torndaoPrefab, TransformUsageFlags.Dynamic),
+             //    spawnTornados = configAuthoring.spawnTornados,
+             //    attackTornadoSpawnInterval = configAuthoring.attackTornadoSpawnInterval,
+                 currentIndex = 0
             });
         }
     }
@@ -67,9 +67,9 @@ public struct BirdNormalAttackConfig : IComponentData
     public float4 controlPoint2;
     public float timeToCompleteMovement;
 
-    public Entity TornadoPrefab;
-    public bool spawnTornados;
-    public int attackTornadoSpawnInterval;
-
+    // public Entity TornadoPrefab;
+    // public bool spawnTornados;
+    // public int attackTornadoSpawnInterval;
+    //
     public int currentIndex;
 }

@@ -10,20 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afcfbc19fe776eb4db3ff866255e530a, type: 3}
-  m_Name: UnlockBirds
+  m_Name: BirdComboUnlock
   m_EditorClassIdentifier: 
-  upgradeTitle: Ravens
+  upgradeTitle: Bird
   upgradeSprite: {fileID: 21300000, guid: 9402504d93b85b1468fdad05e1d9cc99, type: 3}
-  upgradeDescription: 'Unlocks a new weapon. The ravens. '
+  upgradeDescription: 'NORMAL
+
+
+    Every fourth bird will spawn a mini birdnado.
+
+
+'
   upgrades:
-  - thingToUpgrade: 10
-    valueToUpgrade: 25
-    valueAmount: 0.2
+  - thingToUpgrade: 16
+    valueToUpgrade: 26
+    valueAmount: 2
   startUnlocked: 0
-  upgradeIndex: 1
+  upgradeIndex: 29
   isUnlocked: 0
   upgradesToLock: []
-  upgradesToUnlock:
-  - {fileID: 11400000, guid: 9440771d96da39f4b9fa589a7c3471ce, type: 2}
-  - {fileID: 11400000, guid: e2910793b8054e44cb5e79859639efc6, type: 2}
-  - {fileID: 11400000, guid: 9983eb62e46654a48858e4cb83f8239c, type: 2}
+  upgradesToUnlock: []

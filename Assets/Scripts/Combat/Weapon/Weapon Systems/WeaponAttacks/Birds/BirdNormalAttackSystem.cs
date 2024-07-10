@@ -103,14 +103,14 @@ public partial struct BirdNormalAttackSystem : ISystem
             // update last index
             birdSettings.ValueRW.currentIndex++;
 
-            if (birdSettings.ValueRO.spawnTornados && birdSettings.ValueRW.currentIndex % birdSettings.ValueRO.attackTornadoSpawnInterval == 0)
-            {
-                state.EntityManager.SetComponentEnabled<ShouldSpawnBirdnado>(configEntity, true);
-
-               // state.EntityManager.Instantiate(birdSettings.ValueRO.TornadoPrefab);
-                
-                UnityEngine.Debug.Log("Spawn Tornado!");
-            }
+            // if (birdSettings.ValueRO.spawnTornados && birdSettings.ValueRW.currentIndex % birdSettings.ValueRO.attackTornadoSpawnInterval == 0)
+            // {
+            //     state.EntityManager.SetComponentEnabled<ShouldSpawnBirdnado>(configEntity, true);
+            //
+            //    // state.EntityManager.Instantiate(birdSettings.ValueRO.TornadoPrefab);
+            //     
+            //     UnityEngine.Debug.Log("Spawn Tornado!");
+            // }
         }
         
         ecb.Playback(state.EntityManager);

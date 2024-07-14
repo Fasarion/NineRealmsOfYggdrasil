@@ -19,7 +19,8 @@ public struct UpgradeInformation
 public enum UpgradeValueTypes
 {
     baseAtk,
-    energyRegen, //this is in %
+    energyRegenActivePerHit, 
+    energyRegenPassivePerHit,
     attackSpeed,
     defence,
     areaEffect,

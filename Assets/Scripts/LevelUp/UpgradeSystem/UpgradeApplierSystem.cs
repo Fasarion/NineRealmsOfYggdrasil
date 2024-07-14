@@ -123,6 +123,28 @@ public partial class UpgradeApplierSystem : SystemBase
                 EventManager.OnWeaponCountSet?.Invoke(_weaponCount);
                 return;
             
+            case UpgradeValueTypes.energyRegenActivePerHit:
+                if (!EntityManager.HasComponent<EnergyFillComponent>(entity))
+                {
+                    EntityManager.AddComponent<EnergyFillComponent>(entity);
+                }
+                
+                var energyFillComponentActive = EntityManager.GetComponentData<EnergyFillComponent>(entity);
+                energyFillComponentActive.ActiveFillPerHit += valueAmount;
+                EntityManager.SetComponentData(entity, energyFillComponentActive);
+                return;
+            
+            case UpgradeValueTypes.energyRegenPassivePerHit:
+                if (!EntityManager.HasComponent<EnergyFillComponent>(entity))
+                {
+                    EntityManager.AddComponent<EnergyFillComponent>(entity);
+                }
+                
+                var energyFillComponentPassive = EntityManager.GetComponentData<EnergyFillComponent>(entity);
+                energyFillComponentPassive.PassiveFillPerHit += valueAmount;
+                EntityManager.SetComponentData(entity, energyFillComponentPassive);
+                return;
+            
             case UpgradeValueTypes.damage:
                 if (!EntityManager.HasComponent<DamageComponent>(entity))
                 {

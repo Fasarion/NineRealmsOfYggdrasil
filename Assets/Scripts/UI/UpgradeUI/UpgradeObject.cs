@@ -20,7 +20,6 @@ public enum UpgradeValueTypes
 {
     baseAtk,
     energyRegenActivePerHit, 
-    energyRegenPassivePerHit,
     attackSpeed,
     defence,
     areaEffect,
@@ -54,6 +53,7 @@ public enum UpgradeValueTypes
     knockbackForce,
     hitStopDuration,
     UseMousePosition,
+    energyRegenPassivePerHit,
 }
 
 public enum UpgradeBaseType

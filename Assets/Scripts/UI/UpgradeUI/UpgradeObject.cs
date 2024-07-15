@@ -19,7 +19,7 @@ public struct UpgradeInformation
 public enum UpgradeValueTypes
 {
     baseAtk,
-    energyRegenActivePerHit, 
+    energyRegen, //this is in %
     attackSpeed,
     defence,
     areaEffect,
@@ -53,7 +53,8 @@ public enum UpgradeValueTypes
     knockbackForce,
     hitStopDuration,
     UseMousePosition,
-    energyRegenPassivePerHit,
+    
+    spawnFrequency, 
 }
 
 public enum UpgradeBaseType
@@ -76,6 +77,7 @@ public enum UpgradeBaseType
     BirdSpecialAbility,
     BirdPassiveAbility,
     BirdUltimateAbility,
+    BirdsComboAbility,
 }
 
 [CreateAssetMenu(fileName = "UpgradeObject", menuName = "Upgrades/UpgradeObject" +

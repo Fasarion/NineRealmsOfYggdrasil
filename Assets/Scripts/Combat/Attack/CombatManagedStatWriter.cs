@@ -12,6 +12,7 @@ public partial struct CombatManagedStatWriter : ISystem
     public void OnCreate(ref SystemState state)
     {
         state.RequireForUpdate<StatHandlerComponent>();
+        state.RequireForUpdate<PlayerTag>();
     }
 
     public void OnUpdate(ref SystemState state)

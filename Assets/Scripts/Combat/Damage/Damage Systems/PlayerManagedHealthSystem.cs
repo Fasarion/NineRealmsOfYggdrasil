@@ -7,7 +7,6 @@ namespace Damage
 {
     public partial class PlayerManagedHealthSystem : SystemBase
     {
-        
         protected override void OnUpdate()
         {
             // if (Input.GetKeyDown(KeyCode.P))
@@ -36,8 +35,6 @@ namespace Damage
         
         private void OnPlayerDamageReductionSet(float reduction)
         {
-            Debug.Log("Receive dmg reduction event");
-
             bool playerExists = SystemAPI.TryGetSingletonEntity<PlayerTag>(out Entity player);
             if (!playerExists)
             {

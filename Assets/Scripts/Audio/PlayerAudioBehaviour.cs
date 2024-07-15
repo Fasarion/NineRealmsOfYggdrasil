@@ -56,7 +56,7 @@ public class PlayerAudioBehaviour : MonoBehaviour
     {
         weaponType = currentWeapon.WeaponType;
         FMODUnity.RuntimeManager.StudioSystem.setParameterByName("ActiveWeapon", (int)weaponType);
-        Debug.Log((int)weaponType);
+      //  Debug.Log((int)weaponType);
     }
 
 

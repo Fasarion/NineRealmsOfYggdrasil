@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2721724589688101465}
   - component: {fileID: 1927580293839562194}
   - component: {fileID: 3931799476243726285}
+  - component: {fileID: 2296801227294041082}
   m_Layer: 0
   m_Name: Bird Ultimate Config
   m_TagString: Untagged
@@ -47,24 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3afc4469d6231e4881b8d46305cfe84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tornadoEntityPrefab: {fileID: 2985631337868830301, guid: 310d609e1e1e17a4692829bba05db4f9,
-    type: 3}
-  tornadoOffset:
-    x: 0
-    y: 3
-    z: 0
-  timeBetweenSuctions: 0.5
-  tornadoRadius: 9
   angularSpeed: 1
   lifeTime: 4
   circleRadius: 6
-  tornadoSound:
-    eventCategoryType: 0
-    weaponType: 0
-    enemyTyping: 0
-    audioEventType: 0
-    attackType: 0
-    environmentType: 0
   useMouse: 0
 --- !u!114 &2721724589688101465
 MonoBehaviour:
@@ -107,3 +93,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 2
+--- !u!114 &2296801227294041082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 998664864989752839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cb7ca72c65f4068ad23341e612c9e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tornadoEntityPrefab: {fileID: 41519486124320627, guid: 9cc90f3ec2c004c46a63ad85f40f4678,
+    type: 3}
+  tornadoOffset:
+    x: 0
+    y: 3
+    z: 0
+  timeBetweenSuctions: 0.3
+  tornadoRadius: 9
+  tornadoDamageModifier: 0.2
+  lifeTime: 4
+  tornadoSound:
+    eventCategoryType: 0
+    weaponType: 0
+    enemyTyping: 0
+    audioEventType: 0
+    attackType: 0
+    environmentType: 0
+  useMouse: 0

@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using Movement;
 using Patrik;
 using Player;
+using Unity.Assertions;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -11,7 +10,6 @@ using Weapon;
 
 public partial struct BirdNormalAttackSystem : ISystem
 {
-    private int lastIndex;
 
     [BurstCompile]
     public void OnCreate(ref SystemState state)
@@ -43,8 +41,8 @@ public partial struct BirdNormalAttackSystem : ISystem
         var playerLTW = SystemAPI.GetComponent<LocalToWorld>(playerEntity);
         var ltwMatrix = playerLTW.Value;
         
-        var birdSettings = SystemAPI.GetSingleton<BirdNormalAttackConfig>(); 
-        var configEntity = SystemAPI.GetSingletonEntity<BirdNormalAttackConfig>(); 
+        var birdSettings = SystemAPI.GetSingletonRW<BirdNormalAttackConfig>(); 
+        var configEntity = SystemAPI.GetSingletonEntity<BirdNormalAttackConfig>();
         
         var ecb = new EntityCommandBuffer(state.WorldUpdateAllocator);
 
@@ -71,15 +69,15 @@ public partial struct BirdNormalAttackSystem : ISystem
             });
             
             // get movement control points
-            float4 localControlPoint1 = birdSettings.controlPoint1;
-            float4 localControlPoint2 = birdSettings.controlPoint2;
+            float4 localControlPoint1 = birdSettings.ValueRO.controlPoint1;
+            float4 localControlPoint2 = birdSettings.ValueRO.controlPoint2;
 
             // transform controls points to world space
             var controlPoint1 = math.mul(ltwMatrix, localControlPoint1).xz; 
             var controlPoint2 = math.mul(ltwMatrix, localControlPoint2).xz;
             
             // bool that is used to decide which point that the bird should go to first
-            bool startWithPoint1 = lastIndex % 2 == 0;
+            bool startWithPoint1 = birdSettings.ValueRO.currentIndex % 2 == 0;
 
             // set control points for bird
             BezierMovementComponent bezierMovementComponent = new BezierMovementComponent
@@ -88,7 +86,7 @@ public partial struct BirdNormalAttackSystem : ISystem
                 controlPoint1 = startWithPoint1 ? controlPoint1 : controlPoint2,
                 controlPoint2 = startWithPoint1 ? controlPoint2 : controlPoint1,
                 
-                TimeToComplete = birdSettings.timeToCompleteMovement,
+                TimeToComplete = birdSettings.ValueRO.timeToCompleteMovement,
             };
             state.EntityManager.SetComponentData(birdProjectile, bezierMovementComponent);
             state.EntityManager.SetComponentEnabled<BezierMovementComponent>(birdProjectile, true);
@@ -103,7 +101,16 @@ public partial struct BirdNormalAttackSystem : ISystem
             ecb.SetComponent(birdProjectile, updateStatsComponent);
             
             // update last index
-            lastIndex = (lastIndex + 1) % 2;
+            birdSettings.ValueRW.currentIndex++;
+
+            // if (birdSettings.ValueRO.spawnTornados && birdSettings.ValueRW.currentIndex % birdSettings.ValueRO.attackTornadoSpawnInterval == 0)
+            // {
+            //     state.EntityManager.SetComponentEnabled<ShouldSpawnBirdnado>(configEntity, true);
+            //
+            //    // state.EntityManager.Instantiate(birdSettings.ValueRO.TornadoPrefab);
+            //     
+            //     UnityEngine.Debug.Log("Spawn Tornado!");
+            // }
         }
         
         ecb.Playback(state.EntityManager);

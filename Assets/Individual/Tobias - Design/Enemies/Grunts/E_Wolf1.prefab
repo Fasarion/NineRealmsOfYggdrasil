@@ -11,12 +11,12 @@ PrefabInstance:
     - target: {fileID: 89125744733743645, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Name
-      value: E_Wolf
+      value: E_Wolf1
       objectReference: {fileID: 0}
     - target: {fileID: 1570689716404177242, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: enemyType
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 2876683596753378015, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
@@ -31,34 +31,64 @@ PrefabInstance:
     - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: maxHP
-      value: 2000
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: damageReductionValue
-      value: 1.1
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: shouldDisplayDamageNumbers
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3568396196641309044, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 8545918481887744790, guid: f2be23a115a34064b8ed60f7df938a3b,
+      objectReference: {fileID: 8545918481887744790, guid: 509a7566a2461934cb461d3e62a48b0c,
         type: 3}
     - target: {fileID: 4663337924807953367, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: gameObjectPrefab
       value: 
-      objectReference: {fileID: 8870220498742206646, guid: 56d96e17273d9d04c80dc7c68f341f64,
+      objectReference: {fileID: 8870220498742206646, guid: 0e55315b2c202a84890ab7496b4a5002,
         type: 3}
-    - target: {fileID: 6883993067792208077, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+    - target: {fileID: 6120804167349058976, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
-      propertyPath: attackCooldown
+      propertyPath: m_Mass
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6883993067792208077, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
+      propertyPath: attackCooldown
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6883993067792208077, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
       propertyPath: distanceToPerformAttack
-      value: 4
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8071667428324845191, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: speedValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.46
+      objectReference: {fileID: 0}
+    - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.46
       objectReference: {fileID: 0}
     - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
@@ -110,16 +140,27 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8269505085597687999, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: type
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: entitiesToSpawn.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
+        type: 3}
+      propertyPath: entitiesToSpawn.Array.data[0]
+      value: 
+      objectReference: {fileID: 5345650359192567939, guid: 3165fc57e9d91f34abb0bcd99b8f4fbf,
+        type: 3}
     - target: {fileID: 8796295642388451722, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: entitiesToSpawn.Array.data[1]
@@ -159,7 +200,7 @@ PrefabInstance:
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Capsule.Radius
-      value: 1
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
@@ -169,12 +210,12 @@ PrefabInstance:
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_Cylinder.Radius
-      value: 1
+      value: 1.05
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_PrimitiveSize.x
-      value: 2
+      value: 2.1
       objectReference: {fileID: 0}
     - target: {fileID: 9051152070818199392, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
@@ -199,7 +240,7 @@ PrefabInstance:
     - target: {fileID: 9062196686115931803, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: minimumDistanceForMoving
-      value: 3
+      value: 2.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

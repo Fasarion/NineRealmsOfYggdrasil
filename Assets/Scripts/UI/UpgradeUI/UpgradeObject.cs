@@ -19,7 +19,7 @@ public struct UpgradeInformation
 public enum UpgradeValueTypes
 {
     baseAtk,
-    energyRegen, //this is in %
+    energyRegenActivePerHit, //this is in %
     attackSpeed,
     defence,
     areaEffect,
@@ -55,6 +55,7 @@ public enum UpgradeValueTypes
     UseMousePosition,
     
     spawnFrequency, 
+    energyRegenPassivePerHit,
 }
 
 public enum UpgradeBaseType

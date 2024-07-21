@@ -28,6 +28,8 @@ public struct WeaponAttackCaller : IComponentData
 
     public BusyAttackInfo BusyAttackInfo;
 
+    public bool CanDash;
+
     public bool ReturnWeapon;
 
     public readonly bool AttackUnlocked(WeaponType weaponType, AttackType attackType)

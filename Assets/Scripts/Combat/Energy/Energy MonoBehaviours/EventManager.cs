@@ -47,6 +47,7 @@ public static class EventManager
     public static UnityAction OnDashBegin;
     public static UnityAction OnDashInput;
     public static UnityAction OnDashEnd;
+    public static UnityAction<bool> OnCanDash;
     public static UnityAction<DynamicBuffer<DashInfoElement>> OnDashInfoUpdate;
 
     public static UnityAction OnScreenFadeComplete;

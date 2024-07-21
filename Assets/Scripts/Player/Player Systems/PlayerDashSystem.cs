@@ -31,7 +31,9 @@ namespace Player
             foreach (var _ in SystemAPI.Query<PlayerTag>().WithAll<CanMoveFromInput>())
             {
                 // don't dash if busy
-                if (attackCaller.BusyAttackInfo.Busy) continue;
+                // if (attackCaller.BusyAttackInfo.Busy) continue;
+                
+                if (!attackCaller.CanDash) continue;
                 
                 bool dashBufferSingletonExists =
                     SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DashInfoElement> dashBuffer);

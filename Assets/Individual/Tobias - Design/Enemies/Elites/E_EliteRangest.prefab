@@ -333,6 +333,7 @@ MonoBehaviour:
     NewScale: 1
     SetYPosition: 0
     YPosition: 0
+    transferKnockBackToChildren: 0
 --- !u!114 &9062196686115931803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,6 +482,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyAnimationType: 1
   attackDelayAfterAnimationStart: 0.6
+  waitForAttackAnimationToFinish: 1
 --- !u!114 &2741096830942234737
 MonoBehaviour:
   m_ObjectHideFlags: 0

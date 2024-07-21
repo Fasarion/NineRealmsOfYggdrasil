@@ -40,7 +40,9 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
                     Audio = authoring.Audio,
                     DashShieldPrefab = GetEntity(authoring.DashShieldPrefab, TransformUsageFlags.Dynamic),
                     MaxDashes = authoring.maxDashes,
-                    waitBetweenDashes = authoring.waitBetweenDashes
+                    waitBetweenDashes = authoring.waitBetweenDashes,
+                    
+                    CanDash = true
                 });
 
             var dashBuffer = AddBuffer<DashInfoElement>(entity);
@@ -62,6 +64,8 @@ public class PlayerDashConfigAuthoring : MonoBehaviour
 public struct PlayerDashConfig : IComponentData
 {
     public bool waitBetweenDashes;
+
+    public bool CanDash;
     
     //  public float DashForce;
   //  public float DashDuration;

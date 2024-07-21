@@ -35,14 +35,29 @@ namespace Player
         {
             EventManager.OnDashBegin += OnDashBegin;
             EventManager.OnDashEnd += OnDashEnd;
+
+            EventManager.OnCanDash += OnCanDash;
         }
 
         protected override void OnStopRunning()
         {
             EventManager.OnDashBegin -= OnDashBegin;
             EventManager.OnDashEnd -= OnDashEnd;
+            
+            EventManager.OnCanDash -= OnCanDash;
         }
-        
+
+        private void OnCanDash(bool canDash)
+        {
+            if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerDashConfig> dashConfig))
+            {
+                Debug.LogError("No Player Dash Config exists!");
+                return;
+            }
+
+            dashConfig.ValueRW.CanDash = canDash;
+        }
+
         private void OnDashBegin()
         {
             if (!SystemAPI.TryGetSingletonRW(out RefRW<PlayerDashConfig> dashConfig))

@@ -11,7 +11,6 @@ public class WeaponAttackCallerAuthoring : MonoBehaviour
         public override void Bake(WeaponAttackCallerAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent(entity, new WeaponAttackCaller { });
         }
     }
 }
@@ -27,9 +26,7 @@ public struct WeaponAttackCaller : IComponentData
     public UnlockInfo UnlockInfo;
 
     public BusyAttackInfo BusyAttackInfo;
-
-    public bool CanDash;
-
+    
     public bool ReturnWeapon;
 
     public readonly bool AttackUnlocked(WeaponType weaponType, AttackType attackType)

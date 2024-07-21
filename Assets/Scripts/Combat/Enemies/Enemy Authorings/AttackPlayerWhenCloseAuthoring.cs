@@ -20,6 +20,7 @@ public class AttackPlayerWhenCloseAuthoring : MonoBehaviour
             AddComponent(entity, new AttackPlayerWhenCloseComponent
             {
                 ShootingCooldownTime = authoring.attackCooldown,
+                CurrentCooldownTime = authoring.attackCooldown, // sets so it is cooled down to begin with
                 MinimumDistanceForShootingSquared = authoring.distanceToPerformAttack * authoring.distanceToPerformAttack
             });
             

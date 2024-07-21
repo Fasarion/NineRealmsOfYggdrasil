@@ -12,6 +12,7 @@ namespace Patrik.Special_Attack
         {
             state.RequireForUpdate<HammerComponent>();
             state.RequireForUpdate<ThunderBoltConfig>();
+            state.RequireForUpdate<WeaponAttackCaller>();
         }
 
         [BurstCompile]

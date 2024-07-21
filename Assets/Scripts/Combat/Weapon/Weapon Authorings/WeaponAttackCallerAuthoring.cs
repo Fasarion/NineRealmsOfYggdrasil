@@ -11,6 +11,8 @@ public class WeaponAttackCallerAuthoring : MonoBehaviour
         public override void Bake(WeaponAttackCallerAuthoring authoring)
         {
             var entity = GetEntity(TransformUsageFlags.Dynamic);
+            
+            AddComponent(entity, new WeaponAttackCaller());
         }
     }
 }

@@ -26,14 +26,10 @@ namespace Player
             var dashConfig = SystemAPI.GetSingletonRW<PlayerDashConfig>();
             
             var dashTimer = SystemAPI.GetComponentRW<TimerObject>(SystemAPI.GetSingletonEntity<PlayerDashConfig>());
-            var attackCaller = SystemAPI.GetSingleton<WeaponAttackCaller>();
             
             foreach (var _ in SystemAPI.Query<PlayerTag>().WithAll<CanMoveFromInput>())
             {
-                // don't dash if busy
-                // if (attackCaller.BusyAttackInfo.Busy) continue;
-                
-                if (!dashConfig.ValueRO.CanDash) continue;
+             //   if (!dashConfig.ValueRO.CanDash) continue;
                 
                 bool dashBufferSingletonExists =
                     SystemAPI.TryGetSingletonBuffer(out DynamicBuffer<DashInfoElement> dashBuffer);
@@ -76,7 +72,7 @@ namespace Player
                         }
                     }
                     
-                    if (dashInfo.Value.Ready && playerDashInput && playerCanDash)
+                    if (dashConfig.ValueRO.CanDash && dashInfo.Value.Ready && playerDashInput && playerCanDash)
                     {
                         EventManager.OnDashInput?.Invoke();
                         var audioBuffer = SystemAPI.GetSingletonBuffer<AudioBufferData>();

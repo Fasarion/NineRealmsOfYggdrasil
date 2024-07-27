@@ -964,6 +964,24 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!114 &-7209236544151099213
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 1
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!1101 &-7044394605629986139
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -1648,6 +1666,7 @@ AnimatorState:
   - {fileID: 960826222254902797}
   - {fileID: -2652547487312243215}
   - {fileID: -1099337865443867426}
+  - {fileID: -2617102062681710308}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -1723,6 +1742,7 @@ AnimatorState:
   - {fileID: -1673221813068183800}
   - {fileID: 4604852447775337451}
   - {fileID: 877644744636325549}
+  - {fileID: 3866654179095792739}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -3052,6 +3072,24 @@ MonoBehaviour:
   SetOngoing: 0
   EndChargeOnEnd: 0
   SetNone: 1
+--- !u!114 &-2617102062681710308
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 1
+    TurnOff: 0
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!1101 &-2612998681584883193
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -3692,6 +3730,7 @@ AnimatorState:
   - {fileID: 5519237250280886169}
   - {fileID: -5088062047854955633}
   - {fileID: -6613339829998002213}
+  - {fileID: -7209236544151099213}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4082,85 +4121,85 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: movementSpeedX
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: weaponID
     m_Type: 3
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: chargeSpeed
     m_Type: 1
     m_DefaultFloat: 1
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackNormal
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackSpecial
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: attackUltimate
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: holdChargeUntilRelease
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 1
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: hammerReturn
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: startUltimate
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: startUltimateTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: dashTrigger
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: testingBool
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -4704,6 +4743,24 @@ BlendTree:
   m_UseAutomaticThresholds: 0
   m_NormalizedBlendValues: 0
   m_BlendType: 0
+--- !u!114 &996368963998863210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 1
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!1101 &1007070126409294818
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -4744,6 +4801,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -7350789966307507791}
   - {fileID: 7290599699831092066}
+  - {fileID: 2813807017666049394}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4892,6 +4950,7 @@ AnimatorState:
   - {fileID: -3253161867971542714}
   - {fileID: -8920187270445151308}
   - {fileID: 7714644568880725642}
+  - {fileID: 5899625194458398809}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -5442,6 +5501,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &2144619572801769458
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 0
+  OnExit:
+    TurnOn: 1
+    TurnOff: 0
 --- !u!114 &2159999590795775286
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5580,6 +5657,24 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
+--- !u!114 &2813807017666049394
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 1
+    TurnOff: 0
+  OnExit:
+    TurnOn: 1
+    TurnOff: 0
 --- !u!1101 &2906484257214994731
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -6067,6 +6162,24 @@ MonoBehaviour:
     MovementStateChange: 1
     RotationStateChange: 1
     InvincibilityStateChange: 0
+--- !u!114 &3866654179095792739
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 1
+    TurnOff: 0
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!206 &3917797024228222464
 BlendTree:
   m_ObjectHideFlags: 1
@@ -6965,6 +7078,24 @@ MonoBehaviour:
     SpeedChangeOption: 0
     SpeedChangeFactor: 0
     SpeedChangeDuration: 0
+--- !u!114 &5899625194458398809
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 1
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!1101 &5947706180108417411
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -7333,6 +7464,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: 1264911545449778730}
   - {fileID: 5615325783349062269}
+  - {fileID: 2144619572801769458}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -8428,6 +8560,7 @@ AnimatorState:
   - {fileID: 8773275008057811331}
   - {fileID: 4864961526865367251}
   - {fileID: -3437212177121560233}
+  - {fileID: 996368963998863210}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1

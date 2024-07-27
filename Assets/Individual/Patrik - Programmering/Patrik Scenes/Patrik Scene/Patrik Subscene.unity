@@ -556,12 +556,12 @@ PrefabInstance:
     - target: {fileID: 89125744733743645, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3040318899576448565, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
       propertyPath: maxHP
-      value: 10
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8248458485825962027, guid: 80e4223f88a095b45bfd2c9d35cd5e32,
         type: 3}
@@ -758,6 +758,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: E_Bear
+      objectReference: {fileID: 0}
+    - target: {fileID: 8537846315672067913, guid: 2185e644ecc5a1b46a1ff5acc6d5e578,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -20,7 +20,15 @@ public partial struct ShootPlayerWhenCloseSystem : ISystem
     {
         float3 playerPos = SystemAPI.GetSingleton<PlayerPositionSingleton>().Value;
         float deltaTime = SystemAPI.Time.DeltaTime;
-        
+
+        foreach (var (transform, shootWhenClose, entity)
+            in SystemAPI.Query<LocalTransform, RefRW<AttackPlayerWhenCloseComponent>>()
+                .WithAll<HitStopComponent>()
+                .WithEntityAccess())
+        {
+            shootWhenClose.ValueRW.CurrentCooldownTime = 0;
+        }
+
         foreach (var (transform, shootWhenClose, entity) 
             in SystemAPI.Query<LocalTransform, RefRW<AttackPlayerWhenCloseComponent>>()
                 .WithNone<HitStopComponent>()

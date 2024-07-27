@@ -15,6 +15,7 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
     private static string knockBackTrigger = "hitKnockback";
     
     private static string deathName = "isKnockbacked";
+    private static string attackCancelName = "attackCancel";
     
     public void OnUpdate(ref SystemState state)
     {
@@ -104,6 +105,16 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
                 enemyAttackAnimation.ValueRW.HasSetTrigger = true;
             }
 
+            // handle attack cancel
+            if (animatorReference.Animator.GetBool(attackCancelName))
+            {
+                state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
+                state.EntityManager.SetComponentEnabled<ShouldAttackComponent>(entity, false);
+                
+                enemyAttackAnimation.ValueRW.HasSetTrigger = false;
+                continue;
+            }
+
             if (enemyAttackAnimation.ValueRO.WaitForAttackToFinish)
             {
                 // wait for attack animation to finish, then perform DOTS attack logic
@@ -127,16 +138,6 @@ public partial struct EnemyAnimatorControllerSystem : ISystem
                     enemyAttackAnimation.ValueRW.HasSetTrigger = false;
                 }
             }
-            
-            // // wait for attack animation to finish, then perform DOTS attack logic
-            // bool isAttacking = animatorReference.Animator.GetBool(isAttackingName);
-            // if (!isAttacking)
-            // {
-            //     state.EntityManager.SetComponentEnabled<EnemyAttackAnimationComponent>(entity, false);
-            //     state.EntityManager.SetComponentEnabled<ShouldAttackComponent>(entity, true);
-            //     
-            //     enemyAttackAnimation.ValueRW.HasSetTrigger = false;
-            // }
 
             // NOTE: TODO: Old code for using timers to trigger animations
             // // wait for attack animation to finish, then perform DOTS attack logic

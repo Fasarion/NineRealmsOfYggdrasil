@@ -9,7 +9,8 @@ public class EnemyAnimatorControllerSMBehaviour : StateMachineBehaviour
     {
         isAttacking,
         isKnockedBack,
-        isStunned
+        isStunned,
+        attackCancel
     }
 
     public static Dictionary<EnemyAnimationBool, string> EnemyAnimationParameters
@@ -18,6 +19,7 @@ public class EnemyAnimatorControllerSMBehaviour : StateMachineBehaviour
             {EnemyAnimationBool.isAttacking, "isAttacking"},
             {EnemyAnimationBool.isKnockedBack, "isKnockedBack"},
             {EnemyAnimationBool.isStunned, "isStunned"},
+            {EnemyAnimationBool.attackCancel, "attackCancel"},
         };
 
     [System.Serializable]

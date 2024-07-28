@@ -2457,6 +2457,7 @@ AnimatorState:
   - {fileID: 7615928565370930753}
   - {fileID: 8684129588317268551}
   - {fileID: 1341534705122713641}
+  - {fileID: 2425513674118868523}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -4898,6 +4899,7 @@ AnimatorState:
   m_StateMachineBehaviours:
   - {fileID: -1945584826119911993}
   - {fileID: -5822662023931261026}
+  - {fileID: 6747332842610024122}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
@@ -5568,6 +5570,24 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!114 &2425513674118868523
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 0
+    TurnOff: 1
+  OnExit:
+    TurnOn: 0
+    TurnOff: 0
 --- !u!206 &2676665987554537883
 BlendTree:
   m_ObjectHideFlags: 1
@@ -7498,6 +7518,24 @@ MonoBehaviour:
     TurnOff: 0
   OnExit:
     TurnOn: 1
+    TurnOff: 0
+--- !u!114 &6747332842610024122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a061adc634affbc4591ecac1480f8d55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnEnter:
+    TurnOn: 1
+    TurnOff: 0
+  OnExit:
+    TurnOn: 0
     TurnOff: 0
 --- !u!206 &6790774014444331111
 BlendTree:
